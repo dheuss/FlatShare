@@ -7,7 +7,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Test David
     //Test Arber
-    //
+    //Sandro
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
