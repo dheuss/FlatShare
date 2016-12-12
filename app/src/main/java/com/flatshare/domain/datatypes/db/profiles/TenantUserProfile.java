@@ -51,11 +51,8 @@ public class TenantUserProfile extends UserProfile {
     @PropertyName("matched_apartments")
     public List<String> matchedApartments;
 
-    public TenantUserProfile() {
 
-        this.dailyTokenConsumed = false;
-        this.apartmentsToShow = new ArrayList<>();
-        this.matchedApartments = new ArrayList<>();
+    public TenantUserProfile() {
 
     }
 

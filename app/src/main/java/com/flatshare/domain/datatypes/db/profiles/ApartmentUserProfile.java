@@ -1,12 +1,11 @@
 package com.flatshare.domain.datatypes.db.profiles;
 
+import com.flatshare.domain.datatypes.db.common.ApartmentLocation;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.PropertyName;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.flatshare.domain.datatypes.db.common.ApartmentLocation;
 
 /**
  * Created by Arber on 06/12/2016.
@@ -67,6 +66,8 @@ public class ApartmentUserProfile extends UserProfile {
     @PropertyName("matched_tenant_ids")
     public List<String> matchedTenantIds;
 
+    public ApartmentUserProfile() {
+    }
 
     public ApartmentUserProfile(String ownerUserId, List<String> roommateIds, String apartmentInfo, int price, int area, ApartmentLocation apartmentLocation, boolean internet, boolean smokerApartment, List<String> pets, boolean purposeApartment, boolean waschingMachine, boolean dryer, boolean balcony, boolean bathtub, boolean tvCable, List<String> languages) {
         this.ownerUserId = ownerUserId;
