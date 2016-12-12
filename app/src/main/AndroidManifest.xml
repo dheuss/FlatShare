@@ -24,7 +24,7 @@
         <activity android:name="com.flatshare.presentation.ui.activities.TenantProfileActivity" />
         <activity android:name="com.flatshare.presentation.ui.activities.ApartmentProfileActivity" />
         <activity android:name="com.flatshare.presentation.ui.activities.TenantSettingsActivity" />
-        <activity android:name="com.flatshare.presentation.ui.activities.ApartmentSettingsActivity"></activity>
+        <activity android:name="com.flatshare.presentation.ui.activities.ApartmentSettingsActivity" />
     </application>
 
 </manifest>
