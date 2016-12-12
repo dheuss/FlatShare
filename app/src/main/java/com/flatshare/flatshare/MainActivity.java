@@ -6,6 +6,8 @@ import android.os.Bundle;
 public class MainActivity extends AppCompatActivity {
 
     //Test David
+    //Test Arber
+    //Sandro testuj
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
