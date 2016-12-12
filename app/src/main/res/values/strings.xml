@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">FlatShare</string>
+    <string name="app_name">MyApp</string>
+    <string name="hint_email">Enter Email address...</string>
+    <string name="hint_password">Enter password...</string>
+    <string name="login_button">Login!</string>
+    <string name="register">Register</string>
+    <string name="male">male</string>
+    <string name="female">female</string>
+    <string name="smoker">smoker</string>
+    <string name="age">age</string>
+    <string name="hint_firstname">firstname</string>
+    <string name="done">Done!</string>
+    <string name="tenant_profile_button">Tenant</string>
+    <string name="apartment_profile_button">Apartment</string>
+    <string name="firstname_hint">Enter your name</string>
+    <string name="age_hint">Enter your age</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="gender">Gender</string>
+    <string name="internet">Internet</string>
+    <string name="washing_machine">Washing Machine</string>
 </resources>

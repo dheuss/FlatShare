@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "746261805904",
+    "firebase_url": "https://flatshare-5d4c6.firebaseio.com",
+    "project_id": "flatshare-5d4c6",
+    "storage_bucket": "flatshare-5d4c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746261805904:android:54a905cff07dd26d",
+        "android_client_info": {
+          "package_name": "com.flatshare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "746261805904-icki9ds97ltmh32vhd6u4k4nvrp4tih8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVg37iG1Dn1hAU8okN01myHW0EGKoBXmk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
