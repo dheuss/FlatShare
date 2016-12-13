@@ -9,8 +9,11 @@ import com.google.firebase.database.PropertyName;
 
 public class ApartmentFilterSettings extends FilterSettings {
 
-    @PropertyName("age")
-    public int age;
+    @PropertyName("age_from")
+    public int ageFrom;
+
+    @PropertyName("age_to")
+    public int ageTo;
 
     @PropertyName("gender")
     public int gender;
@@ -18,11 +21,11 @@ public class ApartmentFilterSettings extends FilterSettings {
     @PropertyName("smoker")
     public int smoker;
 
-    @PropertyName("occupation")
-    public String occupation;
-
-    @PropertyName("duration_of_stay")
-    public int durationOfStay;
+//    @PropertyName("occupation")
+//    public String occupation;
+//
+//    @PropertyName("duration_of_stay")
+//    public int durationOfStay;
 
     @PropertyName("pets_allowed")
     public int petsAllowed;
@@ -31,13 +34,23 @@ public class ApartmentFilterSettings extends FilterSettings {
     }
 
     @Exclude
-    public int getAge() {
-        return age;
+    public int getAgeFrom() {
+        return ageFrom;
     }
 
     @Exclude
-    public void setAge(int age) {
-        this.age = age;
+    public void setAgeFrom(int ageFrom) {
+        this.ageFrom = ageFrom;
+    }
+
+    @Exclude
+    public int getAgeTo() {
+        return ageTo;
+    }
+
+    @Exclude
+    public void setAgeTo(int ageTo) {
+        this.ageTo = ageTo;
     }
 
     @Exclude
@@ -58,26 +71,6 @@ public class ApartmentFilterSettings extends FilterSettings {
     @Exclude
     public void setSmoker(int smoker) {
         this.smoker = smoker;
-    }
-
-    @Exclude
-    public String getOccupation() {
-        return occupation;
-    }
-
-    @Exclude
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
-    }
-
-    @Exclude
-    public int getDurationOfStay() {
-        return durationOfStay;
-    }
-
-    @Exclude
-    public void setDurationOfStay(int durationOfStay) {
-        this.durationOfStay = durationOfStay;
     }
 
     @Exclude

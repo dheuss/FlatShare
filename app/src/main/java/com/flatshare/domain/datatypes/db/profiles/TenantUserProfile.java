@@ -1,9 +1,9 @@
 package com.flatshare.domain.datatypes.db.profiles;
 
+import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.PropertyName;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,6 +11,9 @@ import java.util.List;
  */
 
 public class TenantUserProfile extends UserProfile {
+
+    @PropertyName("tenant_filter_settings")
+    public TenantFilterSettings tenantFilterSettings;
 
     @PropertyName("user_id")
     public String userId;
@@ -40,7 +43,7 @@ public class TenantUserProfile extends UserProfile {
     public List<String> hobbies;
 
     @PropertyName("pets")
-    public List<String> pets;
+    public boolean pets;
 
     @PropertyName("daily_token_consumed")
     public boolean dailyTokenConsumed;
@@ -54,23 +57,6 @@ public class TenantUserProfile extends UserProfile {
 
     public TenantUserProfile() {
 
-    }
-
-    public TenantUserProfile(String firstName, int age, int gender, boolean smoker, String occupation, String shortBio, int durationOfStay, List<String> hobbies, List<String> pets) {
-
-        this.firstName = firstName;
-        this.age = age;
-        this.gender = gender;
-        this.smoker = smoker;
-        this.occupation = occupation;
-        this.shortBio = shortBio;
-        this.durationOfStay = durationOfStay;
-        this.hobbies = hobbies;
-        this.pets = pets;
-
-        this.dailyTokenConsumed = false;
-        this.apartmentsToShow = new ArrayList<>();
-        this.matchedApartments = new ArrayList<>();
     }
 
     @Exclude
@@ -164,12 +150,12 @@ public class TenantUserProfile extends UserProfile {
     }
 
     @Exclude
-    public List<String> getPets() {
+    public boolean hasPets() {
         return pets;
     }
 
     @Exclude
-    public void setPets(List<String> pets) {
+    public void setPets(boolean pets) {
         this.pets = pets;
     }
 
@@ -201,5 +187,15 @@ public class TenantUserProfile extends UserProfile {
     @Exclude
     public void setMatchedApartments(List<String> matchedApartments) {
         this.matchedApartments = matchedApartments;
+    }
+
+    @Exclude
+    public TenantFilterSettings getTenantFilterSettings() {
+        return tenantFilterSettings;
+    }
+
+    @Exclude
+    public void setTenantFilterSettings(TenantFilterSettings tenantFilterSettings) {
+        this.tenantFilterSettings = tenantFilterSettings;
     }
 }

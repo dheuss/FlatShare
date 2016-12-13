@@ -1,10 +1,10 @@
 package com.flatshare.domain.datatypes.db.profiles;
 
 import com.flatshare.domain.datatypes.db.common.ApartmentLocation;
+import com.flatshare.domain.datatypes.db.filters.ApartmentFilterSettings;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.PropertyName;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +12,9 @@ import java.util.List;
  */
 
 public class ApartmentUserProfile extends UserProfile {
+
+    @PropertyName("apartment_filter_settings")
+    public ApartmentFilterSettings apartmentFilterSettings;
 
     @PropertyName("owner_user_id")
     public String ownerUserId;
@@ -38,7 +41,7 @@ public class ApartmentUserProfile extends UserProfile {
     public boolean smokerApartment;
 
     @PropertyName("pets")
-    public List<String> pets;
+    public boolean pets;
 
     @PropertyName("purpose_apartment")
     public boolean purposeApartment;
@@ -46,48 +49,25 @@ public class ApartmentUserProfile extends UserProfile {
     @PropertyName("washing_machine")
     public boolean waschingMachine;
 
-    @PropertyName("dryer")
-    public boolean dryer;
+//    @PropertyName("dryer")
+//    public boolean dryer;
 
-    @PropertyName("balcony")
-    public boolean balcony;
+//    @PropertyName("balcony")
+//    public boolean balcony;
 
-    @PropertyName("bathtub")
-    public boolean bathtub;
+//    @PropertyName("bathtub")
+//    public boolean bathtub;
 
-
-    @PropertyName("tv_cable")
-    public boolean tvCable;
+//    @PropertyName("tv_cable")
+//    public boolean tvCable;
 
     @PropertyName("languages")
     public List<String> languages;
-
 
     @PropertyName("matched_tenant_ids")
     public List<String> matchedTenantIds;
 
     public ApartmentUserProfile() {
-    }
-
-    public ApartmentUserProfile(String ownerUserId, List<String> roommateIds, String apartmentInfo, int price, int area, ApartmentLocation apartmentLocation, boolean internet, boolean smokerApartment, List<String> pets, boolean purposeApartment, boolean waschingMachine, boolean dryer, boolean balcony, boolean bathtub, boolean tvCable, List<String> languages) {
-        this.ownerUserId = ownerUserId;
-        this.roommateIds = roommateIds;
-        this.apartmentInfo = apartmentInfo;
-        this.price = price;
-        this.area = area;
-        this.apartmentLocation = apartmentLocation;
-        this.internet = internet;
-        this.smokerApartment = smokerApartment;
-        this.pets = pets;
-        this.purposeApartment = purposeApartment;
-        this.waschingMachine = waschingMachine;
-        this.dryer = dryer;
-        this.balcony = balcony;
-        this.bathtub = bathtub;
-        this.tvCable = tvCable;
-        this.languages = languages;
-
-        this.matchedTenantIds = new ArrayList<>();
     }
 
     @Exclude
@@ -151,7 +131,7 @@ public class ApartmentUserProfile extends UserProfile {
     }
 
     @Exclude
-    public boolean isInternet() {
+    public boolean hasInternet() {
         return internet;
     }
 
@@ -171,13 +151,13 @@ public class ApartmentUserProfile extends UserProfile {
     }
 
     @Exclude
-    public List<String> getPets() {
+    public boolean hasPets() {
         return pets;
     }
 
     @Exclude
-    public void setPets(List<String> pets) {
-        this.pets = pets;
+    public void setPets(boolean hasPets) {
+        this.pets = hasPets;
     }
 
     @Exclude
@@ -191,53 +171,13 @@ public class ApartmentUserProfile extends UserProfile {
     }
 
     @Exclude
-    public boolean isWaschingMachine() {
+    public boolean hasWaschingMachine() {
         return waschingMachine;
     }
 
     @Exclude
     public void setWaschingMachine(boolean waschingMachine) {
         this.waschingMachine = waschingMachine;
-    }
-
-    @Exclude
-    public boolean isDryer() {
-        return dryer;
-    }
-
-    @Exclude
-    public void setDryer(boolean dryer) {
-        this.dryer = dryer;
-    }
-
-    @Exclude
-    public boolean isBalcony() {
-        return balcony;
-    }
-
-    @Exclude
-    public void setBalcony(boolean balcony) {
-        this.balcony = balcony;
-    }
-
-    @Exclude
-    public boolean isBathtub() {
-        return bathtub;
-    }
-
-    @Exclude
-    public void setBathtub(boolean bathtub) {
-        this.bathtub = bathtub;
-    }
-
-    @Exclude
-    public boolean isTvCable() {
-        return tvCable;
-    }
-
-    @Exclude
-    public void setTvCable(boolean tvCable) {
-        this.tvCable = tvCable;
     }
 
     @Exclude
@@ -258,5 +198,15 @@ public class ApartmentUserProfile extends UserProfile {
     @Exclude
     public void setMatchedTenantIds(List<String> matchedTenantIds) {
         this.matchedTenantIds = matchedTenantIds;
+    }
+
+    @Exclude
+    public ApartmentFilterSettings getApartmentFilterSettings() {
+        return apartmentFilterSettings;
+    }
+
+    @Exclude
+    public void setApartmentFilterSettings(ApartmentFilterSettings apartmentFilterSettings) {
+        this.apartmentFilterSettings = apartmentFilterSettings;
     }
 }

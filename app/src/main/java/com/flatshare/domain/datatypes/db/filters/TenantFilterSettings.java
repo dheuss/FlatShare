@@ -29,7 +29,7 @@ public class TenantFilterSettings extends FilterSettings {
     public int internet;
 
     @PropertyName("smoker_apartment")
-    public boolean smokerApartment;
+    public int smokerApartment;
 
     @PropertyName("pets_allowed")
     public int petsAllowed;
@@ -38,19 +38,19 @@ public class TenantFilterSettings extends FilterSettings {
     public int purposeApartment;
 
     @PropertyName("washing_machine")
-    public int waschingMachine;
+    public int washingMachine;
 
-    @PropertyName("dryer")
-    public int dryer;
+//    @PropertyName("dryer")
+//    public int dryer;
 
-    @PropertyName("balcony")
-    public int balcony;
+//    @PropertyName("balcony")
+//    public int balcony;
 
-    @PropertyName("bathtub")
-    public int bathtub;
+//    @PropertyName("bathtub")
+//    public int bathtub;
 
-    @PropertyName("tv_cable")
-    public int tvCable;
+//    @PropertyName("tv_cable")
+//    public int tvCable;
 
     public TenantFilterSettings() {
     }
@@ -116,12 +116,12 @@ public class TenantFilterSettings extends FilterSettings {
     }
 
     @Exclude
-    public boolean isSmokerApartment() {
+    public int wantsSmokerApartment() {
         return smokerApartment;
     }
 
     @Exclude
-    public void setSmokerApartment(boolean smokerApartment) {
+    public void setSmokerApartment(int smokerApartment) {
         this.smokerApartment = smokerApartment;
     }
 
@@ -136,7 +136,7 @@ public class TenantFilterSettings extends FilterSettings {
     }
 
     @Exclude
-    public int getPurposeApartment() {
+    public int wantsPurposeApartment() {
         return purposeApartment;
     }
 
@@ -146,52 +146,13 @@ public class TenantFilterSettings extends FilterSettings {
     }
 
     @Exclude
-    public int getWaschingMachine() {
-        return waschingMachine;
+    public int wantsWashingMachine() {
+        return washingMachine;
     }
 
     @Exclude
-    public void setWaschingMachine(int waschingMachine) {
-        this.waschingMachine = waschingMachine;
+    public void setWashingMachine(int washingMachine) {
+        this.washingMachine = washingMachine;
     }
 
-    @Exclude
-    public int getDryer() {
-        return dryer;
-    }
-
-    @Exclude
-    public void setDryer(int dryer) {
-        this.dryer = dryer;
-    }
-
-    @Exclude
-    public int getBalcony() {
-        return balcony;
-    }
-
-    @Exclude
-    public void setBalcony(int balcony) {
-        this.balcony = balcony;
-    }
-
-    @Exclude
-    public int getBathtub() {
-        return bathtub;
-    }
-
-    @Exclude
-    public void setBathtub(int bathtub) {
-        this.bathtub = bathtub;
-    }
-
-    @Exclude
-    public int getTvCable() {
-        return tvCable;
-    }
-
-    @Exclude
-    public void setTvCable(int tvCable) {
-        this.tvCable = tvCable;
-    }
 }
