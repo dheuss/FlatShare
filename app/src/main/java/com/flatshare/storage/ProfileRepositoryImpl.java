@@ -39,7 +39,7 @@ public class ProfileRepositoryImpl implements ProfileRepository {
     }
 
     @Override
-    public void createPrimaryProfile(PrimaryUserProfile primaryUserProfile) throws DatabaseException {
+    public boolean createPrimaryProfile(PrimaryUserProfile primaryUserProfile) throws DatabaseException {
 
         // create main profile
         databaseManager.create(primaryUserProfile, userPath);
@@ -49,20 +49,23 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 
         // add empty apartment profile TODO: remove, maybe redundant
 //        databaseManager.addJsonRoot(apartmentProfilesPath + apartmentId, "empty");
+        return false;
     }
 
     @Override
-    public void createTenantProfile(TenantUserProfile tenantUserProfile) throws DatabaseException {
+    public boolean createTenantProfile(TenantUserProfile tenantUserProfile) throws DatabaseException {
         databaseManager.create(tenantUserProfile, tenantProfilesPath + tenantId);
         //TODO: add to the list of all tenants
+        return false;
     }
 
     @Override
-    public void createApartmentProfile(ApartmentUserProfile apartmentUserProfile) throws DatabaseException {
+    public boolean createApartmentProfile(ApartmentUserProfile apartmentUserProfile) throws DatabaseException {
         databaseManager.create(apartmentUserProfile, apartmentProfilesPath + apartmentId);
 
 //        addToAllApartments(apartmentId);
         //TODO: add to the list of all apartments
         //TODO: add to the right zip code list
+        return false;
     }
 }

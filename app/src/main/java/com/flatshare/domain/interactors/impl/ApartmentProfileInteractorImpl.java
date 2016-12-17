@@ -2,8 +2,6 @@ package com.flatshare.domain.interactors.impl;
 
 import android.util.Log;
 
-import com.google.firebase.database.DatabaseException;
-
 import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
 import com.flatshare.domain.executor.Executor;
 import com.flatshare.domain.executor.MainThread;
@@ -62,11 +60,13 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
     public void run() {
         Log.d(TAG, "inside run()");
 
-        try {
-            profileRepository.createApartmentProfile(apartmentUserProfile);
+
+        if(
+            profileRepository.createApartmentProfile(apartmentUserProfile)){
+
             notifySuccess();
-        } catch (DatabaseException e) {
-            Log.w(TAG, e);
+        } else{
+            Log.w(TAG, "Could not create Apartment Profile");
             notifyError();
         }
     }

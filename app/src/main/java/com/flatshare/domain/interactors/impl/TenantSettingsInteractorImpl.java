@@ -2,8 +2,6 @@ package com.flatshare.domain.interactors.impl;
 
 import android.util.Log;
 
-import com.google.firebase.database.DatabaseException;
-
 import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
 import com.flatshare.domain.executor.Executor;
 import com.flatshare.domain.executor.MainThread;
@@ -63,12 +61,11 @@ public class TenantSettingsInteractorImpl extends AbstractInteractor implements 
     public void run() {
         Log.d(TAG, "inside run()");
 
-        try {
-            //TODO: change it to do something
-//            profileRepository.createTenantProfile(tenantFilterSettings);
+        //TODO: change it to do something
+        if(false){
             notifySuccess();
-        } catch (DatabaseException e) {
-            Log.w(TAG, e);
+        } else  {
+            Log.w(TAG, "change it to do something");
             notifyError();
         }
     }

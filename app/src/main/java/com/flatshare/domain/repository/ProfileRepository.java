@@ -1,7 +1,5 @@
 package com.flatshare.domain.repository;
 
-import com.google.firebase.database.DatabaseException;
-
 import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
@@ -12,9 +10,9 @@ import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
 
 public interface ProfileRepository {
 
-    void createPrimaryProfile(PrimaryUserProfile isTenant) throws DatabaseException;
+    boolean createPrimaryProfile(PrimaryUserProfile isTenant);
 
-    void createTenantProfile(TenantUserProfile tenantUserProfile) throws DatabaseException;
+    boolean createTenantProfile(TenantUserProfile tenantUserProfile);
 
-    void createApartmentProfile(ApartmentUserProfile apartmentUserProfile) throws DatabaseException;
+    boolean createApartmentProfile(ApartmentUserProfile apartmentUserProfile);
 }

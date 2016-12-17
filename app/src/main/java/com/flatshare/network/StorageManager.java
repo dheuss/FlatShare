@@ -5,4 +5,6 @@ package com.flatshare.network;
  */
 
 public interface StorageManager {
+
+
 }

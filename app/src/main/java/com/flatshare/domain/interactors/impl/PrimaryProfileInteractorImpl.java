@@ -2,8 +2,6 @@ package com.flatshare.domain.interactors.impl;
 
 import android.util.Log;
 
-import com.google.firebase.database.DatabaseException;
-
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.executor.Executor;
 import com.flatshare.domain.executor.MainThread;
@@ -31,8 +29,8 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
     private ProfileRepository profileRepository;
 
     public PrimaryProfileInteractorImpl(Executor threadExecutor,
-                                          MainThread mainThread,
-                                          Callback callback, PrimaryUserProfile primaryUserProfile) {
+                                        MainThread mainThread,
+                                        Callback callback, PrimaryUserProfile primaryUserProfile) {
 
         super(threadExecutor, mainThread);
         Log.d(TAG, "inside constructor");
@@ -63,11 +61,12 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
     public void run() {
         Log.d(TAG, "inside run()");
 
-        try {
-            profileRepository.createPrimaryProfile(primaryUserProfile);
+        if (
+                profileRepository.createPrimaryProfile(primaryUserProfile)) {
+
             notifySuccess();
-        } catch (DatabaseException e) {
-            Log.w(TAG, e);
+        } else {
+            Log.w(TAG, "Could not create Primary Profile");
             notifyError();
         }
     }

@@ -2,19 +2,18 @@ package com.flatshare.network.impl;
 
 import android.util.Log;
 
+import com.flatshare.domain.datatypes.db.DatabaseItem;
+import com.flatshare.network.DatabaseManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.flatshare.domain.datatypes.db.DatabaseItem;
-import com.flatshare.network.DatabaseManager;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by Arber on 06/12/2016.
@@ -44,21 +43,25 @@ public class DatabaseManagerImpl implements DatabaseManager {
     }
 
     @Override
-    public void create(DatabaseItem databaseItem, String path) throws DatabaseException {
+    public boolean create(DatabaseItem databaseItem, String path){
+
+        AtomicBoolean itemCreated = new AtomicBoolean(false);
 
         mDatabase.child(path).setValue(databaseItem, (databaseError, databaseReference) -> {
             if (databaseError == null) { // Success!
                 Log.d(TAG, "successfully created!");
-
+                itemCreated.set(true);
             } else { // Failure
                 Log.w(TAG, "FAILED!", databaseError.toException());
-                throw databaseError.toException();
+                itemCreated.set(false);
             }
         });
+
+        return itemCreated.get();
     }
 
     @Override
-    public DatabaseItem read(String path, final Class<? extends DatabaseItem> databaseItemClass) throws DatabaseException {
+    public DatabaseItem read(String path, final Class<? extends DatabaseItem> databaseItemClass) {
 
         mDatabase.child(path).addValueEventListener(new ValueEventListener() {
             @Override
@@ -71,7 +74,7 @@ public class DatabaseManagerImpl implements DatabaseManager {
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
-                throw error.toException();
+                databaseItem = null;
             }
         });
 
@@ -83,7 +86,9 @@ public class DatabaseManagerImpl implements DatabaseManager {
 
 
     @Override
-    public void update(DatabaseItem newDatabaseItem, String path) throws DatabaseException {
+    public boolean update(DatabaseItem newDatabaseItem, String path){
+
+        AtomicBoolean itemUpdated = new AtomicBoolean(false);
 
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put(path, newDatabaseItem);
@@ -91,12 +96,14 @@ public class DatabaseManagerImpl implements DatabaseManager {
         mDatabase.updateChildren(childUpdates).addOnCompleteListener(task -> {
             if (!task.isSuccessful()) { // FAILURE!
                 Log.w(TAG, "update FAILED!", task.getException());
-                throw new DatabaseException("cannot update...");
+                itemUpdated.set(false);
             } else { // SUCCESS
                 Log.d(TAG, "successfully updated!");
+                itemUpdated.set(true);
             }
         });
 
+        return itemUpdated.get();
 
 //        mDatabase.child(path).setValue(newDatabaseItem, (databaseError, databaseReference) -> {
 //            if (databaseError != null) { // FAILURE!
@@ -110,15 +117,21 @@ public class DatabaseManagerImpl implements DatabaseManager {
     }
 
     @Override
-    public void delete(String path) throws DatabaseException {
+    public boolean delete(String path){
+
+        AtomicBoolean itemDeleted = new AtomicBoolean(false);
+
         mDatabase.child(userId + path).removeValue((databaseError, databaseReference) -> {
             if (databaseError != null) { // FAILURE!
                 Log.d(TAG, "delete FAILED!", databaseError.toException());
-                throw databaseError.toException();
+                itemDeleted.set(false);
             } else { // SUCCESS
                 Log.d(TAG, "successfully deleted!");
+                itemDeleted.set(true);
             }
         });
+
+        return itemDeleted.get();
     }
 
     @Override
@@ -127,15 +140,21 @@ public class DatabaseManagerImpl implements DatabaseManager {
     }
 
     @Override
-    public void addJsonRoot(String path, String id) throws DatabaseException {
+    public boolean addJsonRoot(String path, String id){
+
+        AtomicBoolean rootAdded = new AtomicBoolean(false);
+
         mDatabase.child(path).setValue(id, (databaseError, databaseReference) -> {
             if (databaseError == null) { // Success!
                 Log.d(TAG, "successfully created!");
-
+                rootAdded.set(true);
             } else { // Failure
                 Log.w(TAG, "FAILED!", databaseError.toException());
-                throw databaseError.toException();
+                rootAdded.set(false);
             }
         });
+
+        return rootAdded.get();
     }
+
 }

@@ -1,7 +1,5 @@
 package com.flatshare.network;
 
-import com.google.firebase.database.DatabaseException;
-
 import com.flatshare.domain.datatypes.db.DatabaseItem;
 
 /**
@@ -10,15 +8,15 @@ import com.flatshare.domain.datatypes.db.DatabaseItem;
 
 public interface DatabaseManager {
 
-    void create(DatabaseItem databaseItem, String path) throws DatabaseException;
+    boolean create(DatabaseItem databaseItem, String path);
 
-    DatabaseItem read(String path, Class<? extends DatabaseItem> databaseItemClass) throws DatabaseException;
+    DatabaseItem read(String path, Class<? extends DatabaseItem> databaseItemClass);
 
-    void update(DatabaseItem newDatabaseItem, String path) throws DatabaseException;
+    boolean update(DatabaseItem newDatabaseItem, String path);
 
-    void delete(String path) throws DatabaseException;
+    boolean delete(String path);
 
-    void addJsonRoot(String path, String id) throws DatabaseException;
+    boolean addJsonRoot(String path, String id);
 
     String getUserId();
 
