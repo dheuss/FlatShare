@@ -47,7 +47,7 @@ public class ApartmentUserProfile extends UserProfile {
     public boolean purposeApartment;
 
     @PropertyName("washing_machine")
-    public boolean waschingMachine;
+    public boolean washingMachine;
 
 //    @PropertyName("dryer")
 //    public boolean dryer;
@@ -171,13 +171,13 @@ public class ApartmentUserProfile extends UserProfile {
     }
 
     @Exclude
-    public boolean hasWaschingMachine() {
-        return waschingMachine;
+    public boolean hasWashingMachine() {
+        return washingMachine;
     }
 
     @Exclude
-    public void setWaschingMachine(boolean waschingMachine) {
-        this.waschingMachine = waschingMachine;
+    public void setWashingMachine(boolean washingMachine) {
+        this.washingMachine = washingMachine;
     }
 
     @Exclude

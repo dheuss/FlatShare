@@ -63,8 +63,12 @@ public class TenantProfileActivity extends AppCompatActivity implements TenantPr
 
         int gender = genderRadioGroup.getCheckedRadioButtonId() == maleRadioButton.getId() ? 0 : 1;
 
-        // TODO: better work with setters...constructor too long
-        TenantUserProfile tenantUserProfile = new TenantUserProfile(firstname, age, gender, isSmoker, "occupation", "shortBio", 10, null, null);
+        TenantUserProfile tenantUserProfile = new TenantUserProfile();
+        tenantUserProfile.setFirstName(firstname);
+        tenantUserProfile.setAge(age);
+        tenantUserProfile.setSmoker(isSmoker);
+        tenantUserProfile.setGender(gender);
+
         mPresenter.sendProfile(tenantUserProfile);
     }
 

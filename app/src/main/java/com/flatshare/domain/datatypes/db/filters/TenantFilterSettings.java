@@ -106,7 +106,7 @@ public class TenantFilterSettings extends FilterSettings {
     }
 
     @Exclude
-    public int getInternet() {
+    public int wantsInternet() {
         return internet;
     }
 
