@@ -6,5 +6,11 @@ package com.flatshare.network;
 
 public interface StorageManager {
 
+    boolean uploadImage(String userId, byte[] data);
 
+    boolean uploadVideo(String userId, byte[] data);
+
+    byte[] downloadImage(String userId, String imgName);
+
+    byte[] downloadVideo(String userId, String vidName);
 }

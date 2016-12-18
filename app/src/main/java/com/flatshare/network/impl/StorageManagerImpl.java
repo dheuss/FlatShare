@@ -8,7 +8,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -21,14 +20,9 @@ public class StorageManagerImpl implements StorageManager {
     private StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl("gs://flatshare-5d4c6.appspot.com");
 
 
-    public StorageManagerImpl() {
+    private boolean uploadDataLocal(StorageReference storageRef, byte[] data) {
 
-    }
-
-    private boolean uploadDataLocal(StorageReference storageRef, String filePath) {
-        Uri file = Uri.fromFile(new File(filePath));
-
-        UploadTask uploadTask = storageRef.putFile(file);
+        UploadTask uploadTask = storageRef.putBytes(data);
         AtomicBoolean uploaded = new AtomicBoolean(true);
 
 // Register observers to listen for when the download is done or if it fails
@@ -45,13 +39,15 @@ public class StorageManagerImpl implements StorageManager {
         return uploaded.get();
     }
 
-    public boolean uploadDataLocal(String userId, String filePath) {
-        return uploadDataLocal(storageRef.child(userId + "/images"), filePath);
+    @Override
+    public boolean uploadImage(String userId, byte[] data) {
+        return uploadDataLocal(storageRef.child(userId + "/images"), data);
     }
 
-    public boolean uploadVideoLocal(String userId, String filePath) {
+    @Override
+    public boolean uploadVideo(String userId, byte[] data) {
 
-        return uploadDataLocal(storageRef.child(userId + "/videos"), filePath);
+        return uploadDataLocal(storageRef.child(userId + "/videos"), data);
 
     }
 
@@ -70,10 +66,12 @@ public class StorageManagerImpl implements StorageManager {
         return b;
     }
 
+    @Override
     public byte[] downloadImage(String userId, String imgName) {
         return downloadDataMemory(storageRef.child(userId + "/images/" + imgName));
     }
 
+    @Override
     public byte[] downloadVideo(String userId, String vidName) {
         return downloadDataMemory(storageRef.child(userId + "/videos/" + vidName));
 

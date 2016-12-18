@@ -63,7 +63,9 @@ public class DatabaseManagerImpl implements DatabaseManager {
     @Override
     public DatabaseItem read(String path, final Class<? extends DatabaseItem> databaseItemClass) {
 
-        mDatabase.child(path).addValueEventListener(new ValueEventListener() {
+
+//                addValueEventListener
+        mDatabase.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
