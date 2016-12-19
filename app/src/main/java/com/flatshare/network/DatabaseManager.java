@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface DatabaseManager {
 
-    boolean create(Object item, String path);
+    String create(Object item, String path);
 
     String push(Object item, String path);
 
@@ -18,9 +18,15 @@ public interface DatabaseManager {
 
     List<String> readIds(String path);
 
-    boolean update(Object newItem, String path);
+    String update(Object newItem, String path);
 
-    boolean delete(String path);
+    String delete(String path);
+
+    String getTenantProfileId();
+
+    String getApartmentProfileId();
+
+    String getUserId();
 
     //Object addListener
 }

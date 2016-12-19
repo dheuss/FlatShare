@@ -6,7 +6,6 @@ import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
 import com.flatshare.domain.repository.ProfileRepository;
 import com.flatshare.network.DatabaseManager;
 import com.flatshare.network.impl.DatabaseManagerImpl;
-import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Created by Arber on 10/12/2016.
@@ -22,29 +21,23 @@ public class ProfileRepositoryImpl implements ProfileRepository {
     private String tenantProfilesPath;
     private String apartmentProfilesPath;
 
-    private String tenantsIdListPath;
-    private String apartmentsIdListPath;
-
 
     public ProfileRepositoryImpl() {
         databaseManager = new DatabaseManagerImpl();
 
 
-        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        userId = databaseManager.getUserId();
         userPath = "/user_profiles";
 
         tenantProfilesPath = "/tenant_profiles";
         apartmentProfilesPath = "/apartment_profiles";
-
-        tenantsIdListPath = "/tenants_list";
-        apartmentsIdListPath = "/apartments_list";
     }
 
 
     @Override
     public boolean createPrimaryProfile(PrimaryUserProfile primaryUserProfile) {
 
-        return databaseManager.create(primaryUserProfile, userPath);
+        return databaseManager.create(primaryUserProfile, userPath + "/" + userId) == null;
     }
 
     @Override
@@ -53,7 +46,7 @@ public class ProfileRepositoryImpl implements ProfileRepository {
         if (tenantId == null) {
             return false;
         }
-        return databaseManager.create(tenantId, userPath + "/" + userId + "/" + "tenant_profile_id");
+        return databaseManager.create(tenantId, userPath + "/" + userId + "/" + "tenant_profile_id") == null;
     }
 
     @Override
@@ -77,19 +70,7 @@ public class ProfileRepositoryImpl implements ProfileRepository {
         if (locationId == null) {
             return false;
         }
-        return databaseManager.create(apartmentId, userPath + "/" + userId + "/" + "apartment_profile_id");
+        return databaseManager.create(apartmentId, userPath + "/" + userId + "/" + "apartment_profile_id") == null;
 
     }
-
-//    @Override
-//    public String getTenantProfileId() {
-//        PrimaryUserProfile primaryUserProfile = (PrimaryUserProfile) databaseManager.readItem("users/" + userId, PrimaryUserProfile.class);
-//        return primaryUserProfile.getTenantProfileId();
-//    }
-//
-//    @Override
-//    public String getApartmentProfileId() {
-//        PrimaryUserProfile primaryUserProfile = (PrimaryUserProfile) databaseManager.readItem("users/" + userId, PrimaryUserProfile.class);
-//        return primaryUserProfile.getApartmentProfileId();
-//    }
 }
