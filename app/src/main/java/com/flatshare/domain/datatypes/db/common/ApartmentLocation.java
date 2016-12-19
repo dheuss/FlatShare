@@ -23,9 +23,9 @@ public class ApartmentLocation implements DatabaseItem {
     public int streetNumber;
 
     @PropertyName("zip_code")
-    public String zipCode;
+    public int zipCode;
 
-    public ApartmentLocation(String city, String district, String street, int streetNumber, String zipCode) {
+    public ApartmentLocation(String city, String district, String street, int streetNumber, int zipCode) {
         this.city = city;
         this.district = district;
         this.street = street;
@@ -65,11 +65,11 @@ public class ApartmentLocation implements DatabaseItem {
         this.streetNumber = streetNumber;
     }
 
-    public String getZipCode() {
+    public int getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(String zipCode) {
+    public void setZipCode(int zipCode) {
         this.zipCode = zipCode;
     }
 }

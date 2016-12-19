@@ -6,6 +6,7 @@ import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
 import com.flatshare.domain.repository.ProfileRepository;
 import com.flatshare.network.DatabaseManager;
 import com.flatshare.network.impl.DatabaseManagerImpl;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Created by Arber on 10/12/2016.
@@ -13,9 +14,11 @@ import com.flatshare.network.impl.DatabaseManagerImpl;
 
 public class ProfileRepositoryImpl implements ProfileRepository {
 
-    DatabaseManager databaseManager;
+    private DatabaseManager databaseManager;
 
+    private String userId;
     private String userPath;
+
     private String tenantProfilesPath;
     private String apartmentProfilesPath;
 
@@ -25,6 +28,11 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 
     public ProfileRepositoryImpl() {
         databaseManager = new DatabaseManagerImpl();
+
+
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        userPath = "/user_profiles";
+
         tenantProfilesPath = "/tenant_profiles";
         apartmentProfilesPath = "/apartment_profiles";
 
@@ -32,29 +40,56 @@ public class ProfileRepositoryImpl implements ProfileRepository {
         apartmentsIdListPath = "/apartments_list";
     }
 
+
     @Override
     public boolean createPrimaryProfile(PrimaryUserProfile primaryUserProfile) {
 
-        // create main profile
-        databaseManager.create(primaryUserProfile, userPath);
-
-        return false;
+        return databaseManager.create(primaryUserProfile, userPath);
     }
 
     @Override
     public boolean createTenantProfile(TenantUserProfile tenantUserProfile) {
         String tenantId = databaseManager.push(tenantUserProfile, tenantProfilesPath);
-        databaseManager.addIdToList(tenantId, tenantsIdListPath);
-        return false;
+        if (tenantId == null) {
+            return false;
+        }
+        return databaseManager.create(tenantId, userPath + "/" + userId + "/" + "tenant_profile_id");
     }
 
     @Override
     public boolean createApartmentProfile(ApartmentUserProfile apartmentUserProfile) {
+
         String apartmentId = databaseManager.push(apartmentUserProfile, apartmentProfilesPath);
-        databaseManager.addIdToList(apartmentId, apartmentsIdListPath);
-//        addToAllApartments(apartmentId);
-        //TODO: add to the list of all apartments
-        //TODO: add to the right zip code list
-        return false;
+
+        String city = apartmentUserProfile.getApartmentLocation().getCity();
+        String district = apartmentUserProfile.getApartmentLocation().getDistrict();
+        int zipCode = apartmentUserProfile.getApartmentLocation().getZipCode();
+
+        String locationPath = "apartment_locations/" + city + "/" + district + "/" + zipCode;
+
+        if (apartmentId == null) {
+            return false;
+        }
+
+        //TODO: TEST!!!
+        String locationId = databaseManager.push(apartmentId, locationPath);
+
+        if (locationId == null) {
+            return false;
+        }
+        return databaseManager.create(apartmentId, userPath + "/" + userId + "/" + "apartment_profile_id");
+
     }
+
+//    @Override
+//    public String getTenantProfileId() {
+//        PrimaryUserProfile primaryUserProfile = (PrimaryUserProfile) databaseManager.readItem("users/" + userId, PrimaryUserProfile.class);
+//        return primaryUserProfile.getTenantProfileId();
+//    }
+//
+//    @Override
+//    public String getApartmentProfileId() {
+//        PrimaryUserProfile primaryUserProfile = (PrimaryUserProfile) databaseManager.readItem("users/" + userId, PrimaryUserProfile.class);
+//        return primaryUserProfile.getApartmentProfileId();
+//    }
 }

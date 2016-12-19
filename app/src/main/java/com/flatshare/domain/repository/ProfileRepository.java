@@ -15,4 +15,8 @@ public interface ProfileRepository {
     boolean createTenantProfile(TenantUserProfile tenantUserProfile);
 
     boolean createApartmentProfile(ApartmentUserProfile apartmentUserProfile);
+
+//    String getTenantProfileId();
+
+//    String getApartmentProfileId();
 }

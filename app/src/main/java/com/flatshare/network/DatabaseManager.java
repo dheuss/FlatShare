@@ -2,25 +2,25 @@ package com.flatshare.network;
 
 import com.flatshare.domain.datatypes.db.DatabaseItem;
 
+import java.util.List;
+
 /**
  * Created by Arber on 06/12/2016.
  */
 
 public interface DatabaseManager {
 
-    boolean create(DatabaseItem databaseItem, String path);
+    boolean create(Object item, String path);
 
-    DatabaseItem read(String path, Class<? extends DatabaseItem> databaseItemClass);
+    String push(Object item, String path);
 
-    boolean update(DatabaseItem newDatabaseItem, String path);
+    DatabaseItem readItem(String path, Class<? extends DatabaseItem> databaseItemClass);
+
+    List<String> readIds(String path);
+
+    boolean update(Object newItem, String path);
 
     boolean delete(String path);
 
-    String getTenantProfileId();
-
-    String getApartmentProfileId();
-
-    String push(DatabaseItem databaseItem, String path);
-
-    boolean addIdToList(String tenantId, String tenantsIdListPath);
+    //Object addListener
 }
