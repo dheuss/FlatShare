@@ -71,6 +71,8 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
 
         if (!validateForm(email, password)) {
             //TODO: show error in view if not valid
+            loginCallback.onLoginFailed("Invalid Email and/or Password");
+            return;
         }
 
 //        showProgressDialog();
@@ -122,8 +124,11 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
                     // If sign in fails, display a message to the user. If sign in succeeds
                     // the auth state listener will be notified and logic to handle the
                     // signed in user can be handled in the listener.
-                    if (!task.isSuccessful()) {
+                    if (task.isSuccessful()) {
                         // TODO: update view
+                        registerCallBack.onRegisterSuccessful();
+                    } else {
+                        registerCallBack.onRegisterFailed(task.getException().getMessage());
                     }
 
                     // [START_EXCLUDE]

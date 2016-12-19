@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.auth.RegisterDataType;
-import com.flatshare.domain.executor.MainThread;
 import com.flatshare.domain.executor.impl.ThreadExecutor;
 import com.flatshare.presentation.presenters.RegisterPresenter;
 import com.flatshare.presentation.presenters.impl.RegisterPresenterImpl;
@@ -73,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterPrese
     @Override
     public void changeToProfileActivity() {
         //TODO change to PrimaryProfileActivity
-        Log.d("LoginActivity", "success! changed to PrimaryProfileActivity!");
+        Log.d(TAG, "success! changed to PrimaryProfileActivity!");
         Intent intent = new Intent(this, PrimaryProfileActivity.class);
         startActivity(intent);
     }
