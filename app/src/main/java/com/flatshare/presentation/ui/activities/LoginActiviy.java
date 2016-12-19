@@ -7,19 +7,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.login.widget.LoginButton;
+import com.facebook.FacebookSdk;
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.auth.LoginDataType;
 import com.flatshare.domain.executor.impl.ThreadExecutor;
 import com.flatshare.presentation.presenters.LoginPresenter;
 import com.flatshare.presentation.presenters.impl.LoginPresenterImpl;
 import com.flatshare.threading.MainThreadImpl;
-
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 
 public class LoginActiviy extends AppCompatActivity implements LoginPresenter.View {
-
 
 //    @Bind(R.id.email_edittext)
     private EditText emailEditText;
@@ -33,17 +35,31 @@ public class LoginActiviy extends AppCompatActivity implements LoginPresenter.Vi
 //    @Bind(R.id.register_button)
     private Button registerButton;
 
+    //Google
+    private SignInButton googleSignInButton;
+
+    //Facebook
+    private LoginButton facebookSignInButton;
+    private CallbackManager facebookCallbackManager;
+
     private LoginPresenter mPresenter;
     private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_login);
 
+        facebookCallbackManager = CallbackManager.Factory.create();
+
 //        ButterKnife.bind(this);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
 
         bindView();
 
@@ -64,8 +80,6 @@ public class LoginActiviy extends AppCompatActivity implements LoginPresenter.Vi
                 finish();
             }
         });
-
-
     }
 
     private void bindView() {
@@ -80,6 +94,9 @@ public class LoginActiviy extends AppCompatActivity implements LoginPresenter.Vi
 
 //    @Bind(R.id.register_button)
         registerButton = (Button) findViewById(R.id.register_button);
+
+        googleSignInButton = (SignInButton)findViewById(R.id.google_sign_in_button);
+        facebookSignInButton = (LoginButton)findViewById(R.id.facebook_sign_in_button);
     }
 
     private void login() {

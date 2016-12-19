@@ -72,21 +72,21 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
         this.registerCallBack = registerCallBack;
     }
 
-    public AuthenticationManagerImpl(AuthenticationManager.ResetCallBack resetCallBack){
+    public AuthenticationManagerImpl(AuthenticationManager.ResetCallBack resetCallBack) {
         this();
         this.resetCallBack = resetCallBack;
     }
 
     @Override
-    public void reset(ResetDataType resetDataType){
+    public void reset(ResetDataType resetDataType) {
 
         System.out.println("AUTH MANAGER RESET");
 
         String email = resetDataType.getEmail();
 
-        //if (TextUtils.isEmpty(email)) {
-        //    return;
-        //}
+        if (TextUtils.isEmpty(email)) {
+            return;
+        }
 
         mAuth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -97,7 +97,6 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
                         } else {
                             Log.v(TAG, "resetEmail:failed:" + task.getException());
                         }
-
                     }
                 });
     }

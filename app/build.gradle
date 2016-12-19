@@ -62,5 +62,10 @@ dependencies {
     //tests
     testCompile 'junit:junit:4.12'
 
+    //facebook
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    //Gson
+    compile 'com.google.code.gson:gson:2.7'
 }
 apply plugin: 'com.google.gms.google-services'

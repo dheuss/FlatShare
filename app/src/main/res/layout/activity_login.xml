@@ -11,7 +11,6 @@
     tools:context=".presentation.ui.activities.LoginActiviy"
     android:orientation="vertical">
 
-
     <EditText
         android:id="@+id/email_edittext"
         android:layout_width="match_parent"
@@ -21,7 +20,6 @@
         android:inputType="textEmailAddress"
         android:textColor="@android:color/black"
         android:textColorHint="@android:color/black" />
-
 
     <EditText
         android:id="@+id/password_edittext"
@@ -46,13 +44,26 @@
 
     <Button
         android:id="@+id/register_button"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:layout_below="@id/login_button"
+        android:layout_marginTop="20dip"
         android:inputType="none"
         android:text="@string/register"
+        android:background="@color/colorAccent"
         android:textColor="@android:color/black"
         android:textColorHint="@android:color/black" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/google_sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"/>
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/facebook_sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"/>
 
 </LinearLayout>

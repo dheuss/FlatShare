@@ -1,4 +1,7 @@
 <resources>
+    <string name="facebook_app_id">662377893941963</string>
+    <string name="fb_login_protocol_scheme">fb662377893941963</string>
+
     <string name="app_name">MyApp</string>
     <string name="hint_email">Enter Email address...</string>
     <string name="hint_password">Enter password...</string>
