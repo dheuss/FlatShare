@@ -44,8 +44,8 @@
         android:text="@string/login_button"
         android:textColor="@android:color/black" />
 
-    <EditText
-        android:id="@+id/register_textview"
+    <Button
+        android:id="@+id/register_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
