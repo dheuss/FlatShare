@@ -28,14 +28,16 @@ public class UploadInteractorImpl extends AbstractInteractor implements MediaInt
     private byte[] data;
 
     private StorageRepository storageRepository;
+    private boolean isTenant;
 
     public UploadInteractorImpl(Executor threadExecutor,
                                 MainThread mainThread,
-                                UploadCallback downloadCallback, int mediaType, String mediaName, byte[] data) {
+                                UploadCallback downloadCallback,boolean isTenant, int mediaType, String mediaName, byte[] data) {
 
         super(threadExecutor, mainThread);
         Log.d(TAG, "inside constructor");
         this.mCallback = downloadCallback;
+        this.isTenant = isTenant;
         this.mediaType = mediaType;
         this.mediaName = mediaName;
         this.data = data;
@@ -64,7 +66,7 @@ public class UploadInteractorImpl extends AbstractInteractor implements MediaInt
     public void run() {
         Log.d(TAG, "inside run()");
 
-        if(storageRepository.uploadMedia(mediaType,mediaName,this.data)){
+        if(storageRepository.uploadMedia(isTenant, mediaType,mediaName,this.data)){
             notifySuccess();
         } else {
             Log.w(TAG, "Upload Failed!");

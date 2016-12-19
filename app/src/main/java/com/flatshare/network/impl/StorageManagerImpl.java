@@ -40,14 +40,14 @@ public class StorageManagerImpl implements StorageManager {
     }
 
     @Override
-    public boolean uploadImage(String userId, byte[] data) {
-        return uploadDataLocal(storageRef.child(userId + "/images"), data);
+    public boolean uploadImage(String profileId, byte[] data) {
+        return uploadDataLocal(storageRef.child(profileId + "/images"), data);
     }
 
     @Override
-    public boolean uploadVideo(String userId, byte[] data) {
+    public boolean uploadVideo(String profileId, byte[] data) {
 
-        return uploadDataLocal(storageRef.child(userId + "/videos"), data);
+        return uploadDataLocal(storageRef.child(profileId + "/videos"), data);
 
     }
 
@@ -67,13 +67,13 @@ public class StorageManagerImpl implements StorageManager {
     }
 
     @Override
-    public byte[] downloadImage(String userId, String imgName) {
-        return downloadDataMemory(storageRef.child(userId + "/images/" + imgName));
+    public byte[] downloadImage(String profileId, String imgName) {
+        return downloadDataMemory(storageRef.child(profileId + "/images/" + imgName));
     }
 
     @Override
-    public byte[] downloadVideo(String userId, String vidName) {
-        return downloadDataMemory(storageRef.child(userId + "/videos/" + vidName));
+    public byte[] downloadVideo(String profileId, String vidName) {
+        return downloadDataMemory(storageRef.child(profileId + "/videos/" + vidName));
 
     }
 

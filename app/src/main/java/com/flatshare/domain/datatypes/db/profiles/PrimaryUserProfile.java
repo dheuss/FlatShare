@@ -12,8 +12,11 @@ public class PrimaryUserProfile extends UserProfile {
     @PropertyName("classification_id")
     public int classificationId;
 
-    @PropertyName("profile_id")
-    public String profileId;
+    @PropertyName("tenant_profile_id")
+    public String tenantProfileId;
+
+    @PropertyName("apartment_profile_id")
+    public String apartmentProfileId;
 
     public PrimaryUserProfile(int classificationId) {
         this.classificationId = classificationId;
@@ -30,12 +33,22 @@ public class PrimaryUserProfile extends UserProfile {
     }
 
     @Exclude
-    public String getProfileId() {
-        return profileId;
+    public String getTenantProfileId() {
+        return tenantProfileId;
     }
 
     @Exclude
-    public void setProfileId(String profileId) {
-        this.profileId = profileId;
+    public void setTenantProfileId(String tenantProfileId) {
+        this.tenantProfileId = tenantProfileId;
+    }
+
+    @Exclude
+    public String getApartmentProfileId() {
+        return apartmentProfileId;
+    }
+
+    @Exclude
+    public void setApartmentProfileId(String apartmentProfileId) {
+        this.apartmentProfileId = apartmentProfileId;
     }
 }
