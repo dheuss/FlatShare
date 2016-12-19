@@ -1,8 +1,13 @@
 package com.flatshare.network.impl;
 
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.flatshare.domain.datatypes.auth.ResetDataType;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -26,6 +31,11 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
      * The Callback is responsible for talking to the UI on the main thread
      */
     private AuthenticationManager.RegisterCallBack registerCallBack;
+
+    /**
+     * The Callback is responsible for talking to the UI on the main thread
+     */
+    private AuthenticationManager.ResetCallBack resetCallBack;
 
 
     private String TAG = "AuthenticationManager";
@@ -58,9 +68,38 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
     }
 
     public AuthenticationManagerImpl(AuthenticationManager.RegisterCallBack registerCallBack) {
-
         this();
         this.registerCallBack = registerCallBack;
+    }
+
+    public AuthenticationManagerImpl(AuthenticationManager.ResetCallBack resetCallBack){
+        this();
+        this.resetCallBack = resetCallBack;
+    }
+
+    @Override
+    public void reset(ResetDataType resetDataType){
+
+        System.out.println("AUTH MANAGER RESET");
+
+        String email = resetDataType.getEmail();
+
+        //if (TextUtils.isEmpty(email)) {
+        //    return;
+        //}
+
+        mAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.v(TAG, "resetEmail:successful:" + task.isSuccessful());
+                        } else {
+                            Log.v(TAG, "resetEmail:failed:" + task.getException());
+                        }
+
+                    }
+                });
     }
 
     @Override

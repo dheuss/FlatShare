@@ -2,6 +2,7 @@ package com.flatshare.network;
 
 import com.flatshare.domain.datatypes.auth.LoginDataType;
 import com.flatshare.domain.datatypes.auth.RegisterDataType;
+import com.flatshare.domain.datatypes.auth.ResetDataType;
 
 /**
  * Created by Arber on 06/12/2016.
@@ -13,6 +14,8 @@ public interface AuthenticationManager {
     void login(LoginDataType loginDataType);
 
     void register(RegisterDataType signUpDataType);
+
+    void reset (ResetDataType resetDataType);
 
     void logOut();
 
@@ -28,5 +31,11 @@ public interface AuthenticationManager {
 
         void onRegisterFailed(String error);
 
+    }
+
+    interface ResetCallBack {
+        void onResetSuccessful();
+
+        void onResetFailed(String error);
     }
 }
