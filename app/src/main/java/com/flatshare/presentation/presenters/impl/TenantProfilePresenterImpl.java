@@ -80,7 +80,7 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
 
         String mediaName = (String) imageView.getTag();
 
-        MediaInteractor mediaInteractor = new UploadInteractorImpl(mExecutor, mMainThread, this, 0, mediaName, data);
+        MediaInteractor mediaInteractor = new UploadInteractorImpl(mExecutor, mMainThread, this, true, 0, mediaName, data);
         mediaInteractor.execute();
     }
 
@@ -91,7 +91,7 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
 
         String mediaName = (String) videoView.getTag();
 
-        MediaInteractor mediaInteractor = new UploadInteractorImpl(mExecutor, mMainThread, this, 1, mediaName, data);
+        MediaInteractor mediaInteractor = new UploadInteractorImpl(mExecutor, mMainThread, this, true, 0, mediaName, data);
         mediaInteractor.execute();
     }
 

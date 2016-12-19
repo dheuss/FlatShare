@@ -3,6 +3,7 @@ package com.flatshare.network.impl;
 import android.util.Log;
 
 import com.flatshare.domain.datatypes.db.DatabaseItem;
+import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.network.DatabaseManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -30,8 +31,6 @@ public class DatabaseManagerImpl implements DatabaseManager {
     private DatabaseItem databaseItem;
 
     private String userId;
-    private String tenantId;
-    private String apartmentId;
 
     public DatabaseManagerImpl() {
         // [START initialize_database_ref]
@@ -43,7 +42,7 @@ public class DatabaseManagerImpl implements DatabaseManager {
     }
 
     @Override
-    public boolean create(DatabaseItem databaseItem, String path){
+    public boolean create(DatabaseItem databaseItem, String path) {
 
         AtomicBoolean itemCreated = new AtomicBoolean(false);
 
@@ -88,7 +87,7 @@ public class DatabaseManagerImpl implements DatabaseManager {
 
 
     @Override
-    public boolean update(DatabaseItem newDatabaseItem, String path){
+    public boolean update(DatabaseItem newDatabaseItem, String path) {
 
         AtomicBoolean itemUpdated = new AtomicBoolean(false);
 
@@ -119,7 +118,7 @@ public class DatabaseManagerImpl implements DatabaseManager {
     }
 
     @Override
-    public boolean delete(String path){
+    public boolean delete(String path) {
 
         AtomicBoolean itemDeleted = new AtomicBoolean(false);
 
@@ -137,26 +136,35 @@ public class DatabaseManagerImpl implements DatabaseManager {
     }
 
     @Override
-    public String getUserId() {
-        return userId;
+    public String getTenantProfileId() {
+        PrimaryUserProfile primaryUserProfile = (PrimaryUserProfile) read("users/" + userId, PrimaryUserProfile.class);
+        return primaryUserProfile.getTenantProfileId();
     }
 
     @Override
-    public boolean addJsonRoot(String path, String id){
+    public String getApartmentProfileId() {
+        PrimaryUserProfile primaryUserProfile = (PrimaryUserProfile) read("users/" + userId, PrimaryUserProfile.class);
+        return primaryUserProfile.getApartmentProfileId();
+    }
 
-        AtomicBoolean rootAdded = new AtomicBoolean(false);
+    @Override
+    public String push(DatabaseItem databaseItem, String path) {
+        String key = mDatabase.child(path).push().getKey();
 
-        mDatabase.child(path).setValue(id, (databaseError, databaseReference) -> {
-            if (databaseError == null) { // Success!
-                Log.d(TAG, "successfully created!");
-                rootAdded.set(true);
-            } else { // Failure
-                Log.w(TAG, "FAILED!", databaseError.toException());
-                rootAdded.set(false);
-            }
-        });
+        boolean created = create(databaseItem, path + "/" + key);
 
-        return rootAdded.get();
+        return created ? key : null;
+
+    }
+
+    @Override
+    public boolean addIdToList(String tenantId, String tenantsIdListPath) {
+
+//        GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
+//
+//        List<String> yourStringArray = dataSnapshot.getValue(t);
+        // TODO:
+        return false;
     }
 
 }

@@ -6,9 +6,9 @@ package com.flatshare.domain.repository;
 
 public interface StorageRepository {
 
-    byte[] downloadMedia(int mediaType, String mediaName);
+    byte[] downloadMedia(boolean isTenant, int mediaType, String mediaName);
 
-    boolean uploadMedia(int mediaType, String mediaName, byte[] data);
+    boolean uploadMedia(boolean isTenant, int mediaType, String mediaName, byte[] data);
 
 
 }

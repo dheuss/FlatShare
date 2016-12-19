@@ -1,9 +1,10 @@
 package com.flatshare.storage;
 
 import com.flatshare.domain.repository.StorageRepository;
+import com.flatshare.network.DatabaseManager;
 import com.flatshare.network.StorageManager;
+import com.flatshare.network.impl.DatabaseManagerImpl;
 import com.flatshare.network.impl.StorageManagerImpl;
-import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Created by Arber on 10/12/2016.
@@ -12,37 +13,63 @@ import com.google.firebase.auth.FirebaseAuth;
 public class StorageRepositoryImpl implements StorageRepository {
 
     private StorageManager storageManager;
-    private String userId;
+    private String tenantProfileId;
+    private String apartmentProfileId;
 
     public StorageRepositoryImpl() {
         storageManager = new StorageManagerImpl();
-        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseManager databaseManager = new DatabaseManagerImpl();
+
+        tenantProfileId = databaseManager.getTenantProfileId();
+        apartmentProfileId = databaseManager.getApartmentProfileId();
     }
 
     @Override
-    public byte[] downloadMedia(int mediaType, String mediaName) {
+    public byte[] downloadMedia(boolean isTenant, int mediaType, String mediaName) {
 
         byte[] data = null;
 
-        if (mediaType == 0) {
-            data = storageManager.downloadImage(userId, mediaName);
-        } else if (mediaType == 1) {
-            data = storageManager.downloadVideo(userId, mediaName);
-        } else {
-            // ??
+        if (mediaType == 0) { // image
+            if (isTenant) { // tenant
+
+                data = storageManager.downloadImage(tenantProfileId, mediaName);
+            } else { // apartment
+
+                data = storageManager.downloadImage(apartmentProfileId, mediaName);
+            }
+        } else if (mediaType == 1) { // video
+            if (isTenant) {
+                data = storageManager.downloadVideo(tenantProfileId, mediaName);
+
+            } else {
+                data = storageManager.downloadVideo(apartmentProfileId, mediaName);
+
+            }
         }
 
         return data;
     }
 
     @Override
-    public boolean uploadMedia(int mediaType, String mediaName, byte[] data) {
+    public boolean uploadMedia(boolean isTenant, int mediaType, String mediaName, byte[] data) {
+
         if (mediaType == 0) { // image
-            return storageManager.uploadImage(userId, data);
-        } else if (mediaType == 1) { // photo
-            return storageManager.uploadVideo(userId, data);
-        } else {
-            return false;
+            if (isTenant) { // tenant
+
+
+                return storageManager.uploadImage(tenantProfileId, data);
+            } else { // apartment
+
+                return storageManager.uploadImage(apartmentProfileId, data);
+            }
+        } else if (mediaType == 1) { // video
+            if (isTenant) {
+
+                return storageManager.uploadVideo(tenantProfileId, data);
+            } else {
+                return storageManager.uploadVideo(tenantProfileId, data);
+            }
         }
+        return false;
     }
 }

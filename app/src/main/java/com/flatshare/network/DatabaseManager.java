@@ -16,8 +16,11 @@ public interface DatabaseManager {
 
     boolean delete(String path);
 
-    boolean addJsonRoot(String path, String id);
+    String getTenantProfileId();
 
-    String getUserId();
+    String getApartmentProfileId();
 
+    String push(DatabaseItem databaseItem, String path);
+
+    boolean addIdToList(String tenantId, String tenantsIdListPath);
 }

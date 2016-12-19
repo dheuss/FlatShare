@@ -27,14 +27,16 @@ public class DownloadInteractorImpl extends AbstractInteractor implements MediaI
     private String mediaName;
 
     private StorageRepository storageRepository;
+    private boolean isTenant;
 
     public DownloadInteractorImpl(Executor threadExecutor,
                                   MainThread mainThread,
-                                  DownloadCallback downloadCallback, int mediaType, String mediaName) {
+                                  DownloadCallback downloadCallback,boolean isTenant, int mediaType, String mediaName) {
 
         super(threadExecutor, mainThread);
         Log.d(TAG, "inside constructor");
         this.mCallback = downloadCallback;
+        this.isTenant = isTenant;
         this.mediaType = mediaType;
         this.mediaName = mediaName;
         this.storageRepository = new StorageRepositoryImpl();
@@ -62,7 +64,7 @@ public class DownloadInteractorImpl extends AbstractInteractor implements MediaI
     public void run() {
         Log.d(TAG, "inside run()");
 
-        byte[] data = storageRepository.downloadMedia(this.mediaType, this.mediaName);
+        byte[] data = storageRepository.downloadMedia(this.isTenant, this.mediaType, this.mediaName);
 
         if(data == null){
             Log.w(TAG, "Download Failed!");

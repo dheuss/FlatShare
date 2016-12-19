@@ -1,7 +1,5 @@
 package com.flatshare.storage;
 
-import com.google.firebase.database.DatabaseException;
-
 import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
@@ -21,48 +19,39 @@ public class ProfileRepositoryImpl implements ProfileRepository {
     private String tenantProfilesPath;
     private String apartmentProfilesPath;
 
-    private String userId;
-    private String tenantId;
-    private String apartmentId;
+    private String tenantsIdListPath;
+    private String apartmentsIdListPath;
 
 
     public ProfileRepositoryImpl() {
         databaseManager = new DatabaseManagerImpl();
+        tenantProfilesPath = "/tenant_profiles";
+        apartmentProfilesPath = "/apartment_profiles";
 
-        userId = databaseManager.getUserId();
-        tenantId = userId.substring(0, userId.length() / 2);
-        apartmentId = userId.substring(userId.length() / 2, userId.length());
-
-        userPath = "users/" + userId + "/";
-        tenantProfilesPath = "/tenant_profiles/"; // TODO: make sure its an even number
-        apartmentProfilesPath = "/apartment_profiles/";
+        tenantsIdListPath = "/tenants_list";
+        apartmentsIdListPath = "/apartments_list";
     }
 
     @Override
-    public boolean createPrimaryProfile(PrimaryUserProfile primaryUserProfile) throws DatabaseException {
+    public boolean createPrimaryProfile(PrimaryUserProfile primaryUserProfile) {
 
         // create main profile
         databaseManager.create(primaryUserProfile, userPath);
 
-        // add empty tenant profile TODO: remove, maybe redundant
-//        databaseManager.addJsonRoot(tenantProfilesPath + tenantId, "empty");
-
-        // add empty apartment profile TODO: remove, maybe redundant
-//        databaseManager.addJsonRoot(apartmentProfilesPath + apartmentId, "empty");
         return false;
     }
 
     @Override
-    public boolean createTenantProfile(TenantUserProfile tenantUserProfile) throws DatabaseException {
-        databaseManager.create(tenantUserProfile, tenantProfilesPath + tenantId);
-        //TODO: add to the list of all tenants
+    public boolean createTenantProfile(TenantUserProfile tenantUserProfile) {
+        String tenantId = databaseManager.push(tenantUserProfile, tenantProfilesPath);
+        databaseManager.addIdToList(tenantId, tenantsIdListPath);
         return false;
     }
 
     @Override
-    public boolean createApartmentProfile(ApartmentUserProfile apartmentUserProfile) throws DatabaseException {
-        databaseManager.create(apartmentUserProfile, apartmentProfilesPath + apartmentId);
-
+    public boolean createApartmentProfile(ApartmentUserProfile apartmentUserProfile) {
+        String apartmentId = databaseManager.push(apartmentUserProfile, apartmentProfilesPath);
+        databaseManager.addIdToList(apartmentId, apartmentsIdListPath);
 //        addToAllApartments(apartmentId);
         //TODO: add to the list of all apartments
         //TODO: add to the right zip code list
