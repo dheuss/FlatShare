@@ -6,7 +6,7 @@ import com.flatshare.domain.datatypes.db.filters.ApartmentFilterSettings;
 import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
-import com.flatshare.domain.datatypes.predicates.TenantMatchFinder;
+import com.flatshare.domain.predicates.TenantMatchFinder;
 
 import java.util.ArrayList;
 import java.util.List;

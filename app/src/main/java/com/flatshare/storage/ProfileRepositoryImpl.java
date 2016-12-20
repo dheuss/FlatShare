@@ -73,4 +73,9 @@ public class ProfileRepositoryImpl implements ProfileRepository {
         return databaseManager.create(apartmentId, userPath + "/" + userId + "/" + "apartment_profile_id") == null;
 
     }
+
+    @Override
+    public PrimaryUserProfile getPrimaryProfile() {
+        return (PrimaryUserProfile) databaseManager.readItem(userPath + "/" + userId, PrimaryUserProfile.class);
+    }
 }

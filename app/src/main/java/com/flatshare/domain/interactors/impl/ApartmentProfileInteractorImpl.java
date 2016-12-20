@@ -3,18 +3,20 @@ package com.flatshare.domain.interactors.impl;
 import android.util.Log;
 
 import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
-import com.flatshare.domain.executor.Executor;
 import com.flatshare.domain.executor.MainThread;
 import com.flatshare.domain.interactors.ProfileInteractor;
-import com.flatshare.domain.interactors.base.AbstractInteractor;
-import com.flatshare.domain.repository.ProfileRepository;
-import com.flatshare.storage.ProfileRepositoryImpl;
+import com.flatshare.network.DatabaseTree;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
  * This is an interactor boilerplate with a reference to a model repository.
  */
-public class ApartmentProfileInteractorImpl extends AbstractInteractor implements ProfileInteractor {
+public class ApartmentProfileInteractorImpl implements ProfileInteractor {
 
     private static final String TAG = "ApartmentProfileInt";
 
@@ -25,20 +27,20 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
 
     private ApartmentUserProfile apartmentUserProfile;
 
-    private ProfileRepository profileRepository;
+    private DatabaseReference mDatabase;
 
-    public ApartmentProfileInteractorImpl(Executor threadExecutor,
-                                          MainThread mainThread,
+    private MainThread mMainThread;
+
+    public ApartmentProfileInteractorImpl(MainThread mainThread,
                                           Callback callback, ApartmentUserProfile apartmentUserProfile) {
 
-        super(threadExecutor, mainThread);
-        Log.d(TAG, "inside constructor");
+        this.mMainThread = mainThread;
+        this.mDatabase = FirebaseDatabase.getInstance().getReference();
         this.mCallback = callback;
         this.apartmentUserProfile = apartmentUserProfile;
-        this.profileRepository = new ProfileRepositoryImpl();
     }
 
-    private void notifyError() {
+    private void notifyError(String errorMessage) {
         Log.d(TAG, "inside notifyError()");
 
         mMainThread.post(() -> mCallback.onSentFailure("some kind of error"));
@@ -53,21 +55,32 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
         mMainThread.post(() -> mCallback.onSentSuccess(1));
     }
 
-    /**
-     * contains the business logic for this use case (Interactor), SHOULD ALWAYS CALL EXECUTE NOT START!!!!
-     */
     @Override
-    public void run() {
-        Log.d(TAG, "inside run()");
+    public void execute() {
 
+        String apPath = DatabaseTree.APARTMENT_PROFILES_PATH;
+        String usersPath = DatabaseTree.USERS_PATH;
 
-        if(
-            profileRepository.createApartmentProfile(apartmentUserProfile)){
+        String city = apartmentUserProfile.getApartmentLocation().getCity();
+        String district = apartmentUserProfile.getApartmentLocation().getDistrict();
+        int zipCode = apartmentUserProfile.getApartmentLocation().getZipCode();
 
-            notifySuccess();
-        } else{
-            Log.w(TAG, "Could not create Apartment Profile");
-            notifyError();
-        }
+        String locationPath = DatabaseTree.APARTMENTS_LOCATION_PATH + city + "/" + district + "/" + zipCode;
+
+        String apartmentId = mDatabase.child(apPath).push().getKey();
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put(apPath+apartmentId, this.apartmentUserProfile);
+        map.put(usersPath + DatabaseTree.USER_ID, apartmentId);
+        map.put(locationPath, apartmentId);
+
+        mDatabase.updateChildren(map, (databaseError, databaseReference) -> {
+            if(databaseError != null){ // Error
+                notifyError(databaseError.toException().getMessage());
+            } else {
+                notifySuccess();
+            }
+        });
+
     }
 }

@@ -69,7 +69,8 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
     @Override
     public void sendProfile(ApartmentUserProfile apartmentUserProfile) {
 
-        ProfileInteractor interactor = new ApartmentProfileInteractorImpl(mExecutor, mMainThread, this, apartmentUserProfile);
+
+        ProfileInteractor interactor = new ApartmentProfileInteractorImpl(mMainThread, this, apartmentUserProfile);
         interactor.execute();
 
     }

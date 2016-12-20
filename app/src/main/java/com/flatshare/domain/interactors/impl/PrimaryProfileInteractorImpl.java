@@ -61,14 +61,25 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
     public void run() {
         Log.d(TAG, "inside run()");
 
-        boolean test = profileRepository.createPrimaryProfile(primaryUserProfile);
-
-        Log.d(TAG, "TEST?? " + test);
-        if (test) {
+        if (profileExists()) {
             notifySuccess();
         } else {
-            Log.w(TAG, "Could not create Primary Profile");
-            notifyError();
+            if (createProfileSuccessful()) {
+                notifySuccess();
+            } else {
+                Log.w(TAG, "Could not create Primary Profile");
+                notifyError();
+            }
         }
+    }
+
+    private boolean createProfileSuccessful() {
+        return this.profileRepository.createPrimaryProfile(this.primaryUserProfile);
+    }
+
+    private boolean profileExists() {
+
+        Log.d(TAG, "arb: " + (this.profileRepository.getPrimaryProfile() != null));
+        return this.profileRepository.getPrimaryProfile() != null;
     }
 }

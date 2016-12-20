@@ -18,6 +18,9 @@ public class PrimaryUserProfile extends UserProfile {
     @PropertyName("apartment_profile_id")
     public String apartmentProfileId;
 
+    public PrimaryUserProfile() {
+    }
+
     public PrimaryUserProfile(int classificationId) {
         this.classificationId = classificationId;
     }

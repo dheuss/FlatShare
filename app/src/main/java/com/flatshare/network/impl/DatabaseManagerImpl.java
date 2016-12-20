@@ -70,6 +70,8 @@ public class DatabaseManagerImpl implements DatabaseManager {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 databaseItem = dataSnapshot.getValue(databaseItemClass);
+
+                Log.d(TAG, "arb dbs: " + (databaseItem != null));
             }
 
             @Override
@@ -79,6 +81,7 @@ public class DatabaseManagerImpl implements DatabaseManager {
                 databaseItem = null;
             }
         });
+
 
         DatabaseItem tempDatabaseItem = this.databaseItem;
         this.databaseItem = null;

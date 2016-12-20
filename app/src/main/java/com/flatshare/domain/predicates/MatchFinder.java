@@ -1,4 +1,4 @@
-package com.flatshare.domain.datatypes.predicates;
+package com.flatshare.domain.predicates;
 
 
 import com.flatshare.domain.datatypes.db.filters.ApartmentFilterSettings;
