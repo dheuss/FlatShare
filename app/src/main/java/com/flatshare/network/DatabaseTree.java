@@ -8,19 +8,35 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public interface DatabaseTree {
 
-    String USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
     String USERS_PATH = "users/";
+
+    interface UsersJSON{
+
+        String USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid() + "/";
+
+        String CLASSIFICATION_ID = USER_ID + "classification_id/";
+        String TENANT_PROFILE_ID = USER_ID + "tenant_profile_id/";
+        String APARTMENT_PROFILE_ID = USER_ID + "apartment_profile_id/";
+
+    }
+
+    String TENANT_PROFILES = "tenant_profiles/";
+
+    interface TenantProfilesJSON{
+
+        String FILTER_SETTINGS_PATH = "filter_settings/";
+        String APARTMENTS_TO_SHOW_PATH = "apartments_to_show/";
+        String MATCHED_APARTMENTS_PATH = "matched_apartments/";
+
+    }
+
 
     String APARTMENTS_LOCATION_PATH = "apartments_location/";
     String CITIES_PATH = "cities/";
     String DISTRICTS_PATH = "districts/";
+
     String ZIP_CODES_PATH = "zip_codes/";
 
-    String TENANT_PROFILES_PATH = "tenant_profiles/";
-    String APARTMENTS_TO_SHOW_PATH = "apartments_to_show/";
-    String MATCHED_APARTMENTS_PATH = "matched_apartments/";
-
-    String FILTER_SETTINGS_PATH = "filter_settings/";
 
     String APARTMENT_PROFILES_PATH = "apartment_profiles/";
     String MATCHED_TENANTS_PATH = "matched_tenants/";

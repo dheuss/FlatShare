@@ -2,13 +2,12 @@ package com.flatshare.domain.interactors.impl;
 
 import android.util.Log;
 
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
 import com.flatshare.domain.interactors.ProfileInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.network.DatabaseTree;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.flatshare.network.paths.database.Root;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,24 +54,22 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
     @Override
     public void execute() {
 
-        String apPath = DatabaseTree.APARTMENT_PROFILES_PATH;
-        String usersPath = DatabaseTree.USERS_PATH;
-
         String city = apartmentUserProfile.getApartmentLocation().getCity();
         String district = apartmentUserProfile.getApartmentLocation().getDistrict();
         int zipCode = apartmentUserProfile.getApartmentLocation().getZipCode();
 
         String locationPath = DatabaseTree.APARTMENTS_LOCATION_PATH + city + "/" + district + "/" + zipCode;
 
-        String apartmentId = mDatabase.child(apPath).push().getKey();
+        String apartmentId = mDatabase.child(root.getApartmentProfiles()).push().getKey();
 
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put(apPath+apartmentId, this.apartmentUserProfile);
-        map.put(usersPath + DatabaseTree.USER_ID, apartmentId);
+        map.put(root.getApartmentProfileNode(apartmentId).getRootPath(), this.apartmentUserProfile);
+
+        map.put(root.getUserProfileNode(userId).getApartmentProfileId(), apartmentId);
         map.put(locationPath, apartmentId);
 
         mDatabase.updateChildren(map, (databaseError, databaseReference) -> {
-            if(databaseError != null){ // Error
+            if (databaseError != null) { // Error
                 notifyError(databaseError.toException().getMessage());
             } else {
                 notifySuccess();

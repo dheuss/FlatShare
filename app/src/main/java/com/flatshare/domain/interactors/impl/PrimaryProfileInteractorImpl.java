@@ -2,16 +2,16 @@ package com.flatshare.domain.interactors.impl;
 
 import android.util.Log;
 
-import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.interactors.ProfileInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
-import com.flatshare.network.DatabaseTree;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -55,16 +55,13 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
     @Override
     public void execute() {
 
-        String uId = DatabaseTree.USER_ID;
-        String usersPath = DatabaseTree.USERS_PATH;
-
-        mDatabase.child(usersPath + uId).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(root.getUserProfileNode(userId).getRootPath()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot == null) {
-                    createProfile(usersPath + uId);
+                if (dataSnapshot.getValue() == null) {
+                    createProfile();
                 } else {
-                    notifySuccess();
+                    updateClassificationId();
                 }
             }
 
@@ -75,9 +72,11 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
         });
     }
 
-    private void createProfile(String path) {
+    private void createProfile() {
 
-        mDatabase.child(path).setValue(this.primaryUserProfile, (databaseError, databaseReference) -> {
+        Log.d(TAG, "creating main profile!");
+
+        mDatabase.child(root.getUserProfileNode(userId).getRootPath()).setValue(this.primaryUserProfile, (databaseError, databaseReference) -> {
             if (databaseError == null) {
                 notifySuccess();
             } else {
@@ -85,6 +84,21 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
             }
         });
 
+    }
+
+    private void updateClassificationId() {
+
+
+        Map<String, Object> map = new HashMap<>();
+        map.put(root.getUserProfileNode(userId).getClassificationId(), this.primaryUserProfile.getClassificationId());
+
+        mDatabase.updateChildren(map, (databaseError, databaseReference) -> {
+            if (databaseError != null) { // Error
+                notifyError(databaseError.toException().getMessage());
+            } else {
+                notifySuccess();
+            }
+        });
     }
 
 }

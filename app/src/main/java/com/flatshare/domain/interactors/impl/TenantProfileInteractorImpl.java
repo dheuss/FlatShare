@@ -2,11 +2,10 @@ package com.flatshare.domain.interactors.impl;
 
 import android.util.Log;
 
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
 import com.flatshare.domain.interactors.ProfileInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
-import com.flatshare.network.DatabaseTree;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,14 +55,11 @@ public class TenantProfileInteractorImpl extends AbstractInteractor implements P
     @Override
     public void execute() {
 
-        String tPath = DatabaseTree.TENANT_PROFILES_PATH;
-        String usersPath = DatabaseTree.USERS_PATH;
+        String tId = mDatabase.child(root.getTenantProfiles()).push().getKey();
 
-        String tId = mDatabase.child(tPath).push().getKey();
-
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put(tPath + tId, this.tenantUserProfile);
-        map.put(usersPath + DatabaseTree.USER_ID, tId);
+        Map<String, Object> map = new HashMap<>();
+        map.put(root.getTenantProfileNode(tId).getRootPath(), this.tenantUserProfile);
+        map.put(root.getUserProfileNode(userId).getTenantProfileId(), tId);
 
         mDatabase.updateChildren(map, (databaseError, databaseReference) -> {
             if (databaseError != null) { // Error

@@ -2,12 +2,10 @@ package com.flatshare.domain.interactors.impl;
 
 import android.util.Log;
 
-import java.util.List;
-
+import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
-import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.MatchingInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.domain.predicates.ApartmentMatchFinder;
@@ -15,10 +13,10 @@ import com.flatshare.domain.predicates.TenantMatchFinder;
 import com.flatshare.network.DatabaseTree;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.List;
 
 
 /**
@@ -65,13 +63,10 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
     @Override
     public void execute() {
 
-        String uId = DatabaseTree.USER_ID;
-        String uPath = DatabaseTree.USERS_PATH;
-
-        mDatabase.child(uPath + uId).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(root.getUserProfileNode(userId).getRootPath()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot == null) {
+                if (dataSnapshot.getValue() == null) {
                     notifyError("No PrimaryProfile found!");
                 } else {
                     PrimaryUserProfile pUP = dataSnapshot.getValue(PrimaryUserProfile.class);
@@ -94,9 +89,7 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
 
     private void matchApartment(ApartmentUserProfile apUP) {
 
-        String tPath = DatabaseTree.TENANT_PROFILES_PATH;
-
-        mDatabase.child(tPath).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(root.getTenantProfiles()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -124,9 +117,7 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
 
     private void matchTenant(TenantUserProfile tUP) {
 
-        String aPath = DatabaseTree.APARTMENT_PROFILES_PATH;
-
-        mDatabase.child(aPath).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(root.getApartmentProfiles()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -158,7 +149,7 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
         mDatabase.child(apPath + apartmentProfileId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot == null) {
+                if (dataSnapshot.getValue() == null) {
                     notifyError("No ApartmentProfile found!");
                 } else {
                     ApartmentUserProfile apUP = dataSnapshot.getValue(ApartmentUserProfile.class);
@@ -174,12 +165,11 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
     }
 
     private void getTenant(String tenantProfileId) {
-        String tPath = DatabaseTree.TENANT_PROFILES_PATH;
 
-        mDatabase.child(tPath + tenantProfileId).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(root.getTenantProfileNode(tenantProfileId).getRootPath()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot == null) {
+                if (dataSnapshot.getValue() == null) {
                     notifyError("No ApartmentProfile found!");
                 } else {
                     TenantUserProfile tUP = dataSnapshot.getValue(TenantUserProfile.class);
