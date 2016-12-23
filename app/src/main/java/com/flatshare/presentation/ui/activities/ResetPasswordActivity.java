@@ -10,10 +10,7 @@ import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.auth.ResetDataType;
-import com.flatshare.domain.executor.impl.ThreadExecutor;
-import com.flatshare.presentation.presenters.MainPresenter;
 import com.flatshare.presentation.presenters.ResetPasswordPresenter;
-import com.flatshare.presentation.presenters.impl.MainPresenterImpl;
 import com.flatshare.presentation.presenters.impl.ResetPasswordPresenterImpl;
 import com.flatshare.threading.MainThreadImpl;
 
@@ -21,7 +18,7 @@ import com.flatshare.threading.MainThreadImpl;
  * Created by david on 19.12.2016.
  */
 
-public class ResetPasswordActivity extends AppCompatActivity implements ResetPasswordPresenter.View{
+public class ResetPasswordActivity extends AppCompatActivity implements ResetPasswordPresenter.View {
 
     private EditText emailResetPasswordEditText;
     private Button resetPasswordButton;
@@ -36,7 +33,6 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
         bindView();
 
         mPresenter = new ResetPasswordPresenterImpl(
-                ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(),
                 this
         );
@@ -44,13 +40,13 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
         resetPasswordButton.setOnClickListener(view -> reset());
     }
 
-    private void bindView(){
-        emailResetPasswordEditText = (EditText)findViewById(R.id.email_reset_password_edittext);
-        resetPasswordButton = (Button)findViewById(R.id.reset_password_button);
-        backResetPasswordButton = (Button)findViewById(R.id.back_reset_password_button);
+    private void bindView() {
+        emailResetPasswordEditText = (EditText) findViewById(R.id.email_reset_password_edittext);
+        resetPasswordButton = (Button) findViewById(R.id.reset_password_button);
+        backResetPasswordButton = (Button) findViewById(R.id.back_reset_password_button);
     }
 
-    public void reset(){
+    public void reset() {
         mPresenter.reset(new ResetDataType(emailResetPasswordEditText.getText().toString()));
     }
 

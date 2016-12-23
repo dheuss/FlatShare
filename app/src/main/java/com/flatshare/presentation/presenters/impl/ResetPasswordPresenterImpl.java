@@ -2,9 +2,7 @@ package com.flatshare.presentation.presenters.impl;
 
 import com.flatshare.domain.datatypes.auth.ResetDataType;
 import com.flatshare.presentation.presenters.ResetPasswordPresenter;
-import com.flatshare.domain.datatypes.auth.LoginDataType;
-import com.flatshare.domain.executor.Executor;
-import com.flatshare.domain.executor.MainThread;
+import com.flatshare.domain.MainThread;
 import com.flatshare.network.AuthenticationManager;
 import com.flatshare.network.impl.AuthenticationManagerImpl;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
@@ -19,9 +17,9 @@ public class ResetPasswordPresenterImpl extends AbstractPresenter implements Res
 
     private ResetPasswordPresenter.View mView;
 
-    public ResetPasswordPresenterImpl(Executor executor, MainThread mainThread,
+    public ResetPasswordPresenterImpl(MainThread mainThread,
                                       View view) {
-        super(executor, mainThread);
+        super(mainThread);
 
         mView = view;
 

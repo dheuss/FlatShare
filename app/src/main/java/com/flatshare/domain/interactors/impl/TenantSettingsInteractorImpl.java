@@ -3,12 +3,16 @@ package com.flatshare.domain.interactors.impl;
 import android.util.Log;
 
 import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
-import com.flatshare.domain.executor.Executor;
-import com.flatshare.domain.executor.MainThread;
+import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
+import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.FilterSettingsInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
-import com.flatshare.domain.repository.ProfileRepository;
-import com.flatshare.storage.ProfileRepositoryImpl;
+import com.flatshare.network.DatabaseTree;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -26,23 +30,17 @@ public class TenantSettingsInteractorImpl extends AbstractInteractor implements 
 
     private TenantFilterSettings tenantFilterSettings;
 
-    private ProfileRepository profileRepository; // maybe use another one?
-
-    public TenantSettingsInteractorImpl(Executor threadExecutor,
-                                        MainThread mainThread,
+    public TenantSettingsInteractorImpl(MainThread mainThread,
                                         Callback callback, TenantFilterSettings tenantFilterSettings) {
 
-        super(threadExecutor, mainThread);
-        Log.d(TAG, "inside constructor");
+        super(mainThread);
         this.mCallback = callback;
         this.tenantFilterSettings = tenantFilterSettings;
-        profileRepository = new ProfileRepositoryImpl();
     }
 
-    private void notifyError() {
-        Log.d(TAG, "inside notifyError()");
+    private void notifyError(String errorMessage) {
 
-        mMainThread.post(() -> mCallback.onSentFailure("some kind of error"));
+        mMainThread.post(() -> mCallback.onSentFailure(errorMessage));
     }
 
     /**
@@ -54,19 +52,37 @@ public class TenantSettingsInteractorImpl extends AbstractInteractor implements 
         mMainThread.post(() -> mCallback.onSentSuccess());
     }
 
-    /**
-     * contains the business logic for this use case (Interactor), SHOULD ALWAYS CALL EXECUTE NOT START!!!!
-     */
     @Override
-    public void run() {
-        Log.d(TAG, "inside run()");
+    public void execute() {
 
-        //TODO: change it to do something
-        if(false){
-            notifySuccess();
-        } else  {
-            Log.w(TAG, "change it to do something");
-            notifyError();
-        }
+        String tPath = DatabaseTree.TENANT_PROFILES_PATH;
+        String tsPath = DatabaseTree.FILTER_SETTINGS_PATH;
+        String uId = DatabaseTree.USER_ID;
+        String usersPath = DatabaseTree.USERS_PATH;
+
+        mDatabase.child(usersPath+uId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                PrimaryUserProfile primaryUserProfile = dataSnapshot.getValue(PrimaryUserProfile.class);
+                String tId = primaryUserProfile.getTenantProfileId();
+
+                createTenantSettings(tPath+tId + "/" + tsPath);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                notifyError(databaseError.getMessage());
+            }
+        });
+    }
+
+    private void createTenantSettings(String path) {
+        mDatabase.child(path).setValue(this.tenantFilterSettings, (databaseError, databaseReference) -> {
+            if (databaseError == null) {
+                notifySuccess();
+            } else {
+                notifyError(databaseError.getMessage());
+            }
+        });
     }
 }

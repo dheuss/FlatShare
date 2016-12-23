@@ -2,10 +2,7 @@ package com.flatshare.presentation.presenters.impl;
 
 import android.util.Log;
 
-import com.flatshare.domain.executor.Executor;
-import com.flatshare.domain.executor.MainThread;
-import com.flatshare.domain.interactors.WelcomingInteractor;
-import com.flatshare.domain.interactors.impl.WelcomingInteractorImpl;
+import com.flatshare.domain.MainThread;
 import com.flatshare.presentation.presenters.MainPresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 
@@ -14,8 +11,7 @@ import com.flatshare.presentation.presenters.base.AbstractPresenter;
  * Created by Arber on 11/12/2016.
  */
 
-public class MainPresenterImpl extends AbstractPresenter implements MainPresenter,
-        WelcomingInteractor.Callback {
+public class MainPresenterImpl extends AbstractPresenter implements MainPresenter {
 
 
     private static final String TAG = "MainPresenterImpl";
@@ -23,9 +19,9 @@ public class MainPresenterImpl extends AbstractPresenter implements MainPresente
     private MainPresenter.View mView;
 //    private MessageRepository  mMessageRepository;
 
-    public MainPresenterImpl(Executor executor, MainThread mainThread,
+    public MainPresenterImpl(MainThread mainThread,
                              View view) {
-        super(executor, mainThread);
+        super(mainThread);
 
         Log.d(TAG, "inside constructor");
 
@@ -40,16 +36,6 @@ public class MainPresenterImpl extends AbstractPresenter implements MainPresente
 
         mView.showProgress();
 
-        // initialize the interactor
-        WelcomingInteractor interactor = new WelcomingInteractorImpl(
-                mExecutor,
-                mMainThread,
-                this
-//                mMessageRepository
-        );
-
-        // run the interactor
-        interactor.execute();
     }
 
     @Override
@@ -75,21 +61,21 @@ public class MainPresenterImpl extends AbstractPresenter implements MainPresente
         mView.showError(message);
     }
 
-    @Override
-    public void onMessageRetrieved(String message) {
-
-        Log.d(TAG, "inside onMessageRetrieved(String message), callback???");
-
-        mView.hideProgress();
-        mView.displayWelcomeMessage(message);
-    }
-
-    @Override
-    public void onRetrievalFailed(String error) {
-
-        Log.d(TAG, "inside onRetrievalFailed(String error)");
-
-        mView.hideProgress();
-        onError(error);
-    }
+//    @Override
+//    public void onMessageRetrieved(String message) {
+//
+//        Log.d(TAG, "inside onMessageRetrieved(String message), callback???");
+//
+//        mView.hideProgress();
+//        mView.displayWelcomeMessage(message);
+//    }
+//
+//    @Override
+//    public void onRetrievalFailed(String error) {
+//
+//        Log.d(TAG, "inside onRetrievalFailed(String error)");
+//
+//        mView.hideProgress();
+//        onError(error);
+//    }
 }

@@ -3,12 +3,13 @@ package com.flatshare.domain.interactors.impl;
 import android.util.Log;
 
 import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
-import com.flatshare.domain.executor.Executor;
-import com.flatshare.domain.executor.MainThread;
+import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.ProfileInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
-import com.flatshare.domain.repository.ProfileRepository;
-import com.flatshare.storage.ProfileRepositoryImpl;
+import com.flatshare.network.DatabaseTree;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -25,23 +26,19 @@ public class TenantProfileInteractorImpl extends AbstractInteractor implements P
 
     private TenantUserProfile tenantUserProfile;
 
-    private ProfileRepository profileRepository;
+    public TenantProfileInteractorImpl(
+            MainThread mainThread,
+            Callback callback, TenantUserProfile tenantUserProfile) {
 
-    public TenantProfileInteractorImpl(Executor threadExecutor,
-                                        MainThread mainThread,
-                                        Callback callback, TenantUserProfile tenantUserProfile) {
-
-        super(threadExecutor, mainThread);
-        Log.d(TAG, "inside constructor");
+        super(mainThread);
         this.mCallback = callback;
         this.tenantUserProfile = tenantUserProfile;
-        profileRepository = new ProfileRepositoryImpl();
     }
 
-    private void notifyError() {
+    private void notifyError(String errorMessage) {
         Log.d(TAG, "inside notifyError()");
 
-        mMainThread.post(() -> mCallback.onSentFailure("some kind of error"));
+        mMainThread.post(() -> mCallback.onSentFailure(errorMessage));
     }
 
     /**
@@ -57,15 +54,24 @@ public class TenantProfileInteractorImpl extends AbstractInteractor implements P
      * contains the business logic for this use case (Interactor), SHOULD ALWAYS CALL EXECUTE NOT START!!!!
      */
     @Override
-    public void run() {
-        Log.d(TAG, "inside run()");
+    public void execute() {
 
-        if(
-            profileRepository.createTenantProfile(tenantUserProfile)) {
-            notifySuccess();
-        } else {
-            Log.w(TAG, "Could not create Tenant Profile");
-            notifyError();
-        }
+        String tPath = DatabaseTree.TENANT_PROFILES_PATH;
+        String usersPath = DatabaseTree.USERS_PATH;
+
+        String tId = mDatabase.child(tPath).push().getKey();
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put(tPath + tId, this.tenantUserProfile);
+        map.put(usersPath + DatabaseTree.USER_ID, tId);
+
+        mDatabase.updateChildren(map, (databaseError, databaseReference) -> {
+            if (databaseError != null) { // Error
+                notifyError(databaseError.toException().getMessage());
+            } else {
+                notifySuccess();
+            }
+        });
+
     }
 }

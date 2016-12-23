@@ -1,13 +1,9 @@
 package com.flatshare.network.impl;
 
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.flatshare.domain.datatypes.auth.ResetDataType;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -89,14 +85,11 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
         }
 
         mAuth.sendPasswordResetEmail(email)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.v(TAG, "resetEmail:successful:" + task.isSuccessful());
-                        } else {
-                            Log.v(TAG, "resetEmail:failed:" + task.getException());
-                        }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.v(TAG, "resetEmail:successful:" + task.isSuccessful());
+                    } else {
+                        Log.v(TAG, "resetEmail:failed:" + task.getException());
                     }
                 });
     }

@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
-import com.flatshare.domain.executor.MainThread;
+import com.flatshare.domain.MainThread;
 
 
 /**
@@ -26,9 +26,6 @@ public class MainThreadImpl implements MainThread {
 
     @Override
     public void post(Runnable runnable) {
-
-        Log.d(TAG, "inside post(Runnable runnable) to post in the UI?");
-        Log.d(TAG, "inside post(Runnable runnable), mHandler.post(runnable)");
 
         mHandler.post(runnable);
     }

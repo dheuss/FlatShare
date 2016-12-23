@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
-import com.flatshare.domain.executor.impl.ThreadExecutor;
 import com.flatshare.presentation.presenters.TenantProfilePresenter;
 import com.flatshare.presentation.presenters.impl.TenantProfilePresenterImpl;
 import com.flatshare.threading.MainThreadImpl;
@@ -44,7 +43,6 @@ public class TenantProfileActivity extends AppCompatActivity implements TenantPr
 
         // create a presenter for this view
         mPresenter = new TenantProfilePresenterImpl(
-                ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(),
                 this
         );

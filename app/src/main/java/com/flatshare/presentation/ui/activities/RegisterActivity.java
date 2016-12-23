@@ -11,12 +11,11 @@ import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.auth.RegisterDataType;
-import com.flatshare.domain.executor.impl.ThreadExecutor;
 import com.flatshare.presentation.presenters.RegisterPresenter;
 import com.flatshare.presentation.presenters.impl.RegisterPresenterImpl;
 import com.flatshare.threading.MainThreadImpl;
 
-public class RegisterActivity extends AppCompatActivity implements RegisterPresenter.View{
+public class RegisterActivity extends AppCompatActivity implements RegisterPresenter.View {
 
     private EditText emailEditText;
 
@@ -42,14 +41,13 @@ public class RegisterActivity extends AppCompatActivity implements RegisterPrese
         bindView();
 
         mPresenter = new RegisterPresenterImpl(
-                ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(),
                 this
         );
 
         registerButton.setOnClickListener(view -> register());
 
-        forgotYourPasswordButton.setOnClickListener(new View.OnClickListener(){
+        forgotYourPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(RegisterActivity.this, ResetPasswordActivity.class));
@@ -65,13 +63,13 @@ public class RegisterActivity extends AppCompatActivity implements RegisterPrese
         });
     }
 
-    private void bindView(){
-        emailEditText = (EditText)findViewById(R.id.email_register_edittext);
-        passwordEditText = (EditText)findViewById(R.id.password_register_edittest);
-        nameEditText = (EditText)findViewById(R.id.name_register_edittext);
-        registerButton = (Button)findViewById(R.id.sign_up_register_button);
-        forgotYourPasswordButton = (Button)findViewById(R.id.reset_password_register_button);
-        alreadyRegisteredButton = (Button)findViewById(R.id.sign_in_register_button);
+    private void bindView() {
+        emailEditText = (EditText) findViewById(R.id.email_register_edittext);
+        passwordEditText = (EditText) findViewById(R.id.password_register_edittest);
+        nameEditText = (EditText) findViewById(R.id.name_register_edittext);
+        registerButton = (Button) findViewById(R.id.sign_up_register_button);
+        forgotYourPasswordButton = (Button) findViewById(R.id.reset_password_register_button);
+        alreadyRegisteredButton = (Button) findViewById(R.id.sign_in_register_button);
     }
 
     public void register() {

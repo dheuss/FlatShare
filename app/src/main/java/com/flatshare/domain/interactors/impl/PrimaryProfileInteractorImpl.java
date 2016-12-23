@@ -3,12 +3,15 @@ package com.flatshare.domain.interactors.impl;
 import android.util.Log;
 
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
-import com.flatshare.domain.executor.Executor;
-import com.flatshare.domain.executor.MainThread;
+import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.ProfileInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
-import com.flatshare.domain.repository.ProfileRepository;
-import com.flatshare.storage.ProfileRepositoryImpl;
+import com.flatshare.network.DatabaseTree;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -26,60 +29,62 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
 
     private PrimaryUserProfile primaryUserProfile;
 
-    private ProfileRepository profileRepository;
-
-    public PrimaryProfileInteractorImpl(Executor threadExecutor,
-                                        MainThread mainThread,
+    public PrimaryProfileInteractorImpl(MainThread mainThread,
                                         Callback callback, PrimaryUserProfile primaryUserProfile) {
 
-        super(threadExecutor, mainThread);
-        Log.d(TAG, "inside constructor");
+        super(mainThread);
         this.mCallback = callback;
         this.primaryUserProfile = primaryUserProfile;
-        this.profileRepository = new ProfileRepositoryImpl();
     }
 
-    private void notifyError() {
+    private void notifyError(String errorMessage) {
         Log.d(TAG, "inside notifyError()");
 
-        mMainThread.post(() -> mCallback.onSentFailure("some kind of error"));
+        mMainThread.post(() -> mCallback.onSentFailure(errorMessage));
     }
 
     /**
      * callback method that posts message received into the main UI, through mainThread.post!!!
      */
     private void notifySuccess() {
-        Log.d(TAG, "inside postMessage(String msg)");
+        Log.d(TAG, "inside notifySuccess");
 
         mMainThread.post(() -> mCallback.onSentSuccess(primaryUserProfile.getClassificationId()));
     }
 
-    /**
-     * contains the business logic for this use case (Interactor), SHOULD ALWAYS CALL EXECUTE NOT START!!!!
-     */
     @Override
-    public void run() {
-        Log.d(TAG, "inside run()");
+    public void execute() {
 
-        if (profileExists()) {
-            notifySuccess();
-        } else {
-            if (createProfileSuccessful()) {
+        String uId = DatabaseTree.USER_ID;
+        String usersPath = DatabaseTree.USERS_PATH;
+
+        mDatabase.child(usersPath + uId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot == null) {
+                    createProfile(usersPath + uId);
+                } else {
+                    notifySuccess();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                notifyError(databaseError.getMessage());
+            }
+        });
+    }
+
+    private void createProfile(String path) {
+
+        mDatabase.child(path).setValue(this.primaryUserProfile, (databaseError, databaseReference) -> {
+            if (databaseError == null) {
                 notifySuccess();
             } else {
-                Log.w(TAG, "Could not create Primary Profile");
-                notifyError();
+                notifyError(databaseError.getMessage());
             }
-        }
+        });
+
     }
 
-    private boolean createProfileSuccessful() {
-        return this.profileRepository.createPrimaryProfile(this.primaryUserProfile);
-    }
-
-    private boolean profileExists() {
-
-        Log.d(TAG, "arb: " + (this.profileRepository.getPrimaryProfile() != null));
-        return this.profileRepository.getPrimaryProfile() != null;
-    }
 }

@@ -3,8 +3,9 @@ package com.flatshare.domain.interactors.impl;
 import android.util.Log;
 
 import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
-import com.flatshare.domain.executor.MainThread;
+import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.ProfileInteractor;
+import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.network.DatabaseTree;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -16,7 +17,7 @@ import java.util.Map;
 /**
  * This is an interactor boilerplate with a reference to a model repository.
  */
-public class ApartmentProfileInteractorImpl implements ProfileInteractor {
+public class ApartmentProfileInteractorImpl extends AbstractInteractor implements ProfileInteractor {
 
     private static final String TAG = "ApartmentProfileInt";
 
@@ -27,15 +28,11 @@ public class ApartmentProfileInteractorImpl implements ProfileInteractor {
 
     private ApartmentUserProfile apartmentUserProfile;
 
-    private DatabaseReference mDatabase;
-
-    private MainThread mMainThread;
-
     public ApartmentProfileInteractorImpl(MainThread mainThread,
                                           Callback callback, ApartmentUserProfile apartmentUserProfile) {
 
+        super(mainThread);
         this.mMainThread = mainThread;
-        this.mDatabase = FirebaseDatabase.getInstance().getReference();
         this.mCallback = callback;
         this.apartmentUserProfile = apartmentUserProfile;
     }
@@ -43,7 +40,7 @@ public class ApartmentProfileInteractorImpl implements ProfileInteractor {
     private void notifyError(String errorMessage) {
         Log.d(TAG, "inside notifyError()");
 
-        mMainThread.post(() -> mCallback.onSentFailure("some kind of error"));
+        mMainThread.post(() -> mCallback.onSentFailure(errorMessage));
     }
 
     /**

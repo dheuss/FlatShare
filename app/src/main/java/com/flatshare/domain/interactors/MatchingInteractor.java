@@ -2,6 +2,8 @@ package com.flatshare.domain.interactors;
 
 import java.util.List;
 
+import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.UserProfile;
 import com.flatshare.domain.interactors.base.Interactor;
 
@@ -12,7 +14,11 @@ import com.flatshare.domain.interactors.base.Interactor;
 public interface MatchingInteractor extends Interactor{
 
     interface Callback {
-        void onMatchFound(List<UserProfile> userProfiles); // TODO: return someProfile?
         void onNoMatchFound();
+        void notifyError(String errorMessage);
+
+        void onTenantsFound(List<TenantUserProfile> tenants);
+
+        void onApartmentsFound(List<ApartmentUserProfile> apartments);
     }
 }

@@ -7,7 +7,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flatshare.R;
-import com.flatshare.domain.executor.impl.ThreadExecutor;
 import com.flatshare.presentation.presenters.MainPresenter;
 import com.flatshare.presentation.presenters.impl.MainPresenterImpl;
 import com.flatshare.threading.MainThreadImpl;
@@ -17,7 +16,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
     private static final String TAG = "MainActivity";
 
-//    @Bind(R.id.welcome_textview)
+    //    @Bind(R.id.welcome_textview)
     TextView mWelcomeTextView;
 
     private MainPresenter mPresenter;
@@ -33,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         Log.d(TAG, "inside onCreate(), creating presenter for this view");
         // create a presenter for this view
         mPresenter = new MainPresenterImpl(
-                ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(),
                 this
         );

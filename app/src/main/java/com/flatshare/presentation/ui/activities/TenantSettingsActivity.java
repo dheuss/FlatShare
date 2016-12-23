@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
-import com.flatshare.domain.executor.impl.ThreadExecutor;
 import com.flatshare.presentation.presenters.TenantSettingsPresenter;
 import com.flatshare.presentation.presenters.impl.TenantSettingsPresenterImpl;
 import com.flatshare.threading.MainThreadImpl;
@@ -44,7 +43,6 @@ public class TenantSettingsActivity extends AppCompatActivity implements TenantS
 
         // create a presenter for this view
         mPresenter = new TenantSettingsPresenterImpl(
-                ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(),
                 this
         );

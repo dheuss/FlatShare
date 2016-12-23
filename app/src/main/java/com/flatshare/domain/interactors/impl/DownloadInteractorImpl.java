@@ -2,12 +2,10 @@ package com.flatshare.domain.interactors.impl;
 
 import android.util.Log;
 
-import com.flatshare.domain.executor.Executor;
-import com.flatshare.domain.executor.MainThread;
+import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.MediaInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
-import com.flatshare.domain.repository.StorageRepository;
-import com.flatshare.storage.StorageRepositoryImpl;
+import com.flatshare.network.StorageTree;
 
 
 /**
@@ -23,29 +21,29 @@ public class DownloadInteractorImpl extends AbstractInteractor implements MediaI
      */
     private DownloadCallback mCallback;
 
-    private int mediaType;
+    private boolean isImage;
     private String mediaName;
 
-    private StorageRepository storageRepository;
     private boolean isTenant;
 
-    public DownloadInteractorImpl(Executor threadExecutor,
-                                  MainThread mainThread,
-                                  DownloadCallback downloadCallback,boolean isTenant, int mediaType, String mediaName) {
+    private MainThread mMainThread;
 
-        super(threadExecutor, mainThread);
-        Log.d(TAG, "inside constructor");
+    public DownloadInteractorImpl(MainThread mainThread,
+                                  DownloadCallback downloadCallback,
+                                  boolean isTenant,
+                                  boolean isImage,
+                                  String mediaName) {
+
+        super(mainThread);
         this.mCallback = downloadCallback;
         this.isTenant = isTenant;
-        this.mediaType = mediaType;
+        this.isImage = isImage;
         this.mediaName = mediaName;
-        this.storageRepository = new StorageRepositoryImpl();
     }
 
-    private void notifyError() {
-        Log.d(TAG, "inside notifyError()");
+    private void notifyError(String errorMessage) {
 
-        mMainThread.post(() -> mCallback.onError("some kind of error"));
+        mMainThread.post(() -> mCallback.onError(errorMessage));
     }
 
     /**
@@ -54,24 +52,22 @@ public class DownloadInteractorImpl extends AbstractInteractor implements MediaI
     private void notifySuccess(byte[] data) {
         Log.d(TAG, "inside postMessage(String msg)");
 
-        mMainThread.post(() -> mCallback.onDownloadSuccess(this.mediaType, data));
+        mMainThread.post(() -> mCallback.onDownloadSuccess(this.isImage, data));
     }
 
-    /**
-     * contains the business logic for this use case (Interactor), SHOULD ALWAYS CALL EXECUTE NOT START!!!!
-     */
+
     @Override
-    public void run() {
-        Log.d(TAG, "inside run()");
+    public void execute() {
 
-        byte[] data = storageRepository.downloadMedia(this.isTenant, this.mediaType, this.mediaName);
+        String userPath = isTenant ? StorageTree.TENANT_PATH : StorageTree.APARTMENT_PATH;
+        String profileId = "TODO!!!!";
+        String mediaPath = isImage ? StorageTree.IMAGES_PATH : StorageTree.VIDEOS_PATH;
 
-        if(data == null){
-            Log.w(TAG, "Download Failed!");
-            notifyError();
-        } else {
-            notifySuccess(data);
-        }
+        final long ONE_MEGABYTE = 1024 * 1024;
+        storageRef.child(userPath + profileId + mediaPath).getBytes(ONE_MEGABYTE).addOnSuccessListener(
+                bytes -> notifySuccess(bytes))
+                .addOnFailureListener(
+                        exception -> notifyError(exception.getMessage()));
 
     }
 }

@@ -4,8 +4,7 @@ import android.widget.ImageView;
 import android.widget.VideoView;
 
 import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
-import com.flatshare.domain.executor.Executor;
-import com.flatshare.domain.executor.MainThread;
+import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.MediaInteractor;
 import com.flatshare.domain.interactors.ProfileInteractor;
 import com.flatshare.domain.interactors.impl.ApartmentProfileInteractorImpl;
@@ -24,9 +23,9 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
 
     private ApartmentProfilePresenter.View mView;
 
-    public ApartmentProfilePresenterImpl(Executor executor, MainThread mainThread,
+    public ApartmentProfilePresenterImpl(MainThread mainThread,
                                          View view) {
-        super(executor, mainThread);
+        super(mainThread);
 
         mView = view;
 
@@ -81,7 +80,7 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
 
         String mediaName = (String) imageView.getTag();
 
-        MediaInteractor mediaInteractor = new UploadInteractorImpl(mExecutor, mMainThread, this, false, 1, mediaName, data);
+        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, false, 1, mediaName, data);
         mediaInteractor.execute();
     }
 
@@ -92,7 +91,7 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
 
         String mediaName = (String) videoView.getTag();
 
-        MediaInteractor mediaInteractor = new UploadInteractorImpl(mExecutor, mMainThread, this,false, 1, mediaName, data);
+        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this,false, 1, mediaName, data);
         mediaInteractor.execute();
     }
 

@@ -1,8 +1,7 @@
 package com.flatshare.presentation.presenters.impl;
 
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
-import com.flatshare.domain.executor.Executor;
-import com.flatshare.domain.executor.MainThread;
+import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.ProfileInteractor;
 import com.flatshare.domain.interactors.impl.PrimaryProfileInteractorImpl;
 import com.flatshare.presentation.presenters.PrimaryProfilePresenter;
@@ -18,9 +17,9 @@ public class PrimaryProfilePresenterImpl extends AbstractPresenter implements Pr
 
     private PrimaryProfilePresenter.View mView;
 
-    public PrimaryProfilePresenterImpl(Executor executor, MainThread mainThread,
+    public PrimaryProfilePresenterImpl(MainThread mainThread,
                                        View view) {
-        super(executor, mainThread);
+        super(mainThread);
 
         mView = view;
 
@@ -67,7 +66,7 @@ public class PrimaryProfilePresenterImpl extends AbstractPresenter implements Pr
     @Override
     public void sendProfile(PrimaryUserProfile primaryUserProfile) {
 
-        ProfileInteractor interactor = new PrimaryProfileInteractorImpl(mExecutor,mMainThread,this,primaryUserProfile);
+        ProfileInteractor interactor = new PrimaryProfileInteractorImpl(mMainThread,this,primaryUserProfile);
         interactor.execute();
 
     }

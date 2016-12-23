@@ -10,11 +10,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
-import com.facebook.login.widget.LoginButton;
 import com.facebook.FacebookSdk;
+import com.facebook.login.widget.LoginButton;
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.auth.LoginDataType;
-import com.flatshare.domain.executor.impl.ThreadExecutor;
 import com.flatshare.presentation.presenters.LoginPresenter;
 import com.flatshare.presentation.presenters.impl.LoginPresenterImpl;
 import com.flatshare.threading.MainThreadImpl;
@@ -23,16 +22,16 @@ import com.google.android.gms.common.SignInButton;
 
 public class LoginActiviy extends AppCompatActivity implements LoginPresenter.View {
 
-//    @Bind(R.id.email_edittext)
+    //    @Bind(R.id.email_edittext)
     private EditText emailEditText;
 
-//    @Bind(R.id.password_edittext)
+    //    @Bind(R.id.password_edittext)
     private EditText passwordEditText;
 
-//    @Bind(R.id.login_button)
+    //    @Bind(R.id.login_button)
     private Button loginButton;
 
-//    @Bind(R.id.register_button)
+    //    @Bind(R.id.register_button)
     private Button registerButton;
 
     //Google
@@ -65,7 +64,6 @@ public class LoginActiviy extends AppCompatActivity implements LoginPresenter.Vi
 
         // create a presenter for this view
         mPresenter = new LoginPresenterImpl(
-                ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(),
                 this
         );
@@ -95,14 +93,13 @@ public class LoginActiviy extends AppCompatActivity implements LoginPresenter.Vi
 //    @Bind(R.id.register_button)
         registerButton = (Button) findViewById(R.id.register_button);
 
-        googleSignInButton = (SignInButton)findViewById(R.id.google_sign_in_button);
-        facebookSignInButton = (LoginButton)findViewById(R.id.facebook_sign_in_button);
+        googleSignInButton = (SignInButton) findViewById(R.id.google_sign_in_button);
+        facebookSignInButton = (LoginButton) findViewById(R.id.facebook_sign_in_button);
     }
 
     private void login() {
         mPresenter.login(new LoginDataType(emailEditText.getText().toString(), passwordEditText.getText().toString()));
     }
-
 
 
     @Override

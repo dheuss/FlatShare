@@ -17,13 +17,12 @@ public interface DatabaseTree {
     String ZIP_CODES_PATH = "zip_codes/";
 
     String TENANT_PROFILES_PATH = "tenant_profiles/";
-    String TENANT_FILTER_PATH = "tenant_filter_settings/";
     String APARTMENTS_TO_SHOW_PATH = "apartments_to_show/";
     String MATCHED_APARTMENTS_PATH = "matched_apartments/";
 
+    String FILTER_SETTINGS_PATH = "filter_settings/";
 
     String APARTMENT_PROFILES_PATH = "apartment_profiles/";
-    String APARTMENT_FILTER_PATH = "apartment_filter_settings/";
     String MATCHED_TENANTS_PATH = "matched_tenants/";
 
     String APARTMENT_LOCATION_PATH = "apartment_location/";

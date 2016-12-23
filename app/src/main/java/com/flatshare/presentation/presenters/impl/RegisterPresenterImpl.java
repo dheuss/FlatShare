@@ -1,8 +1,7 @@
 package com.flatshare.presentation.presenters.impl;
 
 import com.flatshare.domain.datatypes.auth.RegisterDataType;
-import com.flatshare.domain.executor.Executor;
-import com.flatshare.domain.executor.MainThread;
+import com.flatshare.domain.MainThread;
 import com.flatshare.network.AuthenticationManager;
 import com.flatshare.network.impl.AuthenticationManagerImpl;
 import com.flatshare.presentation.presenters.RegisterPresenter;
@@ -18,9 +17,9 @@ public class RegisterPresenterImpl extends AbstractPresenter implements Register
 
     private RegisterPresenter.View mView;
 
-    public RegisterPresenterImpl(Executor executor, MainThread mainThread,
+    public RegisterPresenterImpl(MainThread mainThread,
                                  View view) {
-        super(executor, mainThread);
+        super(mainThread);
 
         mView = view;
 

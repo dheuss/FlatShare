@@ -1,9 +1,7 @@
 package com.flatshare.domain.interactors.impl;
 
 import android.util.Log;
-
-import com.flatshare.domain.executor.Executor;
-import com.flatshare.domain.executor.MainThread;
+import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.MediaInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.domain.repository.StorageRepository;
@@ -27,21 +25,17 @@ public class UploadInteractorImpl extends AbstractInteractor implements MediaInt
     private String mediaName;
     private byte[] data;
 
-    private StorageRepository storageRepository;
     private boolean isTenant;
 
-    public UploadInteractorImpl(Executor threadExecutor,
-                                MainThread mainThread,
+    public UploadInteractorImpl(MainThread mainThread,
                                 UploadCallback downloadCallback,boolean isTenant, int mediaType, String mediaName, byte[] data) {
 
-        super(threadExecutor, mainThread);
-        Log.d(TAG, "inside constructor");
+        super(mainThread);
         this.mCallback = downloadCallback;
         this.isTenant = isTenant;
         this.mediaType = mediaType;
         this.mediaName = mediaName;
         this.data = data;
-        this.storageRepository = new StorageRepositoryImpl();
     }
 
     private void notifyError() {
@@ -63,15 +57,15 @@ public class UploadInteractorImpl extends AbstractInteractor implements MediaInt
      * contains the business logic for this use case (Interactor), SHOULD ALWAYS CALL EXECUTE NOT START!!!!
      */
     @Override
-    public void run() {
+    public void execute() {
         Log.d(TAG, "inside run()");
 
-        if(storageRepository.uploadMedia(isTenant, mediaType,mediaName,this.data)){
-            notifySuccess();
-        } else {
-            Log.w(TAG, "Upload Failed!");
-            notifyError();
-        }
+//        if(storageRepository.uploadMedia(isTenant, mediaType,mediaName,this.data)){
+//            notifySuccess();
+//        } else {
+//            Log.w(TAG, "Upload Failed!");
+//            notifyError();
+//        }
 
     }
 }

@@ -10,7 +10,7 @@ public interface MediaInteractor extends Interactor {
 
     interface DownloadCallback {
         // TODO: CHANGE parameter type?
-        void onDownloadSuccess(int dataType, byte[] data);
+        void onDownloadSuccess(boolean isImage, byte[] data);
         void onError(String error);
     }
 

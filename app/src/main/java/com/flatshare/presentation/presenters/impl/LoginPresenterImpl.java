@@ -4,8 +4,7 @@ package com.flatshare.presentation.presenters.impl;
 import android.util.Log;
 
 import com.flatshare.domain.datatypes.auth.LoginDataType;
-import com.flatshare.domain.executor.Executor;
-import com.flatshare.domain.executor.MainThread;
+import com.flatshare.domain.MainThread;
 import com.flatshare.network.AuthenticationManager;
 import com.flatshare.network.impl.AuthenticationManagerImpl;
 import com.flatshare.presentation.presenters.LoginPresenter;
@@ -22,9 +21,9 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
     private static final String TAG = "LoginPresenter";
     private LoginPresenter.View mView;
 
-    public LoginPresenterImpl(Executor executor, MainThread mainThread,
+    public LoginPresenterImpl(MainThread mainThread,
                               View view) {
-        super(executor, mainThread);
+        super(mainThread);
 
         mView = view;
 

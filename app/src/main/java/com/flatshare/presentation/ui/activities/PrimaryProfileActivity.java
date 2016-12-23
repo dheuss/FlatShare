@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
-import com.flatshare.domain.executor.impl.ThreadExecutor;
 import com.flatshare.presentation.presenters.PrimaryProfilePresenter;
 import com.flatshare.presentation.presenters.impl.PrimaryProfilePresenterImpl;
 import com.flatshare.threading.MainThreadImpl;
@@ -33,7 +32,6 @@ public class PrimaryProfileActivity extends AppCompatActivity implements Primary
 
         // create a presenter for this view
         mPresenter = new PrimaryProfilePresenterImpl(
-                ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(),
                 this
         );

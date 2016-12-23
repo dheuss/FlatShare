@@ -4,8 +4,7 @@ import android.widget.ImageView;
 import android.widget.VideoView;
 
 import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
-import com.flatshare.domain.executor.Executor;
-import com.flatshare.domain.executor.MainThread;
+import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.MediaInteractor;
 import com.flatshare.domain.interactors.ProfileInteractor;
 import com.flatshare.domain.interactors.impl.TenantProfileInteractorImpl;
@@ -24,9 +23,9 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
 
     private TenantProfilePresenter.View mView;
 
-    public TenantProfilePresenterImpl(Executor executor, MainThread mainThread,
+    public TenantProfilePresenterImpl(MainThread mainThread,
                                       View view) {
-        super(executor, mainThread);
+        super(mainThread);
 
         mView = view;
 
@@ -69,7 +68,7 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
     @Override
     public void sendProfile(TenantUserProfile tenantUserProfile) {
 
-        ProfileInteractor interactor = new TenantProfileInteractorImpl(mExecutor, mMainThread, this, tenantUserProfile);
+        ProfileInteractor interactor = new TenantProfileInteractorImpl(mMainThread, this, tenantUserProfile);
         interactor.execute();
 
     }
@@ -80,7 +79,7 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
 
         String mediaName = (String) imageView.getTag();
 
-        MediaInteractor mediaInteractor = new UploadInteractorImpl(mExecutor, mMainThread, this, true, 0, mediaName, data);
+        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, true, 0, mediaName, data);
         mediaInteractor.execute();
     }
 
@@ -91,7 +90,7 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
 
         String mediaName = (String) videoView.getTag();
 
-        MediaInteractor mediaInteractor = new UploadInteractorImpl(mExecutor, mMainThread, this, true, 0, mediaName, data);
+        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, true, 0, mediaName, data);
         mediaInteractor.execute();
     }
 

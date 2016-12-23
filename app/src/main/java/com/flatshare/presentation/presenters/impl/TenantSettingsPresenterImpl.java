@@ -1,8 +1,7 @@
 package com.flatshare.presentation.presenters.impl;
 
 import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
-import com.flatshare.domain.executor.Executor;
-import com.flatshare.domain.executor.MainThread;
+import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.FilterSettingsInteractor;
 import com.flatshare.domain.interactors.impl.TenantSettingsInteractorImpl;
 import com.flatshare.presentation.presenters.TenantSettingsPresenter;
@@ -18,9 +17,9 @@ public class TenantSettingsPresenterImpl extends AbstractPresenter implements Te
 
     private TenantSettingsPresenter.View mView;
 
-    public TenantSettingsPresenterImpl(Executor executor, MainThread mainThread,
+    public TenantSettingsPresenterImpl(MainThread mainThread,
                                        View view) {
-        super(executor, mainThread);
+        super(mainThread);
 
         mView = view;
 
@@ -67,7 +66,7 @@ public class TenantSettingsPresenterImpl extends AbstractPresenter implements Te
 
     @Override
     public void sendFilterSettings(TenantFilterSettings tenantFilterSettings) {
-        FilterSettingsInteractor interactor = new TenantSettingsInteractorImpl(mExecutor, mMainThread, this, tenantFilterSettings);
+        FilterSettingsInteractor interactor = new TenantSettingsInteractorImpl(mMainThread, this, tenantFilterSettings);
         interactor.execute();
     }
 }
