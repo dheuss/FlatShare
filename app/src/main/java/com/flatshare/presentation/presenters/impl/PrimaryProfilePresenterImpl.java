@@ -66,6 +66,8 @@ public class PrimaryProfilePresenterImpl extends AbstractPresenter implements Pr
     @Override
     public void sendProfile(PrimaryUserProfile primaryUserProfile) {
 
+        mView.showProgress();
+
         ProfileInteractor interactor = new PrimaryProfileInteractorImpl(mMainThread,this,primaryUserProfile);
         interactor.execute();
 

@@ -2,7 +2,6 @@ package com.flatshare.presentation.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,13 +11,14 @@ import com.flatshare.R;
 import com.flatshare.domain.datatypes.auth.ResetDataType;
 import com.flatshare.presentation.presenters.ResetPasswordPresenter;
 import com.flatshare.presentation.presenters.impl.ResetPasswordPresenterImpl;
+import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
 
 /**
  * Created by david on 19.12.2016.
  */
 
-public class ResetPasswordActivity extends AppCompatActivity implements ResetPasswordPresenter.View {
+public class ResetPasswordActivity extends AbstractActivity implements ResetPasswordPresenter.View {
 
     private EditText emailResetPasswordEditText;
     private Button resetPasswordButton;
@@ -28,7 +28,6 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reset_password);
 
         bindView();
 
@@ -38,6 +37,11 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
         );
 
         resetPasswordButton.setOnClickListener(view -> reset());
+    }
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.activity_reset_password;
     }
 
     private void bindView() {
@@ -64,16 +68,6 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
         Log.d("LoginActivity", "success! changed to PrimaryProfileActivity!");
         Intent intent = new Intent(this, PrimaryProfileActivity.class);
         startActivity(intent);
-    }
-
-    @Override
-    public void showProgress() {
-        resetPasswordButton.setText("Retreiving...");
-    }
-
-    @Override
-    public void hideProgress() {
-        Toast.makeText(this, "Retrieved!", Toast.LENGTH_LONG).show();
     }
 
     @Override

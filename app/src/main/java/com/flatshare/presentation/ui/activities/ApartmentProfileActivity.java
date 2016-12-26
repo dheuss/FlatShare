@@ -1,15 +1,19 @@
 package com.flatshare.presentation.ui.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.flatshare.R;
+import com.flatshare.presentation.ui.AbstractActivity;
 
-public class ApartmentProfileActivity extends AppCompatActivity {
+public class ApartmentProfileActivity extends AbstractActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_apartment_profile);
+    }
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.activity_apartment_profile;
     }
 }

@@ -67,5 +67,8 @@ dependencies {
 
     //Gson
     compile 'com.google.code.gson:gson:2.7'
+
+    // loader
+    compile 'com.github.d-max:spots-dialog:0.4@aar'
 }
 apply plugin: 'com.google.gms.google-services'

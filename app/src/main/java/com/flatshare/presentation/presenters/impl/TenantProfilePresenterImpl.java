@@ -68,6 +68,8 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
     @Override
     public void sendProfile(TenantUserProfile tenantUserProfile) {
 
+        mView.showProgress();
+
         ProfileInteractor interactor = new TenantProfileInteractorImpl(mMainThread, this, tenantUserProfile);
         interactor.execute();
 
@@ -75,6 +77,9 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
 
     @Override
     public void uploadImage(ImageView imageView) {
+
+        mView.showProgress();
+
         byte[] data = new MediaConverter().imageViewToByte(imageView);
 
         String mediaName = (String) imageView.getTag();
@@ -86,6 +91,8 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
     @Override
     public void uploadVideo(VideoView videoView) {
 
+        mView.showProgress();
+
         byte[] data = new MediaConverter().videoViewToByte(videoView);
 
         String mediaName = (String) videoView.getTag();
@@ -96,7 +103,6 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
 
     @Override
     public void onError(String error) {
-
         mView.showError(error);
     }
 

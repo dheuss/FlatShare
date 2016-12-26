@@ -1,8 +1,8 @@
 package com.flatshare.presentation.ui.activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -14,9 +14,12 @@ import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
 import com.flatshare.presentation.presenters.TenantSettingsPresenter;
 import com.flatshare.presentation.presenters.impl.TenantSettingsPresenterImpl;
+import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-public class TenantSettingsActivity extends AppCompatActivity implements TenantSettingsPresenter.View {
+import dmax.dialog.SpotsDialog;
+
+public class TenantSettingsActivity extends AbstractActivity implements TenantSettingsPresenter.View {
 
     private TextView internetTextView;
 
@@ -31,13 +34,13 @@ public class TenantSettingsActivity extends AppCompatActivity implements TenantS
 
     private TenantSettingsPresenter mPresenter;
     private static final String TAG = "TenantProfileAct";
+    private AlertDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tenant_settings);
 
         bindView();
 
@@ -51,6 +54,11 @@ public class TenantSettingsActivity extends AppCompatActivity implements TenantS
         profileDoneButton.setOnClickListener(view -> sendFilterSettings());
 
 
+    }
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.activity_tenant_settings;
     }
 
     private void sendFilterSettings() {
@@ -76,22 +84,14 @@ public class TenantSettingsActivity extends AppCompatActivity implements TenantS
 
         profileDoneButton = (Button) findViewById(R.id.tenant_settings_done_button);
 
+        progressDialog = new SpotsDialog(this, R.style.Custom);
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         mPresenter.resume();
-    }
-
-    @Override
-    public void showProgress() {
-        //TODO: find some loading bar
-    }
-
-    @Override
-    public void hideProgress() {
-        Toast.makeText(this, "Retrieved!", Toast.LENGTH_LONG).show();
     }
 
     @Override

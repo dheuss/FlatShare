@@ -76,6 +76,8 @@ public class ResetPasswordPresenterImpl extends AbstractPresenter implements Res
 //                this
 //        );
 
+        mView.showProgress();
+
         AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
 
 //        // run the interactor

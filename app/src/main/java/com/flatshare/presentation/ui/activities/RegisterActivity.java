@@ -2,7 +2,6 @@ package com.flatshare.presentation.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,9 +12,10 @@ import com.flatshare.R;
 import com.flatshare.domain.datatypes.auth.RegisterDataType;
 import com.flatshare.presentation.presenters.RegisterPresenter;
 import com.flatshare.presentation.presenters.impl.RegisterPresenterImpl;
+import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-public class RegisterActivity extends AppCompatActivity implements RegisterPresenter.View {
+public class RegisterActivity extends AbstractActivity implements RegisterPresenter.View {
 
     private EditText emailEditText;
 
@@ -36,7 +36,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterPrese
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
 
         bindView();
 
@@ -61,6 +60,11 @@ public class RegisterActivity extends AppCompatActivity implements RegisterPrese
                 finish();
             }
         });
+    }
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.activity_register;
     }
 
     private void bindView() {
@@ -89,16 +93,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterPrese
         Log.d(TAG, "success! changed to PrimaryProfileActivity!");
         Intent intent = new Intent(this, PrimaryProfileActivity.class);
         startActivity(intent);
-    }
-
-    @Override
-    public void showProgress() {
-        registerButton.setText("Retreiving...");
-    }
-
-    @Override
-    public void hideProgress() {
-        Toast.makeText(this, "Retrieved!", Toast.LENGTH_LONG).show();
     }
 
     @Override

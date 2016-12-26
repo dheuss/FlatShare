@@ -2,7 +2,6 @@ package com.flatshare.presentation.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,9 +13,10 @@ import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.presentation.presenters.PrimaryProfilePresenter;
 import com.flatshare.presentation.presenters.impl.PrimaryProfilePresenterImpl;
+import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-public class PrimaryProfileActivity extends AppCompatActivity implements PrimaryProfilePresenter.View {
+public class PrimaryProfileActivity extends AbstractActivity implements PrimaryProfilePresenter.View {
 
 
     private Button createTenantProfileButton;
@@ -29,7 +29,6 @@ public class PrimaryProfileActivity extends AppCompatActivity implements Primary
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_primary_profile);
 
         bindView();
 
@@ -42,6 +41,11 @@ public class PrimaryProfileActivity extends AppCompatActivity implements Primary
         createTenantProfileButton.setOnClickListener(view -> sendProfile(0));
         createApartmentProfileButton.setOnClickListener(view -> sendProfile(1));
 
+    }
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.activity_primary_profile;
     }
 
     private void sendProfile(int classificationId) {
@@ -62,16 +66,6 @@ public class PrimaryProfileActivity extends AppCompatActivity implements Primary
 
         // let's start welcome message retrieval when the app resumes
         mPresenter.resume();
-    }
-
-    @Override
-    public void showProgress() {
-        Log.d(TAG, "showing Progress");
-    }
-
-    @Override
-    public void hideProgress() {
-        Toast.makeText(this, "done!", Toast.LENGTH_LONG).show();
     }
 
     @Override

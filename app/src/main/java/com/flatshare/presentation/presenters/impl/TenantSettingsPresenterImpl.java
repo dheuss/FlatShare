@@ -60,12 +60,12 @@ public class TenantSettingsPresenterImpl extends AbstractPresenter implements Te
 
     @Override
     public void onError(String message) {
-
         mView.showError(message);
     }
 
     @Override
     public void sendFilterSettings(TenantFilterSettings tenantFilterSettings) {
+        mView.showProgress();
         FilterSettingsInteractor interactor = new TenantSettingsInteractorImpl(mMainThread, this, tenantFilterSettings);
         interactor.execute();
     }

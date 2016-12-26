@@ -65,6 +65,7 @@ public class RegisterPresenterImpl extends AbstractPresenter implements Register
 
     @Override
     public void register(RegisterDataType registerDataType) {
+        mView.showProgress();
         AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
 
 //        // run the interactor

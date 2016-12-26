@@ -16,9 +16,10 @@ import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
 import com.flatshare.presentation.presenters.TenantProfilePresenter;
 import com.flatshare.presentation.presenters.impl.TenantProfilePresenterImpl;
+import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-public class TenantProfileActivity extends AppCompatActivity implements TenantProfilePresenter.View {
+public class TenantProfileActivity extends AbstractActivity implements TenantProfilePresenter.View {
 
     private EditText firstNameEditText;
     private EditText ageEditText;
@@ -46,7 +47,6 @@ public class TenantProfileActivity extends AppCompatActivity implements TenantPr
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tenant_profile);
 
         bindView();
 
@@ -57,6 +57,11 @@ public class TenantProfileActivity extends AppCompatActivity implements TenantPr
 
         profileDoneButton.setOnClickListener(view -> sendProfile());
 
+    }
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.activity_tenant_profile;
     }
 
     private void sendProfile() {
@@ -112,16 +117,6 @@ public class TenantProfileActivity extends AppCompatActivity implements TenantPr
     protected void onResume() {
         super.onResume();
         mPresenter.resume();
-    }
-
-    @Override
-    public void showProgress() {
-        //TODO: find some loading bar
-    }
-
-    @Override
-    public void hideProgress() {
-        Toast.makeText(this, "Retrieved!", Toast.LENGTH_LONG).show();
     }
 
     @Override

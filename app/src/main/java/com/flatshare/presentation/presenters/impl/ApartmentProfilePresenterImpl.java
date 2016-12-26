@@ -68,6 +68,7 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
     @Override
     public void sendProfile(ApartmentUserProfile apartmentUserProfile) {
 
+        mView.showProgress();
 
         ProfileInteractor interactor = new ApartmentProfileInteractorImpl(mMainThread, this, apartmentUserProfile);
         interactor.execute();
@@ -76,6 +77,9 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
 
     @Override
     public void uploadImage(ImageView imageView) {
+
+        mView.showProgress();
+
         byte[] data = new MediaConverter().imageViewToByte(imageView);
 
         String mediaName = (String) imageView.getTag();
@@ -86,6 +90,8 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
 
     @Override
     public void uploadVideo(VideoView videoView) {
+
+        mView.showProgress();
 
         byte[] data = new MediaConverter().videoViewToByte(videoView);
 

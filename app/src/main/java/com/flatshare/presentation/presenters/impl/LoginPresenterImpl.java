@@ -80,6 +80,7 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
 //                this
 //        );
 
+        mView.showProgress();
         AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
 
 //        // run the interactor

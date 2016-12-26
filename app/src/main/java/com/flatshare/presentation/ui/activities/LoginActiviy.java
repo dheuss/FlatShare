@@ -1,5 +1,6 @@
 package com.flatshare.presentation.ui.activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,8 @@ import com.flatshare.presentation.presenters.impl.LoginPresenterImpl;
 import com.flatshare.threading.MainThreadImpl;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
+
+import dmax.dialog.SpotsDialog;
 
 public class LoginActiviy extends AppCompatActivity implements LoginPresenter.View {
 
@@ -41,6 +44,9 @@ public class LoginActiviy extends AppCompatActivity implements LoginPresenter.Vi
     private LoginButton facebookSignInButton;
     private CallbackManager facebookCallbackManager;
 
+    // loader
+    private AlertDialog progressDialog;
+
     private LoginPresenter mPresenter;
     private static final String TAG = "LoginActivity";
 
@@ -51,6 +57,7 @@ public class LoginActiviy extends AppCompatActivity implements LoginPresenter.Vi
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_login);
 
+        bindView();
         facebookCallbackManager = CallbackManager.Factory.create();
 
 //        ButterKnife.bind(this);
@@ -60,7 +67,6 @@ public class LoginActiviy extends AppCompatActivity implements LoginPresenter.Vi
                 .requestEmail()
                 .build();
 
-        bindView();
 
         // create a presenter for this view
         mPresenter = new LoginPresenterImpl(
@@ -95,12 +101,26 @@ public class LoginActiviy extends AppCompatActivity implements LoginPresenter.Vi
 
         googleSignInButton = (SignInButton) findViewById(R.id.google_sign_in_button);
         facebookSignInButton = (LoginButton) findViewById(R.id.facebook_sign_in_button);
+
+
+        progressDialog = new SpotsDialog(this, R.style.Custom);
     }
 
     private void login() {
         mPresenter.login(new LoginDataType(emailEditText.getText().toString(), passwordEditText.getText().toString()));
     }
 
+    @Override
+    protected void onDestroy() {
+        try {
+            if (progressDialog != null && progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        super.onDestroy();
+    }
 
     @Override
     protected void onResume() {
@@ -110,11 +130,12 @@ public class LoginActiviy extends AppCompatActivity implements LoginPresenter.Vi
 
     @Override
     public void showProgress() {
-        loginButton.setText("Retrieving...");
+        progressDialog.show();
     }
 
     @Override
     public void hideProgress() {
+        progressDialog.hide();
         Toast.makeText(this, "Retrieved!", Toast.LENGTH_LONG).show();
     }
 

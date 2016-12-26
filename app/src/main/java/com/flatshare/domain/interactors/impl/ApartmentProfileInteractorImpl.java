@@ -56,7 +56,6 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
         String district = apartmentUserProfile.getApartmentLocation().getDistrict();
         int zipCode = apartmentUserProfile.getApartmentLocation().getZipCode();
 
-//        String locationPath = DatabaseTree.APARTMENTS_LOCATION_PATH + city + "/" + district + "/" + zipCode;
         String locationPath = databaseRoot.getApartmentLocationsNode().getCitiesNode(city).getDistrictsNode(district).getZipCodesNode(zipCode).getRootPath();
 
         String apartmentId = mDatabase.child(databaseRoot.getApartmentProfiles()).push().getKey();

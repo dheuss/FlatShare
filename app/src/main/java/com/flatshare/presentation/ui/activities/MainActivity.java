@@ -1,17 +1,16 @@
 package com.flatshare.presentation.ui.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.presentation.presenters.MainPresenter;
 import com.flatshare.presentation.presenters.impl.MainPresenterImpl;
+import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-public class MainActivity extends AppCompatActivity implements MainPresenter.View {
+public class MainActivity extends AbstractActivity implements MainPresenter.View {
 
 
     private static final String TAG = "MainActivity";
@@ -24,8 +23,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Log.d(TAG, "inside onCreate(), calling ButterKnife.bind(this)");
 //        ButterKnife.bind(this);
 
         bindView();
@@ -35,6 +32,11 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
                 MainThreadImpl.getInstance(),
                 this
         );
+    }
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.activity_main;
     }
 
     private void bindView() {
@@ -49,18 +51,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
         // let's start welcome message retrieval when the app resumes
         mPresenter.resume();
-    }
-
-    @Override
-    public void showProgress() {
-        Log.d(TAG, "inside showProgress()");
-        mWelcomeTextView.setText("Retrieving...");
-    }
-
-    @Override
-    public void hideProgress() {
-        Log.d(TAG, "inside hideProgress(), Toast.maxeText(this, \"Retrieved\", Toast.LENGTH_LONG).show();");
-        Toast.makeText(this, "Retrieved!", Toast.LENGTH_LONG).show();
     }
 
     @Override
