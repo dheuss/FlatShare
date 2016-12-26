@@ -10,7 +10,6 @@ import com.flatshare.domain.interactors.MatchingInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.domain.predicates.ApartmentMatchFinder;
 import com.flatshare.domain.predicates.TenantMatchFinder;
-import com.flatshare.network.DatabaseTree;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.GenericTypeIndicator;
@@ -63,7 +62,7 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
     @Override
     public void execute() {
 
-        mDatabase.child(root.getUserProfileNode(userId).getRootPath()).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(databaseRoot.getUserProfileNode(userId).getRootPath()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() == null) {
@@ -89,7 +88,7 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
 
     private void matchApartment(ApartmentUserProfile apUP) {
 
-        mDatabase.child(root.getTenantProfiles()).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(databaseRoot.getTenantProfiles()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -117,7 +116,7 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
 
     private void matchTenant(TenantUserProfile tUP) {
 
-        mDatabase.child(root.getApartmentProfiles()).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(databaseRoot.getApartmentProfiles()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -144,7 +143,7 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
     }
 
     private void getApartment(String apartmentProfileId) {
-        String apPath = DatabaseTree.APARTMENT_PROFILES_PATH;
+        String apPath = databaseRoot.getApartmentProfiles();
 
         mDatabase.child(apPath + apartmentProfileId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -166,7 +165,7 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
 
     private void getTenant(String tenantProfileId) {
 
-        mDatabase.child(root.getTenantProfileNode(tenantProfileId).getRootPath()).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(databaseRoot.getTenantProfileNode(tenantProfileId).getRootPath()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() == null) {

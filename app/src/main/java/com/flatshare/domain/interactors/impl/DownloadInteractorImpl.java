@@ -5,7 +5,6 @@ import android.util.Log;
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.MediaInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
-import com.flatshare.network.StorageTree;
 
 
 /**
@@ -59,12 +58,12 @@ public class DownloadInteractorImpl extends AbstractInteractor implements MediaI
     @Override
     public void execute() {
 
-        String userPath = isTenant ? StorageTree.TENANT_PATH : StorageTree.APARTMENT_PATH;
+        String userPath = isTenant ? storageRoot.getTenants(): storageRoot.getApartments();
         String profileId = "TODO!!!!";
-        String mediaPath = isImage ? StorageTree.IMAGES_PATH : StorageTree.VIDEOS_PATH;
+        String mediaPath = isImage ? storageRoot.getImages() : storageRoot.getVideos();
 
         final long ONE_MEGABYTE = 1024 * 1024;
-        storageRef.child(userPath + profileId + mediaPath).getBytes(ONE_MEGABYTE).addOnSuccessListener(
+        mStorage.child(userPath + profileId + mediaPath).getBytes(ONE_MEGABYTE).addOnSuccessListener(
                 bytes -> notifySuccess(bytes))
                 .addOnFailureListener(
                         exception -> notifyError(exception.getMessage()));

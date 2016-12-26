@@ -52,13 +52,13 @@ public class TenantSettingsInteractorImpl extends AbstractInteractor implements 
     @Override
     public void execute() {
 
-        mDatabase.child(root.getUserProfileNode(userId).getRootPath()).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(databaseRoot.getUserProfileNode(userId).getRootPath()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 PrimaryUserProfile primaryUserProfile = dataSnapshot.getValue(PrimaryUserProfile.class);
                 String tId = primaryUserProfile.getTenantProfileId();
 
-                createTenantSettings(root.getTenantProfileNode(tId).getTenantFilterSettings());
+                createTenantSettings(databaseRoot.getTenantProfileNode(tId).getTenantFilterSettings());
             }
 
             @Override

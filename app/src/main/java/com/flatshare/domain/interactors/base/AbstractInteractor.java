@@ -3,8 +3,8 @@ package com.flatshare.domain.interactors.base;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
-import com.flatshare.network.StorageTree;
-import com.flatshare.network.paths.database.Root;
+import com.flatshare.network.path.database.DatabaseRoot;
+import com.flatshare.network.path.storage.StorageRoot;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,11 +21,12 @@ public abstract class AbstractInteractor implements Interactor {
     protected MainThread mMainThread;
 
     protected DatabaseReference mDatabase;
+    protected StorageReference mStorage;
+
     protected final String userId;
 
-    protected Root root;
-
-    protected StorageReference storageRef;
+    protected DatabaseRoot databaseRoot;
+    protected StorageRoot storageRoot;
 
     public AbstractInteractor(MainThread mainThread) {
 
@@ -33,9 +34,10 @@ public abstract class AbstractInteractor implements Interactor {
         this.mDatabase = FirebaseDatabase.getInstance().getReference();
 
         this.userId= FirebaseAuth.getInstance().getCurrentUser().getUid() + "/";
-        root = new Root();
+        databaseRoot = new DatabaseRoot();
+        storageRoot = new StorageRoot();
 
-        this.storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(StorageTree.URL);
+        this.mStorage = FirebaseStorage.getInstance().getReferenceFromUrl(storageRoot.getUrl());
         mMainThread = mainThread;
     }
 

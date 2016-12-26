@@ -55,7 +55,7 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
     @Override
     public void execute() {
 
-        mDatabase.child(root.getUserProfileNode(userId).getRootPath()).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(databaseRoot.getUserProfileNode(userId).getRootPath()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() == null) {
@@ -76,7 +76,7 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
 
         Log.d(TAG, "creating main profile!");
 
-        mDatabase.child(root.getUserProfileNode(userId).getRootPath()).setValue(this.primaryUserProfile, (databaseError, databaseReference) -> {
+        mDatabase.child(databaseRoot.getUserProfileNode(userId).getRootPath()).setValue(this.primaryUserProfile, (databaseError, databaseReference) -> {
             if (databaseError == null) {
                 notifySuccess();
             } else {
@@ -90,7 +90,7 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
 
 
         Map<String, Object> map = new HashMap<>();
-        map.put(root.getUserProfileNode(userId).getClassificationId(), this.primaryUserProfile.getClassificationId());
+        map.put(databaseRoot.getUserProfileNode(userId).getClassificationId(), this.primaryUserProfile.getClassificationId());
 
         mDatabase.updateChildren(map, (databaseError, databaseReference) -> {
             if (databaseError != null) { // Error

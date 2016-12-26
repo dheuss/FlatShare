@@ -6,8 +6,6 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
 import com.flatshare.domain.interactors.ProfileInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
-import com.flatshare.network.DatabaseTree;
-import com.flatshare.network.paths.database.Root;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,14 +56,15 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
         String district = apartmentUserProfile.getApartmentLocation().getDistrict();
         int zipCode = apartmentUserProfile.getApartmentLocation().getZipCode();
 
-        String locationPath = DatabaseTree.APARTMENTS_LOCATION_PATH + city + "/" + district + "/" + zipCode;
+//        String locationPath = DatabaseTree.APARTMENTS_LOCATION_PATH + city + "/" + district + "/" + zipCode;
+        String locationPath = databaseRoot.getApartmentLocationsNode().getCitiesNode(city).getDistrictsNode(district).getZipCodesNode(zipCode).getRootPath();
 
-        String apartmentId = mDatabase.child(root.getApartmentProfiles()).push().getKey();
+        String apartmentId = mDatabase.child(databaseRoot.getApartmentProfiles()).push().getKey();
 
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put(root.getApartmentProfileNode(apartmentId).getRootPath(), this.apartmentUserProfile);
+        map.put(databaseRoot.getApartmentProfileNode(apartmentId).getRootPath(), this.apartmentUserProfile);
 
-        map.put(root.getUserProfileNode(userId).getApartmentProfileId(), apartmentId);
+        map.put(databaseRoot.getUserProfileNode(userId).getApartmentProfileId(), apartmentId);
         map.put(locationPath, apartmentId);
 
         mDatabase.updateChildren(map, (databaseError, databaseReference) -> {

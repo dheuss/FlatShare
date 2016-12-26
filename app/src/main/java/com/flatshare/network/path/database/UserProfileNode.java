@@ -1,4 +1,4 @@
-package com.flatshare.network.paths.database;
+package com.flatshare.network.path.database;
 
 /**
  * Created by Arber on 23/12/2016.
