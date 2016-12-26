@@ -1,13 +1,301 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_apartment_profile"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     tools:context="com.flatshare.presentation.ui.activities.ApartmentProfileActivity">
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+
+        <!--@PropertyName("roommate_ids")-->
+        <!--public List<String> roommateIds;-->
+
+        <!--@PropertyName("apartment_info")-->
+        <!--public String apartmentInfo;-->
+
+        <!---->
+        <!--@PropertyName("languages")-->
+        <!--public List<String> languages;-->
+
+        <TextView
+            android:id="@+id/initial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/create_your_apartment_profile"
+            android:textAlignment="center"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/apartment_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/initial"
+            android:layout_marginTop="20dp"
+            android:text="@string/apartment_price"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/apartment_price_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/initial"
+            android:layout_marginTop="10dp"
+            android:width="200dp"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/apartment_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/apartment_price"
+            android:layout_marginTop="20dp"
+            android:text="@string/apartment_area"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/apartment_area_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/apartment_price"
+            android:width="200dp"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/apartment_street"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/apartment_area"
+            android:layout_marginTop="20dp"
+            android:text="@string/apartment_street"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/apartment_street_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/apartment_area"
+            android:width="200dp"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/apartment_house_nr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/apartment_street"
+            android:layout_marginTop="20dp"
+            android:text="@string/apartment_house_nr"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/apartment_house_nr_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/apartment_street"
+            android:width="200dp"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/apartment_zip_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/apartment_house_nr"
+            android:layout_marginTop="20dp"
+            android:text="@string/apartment_zip_code"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/apartment_zip_code_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/apartment_house_nr"
+            android:width="200dp"
+            android:inputType="numberDecimal" />
+
+
+        <TextView
+            android:id="@+id/internet_apartment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/apartment_zip_code"
+            android:layout_marginTop="20dp"
+            android:text="@string/internet"
+            android:textSize="20dp" />
+
+        <RadioGroup
+            android:id="@+id/internet_apartment_rg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/apartment_zip_code"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/internet_yes_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/yes" />
+
+            <RadioButton
+                android:id="@+id/internet_no_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/smoker_apartment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/internet_apartment"
+            android:layout_marginTop="20dp"
+            android:text="@string/smoker"
+            android:textSize="20dp" />
+
+        <RadioGroup
+            android:id="@+id/smoker_apartment_rg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/internet_apartment"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/smoker_yes_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/yes" />
+
+            <RadioButton
+                android:id="@+id/smoker_no_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/pets_apartment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/smoker_apartment"
+            android:layout_marginTop="20dp"
+            android:text="@string/pets"
+            android:textSize="20dp" />
+
+        <RadioGroup
+            android:id="@+id/pets_apartment_rg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/smoker_apartment"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/pets_yes_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/yes" />
+
+            <RadioButton
+                android:id="@+id/pets_no_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/washing_machine_apartment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pets_apartment"
+            android:layout_marginTop="20dp"
+            android:text="@string/washing_machine"
+            android:textSize="20dp" />
+
+        <RadioGroup
+            android:id="@+id/washing_machine_apartment_rg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/pets_apartment"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/washing_machine_yes_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/yes" />
+
+            <RadioButton
+                android:id="@+id/washing_machine_no_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no" />
+        </RadioGroup>
+
+        <!--<TextView-->
+        <!--android:id="@+id/occupation_tenant_profile_textView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/pets_tenant_activity"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:text="@string/occupation"-->
+        <!--android:textSize="20dp" />-->
+
+        <!--<Spinner-->
+        <!--android:id="@+id/occupation_tenant_profile_spinner"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/petsRadioGroup"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:entries="@array/occupation"/>-->
+
+
+        <!-- Picture Button -->
+
+        <!--<Button-->
+        <!--android:id="@+id/take_a_picture_tenant_profile_button"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/occupation_tenant_profile_textView"-->
+        <!--android:hint="@string/take_picture_tenant_profile"-->
+        <!--android:textColor="@android:color/black"-->
+        <!--android:textColorHint="@android:color/black"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:background="@color/colorAccent"-->
+        <!--android:textStyle="bold"-->
+        <!--/>-->
+
+        <!-- Save Button -->
+
+        <Button
+            android:id="@+id/create_apartment_profile_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/washing_machine_apartment"
+            android:background="@color/colorAccent"
+            android:hint="@string/done"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black"
+            android:textStyle="bold" />
+
+        <!--android:layout_below="@id/take_a_picture_tenant_profile_button"-->
+
+    </RelativeLayout>
+</ScrollView>

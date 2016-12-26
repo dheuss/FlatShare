@@ -2,8 +2,6 @@ package com.flatshare.presentation.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;

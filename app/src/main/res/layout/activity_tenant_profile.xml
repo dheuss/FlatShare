@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ScrollView01"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    tools:context="com.flatshare.presentation.ui.activities.TenantProfileActivity">
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="567dp"
-        android:orientation="vertical"
-        android:padding="@dimen/activity_horizontal_margin">
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/initial"

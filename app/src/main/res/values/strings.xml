@@ -9,7 +9,7 @@
     <string name="register">Register</string>
     <string name="male">male</string>
     <string name="female">female</string>
-    <string name="smoker">smoker</string>
+    <string name="smoker">Smoker:</string>
     <string name="age">age</string>
     <string name="hint_firstname">firstname</string>
     <string name="done">Done!</string>
@@ -20,8 +20,8 @@
     <string name="yes">yes</string>
     <string name="no">no</string>
     <string name="gender">Gender</string>
-    <string name="internet">Internet</string>
-    <string name="washing_machine">Washing Machine</string>
+    <string name="internet">Internet:</string>
+    <string name="washing_machine">Washing machine:</string>
     <string name="create_tenant_profile">Create Tenant Profle</string>
     <string name="create_apartment_profile_button">Create Apartment Profile</string>
     <string name="join_apartment_profile_button">Join Apartment</string>
@@ -32,6 +32,12 @@
     <string name="done_1_tenant_profile">Done!</string>
     <string name="pets">Pets:</string>
     <string name="occupation">Occupation:</string>
+    <string name="create_your_apartment_profile">Create Your Apartment Profile</string>
+    <string name="apartment_price">Price:</string>
+    <string name="apartment_area">Area:</string>
+    <string name="apartment_street">Street:</string>
+    <string name="apartment_house_nr">House Nr:</string>
+    <string name="apartment_zip_code">Zip Code:</string>
     <string name="short_bio">Short bio:</string>
     <string name="insert_your_bio">insert your short bio</string>
 
