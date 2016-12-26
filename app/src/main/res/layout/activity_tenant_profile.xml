@@ -185,7 +185,27 @@
             android:layout_marginTop="20dp"
             android:entries="@array/occupation"/>
 
+        <TextView
+            android:id="@+id/short_bio_tenant_profile_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/occupation_tenant_profile_textView"
+            android:layout_marginTop="20dp"
+            android:text="@string/short_bio"
+            android:textSize="20dp"/>
 
+        <EditText
+            android:id="@+id/short_bio_tenant_profile_editText"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/short_bio_tenant_profile_textView"
+            android:hint="@string/insert_your_bio"
+            android:textSize="10dp"
+            android:lines="5"
+            android:maxLines="5"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:scrollHorizontally="false"/>
 
         <!-- Picture Button -->
 
@@ -193,7 +213,7 @@
             android:id="@+id/take_a_picture_tenant_profile_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/occupation_tenant_profile_textView"
+            android:layout_below="@id/short_bio_tenant_profile_editText"
             android:hint="@string/take_picture_tenant_profile"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black"

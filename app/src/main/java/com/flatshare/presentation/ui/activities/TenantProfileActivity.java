@@ -24,6 +24,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
     private EditText firstNameEditText;
     private EditText ageEditText;
     private EditText emailText;
+    private EditText shortBioText;
 
     private RadioGroup genderRadioGroup;
     private RadioButton maleRadioButton, femaleRadioButton;
@@ -69,14 +70,11 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         String firstname = firstNameEditText.getText().toString();
         int age = Integer.parseInt(ageEditText.getText().toString());
         String email = emailText.getText().toString();
-
         boolean isSmoker = smokerRadioGroup.getCheckedRadioButtonId() == smokerYesRadioButton.getId();
-
         int gender = genderRadioGroup.getCheckedRadioButtonId() == maleRadioButton.getId() ? 0 : 1;
-
         boolean isPets = petsRadioGroup.getCheckedRadioButtonId() == petsYesRadioButton.getId();
-
         String occupation = occupationSpinner.getSelectedItem().toString();
+        String shortBio = shortBioText.getText().toString();
 
         TenantUserProfile tenantUserProfile = new TenantUserProfile();
         tenantUserProfile.setFirstName(firstname);
@@ -86,6 +84,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         tenantUserProfile.setGender(gender);
         tenantUserProfile.setPets(isPets);
         tenantUserProfile.setOccupation(occupation);
+        tenantUserProfile.setShortBio(shortBio);
 
         mPresenter.sendProfile(tenantUserProfile);
     }
@@ -94,6 +93,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         firstNameEditText = (EditText) findViewById(R.id.nameText_tenant_profile_editText);
         ageEditText = (EditText) findViewById(R.id.ageText_tenant_profile_editText);
         emailText = (EditText) findViewById(R.id.email_tenant_profile_editText);
+        shortBioText = (EditText) findViewById(R.id.short_bio_tenant_profile_editText);
 
         genderRadioGroup = (RadioGroup) findViewById(R.id.genderRadioGroup);
         maleRadioButton = (RadioButton) findViewById(R.id.maleRadioButton);

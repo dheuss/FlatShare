@@ -32,6 +32,8 @@
     <string name="done_1_tenant_profile">Done!</string>
     <string name="pets">Pets:</string>
     <string name="occupation">Occupation:</string>
+    <string name="short_bio">Short bio:</string>
+    <string name="insert_your_bio">insert your short bio</string>
 
     <string-array name="occupation">
         <item>Student</item>
