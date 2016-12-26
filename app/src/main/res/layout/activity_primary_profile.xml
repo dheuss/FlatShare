@@ -1,38 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_profile"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.flatshare.presentation.ui.activities.PrimaryProfileActivity">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_width="fill_parent"
+        android:layout_height="567dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:padding="@dimen/activity_horizontal_margin">
 
         <Button
-            android:id="@+id/tenant_profile_button"
-            android:layout_width="wrap_content"
+            android:id="@+id/create_tenant_profile_button"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/tenant_profile_button"
+            android:hint="@string/create_tenant_profile"
             android:textColor="@android:color/black"
-            android:textColorHint="@android:color/black" />
+            android:textColorHint="@android:color/black"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorAccent"
+            android:textStyle="bold"
+            />
 
         <Button
-            android:id="@+id/apartment_profile_button"
-            android:layout_width="wrap_content"
+            android:id="@+id/create_apartment_profile_button"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tenant_profile_button"
-            android:hint="@string/apartment_profile_button"
+            android:layout_below="@id/create_tenant_profile_button"
+            android:hint="@string/create_apartment_profile_button"
             android:textColor="@android:color/black"
-            android:textColorHint="@android:color/black" />
+            android:textColorHint="@android:color/black"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorAccent"
+            android:textStyle="bold"/>
+
 
     </LinearLayout>
-
-</RelativeLayout>
+</ScrollView>

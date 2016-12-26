@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.flatshare.R;
@@ -16,8 +19,8 @@ import com.flatshare.threading.MainThreadImpl;
 public class PrimaryProfileActivity extends AppCompatActivity implements PrimaryProfilePresenter.View {
 
 
-    private Button tenantProfileButton;
-    private Button apartmentProfileButton;
+    private Button createTenantProfileButton;
+    private Button createApartmentProfileButton;
 
     private PrimaryProfilePresenter mPresenter;
     private static final String TAG = "PrimaryProfileActivity";
@@ -36,8 +39,8 @@ public class PrimaryProfileActivity extends AppCompatActivity implements Primary
                 this
         );
 
-        tenantProfileButton.setOnClickListener(view -> sendProfile(0));
-        apartmentProfileButton.setOnClickListener(view -> sendProfile(1));
+        createTenantProfileButton.setOnClickListener(view -> sendProfile(0));
+        createApartmentProfileButton.setOnClickListener(view -> sendProfile(1));
 
     }
 
@@ -48,9 +51,8 @@ public class PrimaryProfileActivity extends AppCompatActivity implements Primary
     }
 
     private void bindView() {
-        tenantProfileButton = (Button) findViewById(R.id.tenant_profile_button);
-        apartmentProfileButton = (Button) findViewById(R.id.apartment_profile_button);
-
+        createTenantProfileButton = (Button) findViewById(R.id.create_tenant_profile_button);
+        createApartmentProfileButton = (Button) findViewById(R.id.create_apartment_profile_button);
     }
 
 

@@ -13,8 +13,8 @@
     <string name="age">age</string>
     <string name="hint_firstname">firstname</string>
     <string name="done">Done!</string>
-    <string name="tenant_profile_button">Tenant</string>
-    <string name="apartment_profile_button">Apartment</string>
+    <string name="tenant_profile_button">Create Tenant Profie</string>
+    <string name="apartment_profile_button">Create Apartment Profile</string>
     <string name="firstname_hint">Enter your name</string>
     <string name="age_hint">Enter your age</string>
     <string name="yes">yes</string>
@@ -22,4 +22,22 @@
     <string name="gender">Gender</string>
     <string name="internet">Internet</string>
     <string name="washing_machine">Washing Machine</string>
+    <string name="create_tenant_profile">Create Tenant Profle</string>
+    <string name="create_apartment_profile_button">Create Apartment Profile</string>
+    <string name="join_apartment_profile_button">Join Apartment</string>
+    <string name="create_your_profile">Create Your Profile</string>
+    <string name="surname_primary_profile_textview">Name</string>
+    <string name="create_your_tenant_profile">Create Your Tenant Profile</string>
+    <string name="take_picture_tenant_profile">Take a Picture of You</string>
+    <string name="done_1_tenant_profile">Done!</string>
+    <string name="pets">Pets:</string>
+    <string name="occupation">Occupation:</string>
+
+    <string-array name="occupation">
+        <item>Student</item>
+        <item>Emplyee</item>
+        <item>Lowly employed</item>
+        <item>Official</item>
+        <item>No Job</item>
+    </string-array>
 </resources>

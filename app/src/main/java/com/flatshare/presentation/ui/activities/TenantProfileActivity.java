@@ -2,12 +2,14 @@ package com.flatshare.presentation.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.flatshare.R;
@@ -20,6 +22,7 @@ public class TenantProfileActivity extends AppCompatActivity implements TenantPr
 
     private EditText firstNameEditText;
     private EditText ageEditText;
+    private EditText emailText;
 
     private RadioGroup genderRadioGroup;
     private RadioButton maleRadioButton, femaleRadioButton;
@@ -27,7 +30,13 @@ public class TenantProfileActivity extends AppCompatActivity implements TenantPr
     private RadioGroup smokerRadioGroup;
     private RadioButton smokerYesRadioButton, smokerNoRadioButton;
 
+    private RadioGroup petsRadioGroup;
+    private RadioButton petsYesRadioButton, petsNoRadioButton;
+
+    private Spinner occupationSpinner;
+
     private Button profileDoneButton;
+    private Button takeAPictureButton;
 
     private TenantProfilePresenter mPresenter;
     private static final String TAG = "TenantProfileAct";
@@ -41,7 +50,6 @@ public class TenantProfileActivity extends AppCompatActivity implements TenantPr
 
         bindView();
 
-        // create a presenter for this view
         mPresenter = new TenantProfilePresenterImpl(
                 MainThreadImpl.getInstance(),
                 this
@@ -49,43 +57,55 @@ public class TenantProfileActivity extends AppCompatActivity implements TenantPr
 
         profileDoneButton.setOnClickListener(view -> sendProfile());
 
-
     }
 
     private void sendProfile() {
 
         String firstname = firstNameEditText.getText().toString();
         int age = Integer.parseInt(ageEditText.getText().toString());
+        String email = emailText.getText().toString();
 
         boolean isSmoker = smokerRadioGroup.getCheckedRadioButtonId() == smokerYesRadioButton.getId();
 
         int gender = genderRadioGroup.getCheckedRadioButtonId() == maleRadioButton.getId() ? 0 : 1;
 
+        boolean isPets = petsRadioGroup.getCheckedRadioButtonId() == petsYesRadioButton.getId();
+
+        String occupation = occupationSpinner.getSelectedItem().toString();
+
         TenantUserProfile tenantUserProfile = new TenantUserProfile();
         tenantUserProfile.setFirstName(firstname);
         tenantUserProfile.setAge(age);
+        tenantUserProfile.setEmail(email);
         tenantUserProfile.setSmoker(isSmoker);
         tenantUserProfile.setGender(gender);
+        tenantUserProfile.setPets(isPets);
+        tenantUserProfile.setOccupation(occupation);
 
         mPresenter.sendProfile(tenantUserProfile);
     }
 
     private void bindView() {
-        //    @Bind(R.id.email_edittext)
-        firstNameEditText = (EditText) findViewById(R.id.first_name_edittext);
-        ageEditText = (EditText) findViewById(R.id.age_edittext);
+        firstNameEditText = (EditText) findViewById(R.id.nameText_tenant_profile_editText);
+        ageEditText = (EditText) findViewById(R.id.ageText_tenant_profile_editText);
+        emailText = (EditText) findViewById(R.id.email_tenant_profile_editText);
 
-        genderRadioGroup = (RadioGroup) findViewById(R.id.gender_radio_group);
-        maleRadioButton = (RadioButton) findViewById(R.id.male_radiobutton);
-        femaleRadioButton = (RadioButton) findViewById(R.id.female_radiobutton);
+        genderRadioGroup = (RadioGroup) findViewById(R.id.genderRadioGroup);
+        maleRadioButton = (RadioButton) findViewById(R.id.maleRadioButton);
+        femaleRadioButton = (RadioButton) findViewById(R.id.femaleRadioButton);
 
-        smokerRadioGroup = (RadioGroup) findViewById(R.id.smoker_radio_group);
-        smokerYesRadioButton = (RadioButton) findViewById(R.id.smoker_yes);
-        smokerNoRadioButton = (RadioButton) findViewById(R.id.smoker_no);
+        smokerRadioGroup = (RadioGroup) findViewById(R.id.smokerRadioGroup);
+        smokerYesRadioButton = (RadioButton) findViewById(R.id.yesSmokerRadioButton);
+        smokerNoRadioButton = (RadioButton) findViewById(R.id.noSmokerRadioButton);
 
-        profileDoneButton = (Button) findViewById(R.id.tenant_profile_done_button);
+        petsRadioGroup = (RadioGroup) findViewById(R.id.petsRadioGroup);
+        petsYesRadioButton = (RadioButton) findViewById(R.id.yesPetsRadioButton);
+        petsNoRadioButton = (RadioButton) findViewById(R.id.noPetsRadioButton);
 
+        occupationSpinner = (Spinner) findViewById(R.id.occupation_tenant_profile_spinner);
 
+        takeAPictureButton = (Button) findViewById(R.id.take_a_picture_tenant_profile_button);
+        profileDoneButton = (Button) findViewById(R.id.done_1_tenant_profile);
     }
 
     @Override

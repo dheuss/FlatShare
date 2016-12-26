@@ -21,6 +21,9 @@ public class TenantUserProfile extends UserProfile {
     @PropertyName("first_name")
     public String firstName;
 
+    @PropertyName("email")
+    public String email;
+
     @PropertyName("age")
     public int age;
 
@@ -197,5 +200,15 @@ public class TenantUserProfile extends UserProfile {
     @Exclude
     public void setTenantFilterSettings(TenantFilterSettings tenantFilterSettings) {
         this.tenantFilterSettings = tenantFilterSettings;
+    }
+
+    @Exclude
+    public String getEmail() {
+        return email;
+    }
+
+    @Exclude
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
