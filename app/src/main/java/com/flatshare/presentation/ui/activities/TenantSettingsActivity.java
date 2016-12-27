@@ -116,9 +116,30 @@ public class TenantSettingsActivity extends AbstractActivity implements TenantSe
         int priceFrom = Integer.parseInt(minPrice.getText().toString());
         int priceTo = Integer.parseInt(maxPrice.getText().toString());
 
+        //TODO Area
+
+        int isInternet = internetRadioGroup.getCheckedRadioButtonId() == yesInternetRadioButton.getId() ? 0 : 1;
+        int isSomkerApartment = smokingApartmentRadioGroup.getCheckedRadioButtonId() == yesSmokingApartmentRadioButton.getId() ? 0 : 1;
+        int isPetAllowed = petsRadioGroup.getCheckedRadioButtonId() == yesPetsRadioButton.getId() ? 0 : 1;
+        int isPurposeApartment = purposeCommunityRadioGroup.getCheckedRadioButtonId() == yesPetsRadioButton.getId() ? 0 : 1;
+        int isWashingMashine = washingMashineRadioGroup.getCheckedRadioButtonId() == yesWashingMashineRadioButton.getId() ? 0 : 1;
+        int isDryer = dryerRadioGroup.getCheckedRadioButtonId() == yesDryerRadioButton.getId() ? 0 : 1;
+        int isBalcony = balconyRadioGroup.getCheckedRadioButtonId() == yesBalconyRadioButton.getId() ? 0 : 1;
+        int isBathtube = bathTubeRadioGroup.getCheckedRadioButtonId() == yesBathTubeRadioButton.getId() ? 0 : 1;
+        int isTVCable = cabelTVRadioGroup.getCheckedRadioButtonId() == yesCabelTVRadioButton.getId() ? 0 : 1;
+
         TenantFilterSettings tenantFilterSettings = new TenantFilterSettings();
         tenantFilterSettings.setPriceFrom(priceFrom);
         tenantFilterSettings.setPriceTo(priceTo);
+        tenantFilterSettings.setInternet(isInternet);
+        tenantFilterSettings.setSmokerApartment(isSomkerApartment);
+        tenantFilterSettings.setPetsAllowed(isPetAllowed);
+        tenantFilterSettings.setPurposeApartment(isPurposeApartment);
+        tenantFilterSettings.setWashingMachine(isWashingMashine);
+        tenantFilterSettings.setDryer(isDryer);
+        tenantFilterSettings.setBalcony(isBalcony);
+        tenantFilterSettings.setBathtub(isBathtube);
+        tenantFilterSettings.setTvCable(isTVCable);
 
         mPresenter.sendFilterSettings(tenantFilterSettings);
     }
