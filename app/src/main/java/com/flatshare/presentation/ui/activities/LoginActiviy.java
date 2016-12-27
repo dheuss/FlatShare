@@ -25,16 +25,9 @@ import dmax.dialog.SpotsDialog;
 
 public class LoginActiviy extends AppCompatActivity implements LoginPresenter.View {
 
-    //    @Bind(R.id.email_edittext)
     private EditText emailEditText;
-
-    //    @Bind(R.id.password_edittext)
     private EditText passwordEditText;
-
-    //    @Bind(R.id.login_button)
     private Button loginButton;
-
-    //    @Bind(R.id.register_button)
     private Button registerButton;
 
     //Google
@@ -60,8 +53,6 @@ public class LoginActiviy extends AppCompatActivity implements LoginPresenter.Vi
         bindView();
         facebookCallbackManager = CallbackManager.Factory.create();
 
-//        ButterKnife.bind(this);
-
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -74,6 +65,9 @@ public class LoginActiviy extends AppCompatActivity implements LoginPresenter.Vi
                 this
         );
 
+        //TODO delete authentication
+        emailEditText.setText("david.heuss@web.de");
+        passwordEditText.setText("123456");
 
         loginButton.setOnClickListener(view -> login());
 
@@ -87,22 +81,12 @@ public class LoginActiviy extends AppCompatActivity implements LoginPresenter.Vi
     }
 
     private void bindView() {
-//    @Bind(R.id.email_edittext)
         emailEditText = (EditText) findViewById(R.id.email_edittext);
-
-//    @Bind(R.id.password_edittext)
         passwordEditText = (EditText) findViewById(R.id.password_edittext);
-
-//    @Bind(R.id.login_button)
         loginButton = (Button) findViewById(R.id.login_button);
-
-//    @Bind(R.id.register_button)
         registerButton = (Button) findViewById(R.id.register_button);
-
         googleSignInButton = (SignInButton) findViewById(R.id.google_sign_in_button);
         facebookSignInButton = (LoginButton) findViewById(R.id.facebook_sign_in_button);
-
-
         progressDialog = new SpotsDialog(this, R.style.Custom);
     }
 
@@ -151,6 +135,5 @@ public class LoginActiviy extends AppCompatActivity implements LoginPresenter.Vi
         Log.d("LoginActivity", "success! changed to PrimaryProfileActivity!");
         Intent intent = new Intent(this, PrimaryProfileActivity.class);
         startActivity(intent);
-
     }
 }

@@ -70,5 +70,8 @@ dependencies {
 
     // loader
     compile 'com.github.d-max:spots-dialog:0.4@aar'
+
+    //range bar
+    compile 'com.appyvet:materialrangebar:1.3'
 }
 apply plugin: 'com.google.gms.google-services'

@@ -10,113 +10,429 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.flatshare.presentation.ui.activities.TenantSettingsActivity">
 
-    <!--
-    "tenant_filter_settings": {
-      "tenant_ID (value)": {
-        "city": {
-          "district": "string",
-          "zip_code": "int",
-          "other_stuff": ""
-        },
-        "internet": "0/1/2",
-        "price_range": "int in euro",
-        "area": "int",
-        "purpose_apartment (zweck WG)": "0/1",
-        "smoking_apartment": "0/1",
-        "washing_machine": "0/1",
-        "dryer": "0/1",
-        "balcony": "0/1",
-        "bathtub??": "0/1",
-        "TV_cable": "0/1",
-        "pets": "0/1"
-      },
-      "ID2": {},
-      "ID3": {}
-    },
-    -->
-
-
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/internet_textview"
+            android:id="@+id/initial_tenant_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/create_your_tenant_setting"
+            android:textAlignment="center"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/price_range_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/internet" />
+            android:text="@string/price_range"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@+id/initial_tenant_setting"/>
+
+        <TextView
+            android:id="@+id/price_range_textview_minPRICE"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/price_range_textview"
+            android:layout_marginLeft="20dp"
+            android:text=""
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@id/initial_tenant_setting"/>
+
+        <TextView
+            android:id="@+id/price_range_textview_TO"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/price_range_textview_minPRICE"
+            android:layout_marginLeft="30dp"
+            android:text="to"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@id/initial_tenant_setting"/>
+
+        <TextView
+            android:id="@+id/price_range_textview_maxPRICE"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/price_range_textview_TO"
+            android:layout_marginLeft="30dp"
+            android:text=""
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@id/initial_tenant_setting"/>
+
+        <com.appyvet.rangebar.RangeBar
+            xmlns:custom="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/rangebar_price_range"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            custom:tickStart="300"
+            custom:tickInterval="50"
+            custom:tickEnd="2500"
+            custom:selectorSize="4dp"
+            android:layout_below="@+id/price_range_textview"
+            />
+
+        <TextView
+            android:id="@+id/size_range_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/size_range"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@+id/rangebar_price_range"/>
+
+        <TextView
+            android:id="@+id/size_range_textview_minSIZE"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/size_range_textview"
+            android:layout_marginLeft="20dp"
+            android:text=""
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@id/rangebar_price_range"/>
+
+        <TextView
+            android:id="@+id/size_range_textview_TO"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/size_range_textview_minSIZE"
+            android:layout_marginLeft="30dp"
+            android:text="to"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@id/rangebar_price_range"/>
+
+        <TextView
+            android:id="@+id/size_range_textview_maxSIZE"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/size_range_textview_TO"
+            android:layout_marginLeft="30dp"
+            android:text=""
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@id/rangebar_price_range"/>
+
+        <com.appyvet.rangebar.RangeBar
+            xmlns:custom="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/rangebar_size_range"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            custom:tickStart="15"
+            custom:tickInterval="5"
+            custom:tickEnd="60"
+            android:layout_below="@+id/size_range_textview"
+            />
+
+        <TextView
+            android:id="@+id/area_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/area"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@+id/rangebar_size_range"/>
+
+        <TextView
+            android:id="@+id/purpose_community_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/purpose_community"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@+id/area_textview"/>
 
         <RadioGroup
-            android:id="@+id/internet_radiogroup"
+            android:id="@+id/purposeCommunityRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/internet_textview"
-            android:checkedButton="@+id/internet"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/area_textview"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/necessaryPCRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/internet_yes"
-                android:text="@string/yes" />
+                android:text="@string/necessary" />
 
             <RadioButton
+                android:id="@+id/notNecessaryPCRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/internet_no"
-                android:text="@string/no" />
+                android:text="@string/notNecessary" />
+        </RadioGroup>
 
+        <TextView
+            android:id="@+id/smoking_apartment_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/smoking_apartment"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@id/purpose_community_textview"/>
+
+        <RadioGroup
+            android:id="@+id/smoker_apartment_RadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/purposeCommunityRadioGroup"
+            android:layout_marginTop="7dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/necessarySARadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/necessary" />
+
+            <RadioButton
+                android:id="@+id/notNecessarySARadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notNecessary" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/balcony_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/balcony"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@id/smoking_apartment_textview"/>
+
+        <RadioGroup
+            android:id="@+id/balconyRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/smoker_apartment_RadioGroup"
+            android:layout_marginTop="7dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/necessaryBRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/necessary" />
+
+            <RadioButton
+                android:id="@+id/notNecessaryBRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notNecessary"/>
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/internet_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/internet"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@id/balcony_textview"/>
+
+        <RadioGroup
+            android:id="@+id/internetRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/balconyRadioGroup"
+            android:layout_marginTop="7dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/internetYESRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/necessary" />
+
+            <RadioButton
+                android:id="@+id/internetNORadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notNecessary" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/cabel_tv_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cabeltv"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@id/internet_textview"/>
+
+        <RadioGroup
+            android:id="@+id/cabelTVRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/internetRadioGroup"
+            android:layout_marginTop="7dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/cabelTVYESRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/necessary" />
+
+            <RadioButton
+                android:id="@+id/cableTVNORadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notNecessary" />
         </RadioGroup>
 
         <TextView
             android:id="@+id/washing_machine_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/internet_textview"
-            android:text="@string/washing_machine" />
+            android:text="@string/washing_machine"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@id/cabel_tv_textview"/>
 
         <RadioGroup
-            android:id="@+id/washing_machine_radiogroup"
+            android:id="@+id/washingMashineRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/internet_textview"
-            android:checkedButton="@+id/washing_machine"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/cabelTVRadioGroup"
+            android:layout_marginTop="7dp"
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/washingMashineYESRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/washing_machine_yes"
-                android:text="@string/yes" />
+                android:text="@string/necessary" />
 
             <RadioButton
+                android:id="@+id/washingMashineNORadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/washing_machine_no"
-                android:text="@string/no" />
-
+                android:text="@string/notNecessary" />
         </RadioGroup>
 
-        <!--
-        occupation
-        short_bio
-        pictures
-        video
-        hobbies
-        pets
-        duration of stay (on top)
-        -->
-
-
-        <Button
-            android:id="@+id/tenant_settings_done_button"
+        <TextView
+            android:id="@+id/dryer_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/done"
-            android:layout_below="@id/washing_machine_radiogroup" />
+            android:text="@string/dryer"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@id/washing_machine_textview"/>
 
-    </LinearLayout>
+        <RadioGroup
+            android:id="@+id/dryerRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/washing_machine_textview"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/dryerYESRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/necessary" />
+
+            <RadioButton
+                android:id="@+id/dryerNORadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notNecessary" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/bathtube_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bathtube"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@id/dryer_textview"/>
+
+        <RadioGroup
+            android:id="@+id/bathTubeRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/dryer_textview"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/bathTubeYESRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/necessary" />
+
+            <RadioButton
+                android:id="@+id/bathTubeNORadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notNecessary" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/pets_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pets"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:layout_below="@id/bathtube_textview"/>
+
+        <RadioGroup
+            android:id="@+id/petsRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/bathtube_textview"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/petsYESRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/necessary" />
+
+            <RadioButton
+                android:id="@+id/petsNORadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notNecessary" />
+        </RadioGroup>
+
+        <!-- Save Button -->
+
+        <Button
+            android:id="@+id/done_2_tenant_profile"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/done_1_tenant_profile"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorAccent"
+            android:textStyle="bold"
+            android:layout_below="@id/pets_textview"/>
+
+    </RelativeLayout>
 
 </ScrollView>

@@ -40,6 +40,19 @@
     <string name="apartment_zip_code">Zip Code:</string>
     <string name="short_bio">Short bio:</string>
     <string name="insert_your_bio">insert your short bio</string>
+    <string name="durationOfStay">Duration of Stay:</string>
+    <string name="create_your_tenant_setting">Create Your Tenant Settings</string>
+    <string name="price_range">Pricing Range:</string>
+    <string name="size_range">Size Range:</string>
+    <string name="area">Area:</string>
+    <string name="purpose_community">Purpose Community:</string>
+    <string name="smoking_apartment">Somoking Apartment:</string>
+    <string name="balcony">Balcony:</string>
+    <string name="cabeltv">Cabel TV:</string>
+    <string name="dryer">Dryer:</string>
+    <string name="bathtube">Bathtube:</string>
+    <string name="necessary">necessary</string>
+    <string name="notNecessary">not necessary</string>
 
     <string-array name="occupation">
         <item>Student</item>
@@ -47,5 +60,13 @@
         <item>Lowly employed</item>
         <item>Official</item>
         <item>No Job</item>
+    </string-array>
+    <string-array name="durationOfStayArray">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
     </string-array>
 </resources>

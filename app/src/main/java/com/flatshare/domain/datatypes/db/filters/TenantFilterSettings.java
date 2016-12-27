@@ -40,17 +40,17 @@ public class TenantFilterSettings extends FilterSettings {
     @PropertyName("washing_machine")
     public int washingMachine;
 
-//    @PropertyName("dryer")
-//    public int dryer;
+    @PropertyName("dryer")
+    public int dryer;
 
-//    @PropertyName("balcony")
-//    public int balcony;
+    @PropertyName("balcony")
+    public int balcony;
 
-//    @PropertyName("bathtub")
-//    public int bathtub;
+    @PropertyName("bathtub")
+    public int bathtub;
 
-//    @PropertyName("tv_cable")
-//    public int tvCable;
+    @PropertyName("tv_cable")
+    public int tvCable;
 
     public TenantFilterSettings() {
     }
@@ -133,6 +133,45 @@ public class TenantFilterSettings extends FilterSettings {
     @Exclude
     public void setPetsAllowed(int petsAllowed) {
         this.petsAllowed = petsAllowed;
+    }
+
+    @Exclude
+    public int getDryer() {
+        return dryer;
+    }
+
+    @Exclude
+    public void setDryer(int dryer) {
+        this.dryer = dryer;
+    }
+
+    @Exclude
+    public int getBathtub() {
+        return bathtub;
+    }
+
+    @Exclude
+    public void setBathtub(int bathtub) {
+        this.bathtub = bathtub;
+    }
+
+    @Exclude
+    public int getBalcony() {
+        return balcony;
+    }
+
+    public void setBalcony(int balcony) {
+        this.balcony = balcony;
+    }
+
+    @Exclude
+    public int getTvCable() {
+        return tvCable;
+    }
+
+    @Exclude
+    public void setTvCable(int tvCable) {
+        this.tvCable = tvCable;
     }
 
     @Exclude

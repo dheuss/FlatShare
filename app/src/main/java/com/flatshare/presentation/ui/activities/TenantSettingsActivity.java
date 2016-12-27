@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appyvet.rangebar.RangeBar;
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
 import com.flatshare.presentation.presenters.TenantSettingsPresenter;
@@ -19,16 +21,44 @@ import com.flatshare.threading.MainThreadImpl;
 
 import dmax.dialog.SpotsDialog;
 
+import static com.appyvet.rangebar.R.attr.rangeBar;
+
 public class TenantSettingsActivity extends AbstractActivity implements TenantSettingsPresenter.View {
 
-    private TextView internetTextView;
+    private TextView minPrice;
+    private TextView maxPrice;
+    private RangeBar priceRange;
+
+    private TextView minSize;
+    private TextView maxSize;
+    private RangeBar sizeRange;
+
+    private RadioGroup purposeCommunityRadioGroup;
+    private RadioButton yesPurposeCommunityRadioButton, noPurposeCommunityRadioButton;
+
+    private RadioGroup smokingApartmentRadioGroup;
+    private RadioButton yesSmokingApartmentRadioButton, noSmokingApartmentRadioButton;
+
+    private RadioGroup balconyRadioGroup;
+    private RadioButton yesBalconyRadioButton, noBalconyRadioButton;
 
     private RadioGroup internetRadioGroup;
-    private RadioButton internetYesRadioButton, internetNoRadioButton;
+    private RadioButton yesInternetRadioButton, noInternetRadioButton;
 
-    private TextView wMachineTextView;
-    private RadioGroup wMachineRadioGroup;
-    private RadioButton wMachineYesRadioButton, wMachineNoRadioButton;
+    private RadioGroup cabelTVRadioGroup;
+    private RadioButton yesCabelTVRadioButton, noCabelTVRadioButton;
+
+    private RadioGroup washingMashineRadioGroup;
+    private RadioButton yesWashingMashineRadioButton, noWashingMashineRadioButton;
+
+    private RadioGroup dryerRadioGroup;
+    private RadioButton yesDryerRadioButton, noDryerRadioButton;
+
+    private RadioGroup bathTubeRadioGroup;
+    private RadioButton yesBathTubeRadioButton, noBathTubeButton;
+
+    private RadioGroup petsRadioGroup;
+    private RadioButton yesPetsRadioButton, noPetsRadioButton;
 
     private Button profileDoneButton;
 
@@ -39,16 +69,36 @@ public class TenantSettingsActivity extends AbstractActivity implements TenantSe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
 
         bindView();
 
-        // create a presenter for this view
         mPresenter = new TenantSettingsPresenterImpl(
                 MainThreadImpl.getInstance(),
                 this
         );
+
+        priceRange.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
+            @Override
+            public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex,
+                                              int rightPinIndex,
+                                              String leftPinValue, String rightPinValue) {
+                minPrice.setText("" + leftPinIndex);
+                maxPrice.setText("" + rightPinIndex);
+            }
+
+        });
+
+        sizeRange.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
+            @Override
+            public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex,
+                                              int rightPinIndex,
+                                              String leftPinValue, String rightPinValue) {
+                minSize.setText("" + leftPinIndex);
+                maxSize.setText("" + rightPinIndex);
+            }
+
+        });
 
 
         profileDoneButton.setOnClickListener(view -> sendFilterSettings());
@@ -63,29 +113,66 @@ public class TenantSettingsActivity extends AbstractActivity implements TenantSe
 
     private void sendFilterSettings() {
 
-        //TODO: read from view components, fill the settings object
+        int priceFrom = Integer.parseInt(minPrice.getText().toString());
+        int priceTo = Integer.parseInt(maxPrice.getText().toString());
 
         TenantFilterSettings tenantFilterSettings = new TenantFilterSettings();
+        tenantFilterSettings.setPriceFrom(priceFrom);
+        tenantFilterSettings.setPriceTo(priceTo);
+
         mPresenter.sendFilterSettings(tenantFilterSettings);
     }
 
     private void bindView() {
-        internetTextView = (TextView) findViewById(R.id.internet_textview);
+        minPrice = (TextView) findViewById(R.id.price_range_textview_minPRICE);
+        maxPrice = (TextView) findViewById(R.id.price_range_textview_maxPRICE);
+        priceRange = (RangeBar) findViewById(R.id.rangebar_price_range);
 
-        internetRadioGroup = (RadioGroup) findViewById(R.id.internet_radiogroup);
+        minSize = (TextView) findViewById(R.id.size_range_textview_minSIZE);
+        maxSize = (TextView) findViewById(R.id.size_range_textview_maxSIZE);
+        sizeRange = (RangeBar) findViewById(R.id.rangebar_size_range);
 
-        internetYesRadioButton = (RadioButton) findViewById(R.id.internet_yes);
-        internetNoRadioButton = (RadioButton) findViewById(R.id.internet_no);
+        //TODO AREA
 
-        wMachineTextView = (TextView) findViewById(R.id.washing_machine_textview);
-        wMachineRadioGroup = (RadioGroup) findViewById(R.id.washing_machine_radiogroup);
-        wMachineYesRadioButton = (RadioButton) findViewById(R.id.washing_machine_yes);
-        wMachineNoRadioButton = (RadioButton) findViewById(R.id.washing_machine_no);
+        purposeCommunityRadioGroup = (RadioGroup) findViewById(R.id.purposeCommunityRadioGroup);
+        yesPurposeCommunityRadioButton = (RadioButton) findViewById(R.id.necessaryPCRadioButton);
+        noPurposeCommunityRadioButton = (RadioButton) findViewById(R.id.notNecessaryPCRadioButton);
 
-        profileDoneButton = (Button) findViewById(R.id.tenant_settings_done_button);
+        smokingApartmentRadioGroup = (RadioGroup) findViewById(R.id.smokerRadioGroup);
+        yesSmokingApartmentRadioButton = (RadioButton) findViewById(R.id.necessarySARadioButton);
+        noSmokingApartmentRadioButton = (RadioButton) findViewById(R.id.notNecessarySARadioButton);
+
+        balconyRadioGroup = (RadioGroup) findViewById(R.id.balconyRadioGroup);
+        yesBalconyRadioButton = (RadioButton) findViewById(R.id.necessaryBRadioButton);
+        noBalconyRadioButton = (RadioButton) findViewById(R.id.notNecessaryBRadioButton);
+
+        internetRadioGroup = (RadioGroup) findViewById(R.id.internetRadioGroup);
+        yesInternetRadioButton = (RadioButton) findViewById(R.id.internetYESRadioButton);
+        noInternetRadioButton = (RadioButton) findViewById(R.id.internetNORadioButton);
+
+        cabelTVRadioGroup = (RadioGroup) findViewById(R.id.cabelTVRadioGroup);
+        yesCabelTVRadioButton = (RadioButton) findViewById(R.id.cabelTVYESRadioButton);
+        noCabelTVRadioButton = (RadioButton) findViewById(R.id.cableTVNORadioButton);
+
+        washingMashineRadioGroup = (RadioGroup) findViewById(R.id.washingMashineRadioGroup);
+        yesWashingMashineRadioButton = (RadioButton) findViewById(R.id.washingMashineYESRadioButton);
+        noWashingMashineRadioButton = (RadioButton) findViewById(R.id.washingMashineNORadioButton);
+
+        dryerRadioGroup = (RadioGroup) findViewById(R.id.dryerRadioGroup);
+        yesDryerRadioButton = (RadioButton) findViewById(R.id.dryerYESRadioButton);
+        noDryerRadioButton = (RadioButton) findViewById(R.id.dryerNORadioButton);
+
+        bathTubeRadioGroup = (RadioGroup) findViewById(R.id.bathTubeRadioGroup);
+        yesBathTubeRadioButton = (RadioButton) findViewById(R.id.bathTubeYESRadioButton);
+        noBathTubeButton = (RadioButton) findViewById(R.id.bathTubeNORadioButton);
+
+        petsRadioGroup = (RadioGroup) findViewById(R.id.petsRadioGroup);
+        yesPetsRadioButton = (RadioButton) findViewById(R.id.petsYESRadioButton);
+        noPetsRadioButton = (RadioButton) findViewById(R.id.petsNORadioButton);
+
+        profileDoneButton = (Button) findViewById(R.id.done_2_tenant_profile);
 
         progressDialog = new SpotsDialog(this, R.style.Custom);
-
     }
 
     @Override

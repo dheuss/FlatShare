@@ -34,9 +34,13 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
     private RadioButton petsYesRadioButton, petsNoRadioButton;
 
     private Spinner occupationSpinner;
+    private Spinner durationSpinner;
 
     private Button profileDoneButton;
+    //TODO takeAPicture
     private Button takeAPictureButton;
+
+    //TODO Hobbies
 
     private TenantProfilePresenter mPresenter;
     private static final String TAG = "TenantProfileAct";
@@ -73,6 +77,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         boolean isPets = petsRadioGroup.getCheckedRadioButtonId() == petsYesRadioButton.getId();
         String occupation = occupationSpinner.getSelectedItem().toString();
         String shortBio = shortBioText.getText().toString();
+        int duration = Integer.parseInt(durationSpinner.getSelectedItem().toString());
 
         TenantUserProfile tenantUserProfile = new TenantUserProfile();
         tenantUserProfile.setFirstName(firstname);
@@ -83,6 +88,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         tenantUserProfile.setPets(isPets);
         tenantUserProfile.setOccupation(occupation);
         tenantUserProfile.setShortBio(shortBio);
+        tenantUserProfile.setDurationOfStay(duration);
 
         mPresenter.sendProfile(tenantUserProfile);
     }
@@ -106,6 +112,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         petsNoRadioButton = (RadioButton) findViewById(R.id.noPetsRadioButton);
 
         occupationSpinner = (Spinner) findViewById(R.id.occupation_tenant_profile_spinner);
+        durationSpinner = (Spinner) findViewById(R.id.duration_of_stay_tenant_profile_spinner);
 
         takeAPictureButton = (Button) findViewById(R.id.take_a_picture_tenant_profile_button);
         profileDoneButton = (Button) findViewById(R.id.done_1_tenant_profile);
