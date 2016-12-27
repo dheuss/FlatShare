@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.flatshare.R;
+import com.flatshare.domain.datatypes.db.common.ApartmentLocation;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
 import com.flatshare.presentation.presenters.ApartmentProfilePresenter;
 import com.flatshare.presentation.presenters.impl.ApartmentProfilePresenterImpl;
@@ -15,9 +19,26 @@ import com.flatshare.threading.MainThreadImpl;
 
 public class ApartmentProfileActivity extends AbstractActivity implements ApartmentProfilePresenter.View {
 
+    private EditText apartmentPriceEditText;
+    private EditText apartmentAreaEditText;
+    private EditText apartmentStreetEditText;
+    private EditText apartmentHouseNrEditText;
+    private EditText apartmentZipCodeEditText;
 
-    private Button profileDoneButton;
-    private Button takeAPictureButton;
+    private RadioGroup internetRadioGroup;
+    private RadioButton internetYesRB, internetNoRB;
+
+    private RadioGroup smokerRadioGroup;
+    private RadioButton smokerYesRB, smokerNoRB;
+
+    private RadioGroup petsRadioGroup;
+    private RadioButton petsYesRB, petsNoRB;
+
+    private RadioGroup washingMachineRadioGroup;
+    private RadioButton washingMachineYesRB, washingMachineNoRB;
+
+    //    private Button profileDoneButton;
+    private Button createApartmentButton;
 
     private ApartmentProfilePresenter mPresenter;
     private static final String TAG = "ApartmentProfileAct";
@@ -34,7 +55,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
                 this
         );
 
-//        profileDoneButton.setOnClickListener(view -> sendProfile());
+        createApartmentButton.setOnClickListener(view -> sendProfile());
 
     }
 
@@ -45,51 +66,62 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
     private void sendProfile() {
 
-//        String firstname = firstNameEditText.getText().toString();
-//        int age = Integer.parseInt(ageEditText.getText().toString());
-//        String email = emailText.getText().toString();
-//
-//        boolean isSmoker = smokerRadioGroup.getCheckedRadioButtonId() == smokerYesRadioButton.getId();
-//
-//        int gender = genderRadioGroup.getCheckedRadioButtonId() == maleRadioButton.getId() ? 0 : 1;
-//
-//        boolean isPets = petsRadioGroup.getCheckedRadioButtonId() == petsYesRadioButton.getId();
-//
-//        String occupation = occupationSpinner.getSelectedItem().toString();
-//
+        int price = Integer.parseInt(apartmentPriceEditText.getText().toString());
+        int area = Integer.parseInt(apartmentAreaEditText.getText().toString());
+
+        String street = apartmentStreetEditText.getText().toString();
+        String houseNr = apartmentHouseNrEditText.getText().toString();
+        int zipCode = Integer.parseInt(apartmentZipCodeEditText.getText().toString());
+
+        boolean hasInternet = internetRadioGroup.getCheckedRadioButtonId() == internetYesRB.getId();
+        boolean isSmoker = smokerRadioGroup.getCheckedRadioButtonId() == smokerYesRB.getId();
+        boolean hasPets = petsRadioGroup.getCheckedRadioButtonId() == petsYesRB.getId();
+        boolean hasWashingMachine = washingMachineRadioGroup.getCheckedRadioButtonId() == washingMachineYesRB.getId();
+
+        ApartmentLocation apartmentLocation = new ApartmentLocation();
+
+        apartmentLocation.setStreet(street);
+        apartmentLocation.setHouseNr(houseNr);
+        apartmentLocation.setZipCode(zipCode);
+
         ApartmentUserProfile apartmentUserProfile = new ApartmentUserProfile();
-//        tenantUserProfile.setFirstName(firstname);
-//        tenantUserProfile.setAge(age);
-//        tenantUserProfile.setEmail(email);
-//        tenantUserProfile.setSmoker(isSmoker);
-//        tenantUserProfile.setGender(gender);
-//        tenantUserProfile.setPets(isPets);
-//        tenantUserProfile.setOccupation(occupation);
+        apartmentUserProfile.setPrice(price);
+        apartmentUserProfile.setArea(area);
+        apartmentUserProfile.setInternet(hasInternet);
+        apartmentUserProfile.setSmokerApartment(isSmoker);
+        apartmentUserProfile.setPets(hasPets);
+        apartmentUserProfile.setWashingMachine(hasWashingMachine);
 
         mPresenter.sendProfile(apartmentUserProfile);
     }
 
     private void bindView() {
-//        firstNameEditText = (EditText) findViewById(R.id.nameText_tenant_profile_editText);
-//        ageEditText = (EditText) findViewById(R.id.ageText_tenant_profile_editText);
-//        emailText = (EditText) findViewById(R.id.email_tenant_profile_editText);
-//
-//        genderRadioGroup = (RadioGroup) findViewById(R.id.genderRadioGroup);
-//        maleRadioButton = (RadioButton) findViewById(R.id.maleRadioButton);
-//        femaleRadioButton = (RadioButton) findViewById(R.id.femaleRadioButton);
-//
-//        smokerRadioGroup = (RadioGroup) findViewById(R.id.smokerRadioGroup);
-//        smokerYesRadioButton = (RadioButton) findViewById(R.id.yesSmokerRadioButton);
-//        smokerNoRadioButton = (RadioButton) findViewById(R.id.noSmokerRadioButton);
-//
-//        petsRadioGroup = (RadioGroup) findViewById(R.id.petsRadioGroup);
-//        petsYesRadioButton = (RadioButton) findViewById(R.id.yesPetsRadioButton);
-//        petsNoRadioButton = (RadioButton) findViewById(R.id.noPetsRadioButton);
-//
-//        occupationSpinner = (Spinner) findViewById(R.id.occupation_tenant_profile_spinner);
 
-//        takeAPictureButton = (Button) findViewById(R.id.take_a_picture_tenant_profile_button);
-//        profileDoneButton = (Button) findViewById(R.id.done_1_tenant_profile);
+
+        apartmentPriceEditText = (EditText) findViewById(R.id.apartment_price_edit_text);
+        apartmentAreaEditText = (EditText) findViewById(R.id.apartment_area_editText);
+        apartmentStreetEditText = (EditText) findViewById(R.id.apartment_street_edit_text);
+        apartmentHouseNrEditText = (EditText) findViewById(R.id.apartment_house_nr_edit_text);
+        apartmentZipCodeEditText = (EditText) findViewById(R.id.apartment_zip_code_edit_text);
+
+        internetRadioGroup = (RadioGroup) findViewById(R.id.internet_apartment_rg);
+        internetYesRB = (RadioButton) findViewById(R.id.internet_yes_rb);
+        internetNoRB = (RadioButton) findViewById(R.id.internet_no_rb);
+
+        smokerRadioGroup = (RadioGroup) findViewById(R.id.smoker_apartment_rg);
+        smokerYesRB = (RadioButton) findViewById(R.id.smoker_yes_rb);
+        smokerNoRB = (RadioButton) findViewById(R.id.smoker_no_rb);
+
+        petsRadioGroup = (RadioGroup) findViewById(R.id.pets_apartment_rg);
+        petsYesRB = (RadioButton) findViewById(R.id.pets_yes_rb);
+        petsNoRB = (RadioButton) findViewById(R.id.pets_no_rb);
+
+        washingMachineRadioGroup = (RadioGroup) findViewById(R.id.washing_machine_apartment_rg);
+        washingMachineYesRB = (RadioButton) findViewById(R.id.washing_machine_yes_rb);
+        washingMachineNoRB = (RadioButton) findViewById(R.id.washing_machine_no_rb);
+
+        createApartmentButton = (Button) findViewById(R.id.create_apartment_profile_button);
+
     }
 
     @Override

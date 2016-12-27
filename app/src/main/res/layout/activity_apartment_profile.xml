@@ -23,7 +23,7 @@
         <!--public List<String> languages;-->
 
         <TextView
-            android:id="@+id/initial"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -35,7 +35,7 @@
             android:id="@+id/apartment_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/initial"
+            android:layout_below="@+id/title"
             android:layout_marginTop="20dp"
             android:text="@string/apartment_price"
             android:textSize="20dp" />
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/initial"
+            android:layout_below="@+id/title"
             android:layout_marginTop="10dp"
             android:width="200dp"
             android:inputType="numberDecimal" />
@@ -247,29 +247,10 @@
                 android:text="@string/no" />
         </RadioGroup>
 
-        <!--<TextView-->
-        <!--android:id="@+id/occupation_tenant_profile_textView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/pets_tenant_activity"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:text="@string/occupation"-->
-        <!--android:textSize="20dp" />-->
-
-        <!--<Spinner-->
-        <!--android:id="@+id/occupation_tenant_profile_spinner"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/petsRadioGroup"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:entries="@array/occupation"/>-->
-
-
         <!-- Picture Button -->
 
         <!--<Button-->
-        <!--android:id="@+id/take_a_picture_tenant_profile_button"-->
+        <!--android:id="@+id/upload_picture"-->
         <!--android:layout_width="fill_parent"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:layout_below="@id/occupation_tenant_profile_textView"-->
