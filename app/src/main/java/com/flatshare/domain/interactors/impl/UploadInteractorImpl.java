@@ -1,11 +1,13 @@
 package com.flatshare.domain.interactors.impl;
 
+import android.net.Uri;
 import android.util.Log;
+
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.enums.MediaType;
 import com.flatshare.domain.interactors.MediaInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
-import com.flatshare.domain.repository.StorageRepository;
-import com.flatshare.storage.StorageRepositoryImpl;
+import com.google.firebase.storage.UploadTask;
 
 
 /**
@@ -21,21 +23,19 @@ public class UploadInteractorImpl extends AbstractInteractor implements MediaInt
      */
     private UploadCallback mCallback;
 
-    private int mediaType;
-    private String mediaName;
-    private byte[] data;
+    private MediaType mediaType;
 
+    private Uri uri;
     private boolean isTenant;
 
     public UploadInteractorImpl(MainThread mainThread,
-                                UploadCallback downloadCallback,boolean isTenant, int mediaType, String mediaName, byte[] data) {
+                                UploadCallback downloadCallback, boolean isTenant, MediaType mediaType, Uri uri) {
 
         super(mainThread);
         this.mCallback = downloadCallback;
         this.isTenant = isTenant;
         this.mediaType = mediaType;
-        this.mediaName = mediaName;
-        this.data = data;
+        this.uri = uri;
     }
 
     private void notifyError() {
@@ -58,14 +58,32 @@ public class UploadInteractorImpl extends AbstractInteractor implements MediaInt
      */
     @Override
     public void execute() {
-        Log.d(TAG, "inside run()");
 
-//        if(storageRepository.uploadMedia(isTenant, mediaType,mediaName,this.data)){
-//            notifySuccess();
-//        } else {
-//            Log.w(TAG, "Upload Failed!");
-//            notifyError();
-//        }
+        String childNode = "";
 
+        String mediaName = "";
+
+
+        if (isTenant) {
+            childNode += storageRoot.getTenants().getRootPath();
+            if (mediaType == MediaType.IMAGE) {
+                childNode += storageRoot.getTenants().getImages();
+            } else {
+                childNode += storageRoot.getTenants().getVideos();
+            }
+            mediaName = userId;
+        } else {
+            childNode += storageRoot.getApartments().getImages();
+            mediaName = uri.getLastPathSegment();
+        }
+
+        UploadTask uploadTask = mStorage.child(childNode + mediaName).putFile(uri);
+
+        uploadTask.addOnFailureListener(exception -> notifyError()).addOnSuccessListener(taskSnapshot -> {
+            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+            Uri downloadUrl = taskSnapshot.getDownloadUrl();
+            notifySuccess();
+        });
     }
+
 }

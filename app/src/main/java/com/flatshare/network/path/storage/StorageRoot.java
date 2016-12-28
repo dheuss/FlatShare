@@ -8,29 +8,19 @@ import com.flatshare.network.path.Node;
 
 public class StorageRoot implements Node {
 
+    public static final String PROFILE = "profile";
     private final String url = "gs://flatshare-5d4c6.appspot.com";
     private final String tenants = "tenants/";
-    private final String apartments = "apartments/";
-    private final String images = "images/";
-    private final String videos = "videos/";
+
+    public TenantsStorage getTenants() {
+        return new TenantsStorage();
+    }
+
+    public ApartmentsStorage getApartments() {
+        return new ApartmentsStorage();
+    }
 
     public String getUrl() {
         return url;
-    }
-
-    public String getTenants() {
-        return tenants;
-    }
-
-    public String getApartments() {
-        return apartments;
-    }
-
-    public String getImages() {
-        return images;
-    }
-
-    public String getVideos() {
-        return videos;
     }
 }

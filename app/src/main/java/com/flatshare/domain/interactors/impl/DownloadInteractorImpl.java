@@ -58,12 +58,12 @@ public class DownloadInteractorImpl extends AbstractInteractor implements MediaI
     @Override
     public void execute() {
 
-        String userPath = isTenant ? storageRoot.getTenants(): storageRoot.getApartments();
-        String profileId = "TODO!!!!";
-        String mediaPath = isImage ? storageRoot.getImages() : storageRoot.getVideos();
+//        String userPath = isTenant ? storageRoot.getTenants(): storageRoot.getApartments();
+//        String profileId = "TODO!!!!";
+//        String mediaPath = isImage ? storageRoot.getImages() : storageRoot.getVideos();
 
         final long ONE_MEGABYTE = 1024 * 1024;
-        mStorage.child(userPath + profileId + mediaPath).getBytes(ONE_MEGABYTE).addOnSuccessListener(
+        mStorage.child("").getBytes(ONE_MEGABYTE).addOnSuccessListener(
                 bytes -> notifySuccess(bytes))
                 .addOnFailureListener(
                         exception -> notifyError(exception.getMessage()));

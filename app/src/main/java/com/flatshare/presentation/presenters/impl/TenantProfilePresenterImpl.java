@@ -1,17 +1,17 @@
 package com.flatshare.presentation.presenters.impl;
 
-import android.widget.ImageView;
+import android.net.Uri;
 import android.widget.VideoView;
 
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.enums.MediaType;
 import com.flatshare.domain.interactors.MediaInteractor;
 import com.flatshare.domain.interactors.ProfileInteractor;
 import com.flatshare.domain.interactors.impl.TenantProfileInteractorImpl;
 import com.flatshare.domain.interactors.impl.UploadInteractorImpl;
 import com.flatshare.presentation.presenters.TenantProfilePresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
-import com.flatshare.utils.converters.MediaConverter;
 
 /**
  * Created by Arber on 11/12/2016.
@@ -76,29 +76,17 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
     }
 
     @Override
-    public void uploadImage(ImageView imageView) {
+    public void uploadImage(Uri uri) {
 
-        mView.showProgress();
+//        mView.showProgress();
 
-        byte[] data = new MediaConverter().imageViewToByte(imageView);
-
-        String mediaName = (String) imageView.getTag();
-
-        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, true, 0, mediaName, data);
+        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, true, MediaType.IMAGE, uri);
         mediaInteractor.execute();
     }
 
     @Override
     public void uploadVideo(VideoView videoView) {
 
-        mView.showProgress();
-
-        byte[] data = new MediaConverter().videoViewToByte(videoView);
-
-        String mediaName = (String) videoView.getTag();
-
-        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, true, 0, mediaName, data);
-        mediaInteractor.execute();
     }
 
     @Override
@@ -108,6 +96,7 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
 
     @Override
     public void onUploadSuccess() {
-        //TODO: notify view that media was uploaded
+
+        mView.uploadSucces();
     }
 }

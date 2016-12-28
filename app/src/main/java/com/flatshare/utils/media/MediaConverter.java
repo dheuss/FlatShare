@@ -1,4 +1,4 @@
-package com.flatshare.utils.converters;
+package com.flatshare.utils.media;
 
 import android.content.Context;
 import android.graphics.Bitmap;

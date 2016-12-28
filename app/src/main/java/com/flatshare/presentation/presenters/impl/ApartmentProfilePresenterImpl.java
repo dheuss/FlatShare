@@ -3,15 +3,13 @@ package com.flatshare.presentation.presenters.impl;
 import android.widget.ImageView;
 import android.widget.VideoView;
 
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
 import com.flatshare.domain.interactors.MediaInteractor;
 import com.flatshare.domain.interactors.ProfileInteractor;
 import com.flatshare.domain.interactors.impl.ApartmentProfileInteractorImpl;
-import com.flatshare.domain.interactors.impl.UploadInteractorImpl;
 import com.flatshare.presentation.presenters.ApartmentProfilePresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
-import com.flatshare.utils.converters.MediaConverter;
 
 /**
  * Created by Arber on 11/12/2016.
@@ -78,27 +76,11 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
     @Override
     public void uploadImage(ImageView imageView) {
 
-        mView.showProgress();
-
-        byte[] data = new MediaConverter().imageViewToByte(imageView);
-
-        String mediaName = (String) imageView.getTag();
-
-        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, false, 1, mediaName, data);
-        mediaInteractor.execute();
     }
 
     @Override
     public void uploadVideo(VideoView videoView) {
 
-        mView.showProgress();
-
-        byte[] data = new MediaConverter().videoViewToByte(videoView);
-
-        String mediaName = (String) videoView.getTag();
-
-        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this,false, 1, mediaName, data);
-        mediaInteractor.execute();
     }
 
     @Override

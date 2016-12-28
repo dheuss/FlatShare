@@ -1,6 +1,7 @@
 package com.flatshare.presentation.ui.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -42,6 +43,8 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
 
     //TODO Hobbies
 
+    private int PICK_IMAGE_REQUEST = 1;
+
     private TenantProfilePresenter mPresenter;
     private static final String TAG = "TenantProfileAct";
 
@@ -59,7 +62,30 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         );
 
         profileDoneButton.setOnClickListener(view -> sendProfile());
+        takeAPictureButton.setOnClickListener(view -> openGallery());
 
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent();
+        // Show only images, no videos or anything else
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        // Always show the chooser (if there are multiple options available)
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            Uri uri = data.getData();
+
+            mPresenter.uploadImage(uri);
+            // Log.d(TAG, String.valueOf(bitmap));
+        }
     }
 
     @Override
@@ -85,8 +111,8 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         tenantUserProfile.setEmail(email);
         tenantUserProfile.setSmoker(isSmoker);
         tenantUserProfile.setGender(gender);
-        tenantUserProfile.setPets(isPets);
         tenantUserProfile.setOccupation(occupation);
+        tenantUserProfile.setPets(isPets);
         tenantUserProfile.setShortBio(shortBio);
         tenantUserProfile.setDurationOfStay(duration);
 
@@ -135,5 +161,10 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         Log.d(TAG, "success! changed to TenantSettings!");
         Intent intent = new Intent(this, TenantSettingsActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void uploadSucces() {
+        Toast.makeText(this, "Upload Successful", Toast.LENGTH_LONG).show();
     }
 }

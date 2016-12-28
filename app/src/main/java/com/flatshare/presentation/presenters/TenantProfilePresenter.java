@@ -1,6 +1,6 @@
 package com.flatshare.presentation.presenters;
 
-import android.widget.ImageView;
+import android.net.Uri;
 import android.widget.VideoView;
 
 import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
@@ -15,11 +15,13 @@ public interface TenantProfilePresenter extends BasePresenter {
 
     void sendProfile(TenantUserProfile tenantUserProfile);
 
-    void uploadImage(ImageView imageView);
     void uploadVideo(VideoView videoView);
+
+    void uploadImage(Uri uri);
 
     interface View extends BaseView {
         void changeToTenantSettings();
+        void uploadSucces();
     }
 
 }
