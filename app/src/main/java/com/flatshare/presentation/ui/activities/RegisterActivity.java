@@ -15,6 +15,9 @@ import com.flatshare.presentation.presenters.impl.RegisterPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
 
+/**
+ * Created by Arber on 16/12/2016.
+ */
 public class RegisterActivity extends AbstractActivity implements RegisterPresenter.View {
 
     private EditText emailEditText;

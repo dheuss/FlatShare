@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.flatshare.R;
@@ -16,6 +13,9 @@ import com.flatshare.presentation.presenters.impl.PrimaryProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
 
+/**
+ * Created by Arber on 16/12/2016.
+ */
 public class PrimaryProfileActivity extends AbstractActivity implements PrimaryProfilePresenter.View {
 
 

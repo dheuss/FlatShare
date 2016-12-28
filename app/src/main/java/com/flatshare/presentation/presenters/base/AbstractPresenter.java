@@ -6,8 +6,7 @@ import com.flatshare.domain.state.UserState;
 
 
 /**
- * This is a base class for all presenters which are communicating with interactors. This base class will hold a
- * reference to the Executor and MainThread objects that are needed for running interactors in a background thread.
+ * Created by Arber on 06/12/2016.
  */
 public abstract class AbstractPresenter {
 

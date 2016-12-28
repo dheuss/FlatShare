@@ -1,5 +1,8 @@
 package com.flatshare.presentation.presenters.base;
 
+/**
+ * Created by Arber on 06/12/2016.
+ */
 public interface BasePresenter {
     /**
      * Method that control the lifecycle of the view. It should be called in the view's

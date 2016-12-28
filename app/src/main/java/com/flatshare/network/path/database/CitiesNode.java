@@ -10,7 +10,7 @@ public class CitiesNode {
 
     public CitiesNode(String rootPath, String city) {
         this.rootPath = rootPath + city;
-        this.districts = rootPath + "districts/";
+        this.districts = this.rootPath + "districts/";
     }
 
     public String getRootPath() {

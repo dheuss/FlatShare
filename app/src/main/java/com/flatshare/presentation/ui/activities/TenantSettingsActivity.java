@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -21,8 +20,9 @@ import com.flatshare.threading.MainThreadImpl;
 
 import dmax.dialog.SpotsDialog;
 
-import static com.appyvet.rangebar.R.attr.rangeBar;
-
+/**
+ * Created by Arber on 16/12/2016.
+ */
 public class TenantSettingsActivity extends AbstractActivity implements TenantSettingsPresenter.View {
 
     private TextView minPrice;
@@ -211,7 +211,7 @@ public class TenantSettingsActivity extends AbstractActivity implements TenantSe
     public void changeToMatchingActivity() {
         //TODO change to MatchingActivity
         Log.d(TAG, "success! changed to TenantSettings!");
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MatchingActivity.class);
         startActivity(intent);
     }
 }

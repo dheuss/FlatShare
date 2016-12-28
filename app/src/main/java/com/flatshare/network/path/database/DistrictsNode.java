@@ -10,7 +10,7 @@ public class DistrictsNode {
 
     public DistrictsNode(String rootPath, String district) {
         this.rootPath = rootPath + district;
-        this.zipCodes = rootPath + "zip_codes/";
+        this.zipCodes = this.rootPath + "zip_codes/";
     }
 
     public String getRootPath() {

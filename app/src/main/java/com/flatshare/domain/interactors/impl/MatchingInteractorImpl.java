@@ -19,8 +19,7 @@ import java.util.List;
 
 
 /**
- * This is an interactor boilerplate with a reference to a model repository.
- * <p/>
+ * Created by Arber on 20/12/2016.
  */
 public class MatchingInteractorImpl extends AbstractInteractor implements MatchingInteractor {
 

@@ -11,7 +11,7 @@ public class ApartmentLocationsNode {
 
     public ApartmentLocationsNode(String rootPath) {
         this.rootPath = rootPath;
-        this.cities = rootPath + "cities/";
+        this.cities = this.rootPath + "cities/";
     }
 
     public String getRootPath() {

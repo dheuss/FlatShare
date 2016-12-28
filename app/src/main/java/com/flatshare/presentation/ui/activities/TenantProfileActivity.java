@@ -18,6 +18,9 @@ import com.flatshare.presentation.presenters.impl.TenantProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
 
+/**
+ * Created by Arber on 16/12/2016.
+ */
 public class TenantProfileActivity extends AbstractActivity implements TenantProfilePresenter.View {
 
     private EditText firstNameEditText;

@@ -12,8 +12,8 @@ import java.util.Map;
 
 
 /**
- *
- * */
+ * Created by Arber on 12/12/2016.
+ */
 public class TenantProfileInteractorImpl extends AbstractInteractor implements ProfileInteractor {
 
     private static final String TAG = "TenantProfileInt";

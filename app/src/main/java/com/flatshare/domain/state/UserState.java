@@ -1,6 +1,7 @@
 package com.flatshare.domain.state;
 
 import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
 
 import java.util.ArrayList;
@@ -12,18 +13,17 @@ import java.util.List;
 
 public class UserState {
 
-    private int classificationId;
+    private PrimaryUserProfile primaryUserProfile;
 
     private TenantUserProfile tenantUserProfile;
     private ApartmentUserProfile apartmentUserProfile;
 
-
-    public int getClassificationId() {
-        return classificationId;
+    public PrimaryUserProfile getPrimaryUserProfile() {
+        return primaryUserProfile;
     }
 
-    public void setClassificationId(int classificationId) {
-        this.classificationId = classificationId;
+    public void setPrimaryUserProfile(PrimaryUserProfile primaryUserProfile) {
+        this.primaryUserProfile = primaryUserProfile;
     }
 
     public TenantUserProfile getTenantUserProfile() {

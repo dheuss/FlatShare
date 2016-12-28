@@ -8,6 +8,9 @@ import com.flatshare.R;
 
 import dmax.dialog.SpotsDialog;
 
+/**
+ * Created by Arber on 26/12/2016.
+ */
 public abstract class AbstractActivity extends AppCompatActivity {
 
 

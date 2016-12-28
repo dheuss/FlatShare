@@ -3,8 +3,13 @@ package com.flatshare.presentation.presenters.impl;
 
 import android.util.Log;
 
-import com.flatshare.domain.datatypes.auth.LoginDataType;
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.auth.LoginDataType;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.interactors.InitInteractor;
+import com.flatshare.domain.interactors.impl.InitInteractorImpl;
 import com.flatshare.network.AuthenticationManager;
 import com.flatshare.network.impl.AuthenticationManagerImpl;
 import com.flatshare.presentation.presenters.LoginPresenter;
@@ -15,7 +20,7 @@ import com.flatshare.presentation.presenters.base.AbstractPresenter;
  */
 
 public class LoginPresenterImpl extends AbstractPresenter implements LoginPresenter,
-        AuthenticationManager.LoginCallback {
+        AuthenticationManager.LoginCallback, InitInteractor.Callback {
 
 
     private static final String TAG = "LoginPresenter";
@@ -58,8 +63,9 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
     @Override
     public void onLoginSuccessful() {
 
-        mView.hideProgress();
-        mView.changeToProfileActivity();
+        InitInteractor initInteractor = new InitInteractorImpl(mMainThread, this);
+        initInteractor.execute();
+
     }
 
     @Override
@@ -86,5 +92,22 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
 //        // run the interactor
         authenticationManager.login(loginDataType);
 
+    }
+
+    @Override
+    public void onReceivedSuccess(PrimaryUserProfile primaryUserProfile, TenantUserProfile tenantUserProfile, ApartmentUserProfile apartmentUserProfile) {
+        userState.setApartmentUserProfile(apartmentUserProfile);
+        userState.setTenantUserProfile(tenantUserProfile);
+        userState.setPrimaryUserProfile(primaryUserProfile);
+
+        mView.hideProgress();
+        mView.changeToMatchingActivity();
+    }
+
+    @Override
+    public void onReceivedFailure(String error) {
+        mView.hideProgress();
+        onError(error);
+        mView.changeToProfileActivity();
     }
 }

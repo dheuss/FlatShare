@@ -11,8 +11,7 @@ import com.google.firebase.storage.UploadTask;
 
 
 /**
- * This is an interactor boilerplate with a reference to a model repository.
- * <p/>
+ * Created by Arber on 23/12/2016.
  */
 public class UploadInteractorImpl extends AbstractInteractor implements MediaInteractor {
 

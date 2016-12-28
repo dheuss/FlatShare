@@ -2,16 +2,13 @@ package com.flatshare.presentation.ui.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.flatshare.R;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
 import com.flatshare.presentation.presenters.MainPresenter;
 import com.flatshare.presentation.presenters.impl.MainPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
@@ -22,10 +19,10 @@ import com.flatshare.utils.random.Utils;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
-import static com.flatshare.R.id.rejectBtn;
-import static com.flatshare.R.id.settingsBtn;
-
-public class MainActivity extends AbstractActivity implements MainPresenter.View {
+/**
+ * Created by Arber on 20/12/2016.
+ */
+public class MatchingActivity extends AbstractActivity implements MainPresenter.View {
 
     private SwipePlaceHolderView mSwipeView;
     private Context mContext;
@@ -35,7 +32,7 @@ public class MainActivity extends AbstractActivity implements MainPresenter.View
     private ImageButton settingsBtn;
     private ImageButton chatBtn;
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "MatchingActivity";
 
     TextView mWelcomeTextView;
 
@@ -68,14 +65,14 @@ public class MainActivity extends AbstractActivity implements MainPresenter.View
         settingsBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                startActivity(new Intent(MatchingActivity.this, SettingsActivity.class));
             }
         });
 
         chatBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(MainActivity.this, ChatActivity.class));
+                startActivity(new Intent(MatchingActivity.this, ChatActivity.class));
             }
         });
 

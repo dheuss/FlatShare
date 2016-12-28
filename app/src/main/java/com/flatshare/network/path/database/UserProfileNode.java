@@ -12,9 +12,9 @@ public class UserProfileNode {
 
     public UserProfileNode(String rootPath, String userId) {
         this.rootPath = rootPath + userId;
-        this.classificationId = rootPath + "classification_id/";
-        this.tenantProfileId = rootPath + "tenant_profile_id/";
-        this.apartmentProfileId = rootPath + "apartment_profile_id/";
+        this.classificationId = this.rootPath + "classification_id/";
+        this.tenantProfileId = this.rootPath + "tenant_profile_id/";
+        this.apartmentProfileId = this.rootPath + "apartment_profile_id/";
     }
 
     public String getRootPath() {

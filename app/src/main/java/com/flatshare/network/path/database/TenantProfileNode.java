@@ -13,9 +13,9 @@ public class TenantProfileNode {
 
     public TenantProfileNode(String rootPath, String tenantId) {
         this.rootPath = rootPath + tenantId;
-        this.tenantFilterSettings = rootPath + "tenant_filter_settings/";
-        this.apartmentsToShow = rootPath + "apartments_to_show/";
-        this.matchedApartments = rootPath + "matched_apartments/";
+        this.tenantFilterSettings = this.rootPath + "tenant_filter_settings/";
+        this.apartmentsToShow = this.rootPath + "apartments_to_show/";
+        this.matchedApartments = this.rootPath + "matched_apartments/";
     }
 
     public String getRootPath() {

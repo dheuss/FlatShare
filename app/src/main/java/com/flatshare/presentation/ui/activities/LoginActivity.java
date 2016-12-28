@@ -23,6 +23,9 @@ import com.google.android.gms.common.SignInButton;
 
 import dmax.dialog.SpotsDialog;
 
+/**
+ * Created by Arber on 16/12/2016.
+ */
 public class LoginActivity extends AppCompatActivity implements LoginPresenter.View {
 
     private EditText emailEditText;
@@ -120,7 +123,6 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
     @Override
     public void hideProgress() {
         progressDialog.hide();
-        Toast.makeText(this, "Retrieved!", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -131,9 +133,15 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
 
     @Override
     public void changeToProfileActivity() {
-        //TODO change to PrimaryProfileActivity
         Log.d("LoginActivity", "success! changed to PrimaryProfileActivity!");
         Intent intent = new Intent(this, PrimaryProfileActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void changeToMatchingActivity() {
+        Log.d("LoginActivity", "success! changed to MatchingActivity!");
+        Intent intent = new Intent(this, MatchingActivity.class);
         startActivity(intent);
     }
 }

@@ -5,6 +5,9 @@ import android.os.Bundle;
 import com.flatshare.R;
 import com.flatshare.presentation.ui.AbstractActivity;
 
+/**
+ * Created by Arber on 16/12/2016.
+ */
 public class ApartmentSettingsActivity extends AbstractActivity {
 
     @Override

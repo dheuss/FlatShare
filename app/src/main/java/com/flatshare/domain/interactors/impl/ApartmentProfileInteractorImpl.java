@@ -12,7 +12,7 @@ import java.util.Map;
 
 
 /**
- * This is an interactor boilerplate with a reference to a model repository.
+ * Created by Arber on 10/12/2016.
  */
 public class ApartmentProfileInteractorImpl extends AbstractInteractor implements ProfileInteractor {
 

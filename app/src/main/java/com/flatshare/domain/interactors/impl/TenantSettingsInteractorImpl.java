@@ -13,8 +13,7 @@ import com.google.firebase.database.ValueEventListener;
 
 
 /**
- * This is an interactor boilerplate with a reference to a model repository.
- * <p/>
+ * Created by Arber on 10/12/2016.
  */
 public class TenantSettingsInteractorImpl extends AbstractInteractor implements FilterSettingsInteractor {
 

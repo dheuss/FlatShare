@@ -13,9 +13,9 @@ public class PotentialMatchesNode {
 
     public PotentialMatchesNode(String rootPath, String tenantId, String apartmentId) {
         this.rootPath = rootPath + tenantId + "." + apartmentId;
-        this.tenantYes = rootPath + "tenant_yes/";
-        this.apartmentYes= rootPath + "apartment_yes/";
-        this.timeoutInDays= rootPath + "timeout_in_days/";
+        this.tenantYes = this.rootPath + "tenant_yes/";
+        this.apartmentYes= this.rootPath + "apartment_yes/";
+        this.timeoutInDays= this.rootPath + "timeout_in_days/";
     }
 
     public String getRootPath() {

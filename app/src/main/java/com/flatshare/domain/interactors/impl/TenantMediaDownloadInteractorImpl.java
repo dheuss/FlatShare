@@ -8,8 +8,7 @@ import com.flatshare.domain.interactors.base.AbstractInteractor;
 
 
 /**
- * This is an interactor boilerplate with a reference to a model repository.
- * <p/>
+ * Created by Arber on 28/12/2016.
  */
 public class TenantMediaDownloadInteractorImpl extends AbstractInteractor implements MediaInteractor {
 

@@ -17,6 +17,9 @@ import com.flatshare.presentation.presenters.impl.ApartmentProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
 
+/**
+ * Created by Arber on 16/12/2016.
+ */
 public class ApartmentProfileActivity extends AbstractActivity implements ApartmentProfilePresenter.View {
 
     private EditText apartmentPriceEditText;

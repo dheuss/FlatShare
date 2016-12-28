@@ -25,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.ui.activities.MainActivity" />
+        <activity android:name=".presentation.ui.activities.MatchingActivity" />
         <activity android:name=".presentation.ui.activities.PrimaryProfileActivity" />
         <activity android:name=".presentation.ui.activities.RegisterActivity" />
         <activity android:name=".presentation.ui.activities.ResetPasswordActivity" />
