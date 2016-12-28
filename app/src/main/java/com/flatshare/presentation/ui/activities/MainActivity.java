@@ -7,10 +7,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.flatshare.R;
+import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
 import com.flatshare.presentation.presenters.MainPresenter;
 import com.flatshare.presentation.presenters.impl.MainPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
+import com.flatshare.utils.random.MainActivity_ProfileCard;
+import com.flatshare.utils.random.Profile;
+import com.flatshare.utils.random.Utils;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
@@ -44,6 +48,10 @@ public class MainActivity extends AbstractActivity implements MainPresenter.View
                     .setRelativeScale(0.01f)
                     .setSwipeInMsgLayoutId(R.layout.activity_main_card_in)
                     .setSwipeOutMsgLayoutId(R.layout.activity_main_card_out));
+
+        for(Profile profile : Utils.loadProfiles(this.getApplicationContext())){
+            mSwipeView.addView(new MainActivity_ProfileCard(mContext, profile, mSwipeView));
+        }
 
         findViewById(R.id.rejectBtn).setOnClickListener(new View.OnClickListener(){
             @Override
