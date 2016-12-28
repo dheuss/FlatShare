@@ -15,5 +15,4 @@ public interface TenantSettingsPresenter extends BasePresenter {
     interface View extends BaseView {
         void changeToMatchingActivity();
     }
-
 }

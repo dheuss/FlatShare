@@ -34,7 +34,7 @@ public class MainPresenterImpl extends AbstractPresenter implements MainPresente
 
         Log.d(TAG, "inside resume()");
 
-        mView.showProgress();
+        //mView.showProgress();
 
     }
 

@@ -31,7 +31,7 @@
         <activity android:name=".presentation.ui.activities.ResetPasswordActivity" />
         <activity android:name=".presentation.ui.activities.TenantProfileActivity" />
         <activity android:name=".presentation.ui.activities.ApartmentProfileActivity" />
-        <activity android:name=".presentation.ui.activities.TenantSettingsActivity"></activity>
+        <activity android:name=".presentation.ui.activities.TenantSettingsActivity" />
         <activity android:name=".presentation.ui.activities.ApartmentSettingsActivity" />
         <!-- Facebook Activity -->
         <activity

@@ -159,7 +159,7 @@ public class TenantSettingsActivity extends AbstractActivity implements TenantSe
         yesPurposeCommunityRadioButton = (RadioButton) findViewById(R.id.necessaryPCRadioButton);
         noPurposeCommunityRadioButton = (RadioButton) findViewById(R.id.notNecessaryPCRadioButton);
 
-        smokingApartmentRadioGroup = (RadioGroup) findViewById(R.id.smokerRadioGroup);
+        smokingApartmentRadioGroup = (RadioGroup) findViewById(R.id.smoker_apartment_RadioGroup);
         yesSmokingApartmentRadioButton = (RadioButton) findViewById(R.id.necessarySARadioButton);
         noSmokingApartmentRadioButton = (RadioButton) findViewById(R.id.notNecessarySARadioButton);
 
