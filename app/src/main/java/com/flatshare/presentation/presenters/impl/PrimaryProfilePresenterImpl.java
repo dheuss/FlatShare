@@ -59,6 +59,7 @@ public class PrimaryProfilePresenterImpl extends AbstractPresenter implements Pr
 
     @Override
     public void onSentFailure(String error) {
+        userState.setPrimaryUserProfile(null);
         mView.hideProgress();
         onError(error);
     }
@@ -67,7 +68,7 @@ public class PrimaryProfilePresenterImpl extends AbstractPresenter implements Pr
     public void sendProfile(PrimaryUserProfile primaryUserProfile) {
 
         mView.showProgress();
-
+        userState.setPrimaryUserProfile(primaryUserProfile);
         ProfileInteractor interactor = new PrimaryProfileInteractorImpl(mMainThread,this,primaryUserProfile);
         interactor.execute();
 

@@ -1,12 +1,14 @@
 package com.flatshare.presentation.ui.activities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -30,8 +32,13 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
 
     private EditText emailEditText;
     private EditText passwordEditText;
+
+    private CheckBox loginCheckBox;
+
     private Button loginButton;
     private Button registerButton;
+    private SharedPreferences sharedPref;
+
 
     //Google
     private SignInButton googleSignInButton;
@@ -53,7 +60,9 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_login);
 
+        sharedPref = getPreferences(Context.MODE_PRIVATE);
         bindView();
+        readSharedPreferences();
         facebookCallbackManager = CallbackManager.Factory.create();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -69,23 +78,47 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
         );
 
         //TODO delete authentication
-        emailEditText.setText("david.heuss@web.de");
-        passwordEditText.setText("123456");
+//        emailEditText.setText("david.heuss@web.de");
+//        passwordEditText.setText("123456");
 
         loginButton.setOnClickListener(view -> login());
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-                finish();
-            }
+        registerButton.setOnClickListener(v -> {
+            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            finish();
         });
+    }
+
+    private void readSharedPreferences() {
+
+        boolean rememberLogin = sharedPref.getBoolean(getResources().getString(R.string.login_check_box), false);
+
+
+        loginCheckBox.setChecked(rememberLogin);
+
+        String email;
+        String password;
+
+        if (rememberLogin) {
+            email = sharedPref.getString(getResources().getString(R.string.email_login), null);
+            password = sharedPref.getString(getResources().getString(R.string.password_login), null);
+        } else {
+            return;
+        }
+
+        if (email != null && password != null) {
+
+            emailEditText.setText(email);
+            passwordEditText.setText(password);
+
+        }
+
     }
 
     private void bindView() {
         emailEditText = (EditText) findViewById(R.id.email_edittext);
         passwordEditText = (EditText) findViewById(R.id.password_edittext);
+        loginCheckBox = (CheckBox) findViewById(R.id.login_check_box);
         loginButton = (Button) findViewById(R.id.login_button);
         registerButton = (Button) findViewById(R.id.register_button);
         googleSignInButton = (SignInButton) findViewById(R.id.google_sign_in_button);
@@ -94,7 +127,13 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
     }
 
     private void login() {
-        mPresenter.login(new LoginDataType(emailEditText.getText().toString(), passwordEditText.getText().toString()));
+        String email = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+
+        writeToSharedPreferences(R.string.email_login, email);
+        writeToSharedPreferences(R.string.password_login, password);
+        writeToSharedPreferences(R.string.login_check_box, loginCheckBox.isChecked());
+        mPresenter.login(new LoginDataType(email, password));
     }
 
     @Override
@@ -143,5 +182,17 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
         Log.d("LoginActivity", "success! changed to MatchingActivity!");
         Intent intent = new Intent(this, MatchingActivity.class);
         startActivity(intent);
+    }
+
+    private void writeToSharedPreferences(int key, String value) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(key), value);
+        editor.apply();
+    }
+
+    private void writeToSharedPreferences(int key, boolean value) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(getString(key), value);
+        editor.apply();
     }
 }

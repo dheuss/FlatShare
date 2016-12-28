@@ -59,6 +59,7 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
 
     @Override
     public void onSentFailure(String error) {
+        userState.setApartmentUserProfile(null);
         mView.hideProgress();
         onError(error);
     }
@@ -67,7 +68,7 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
     public void sendProfile(ApartmentUserProfile apartmentUserProfile) {
 
         mView.showProgress();
-
+        userState.setApartmentUserProfile(apartmentUserProfile);
         ProfileInteractor interactor = new ApartmentProfileInteractorImpl(mMainThread, this, apartmentUserProfile);
         interactor.execute();
 

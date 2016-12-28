@@ -53,10 +53,13 @@
     <string name="bathtube">Bathtube:</string>
     <string name="necessary">necessary</string>
     <string name="notNecessary">not necessary</string>
+    <string name="email_login">emailLogin</string>
+    <string name="password_login">passwordLogin</string>
+    <string name="login_check_box">Remember Me</string>
 
     <string-array name="occupation">
         <item>Student</item>
-        <item>Emplyee</item>
+        <item>Employee</item>
         <item>Lowly employed</item>
         <item>Official</item>
         <item>No Job</item>

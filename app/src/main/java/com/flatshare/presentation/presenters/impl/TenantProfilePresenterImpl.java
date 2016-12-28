@@ -61,6 +61,7 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
 
     @Override
     public void onSentFailure(String error) {
+        userState.setTenantUserProfile(null);
         mView.hideProgress();
         onError(error);
     }
@@ -69,7 +70,7 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
     public void sendProfile(TenantUserProfile tenantUserProfile) {
 
         mView.showProgress();
-
+        userState.setTenantUserProfile(tenantUserProfile);
         ProfileInteractor interactor = new TenantProfileInteractorImpl(mMainThread, this, tenantUserProfile);
         interactor.execute();
 
