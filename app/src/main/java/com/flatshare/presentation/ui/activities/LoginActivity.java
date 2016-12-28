@@ -23,7 +23,7 @@ import com.google.android.gms.common.SignInButton;
 
 import dmax.dialog.SpotsDialog;
 
-public class LoginActiviy extends AppCompatActivity implements LoginPresenter.View {
+public class LoginActivity extends AppCompatActivity implements LoginPresenter.View {
 
     private EditText emailEditText;
     private EditText passwordEditText;
@@ -74,7 +74,7 @@ public class LoginActiviy extends AppCompatActivity implements LoginPresenter.Vi
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActiviy.this, RegisterActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 finish();
             }
         });

@@ -11,33 +11,26 @@ import com.flatshare.domain.interactors.base.AbstractInteractor;
  * This is an interactor boilerplate with a reference to a model repository.
  * <p/>
  */
-public class DownloadInteractorImpl extends AbstractInteractor implements MediaInteractor {
+public class ApartmentsMediaDownloadInteractorImpl extends AbstractInteractor implements MediaInteractor {
 
-    private static final String TAG = "DownloadInt";
+    private static final String TAG = "ApartmentsMediaDownloadInt";
 
     /**
      * The Callback is responsible for talking to the UI on the main thread
      */
-    private DownloadCallback mCallback;
-
-    private boolean isImage;
-    private String mediaName;
-
-    private boolean isTenant;
+    private ApartmentDownloadCallback mCallback;
 
     private MainThread mMainThread;
 
-    public DownloadInteractorImpl(MainThread mainThread,
-                                  DownloadCallback downloadCallback,
-                                  boolean isTenant,
-                                  boolean isImage,
-                                  String mediaName) {
+    private String apartmentId;
+
+    public ApartmentsMediaDownloadInteractorImpl(MainThread mainThread,
+                                                 ApartmentDownloadCallback downloadCallback,
+                                                 String apartmentId) {
 
         super(mainThread);
         this.mCallback = downloadCallback;
-        this.isTenant = isTenant;
-        this.isImage = isImage;
-        this.mediaName = mediaName;
+        this.apartmentId = apartmentId;
     }
 
     private void notifyError(String errorMessage) {
@@ -47,23 +40,24 @@ public class DownloadInteractorImpl extends AbstractInteractor implements MediaI
 
     /**
      * callback method that posts message received into the main UI, through mainThread.post!!!
+     * @param data
      */
     private void notifySuccess(byte[] data) {
         Log.d(TAG, "inside postMessage(String msg)");
 
-        mMainThread.post(() -> mCallback.onDownloadSuccess(this.isImage, data));
+        mMainThread.post(() -> mCallback.onDownloadSuccess(data));
     }
 
 
     @Override
     public void execute() {
 
-//        String userPath = isTenant ? storageRoot.getTenants(): storageRoot.getApartments();
-//        String profileId = "TODO!!!!";
-//        String mediaPath = isImage ? storageRoot.getImages() : storageRoot.getVideos();
+        String path = storageRoot.getApartments(apartmentId).getImagesPath();
+
+        String mediaName = "SOME_IMAGE_NAME";
 
         final long ONE_MEGABYTE = 1024 * 1024;
-        mStorage.child("").getBytes(ONE_MEGABYTE).addOnSuccessListener(
+        mStorage.child(path + mediaName).getBytes(ONE_MEGABYTE).addOnSuccessListener(
                 bytes -> notifySuccess(bytes))
                 .addOnFailureListener(
                         exception -> notifyError(exception.getMessage()));

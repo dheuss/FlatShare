@@ -8,7 +8,13 @@ import com.flatshare.domain.interactors.base.Interactor;
 
 public interface MediaInteractor extends Interactor {
 
-    interface DownloadCallback {
+    interface ApartmentDownloadCallback {
+        // TODO: CHANGE parameter type?
+        void onDownloadSuccess(byte[] data);
+        void onError(String error);
+    }
+
+    interface TenantDownloadCallback {
         // TODO: CHANGE parameter type?
         void onDownloadSuccess(boolean isImage, byte[] data);
         void onError(String error);

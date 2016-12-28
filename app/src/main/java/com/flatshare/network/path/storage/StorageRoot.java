@@ -12,12 +12,12 @@ public class StorageRoot implements Node {
     private final String url = "gs://flatshare-5d4c6.appspot.com";
     private final String tenants = "tenants/";
 
-    public TenantsStorage getTenants() {
-        return new TenantsStorage();
+    public TenantsStorage getTenants(String tenantId) {
+        return new TenantsStorage(tenantId);
     }
 
-    public ApartmentsStorage getApartments() {
-        return new ApartmentsStorage();
+    public ApartmentsStorage getApartments(String apartmentId) {
+        return new ApartmentsStorage(apartmentId);
     }
 
     public String getUrl() {

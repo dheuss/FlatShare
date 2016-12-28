@@ -27,15 +27,17 @@ public class UploadInteractorImpl extends AbstractInteractor implements MediaInt
 
     private Uri uri;
     private boolean isTenant;
+    private String id;
 
     public UploadInteractorImpl(MainThread mainThread,
-                                UploadCallback downloadCallback, boolean isTenant, MediaType mediaType, Uri uri) {
+                                UploadCallback downloadCallback, boolean isTenant, MediaType mediaType, Uri uri, String id) {
 
         super(mainThread);
         this.mCallback = downloadCallback;
         this.isTenant = isTenant;
         this.mediaType = mediaType;
         this.uri = uri;
+        this.id = id;
     }
 
     private void notifyError() {
@@ -59,21 +61,20 @@ public class UploadInteractorImpl extends AbstractInteractor implements MediaInt
     @Override
     public void execute() {
 
-        String childNode = "";
+        String childNode;
 
-        String mediaName = "";
+        String mediaName;
 
 
         if (isTenant) {
-            childNode += storageRoot.getTenants().getRootPath();
             if (mediaType == MediaType.IMAGE) {
-                childNode += storageRoot.getTenants().getImages();
+                childNode = storageRoot.getTenants(this.id).getImagesPath();
             } else {
-                childNode += storageRoot.getTenants().getVideos();
+                childNode = storageRoot.getTenants(this.id).getVideosPath();
             }
             mediaName = userId;
         } else {
-            childNode += storageRoot.getApartments().getImages();
+            childNode = storageRoot.getApartments(this.id).getImagesPath();
             mediaName = uri.getLastPathSegment();
         }
 

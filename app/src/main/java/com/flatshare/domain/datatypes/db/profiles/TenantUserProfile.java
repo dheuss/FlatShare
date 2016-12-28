@@ -18,6 +18,9 @@ public class TenantUserProfile extends UserProfile {
     @PropertyName("user_id")
     public String userId;
 
+    @PropertyName("tenant_id")
+    public String tenantId;
+
     @PropertyName("first_name")
     public String firstName;
 
@@ -210,5 +213,10 @@ public class TenantUserProfile extends UserProfile {
     @Exclude
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Exclude
+    public String getTenantId() {
+        return tenantId;
     }
 }

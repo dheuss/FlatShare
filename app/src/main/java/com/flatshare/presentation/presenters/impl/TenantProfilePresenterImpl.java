@@ -80,7 +80,7 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
 
 //        mView.showProgress();
 
-        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, true, MediaType.IMAGE, uri);
+        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, true, MediaType.IMAGE, uri, userState.getTenantId());
         mediaInteractor.execute();
     }
 

@@ -18,7 +18,7 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".presentation.ui.activities.LoginActiviy">
+        <activity android:name=".presentation.ui.activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,7 +51,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.ui.AbstractActivity" />
+        <!--<activity android:name=".presentation.ui.AbstractActivity" />-->
         <activity android:name=".presentation.ui.activities.SettingsActivity" />
         <activity android:name=".presentation.ui.activities.ChatActivity"></activity>
     </application>

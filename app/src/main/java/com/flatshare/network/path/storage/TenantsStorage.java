@@ -9,16 +9,17 @@ public class TenantsStorage {
 
     private final String images = "images/";
     private final String videos = "videos/";
+    private final String tenantId;
 
-    public String getImages() {
-        return images;
+    public TenantsStorage(String tenantId) {
+        this.tenantId = tenantId + "/";
     }
 
-    public String getVideos() {
-        return videos;
+    public String getImagesPath() {
+        return rootPath + tenantId + images;
     }
 
-    public String getRootPath() {
-        return rootPath;
+    public String getVideosPath() {
+        return rootPath + tenantId + videos;
     }
 }

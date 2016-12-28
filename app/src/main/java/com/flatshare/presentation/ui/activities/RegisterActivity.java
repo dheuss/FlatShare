@@ -56,7 +56,7 @@ public class RegisterActivity extends AbstractActivity implements RegisterPresen
         alreadyRegisteredButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(RegisterActivity.this, LoginActiviy.class));
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 finish();
             }
         });

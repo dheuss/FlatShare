@@ -14,6 +14,7 @@ import com.flatshare.domain.interactors.base.AbstractInteractor;
 public class TenantMediaDownloadInteractorImpl extends AbstractInteractor implements MediaInteractor {
 
     private static final String TAG = "TenantProfileDownloadInt";
+    private static final String DEFAULT_NAME = "1";
 
     /**
      * The Callback is responsible for talking to the UI on the main thread
@@ -23,14 +24,17 @@ public class TenantMediaDownloadInteractorImpl extends AbstractInteractor implem
     private boolean isImage;
 
     private MainThread mMainThread;
+    private String tenantId;
 
     public TenantMediaDownloadInteractorImpl(MainThread mainThread,
                                              TenantDownloadCallback downloadCallback,
-                                             boolean isImage) {
+                                             boolean isImage,
+                                             String tenantId) {
 
         super(mainThread);
         this.mCallback = downloadCallback;
         this.isImage = isImage;
+        this.tenantId = tenantId;
     }
 
     private void notifyError(String errorMessage) {
@@ -59,14 +63,14 @@ public class TenantMediaDownloadInteractorImpl extends AbstractInteractor implem
         long size;
 
         if (isImage) {
-            mediaPath = storageRoot.getTenants().getImages();
+            mediaPath = storageRoot.getTenants(this.tenantId).getImagesPath();
             size = ONE_MEGABYTE;
         } else {
-            mediaPath = storageRoot.getTenants().getVideos();
+            mediaPath = storageRoot.getTenants(this.tenantId).getVideosPath();
             size = TEN_MEGABYTE;
         }
 
-        mStorage.child(mediaPath + userId).getBytes(size).addOnSuccessListener(
+        mStorage.child(mediaPath + DEFAULT_NAME).getBytes(size).addOnSuccessListener(
                 bytes -> notifySuccess(bytes))
                 .addOnFailureListener(
                         exception -> notifyError(exception.getMessage()));

@@ -1,9 +1,8 @@
 package com.flatshare.presentation.presenters.base;
 
 
-import android.util.Log;
-
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.state.UserState;
 
 
 /**
@@ -16,8 +15,11 @@ public abstract class AbstractPresenter {
 
     protected MainThread mMainThread;
 
+    protected UserState userState;
+
     public AbstractPresenter(MainThread mainThread) {
 
         mMainThread = mainThread;
+        userState = new UserState();
     }
 }

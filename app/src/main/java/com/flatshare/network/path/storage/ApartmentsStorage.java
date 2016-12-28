@@ -8,13 +8,18 @@ public class ApartmentsStorage {
     private final String rootPath = "apartments/";
 
     private final String images = "images/";
-//    private final String videos = "videos/";
+    private final String apartmentId;
 
-    public String getImages() {
-        return images;
+    public ApartmentsStorage(String apartmentId) {
+        this.apartmentId = apartmentId + "/";
     }
+//    private final String videos = "videos/";
 
     public String getRootPath() {
         return rootPath;
+    }
+
+    public String getImagesPath() {
+        return rootPath + images + apartmentId;
     }
 }

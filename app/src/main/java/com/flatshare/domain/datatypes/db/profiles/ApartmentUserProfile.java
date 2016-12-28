@@ -16,6 +16,9 @@ public class ApartmentUserProfile extends UserProfile {
     @PropertyName("apartment_filter_settings")
     public ApartmentFilterSettings apartmentFilterSettings;
 
+    @PropertyName("apartment_id")
+    public String apartmentId;
+
     @PropertyName("owner_user_id")
     public String ownerUserId;
 
@@ -49,17 +52,11 @@ public class ApartmentUserProfile extends UserProfile {
     @PropertyName("washing_machine")
     public boolean washingMachine;
 
-//    @PropertyName("dryer")
-//    public boolean dryer;
+    @PropertyName("image_ids")
+    public List<String> imageIds;
 
-//    @PropertyName("balcony")
-//    public boolean balcony;
-
-//    @PropertyName("bathtub")
-//    public boolean bathtub;
-
-//    @PropertyName("tv_cable")
-//    public boolean tvCable;
+    @PropertyName("main_image_id")
+    public String mainImageId;
 
     @PropertyName("languages")
     public List<String> languages;
@@ -208,5 +205,18 @@ public class ApartmentUserProfile extends UserProfile {
     @Exclude
     public void setApartmentFilterSettings(ApartmentFilterSettings apartmentFilterSettings) {
         this.apartmentFilterSettings = apartmentFilterSettings;
+    }
+
+    @Exclude
+    public String getApartmentId() {
+        return apartmentId;
+    }
+
+    public List<String> getImageIds() {
+        return imageIds;
+    }
+
+    public String getMainImageId() {
+        return mainImageId;
     }
 }
