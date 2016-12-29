@@ -12,8 +12,9 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
 
     private SettingsPresenter.View mView;
 
-    public SettingsPresenterImpl(MainThread mainThread) {
+    public SettingsPresenterImpl(MainThread mainThread, View view) {
         super(mainThread);
+        mView = view;
     }
 
     @Override

@@ -1,15 +1,63 @@
 package com.flatshare.presentation.ui.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.flatshare.R;
+import com.flatshare.presentation.presenters.ProfilSettingsPresenter;
+import com.flatshare.presentation.presenters.SettingsPresenter;
+import com.flatshare.presentation.presenters.impl.ProfilSettingsPresenterImpl;
+import com.flatshare.presentation.ui.AbstractActivity;
+import com.flatshare.threading.MainThreadImpl;
 
-public class ProfilSettingsActivity extends AppCompatActivity {
+public class ProfilSettingsActivity extends AbstractActivity implements ProfilSettingsPresenter.View {
+
+    private ImageButton settingsButton;
+
+    private static final String TAG = "ProfilSettingsActivity";
+
+    private ProfilSettingsPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profil_settings);
+
+        bindView();
+
+        Log.d(TAG, "inside onCreate(), creating presenter fr this view");
+
+        mPresenter = new ProfilSettingsPresenterImpl(
+                MainThreadImpl.getInstance(),
+                this
+        );
+    }
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.activity_profil_settings;
+    }
+
+    private void bindView(){
+        //settingsButton = (ImageButton)findViewById(R.id.settings_Btn);
+    }
+
+
+    @Override
+    public void changeToTenantSettings() {
+
+    }
+
+    @Override
+    public void uploadSucces() {
+
+    }
+
+    @Override
+    public void showError(String message) {
+
     }
 }
