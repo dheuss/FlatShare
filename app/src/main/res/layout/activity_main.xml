@@ -12,10 +12,10 @@
         android:gravity="center"
         android:orientation="horizontal">
         <ImageButton
-            android:id="@+id/settingsBtn"
+            android:id="@+id/profilsettingsBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/settings_button"/>
+            android:background="@drawable/profile_button"/>
         <ImageButton
             android:id="@+id/chatBtn"
             android:layout_width="50dp"

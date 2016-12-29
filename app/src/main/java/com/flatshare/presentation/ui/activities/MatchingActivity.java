@@ -29,7 +29,7 @@ public class MatchingActivity extends AbstractActivity implements MainPresenter.
 
     private ImageButton acceptBtn;
     private ImageButton rejectBtn;
-    private ImageButton settingsBtn;
+    private ImageButton profilBtn;
     private ImageButton chatBtn;
 
     private static final String TAG = "MatchingActivity";
@@ -62,10 +62,10 @@ public class MatchingActivity extends AbstractActivity implements MainPresenter.
             mSwipeView.addView(new MainActivity_ProfileCard(mContext, profile, mSwipeView));
         }
 
-        settingsBtn.setOnClickListener(new View.OnClickListener(){
+        profilBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(MatchingActivity.this, SettingsActivity.class));
+                startActivity(new Intent(MatchingActivity.this, ProfilSettingsActivity.class));
             }
         });
 
@@ -100,7 +100,7 @@ public class MatchingActivity extends AbstractActivity implements MainPresenter.
         mSwipeView = (SwipePlaceHolderView)findViewById(R.id.swipeView);
         mContext = getApplicationContext();
 
-        settingsBtn = (ImageButton)findViewById(R.id.settingsBtn);
+        profilBtn = (ImageButton)findViewById(R.id.profilsettingsBtn);
         chatBtn = (ImageButton)findViewById(R.id.chatBtn);
 
         rejectBtn = (ImageButton)findViewById(R.id.rejectBtn);
