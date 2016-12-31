@@ -10,7 +10,5 @@ import com.flatshare.presentation.ui.BaseView;
 public interface SettingsPresenter extends BasePresenter{
 
     interface View extends BaseView {
-        void changeToTenantSettings();
-        void uploadSucces();
     }
 }
