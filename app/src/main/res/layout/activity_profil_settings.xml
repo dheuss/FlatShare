@@ -6,15 +6,23 @@
     android:layout_height="match_parent"
     android:background="@color/cardview_light_background">
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_gravity="top"
-        android:gravity="left"
-        android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/settings_Btn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="top|left">
+        <ImageButton
+            android:id="@+id/settingsBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@drawable/settings_button"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="top|right">
+        <ImageButton
+            android:id="@+id/couchBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/couch_button"/>
     </LinearLayout>
 </FrameLayout>

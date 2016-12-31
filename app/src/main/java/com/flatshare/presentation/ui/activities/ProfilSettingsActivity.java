@@ -1,6 +1,7 @@
 package com.flatshare.presentation.ui.activities;
 
 import android.content.Intent;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import com.flatshare.threading.MainThreadImpl;
 public class ProfilSettingsActivity extends AbstractActivity implements ProfilSettingsPresenter.View {
 
     private ImageButton settingsButton;
+    private ImageButton matchingActivityButton;
 
     private static final String TAG = "ProfilSettingsActivity";
 
@@ -34,6 +36,20 @@ public class ProfilSettingsActivity extends AbstractActivity implements ProfilSe
                 MainThreadImpl.getInstance(),
                 this
         );
+
+        settingsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(ProfilSettingsActivity.this, SettingsActivity.class));
+            }
+        });
+
+        matchingActivityButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(ProfilSettingsActivity.this, MatchingActivity.class));
+            }
+        });
     }
 
     @Override
@@ -42,7 +58,8 @@ public class ProfilSettingsActivity extends AbstractActivity implements ProfilSe
     }
 
     private void bindView(){
-        //settingsButton = (ImageButton)findViewById(R.id.settings_Btn);
+        settingsButton = (ImageButton)findViewById(R.id.settingsBtn);
+        matchingActivityButton = (ImageButton)findViewById(R.id.couchBtn);
     }
 
 
