@@ -2,7 +2,7 @@
     <string name="facebook_app_id">662377893941963</string>
     <string name="fb_login_protocol_scheme">fb662377893941963</string>
 
-    <string name="app_name">MyApp</string>
+    <string name="app_name">FlatShare</string>
     <string name="hint_email">Enter Email address...</string>
     <string name="hint_password">Enter password...</string>
     <string name="login_button">Login!</string>
@@ -26,7 +26,7 @@
     <string name="create_apartment_profile_button">Create Apartment Profile</string>
     <string name="join_apartment_profile_button">Join Apartment</string>
     <string name="create_your_profile">Create Your Profile</string>
-    <string name="surname_primary_profile_textview">Name</string>
+    <string name="surname_primary_profile_textview">Name:</string>
     <string name="create_your_tenant_profile">Create Your Tenant Profile</string>
     <string name="take_picture_tenant_profile">Take a Picture of You</string>
     <string name="done_1_tenant_profile">Done!</string>
@@ -56,6 +56,18 @@
     <string name="email_login">emailLogin</string>
     <string name="password_login">passwordLogin</string>
     <string name="login_check_box">Remember Me</string>
+    <string name="hint_new_email">New Email address...</string>
+    <string name="prompt_password">PROMPT PASSWORD</string>
+    <string name="new_pass">New Password...</string>
+    <string name="btn_change">Change</string>
+    <string name="btn_send">Send</string>
+    <string name="btn_remove">Remove</string>
+    <string name="change_email">Change Email</string>
+    <string name="change_password">Change Password</string>
+    <string name="send_password_reset_email">Send Password Reset Mail</string>
+    <string name="remove_user">Remove User</string>
+    <string name="btn_sign_out">Sign Out</string>
+    <string name="settings">Settings</string>
 
     <string-array name="occupation">
         <item>Student</item>

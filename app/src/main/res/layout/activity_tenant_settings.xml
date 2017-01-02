@@ -14,7 +14,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <TextView
             android:id="@+id/initial_tenant_setting"
@@ -77,7 +79,10 @@
             custom:tickEnd="2500"
             custom:selectorSize="4dp"
             android:layout_below="@+id/price_range_textview"
-            />
+            custom:connectingLineColor="@color/colorHardAccent"
+            custom:pinColor="@color/colorHardAccent"
+            custom:rangeBarColor="@color/colorHardAccent"
+            custom:selectorColor="@color/colorHardAccent"/>
 
         <TextView
             android:id="@+id/size_range_textview"
@@ -97,7 +102,7 @@
             android:text=""
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@id/rangebar_price_range"/>
+            android:layout_below="@id/rangebar_price_range" />
 
         <TextView
             android:id="@+id/size_range_textview_TO"
@@ -130,7 +135,10 @@
             custom:tickInterval="5"
             custom:tickEnd="60"
             android:layout_below="@+id/size_range_textview"
-            />
+            custom:connectingLineColor="@color/colorHardAccent"
+            custom:pinColor="@color/colorHardAccent"
+            custom:rangeBarColor="@color/colorHardAccent"
+            custom:selectorColor="@color/colorHardAccent"/>
 
         <TextView
             android:id="@+id/area_textview"

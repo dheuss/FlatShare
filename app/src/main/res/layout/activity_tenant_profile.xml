@@ -14,7 +14,9 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <TextView
             android:id="@+id/initial"
@@ -26,10 +28,22 @@
             android:textSize="30dp" />
 
         <TextView
+            android:id="@+id/tenant_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:text="In this section you should give us some more information about you, so that we can find the perfect apartment for you!"
+            android:textColor="@android:color/black"
+            android:textSize="14dp"
+            android:layout_below="@+id/initial"/>
+
+        <TextView
             android:id="@+id/name_tenant_profile_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/initial"
+            android:layout_below="@+id/tenant_text"
             android:layout_marginTop="20dp"
             android:text="@string/surname_primary_profile_textview"
             android:textSize="20dp" />
@@ -39,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/initial"
+            android:layout_below="@+id/tenant_text"
             android:layout_marginTop="10dp"
             android:width="200dp"
             android:inputType="text" />
@@ -102,6 +116,7 @@
                 android:id="@+id/maleRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:shadowColor="@color/colorHardAccent"
                 android:text="male                  " />
 
             <RadioButton
