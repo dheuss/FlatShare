@@ -29,9 +29,7 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
     public LoginPresenterImpl(MainThread mainThread,
                               View view) {
         super(mainThread);
-
         mView = view;
-
     }
 
     @Override
@@ -56,7 +54,6 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
 
     @Override
     public void onError(String message) {
-
         mView.showError(message);
     }
 

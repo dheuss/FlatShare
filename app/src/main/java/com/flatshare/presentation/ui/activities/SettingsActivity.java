@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import com.flatshare.R;
+import com.flatshare.domain.datatypes.auth.ChangeMailAddressDataType;
 import com.flatshare.presentation.presenters.SettingsPresenter;
 import com.flatshare.presentation.presenters.impl.SettingsPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
@@ -105,6 +106,9 @@ public class SettingsActivity extends AbstractActivity implements SettingsPresen
                 startActivity(new Intent(SettingsActivity.this, ProfilSettingsActivity.class));
             }
         });
+
+        changeEmail.setOnClickListener(view -> changeMail());
+        signOut.setOnClickListener(view -> signOut());
     }
 
     @Override
@@ -140,6 +144,14 @@ public class SettingsActivity extends AbstractActivity implements SettingsPresen
         changePassword.setVisibility(View.GONE);
         sendEmail.setVisibility(View.GONE);
         remove.setVisibility(View.GONE);
+    }
+
+    public void changeMail(){
+        mPresenter.changeMail(new ChangeMailAddressDataType(newEmail.getText().toString()));
+    }
+
+    public void signOut() {
+        mPresenter.logOut();
     }
 
     @Override

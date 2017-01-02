@@ -11,18 +11,14 @@ import com.flatshare.presentation.presenters.base.AbstractPresenter;
  * Created by david on 19.12.2016.
  */
 
-public class ResetPasswordPresenterImpl extends AbstractPresenter implements ResetPasswordPresenter,
-        AuthenticationManager.ResetCallBack {
+public class ResetPasswordPresenterImpl extends AbstractPresenter implements ResetPasswordPresenter, AuthenticationManager.ResetCallBack {
 
 
     private ResetPasswordPresenter.View mView;
 
-    public ResetPasswordPresenterImpl(MainThread mainThread,
-                                      View view) {
+    public ResetPasswordPresenterImpl(MainThread mainThread, View view) {
         super(mainThread);
-
         mView = view;
-
     }
 
     @Override
@@ -47,41 +43,25 @@ public class ResetPasswordPresenterImpl extends AbstractPresenter implements Res
 
     @Override
     public void onError(String message) {
-
         mView.showError(message);
     }
 
     @Override
     public void onResetSuccessful() {
-
         mView.hideProgress();
         mView.changeToProfileActivity();
     }
 
     @Override
     public void onResetFailed(String error) {
-
         mView.hideProgress();
         onError(error);
-
     }
 
     @Override
     public void reset(ResetDataType resetDataType) {
-
-        // initialize the interactor
-//        LoginInteractor interactor = new LoginInteractorImpl(
-//                mExecutor,
-//                mMainThread,
-//                this
-//        );
-
         mView.showProgress();
-
         AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
-
-//        // run the interactor
         authenticationManager.reset(resetDataType);
-
     }
 }

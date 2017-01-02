@@ -2,7 +2,11 @@ package com.flatshare.network.impl;
 
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
+import com.flatshare.domain.datatypes.auth.ChangeMailAddressDataType;
+import com.flatshare.domain.datatypes.auth.ChangePasswordDataType;
 import com.flatshare.domain.datatypes.auth.ResetDataType;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,50 +21,39 @@ import com.flatshare.network.AuthenticationManager;
 
 public class AuthenticationManagerImpl implements AuthenticationManager {
 
-
-    /**
-     * The Callback is responsible for talking to the UI on the main thread
-     */
     private AuthenticationManager.LoginCallback loginCallback;
-
-    /**
-     * The Callback is responsible for talking to the UI on the main thread
-     */
     private AuthenticationManager.RegisterCallBack registerCallBack;
-
-    /**
-     * The Callback is responsible for talking to the UI on the main thread
-     */
     private AuthenticationManager.ResetCallBack resetCallBack;
-
+    private AuthenticationManager.ChangeMailCallBack changeMailCallBack;
+    private AuthenticationManager.ChangePasswordCallBack changePasswordCallBack;
+    private AuthenticationManager.RemoveUserCallBack removeUserCallBack;
+    private AuthenticationManager.LogOutCallBack logOutCallBack;
 
     private String TAG = "AuthenticationManager";
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+    private final FirebaseUser user;
+
     private AuthenticationManagerImpl() {
-        // [START initialize_auth]
         mAuth = FirebaseAuth.getInstance();
-        // [END initialize_auth]
-        // [START auth_state_listener]
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
         mAuthListener = firebaseAuth -> {
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            if (user != null) {
-                // User is signed in
+            FirebaseUser user_ = firebaseAuth.getCurrentUser();
+            if (user_ != null) {
                 Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
             } else {
-                // User is signed out
                 Log.d(TAG, "onAuthStateChanged:signed_out");
             }
         };
-        // [END auth_state_listener]
     }
 
     public AuthenticationManagerImpl(AuthenticationManager.LoginCallback loginCallback) {
         this();
         this.loginCallback = loginCallback;
-
     }
 
     public AuthenticationManagerImpl(AuthenticationManager.RegisterCallBack registerCallBack) {
@@ -75,15 +68,10 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
 
     @Override
     public void reset(ResetDataType resetDataType) {
-
-        System.out.println("AUTH MANAGER RESET");
-
         String email = resetDataType.getEmail();
-
         if (TextUtils.isEmpty(email)) {
             return;
         }
-
         mAuth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -92,6 +80,36 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
                         Log.v(TAG, "resetEmail:failed:" + task.getException());
                     }
                 });
+    }
+
+    @Override
+    public void changeMail(ChangeMailAddressDataType changeMailAddressDataType) {
+        System.out.println("Change Mail for Mail: " + changeMailAddressDataType.getEmail() + " USER: " + user.getUid());
+        String email = changeMailAddressDataType.getEmail();
+        if (TextUtils.isEmpty(email)){
+            return;
+        }
+        user.updateEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.v(TAG, "changeMail:successful:" + task.isSuccessful());
+                        logOut();
+                    } else {
+                        Log.v(TAG, "chanageMail:failed:" + task.getException());
+                        logOutCallBack.onLogOutFailed("logoutFailed");
+                    }
+                });
+    }
+
+    @Override
+    public void changePassword(ChangePasswordDataType changePasswordDataType) {
+        System.out.println("Change Password for Mail: " + changePasswordDataType.getPassword());
+
+    }
+
+    @Override
+    public void removeUser() {
+
     }
 
     @Override
@@ -105,18 +123,11 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
             loginCallback.onLoginFailed("Invalid Email and/or Password");
             return;
         }
-
-//        showProgressDialog();
-
         // TODO: check arguments on addOnCompleteListener
         // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-
-                    // If sign in fails, display a message to the user. If sign in succeeds
-                    // the auth state listener will be notified and logic to handle the
-                    // signed in user can be handled in the listener.
                     if (!task.isSuccessful()) {
                         Log.w(TAG, "signInWithEmail:failed", task.getException());
 //                            Toast.makeText(EmailPasswordActivity.this, R.string.auth_failed,
@@ -127,12 +138,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
                         Log.d(TAG, "SUCCESSS!!");
                         loginCallback.onLoginSuccessful();
                     }
-
-                    // [START_EXCLUDE]
-//                        hideProgressDialog();
-                    // [END_EXCLUDE]
                 });
-        // [END sign_in_with_email]
     }
 
     @Override
@@ -145,9 +151,6 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
             return;
         }
 
-//        showProgressDialog();
-
-        // [START create_user_with_email]
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
@@ -161,18 +164,14 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
                     } else {
                         registerCallBack.onRegisterFailed(task.getException().getMessage());
                     }
-
-                    // [START_EXCLUDE]
-//                        hideProgressDialog();
-                    // [END_EXCLUDE]
                 });
-        // [END create_user_with_email]
     }
 
 
     @Override
     public void logOut() {
         mAuth.signOut();
+        logOutCallBack.onLogOutSuccessful();
     }
 
     private boolean validateForm(String email, String password) {
@@ -197,10 +196,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
 
 
     private void notifyError() {
-
-
         loginCallback.onLoginFailed("Cannot login");
-
     }
 
     /**
@@ -208,29 +204,5 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
      */
     private void postMessage() {
         loginCallback.onLoginSuccessful();
-
     }
-
-
-//    public void showProgressDialog() {
-//        if (mProgressDialog == null) {
-//            mProgressDialog = new ProgressDialog(this);
-//            mProgressDialog.setMessage(getString(R.string.loading));
-//            mProgressDialog.setIndeterminate(true);
-//        }
-//
-//        mProgressDialog.show();
-//    }
-//
-//    public void hideProgressDialog() {
-//        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-//            mProgressDialog.dismiss();
-//        }
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        hideProgressDialog();
-//    }
 }
