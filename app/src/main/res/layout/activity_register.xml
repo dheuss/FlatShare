@@ -5,26 +5,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.flatshare.presentation.ui.activities.RegisterActivity">
+    tools:context="com.flatshare.presentation.ui.activities.RegisterActivity"
+    android:background="@color/colorBackground">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorBackground"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="@dimen/activity_horizontal_margin">
+        android:padding="@dimen/activity_horizontal_margin"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="Not registered yet?"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:layout_marginTop="50dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:text="Here you can set up your account to enjoy all the possibilities of FlatShare"
+            android:textColor="@android:color/black"
+            android:textSize="14dp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/name_register_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
+            android:hint="Name..."
             android:inputType="text"
             android:maxLines="1"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/black" />
 
+        </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -34,10 +61,10 @@
                 android:id="@+id/email_register_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="Email..."
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/black" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -54,7 +81,7 @@
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/black" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -64,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorAccent"
+            android:background="@color/colorHardAccent"
             android:text="Register"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
@@ -77,7 +104,7 @@
             android:background="@null"
             android:text="Forgot your Pasword"
             android:textAllCaps="false"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorHardAccent" />
 
         <!-- Link to Login Screen -->
 

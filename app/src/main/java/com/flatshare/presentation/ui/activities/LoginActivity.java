@@ -77,10 +77,6 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
                 this
         );
 
-        //TODO delete authentication
-//        emailEditText.setText("david.heuss@web.de");
-//        passwordEditText.setText("123456");
-
         loginButton.setOnClickListener(view -> login());
 
         registerButton.setOnClickListener(v -> {
@@ -166,7 +162,6 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
 
     @Override
     public void showError(String message) {
-//        mWelcomeTextView.setText(message);
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 

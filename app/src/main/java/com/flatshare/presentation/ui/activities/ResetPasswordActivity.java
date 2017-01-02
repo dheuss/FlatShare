@@ -22,7 +22,6 @@ public class ResetPasswordActivity extends AbstractActivity implements ResetPass
 
     private EditText emailResetPasswordEditText;
     private Button resetPasswordButton;
-    private Button backResetPasswordButton;
 
     private ResetPasswordPresenter mPresenter;
 
@@ -47,7 +46,6 @@ public class ResetPasswordActivity extends AbstractActivity implements ResetPass
     private void bindView() {
         emailResetPasswordEditText = (EditText) findViewById(R.id.email_reset_password_edittext);
         resetPasswordButton = (Button) findViewById(R.id.reset_password_button);
-        backResetPasswordButton = (Button) findViewById(R.id.back_reset_password_button);
     }
 
     public void reset() {

@@ -4,24 +4,17 @@
     android:id="@+id/ScrollView01"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context="com.flatshare.presentation.ui.activities.ApartmentProfileActivity">
+    tools:context="com.flatshare.presentation.ui.activities.ApartmentProfileActivity"
+    android:background="@color/colorBackground"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
-
-
-        <!--@PropertyName("roommate_ids")-->
-        <!--public List<String> roommateIds;-->
-
-        <!--@PropertyName("apartment_info")-->
-        <!--public String apartmentInfo;-->
-
-        <!---->
-        <!--@PropertyName("languages")-->
-        <!--public List<String> languages;-->
-
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
@@ -246,37 +239,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/no" />
         </RadioGroup>
-
-        <!-- Picture Button -->
-
-        <!--<Button-->
-        <!--android:id="@+id/upload_picture"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/occupation_tenant_profile_textView"-->
-        <!--android:hint="@string/take_picture_tenant_profile"-->
-        <!--android:textColor="@android:color/black"-->
-        <!--android:textColorHint="@android:color/black"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:background="@color/colorAccent"-->
-        <!--android:textStyle="bold"-->
-        <!--/>-->
-
-        <!-- Save Button -->
-
         <Button
             android:id="@+id/create_apartment_profile_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_below="@id/washing_machine_apartment"
-            android:background="@color/colorAccent"
+            android:background="@color/colorHardAccent"
             android:hint="@string/done"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black"
             android:textStyle="bold" />
-
-        <!--android:layout_below="@id/take_a_picture_tenant_profile_button"-->
-
     </RelativeLayout>
 </ScrollView>
