@@ -78,7 +78,8 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
 
     @Override
     public void onLogOutSuccessful() {
-
+        userState.setLoggedIn(false);
+        //TODO: maybe change back to main view?
     }
 
     @Override

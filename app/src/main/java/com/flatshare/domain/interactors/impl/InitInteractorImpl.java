@@ -122,7 +122,7 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
             if (tenantFound) {
                 notifySuccess();
             } else {
-                notifyError("Neither tenantId, not apartmentId found!");
+                notifyError("Neither tenantId, nor apartmentId found!");
             }
         }
     }

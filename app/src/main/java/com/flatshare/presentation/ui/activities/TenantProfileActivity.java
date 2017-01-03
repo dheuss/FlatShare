@@ -167,7 +167,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
     }
 
     @Override
-    public void uploadSucces() {
+    public void uploadSuccess() {
         Toast.makeText(this, "Upload Successful", Toast.LENGTH_LONG).show();
     }
 }

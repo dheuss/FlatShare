@@ -60,9 +60,15 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
     @Override
     public void onLoginSuccessful() {
 
-        InitInteractor initInteractor = new InitInteractorImpl(mMainThread, this);
-        initInteractor.execute();
+        userState.setLoggedIn(true);
 
+        if (userState.receivedProfiles()) {
+            mView.hideProgress();
+            mView.changeToMatchingActivity();
+        } else {
+            InitInteractor initInteractor = new InitInteractorImpl(mMainThread, this);
+            initInteractor.execute();
+        }
     }
 
     @Override
@@ -84,11 +90,15 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
 //        );
 
         mView.showProgress();
-        AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
+
+        if (userState.isLoggedIn()) {
+            onLoginSuccessful();
+        } else {
+            AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
 
 //        // run the interactor
-        authenticationManager.login(loginDataType);
-
+            authenticationManager.login(loginDataType);
+        }
     }
 
     @Override
@@ -96,6 +106,8 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
         userState.setApartmentUserProfile(apartmentUserProfile);
         userState.setTenantUserProfile(tenantUserProfile);
         userState.setPrimaryUserProfile(primaryUserProfile);
+
+        userState.setReceivedProfiles(true);
 
         mView.hideProgress();
         mView.changeToMatchingActivity();

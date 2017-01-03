@@ -21,7 +21,7 @@ public interface TenantProfilePresenter extends BasePresenter {
 
     interface View extends BaseView {
         void changeToTenantSettings();
-        void uploadSucces();
+        void uploadSuccess();
     }
 
 }

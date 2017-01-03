@@ -21,6 +21,7 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
         ProfileInteractor.Callback, MediaInteractor.UploadCallback {
 
 
+    private static final String TAG = "TenantProfilePresenter";
     private TenantProfilePresenter.View mView;
 
     public TenantProfilePresenterImpl(MainThread mainThread,
@@ -98,6 +99,6 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
     @Override
     public void onUploadSuccess() {
 
-        mView.uploadSucces();
+        mView.uploadSuccess();
     }
 }

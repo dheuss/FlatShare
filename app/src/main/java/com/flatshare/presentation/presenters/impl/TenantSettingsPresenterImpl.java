@@ -1,5 +1,7 @@
 package com.flatshare.presentation.presenters.impl;
 
+import android.util.Log;
+
 import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.FilterSettingsInteractor;
@@ -15,6 +17,7 @@ public class TenantSettingsPresenterImpl extends AbstractPresenter implements Te
         FilterSettingsInteractor.Callback {
 
 
+    private static final String TAG = "TenantSettingsPresenter";
     private TenantSettingsPresenter.View mView;
 
     public TenantSettingsPresenterImpl(MainThread mainThread,
@@ -67,6 +70,9 @@ public class TenantSettingsPresenterImpl extends AbstractPresenter implements Te
     @Override
     public void sendFilterSettings(TenantFilterSettings tenantFilterSettings) {
         mView.showProgress();
+
+        Log.d(TAG, "userstate null? " + (userState == null) + " or is tenantuserprofile null? " + (userState.getTenantUserProfile() == null));
+
         userState.getTenantUserProfile().setTenantFilterSettings(tenantFilterSettings);
         FilterSettingsInteractor interactor = new TenantSettingsInteractorImpl(mMainThread, this, tenantFilterSettings);
         interactor.execute();

@@ -19,6 +19,6 @@ public abstract class AbstractPresenter {
     public AbstractPresenter(MainThread mainThread) {
 
         mMainThread = mainThread;
-        userState = new UserState();
+        userState = UserState.getInstance();
     }
 }

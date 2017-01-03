@@ -13,6 +13,21 @@ import java.util.List;
 
 public class UserState {
 
+    // Singleton
+    static final UserState INSTANCE = new UserState();
+
+    private UserState(){
+
+    }
+
+    public static UserState getInstance() {
+        return UserState.INSTANCE;
+    }
+    // Singleton Done
+
+    private boolean receivedProfiles;
+    private boolean loggedIn;
+
     private PrimaryUserProfile primaryUserProfile;
 
     private TenantUserProfile tenantUserProfile;
@@ -42,20 +57,35 @@ public class UserState {
         this.apartmentUserProfile = apartmentUserProfile;
     }
 
-    public String getTenantId(){
+    public String getTenantId() {
         return getTenantUserProfile().getTenantId();
     }
 
-    public String getApartmentId(){
+    public String getApartmentId() {
         return getApartmentUserProfile().getApartmentId();
     }
 
-    public String getApartmentMainImageId(){
+    public String getApartmentMainImageId() {
         return getApartmentUserProfile().getMainImageId();
     }
 
-    public List<String> getApartmentImageIds(){
+    public List<String> getApartmentImageIds() {
         return new ArrayList<>(getApartmentUserProfile().getImageIds());
     }
 
+    public boolean receivedProfiles() {
+        return receivedProfiles;
+    }
+
+    public void setReceivedProfiles(boolean receivedProfiles) {
+        this.receivedProfiles = receivedProfiles;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
 }

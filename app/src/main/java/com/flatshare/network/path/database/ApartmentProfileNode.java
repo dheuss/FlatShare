@@ -13,7 +13,7 @@ public class ApartmentProfileNode {
     private final String matchedTenants;
 
     public ApartmentProfileNode(String rootPath, String apartmentId) {
-        this.rootPath = rootPath + apartmentId;
+        this.rootPath = rootPath + apartmentId + "/";
         this.apartmentFilterSettings = this.rootPath + "apartment_filter_settings/";
         this.tenantsToShow = this.rootPath + "tenants_to_show/";
         this.matchedTenants = this.rootPath + "matched_tenants/";

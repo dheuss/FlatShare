@@ -33,7 +33,7 @@ public abstract class AbstractInteractor implements Interactor {
         Log.d(TAG, "inside constructor");
         this.mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        this.userId= FirebaseAuth.getInstance().getCurrentUser().getUid() + "/";
+        this.userId= FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseRoot = new DatabaseRoot();
         storageRoot = new StorageRoot();
 

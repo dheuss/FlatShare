@@ -12,7 +12,7 @@ public class TenantProfileNode {
     private final String matchedApartments;
 
     public TenantProfileNode(String rootPath, String tenantId) {
-        this.rootPath = rootPath + tenantId;
+        this.rootPath = rootPath + tenantId + "/";
         this.tenantFilterSettings = this.rootPath + "tenant_filter_settings/";
         this.apartmentsToShow = this.rootPath + "apartments_to_show/";
         this.matchedApartments = this.rootPath + "matched_apartments/";
