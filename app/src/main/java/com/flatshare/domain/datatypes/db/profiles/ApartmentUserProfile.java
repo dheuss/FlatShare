@@ -212,10 +212,12 @@ public class ApartmentUserProfile extends UserProfile {
         return apartmentId;
     }
 
+    @Exclude
     public List<String> getImageIds() {
         return imageIds;
     }
 
+    @Exclude
     public String getMainImageId() {
         return mainImageId;
     }

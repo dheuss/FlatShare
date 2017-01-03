@@ -15,7 +15,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -30,11 +32,18 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
      */
     private MatchingInteractor.Callback mCallback;
 
+    private int classificationId;
+    private TenantUserProfile tenantUserProfile;
+    private ApartmentUserProfile apartmentUserProfile;
+
     public MatchingInteractorImpl(MainThread mainThread,
-                                  Callback callback) {
+                                  Callback callback, int classificationId, TenantUserProfile tenantUserProfile, ApartmentUserProfile apartmentUserProfile) {
 
         super(mainThread);
         this.mCallback = callback;
+        this.classificationId = classificationId;
+        this.tenantUserProfile = tenantUserProfile;
+        this.apartmentUserProfile = apartmentUserProfile;
     }
 
     private void notifyTenantMatchesFound(List<TenantUserProfile> tenants) {
@@ -61,40 +70,59 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
     @Override
     public void execute() {
 
-        mDatabase.child(databaseRoot.getUserProfileNode(userId).getRootPath()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue() == null) {
-                    notifyError("No PrimaryProfile found!");
-                } else {
-                    PrimaryUserProfile pUP = dataSnapshot.getValue(PrimaryUserProfile.class);
-                    int cId = pUP.getClassificationId();
-                    if (cId == 0) {
-                        getTenant(pUP.getTenantProfileId());
+
+        if (tenantUserProfile != null || apartmentUserProfile != null) {
+
+            if (classificationId == 0) { // tenant is looking for matches
+                matchTenant(tenantUserProfile);
+            } else { // apartment is looking for matches
+                matchApartment(apartmentUserProfile);
+            }
+        } else {
+
+            mDatabase.child(databaseRoot.getUserProfileNode(userId).getRootPath()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue() == null) {
+                        notifyError("No PrimaryProfile found!");
                     } else {
-                        getApartment(pUP.getApartmentProfileId());
+                        PrimaryUserProfile pUP = dataSnapshot.getValue(PrimaryUserProfile.class);
+                        int cId = pUP.getClassificationId();
+                        if (cId == 0) {
+                            getTenant(pUP.getTenantProfileId());
+                        } else {
+                            getApartment(pUP.getApartmentProfileId());
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                notifyError(databaseError.getMessage());
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    notifyError(databaseError.getMessage());
+                }
+            });
+        }
 
     }
 
     private void matchApartment(ApartmentUserProfile apUP) {
 
-        mDatabase.child(databaseRoot.getTenantProfiles()).addListenerForSingleValueEvent(new ValueEventListener() {
+        String path = databaseRoot.getTenantProfiles();
+        String testPath = "test/" + databaseRoot.getTenantProfiles();
+
+        mDatabase.child(testPath).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                GenericTypeIndicator<List<TenantUserProfile>> t = new GenericTypeIndicator<List<TenantUserProfile>>() {
+                GenericTypeIndicator<Map<String, TenantUserProfile>> t = new GenericTypeIndicator<Map<String, TenantUserProfile>>() {
                 };
 
-                List<TenantUserProfile> tenants = dataSnapshot.getValue(t);
+                List<TenantUserProfile> tenants = new ArrayList<>(dataSnapshot.getValue(t).values());
+
+                if (tenants == null) {
+                    notifyError("No tenants were found in the database!");
+                    return;
+                }
 
                 List<TenantUserProfile> potentialMatches = new ApartmentMatchFinder(apUP, tenants).getMatches();
 
@@ -115,14 +143,22 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
 
     private void matchTenant(TenantUserProfile tUP) {
 
-        mDatabase.child(databaseRoot.getApartmentProfiles()).addListenerForSingleValueEvent(new ValueEventListener() {
+        String path = databaseRoot.getApartmentProfiles();
+        String testPath = "test/" + databaseRoot.getApartmentProfiles();
+
+        mDatabase.child(testPath).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                GenericTypeIndicator<List<ApartmentUserProfile>> t = new GenericTypeIndicator<List<ApartmentUserProfile>>() {
+                GenericTypeIndicator<Map<String, ApartmentUserProfile>> t = new GenericTypeIndicator<Map<String, ApartmentUserProfile>>() {
                 };
 
-                List<ApartmentUserProfile> apartments = dataSnapshot.getValue(t);
+                List<ApartmentUserProfile> apartments = new ArrayList<>((dataSnapshot.getValue(t).values()));
+
+                if (apartments == null) {
+                    notifyError("No apartments were found in the database!");
+                    return;
+                }
 
                 List<ApartmentUserProfile> potentialMatches = new TenantMatchFinder(tUP, apartments).getMatches();
 
