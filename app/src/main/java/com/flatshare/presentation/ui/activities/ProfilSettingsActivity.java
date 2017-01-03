@@ -1,28 +1,25 @@
 package com.flatshare.presentation.ui.activities;
 
 import android.content.Intent;
-import android.media.Image;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
 import com.flatshare.R;
-import com.flatshare.presentation.presenters.ProfilSettingsPresenter;
-import com.flatshare.presentation.presenters.SettingsPresenter;
-import com.flatshare.presentation.presenters.impl.ProfilSettingsPresenterImpl;
+import com.flatshare.presentation.presenters.ProfileSettingsPresenter;
+import com.flatshare.presentation.presenters.impl.ProfileSettingsPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-public class ProfilSettingsActivity extends AbstractActivity implements ProfilSettingsPresenter.View {
+public class ProfilSettingsActivity extends AbstractActivity implements ProfileSettingsPresenter.View {
 
     private ImageButton settingsButton;
     private ImageButton matchingActivityButton;
 
     private static final String TAG = "ProfilSettingsActivity";
 
-    private ProfilSettingsPresenter mPresenter;
+    private ProfileSettingsPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +29,7 @@ public class ProfilSettingsActivity extends AbstractActivity implements ProfilSe
 
         Log.d(TAG, "inside onCreate(), creating presenter fr this view");
 
-        mPresenter = new ProfilSettingsPresenterImpl(
+        mPresenter = new ProfileSettingsPresenterImpl(
                 MainThreadImpl.getInstance(),
                 this
         );

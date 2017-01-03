@@ -33,7 +33,7 @@ public class MatchTest {
     public MatchTest() {
         this.tenantUserProfile = getTenantUserProfile();
         this.tenantFilterSettings = getTenantFilterSettings();
-        this.apartmentUserProfileList = new ArrayList<>(ProfileGenerator.generateApartmentProfiles());
+        this.apartmentUserProfileList = new ArrayList<>(ProfileGenerator.generateApartmentProfiles(100));
 
 
         init();

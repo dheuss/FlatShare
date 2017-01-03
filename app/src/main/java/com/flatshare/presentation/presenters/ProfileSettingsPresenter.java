@@ -7,7 +7,7 @@ import com.flatshare.presentation.ui.BaseView;
  * Created by david on 28.12.2016.
  */
 
-public interface ProfilSettingsPresenter extends BasePresenter{
+public interface ProfileSettingsPresenter extends BasePresenter{
     interface View extends BaseView {
         void changeToTenantSettings();
         void uploadSucces();

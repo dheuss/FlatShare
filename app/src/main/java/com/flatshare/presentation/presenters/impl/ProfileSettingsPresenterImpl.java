@@ -1,20 +1,18 @@
 package com.flatshare.presentation.presenters.impl;
 
 import com.flatshare.domain.MainThread;
-import com.flatshare.presentation.presenters.ProfilSettingsPresenter;
-import com.flatshare.presentation.presenters.SettingsPresenter;
+import com.flatshare.presentation.presenters.ProfileSettingsPresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
-import com.flatshare.presentation.ui.AbstractActivity;
 
 /**
  * Created by david on 28.12.2016.
  */
 
-public class ProfilSettingsPresenterImpl extends AbstractPresenter implements ProfilSettingsPresenter {
+public class ProfileSettingsPresenterImpl extends AbstractPresenter implements ProfileSettingsPresenter {
 
-    private ProfilSettingsPresenter.View mView;
+    private ProfileSettingsPresenter.View mView;
 
-    public ProfilSettingsPresenterImpl(MainThread mainThread, View view) {
+    public ProfileSettingsPresenterImpl(MainThread mainThread, View view) {
         super(mainThread);
         mView = view;
     }
