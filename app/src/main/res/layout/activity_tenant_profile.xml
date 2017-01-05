@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.flatshare.presentation.ui.activities.TenantProfileActivity"
-    android:background="@color/colorBackground">
+    android:background="@color/windowBackground">
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -116,7 +116,6 @@
                 android:id="@+id/maleRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:shadowColor="@color/colorHardAccent"
                 android:text="male                  " />
 
             <RadioButton
@@ -255,10 +254,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/duration_of_stay_tenant_profile_textView"
             android:hint="@string/take_picture_tenant_profile"
-            android:textColor="@android:color/black"
-            android:textColorHint="@android:color/black"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
             android:layout_marginTop="20dp"
-            android:background="@color/colorHardAccent"
+            android:background="@color/colorPrimary"
             android:textStyle="bold" />
 
         <!-- Save Button -->
@@ -269,10 +268,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/take_a_picture_tenant_profile_button"
             android:hint="@string/done_1_tenant_profile"
-            android:textColor="@android:color/black"
-            android:textColorHint="@android:color/black"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
             android:layout_marginTop="20dp"
-            android:background="@color/colorHardAccent"
+            android:background="@color/colorPrimary"
             android:textStyle="bold"/>
 
     </RelativeLayout>

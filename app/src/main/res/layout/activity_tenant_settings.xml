@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.flatshare.presentation.ui.activities.TenantSettingsActivity"
-    android:background="@color/colorBackground">
+    android:background="@color/windowBackground">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -79,10 +79,10 @@
             custom:tickEnd="2500"
             custom:selectorSize="4dp"
             android:layout_below="@+id/price_range_textview"
-            custom:connectingLineColor="@color/colorHardAccent"
-            custom:pinColor="@color/colorHardAccent"
-            custom:rangeBarColor="@color/colorHardAccent"
-            custom:selectorColor="@color/colorHardAccent"/>
+            custom:connectingLineColor="@color/colorPrimary"
+            custom:pinColor="@color/colorPrimary"
+            custom:rangeBarColor="@color/colorPrimary"
+            custom:selectorColor="@color/colorPrimary"/>
 
         <TextView
             android:id="@+id/size_range_textview"
@@ -135,10 +135,10 @@
             custom:tickInterval="5"
             custom:tickEnd="60"
             android:layout_below="@+id/size_range_textview"
-            custom:connectingLineColor="@color/colorHardAccent"
-            custom:pinColor="@color/colorHardAccent"
-            custom:rangeBarColor="@color/colorHardAccent"
-            custom:selectorColor="@color/colorHardAccent"/>
+            custom:connectingLineColor="@color/colorPrimary"
+            custom:pinColor="@color/colorPrimary"
+            custom:rangeBarColor="@color/colorPrimary"
+            custom:selectorColor="@color/colorPrimary"/>
 
         <TextView
             android:id="@+id/area_textview"
@@ -435,10 +435,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="@string/done_1_tenant_profile"
-            android:textColor="@android:color/black"
-            android:textColorHint="@android:color/black"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
             android:layout_marginTop="20dp"
-            android:background="@color/colorHardAccent"
+            android:background="@color/colorPrimary"
             android:textStyle="bold"
             android:layout_below="@id/pets_textview"/>
 
