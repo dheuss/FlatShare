@@ -66,6 +66,11 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
         this.resetCallBack = resetCallBack;
     }
 
+    public AuthenticationManagerImpl(AuthenticationManager.LogOutCallBack logOutCallBack){
+        this();
+        this.logOutCallBack = logOutCallBack;
+    }
+
     @Override
     public void reset(ResetDataType resetDataType) {
         String email = resetDataType.getEmail();

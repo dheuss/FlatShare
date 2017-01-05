@@ -109,36 +109,36 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
 
     @Override
     public void reset(ResetDataType resetDataType) {
-        mView.showProgress();
-        AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
-        authenticationManager.reset(resetDataType);
+//        mView.showProgress();
+//        AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
+//        authenticationManager.reset(resetDataType);
     }
 
     @Override
     public void changeMail(ChangeMailAddressDataType changeMailAddressDataType) {
-        mView.showProgress();
-        AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
-        authenticationManager.changeMail(changeMailAddressDataType);
+//        mView.showProgress();
+//        AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
+//        authenticationManager.changeMail(changeMailAddressDataType);
     }
 
     @Override
     public void changePassword(ChangePasswordDataType changePasswordDataType) {
-        mView.showProgress();
-        AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
-        authenticationManager.changePassword(changePasswordDataType);
+//        mView.showProgress();
+//        AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
+//        authenticationManager.changePassword(changePasswordDataType);
     }
 
     @Override
     public void removeUser() {
-        mView.showProgress();
-        AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
-        authenticationManager.removeUser();
+//        mView.showProgress();
+//        AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
+//        authenticationManager.removeUser();
     }
 
     @Override
     public void logOut() {
         mView.showProgress();
-        AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
+        AuthenticationManager authenticationManager = new AuthenticationManagerImpl((AuthenticationManager.LogOutCallBack) this);
         authenticationManager.logOut();
     }
 }
