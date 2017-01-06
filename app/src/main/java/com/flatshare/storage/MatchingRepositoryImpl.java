@@ -1,7 +1,7 @@
 package com.flatshare.storage;
 
-import com.flatshare.domain.interactors.MatchingInteractor;
-import com.flatshare.domain.interactors.impl.MatchingInteractorImpl;
+import com.flatshare.domain.interactors.matching.MatchingInteractor;
+import com.flatshare.domain.interactors.matching.impl.MatchingInteractorImpl;
 import com.flatshare.domain.repository.MatchingRepository;
 
 /**

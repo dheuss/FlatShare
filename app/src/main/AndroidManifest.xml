@@ -18,21 +18,21 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".presentation.ui.activities.LoginActivity">
+        <activity android:name=".presentation.ui.activities.auth.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.ui.activities.MatchingActivity" />
-        <activity android:name=".presentation.ui.activities.PrimaryProfileActivity" />
-        <activity android:name=".presentation.ui.activities.RegisterActivity" />
-        <activity android:name=".presentation.ui.activities.ResetPasswordActivity" />
-        <activity android:name=".presentation.ui.activities.TenantProfileActivity" />
-        <activity android:name=".presentation.ui.activities.ApartmentProfileActivity" />
-        <activity android:name=".presentation.ui.activities.TenantSettingsActivity" />
-        <activity android:name=".presentation.ui.activities.ApartmentSettingsActivity" />
+        <activity android:name=".presentation.ui.activities.matching.MatchingActivity" />
+        <activity android:name=".presentation.ui.activities.profile.PrimaryProfileActivity" />
+        <activity android:name=".presentation.ui.activities.auth.RegisterActivity" />
+        <activity android:name=".presentation.ui.activities.auth.ResetPasswordActivity" />
+        <activity android:name=".presentation.ui.activities.profile.TenantProfileActivity" />
+        <activity android:name=".presentation.ui.activities.profile.ApartmentProfileActivity" />
+        <activity android:name=".presentation.ui.activities.profile.TenantSettingsActivity" />
+        <activity android:name=".presentation.ui.activities.profile.ApartmentSettingsActivity" />
         <!-- Facebook Activity -->
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -51,9 +51,9 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.ui.activities.ProfilSettingsActivity" />
-        <activity android:name=".presentation.ui.activities.ChatActivity" />
-        <activity android:name=".presentation.ui.activities.SettingsActivity" />
+        <activity android:name=".presentation.ui.activities.settings.ProfilSettingsActivity" />
+        <activity android:name=".presentation.ui.activities.chat.ChatActivity" />
+        <activity android:name=".presentation.ui.activities.settings.SettingsActivity" />
     </application>
 
 </manifest>
