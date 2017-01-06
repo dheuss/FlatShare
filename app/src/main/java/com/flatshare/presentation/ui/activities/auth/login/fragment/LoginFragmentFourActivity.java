@@ -77,12 +77,6 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
         );
 
         readSharedPreferences();
-        facebookCallbackManager = CallbackManager.Factory.create();
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +89,20 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), RegisterActivity.class));
+            }
+        });
+
+        facebookSignInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("FACEBOOK");
+            }
+        });
+
+        googleSignInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                googleLogin();
             }
         });
 
@@ -140,6 +148,10 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         mPresenter.login(new LoginDataType(email, password));
+    }
+
+    private void googleLogin(){
+
     }
 
     private void writeToSharedPreferences(int key, String value) {

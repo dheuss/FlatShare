@@ -11,6 +11,8 @@ import com.flatshare.presentation.ui.BaseView;
 public interface LoginPresenter extends BasePresenter {
 
     void login(LoginDataType loginDataType);
+    void loginGoogle();
+    void loginFacebook();
 
     interface View extends BaseView {
         void changeToProfileActivity();

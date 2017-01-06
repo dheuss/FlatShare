@@ -61,24 +61,24 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
 
     @Override
     public void login(LoginDataType loginDataType) {
-
-        // initialize the interactor
-//        LoginInteractor interactor = new LoginInteractorImpl(
-//                mExecutor,
-//                mMainThread,
-//                this
-//        );
-
         mView.showProgress();
 
         if (userState.isLoggedIn()) {
             onLoginSuccess();
         } else {
-
             LoginInteractor loginInteractor = new LoginInteractorImpl(mMainThread, this, loginDataType);
             loginInteractor.execute();
-
         }
+    }
+
+    @Override
+    public void loginGoogle() {
+        mView.showProgress();
+    }
+
+    @Override
+    public void loginFacebook() {
+        mView.showProgress();
     }
 
     @Override
