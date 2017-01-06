@@ -18,6 +18,9 @@ public class PrimaryUserProfile extends UserProfile {
     @PropertyName("apartment_profile_id")
     public String apartmentProfileId;
 
+    @PropertyName("email_address")
+    public String email;
+
     public PrimaryUserProfile() {
     }
 
@@ -53,5 +56,15 @@ public class PrimaryUserProfile extends UserProfile {
     @Exclude
     public void setApartmentProfileId(String apartmentProfileId) {
         this.apartmentProfileId = apartmentProfileId;
+    }
+
+    @Exclude
+    public String getEmail() {
+        return email;
+    }
+
+    @Exclude
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

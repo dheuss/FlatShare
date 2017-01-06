@@ -5,18 +5,22 @@ import android.widget.VideoView;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
+import com.flatshare.domain.interactors.matching.EmailRetrieverInteractor;
+import com.flatshare.domain.interactors.matching.impl.EmailRetrieverInteractorImpl;
 import com.flatshare.domain.interactors.media.MediaInteractor;
 import com.flatshare.domain.interactors.profile.ProfileInteractor;
 import com.flatshare.domain.interactors.profile.impl.ApartmentProfileInteractorImpl;
-import com.flatshare.presentation.presenters.profile.ApartmentProfilePresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
+import com.flatshare.presentation.presenters.profile.ApartmentProfilePresenter;
+
+import java.util.Map;
 
 /**
  * Created by Arber on 11/12/2016.
  */
 
 public class ApartmentProfilePresenterImpl extends AbstractPresenter implements ApartmentProfilePresenter,
-        ProfileInteractor.Callback, MediaInteractor.UploadCallback {
+        ProfileInteractor.Callback, MediaInteractor.UploadCallback, EmailRetrieverInteractor.Callback {
 
 
     private ApartmentProfilePresenter.View mView;
@@ -85,6 +89,12 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
     }
 
     @Override
+    public void getUserEmails() {
+        EmailRetrieverInteractor emailRetrieverInteractor = new EmailRetrieverInteractorImpl(mMainThread, this);
+        emailRetrieverInteractor.execute();
+    }
+
+    @Override
     public void onError(String error) {
 
         mView.showError(error);
@@ -93,5 +103,15 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
     @Override
     public void onUploadSuccess() {
         //TODO: notify view that media was uploaded
+    }
+
+    @Override
+    public void emailsRetrievedSuccess(Map<String, String> emailIdMap) {
+        mView.updateAdapter(emailIdMap);
+    }
+
+    @Override
+    public void emailsRetrievedFailure(String errorMessage) {
+        mView.showError(errorMessage);
     }
 }

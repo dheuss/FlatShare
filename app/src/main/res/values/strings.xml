@@ -68,6 +68,7 @@
     <string name="remove_user">Remove User</string>
     <string name="btn_sign_out">Sign Out</string>
     <string name="settings">Settings</string>
+    <string name="apartment_roommates">Roommates:</string>
 
     <string-array name="occupation">
         <item>Student</item>

@@ -25,10 +25,28 @@
             android:textSize="30dp" />
 
         <TextView
-            android:id="@+id/apartment_price"
+            android:id="@+id/apartment_roommates"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
+            android:layout_marginTop="20dp"
+            android:text="@string/apartment_roommates"
+            android:textSize="20dp" />
+
+        <MultiAutoCompleteTextView
+            android:id="@+id/apartment_roommates_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/title"
+            android:layout_marginTop="10dp"
+            android:width="200dp"/>
+
+        <TextView
+            android:id="@+id/apartment_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/apartment_roommates"
             android:layout_marginTop="20dp"
             android:text="@string/apartment_price"
             android:textSize="20dp" />
@@ -38,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/title"
+            android:layout_below="@+id/apartment_roommates"
             android:layout_marginTop="10dp"
             android:width="200dp"
             android:inputType="numberDecimal" />

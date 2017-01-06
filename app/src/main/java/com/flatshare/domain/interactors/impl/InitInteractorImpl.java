@@ -47,7 +47,6 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
      * callback method that posts message received into the main UI, through mainThread.post!!!
      */
     private void notifySuccess() {
-        Log.d(TAG, "inside postMessage(String msg)");
 
         mMainThread.post(() -> mCallback.onReceivedSuccess(primaryUserProfile, tenantUserProfile, apartmentUserProfile));
     }
@@ -82,14 +81,18 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
 
     private void getSecondaryUserProfiles(String tenantProfileId, String apartmentProfileId) {
 
-        if (tenantProfileId != null) {
+        if (tenantProfileId != null && tenantProfileId != "") {
             String path = databaseRoot.getTenantProfileNode(tenantProfileId).getRootPath();
 
             mDatabase.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     tenantUserProfile = dataSnapshot.getValue(TenantUserProfile.class);
-                    getApartmentProfile(apartmentProfileId, true);
+                    if (tenantUserProfile == null) { // nothing found
+                        getApartmentProfile(apartmentProfileId, false);
+                    } else {
+                        getApartmentProfile(apartmentProfileId, true);
+                    }
                 }
 
                 @Override
@@ -103,13 +106,24 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
     }
 
     private void getApartmentProfile(String apartmentProfileId, boolean tenantFound) {
-        if (apartmentProfileId != null) {
+
+        if (apartmentProfileId != null && apartmentProfileId != "") {
             String path = databaseRoot.getApartmentProfileNode(apartmentProfileId).getRootPath();
 
             mDatabase.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+
                     apartmentUserProfile = dataSnapshot.getValue(ApartmentUserProfile.class);
+                    if (apartmentUserProfile == null) {
+                        if (tenantFound) {
+                            notifySuccess();
+                            return;
+                        } else {
+                            notifyError("Neither tenantId, nor apartmentId found!");
+                            return;
+                        }
+                    }
                     notifySuccess();
                 }
 

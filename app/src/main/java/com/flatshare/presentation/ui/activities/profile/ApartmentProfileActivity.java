@@ -3,8 +3,10 @@ package com.flatshare.presentation.ui.activities.profile;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -16,6 +18,10 @@ import com.flatshare.presentation.presenters.profile.ApartmentProfilePresenter;
 import com.flatshare.presentation.presenters.profile.impl.ApartmentProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Arber on 16/12/2016.
@@ -40,11 +46,15 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     private RadioGroup washingMachineRadioGroup;
     private RadioButton washingMachineYesRB, washingMachineNoRB;
 
+    private MultiAutoCompleteTextView roommatesEmailsMultiAC;
+    private ArrayAdapter<String> adapter;
+
     //    private Button profileDoneButton;
     private Button createApartmentButton;
 
     private ApartmentProfilePresenter mPresenter;
     private static final String TAG = "ApartmentProfileAct";
+    private Map<String, String> emailIdMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +68,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
                 this
         );
 
+        initMultiAutoComplete();
         createApartmentButton.setOnClickListener(view -> sendProfile());
 
     }
@@ -68,6 +79,22 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     }
 
     private void sendProfile() {
+
+        String[] emails = roommatesEmailsMultiAC.getText().toString().split(",");
+
+        List<String> roommatesId = new ArrayList<>();
+
+        for (int i = 0; i < emails.length; i++) {
+
+            String id = emailIdMap.get(emails[i].trim());
+
+//            System.out.println("email of " + i + ":" + emails[i].trim());
+//            System.out.println("ID of " + i + ":" + id);
+
+            if (id != null) {
+                roommatesId.add(id);
+            }
+        }
 
         int price = Integer.parseInt(apartmentPriceEditText.getText().toString());
         int area = Integer.parseInt(apartmentAreaEditText.getText().toString());
@@ -94,6 +121,9 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         apartmentUserProfile.setSmokerApartment(isSmoker);
         apartmentUserProfile.setPets(hasPets);
         apartmentUserProfile.setWashingMachine(hasWashingMachine);
+
+
+        apartmentUserProfile.setRoommateIds(roommatesId);
 
         mPresenter.sendProfile(apartmentUserProfile);
     }
@@ -125,6 +155,8 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
         createApartmentButton = (Button) findViewById(R.id.create_apartment_profile_button);
 
+        roommatesEmailsMultiAC = (MultiAutoCompleteTextView) findViewById(R.id.apartment_roommates_edit_text);
+
     }
 
     @Override
@@ -145,5 +177,33 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         Intent intent = new Intent(this, ApartmentSettingsActivity.class);
         startActivity(intent);
 
+    }
+
+    @Override
+    public void updateAdapter(Map<String, String> emailIdMap) {
+
+        System.out.println("Updating adapter!");
+
+        emailIdMap.clear();
+        emailIdMap.put("a@a.de", "1");
+        emailIdMap.put("b@b.de", "2");
+        emailIdMap.put("c@c.de", "3");
+
+        this.emailIdMap = emailIdMap;
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>(emailIdMap.keySet()));
+
+//        System.out.println("item 0: " + adapter.getItem(0));
+//        System.out.println("item 1: " + adapter.getItem(1));
+
+        roommatesEmailsMultiAC.setAdapter(adapter);
+
+        System.out.println("done updating");
+
+    }
+
+    private void initMultiAutoComplete() {
+        roommatesEmailsMultiAC.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        roommatesEmailsMultiAC.setThreshold(2);
+        mPresenter.getUserEmails();
     }
 }

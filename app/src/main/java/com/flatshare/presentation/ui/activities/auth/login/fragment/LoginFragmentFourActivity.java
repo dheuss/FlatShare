@@ -140,7 +140,7 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
 
             emailEditText.setText(email);
             passwordEditText.setText(password);
-            login();
+//            login();
         }
     }
 
