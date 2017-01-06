@@ -116,7 +116,6 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
 
     @Override
     public void onLoginFailure(String errorMessage) {
-
         mView.hideProgress();
         onError(errorMessage);
     }

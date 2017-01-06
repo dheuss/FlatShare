@@ -22,15 +22,11 @@ import com.flatshare.threading.MainThreadImpl;
 public class RegisterActivity extends AbstractActivity implements RegisterPresenter.View {
 
     private EditText emailEditText;
-
     private EditText passwordEditText;
-
     private EditText nameEditText;
 
     private Button registerButton;
-
     private Button forgotYourPasswordButton;
-
     private Button alreadyRegisteredButton;
 
     private RegisterPresenter mPresenter;
@@ -93,7 +89,6 @@ public class RegisterActivity extends AbstractActivity implements RegisterPresen
 
     @Override
     public void changeToProfileActivity() {
-        //TODO change to PrimaryProfileActivity
         Log.d(TAG, "success! changed to PrimaryProfileActivity!");
         Intent intent = new Intent(this, PrimaryProfileActivity.class);
         startActivity(intent);

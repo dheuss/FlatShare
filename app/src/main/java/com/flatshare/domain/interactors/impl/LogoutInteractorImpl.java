@@ -39,6 +39,8 @@ public class LogoutInteractorImpl extends AbstractInteractor implements LogoutIn
 
     @Override
     public void execute() {
-        //TODO: logout
+        //TODO: Abfrage ob man sich wirklich ausloggen möchte
+        mAuth.signOut();
+        notifySuccess();
     }
 }

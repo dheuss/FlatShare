@@ -128,8 +128,6 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
 
     @Override
     public void logOut() {
-        mAuth.signOut();
-        logOutCallBack.onLogOutSuccessful();
     }
 
 

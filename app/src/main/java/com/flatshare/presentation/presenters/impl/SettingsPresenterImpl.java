@@ -6,6 +6,8 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.auth.ChangeMailAddressDataType;
 import com.flatshare.domain.datatypes.auth.ChangePasswordDataType;
 import com.flatshare.domain.datatypes.auth.ResetDataType;
+import com.flatshare.domain.interactors.LogoutInteractor;
+import com.flatshare.domain.interactors.impl.LogoutInteractorImpl;
 import com.flatshare.network.AuthenticationManager;
 import com.flatshare.network.impl.AuthenticationManagerImpl;
 import com.flatshare.presentation.presenters.SettingsPresenter;
@@ -16,11 +18,7 @@ import com.flatshare.presentation.presenters.base.AbstractPresenter;
  */
 
 public class SettingsPresenterImpl extends AbstractPresenter implements SettingsPresenter,
-        AuthenticationManager.ResetCallBack,
-        AuthenticationManager.ChangeMailCallBack,
-        AuthenticationManager.ChangePasswordCallBack,
-        AuthenticationManager.RemoveUserCallBack,
-        AuthenticationManager.LogOutCallBack {
+        LogoutInteractor.Callback{
 
     private static final String TAG = "SettingsPresenterImpl";
     private SettingsPresenter.View mView;
@@ -56,89 +54,22 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
     }
 
     @Override
-    public void onResetSuccessful() {
-
+    public void logOut() {
+        LogoutInteractor logoutInteractor = new LogoutInteractorImpl(mMainThread, this);
+        logoutInteractor.execute();
     }
 
     @Override
-    public void onResetFailed(String error) {
-
-    }
-
-
-    @Override
-    public void onChangePasswordSuccessful() {
-
-    }
-
-    @Override
-    public void onChangePasswordFailed(String error) {
-
-    }
-
-    @Override
-    public void onLogOutSuccessful() {
+    public void onLogoutSuccess() {
         userState.setLoggedIn(false);
         //TODO: maybe change back to main view?
+        mView.hideProgress();
+        mView.changeToLoginActivity();
     }
 
     @Override
-    public void onLogOutFailed(String error) {
-
-    }
-
-    @Override
-    public void onRemoveUserSuccessful() {
-
-    }
-
-    @Override
-    public void onRemoveUserFailed(String error) {
-
-    }
-
-    @Override
-    public void onChangeMailSuccessful() {
-
-    }
-
-    @Override
-    public void onChangedMailFailed(String error) {
-
-    }
-
-    @Override
-    public void reset(ResetDataType resetDataType) {
-//        mView.showProgress();
-//        AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
-//        authenticationManager.reset(resetDataType);
-    }
-
-    @Override
-    public void changeMail(ChangeMailAddressDataType changeMailAddressDataType) {
-//        mView.showProgress();
-//        AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
-//        authenticationManager.changeMail(changeMailAddressDataType);
-    }
-
-    @Override
-    public void changePassword(ChangePasswordDataType changePasswordDataType) {
-//        mView.showProgress();
-//        AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
-//        authenticationManager.changePassword(changePasswordDataType);
-    }
-
-    @Override
-    public void removeUser() {
-//        mView.showProgress();
-//        AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
-//        authenticationManager.removeUser();
-    }
-
-    @Override
-    public void logOut() {
-        mView.showProgress();
-        AuthenticationManager authenticationManager = new AuthenticationManagerImpl((AuthenticationManager.LogOutCallBack) this);
-        authenticationManager.logOut();
+    public void onLogoutFail(String errorMessage) {
+        mView.hideProgress();
+        onError(errorMessage);
     }
 }

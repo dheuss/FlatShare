@@ -22,34 +22,23 @@ public class RegisterPresenterImpl extends AbstractPresenter implements Register
     public RegisterPresenterImpl(MainThread mainThread,
                                  View view) {
         super(mainThread);
-
         mView = view;
-
     }
 
     @Override
-    public void resume() {
-
-    }
+    public void resume() {}
 
     @Override
-    public void pause() {
-
-    }
+    public void pause() {}
 
     @Override
-    public void stop() {
-
-    }
+    public void stop() {}
 
     @Override
-    public void destroy() {
-
-    }
+    public void destroy() {}
 
     @Override
     public void onError(String message) {
-
         mView.showError(message);
     }
 

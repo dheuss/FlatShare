@@ -12,13 +12,9 @@ import com.flatshare.presentation.ui.BaseView;
 
 public interface SettingsPresenter extends BasePresenter{
 
-    void reset(ResetDataType resetDataType);
-    void changeMail(ChangeMailAddressDataType changeMailAddressDataType);
-    void changePassword(ChangePasswordDataType changePasswordDataType);
-    void removeUser();
     void logOut();
 
     interface View extends BaseView {
-
+        void changeToLoginActivity();
     }
 }

@@ -107,7 +107,7 @@ public class SettingsActivity extends AbstractActivity implements SettingsPresen
             }
         });
 
-        changeEmail.setOnClickListener(view -> changeMail());
+        //changeEmail.setOnClickListener(view -> changeMail());
         signOut.setOnClickListener(view -> signOut());
     }
 
@@ -146,10 +146,6 @@ public class SettingsActivity extends AbstractActivity implements SettingsPresen
         remove.setVisibility(View.GONE);
     }
 
-    public void changeMail(){
-        mPresenter.changeMail(new ChangeMailAddressDataType(newEmail.getText().toString()));
-    }
-
     public void signOut() {
         mPresenter.logOut();
     }
@@ -159,4 +155,10 @@ public class SettingsActivity extends AbstractActivity implements SettingsPresen
 
     }
 
+    @Override
+    public void changeToLoginActivity() {
+        Log.d(TAG, "success! changed to PrimaryProfileActivity!");
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 }
