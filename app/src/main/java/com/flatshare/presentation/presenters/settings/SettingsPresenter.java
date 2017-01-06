@@ -10,6 +10,8 @@ import com.flatshare.presentation.ui.BaseView;
 public interface SettingsPresenter extends BasePresenter{
 
     void logOut();
+    void changeMailAddress(String newMailAddress);
+    void deleteAccount();
 
     interface View extends BaseView {
         void changeToLoginActivity();

@@ -107,8 +107,9 @@ public class SettingsActivity extends AbstractActivity implements SettingsPresen
             }
         });
 
-        //changeEmail.setOnClickListener(view -> changeMail());
+        changeEmail.setOnClickListener(view -> changeMail());
         signOut.setOnClickListener(view -> signOut());
+        btnRemoveUser.setOnClickListener(view -> deleteAccount());
     }
 
     @Override
@@ -148,6 +149,14 @@ public class SettingsActivity extends AbstractActivity implements SettingsPresen
 
     public void signOut() {
         mPresenter.logOut();
+    }
+
+    public void changeMail(){
+        mPresenter.changeMailAddress(newEmail.getText().toString());
+    }
+
+    public void deleteAccount() {
+        mPresenter.deleteAccount();
     }
 
     @Override

@@ -28,6 +28,7 @@ public abstract class AbstractInteractor implements Interactor {
     // Authentication
     protected FirebaseAuth mAuth;
     protected FirebaseAuth.AuthStateListener mAuthListener;
+    protected FirebaseUser userFirebase;
 
     protected String userId;
 
@@ -40,12 +41,14 @@ public abstract class AbstractInteractor implements Interactor {
         Log.d(TAG, "inside constructor");
 
         mAuth = FirebaseAuth.getInstance();
+        this.userFirebase = mAuth.getCurrentUser();
 
         mAuthListener = firebaseAuth -> {
             FirebaseUser user_ = firebaseAuth.getCurrentUser();
             if (user_ != null) {
                 Log.d(TAG, "onAuthStateChanged:signed_in:" + userId);
                 this.userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                Log.v(TAG, userFirebase + "  ++++++ ABstractActivity FIREBVASEUSER ID");
             } else {
                 Log.d(TAG, "onAuthStateChanged:signed_out");
             }

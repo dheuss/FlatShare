@@ -96,27 +96,10 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
 
     @Override
     public void changeMail(ChangeMailAddressDataType changeMailAddressDataType) {
-        System.out.println("Change Mail for Mail: " + changeMailAddressDataType.getEmail() + " USER: " + user.getUid());
-        String email = changeMailAddressDataType.getEmail();
-        if (TextUtils.isEmpty(email)){
-            return;
-        }
-        user.updateEmail(email)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Log.v(TAG, "changeMail:successful:" + task.isSuccessful());
-                        logOut();
-                    } else {
-                        Log.v(TAG, "chanageMail:failed:" + task.getException());
-                        logOutCallBack.onLogOutFailed("logoutFailed");
-                    }
-                });
     }
 
     @Override
     public void changePassword(ChangePasswordDataType changePasswordDataType) {
-        System.out.println("Change Password for Mail: " + changePasswordDataType.getPassword());
-
     }
 
     @Override

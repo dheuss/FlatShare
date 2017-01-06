@@ -3,7 +3,11 @@ package com.flatshare.presentation.presenters.settings.impl;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.interactors.auth.ChangeMailInteractor;
+import com.flatshare.domain.interactors.auth.DeleteAccountInteractor;
 import com.flatshare.domain.interactors.auth.LogoutInteractor;
+import com.flatshare.domain.interactors.auth.impl.ChangeMailInteractorImpl;
+import com.flatshare.domain.interactors.auth.impl.DeleteAccountInteractorImpl;
 import com.flatshare.domain.interactors.auth.impl.LogoutInteractorImpl;
 import com.flatshare.presentation.presenters.settings.SettingsPresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
@@ -13,7 +17,9 @@ import com.flatshare.presentation.presenters.base.AbstractPresenter;
  */
 
 public class SettingsPresenterImpl extends AbstractPresenter implements SettingsPresenter,
-        LogoutInteractor.Callback{
+        LogoutInteractor.Callback,
+        ChangeMailInteractor.Callback,
+        DeleteAccountInteractor.Callback{
 
     private static final String TAG = "SettingsPresenterImpl";
     private SettingsPresenter.View mView;
@@ -55,15 +61,54 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
     }
 
     @Override
+    public void changeMailAddress(String newMailAddress) {
+        ChangeMailInteractor changeMailInteractor = new ChangeMailInteractorImpl(mMainThread, this, newMailAddress);
+        changeMailInteractor.execute();
+    }
+
+    @Override
+    public void deleteAccount(){
+        DeleteAccountInteractor deleteAccountInteractor = new DeleteAccountInteractorImpl(mMainThread, this);
+        deleteAccountInteractor.execute();
+    }
+
+    @Override
     public void onLogoutSuccess() {
         userState.setLoggedIn(false);
-        //TODO: maybe change back to main view?
         mView.hideProgress();
         mView.changeToLoginActivity();
     }
 
     @Override
     public void onLogoutFail(String errorMessage) {
+        mView.hideProgress();
+        onError(errorMessage);
+    }
+
+
+    @Override
+    public void onChangeMailSuccess() {
+        userState.setLoggedIn(false);
+        mView.hideProgress();
+        mView.changeToLoginActivity();
+    }
+
+    @Override
+    public void onChangeMailFailure(String errorMessage) {
+        mView.hideProgress();
+        onError(errorMessage);
+    }
+
+
+    @Override
+    public void onDeleteAccountSuccess() {
+        userState.setLoggedIn(false);
+        mView.hideProgress();
+        mView.changeToLoginActivity();
+    }
+
+    @Override
+    public void onDeleteAccountFailure(String errorMessage){
         mView.hideProgress();
         onError(errorMessage);
     }
