@@ -2,6 +2,8 @@ package com.flatshare.presentation.presenters.impl;
 
 import com.flatshare.domain.datatypes.auth.RegisterDataType;
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.interactors.RegisterInteractor;
+import com.flatshare.domain.interactors.impl.RegisterInteractorImpl;
 import com.flatshare.network.AuthenticationManager;
 import com.flatshare.network.impl.AuthenticationManagerImpl;
 import com.flatshare.presentation.presenters.RegisterPresenter;
@@ -12,7 +14,7 @@ import com.flatshare.presentation.presenters.base.AbstractPresenter;
  */
 
 public class RegisterPresenterImpl extends AbstractPresenter implements RegisterPresenter,
-        AuthenticationManager.RegisterCallBack{
+        RegisterInteractor.Callback{
 
 
     private RegisterPresenter.View mView;
@@ -52,23 +54,20 @@ public class RegisterPresenterImpl extends AbstractPresenter implements Register
     }
 
     @Override
-    public void onRegisterSuccessful() {
+    public void register(RegisterDataType registerDataType) {
+        RegisterInteractor registerInteractor = new RegisterInteractorImpl(mMainThread,this, registerDataType);
+        registerInteractor.execute();
+    }
+
+    @Override
+    public void onRegisterSuccess() {
         mView.hideProgress();
         mView.changeToProfileActivity();
     }
 
     @Override
-    public void onRegisterFailed(String error) {
+    public void onRegisterFailure(String errorMessage) {
         mView.hideProgress();
-        onError(error);
-    }
-
-    @Override
-    public void register(RegisterDataType registerDataType) {
-        mView.showProgress();
-        AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
-
-//        // run the interactor
-        authenticationManager.register(registerDataType);
+        onError(errorMessage);
     }
 }

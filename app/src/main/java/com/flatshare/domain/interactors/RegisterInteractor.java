@@ -7,10 +7,9 @@ import com.flatshare.domain.interactors.base.Interactor;
  */
 
 public interface RegisterInteractor extends Interactor {
+
     interface Callback {
-
         void onRegisterSuccess();
-
         void onRegisterFailure(String errorMessage);
     }
 }

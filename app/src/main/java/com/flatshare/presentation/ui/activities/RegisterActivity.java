@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.auth.RegisterDataType;
+import com.flatshare.domain.interactors.RegisterInteractor;
 import com.flatshare.presentation.presenters.RegisterPresenter;
 import com.flatshare.presentation.presenters.impl.RegisterPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
