@@ -7,10 +7,12 @@ import com.flatshare.domain.interactors.auth.ChangeMailInteractor;
 import com.flatshare.domain.interactors.auth.ChangePasswordInteractor;
 import com.flatshare.domain.interactors.auth.DeleteAccountInteractor;
 import com.flatshare.domain.interactors.auth.LogoutInteractor;
+import com.flatshare.domain.interactors.auth.ResetPasswordInteractor;
 import com.flatshare.domain.interactors.auth.impl.ChangeMailInteractorImpl;
 import com.flatshare.domain.interactors.auth.impl.ChangePasswordInteractorImpl;
 import com.flatshare.domain.interactors.auth.impl.DeleteAccountInteractorImpl;
 import com.flatshare.domain.interactors.auth.impl.LogoutInteractorImpl;
+import com.flatshare.domain.interactors.auth.impl.ResetPasswordInteractorImpl;
 import com.flatshare.presentation.presenters.settings.SettingsPresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 
@@ -22,7 +24,8 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
         LogoutInteractor.Callback,
         ChangeMailInteractor.Callback,
         DeleteAccountInteractor.Callback,
-        ChangePasswordInteractor.Callback{
+        ChangePasswordInteractor.Callback,
+        ResetPasswordInteractor.Callback{
 
     private static final String TAG = "SettingsPresenterImpl";
     private SettingsPresenter.View mView;
@@ -82,6 +85,12 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
     }
 
     @Override
+    public void resetPasswordMail(String email){
+        ResetPasswordInteractor resetPasswordInteractor = new ResetPasswordInteractorImpl(mMainThread, this, email);
+        resetPasswordInteractor.execute();
+    }
+
+    @Override
     public void onLogoutSuccess() {
         userState.setLoggedIn(false);
         mView.hideProgress();
@@ -93,7 +102,6 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
         mView.hideProgress();
         onError(errorMessage);
     }
-
 
     @Override
     public void onChangeMailSuccess() {
@@ -131,6 +139,19 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
 
     @Override
     public void onChangePasswordFailure(String errorMessage) {
+        mView.hideProgress();
+        onError(errorMessage);
+    }
+
+    @Override
+    public void onResetPasswordSuccess() {
+        userState.setLoggedIn(false);
+        mView.hideProgress();
+        mView.changeToLoginActivity();
+    }
+
+    @Override
+    public void onResetPasswordFailure(String errorMessage) {
         mView.hideProgress();
         onError(errorMessage);
     }

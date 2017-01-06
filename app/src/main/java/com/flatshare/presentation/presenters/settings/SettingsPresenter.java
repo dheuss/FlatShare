@@ -13,6 +13,7 @@ public interface SettingsPresenter extends BasePresenter{
     void changeMailAddress(String newMailAddress);
     void deleteAccount();
     void changePassword(String newPassword);
+    void resetPasswordMail(String email);
 
     interface View extends BaseView {
         void changeToLoginActivity();
