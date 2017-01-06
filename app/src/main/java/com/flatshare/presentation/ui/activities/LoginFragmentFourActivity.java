@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.login.widget.LoginButton;
@@ -135,10 +136,6 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
     private void login() {
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
-
-        writeToSharedPreferences(R.string.email_login, email);
-        writeToSharedPreferences(R.string.password_login, password);
-        writeToSharedPreferences(R.string.login_check_box, loginCheckBox.isChecked());
         mPresenter.login(new LoginDataType(email, password));
     }
 
@@ -157,8 +154,20 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
     @Override
     public void changeToProfileActivity() {
         Log.d("LoginActivity", "success! changed to PrimaryProfileActivity!");
+        loginSuccess();
         Intent intent = new Intent(getActivity(), PrimaryProfileActivity.class);
         startActivity(intent);
+    }
+
+    private void loginSuccess() {
+
+        String email = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+
+        writeToSharedPreferences(R.string.email_login, email);
+        writeToSharedPreferences(R.string.password_login, password);
+        writeToSharedPreferences(R.string.login_check_box, loginCheckBox.isChecked());
+
     }
 
     @Override
@@ -192,6 +201,7 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
 
     @Override
     public void showError(String message) {
-
+        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+        writeToSharedPreferences(R.string.login_check_box, false);
     }
 }
