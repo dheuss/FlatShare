@@ -12,6 +12,7 @@ import com.flatshare.domain.datatypes.auth.ResetDataType;
 import com.flatshare.presentation.presenters.auth.ResetPasswordPresenter;
 import com.flatshare.presentation.presenters.auth.impl.ResetPasswordPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
+import com.flatshare.presentation.ui.activities.auth.login.LoginActivity;
 import com.flatshare.presentation.ui.activities.profile.PrimaryProfileActivity;
 import com.flatshare.threading.MainThreadImpl;
 
@@ -50,7 +51,7 @@ public class ResetPasswordActivity extends AbstractActivity implements ResetPass
     }
 
     public void reset() {
-        mPresenter.reset(new ResetDataType(emailResetPasswordEditText.getText().toString()));
+        mPresenter.reset(emailResetPasswordEditText.getText().toString());
     }
 
 
@@ -60,18 +61,15 @@ public class ResetPasswordActivity extends AbstractActivity implements ResetPass
         mPresenter.resume();
     }
 
-
-    @Override
-    public void changeToProfileActivity() {
-        //TODO change to PrimaryProfileActivity
-        Log.d("LoginActivity", "success! changed to PrimaryProfileActivity!");
-        Intent intent = new Intent(this, PrimaryProfileActivity.class);
-        startActivity(intent);
-    }
-
     @Override
     public void showError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void changeToLoginActivity() {
+        //Log.d(TAG, "success! changed to PrimaryProfileActivity!");
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 }

@@ -1,18 +1,18 @@
 package com.flatshare.presentation.presenters.auth.impl;
 
-import com.flatshare.domain.datatypes.auth.ResetDataType;
-import com.flatshare.presentation.presenters.auth.ResetPasswordPresenter;
+
 import com.flatshare.domain.MainThread;
-import com.flatshare.network.AuthenticationManager;
-import com.flatshare.network.impl.AuthenticationManagerImpl;
+import com.flatshare.domain.interactors.auth.ResetPasswordLoginInteractor;
+import com.flatshare.domain.interactors.auth.impl.ResetPasswordLoginInteractorImpl;
+import com.flatshare.presentation.presenters.auth.ResetPasswordPresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 
 /**
  * Created by david on 19.12.2016.
  */
 
-public class ResetPasswordPresenterImpl extends AbstractPresenter implements ResetPasswordPresenter, AuthenticationManager.ResetCallBack {
-
+public class ResetPasswordPresenterImpl extends AbstractPresenter implements ResetPasswordPresenter,
+        ResetPasswordLoginInteractor.Callback{
 
     private ResetPasswordPresenter.View mView;
 
@@ -47,21 +47,22 @@ public class ResetPasswordPresenterImpl extends AbstractPresenter implements Res
     }
 
     @Override
-    public void onResetSuccessful() {
-        mView.hideProgress();
-        mView.changeToProfileActivity();
-    }
-
-    @Override
-    public void onResetFailed(String error) {
-        mView.hideProgress();
-        onError(error);
-    }
-
-    @Override
-    public void reset(ResetDataType resetDataType) {
+    public void reset(String email) {
         mView.showProgress();
-        AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
-        authenticationManager.reset(resetDataType);
+        ResetPasswordLoginInteractor resetPasswordLoginInteractor = new ResetPasswordLoginInteractorImpl(mMainThread, this, email);
+        resetPasswordLoginInteractor.execute();
+    }
+
+    @Override
+    public void onResetPasswordLoginSuccess() {
+        userState.setLoggedIn(false);
+        mView.hideProgress();
+        mView.changeToLoginActivity();
+    }
+
+    @Override
+    public void onResetPasswordLoginFailure(String errorMessage) {
+        mView.hideProgress();
+        onError(errorMessage);
     }
 }

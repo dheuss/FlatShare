@@ -10,9 +10,9 @@ import com.flatshare.presentation.ui.BaseView;
 
 public interface ResetPasswordPresenter extends BasePresenter {
 
-    void reset(ResetDataType resetDataType);
+    void reset(String email);
 
     interface View extends BaseView{
-        void changeToProfileActivity();
+        void changeToLoginActivity();
     }
 }
