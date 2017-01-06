@@ -1,4 +1,4 @@
-package com.flatshare.presentation.ui.activities.auth;
+package com.flatshare.presentation.ui.activities.auth.login.fragment;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -21,6 +21,7 @@ import com.flatshare.R;
 import com.flatshare.domain.datatypes.auth.LoginDataType;
 import com.flatshare.presentation.presenters.auth.LoginPresenter;
 import com.flatshare.presentation.presenters.auth.impl.LoginPresenterImpl;
+import com.flatshare.presentation.ui.activities.auth.RegisterActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.presentation.ui.activities.profile.PrimaryProfileActivity;
 import com.flatshare.threading.MainThreadImpl;

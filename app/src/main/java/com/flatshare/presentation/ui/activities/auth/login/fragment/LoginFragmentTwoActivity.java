@@ -1,8 +1,7 @@
-package com.flatshare.presentation.ui.activities.auth;
+package com.flatshare.presentation.ui.activities.auth.login.fragment;
 
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

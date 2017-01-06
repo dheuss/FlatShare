@@ -1,4 +1,4 @@
-package com.flatshare.presentation.ui.activities.auth;
+package com.flatshare.presentation.ui.activities.auth.login.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

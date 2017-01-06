@@ -13,7 +13,7 @@ import com.flatshare.R;
 import com.flatshare.presentation.presenters.settings.SettingsPresenter;
 import com.flatshare.presentation.presenters.settings.impl.SettingsPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
-import com.flatshare.presentation.ui.activities.auth.LoginActivity;
+import com.flatshare.presentation.ui.activities.auth.login.LoginActivity;
 import com.flatshare.threading.MainThreadImpl;
 
 public class SettingsActivity extends AbstractActivity implements SettingsPresenter.View {

@@ -1,4 +1,4 @@
-package com.flatshare.presentation.ui.activities.auth;
+package com.flatshare.presentation.ui.activities.auth.login;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -12,6 +12,10 @@ import android.support.v7.widget.Toolbar;
 import com.facebook.FacebookSdk;
 import com.flatshare.R;
 import com.flatshare.presentation.presenters.auth.LoginPresenter;
+import com.flatshare.presentation.ui.activities.auth.login.fragment.LoginFragmentFourActivity;
+import com.flatshare.presentation.ui.activities.auth.login.fragment.LoginFragmentOneActivity;
+import com.flatshare.presentation.ui.activities.auth.login.fragment.LoginFragmentThreeActivity;
+import com.flatshare.presentation.ui.activities.auth.login.fragment.LoginFragmentTwoActivity;
 
 import java.util.ArrayList;
 import java.util.List;

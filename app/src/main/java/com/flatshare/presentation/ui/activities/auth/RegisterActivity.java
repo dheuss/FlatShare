@@ -13,6 +13,7 @@ import com.flatshare.domain.datatypes.auth.RegisterDataType;
 import com.flatshare.presentation.presenters.auth.RegisterPresenter;
 import com.flatshare.presentation.presenters.auth.impl.RegisterPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
+import com.flatshare.presentation.ui.activities.auth.login.LoginActivity;
 import com.flatshare.presentation.ui.activities.profile.PrimaryProfileActivity;
 import com.flatshare.threading.MainThreadImpl;
 
