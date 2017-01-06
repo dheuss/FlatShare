@@ -1,5 +1,6 @@
 package com.flatshare.domain.interactors.impl;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
@@ -41,7 +42,48 @@ public class RegisterInteractorImpl extends AbstractInteractor implements Regist
 
     @Override
     public void execute() {
-        //TODO: register
+
+        String email = this.registerDataType.getEmail();
+        String password = this.registerDataType.getPassword();
+
+        if (!validateForm(email, password)) {
+            return;
+        }
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+
+                    // If sign in fails, display a message to the user. If sign in succeeds
+                    // the auth state listener will be notified and logic to handle the
+                    // signed in user can be handled in the listener.
+                    if (task.isSuccessful()) {
+                        // TODO: update view
+                        notifySuccess();
+                    } else {
+                        notifyError(task.getException().getMessage());
+                    }
+                });
+    }
+
+    private boolean validateForm(String email, String password) {
+        boolean valid = true;
+
+        if (TextUtils.isEmpty(email)) {
+//            mEmailField.setError("Required.");
+            valid = false;
+        } else {
+//            mEmailField.setError(null);
+        }
+
+        if (TextUtils.isEmpty(password)) {
+//            mPasswordField.setError("Required.");
+            valid = false;
+        } else {
+//            mPasswordField.setError(null);
+        }
+
+        return valid;
     }
 }
 

@@ -20,24 +20,44 @@ public abstract class AbstractInteractor implements Interactor {
     private static final String TAG = "AbstractInteractor";
     protected MainThread mMainThread;
 
+    // Database/Storage
     protected DatabaseReference mDatabase;
     protected StorageReference mStorage;
 
+    // Authentication
+    protected FirebaseAuth mAuth;
+//    protected FirebaseAuth.AuthStateListener mAuthListener;
+
     protected final String userId;
 
+    // Paths in Database/Storage
     protected DatabaseRoot databaseRoot;
     protected StorageRoot storageRoot;
 
     public AbstractInteractor(MainThread mainThread) {
 
         Log.d(TAG, "inside constructor");
+
+        mAuth = FirebaseAuth.getInstance();
+
+//        mAuthListener = firebaseAuth -> {
+//            FirebaseUser user_ = firebaseAuth.getCurrentUser();
+//            if (user_ != null) {
+//                Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+//            } else {
+//                Log.d(TAG, "onAuthStateChanged:signed_out");
+//            }
+//        };
+
         this.mDatabase = FirebaseDatabase.getInstance().getReference();
 
+
         this.userId= FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         databaseRoot = new DatabaseRoot();
         storageRoot = new StorageRoot();
-
         this.mStorage = FirebaseStorage.getInstance().getReferenceFromUrl(storageRoot.getUrl());
+
         mMainThread = mainThread;
     }
 

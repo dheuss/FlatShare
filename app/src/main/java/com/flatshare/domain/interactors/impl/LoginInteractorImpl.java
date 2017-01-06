@@ -1,5 +1,6 @@
 package com.flatshare.domain.interactors.impl;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
@@ -41,7 +42,49 @@ public class LoginInteractorImpl extends AbstractInteractor implements LoginInte
 
     @Override
     public void execute() {
-        //TODO: login
+
+        String email = loginDataType.getEmail();
+        String password = loginDataType.getPassword();
+
+        if (!validateForm(email, password)) {
+            notifyError("Invalid Email and/or Password");
+            return;
+        }
+        // [START sign_in_with_email]
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+                    if (!task.isSuccessful()) {
+                        Log.w(TAG, "signInWithEmail:failed", task.getException());
+//                            Toast.makeText(EmailPasswordActivity.this, R.string.auth_failed,
+//                                    Toast.LENGTH_SHORT).show();
+
+                        notifyError("signInWithEmail:failed");
+                    } else {
+                        Log.d(TAG, "SUCCESSS!!");
+                        notifySuccess();
+                    }
+                });
+    }
+
+    private boolean validateForm(String email, String password) {
+        boolean valid = true;
+
+        if (TextUtils.isEmpty(email)) {
+//            mEmailField.setError("Required.");
+            valid = false;
+        } else {
+//            mEmailField.setError(null);
+        }
+
+        if (TextUtils.isEmpty(password)) {
+//            mPasswordField.setError("Required.");
+            valid = false;
+        } else {
+//            mPasswordField.setError(null);
+        }
+
+        return valid;
     }
 }
 

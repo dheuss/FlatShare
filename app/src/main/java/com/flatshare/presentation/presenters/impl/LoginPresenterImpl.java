@@ -9,9 +9,9 @@ import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
 import com.flatshare.domain.interactors.InitInteractor;
+import com.flatshare.domain.interactors.LoginInteractor;
 import com.flatshare.domain.interactors.impl.InitInteractorImpl;
-import com.flatshare.network.AuthenticationManager;
-import com.flatshare.network.impl.AuthenticationManagerImpl;
+import com.flatshare.domain.interactors.impl.LoginInteractorImpl;
 import com.flatshare.presentation.presenters.LoginPresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 
@@ -20,7 +20,7 @@ import com.flatshare.presentation.presenters.base.AbstractPresenter;
  */
 
 public class LoginPresenterImpl extends AbstractPresenter implements LoginPresenter,
-        AuthenticationManager.LoginCallback, InitInteractor.Callback {
+        LoginInteractor.Callback, InitInteractor.Callback {
 
 
     private static final String TAG = "LoginPresenter";
@@ -57,27 +57,7 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
         mView.showError(message);
     }
 
-    @Override
-    public void onLoginSuccessful() {
 
-        userState.setLoggedIn(true);
-
-        if (userState.receivedProfiles()) {
-            mView.hideProgress();
-            mView.changeToMatchingActivity();
-        } else {
-            InitInteractor initInteractor = new InitInteractorImpl(mMainThread, this);
-            initInteractor.execute();
-        }
-    }
-
-    @Override
-    public void onLoginFailed(String error) {
-
-        mView.hideProgress();
-        onError(error);
-
-    }
 
     @Override
     public void login(LoginDataType loginDataType) {
@@ -92,12 +72,12 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
         mView.showProgress();
 
         if (userState.isLoggedIn()) {
-            onLoginSuccessful();
+            onLoginSuccess();
         } else {
-            AuthenticationManager authenticationManager = new AuthenticationManagerImpl(this);
 
-//        // run the interactor
-            authenticationManager.login(loginDataType);
+            LoginInteractor loginInteractor = new LoginInteractorImpl(mMainThread, this, loginDataType);
+            loginInteractor.execute();
+
         }
     }
 
@@ -118,5 +98,26 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
         mView.hideProgress();
         onError(error);
         mView.changeToProfileActivity();
+    }
+
+    @Override
+    public void onLoginSuccess() {
+
+        userState.setLoggedIn(true);
+
+        if (userState.receivedProfiles()) {
+            mView.hideProgress();
+            mView.changeToMatchingActivity();
+        } else {
+            InitInteractor initInteractor = new InitInteractorImpl(mMainThread, this);
+            initInteractor.execute();
+        }
+    }
+
+    @Override
+    public void onLoginFailure(String errorMessage) {
+
+        mView.hideProgress();
+        onError(errorMessage);
     }
 }
