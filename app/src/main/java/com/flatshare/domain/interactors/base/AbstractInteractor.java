@@ -6,7 +6,6 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.network.path.database.DatabaseRoot;
 import com.flatshare.network.path.storage.StorageRoot;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -25,11 +24,6 @@ public abstract class AbstractInteractor implements Interactor {
     protected DatabaseReference mDatabase;
     protected StorageReference mStorage;
 
-    // Authentication
-    protected FirebaseAuth mAuth;
-    protected FirebaseAuth.AuthStateListener mAuthListener;
-    protected FirebaseUser userFirebase;
-
     protected String userId;
 
     // Paths in Database/Storage
@@ -40,22 +34,9 @@ public abstract class AbstractInteractor implements Interactor {
 
         Log.d(TAG, "inside constructor");
 
-        mAuth = FirebaseAuth.getInstance();
-        this.userFirebase = mAuth.getCurrentUser();
-
-        mAuthListener = firebaseAuth -> {
-            FirebaseUser user_ = firebaseAuth.getCurrentUser();
-            if (user_ != null) {
-                Log.d(TAG, "onAuthStateChanged:signed_in:" + userId);
-                this.userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                Log.v(TAG, userFirebase + "  ++++++ ABstractActivity FIREBVASEUSER ID");
-            } else {
-                Log.d(TAG, "onAuthStateChanged:signed_out");
-            }
-        };
-
-
         this.mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        this.userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         databaseRoot = new DatabaseRoot();
         storageRoot = new StorageRoot();

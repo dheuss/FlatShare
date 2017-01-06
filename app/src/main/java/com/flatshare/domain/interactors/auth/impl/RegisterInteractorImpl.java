@@ -5,14 +5,14 @@ import android.util.Log;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.auth.RegisterDataType;
+import com.flatshare.domain.interactors.auth.AbstractAuthenticator;
 import com.flatshare.domain.interactors.auth.RegisterInteractor;
-import com.flatshare.domain.interactors.base.AbstractInteractor;
 
 /**
  * Created by Arber on 06/01/2017.
  */
 
-public class RegisterInteractorImpl extends AbstractInteractor implements RegisterInteractor {
+public class RegisterInteractorImpl extends AbstractAuthenticator implements RegisterInteractor {
 
     private static final String TAG = "RegisterInt";
 

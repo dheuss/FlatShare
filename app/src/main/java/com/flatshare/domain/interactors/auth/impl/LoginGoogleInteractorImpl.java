@@ -1,20 +1,12 @@
 package com.flatshare.domain.interactors.auth.impl;
 
-import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.flatshare.R;
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.interactors.auth.AbstractAuthenticator;
 import com.flatshare.domain.interactors.auth.LoginGoogleInteractor;
-import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
 
@@ -22,7 +14,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
  * Created by david on 06.01.2017.
  */
 
-public class LoginGoogleInteractorImpl extends AbstractInteractor implements LoginGoogleInteractor {
+public class LoginGoogleInteractorImpl extends AbstractAuthenticator implements LoginGoogleInteractor {
 
     private static final String TAG = "LoginGoogleInt";
 

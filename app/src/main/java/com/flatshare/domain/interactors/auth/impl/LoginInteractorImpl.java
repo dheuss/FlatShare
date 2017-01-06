@@ -5,14 +5,14 @@ import android.util.Log;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.auth.LoginDataType;
+import com.flatshare.domain.interactors.auth.AbstractAuthenticator;
 import com.flatshare.domain.interactors.auth.LoginInteractor;
-import com.flatshare.domain.interactors.base.AbstractInteractor;
 
 /**
  * Created by Arber on 06/01/2017.
  */
 
-public class LoginInteractorImpl extends AbstractInteractor implements LoginInteractor {
+public class LoginInteractorImpl extends AbstractAuthenticator implements LoginInteractor {
 
     private static final String TAG = "LoginInt";
 
@@ -45,6 +45,7 @@ public class LoginInteractorImpl extends AbstractInteractor implements LoginInte
 
         String email = loginDataType.getEmail();
         String password = loginDataType.getPassword();
+
 
         if (!validateForm(email, password)) {
             notifyError("Invalid Email and/or Password");

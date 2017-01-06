@@ -25,7 +25,6 @@ public class UserState {
     }
     // Singleton Done
 
-    private boolean receivedProfiles;
     private boolean loggedIn;
 
     private PrimaryUserProfile primaryUserProfile;
@@ -71,14 +70,6 @@ public class UserState {
 
     public List<String> getApartmentImageIds() {
         return new ArrayList<>(getApartmentUserProfile().getImageIds());
-    }
-
-    public boolean receivedProfiles() {
-        return receivedProfiles;
-    }
-
-    public void setReceivedProfiles(boolean receivedProfiles) {
-        this.receivedProfiles = receivedProfiles;
     }
 
     public boolean isLoggedIn() {

@@ -4,11 +4,11 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.interactors.auth.AbstractAuthenticator;
 import com.flatshare.domain.interactors.auth.ResetPasswordInteractor;
-import com.flatshare.domain.interactors.base.AbstractInteractor;
 
 
-public class ResetPasswordInteractorImpl extends AbstractInteractor implements ResetPasswordInteractor {
+public class ResetPasswordInteractorImpl extends AbstractAuthenticator implements ResetPasswordInteractor {
 
     private static final String TAG = "ResetPasswordInt";
 

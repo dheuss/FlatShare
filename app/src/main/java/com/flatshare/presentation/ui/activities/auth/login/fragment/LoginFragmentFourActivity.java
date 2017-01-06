@@ -4,8 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +25,6 @@ import com.flatshare.presentation.ui.activities.auth.RegisterActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.presentation.ui.activities.profile.PrimaryProfileActivity;
 import com.flatshare.threading.MainThreadImpl;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 
 import dmax.dialog.SpotsDialog;
@@ -172,6 +171,7 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
         loginSuccess();
         Intent intent = new Intent(getActivity(), PrimaryProfileActivity.class);
         startActivity(intent);
+        getActivity().finish();
     }
 
     private void loginSuccess() {
@@ -190,6 +190,7 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
         Log.d("LoginActivity", "success! changed to MatchingActivity!");
         Intent intent = new Intent(getActivity(), MatchingActivity.class);
         startActivity(intent);
+        getActivity().finish();
     }
 
     @Override

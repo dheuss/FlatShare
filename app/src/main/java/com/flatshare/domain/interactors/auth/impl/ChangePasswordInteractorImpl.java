@@ -3,14 +3,14 @@ package com.flatshare.domain.interactors.auth.impl;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.interactors.auth.AbstractAuthenticator;
 import com.flatshare.domain.interactors.auth.ChangePasswordInteractor;
-import com.flatshare.domain.interactors.base.AbstractInteractor;
 
 /**
  * Created by Arber on 06/01/2017.
  */
 
-public class ChangePasswordInteractorImpl extends AbstractInteractor implements ChangePasswordInteractor {
+public class ChangePasswordInteractorImpl extends AbstractAuthenticator implements ChangePasswordInteractor {
 
     private static final String TAG = "ChangePasswordInt";
 

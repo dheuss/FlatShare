@@ -4,10 +4,10 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.interactors.auth.AbstractAuthenticator;
 import com.flatshare.domain.interactors.auth.ChangeMailInteractor;
-import com.flatshare.domain.interactors.base.AbstractInteractor;
 
-public class ChangeMailInteractorImpl extends AbstractInteractor implements ChangeMailInteractor {
+public class ChangeMailInteractorImpl extends AbstractAuthenticator implements ChangeMailInteractor {
 
     private static final String TAG = "ChangeMailInt";
 
