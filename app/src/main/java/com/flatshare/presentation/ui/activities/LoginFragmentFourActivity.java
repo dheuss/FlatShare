@@ -26,7 +26,7 @@ import com.google.android.gms.common.SignInButton;
 
 import dmax.dialog.SpotsDialog;
 
-public class LoginFragmentFourActivity extends Fragment implements LoginPresenter.View{
+public class LoginFragmentFourActivity extends Fragment implements LoginPresenter.View {
 
     private EditText emailEditText;
     private EditText passwordEditText;
@@ -97,7 +97,7 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
         return view;
     }
 
-    public void bind(View view){
+    public void bind(View view) {
         emailEditText = (EditText) view.findViewById(R.id.email_edittext);
         passwordEditText = (EditText) view.findViewById(R.id.password_edittext);
         loginCheckBox = (CheckBox) view.findViewById(R.id.login_check_box);
@@ -128,6 +128,7 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
 
             emailEditText.setText(email);
             passwordEditText.setText(password);
+            login();
         }
     }
 
@@ -175,6 +176,18 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
     @Override
     public void hideProgress() {
         progressDialog.hide();
+    }
+
+    @Override
+    public void onDestroy() {
+        try {
+            if (progressDialog != null && progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        super.onDestroy();
     }
 
     @Override

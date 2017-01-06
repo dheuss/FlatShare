@@ -1,29 +1,25 @@
 package com.flatshare.presentation.ui.activities;
 
 import android.os.Bundle;
-
-import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import com.facebook.FacebookSdk;
 import com.flatshare.R;
 import com.flatshare.presentation.presenters.LoginPresenter;
-import com.flatshare.presentation.presenters.impl.LoginPresenterImpl;
-import com.flatshare.threading.MainThreadImpl;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Arber on 16/12/2016.
  */
-public class LoginActivity extends AppCompatActivity implements LoginPresenter.View {
+public class LoginActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
@@ -41,12 +37,6 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
         setContentView(R.layout.activity_login);
 
         bindView();
-
-        // create a presenter for this view
-        mPresenter = new LoginPresenterImpl(
-                MainThreadImpl.getInstance(),
-                this
-        );
     }
 
     private void bindView() {
@@ -60,37 +50,6 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-    }
-
-    @Override
-    protected void onDestroy() {
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mPresenter.resume();
-    }
-
-    @Override
-    public void showProgress() {
-    }
-
-    @Override
-    public void hideProgress() {
-    }
-
-    @Override
-    public void showError(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void changeToProfileActivity() {
-    }
-
-    @Override
-    public void changeToMatchingActivity() {
     }
 
     private void setupViewPager(ViewPager viewPager) {
