@@ -4,9 +4,11 @@ import android.util.Log;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.auth.ChangeMailInteractor;
+import com.flatshare.domain.interactors.auth.ChangePasswordInteractor;
 import com.flatshare.domain.interactors.auth.DeleteAccountInteractor;
 import com.flatshare.domain.interactors.auth.LogoutInteractor;
 import com.flatshare.domain.interactors.auth.impl.ChangeMailInteractorImpl;
+import com.flatshare.domain.interactors.auth.impl.ChangePasswordInteractorImpl;
 import com.flatshare.domain.interactors.auth.impl.DeleteAccountInteractorImpl;
 import com.flatshare.domain.interactors.auth.impl.LogoutInteractorImpl;
 import com.flatshare.presentation.presenters.settings.SettingsPresenter;
@@ -19,7 +21,8 @@ import com.flatshare.presentation.presenters.base.AbstractPresenter;
 public class SettingsPresenterImpl extends AbstractPresenter implements SettingsPresenter,
         LogoutInteractor.Callback,
         ChangeMailInteractor.Callback,
-        DeleteAccountInteractor.Callback{
+        DeleteAccountInteractor.Callback,
+        ChangePasswordInteractor.Callback{
 
     private static final String TAG = "SettingsPresenterImpl";
     private SettingsPresenter.View mView;
@@ -73,6 +76,12 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
     }
 
     @Override
+    public void changePassword(String newPassword){
+        ChangePasswordInteractor changePasswordInteractor = new ChangePasswordInteractorImpl(mMainThread, this, newPassword);
+        changePasswordInteractor.execute();
+    }
+
+    @Override
     public void onLogoutSuccess() {
         userState.setLoggedIn(false);
         mView.hideProgress();
@@ -109,6 +118,19 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
 
     @Override
     public void onDeleteAccountFailure(String errorMessage){
+        mView.hideProgress();
+        onError(errorMessage);
+    }
+
+    @Override
+    public void onChangePasswordSuccess() {
+        userState.setLoggedIn(false);
+        mView.hideProgress();
+        mView.changeToLoginActivity();
+    }
+
+    @Override
+    public void onChangePasswordFailure(String errorMessage) {
         mView.hideProgress();
         onError(errorMessage);
     }

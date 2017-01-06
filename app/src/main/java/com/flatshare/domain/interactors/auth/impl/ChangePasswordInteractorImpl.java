@@ -17,12 +17,16 @@ public class ChangePasswordInteractorImpl extends AbstractInteractor implements 
 
     private ChangePasswordInteractor.Callback mCallback;
 
+    private String newPassword;
+
     public ChangePasswordInteractorImpl(MainThread mainThread,
-                                        Callback callback) {
+                                        Callback callback,
+                                        String newPassword) {
 
         super(mainThread);
         this.mMainThread = mainThread;
         this.mCallback = callback;
+        this.newPassword = newPassword;
     }
 
     private void notifyError(String errorMessage) {
@@ -39,7 +43,21 @@ public class ChangePasswordInteractorImpl extends AbstractInteractor implements 
 
     @Override
     public void execute() {
-        //TODO: changePassword
+        if (userFirebase != null && !newPassword.equals("")){
+            if (newPassword.length() < 6){
+                notifyError("Password too short, enter minimum 6 chars");
+            } else {
+                userFirebase.updatePassword(newPassword)
+                        .addOnCompleteListener(task -> {
+                           if (task.isSuccessful()){
+                             notifySuccess();
+                           } else {
+                               notifyError("Cant change Password");
+                           }
+                        });
+                }
+        } else if (newPassword.equals("")) {
+            notifyError("Enter passsword");
+        }
     }
-
 }
