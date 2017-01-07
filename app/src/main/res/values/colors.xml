@@ -1,9 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#FF8F00</color>
+    <color name="colorPrimaryDark">#FF6F00</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#FFF8E1</color>
+    <color name="navigationBarColor">#000000</color>
+    <color name="colorAccent">#FFE082</color>
+
+    <color name="button">#FF6F00</color>
+    <color name="buttonText">#FFFFFF</color>
+    <color name="ButtonWithoutRectangle">#FF6F00</color>
+
+    <color name="text">#000000</color>
+
+
+
+    <!--
     <color name="colorPrimary">#125688</color>
     <color name="colorPrimaryDark">#125688</color>
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
     <color name="colorAccent">#c8e8ff</color>
+    -->
+
+    <color name="amber50background">#FFF8E1</color>
+    <color name="amber100">#FFECB3</color>
+    <color name="amber200">#FFE082</color>
+    <color name="amber300">#FFD54F</color>
+    <color name="amber400">#FFCA28</color>
+    <color name="amber500">#FFC107</color>
+    <color name="amber600">#FFB300</color>
+    <color name="amber700">#FFA000</color>
+    <color name="amber800">#FF8F00</color>
+    <color name="amber900">#FF6F00</color>
+
+    <!-- accente -->
+    <color name="A100">#FFE57F</color>
+    <color name="A200">#FFD740</color>
+    <color name="A400">#FFC400</color>
+    <color name="A700">#FFAB00</color>
+
 </resources>
