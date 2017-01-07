@@ -25,6 +25,7 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
 
     private static final String TAG = "LoginPresenter";
     private LoginPresenter.View mView;
+    private String email;
 
     public LoginPresenterImpl(MainThread mainThread,
                               View view) {
@@ -61,6 +62,14 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
     @Override
     public void login(LoginDataType loginDataType) {
         mView.showProgress();
+
+        if(userState.getPrimaryUserProfile() != null){
+            userState.getPrimaryUserProfile().setEmail(loginDataType.getEmail());
+        } else {
+            PrimaryUserProfile primaryUserProfile = new PrimaryUserProfile();
+            primaryUserProfile.setEmail(loginDataType.getEmail());
+            userState.setPrimaryUserProfile(primaryUserProfile);
+        }
 
         if (userState.isLoggedIn()) {
             onLoginSuccess();

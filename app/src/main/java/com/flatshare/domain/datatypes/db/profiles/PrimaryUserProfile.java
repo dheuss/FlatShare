@@ -24,10 +24,6 @@ public class PrimaryUserProfile extends UserProfile {
     public PrimaryUserProfile() {
     }
 
-    public PrimaryUserProfile(int classificationId) {
-        this.classificationId = classificationId;
-    }
-
     @Exclude
     public int getClassificationId() {
         return classificationId;

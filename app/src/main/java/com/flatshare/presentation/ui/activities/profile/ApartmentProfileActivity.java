@@ -122,6 +122,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         apartmentUserProfile.setPets(hasPets);
         apartmentUserProfile.setWashingMachine(hasWashingMachine);
 
+        apartmentUserProfile.setApartmentLocation(apartmentLocation);
 
         apartmentUserProfile.setRoommateIds(roommatesId);
 
@@ -182,22 +183,10 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     @Override
     public void updateAdapter(Map<String, String> emailIdMap) {
 
-        System.out.println("Updating adapter!");
-
-        emailIdMap.clear();
-        emailIdMap.put("a@a.de", "1");
-        emailIdMap.put("b@b.de", "2");
-        emailIdMap.put("c@c.de", "3");
-
         this.emailIdMap = emailIdMap;
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>(emailIdMap.keySet()));
 
-//        System.out.println("item 0: " + adapter.getItem(0));
-//        System.out.println("item 1: " + adapter.getItem(1));
-
         roommatesEmailsMultiAC.setAdapter(adapter);
-
-        System.out.println("done updating");
 
     }
 
