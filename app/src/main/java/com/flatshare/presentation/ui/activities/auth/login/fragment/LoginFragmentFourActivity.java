@@ -97,6 +97,7 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
         facebookCustomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                facebookSignInButton.performClick(); //TODO
                 System.out.println("FACEBOOK");
             }
         });
@@ -104,6 +105,7 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
         googleCustomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                googleSignInButton.performClick(); //TODO
                 googleLogin();
             }
         });
