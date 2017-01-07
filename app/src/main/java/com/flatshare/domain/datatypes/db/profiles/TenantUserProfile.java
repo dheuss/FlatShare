@@ -4,6 +4,7 @@ import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.PropertyName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,6 +63,11 @@ public class TenantUserProfile extends UserProfile {
 
 
     public TenantUserProfile() {
+
+        this.tenantFilterSettings = new TenantFilterSettings();
+        this.hobbies = new ArrayList<>();
+        this.apartmentsToShow = new ArrayList<>();
+        this.matchedApartments = new ArrayList<>();
 
     }
 

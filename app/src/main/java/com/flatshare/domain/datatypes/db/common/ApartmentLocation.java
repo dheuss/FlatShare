@@ -20,9 +20,6 @@ public class ApartmentLocation implements DatabaseItem {
     @PropertyName("street")
     public String street;
 
-    @PropertyName("street_number")
-    public int streetNumber;
-
     @PropertyName("zip_code")
     public int zipCode;
 
@@ -30,6 +27,11 @@ public class ApartmentLocation implements DatabaseItem {
     private String houseNr;
 
     public ApartmentLocation() {
+        this.city = "Munich";
+        this.district = "Schwabing";
+        this.street = "someStreet";
+        this.zipCode = 80805;
+        this.houseNr = "16";
     }
 
     @Exclude
@@ -60,16 +62,6 @@ public class ApartmentLocation implements DatabaseItem {
     @Exclude
     public void setStreet(String street) {
         this.street = street;
-    }
-
-    @Exclude
-    public int getStreetNumber() {
-        return streetNumber;
-    }
-
-    @Exclude
-    public void setStreetNumber(int streetNumber) {
-        this.streetNumber = streetNumber;
     }
 
     @Exclude

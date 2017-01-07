@@ -31,6 +31,11 @@ public class ApartmentFilterSettings extends FilterSettings {
     public int petsAllowed;
 
     public ApartmentFilterSettings() {
+        this.ageFrom = Integer.MIN_VALUE;
+        this.ageTo = Integer.MAX_VALUE;
+        this.gender = 2;
+        this.smoker = 2;
+        this.petsAllowed = 2;
     }
 
     @Exclude

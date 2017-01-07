@@ -53,6 +53,22 @@ public class TenantFilterSettings extends FilterSettings {
     public int tvCable;
 
     public TenantFilterSettings() {
+
+        this.apartmentLocation = new ApartmentLocation();
+        this.priceFrom = Integer.MIN_VALUE;
+        this.priceTo = Integer.MAX_VALUE;
+        this.areaFrom = Integer.MIN_VALUE;
+        this.areaTo = Integer.MAX_VALUE;
+        this.internet = 2;
+        this.smokerApartment = 2;
+        this.petsAllowed = 2;
+        this.purposeApartment = 2;
+        this.washingMachine = 2;
+        this.dryer = 2;
+        this.balcony = 2;
+        this.bathtub = 2;
+        this.tvCable = 2;
+
     }
 
     @Exclude
