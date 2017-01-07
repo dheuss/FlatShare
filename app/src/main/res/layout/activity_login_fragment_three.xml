@@ -29,7 +29,7 @@
         android:foregroundGravity="center" />
 
     <Button
-        android:id="@+id/login_button_2"
+        android:id="@+id/login_button_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
