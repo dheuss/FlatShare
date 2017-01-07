@@ -25,7 +25,8 @@
             android:layout_centerHorizontal="true"
             android:text="@string/create_your_tenant_setting"
             android:textAlignment="center"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:textColor="@color/text"/>
 
         <TextView
             android:id="@+id/price_range_textview"
@@ -34,7 +35,8 @@
             android:text="@string/price_range"
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@+id/initial_tenant_setting"/>
+            android:layout_below="@+id/initial_tenant_setting"
+            android:textColor="@color/text"/>
 
         <TextView
             android:id="@+id/price_range_textview_minPRICE"
@@ -45,7 +47,8 @@
             android:text=""
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@id/initial_tenant_setting"/>
+            android:layout_below="@id/initial_tenant_setting"
+            android:textColor="@color/text"/>
 
         <TextView
             android:id="@+id/price_range_textview_TO"
@@ -56,7 +59,8 @@
             android:text="to"
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@id/initial_tenant_setting"/>
+            android:layout_below="@id/initial_tenant_setting"
+            android:textColor="@color/text"/>
 
         <TextView
             android:id="@+id/price_range_textview_maxPRICE"
@@ -67,7 +71,8 @@
             android:text=""
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@id/initial_tenant_setting"/>
+            android:layout_below="@id/initial_tenant_setting"
+            android:textColor="@color/text"/>
 
         <com.appyvet.rangebar.RangeBar
             xmlns:custom="http://schemas.android.com/apk/res-auto"
@@ -91,7 +96,8 @@
             android:text="@string/size_range"
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@+id/rangebar_price_range"/>
+            android:layout_below="@+id/rangebar_price_range"
+            android:textColor="@color/text"/>
 
         <TextView
             android:id="@+id/size_range_textview_minSIZE"
@@ -113,7 +119,8 @@
             android:text="to"
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@id/rangebar_price_range"/>
+            android:layout_below="@id/rangebar_price_range"
+            android:textColor="@color/text"/>
 
         <TextView
             android:id="@+id/size_range_textview_maxSIZE"
@@ -124,7 +131,8 @@
             android:text=""
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@id/rangebar_price_range"/>
+            android:layout_below="@id/rangebar_price_range"
+            android:textColor="@color/text"/>
 
         <com.appyvet.rangebar.RangeBar
             xmlns:custom="http://schemas.android.com/apk/res-auto"
@@ -147,7 +155,8 @@
             android:text="@string/area"
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@+id/rangebar_size_range"/>
+            android:layout_below="@+id/rangebar_size_range"
+            android:textColor="@color/text"/>
 
         <TextView
             android:id="@+id/purpose_community_textview"
@@ -156,7 +165,8 @@
             android:text="@string/purpose_community"
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@+id/area_textview"/>
+            android:layout_below="@+id/area_textview"
+            android:textColor="@color/text"/>
 
         <RadioGroup
             android:id="@+id/purposeCommunityRadioGroup"
@@ -171,13 +181,15 @@
                 android:id="@+id/necessaryPCRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary" />
+                android:text="@string/necessary"
+                android:textColor="@color/text"/>
 
             <RadioButton
                 android:id="@+id/notNecessaryPCRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary" />
+                android:text="@string/notNecessary"
+                android:textColor="@color/text"/>
         </RadioGroup>
 
         <TextView
@@ -187,7 +199,8 @@
             android:text="@string/smoking_apartment"
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@id/purpose_community_textview"/>
+            android:layout_below="@id/purpose_community_textview"
+            android:textColor="@color/text"/>
 
         <RadioGroup
             android:id="@+id/smoker_apartment_RadioGroup"
@@ -202,13 +215,15 @@
                 android:id="@+id/necessarySARadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary" />
+                android:text="@string/necessary"
+                android:textColor=""/>
 
             <RadioButton
                 android:id="@+id/notNecessarySARadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary" />
+                android:text="@string/notNecessary"
+                android:textColor="@color/text"/>
         </RadioGroup>
 
         <TextView
@@ -218,7 +233,8 @@
             android:text="@string/balcony"
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@id/smoking_apartment_textview"/>
+            android:layout_below="@id/smoking_apartment_textview"
+            android:textColor="@color/text"/>
 
         <RadioGroup
             android:id="@+id/balconyRadioGroup"
@@ -233,13 +249,16 @@
                 android:id="@+id/necessaryBRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary" />
+                android:text="@string/necessary"
+                android:textColor="@color/text"/>
 
             <RadioButton
                 android:id="@+id/notNecessaryBRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary"/>
+                android:text="@string/notNecessary"
+                android:textColor="@color/text"/>
+
         </RadioGroup>
 
         <TextView
@@ -249,7 +268,8 @@
             android:text="@string/internet"
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@id/balcony_textview"/>
+            android:layout_below="@id/balcony_textview"
+            android:textColor="@color/text"/>
 
         <RadioGroup
             android:id="@+id/internetRadioGroup"
@@ -264,13 +284,16 @@
                 android:id="@+id/internetYESRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary" />
+                android:text="@string/necessary"
+                android:textColor="@color/text"/>
 
             <RadioButton
                 android:id="@+id/internetNORadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary" />
+                android:text="@string/notNecessary"
+                android:textColor="@color/text"/>
+
         </RadioGroup>
 
         <TextView
@@ -280,7 +303,8 @@
             android:text="@string/cabeltv"
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@id/internet_textview"/>
+            android:layout_below="@id/internet_textview"
+            android:textColor="@color/text"/>
 
         <RadioGroup
             android:id="@+id/cabelTVRadioGroup"
@@ -295,13 +319,16 @@
                 android:id="@+id/cabelTVYESRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary" />
+                android:text="@string/necessary"
+                android:textColor="@color/text"/>
 
             <RadioButton
                 android:id="@+id/cableTVNORadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary" />
+                android:text="@string/notNecessary"
+                android:textColor="@color/text"/>
+
         </RadioGroup>
 
         <TextView
@@ -311,7 +338,8 @@
             android:text="@string/washing_machine"
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@id/cabel_tv_textview"/>
+            android:layout_below="@id/cabel_tv_textview"
+            android:textColor="@color/text"/>
 
         <RadioGroup
             android:id="@+id/washingMashineRadioGroup"
@@ -326,13 +354,15 @@
                 android:id="@+id/washingMashineYESRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary" />
+                android:text="@string/necessary"
+                android:textColor="@color/text"/>
 
             <RadioButton
                 android:id="@+id/washingMashineNORadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary" />
+                android:text="@string/notNecessary"
+                android:textColor="@color/text"/>
         </RadioGroup>
 
         <TextView
@@ -342,7 +372,8 @@
             android:text="@string/dryer"
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@id/washing_machine_textview"/>
+            android:layout_below="@id/washing_machine_textview"
+            android:textColor="@color/text"/>
 
         <RadioGroup
             android:id="@+id/dryerRadioGroup"
@@ -357,13 +388,16 @@
                 android:id="@+id/dryerYESRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary" />
+                android:text="@string/necessary"
+                android:textColor="@color/text"/>
 
             <RadioButton
                 android:id="@+id/dryerNORadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary" />
+                android:text="@string/notNecessary"
+                android:textColor="@color/text"/>
+
         </RadioGroup>
 
         <TextView
@@ -373,7 +407,8 @@
             android:text="@string/bathtube"
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@id/dryer_textview"/>
+            android:layout_below="@id/dryer_textview"
+            android:textColor="@color/text"/>
 
         <RadioGroup
             android:id="@+id/bathTubeRadioGroup"
@@ -388,13 +423,16 @@
                 android:id="@+id/bathTubeYESRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary" />
+                android:text="@string/necessary"
+                android:textColor="@color/text"/>
 
             <RadioButton
                 android:id="@+id/bathTubeNORadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary" />
+                android:text="@string/notNecessary"
+                android:textColor="@color/text"/>
+
         </RadioGroup>
 
         <TextView
@@ -404,7 +442,8 @@
             android:text="@string/pets"
             android:layout_marginTop="20dp"
             android:textSize="15dp"
-            android:layout_below="@id/bathtube_textview"/>
+            android:layout_below="@id/bathtube_textview"
+            android:textColor="@color/text"/>
 
         <RadioGroup
             android:id="@+id/petsRadioGroup"
@@ -419,13 +458,15 @@
                 android:id="@+id/petsYESRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary" />
+                android:text="@string/necessary"
+                android:textColor="@color/text"/>
 
             <RadioButton
                 android:id="@+id/petsNORadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary" />
+                android:text="@string/notNecessary"
+                android:textColor="@color/text"/>
         </RadioGroup>
 
         <!-- Save Button -->
@@ -435,10 +476,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="@string/done_1_tenant_profile"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
+            android:textColor="@color/buttonText"
+            android:textColorHint="@color/buttonText"
             android:layout_marginTop="20dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/button"
             android:textStyle="bold"
             android:layout_below="@id/pets_textview"/>
 
