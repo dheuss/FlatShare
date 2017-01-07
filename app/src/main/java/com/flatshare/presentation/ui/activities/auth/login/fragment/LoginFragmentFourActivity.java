@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -42,9 +43,11 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
 
     //Google
     private SignInButton googleSignInButton;
+    private ImageButton googleCustomButton;
 
     //Facebook
     private LoginButton facebookSignInButton;
+    private ImageButton facebookCustomButton;
     private CallbackManager facebookCallbackManager;
 
     // loader
@@ -91,14 +94,14 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
             }
         });
 
-        facebookSignInButton.setOnClickListener(new View.OnClickListener() {
+        facebookCustomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 System.out.println("FACEBOOK");
             }
         });
 
-        googleSignInButton.setOnClickListener(new View.OnClickListener() {
+        googleCustomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 googleLogin();
@@ -115,6 +118,8 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
         loginButton = (Button) view.findViewById(R.id.login_button);
         registerButton = (Button) view.findViewById(R.id.register_button);
         googleSignInButton = (SignInButton) view.findViewById(R.id.google_sign_in_button);
+        googleCustomButton = (ImageButton) view.findViewById(R.id.custom_google_button);
+        facebookCustomButton = (ImageButton) view.findViewById(R.id.custom_fb_button);
         facebookSignInButton = (LoginButton) view.findViewById(R.id.facebook_sign_in_button);
         progressDialog = new SpotsDialog(getActivity(), R.style.Custom);
     }
