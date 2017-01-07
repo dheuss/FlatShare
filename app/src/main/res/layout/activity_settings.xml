@@ -86,9 +86,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/button"
             android:text="@string/btn_change"
-            android:textColor="@android:color/white"
+            android:textColor="@color/buttonText"
             android:textStyle="bold" />
 
         <Button
@@ -97,9 +97,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/button"
             android:text="@string/btn_change"
-            android:textColor="@android:color/white"
+            android:textColor="@color/buttonText"
             android:textStyle="bold" />
 
         <Button
@@ -108,9 +108,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/button"
             android:text="@string/btn_send"
-            android:textColor="@android:color/white"
+            android:textColor="@color/buttonText"
             android:textStyle="bold" />
 
         <ProgressBar
@@ -125,9 +125,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/button"
             android:text="@string/btn_remove"
-            android:textColor="@android:color/white"
+            android:textColor="@color/buttonText"
             android:textStyle="bold" />
 
         <Button
@@ -137,7 +137,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/change_email"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:background="@color/button"
+            android:textColor="@color/buttonText"/>
 
         <Button
             android:id="@+id/change_password_button"
@@ -146,7 +148,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/change_password"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:background="@color/button"
+            android:textColor="@color/buttonText"/>
 
         <Button
             android:id="@+id/sending_pass_reset_button"
@@ -155,7 +159,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/send_password_reset_email"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:background="@color/button"
+            android:textColor="@color/buttonText"/>
 
         <Button
             android:id="@+id/remove_user_button"
@@ -164,7 +170,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/remove_user"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:background="@color/button"
+            android:textColor="@color/buttonText"/>
 
         <Button
             android:id="@+id/sign_out"

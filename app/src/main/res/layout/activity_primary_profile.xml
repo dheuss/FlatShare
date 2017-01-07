@@ -16,7 +16,7 @@
             android:layout_gravity="center_horizontal"
             android:padding="10dp"
             android:text="You have two choices!"
-            android:textColor="@android:color/black"
+            android:textColor="@color/text"
             android:textSize="20dp"
             android:layout_marginTop="75dp"/>
 
@@ -27,7 +27,7 @@
             android:gravity="center_horizontal"
             android:padding="@dimen/activity_horizontal_margin"
             android:text="You have to deceide wheather you want to search for an appartmant for yourself or if you want to offer an apartmant so somebodey else."
-            android:textColor="@android:color/black"
+            android:textColor="@color/text"
             android:textSize="14dp" />
 
         <Button
@@ -35,10 +35,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="@string/create_tenant_profile"
-            android:textColor="@color/textColorPrimary"
+            android:textColor="@color/buttonText"
             android:textColorHint="@color/textColorPrimary"
             android:layout_marginTop="20dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/button"
             android:textStyle="bold"
             />
 
@@ -49,9 +49,9 @@
             android:layout_below="@id/create_tenant_profile_button"
             android:hint="@string/create_apartment_profile_button"
             android:textColor="@color/textColorPrimary"
-            android:textColorHint="@color/textColorPrimary"
+            android:textColorHint="@color/buttonText"
             android:layout_marginTop="20dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/button"
             android:textStyle="bold"/>
 
     </LinearLayout>

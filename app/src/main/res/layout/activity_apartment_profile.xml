@@ -22,7 +22,8 @@
             android:layout_centerHorizontal="true"
             android:text="@string/create_your_apartment_profile"
             android:textAlignment="center"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:textColor="@color/text"/>
 
         <TextView
             android:id="@+id/apartment_roommates"
@@ -31,7 +32,8 @@
             android:layout_below="@+id/title"
             android:layout_marginTop="20dp"
             android:text="@string/apartment_roommates"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textColor="@color/text"/>
 
         <MultiAutoCompleteTextView
             android:id="@+id/apartment_roommates_edit_text"
@@ -40,7 +42,8 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/title"
             android:layout_marginTop="10dp"
-            android:width="200dp"/>
+            android:width="200dp"
+            android:textColor="@color/text"/>
 
         <TextView
             android:id="@+id/apartment_price"
@@ -49,7 +52,8 @@
             android:layout_below="@+id/apartment_roommates"
             android:layout_marginTop="20dp"
             android:text="@string/apartment_price"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textColor="@color/text"/>
 
         <EditText
             android:id="@+id/apartment_price_edit_text"
@@ -59,7 +63,8 @@
             android:layout_below="@+id/apartment_roommates"
             android:layout_marginTop="10dp"
             android:width="200dp"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:textColor="@color/text"/>
 
         <TextView
             android:id="@+id/apartment_area"
@@ -68,7 +73,8 @@
             android:layout_below="@+id/apartment_price"
             android:layout_marginTop="20dp"
             android:text="@string/apartment_area"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textColor="@color/text"/>
 
         <EditText
             android:id="@+id/apartment_area_editText"
@@ -77,7 +83,8 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/apartment_price"
             android:width="200dp"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:textColor="@color/text"/>
 
         <TextView
             android:id="@+id/apartment_street"
@@ -86,7 +93,8 @@
             android:layout_below="@+id/apartment_area"
             android:layout_marginTop="20dp"
             android:text="@string/apartment_street"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textColor="@color/text"/>
 
         <EditText
             android:id="@+id/apartment_street_edit_text"
@@ -95,7 +103,8 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/apartment_area"
             android:width="200dp"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/text"/>
 
         <TextView
             android:id="@+id/apartment_house_nr"
@@ -104,7 +113,8 @@
             android:layout_below="@+id/apartment_street"
             android:layout_marginTop="20dp"
             android:text="@string/apartment_house_nr"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textColor="@color/text"/>
 
         <EditText
             android:id="@+id/apartment_house_nr_edit_text"
@@ -113,7 +123,8 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/apartment_street"
             android:width="200dp"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/text"/>
 
         <TextView
             android:id="@+id/apartment_zip_code"
@@ -122,7 +133,8 @@
             android:layout_below="@+id/apartment_house_nr"
             android:layout_marginTop="20dp"
             android:text="@string/apartment_zip_code"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textColor="@color/text"/>
 
         <EditText
             android:id="@+id/apartment_zip_code_edit_text"
@@ -131,7 +143,8 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/apartment_house_nr"
             android:width="200dp"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:textColor="@color/text"/>
 
 
         <TextView
@@ -141,7 +154,8 @@
             android:layout_below="@+id/apartment_zip_code"
             android:layout_marginTop="20dp"
             android:text="@string/internet"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textColor="@color/text"/>
 
         <RadioGroup
             android:id="@+id/internet_apartment_rg"
@@ -156,13 +170,15 @@
                 android:id="@+id/internet_yes_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/yes" />
+                android:text="@string/yes"
+                android:textColor="@color/text"/>
 
             <RadioButton
                 android:id="@+id/internet_no_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/no" />
+                android:text="@string/no"
+                android:textColor="@color/text"/>
         </RadioGroup>
 
         <TextView
@@ -172,7 +188,8 @@
             android:layout_below="@+id/internet_apartment"
             android:layout_marginTop="20dp"
             android:text="@string/smoker"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textColor="@color/text"/>
 
         <RadioGroup
             android:id="@+id/smoker_apartment_rg"
@@ -187,13 +204,15 @@
                 android:id="@+id/smoker_yes_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/yes" />
+                android:text="@string/yes"
+                android:textColor="@color/text"/>
 
             <RadioButton
                 android:id="@+id/smoker_no_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/no" />
+                android:text="@string/no"
+                android:textColor="@color/text"/>
         </RadioGroup>
 
         <TextView
@@ -203,7 +222,8 @@
             android:layout_below="@id/smoker_apartment"
             android:layout_marginTop="20dp"
             android:text="@string/pets"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textColor="@color/text"/>
 
         <RadioGroup
             android:id="@+id/pets_apartment_rg"
@@ -218,13 +238,15 @@
                 android:id="@+id/pets_yes_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/yes" />
+                android:text="@string/yes"
+                android:textColor="@color/text"/>
 
             <RadioButton
                 android:id="@+id/pets_no_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/no" />
+                android:text="@string/no"
+                android:textColor="@color/text"/>
         </RadioGroup>
 
         <TextView
@@ -234,7 +256,8 @@
             android:layout_below="@id/pets_apartment"
             android:layout_marginTop="20dp"
             android:text="@string/washing_machine"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textColor="@color/text"/>
 
         <RadioGroup
             android:id="@+id/washing_machine_apartment_rg"
@@ -249,13 +272,15 @@
                 android:id="@+id/washing_machine_yes_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/yes" />
+                android:text="@string/yes"
+                android:textColor="@color/text"/>
 
             <RadioButton
                 android:id="@+id/washing_machine_no_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/no" />
+                android:text="@string/no"
+                android:textColor="@color/text"/>
         </RadioGroup>
         <Button
             android:id="@+id/create_apartment_profile_button"
@@ -263,9 +288,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_below="@id/washing_machine_apartment"
-            android:background="@color/colorPrimary"
+            android:background="@color/button"
             android:text="Done!"
-            android:textColor="@android:color/white"
+            android:textColor="@color/buttonText"
             android:textStyle="bold" />
     </RelativeLayout>
 </ScrollView>
