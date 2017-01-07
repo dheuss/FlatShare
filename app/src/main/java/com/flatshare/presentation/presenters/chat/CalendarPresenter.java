@@ -4,12 +4,12 @@ import com.flatshare.presentation.presenters.base.BasePresenter;
 import com.flatshare.presentation.ui.BaseView;
 
 /**
- * Created by david on 28.12.2016.
+ * Created by Sandro on 07.01.17.
  */
 
-public interface ChatPresenter extends BasePresenter {
+public interface CalendarPresenter extends BasePresenter {
 
-    interface View extends BaseView{
+    interface View extends BaseView {
 
     }
 }

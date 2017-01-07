@@ -1,24 +1,24 @@
 package com.flatshare.presentation.ui.activities.chat;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.flatshare.R;
-import com.flatshare.presentation.presenters.chat.ChatPresenter;
-import com.flatshare.presentation.presenters.chat.impl.ChatPresenterImpl;
+import com.flatshare.presentation.presenters.chat.CalendarPresenter;
+import com.flatshare.presentation.presenters.chat.impl.CalendarPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-public class ChatActivity extends AbstractActivity implements ChatPresenter.View {
+public class CalendarActivity extends AbstractActivity implements CalendarPresenter.View {
 
+    private CalendarPresenter mPresenter;
     private ImageButton couchChatButton;
-
-    private static final String TAG = "ChatActivity";
-
-    private ChatPresenter mPresenter;
+    private static final String TAG = "CalenderAct";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,28 +26,28 @@ public class ChatActivity extends AbstractActivity implements ChatPresenter.View
 
         bindView();
 
-        mPresenter = new ChatPresenterImpl(
-                MainThreadImpl.getInstance(),
-                this
-        );
+        mPresenter = new CalendarPresenterImpl(MainThreadImpl.getInstance(), this);
 
         couchChatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ChatActivity.this, MatchingActivity.class));
+                startActivity(new Intent(CalendarActivity.this, MatchingActivity.class));
             }
         });
     }
 
-    @Override
-    protected int getLayoutResourceId() {
-        return R.layout.activity_chat;
+
+    private void bindView() {
+        couchChatButton = (ImageButton)findViewById(R.id.couchChatBtn);
     }
 
-    private void bindView(){couchChatButton = (ImageButton)findViewById(R.id.couchChatBtn);}
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.activity_calendar;
+    }
 
     @Override
     public void showError(String message) {
-
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

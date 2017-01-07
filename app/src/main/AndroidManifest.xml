@@ -54,6 +54,7 @@
         <activity android:name=".presentation.ui.activities.settings.ProfilSettingsActivity" />
         <activity android:name=".presentation.ui.activities.chat.ChatActivity" />
         <activity android:name=".presentation.ui.activities.settings.SettingsActivity" />
+        <activity android:name=".presentation.ui.activities.chat.CalendarActivity"></activity>
     </application>
 
 </manifest>
