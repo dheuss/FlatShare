@@ -35,6 +35,12 @@
             android:layout_height="50dp"
             android:background="@drawable/reject_button"/>
         <ImageButton
+            android:id="@+id/cardViewInfoButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/info_button"
+            android:layout_marginLeft="30dp"/>
+        <ImageButton
             android:id="@+id/acceptBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"

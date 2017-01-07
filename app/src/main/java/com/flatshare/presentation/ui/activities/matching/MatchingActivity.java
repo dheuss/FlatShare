@@ -2,8 +2,11 @@ package com.flatshare.presentation.ui.activities.matching;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 
 import com.flatshare.R;
@@ -35,6 +38,7 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
     private ImageButton rejectBtn;
     private ImageButton profileBtn;
     private ImageButton chatBtn;
+    private ImageButton cardViewInfoButton;
 
     private static final String TAG = "MatchingActivity";
 
@@ -94,6 +98,8 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
 
         rejectBtn = (ImageButton) findViewById(R.id.rejectBtn);
         acceptBtn = (ImageButton) findViewById(R.id.acceptBtn);
+
+        cardViewInfoButton = (ImageButton) findViewById(R.id.cardViewInfoButton);
     }
 
     @Override
