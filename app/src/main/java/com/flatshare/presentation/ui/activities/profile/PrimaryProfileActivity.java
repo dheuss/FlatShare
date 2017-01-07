@@ -50,7 +50,10 @@ public class PrimaryProfileActivity extends AbstractActivity implements PrimaryP
 
     private void sendProfile(int classificationId) {
 
-        mPresenter.sendProfile(new PrimaryUserProfile(classificationId));
+        PrimaryUserProfile primaryUserProfile = new PrimaryUserProfile();
+        primaryUserProfile.setClassificationId(classificationId);
+
+        mPresenter.sendProfile(primaryUserProfile);
 
     }
 

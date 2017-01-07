@@ -50,7 +50,7 @@ public class PrimaryProfilePresenterImpl extends AbstractPresenter implements Pr
     public void onSentSuccess(int classificationId) {
 
         mView.hideProgress();
-        if(classificationId == 0){
+        if (classificationId == 0) {
             mView.changeToTenantProfile();
         } else {
             mView.changeToApartmentProfile();
@@ -68,8 +68,18 @@ public class PrimaryProfilePresenterImpl extends AbstractPresenter implements Pr
     public void sendProfile(PrimaryUserProfile primaryUserProfile) {
 
         mView.showProgress();
-        userState.setPrimaryUserProfile(primaryUserProfile);
-        ProfileInteractor interactor = new PrimaryProfileInteractorImpl(mMainThread,this,primaryUserProfile);
+
+        if (userState.getPrimaryUserProfile() != null) { // already exists, update profile
+
+            primaryUserProfile.setEmail(userState.getPrimaryUserProfile().getEmail());
+            userState.setPrimaryUserProfile(primaryUserProfile);
+
+        } else {
+
+            userState.setPrimaryUserProfile(primaryUserProfile);
+        }
+
+        ProfileInteractor interactor = new PrimaryProfileInteractorImpl(mMainThread, this, primaryUserProfile);
         interactor.execute();
 
     }

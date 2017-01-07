@@ -53,9 +53,11 @@ public class EmailRetrieverInteractorImpl extends AbstractInteractor implements 
                 GenericTypeIndicator<Map<String, PrimaryUserProfile>> profilesMap = new GenericTypeIndicator<Map<String, PrimaryUserProfile>>() {
                 };
 
+                Map<String, PrimaryUserProfile> idProfileMap = dataSnapshot.getValue(profilesMap);
+                idProfileMap.remove(userId);
                 Map<String, String> emailIdMap = new HashMap<>();
 
-                for (Map.Entry<String, PrimaryUserProfile> entry : dataSnapshot.getValue(profilesMap).entrySet()) {
+                for (Map.Entry<String, PrimaryUserProfile> entry : idProfileMap.entrySet()) {
                     String id = entry.getKey();
                     String email = entry.getValue().getEmail();
                     emailIdMap.put(email, id);

@@ -52,6 +52,8 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
     @Override
     public void execute() {
 
+        apartmentUserProfile.getRoommateIds().add(userId);
+
         String city = apartmentUserProfile.getApartmentLocation().getCity();
         String district = apartmentUserProfile.getApartmentLocation().getDistrict();
         int zipCode = apartmentUserProfile.getApartmentLocation().getZipCode();
