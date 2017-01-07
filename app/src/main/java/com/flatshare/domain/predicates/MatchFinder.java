@@ -12,7 +12,8 @@ import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
 class MatchFinder {
 
     public boolean apMatchesTenantFilter(ApartmentUserProfile a, TenantFilterSettings tf) {
-        return (a.getArea() >= tf.getAreaFrom() && a.getArea() <= tf.getAreaTo())
+        return (a != null && tf != null)
+                && (a.getArea() >= tf.getAreaFrom() && a.getArea() <= tf.getAreaTo())
                 && (a.getPrice() >= tf.getPriceFrom() && a.getPrice() <= tf.getPriceTo())
                 && ((tf.getPetsAllowed() == 2) || (!a.hasPets() && tf.getPetsAllowed() == 0) || (a.hasPets() && tf.getPetsAllowed() == 1))
                 && ((tf.wantsInternet() == 2) || (!a.hasInternet() && tf.wantsInternet() == 0) || (a.hasInternet() && tf.wantsInternet() == 1))
@@ -22,7 +23,8 @@ class MatchFinder {
     }
 
     public boolean tenantMatchesApFilter(TenantUserProfile t, ApartmentFilterSettings af) {
-        return (t.getAge() >= af.getAgeFrom() && t.getAge() <= af.getAgeTo())
+        return (t != null && af != null)
+                && (t.getAge() >= af.getAgeFrom() && t.getAge() <= af.getAgeTo())
                 && ((af.getGender() == 2) || (t.getGender() == af.getGender()))
                 && ((af.getSmoker() == 2) || (!t.isSmoker() && af.getSmoker() == 0) || (t.isSmoker() && af.getSmoker() == 1))
                 && ((af.getPetsAllowed() == 2) || (!t.hasPets() && af.getPetsAllowed() == 0) || (t.hasPets() && af.getPetsAllowed() == 1));
