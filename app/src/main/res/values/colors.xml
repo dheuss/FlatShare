@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FF8F00</color>
-    <color name="colorPrimaryDark">#FF6F00</color>
-    <color name="textColorPrimary">#FFFFFF</color>
-    <color name="windowBackground">#FFF8E1</color>
-    <color name="navigationBarColor">#000000</color>
-    <color name="colorAccent">#FFC400</color>
+    <!-- Orginal
+   <color name="colorPrimary">#125688</color>
+   <color name="colorPrimaryDark">#125688</color>
+   <color name="textColorPrimary">#FFFFFF</color>
+   <color name="windowBackground">#FFFFFF</color>
+   <color name="navigationBarColor">#000000</color>
+   <color name="colorAccent">#c8e8ff</color>
+   -->
 
-    <color name="button">#FF6F00</color>
-    <color name="buttonText">#FFFFFF</color>
-    <color name="ButtonWithoutRectangle">#FF6F00</color>
+    <!-- Orange - Amber -->
+    <color name="colorPrimary">#FF8F00</color>      <!-- Amber 800 -->
+    <color name="colorPrimaryDark">#FF6F00</color>  <!-- Amber 900 -->
+    <color name="textColorPrimary">#FFFFFF</color>  <!-- white -->
+    <color name="windowBackground">#FFF8E1</color>  <!-- Amber 50 -->
+    <color name="navigationBarColor">#000000</color><!-- black -->
+    <color name="colorAccent">#FFC400</color>       <!-- Amber A200 -->
 
-    <color name="text">#000000</color>
+    <!-- Button Color -->
+    <color name="button">#FF6F00</color>                <!-- Amber 900 -->
+    <color name="buttonText">#FFFFFF</color>            <!-- white -->
+    <color name="ButtonWithoutRectangle">#FF6F00</color><!-- Amber 900 -->
 
+    <!-- Text Color -->
+    <color name="text">#000000</color>                  <!-- Amber 50 -->
 
-
-    <!--
-    <color name="colorPrimary">#125688</color>
-    <color name="colorPrimaryDark">#125688</color>
-    <color name="textColorPrimary">#FFFFFF</color>
-    <color name="windowBackground">#FFFFFF</color>
-    <color name="navigationBarColor">#000000</color>
-    <color name="colorAccent">#c8e8ff</color>
-    -->
-
+    <!-- more in Orange -->
     <color name="amber50background">#FFF8E1</color>
     <color name="amber100">#FFECB3</color>
     <color name="amber200">#FFE082</color>
@@ -35,7 +37,7 @@
     <color name="amber800">#FF8F00</color>
     <color name="amber900">#FF6F00</color>
 
-    <!-- accente -->
+    <!-- accente - Amber -->
     <color name="A100">#FFE57F</color>
     <color name="A200">#FFD740</color>
     <color name="A400">#FFC400</color>
