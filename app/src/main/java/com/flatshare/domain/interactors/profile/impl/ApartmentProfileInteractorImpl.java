@@ -6,6 +6,8 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
 import com.flatshare.domain.interactors.profile.ProfileInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,10 +36,15 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
         this.apartmentUserProfile = apartmentUserProfile;
     }
 
-    private void notifyError(String errorMessage) {
+    private void notifyError(final String errorMessage) {
         Log.d(TAG, "inside notifyError()");
 
-        mMainThread.post(() -> mCallback.onSentFailure(errorMessage));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onSentFailure(errorMessage);
+            }
+        });
     }
 
     /**
@@ -46,7 +53,12 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
     private void notifySuccess() {
         Log.d(TAG, "inside postMessage(String msg)");
 
-        mMainThread.post(() -> mCallback.onSentSuccess(1));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onSentSuccess(1);
+            }
+        });
     }
 
     @Override
@@ -68,11 +80,14 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
         map.put(databaseRoot.getUserProfileNode(userId).getApartmentProfileId(), apartmentId);
         map.put(locationPath, apartmentId);
 
-        mDatabase.updateChildren(map, (databaseError, databaseReference) -> {
-            if (databaseError != null) { // Error
-                notifyError(databaseError.toException().getMessage());
-            } else {
-                notifySuccess();
+        mDatabase.updateChildren(map, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError != null) { // Error
+                    ApartmentProfileInteractorImpl.this.notifyError(databaseError.toException().getMessage());
+                } else {
+                    ApartmentProfileInteractorImpl.this.notifySuccess();
+                }
             }
         });
 

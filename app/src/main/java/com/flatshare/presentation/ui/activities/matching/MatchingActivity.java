@@ -75,13 +75,33 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
             mSwipeView.addView(new MainActivity_ProfileCard(mContext, profile, mSwipeView));
         }
 
-        profileBtn.setOnClickListener(v -> startActivity(new Intent(MatchingActivity.this, ProfilSettingsActivity.class)));
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MatchingActivity.this.startActivity(new Intent(MatchingActivity.this, ProfilSettingsActivity.class));
+            }
+        });
 
-        chatBtn.setOnClickListener(v -> startActivity(new Intent(MatchingActivity.this, ChatActivity.class)));
+        chatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MatchingActivity.this.startActivity(new Intent(MatchingActivity.this, ChatActivity.class));
+            }
+        });
 
-        rejectBtn.setOnClickListener(v -> mSwipeView.doSwipe(false));
+        rejectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSwipeView.doSwipe(false);
+            }
+        });
 
-        acceptBtn.setOnClickListener(v -> mSwipeView.doSwipe(true));
+        acceptBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSwipeView.doSwipe(true);
+            }
+        });
     }
 
     @Override

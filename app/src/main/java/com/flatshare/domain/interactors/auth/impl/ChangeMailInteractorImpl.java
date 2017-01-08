@@ -1,11 +1,14 @@
 package com.flatshare.domain.interactors.auth.impl;
 
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.auth.AbstractAuthenticator;
 import com.flatshare.domain.interactors.auth.ChangeMailInteractor;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 public class ChangeMailInteractorImpl extends AbstractAuthenticator implements ChangeMailInteractor {
 
@@ -23,14 +26,24 @@ public class ChangeMailInteractorImpl extends AbstractAuthenticator implements C
         this.newMailAddress = newMailAddress;
     }
 
-    private void notifyError(String errorMessage) {
+    private void notifyError(final String errorMessage) {
         Log.d(TAG, "inside notifyError()");
-        mMainThread.post(() -> mCallback.onChangeMailFailure(errorMessage));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onChangeMailFailure(errorMessage);
+            }
+        });
     }
 
     private void notifySuccess() {
         Log.d(TAG, "inside postMessage(String msg)");
-        mMainThread.post(() -> mCallback.onChangeMailSuccess());
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onChangeMailSuccess();
+            }
+        });
     }
 
     @Override
@@ -41,13 +54,16 @@ public class ChangeMailInteractorImpl extends AbstractAuthenticator implements C
         }
 
         userFirebase.updateEmail(email)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Log.v(TAG, "changeMail:successful:" + task.isSuccessful());
-                        notifySuccess();
-                    } else {
-                        Log.v(TAG, "chanageMail:failed:" + task.getException());
-                        notifyError("logoutFailed");
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.v(TAG, "changeMail:successful:" + task.isSuccessful());
+                            ChangeMailInteractorImpl.this.notifySuccess();
+                        } else {
+                            Log.v(TAG, "chanageMail:failed:" + task.getException());
+                            ChangeMailInteractorImpl.this.notifyError("logoutFailed");
+                        }
                     }
                 });
     }

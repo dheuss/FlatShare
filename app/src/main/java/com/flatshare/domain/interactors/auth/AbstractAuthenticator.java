@@ -1,5 +1,6 @@
 package com.flatshare.domain.interactors.auth;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
@@ -25,16 +26,19 @@ public abstract class AbstractAuthenticator extends AbstractInteractor {
 
         mAuth = FirebaseAuth.getInstance();
 
-        mAuthListener = firebaseAuth -> {
-            FirebaseUser user_ = firebaseAuth.getCurrentUser();
-            if (user_ != null) {
-                Log.d(TAG, "onAuthStateChanged:signed_in:" + userId);
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user_ = firebaseAuth.getCurrentUser();
+                if (user_ != null) {
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + userId);
 
-                this.userFirebase = user_;
+                    AbstractAuthenticator.this.userFirebase = user_;
 
-                Log.v(TAG, userFirebase + "  ++++++ ABstractActivity FIREBVASEUSER ID");
-            } else {
-                Log.d(TAG, "onAuthStateChanged:signed_out");
+                    Log.v(TAG, userFirebase + "  ++++++ ABstractActivity FIREBVASEUSER ID");
+                } else {
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
             }
         };
 

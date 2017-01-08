@@ -3,6 +3,7 @@ package com.flatshare.presentation.ui.activities.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -37,7 +38,12 @@ public class ResetPasswordActivity extends AbstractActivity implements ResetPass
                 this
         );
 
-        resetPasswordButton.setOnClickListener(view -> reset());
+        resetPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ResetPasswordActivity.this.reset();
+            }
+        });
     }
 
     @Override

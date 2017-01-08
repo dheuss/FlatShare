@@ -1,5 +1,6 @@
 package com.flatshare.domain.interactors.auth.impl;
 
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -7,6 +8,9 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.auth.RegisterDataType;
 import com.flatshare.domain.interactors.auth.AbstractAuthenticator;
 import com.flatshare.domain.interactors.auth.RegisterInteractor;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 
 /**
  * Created by Arber on 06/01/2017.
@@ -28,16 +32,26 @@ public class RegisterInteractorImpl extends AbstractAuthenticator implements Reg
         this.registerDataType = registerDataType;
     }
 
-    private void notifyError(String errorMessage) {
+    private void notifyError(final String errorMessage) {
         Log.d(TAG, "inside notifyError()");
 
-        mMainThread.post(() -> mCallback.onRegisterFailure(errorMessage));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onRegisterFailure(errorMessage);
+            }
+        });
     }
 
     private void notifySuccess() {
         Log.d(TAG, "inside postMessage(String msg)");
 
-        mMainThread.post(() -> mCallback.onRegisterSuccess());
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onRegisterSuccess();
+            }
+        });
     }
 
     @Override
@@ -51,17 +65,20 @@ public class RegisterInteractorImpl extends AbstractAuthenticator implements Reg
         }
 
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
-                    Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 
-                    // If sign in fails, display a message to the user. If sign in succeeds
-                    // the auth state listener will be notified and logic to handle the
-                    // signed in user can be handled in the listener.
-                    if (task.isSuccessful()) {
-                        // TODO: update view
-                        notifySuccess();
-                    } else {
-                        notifyError(task.getException().getMessage());
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (task.isSuccessful()) {
+                            // TODO: update view
+                            RegisterInteractorImpl.this.notifySuccess();
+                        } else {
+                            RegisterInteractorImpl.this.notifyError(task.getException().getMessage());
+                        }
                     }
                 });
     }

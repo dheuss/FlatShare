@@ -1,9 +1,12 @@
 package com.flatshare.network.impl;
 
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.flatshare.network.StorageManager;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -23,17 +26,23 @@ public class StorageManagerImpl implements StorageManager {
     private boolean uploadDataLocal(StorageReference storageRef, byte[] data) {
 
         UploadTask uploadTask = storageRef.putBytes(data);
-        AtomicBoolean uploaded = new AtomicBoolean(true);
+        final AtomicBoolean uploaded = new AtomicBoolean(true);
 
 // Register observers to listen for when the download is done or if it fails
 
-        uploadTask.addOnFailureListener(exception -> {
-            Log.w(TAG, "Could not upload File locally:", exception);
-            uploaded.set(false);
-        }).addOnSuccessListener(taskSnapshot -> {
-            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-            Uri downloadUrl = taskSnapshot.getDownloadUrl();
-            uploaded.set(true);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Log.w(TAG, "Could not upload File locally:", exception);
+                uploaded.set(false);
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                uploaded.set(true);
+            }
         });
 
         return uploaded.get();
@@ -51,16 +60,22 @@ public class StorageManagerImpl implements StorageManager {
 
     }
 
-    private byte[] downloadDataMemory(StorageReference dataRef) {
+    private byte[] downloadDataMemory(final StorageReference dataRef) {
 
-        byte[] b = null;
+        final byte[] b = null;
 
         final long ONE_MEGABYTE = 1024 * 1024;
-        dataRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(bytes -> {
-            System.arraycopy(bytes, 0, b, 0, bytes.length);
-        }).addOnFailureListener(exception -> {
-            // TODO: Handle any errors
-            Log.w(TAG, "Could not download following file: " + dataRef.getPath());
+        dataRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                System.arraycopy(bytes, 0, b, 0, bytes.length);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // TODO: Handle any errors
+                Log.w(TAG, "Could not download following file: " + dataRef.getPath());
+            }
         });
 
         return b;

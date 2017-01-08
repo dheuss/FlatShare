@@ -9,6 +9,7 @@ import com.flatshare.domain.interactors.profile.FilterSettingsInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 
@@ -34,9 +35,14 @@ public class TenantSettingsInteractorImpl extends AbstractInteractor implements 
         this.tenantFilterSettings = tenantFilterSettings;
     }
 
-    private void notifyError(String errorMessage) {
+    private void notifyError(final String errorMessage) {
 
-        mMainThread.post(() -> mCallback.onSentFailure(errorMessage));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onSentFailure(errorMessage);
+            }
+        });
     }
 
     /**
@@ -45,7 +51,12 @@ public class TenantSettingsInteractorImpl extends AbstractInteractor implements 
     private void notifySuccess() {
         Log.d(TAG, "inside postMessage(String msg)");
 
-        mMainThread.post(() -> mCallback.onSentSuccess());
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onSentSuccess();
+            }
+        });
     }
 
     @Override
@@ -68,11 +79,14 @@ public class TenantSettingsInteractorImpl extends AbstractInteractor implements 
     }
 
     private void createTenantSettings(String path) {
-        mDatabase.child(path).setValue(this.tenantFilterSettings, (databaseError, databaseReference) -> {
-            if (databaseError == null) {
-                notifySuccess();
-            } else {
-                notifyError(databaseError.getMessage());
+        mDatabase.child(path).setValue(this.tenantFilterSettings, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError == null) {
+                    TenantSettingsInteractorImpl.this.notifySuccess();
+                } else {
+                    TenantSettingsInteractorImpl.this.notifyError(databaseError.getMessage());
+                }
             }
         });
     }

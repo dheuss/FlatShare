@@ -8,6 +8,8 @@ import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.UserProfile;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.utils.random.ProfileGenerator;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
 
@@ -43,11 +45,14 @@ public class TestInteractor extends AbstractInteractor {
 
         String id = mDatabase.child(aPath).push().getKey();
 
-        mDatabase.child(aPath + id).setValue(node, (databaseError, databaseReference) -> {
-            if (databaseError == null) {
+        mDatabase.child(aPath + id).setValue(node, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError == null) {
 
-            } else {
-                Log.d("ERROR", "ERROR");
+                } else {
+                    Log.d("ERROR", "ERROR");
+                }
             }
         });
     }

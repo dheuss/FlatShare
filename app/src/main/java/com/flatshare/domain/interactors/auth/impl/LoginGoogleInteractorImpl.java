@@ -1,5 +1,6 @@
 package com.flatshare.domain.interactors.auth.impl;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
@@ -7,7 +8,10 @@ import com.flatshare.domain.interactors.auth.AbstractAuthenticator;
 import com.flatshare.domain.interactors.auth.LoginGoogleInteractor;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 /**
@@ -31,16 +35,26 @@ public class LoginGoogleInteractorImpl extends AbstractAuthenticator implements 
         this.mCallback = callback;
     }
 
-    private void notifyError(String errorMessage) {
+    private void notifyError(final String errorMessage) {
         Log.d(TAG, "inside notifyError()");
 
-        mMainThread.post(() -> mCallback.onLoginGoogleFailure(errorMessage));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onLoginGoogleFailure(errorMessage);
+            }
+        });
     }
 
     private void notifySuccess() {
         Log.d(TAG, "inside postMessage(String msg)");
 
-        mMainThread.post(() -> mCallback.onLoginGoogleSuccess());
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onLoginGoogleSuccess();
+            }
+        });
     }
 
     @Override
@@ -83,11 +97,14 @@ public class LoginGoogleInteractorImpl extends AbstractAuthenticator implements 
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
 
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()){
-                        notifySuccess();
-                    } else {
-                        notifyError("GoogleLoginFailed");
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            LoginGoogleInteractorImpl.this.notifySuccess();
+                        } else {
+                            LoginGoogleInteractorImpl.this.notifyError("GoogleLoginFailed");
+                        }
                     }
                 });
     }

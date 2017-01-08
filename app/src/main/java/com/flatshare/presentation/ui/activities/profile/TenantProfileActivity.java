@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -64,8 +65,18 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
                 this
         );
 
-        profileDoneButton.setOnClickListener(view -> sendProfile());
-        takeAPictureButton.setOnClickListener(view -> openGallery());
+        profileDoneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TenantProfileActivity.this.sendProfile();
+            }
+        });
+        takeAPictureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TenantProfileActivity.this.openGallery();
+            }
+        });
 
     }
 

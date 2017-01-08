@@ -25,16 +25,26 @@ public class LogoutInteractorImpl extends AbstractAuthenticator implements Logou
         this.mCallback = callback;
     }
 
-    private void notifyError(String errorMessage) {
+    private void notifyError(final String errorMessage) {
         Log.d(TAG, "inside notifyError()");
 
-        mMainThread.post(() -> mCallback.onLogoutFail(errorMessage));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onLogoutFail(errorMessage);
+            }
+        });
     }
 
     private void notifySuccess() {
         Log.d(TAG, "inside postMessage(String msg)");
 
-        mMainThread.post(() -> mCallback.onLogoutSuccess());
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onLogoutSuccess();
+            }
+        });
     }
 
     @Override

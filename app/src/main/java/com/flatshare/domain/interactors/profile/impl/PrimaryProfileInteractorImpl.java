@@ -8,6 +8,7 @@ import com.flatshare.domain.interactors.profile.ProfileInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
@@ -36,10 +37,15 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
         this.primaryUserProfile = primaryUserProfile;
     }
 
-    private void notifyError(String errorMessage) {
+    private void notifyError(final String errorMessage) {
         Log.d(TAG, "inside notifyError()");
 
-        mMainThread.post(() -> mCallback.onSentFailure(errorMessage));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onSentFailure(errorMessage);
+            }
+        });
     }
 
     /**
@@ -48,7 +54,12 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
     private void notifySuccess() {
         Log.d(TAG, "inside notifySuccess");
 
-        mMainThread.post(() -> mCallback.onSentSuccess(primaryUserProfile.getClassificationId()));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onSentSuccess(primaryUserProfile.getClassificationId());
+            }
+        });
     }
 
     @Override
@@ -75,11 +86,14 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
 
         Log.d(TAG, "creating main profile!");
 
-        mDatabase.child(databaseRoot.getUserProfileNode(userId).getRootPath()).setValue(this.primaryUserProfile, (databaseError, databaseReference) -> {
-            if (databaseError == null) {
-                notifySuccess();
-            } else {
-                notifyError(databaseError.getMessage());
+        mDatabase.child(databaseRoot.getUserProfileNode(userId).getRootPath()).setValue(this.primaryUserProfile, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError == null) {
+                    PrimaryProfileInteractorImpl.this.notifySuccess();
+                } else {
+                    PrimaryProfileInteractorImpl.this.notifyError(databaseError.getMessage());
+                }
             }
         });
 
@@ -91,11 +105,14 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
         Map<String, Object> map = new HashMap<>();
         map.put(databaseRoot.getUserProfileNode(userId).getClassificationId(), this.primaryUserProfile.getClassificationId());
 
-        mDatabase.updateChildren(map, (databaseError, databaseReference) -> {
-            if (databaseError != null) { // Error
-                notifyError(databaseError.toException().getMessage());
-            } else {
-                notifySuccess();
+        mDatabase.updateChildren(map, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError != null) { // Error
+                    PrimaryProfileInteractorImpl.this.notifyError(databaseError.toException().getMessage());
+                } else {
+                    PrimaryProfileInteractorImpl.this.notifySuccess();
+                }
             }
         });
     }

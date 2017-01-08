@@ -6,6 +6,8 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
 import com.flatshare.domain.interactors.profile.ProfileInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,10 +36,15 @@ public class TenantProfileInteractorImpl extends AbstractInteractor implements P
         this.tenantUserProfile = tenantUserProfile;
     }
 
-    private void notifyError(String errorMessage) {
+    private void notifyError(final String errorMessage) {
         Log.d(TAG, "inside notifyError()");
 
-        mMainThread.post(() -> mCallback.onSentFailure(errorMessage));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onSentFailure(errorMessage);
+            }
+        });
     }
 
     /**
@@ -46,7 +53,12 @@ public class TenantProfileInteractorImpl extends AbstractInteractor implements P
     private void notifySuccess() {
         Log.d(TAG, "inside postMessage(String msg)");
 
-        mMainThread.post(() -> mCallback.onSentSuccess(0));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onSentSuccess(0);
+            }
+        });
     }
 
     /**
@@ -61,11 +73,14 @@ public class TenantProfileInteractorImpl extends AbstractInteractor implements P
         map.put(databaseRoot.getTenantProfileNode(tId).getRootPath(), this.tenantUserProfile);
         map.put(databaseRoot.getUserProfileNode(userId).getTenantProfileId(), tId);
 
-        mDatabase.updateChildren(map, (databaseError, databaseReference) -> {
-            if (databaseError != null) { // Error
-                notifyError(databaseError.toException().getMessage());
-            } else {
-                notifySuccess();
+        mDatabase.updateChildren(map, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError != null) { // Error
+                    TenantProfileInteractorImpl.this.notifyError(databaseError.toException().getMessage());
+                } else {
+                    TenantProfileInteractorImpl.this.notifySuccess();
+                }
             }
         });
 

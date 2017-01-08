@@ -1,9 +1,12 @@
 package com.flatshare.network.impl;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.flatshare.domain.datatypes.db.DatabaseItem;
 import com.flatshare.network.DatabaseManager;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,13 +46,16 @@ public class DatabaseManagerImpl implements DatabaseManager {
     @Override
     public String create(Object item, String path) {
 
-        mDatabase.child(path).setValue(item, (databaseError, databaseReference) -> {
-            if (databaseError == null) { // Success!
-                Log.d(TAG, "successfully created!");
-                this.dbError = null;
-            } else { // Failure
-                Log.w(TAG, "FAILED!", databaseError.toException());
-                this.dbError = databaseError.getMessage();
+        mDatabase.child(path).setValue(item, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError == null) { // Success!
+                    Log.d(TAG, "successfully created!");
+                    DatabaseManagerImpl.this.dbError = null;
+                } else { // Failure
+                    Log.w(TAG, "FAILED!", databaseError.toException());
+                    DatabaseManagerImpl.this.dbError = databaseError.getMessage();
+                }
             }
         });
 
@@ -91,7 +97,7 @@ public class DatabaseManagerImpl implements DatabaseManager {
     @Override
     public List<String> readIds(String path) {
 
-        List<String> ids = new ArrayList<>();
+        final List<String> ids = new ArrayList<>();
 
 //                addValueEventListener
         mDatabase.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -121,13 +127,16 @@ public class DatabaseManagerImpl implements DatabaseManager {
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put(path, newItem);
 
-        mDatabase.updateChildren(childUpdates).addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) { // FAILURE!
-                Log.w(TAG, "update FAILED!", task.getException());
-                this.dbError = task.getException().getMessage();
-            } else { // SUCCESS
-                Log.d(TAG, "successfully updated!");
-                this.dbError = null;
+        mDatabase.updateChildren(childUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (!task.isSuccessful()) { // FAILURE!
+                    Log.w(TAG, "update FAILED!", task.getException());
+                    DatabaseManagerImpl.this.dbError = task.getException().getMessage();
+                } else { // SUCCESS
+                    Log.d(TAG, "successfully updated!");
+                    DatabaseManagerImpl.this.dbError = null;
+                }
             }
         });
 
@@ -141,13 +150,16 @@ public class DatabaseManagerImpl implements DatabaseManager {
     @Override
     public String delete(String path) {
 
-        mDatabase.child(path).removeValue((databaseError, databaseReference) -> {
-            if (databaseError != null) { // FAILURE!
-                Log.d(TAG, "delete FAILED!", databaseError.toException());
-                this.dbError = databaseError.getMessage();
-            } else { // SUCCESS
-                Log.d(TAG, "successfully deleted!");
-                this.dbError = null;
+        mDatabase.child(path).removeValue(new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError != null) { // FAILURE!
+                    Log.d(TAG, "delete FAILED!", databaseError.toException());
+                    DatabaseManagerImpl.this.dbError = databaseError.getMessage();
+                } else { // SUCCESS
+                    Log.d(TAG, "successfully deleted!");
+                    DatabaseManagerImpl.this.dbError = null;
+                }
             }
         });
 

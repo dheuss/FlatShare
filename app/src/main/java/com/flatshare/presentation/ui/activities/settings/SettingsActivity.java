@@ -107,11 +107,36 @@ public class SettingsActivity extends AbstractActivity implements SettingsPresen
             }
         });
 
-        changeEmail.setOnClickListener(view -> changeMail());
-        signOut.setOnClickListener(view -> signOut());
-        btnRemoveUser.setOnClickListener(view -> deleteAccount());
-        changePassword.setOnClickListener(view -> changeToNewPassword());
-        sendEmail.setOnClickListener(view -> resetEmail());
+        changeEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SettingsActivity.this.changeMail();
+            }
+        });
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SettingsActivity.this.signOut();
+            }
+        });
+        btnRemoveUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SettingsActivity.this.deleteAccount();
+            }
+        });
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SettingsActivity.this.changeToNewPassword();
+            }
+        });
+        sendEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SettingsActivity.this.resetEmail();
+            }
+        });
     }
 
     @Override

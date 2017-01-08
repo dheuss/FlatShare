@@ -3,6 +3,7 @@ package com.flatshare.presentation.ui.activities.profile;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -38,8 +39,18 @@ public class PrimaryProfileActivity extends AbstractActivity implements PrimaryP
                 this
         );
 
-        createTenantProfileButton.setOnClickListener(view -> sendProfile(0));
-        createApartmentProfileButton.setOnClickListener(view -> sendProfile(1));
+        createTenantProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PrimaryProfileActivity.this.sendProfile(0);
+            }
+        });
+        createApartmentProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PrimaryProfileActivity.this.sendProfile(1);
+            }
+        });
 
     }
 

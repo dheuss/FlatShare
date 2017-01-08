@@ -1,12 +1,15 @@
 package com.flatshare.domain.interactors.media.impl;
 
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.enums.MediaType;
 import com.flatshare.domain.interactors.media.MediaInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.UploadTask;
 
 
@@ -42,7 +45,12 @@ public class UploadInteractorImpl extends AbstractInteractor implements MediaInt
     private void notifyError() {
         Log.d(TAG, "inside notifyError()");
 
-        mMainThread.post(() -> mCallback.onError("some kind of error"));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onError("some kind of error");
+            }
+        });
     }
 
     /**
@@ -51,7 +59,12 @@ public class UploadInteractorImpl extends AbstractInteractor implements MediaInt
     private void notifySuccess() {
         Log.d(TAG, "inside postMessage(String msg)");
 
-        mMainThread.post(() -> mCallback.onUploadSuccess());
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onUploadSuccess();
+            }
+        });
     }
 
     /**
@@ -79,10 +92,18 @@ public class UploadInteractorImpl extends AbstractInteractor implements MediaInt
 
         UploadTask uploadTask = mStorage.child(childNode + mediaName).putFile(uri);
 
-        uploadTask.addOnFailureListener(exception -> notifyError()).addOnSuccessListener(taskSnapshot -> {
-            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-            Uri downloadUrl = taskSnapshot.getDownloadUrl();
-            notifySuccess();
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                UploadInteractorImpl.this.notifyError();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                UploadInteractorImpl.this.notifySuccess();
+            }
         });
     }
 

@@ -45,7 +45,12 @@ public class RegisterActivity extends AbstractActivity implements RegisterPresen
                 this
         );
 
-        registerButton.setOnClickListener(view -> register());
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RegisterActivity.this.register();
+            }
+        });
 
         forgotYourPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override

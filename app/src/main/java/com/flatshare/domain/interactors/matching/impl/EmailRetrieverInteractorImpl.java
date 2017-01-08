@@ -34,12 +34,22 @@ public class EmailRetrieverInteractorImpl extends AbstractInteractor implements 
     }
 
 
-    private void notifyError(String errorMessage) {
-        mMainThread.post(() -> mCallback.emailsRetrievedFailure(errorMessage));
+    private void notifyError(final String errorMessage) {
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.emailsRetrievedFailure(errorMessage);
+            }
+        });
     }
 
-    private void notifySuccess(Map<String, String> emailIdMap) {
-        mMainThread.post(() -> mCallback.emailsRetrievedSuccess(emailIdMap));
+    private void notifySuccess(final Map<String, String> emailIdMap) {
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.emailsRetrievedSuccess(emailIdMap);
+            }
+        });
     }
 
     @Override

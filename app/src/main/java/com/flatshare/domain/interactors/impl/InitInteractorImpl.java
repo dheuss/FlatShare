@@ -37,10 +37,15 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
         this.mCallback = callback;
     }
 
-    private void notifyError(String errorMessage) {
+    private void notifyError(final String errorMessage) {
         Log.d(TAG, "inside notifyError()");
 
-        mMainThread.post(() -> mCallback.onReceivedFailure(errorMessage));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onReceivedFailure(errorMessage);
+            }
+        });
     }
 
     /**
@@ -48,7 +53,12 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
      */
     private void notifySuccess() {
 
-        mMainThread.post(() -> mCallback.onReceivedSuccess(primaryUserProfile, tenantUserProfile, apartmentUserProfile));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onReceivedSuccess(primaryUserProfile, tenantUserProfile, apartmentUserProfile);
+            }
+        });
     }
 
     /**
@@ -79,7 +89,7 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
 
     }
 
-    private void getSecondaryUserProfiles(String tenantProfileId, String apartmentProfileId) {
+    private void getSecondaryUserProfiles(String tenantProfileId, final String apartmentProfileId) {
 
         if (tenantProfileId != null && tenantProfileId != "") {
             String path = databaseRoot.getTenantProfileNode(tenantProfileId).getRootPath();
@@ -105,7 +115,7 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
         }
     }
 
-    private void getApartmentProfile(String apartmentProfileId, boolean tenantFound) {
+    private void getApartmentProfile(String apartmentProfileId, final boolean tenantFound) {
 
         if (apartmentProfileId != null && apartmentProfileId != "") {
             String path = databaseRoot.getApartmentProfileNode(apartmentProfileId).getRootPath();

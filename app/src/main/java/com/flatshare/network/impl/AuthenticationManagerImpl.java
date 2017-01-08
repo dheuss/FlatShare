@@ -1,5 +1,6 @@
 package com.flatshare.network.impl;
 
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -9,6 +10,8 @@ import com.flatshare.domain.datatypes.auth.LoginDataType;
 import com.flatshare.domain.datatypes.auth.RegisterDataType;
 import com.flatshare.domain.datatypes.auth.ResetDataType;
 import com.flatshare.network.AuthenticationManager;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -38,12 +41,15 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        mAuthListener = firebaseAuth -> {
-            FirebaseUser user_ = firebaseAuth.getCurrentUser();
-            if (user_ != null) {
-                Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-            } else {
-                Log.d(TAG, "onAuthStateChanged:signed_out");
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user_ = firebaseAuth.getCurrentUser();
+                if (user_ != null) {
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
             }
         };
     }
@@ -85,11 +91,14 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
             return;
         }
         mAuth.sendPasswordResetEmail(email)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Log.v(TAG, "resetEmail:successful:" + task.isSuccessful());
-                    } else {
-                        Log.v(TAG, "resetEmail:failed:" + task.getException());
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.v(TAG, "resetEmail:successful:" + task.isSuccessful());
+                        } else {
+                            Log.v(TAG, "resetEmail:failed:" + task.getException());
+                        }
                     }
                 });
     }

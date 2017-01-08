@@ -46,25 +46,45 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
         this.apartmentUserProfile = apartmentUserProfile;
     }
 
-    private void notifyTenantMatchesFound(List<TenantUserProfile> tenants) {
+    private void notifyTenantMatchesFound(final List<TenantUserProfile> tenants) {
         Log.d(TAG, "inside notifyError()");
-        mMainThread.post(() -> mCallback.onTenantsFound(tenants));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onTenantsFound(tenants);
+            }
+        });
     }
 
-    private void notifyApartmentMatchesFound(List<ApartmentUserProfile> apartments) {
+    private void notifyApartmentMatchesFound(final List<ApartmentUserProfile> apartments) {
         Log.d(TAG, "inside notifyError()");
-        mMainThread.post(() -> mCallback.onApartmentsFound(apartments));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onApartmentsFound(apartments);
+            }
+        });
     }
 
 
     private void notifyNoMatchFound() {
 
-        mMainThread.post(() -> mCallback.onNoMatchFound());
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onNoMatchFound();
+            }
+        });
     }
 
 
-    private void notifyError(String errorMessage) {
-        mMainThread.post(() -> mCallback.notifyError(errorMessage));
+    private void notifyError(final String errorMessage) {
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.notifyError(errorMessage);
+            }
+        });
     }
 
     @Override
@@ -105,7 +125,7 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
 
     }
 
-    private void matchApartment(ApartmentUserProfile apUP) {
+    private void matchApartment(final ApartmentUserProfile apUP) {
 
         String path = databaseRoot.getTenantProfiles();
         String testPath = "test/" + databaseRoot.getTenantProfiles();
@@ -141,7 +161,7 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
 
     }
 
-    private void matchTenant(TenantUserProfile tUP) {
+    private void matchTenant(final TenantUserProfile tUP) {
 
         String path = databaseRoot.getApartmentProfiles();
         String testPath = "test/" + databaseRoot.getApartmentProfiles();

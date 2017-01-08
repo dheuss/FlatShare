@@ -4,6 +4,8 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.UserProfile;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.domain.interactors.matching.SwipeInteractor;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 
 /**
  * Created by Arber on 07/01/2017.
@@ -68,22 +70,28 @@ public class SwipeInteractorImpl extends AbstractInteractor implements SwipeInte
     }
 
     private void insertIntoPotentialMatches(String potentialMatchesPath) {
-        mDatabase.child(potentialMatchesPath).setValue(true, (databaseError, databaseReference) -> {
-            if (databaseError == null) { // success
-                notifySuccess();
-            } else { // error
-                notifyError(databaseError.getMessage());
+        mDatabase.child(potentialMatchesPath).setValue(true, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError == null) { // success
+                    SwipeInteractorImpl.this.notifySuccess();
+                } else { // error
+                    SwipeInteractorImpl.this.notifyError(databaseError.getMessage());
+                }
             }
         });
     }
 
 
     private void removeProfileToShow(String profilesToShowPath) {
-        mDatabase.child(profilesToShowPath).orderByValue().equalTo(otherId).getRef().removeValue((databaseError, databaseReference) -> {
-            if (databaseError == null) { // success
-                notifySuccess();
-            } else { // error
-                notifyError(databaseError.getMessage());
+        mDatabase.child(profilesToShowPath).orderByValue().equalTo(otherId).getRef().removeValue(new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError == null) { // success
+                    SwipeInteractorImpl.this.notifySuccess();
+                } else { // error
+                    SwipeInteractorImpl.this.notifyError(databaseError.getMessage());
+                }
             }
         });
     }

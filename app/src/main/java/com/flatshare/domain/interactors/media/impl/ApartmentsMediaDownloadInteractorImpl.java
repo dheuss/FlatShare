@@ -1,10 +1,13 @@
 package com.flatshare.domain.interactors.media.impl;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.media.MediaInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 
 /**
@@ -32,19 +35,29 @@ public class ApartmentsMediaDownloadInteractorImpl extends AbstractInteractor im
         this.apartmentId = apartmentId;
     }
 
-    private void notifyError(String errorMessage) {
+    private void notifyError(final String errorMessage) {
 
-        mMainThread.post(() -> mCallback.onError(errorMessage));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onError(errorMessage);
+            }
+        });
     }
 
     /**
      * callback method that posts message received into the main UI, through mainThread.post!!!
      * @param data
      */
-    private void notifySuccess(byte[] data) {
+    private void notifySuccess(final byte[] data) {
         Log.d(TAG, "inside postMessage(String msg)");
 
-        mMainThread.post(() -> mCallback.onDownloadSuccess(data));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onDownloadSuccess(data);
+            }
+        });
     }
 
 
@@ -57,9 +70,19 @@ public class ApartmentsMediaDownloadInteractorImpl extends AbstractInteractor im
 
         final long ONE_MEGABYTE = 1024 * 1024;
         mStorage.child(path + mediaName).getBytes(ONE_MEGABYTE).addOnSuccessListener(
-                bytes -> notifySuccess(bytes))
+                new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        ApartmentsMediaDownloadInteractorImpl.this.notifySuccess(bytes);
+                    }
+                })
                 .addOnFailureListener(
-                        exception -> notifyError(exception.getMessage()));
+                        new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                ApartmentsMediaDownloadInteractorImpl.this.notifyError(exception.getMessage());
+                            }
+                        });
 
     }
 }

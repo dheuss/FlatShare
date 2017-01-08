@@ -1,11 +1,14 @@
 package com.flatshare.domain.interactors.auth.impl;
 
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.auth.AbstractAuthenticator;
 import com.flatshare.domain.interactors.auth.ResetPasswordInteractor;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 
 public class ResetPasswordInteractorImpl extends AbstractAuthenticator implements ResetPasswordInteractor {
@@ -25,14 +28,24 @@ public class ResetPasswordInteractorImpl extends AbstractAuthenticator implement
         this.email = email;
     }
 
-    private void notifyError(String errorMessage) {
+    private void notifyError(final String errorMessage) {
         Log.d(TAG, "inside notifyError()");
-        mMainThread.post(() -> mCallback.onResetPasswordFailure(errorMessage));
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onResetPasswordFailure(errorMessage);
+            }
+        });
     }
 
     private void notifySuccess() {
         Log.d(TAG, "inside postMessage(String msg)");
-        mMainThread.post(() -> mCallback.onResetPasswordSuccess());
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onResetPasswordSuccess();
+            }
+        });
     }
 
     @Override
@@ -43,12 +56,15 @@ public class ResetPasswordInteractorImpl extends AbstractAuthenticator implement
         }
 
         mAuth.sendPasswordResetEmail(email)
-                .addOnCompleteListener(task -> {
-                   if (task.isSuccessful()){
-                       notifySuccess();
-                   } else {
-                       notifyError("Cant send Password reste email");
-                   }
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            ResetPasswordInteractorImpl.this.notifySuccess();
+                        } else {
+                            ResetPasswordInteractorImpl.this.notifyError("Cant send Password reste email");
+                        }
+                    }
                 });
     }
 }
