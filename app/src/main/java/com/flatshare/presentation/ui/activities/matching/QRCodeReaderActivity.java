@@ -3,11 +3,7 @@ package com.flatshare.presentation.ui.activities.matching;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
@@ -20,7 +16,6 @@ import android.widget.TextView;
 import com.flatshare.R;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
-import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
@@ -143,17 +138,6 @@ public class QRCodeReaderActivity extends Activity {
         });
 
         System.out.println("done completely");
-
-//        SparseArray<Barcode> barcodes = barcodeDetector.detect(myFrame);
-//
-//        // Check if at least one barcode was detected
-//        if(barcodes.size() != 0) {
-//
-//            // Print the QR code's message
-//            Log.d("My QR Code's Data",
-//                    barcodes.valueAt(0).displayValue
-//            );
-//        }
 
     }
 
