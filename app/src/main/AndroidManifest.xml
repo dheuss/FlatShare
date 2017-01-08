@@ -64,7 +64,8 @@
         <activity android:name=".presentation.ui.activities.chat.CalendarActivity" />
         <activity android:name=".presentation.ui.activities.matching.RoommateQRActivity" />
         <activity android:name=".presentation.ui.activities.matching.QRCodeReaderActivity" />
-        <activity android:name=".presentation.ui.activities.matching.ShowDetailProfilApartmentActivity"></activity>
+        <activity android:name=".presentation.ui.activities.matching.ShowDetailProfilApartmentActivity" />
+        <activity android:name=".presentation.ui.activities.matching.ShowDetailProfilTenantActivity"></activity>
     </application>
 
 </manifest>
