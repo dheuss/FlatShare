@@ -109,7 +109,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/password_edittext"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="30dp"
             android:text="@string/login_button"
             android:textColor="@color/text"
             android:background="@drawable/background_field" />
