@@ -20,7 +20,7 @@
             android:value="@string/facebook_app_id" />
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
+            android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
@@ -63,7 +63,8 @@
         <activity android:name=".presentation.ui.activities.settings.SettingsActivity" />
         <activity android:name=".presentation.ui.activities.chat.CalendarActivity" />
         <activity android:name=".presentation.ui.activities.matching.RoommateQRActivity" />
-        <activity android:name=".presentation.ui.activities.matching.QRCodeReaderActivity"></activity>
+        <activity android:name=".presentation.ui.activities.matching.QRCodeReaderActivity" />
+        <activity android:name=".presentation.ui.activities.matching.ShowDetailProfilApartmentActivity"></activity>
     </application>
 
 </manifest>

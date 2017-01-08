@@ -16,8 +16,6 @@ import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.settings.ProfilSettingsActivity;
 import com.flatshare.presentation.ui.activities.chat.ChatActivity;
 import com.flatshare.threading.MainThreadImpl;
-import com.flatshare.utils.random.Profile;
-import com.flatshare.utils.random.Utils;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
