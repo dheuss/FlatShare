@@ -46,6 +46,7 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
         bindView();
 
         Log.d(TAG, "inside onCreate(), creating presenter for this view");
+
         mPresenter = new MatchingPresenterImpl(
                 MainThreadImpl.getInstance(),
                 this

@@ -13,9 +13,7 @@ public interface MatchingPresenter extends BasePresenter {
     void getMatches();
 
     interface View extends BaseView {
-
         void showTenants(List<TenantUserProfile> tenants);
-
         void showApartments(List<ApartmentUserProfile> apartments);
     }
 }
