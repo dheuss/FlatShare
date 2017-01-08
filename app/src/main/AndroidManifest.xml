@@ -25,13 +25,7 @@
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
 
-        <activity android:name=".presentation.ui.activities.auth.login.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".presentation.ui.activities.auth.login.LoginActivity"></activity>
         <activity android:name=".presentation.ui.activities.matching.MatchingActivity" />
         <activity android:name=".presentation.ui.activities.profile.PrimaryProfileActivity" />
         <activity android:name=".presentation.ui.activities.auth.RegisterActivity" />
@@ -61,7 +55,13 @@
         <activity android:name=".presentation.ui.activities.settings.ProfilSettingsActivity" />
         <activity android:name=".presentation.ui.activities.chat.ChatActivity" />
         <activity android:name=".presentation.ui.activities.settings.SettingsActivity" />
-        <activity android:name=".presentation.ui.activities.chat.CalendarActivity" />
+        <activity android:name=".presentation.ui.activities.chat.CalendarActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".presentation.ui.activities.matching.RoommateQRActivity" />
         <activity android:name=".presentation.ui.activities.matching.QRCodeReaderActivity" />
         <activity android:name=".presentation.ui.activities.matching.ShowDetailProfilApartmentActivity" />

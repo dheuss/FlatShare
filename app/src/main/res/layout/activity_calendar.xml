@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_sunset">
     <LinearLayout
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="top|right">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|left">
         <ImageButton
             android:id="@+id/couchChatBtn"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/couch_button"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/logo_neu"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,8 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Android Calendar View Example"
+            android:text="Choose a date for an appointment to view a flat:"
+            android:textColor="@color/text"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <CalendarView
@@ -41,6 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Calendar View Date Display"
+            android:textColor="@color/text"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </LinearLayout>
