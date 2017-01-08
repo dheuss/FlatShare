@@ -15,7 +15,7 @@ import com.flatshare.presentation.presenters.auth.LoginPresenter;
 
 public class LoginFragmentOneActivity extends Fragment implements LoginPresenter.View{
 
-    private Button login_1_Button;
+//    private Button login_1_Button;
 
     public LoginFragmentOneActivity() {
     }
@@ -32,23 +32,23 @@ public class LoginFragmentOneActivity extends Fragment implements LoginPresenter
 
         bind(view);
 
-        login_1_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        login_1_Button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
 //                startActivity(new Intent(getActivity(), LoginFragmentFourActivity.class));
 //                Fragment fragment = new Dashboard();
 //                FragmentManager fm = getSupportFragmentManager();
 //                FragmentTransaction transaction = fm.beginTransaction();
 //                transaction.replace(R.id.contentFragment, fragment);
 //                transaction.commit();
-            }
-        });
+//            }
+//        });
 
         return view;
     }
 
     public void bind(View view){
-        login_1_Button = (Button)view.findViewById(R.id.login_button_fragment_1);
+//        login_1_Button = (Button)view.findViewById(R.id.login_button_fragment_1);
     }
 
     @Override
