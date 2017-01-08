@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flatshare.R;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
 import com.flatshare.utils.random.Profile;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.annotations.Layout;
@@ -36,11 +37,11 @@ public class MatchingActivity_ProfileCard {
     @View(R.id.locationNameTxt)
     private TextView locationNameTxt;
 
-    private Profile mProfile;
+    private ApartmentUserProfile mProfile;
     private Context mContext;
     private SwipePlaceHolderView mSwipeView;
 
-    public MatchingActivity_ProfileCard(Context context, Profile profile, SwipePlaceHolderView swipeView) {
+    public MatchingActivity_ProfileCard(Context context, ApartmentUserProfile profile, SwipePlaceHolderView swipeView) {
         mContext = context;
         mProfile = profile;
         mSwipeView = swipeView;
@@ -48,9 +49,9 @@ public class MatchingActivity_ProfileCard {
 
     @Resolve
     private void onResolved(){
-        Glide.with(mContext).load(mProfile.getImageUrl()).into(profileImageView);
-        nameAgeTxt.setText(mProfile.getName() + ", " + mProfile.getAge());
-        locationNameTxt.setText(mProfile.getLocation());
+        //Glide.with(mContext).load(mProfile.getImageUrl()).into(profileImageView);
+        nameAgeTxt.setText(mProfile.getApartmentLocation().city + ", " + mProfile.getApartmentLocation().district);
+        locationNameTxt.setText(mProfile.getPrice() + "");
     }
 
     @SwipeOut

@@ -90,7 +90,6 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
     @Override
     public void execute() {
 
-
         if (tenantUserProfile != null || apartmentUserProfile != null) {
 
             if (classificationId == 0) { // tenant is looking for matches

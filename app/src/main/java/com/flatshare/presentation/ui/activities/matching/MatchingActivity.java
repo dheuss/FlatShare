@@ -63,10 +63,6 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
                         .setSwipeInMsgLayoutId(R.layout.activity_main_card_in)
                         .setSwipeOutMsgLayoutId(R.layout.activity_main_card_out));
 
-        for (Profile profile : Utils.loadProfiles(this.getApplicationContext())) {
-            mSwipeView.addView(new MatchingActivity_ProfileCard(mContext, profile, mSwipeView));
-        }
-
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,10 +152,11 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
 
         Log.d(TAG, "size of potential apartments: " + apartments.size());
 
-//        int i = 0;
-//
-//        for (ApartmentUserProfile a : apartments){
-//            Log.d(TAG, "i: " + i++ + "\n" + a.toString());
-//        }
+        int i = 0;
+
+        for (ApartmentUserProfile a : apartments){
+            //Log.d(TAG, "i: " + i++ + "\n" + a.toString());
+            mSwipeView.addView(new MatchingActivity_ProfileCard(mContext, a, mSwipeView));
+        }
     }
 }
