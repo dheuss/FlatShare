@@ -54,4 +54,16 @@
             android:background="@color/button"
             android:textStyle="bold"/>
 
+    <Button
+        android:id="@+id/create_roommate_qr_code_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/create_apartment_profile_button"
+        android:hint="@string/create_roommate_qr_code_button"
+        android:textColor="@color/textColorPrimary"
+        android:textColorHint="@color/buttonText"
+        android:layout_marginTop="20dp"
+        android:background="@color/button"
+        android:textStyle="bold"/>
+
     </LinearLayout>

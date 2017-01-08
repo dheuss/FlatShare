@@ -84,6 +84,12 @@ public class PrimaryProfilePresenterImpl extends AbstractPresenter implements Pr
 
     }
 
+    @Override
+    public void createQRCode() {
+        // TODO: use some interactor to get userId..
+        mView.changeToRoomateQR("some User ID!");
+    }
+
 
     @Override
     public void onError(String message) {

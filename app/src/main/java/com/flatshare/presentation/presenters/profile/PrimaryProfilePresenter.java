@@ -12,9 +12,12 @@ public interface PrimaryProfilePresenter extends BasePresenter {
 
     void sendProfile(PrimaryUserProfile primaryUserProfile);
 
+    void createQRCode();
+
     interface View extends BaseView {
         void changeToTenantProfile();
         void changeToApartmentProfile();
+        void changeToRoomateQR(String roommateId);
     }
 
 }
