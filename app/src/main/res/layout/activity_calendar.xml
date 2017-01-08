@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_gravity="top|left">
+        android:layout_gravity="top|right">
         <ImageButton
             android:id="@+id/couchChatBtn"
             android:layout_width="match_parent"
@@ -17,17 +17,32 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="50dp">
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:scrollbars="vertical">
 
         <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Android Calendar View Example"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <CalendarView
+            android:id="@+id/calendarView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Calendar"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:textColor="@color/text"/>
+            android:layout_height="300dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/date_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calendar View Date Display"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
     </LinearLayout>
+
 </FrameLayout>
