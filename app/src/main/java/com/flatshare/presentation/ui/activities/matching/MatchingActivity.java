@@ -2,9 +2,7 @@ package com.flatshare.presentation.ui.activities.matching;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -18,7 +16,6 @@ import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.settings.ProfilSettingsActivity;
 import com.flatshare.presentation.ui.activities.chat.ChatActivity;
 import com.flatshare.threading.MainThreadImpl;
-import com.flatshare.utils.random.MainActivity_ProfileCard;
 import com.flatshare.utils.random.Profile;
 import com.flatshare.utils.random.Utils;
 import com.mindorks.placeholderview.SwipeDecor;
@@ -56,12 +53,7 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
                 this
         );
 
-
-        // TODO: TEST
-
         mPresenter.getMatches();
-
-        //
 
         mSwipeView.getBuilder()
                 .setDisplayViewCount(3)
@@ -72,7 +64,7 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
                         .setSwipeOutMsgLayoutId(R.layout.activity_main_card_out));
 
         for (Profile profile : Utils.loadProfiles(this.getApplicationContext())) {
-            mSwipeView.addView(new MainActivity_ProfileCard(mContext, profile, mSwipeView));
+            mSwipeView.addView(new MatchingActivity_ProfileCard(mContext, profile, mSwipeView));
         }
 
         profileBtn.setOnClickListener(new View.OnClickListener() {

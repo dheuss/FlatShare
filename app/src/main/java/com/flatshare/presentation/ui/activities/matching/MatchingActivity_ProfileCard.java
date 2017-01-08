@@ -1,14 +1,13 @@
-package com.flatshare.utils.random;
+package com.flatshare.presentation.ui.activities.matching;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flatshare.R;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.utils.random.Profile;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.Resolve;
@@ -19,13 +18,15 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeInState;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOut;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOutState;
 
+import static com.flatshare.R.id.locationNameTxt;
+import static com.flatshare.R.id.nameAgeTxt;
+
 /**
- * Created by david on 28.12.2016.
+ * Created by david on 08.01.2017.
  */
 
 @Layout(R.layout.activity_main_card)
-public class MainActivity_ProfileCard {
-
+public class MatchingActivity_ProfileCard {
     @View(R.id.profileImageView)
     private ImageView profileImageView;
 
@@ -39,7 +40,7 @@ public class MainActivity_ProfileCard {
     private Context mContext;
     private SwipePlaceHolderView mSwipeView;
 
-    public MainActivity_ProfileCard(Context context, Profile profile, SwipePlaceHolderView swipeView) {
+    public MatchingActivity_ProfileCard(Context context, Profile profile, SwipePlaceHolderView swipeView) {
         mContext = context;
         mProfile = profile;
         mSwipeView = swipeView;
@@ -60,21 +61,21 @@ public class MainActivity_ProfileCard {
 
     @SwipeCancelState
     private void onSwipeCancelState(){
-        Log.d("EVENT", "onSwipeCancelState");
+
     }
 
     @SwipeIn
     private void onSwipeIn(){
-        Log.d("EVENT", "onSwipedIn");
+
     }
 
     @SwipeInState
     private void onSwipeInState(){
-        Log.d("EVENT", "onSwipeInState");
+
     }
 
     @SwipeOutState
     private void onSwipeOutState(){
-        Log.d("EVENT", "onSwipeOutState");
+
     }
 }
