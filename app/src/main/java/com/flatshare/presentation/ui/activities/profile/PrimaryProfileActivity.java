@@ -12,6 +12,7 @@ import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.presentation.presenters.profile.PrimaryProfilePresenter;
 import com.flatshare.presentation.presenters.profile.impl.PrimaryProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
+import com.flatshare.presentation.ui.activities.matching.QRCodeReaderActivity;
 import com.flatshare.presentation.ui.activities.matching.RoommateQRActivity;
 import com.flatshare.threading.MainThreadImpl;
 
@@ -24,6 +25,8 @@ public class PrimaryProfileActivity extends AbstractActivity implements PrimaryP
     private Button createTenantProfileButton;
     private Button createApartmentProfileButton;
     private Button createRoommateQRCodeButton;
+
+    private Button testButton;
 
     private PrimaryProfilePresenter mPresenter;
     private static final String TAG = "PrimaryProfileActivity";
@@ -61,6 +64,21 @@ public class PrimaryProfileActivity extends AbstractActivity implements PrimaryP
             }
         });
 
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PrimaryProfileActivity.this.testScanner();
+            }
+        });
+
+    }
+
+    private void testScanner() {
+
+        Intent intent = new Intent(this, QRCodeReaderActivity.class);
+        startActivity(intent);
+//        finish();
+
     }
 
     @Override
@@ -85,6 +103,8 @@ public class PrimaryProfileActivity extends AbstractActivity implements PrimaryP
         createTenantProfileButton = (Button) findViewById(R.id.create_tenant_profile_button);
         createApartmentProfileButton = (Button) findViewById(R.id.create_apartment_profile_button);
         createRoommateQRCodeButton = (Button) findViewById(R.id.create_roommate_qr_code_button);
+
+        testButton = (Button) findViewById(R.id.test_button);
     }
 
 

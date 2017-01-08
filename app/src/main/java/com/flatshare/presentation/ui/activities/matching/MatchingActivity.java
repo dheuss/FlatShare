@@ -143,11 +143,11 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
 
         Log.d(TAG, "size of potential apartments: " + tenants.size());
 
-//        int i = 0;
-//
-//        for (TenantUserProfile t : tenants){
-//            Log.d(TAG, "i: " + i++ + "\n" + t.toString());
-//        }
+        int i = 0;
+
+        for (TenantUserProfile t : tenants){
+            Log.d(TAG, "i: " + i++ + "\n" + t.toString());
+        }
 
     }
 

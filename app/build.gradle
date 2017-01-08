@@ -86,7 +86,10 @@ dependencies {
     //range bar
     compile 'com.appyvet:materialrangebar:1.3'
 
-    // QR Code Scanner
+    // QR Code Generator
     compile 'com.google.zxing:core:3.2.1'
+
+    // QR Code Reader
+    compile 'com.google.android.gms:play-services:10.0.1'
 }
 apply plugin: 'com.google.gms.google-services'
