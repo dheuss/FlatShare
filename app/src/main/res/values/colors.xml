@@ -53,7 +53,7 @@
     <color name="textColorPrimary">#FFFFFF</color>      <!-- white -->
     <color name="windowBackground">#F1F8E9</color>      <!-- Light Green 50 -->
     <color name="navigationBarColor">#000000</color>    <!-- black -->
-    <color name="colorAccent">#64DD17</color>           <!-- Light Green A700 -->
+    <color name="colorAccent">#33691E</color>           <!-- Light Green A700 -->
 
     <!-- Button Color -->
     <color name="button">#33691E</color>                <!-- Light Green 900 -->
