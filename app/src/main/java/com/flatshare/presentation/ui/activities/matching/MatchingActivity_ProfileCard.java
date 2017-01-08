@@ -45,8 +45,8 @@ public class MatchingActivity_ProfileCard {
     @Resolve
     private void onResolved(){
         //Glide.with(mContext).load(mProfile.getImageUrl()).into(profileImageView);
-        nameAgeTxt.setText(mProfile.getApartmentLocation().city + ", " + mProfile.getApartmentLocation().district);
-        locationNameTxt.setText(mProfile.getPrice() + "");
+        nameAgeTxt.setText("Location: " + mProfile.getApartmentLocation().city + ", " + mProfile.getApartmentLocation().district);
+        locationNameTxt.setText("Price: " + mProfile.getPrice() + "€");
     }
 
     @SwipeOut

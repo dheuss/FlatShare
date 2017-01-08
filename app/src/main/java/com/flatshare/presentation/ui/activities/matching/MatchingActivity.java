@@ -89,6 +89,13 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
                 mSwipeView.doSwipe(true);
             }
         });
+
+        cardViewInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                detailedInfoCard();
+            }
+        });
     }
 
     @Override
@@ -107,6 +114,10 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
         acceptBtn = (ImageButton) findViewById(R.id.acceptBtn);
 
         cardViewInfoButton = (ImageButton) findViewById(R.id.cardViewInfoButton);
+    }
+
+    public void detailedInfoCard(){
+        startActivity(new Intent(MatchingActivity.this, ShowDetailProfilApartmentActivity.class));
     }
 
     @Override
