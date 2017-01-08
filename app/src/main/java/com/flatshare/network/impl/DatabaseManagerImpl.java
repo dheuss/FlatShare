@@ -3,7 +3,6 @@ package com.flatshare.network.impl;
 import android.util.Log;
 
 import com.flatshare.domain.datatypes.db.DatabaseItem;
-import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.network.DatabaseManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -170,14 +169,16 @@ public class DatabaseManagerImpl implements DatabaseManager {
 
     @Override
     public String getTenantProfileId() {
-        PrimaryUserProfile primaryUserProfile = (PrimaryUserProfile) readItem("users/" + getUserId(), PrimaryUserProfile.class);
-        return primaryUserProfile.getTenantProfileId();
+//        PrimaryUserProfile primaryUserProfile = (PrimaryUserProfile) readItem("users/" + getUserId(), PrimaryUserProfile.class);
+//        return primaryUserProfile.getTenantProfileId();
+        return null;
     }
 
     @Override
     public String getApartmentProfileId() {
-        PrimaryUserProfile primaryUserProfile = (PrimaryUserProfile) readItem("users/" + getUserId(), PrimaryUserProfile.class);
-        return primaryUserProfile.getApartmentProfileId();
+//        PrimaryUserProfile primaryUserProfile = (PrimaryUserProfile) readItem("users/" + getUserId(), PrimaryUserProfile.class);
+//        return primaryUserProfile.getApartmentProfileId();
+        return null;
     }
 
     @Override

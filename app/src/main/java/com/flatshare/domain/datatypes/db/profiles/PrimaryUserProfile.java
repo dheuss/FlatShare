@@ -7,7 +7,7 @@ import com.google.firebase.database.PropertyName;
  * Created by Arber on 11/12/2016.
  */
 
-public class PrimaryUserProfile extends UserProfile {
+public class PrimaryUserProfile {
 
     @PropertyName("classification_id")
     public int classificationId;
@@ -63,4 +63,5 @@ public class PrimaryUserProfile extends UserProfile {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }

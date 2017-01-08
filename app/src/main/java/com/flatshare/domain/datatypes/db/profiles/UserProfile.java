@@ -7,7 +7,10 @@ import com.google.gson.Gson;
  * Created by Arber on 06/12/2016.
  */
 
-public class UserProfile implements DatabaseItem {
+public abstract class UserProfile implements DatabaseItem {
+
+    public abstract String getId();
+    public abstract int getType();
 
     @Override
     public String toString() {

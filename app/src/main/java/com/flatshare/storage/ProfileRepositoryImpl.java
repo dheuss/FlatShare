@@ -76,6 +76,7 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 
     @Override
     public PrimaryUserProfile getPrimaryProfile() {
-        return (PrimaryUserProfile) databaseManager.readItem(userPath + "/" + userId, PrimaryUserProfile.class);
+//        return (PrimaryUserProfile) databaseManager.readItem(userPath + "/" + userId, PrimaryUserProfile.class);
+        return null;
     }
 }

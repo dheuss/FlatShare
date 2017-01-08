@@ -225,4 +225,16 @@ public class TenantUserProfile extends UserProfile {
     public String getTenantId() {
         return tenantId;
     }
+
+    @Exclude
+    @Override
+    public String getId() {
+        return getTenantId();
+    }
+
+    @Exclude
+    @Override
+    public int getType() {
+        return 0;
+    }
 }

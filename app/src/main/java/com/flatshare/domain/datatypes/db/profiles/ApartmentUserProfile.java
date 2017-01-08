@@ -228,4 +228,16 @@ public class ApartmentUserProfile extends UserProfile {
     public String getMainImageId() {
         return mainImageId;
     }
+
+    @Exclude
+    @Override
+    public String getId() {
+        return getApartmentId();
+    }
+
+    @Exclude
+    @Override
+    public int getType() {
+        return 1;
+    }
 }
