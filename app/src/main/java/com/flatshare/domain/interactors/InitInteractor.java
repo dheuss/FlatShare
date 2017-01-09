@@ -2,6 +2,7 @@ package com.flatshare.domain.interactors;
 
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.interactors.base.Interactor;
 
@@ -12,7 +13,9 @@ import com.flatshare.domain.interactors.base.Interactor;
 public interface InitInteractor extends Interactor {
 
     interface Callback {
-        void onReceivedSuccess(PrimaryUserProfile primaryUserProfile, TenantProfile tenantProfile, ApartmentProfile apartmentProfile);
+        void onTenantFound(PrimaryUserProfile primaryUserProfile, TenantProfile tenantProfile);
+        void onRoommateFound(RoommateProfile roommateProfile, ApartmentProfile apartmentProfile);
+
         void onReceivedFailure(String error);
     }
 

@@ -13,7 +13,7 @@ import android.widget.Button;
 import com.flatshare.R;
 import com.flatshare.presentation.presenters.auth.LoginPresenter;
 
-public class LoginFragmentOneActivity extends Fragment implements LoginPresenter.View{
+public class LoginFragmentOneActivity extends Fragment { //implements LoginPresenter.View{
 
 //    private Button login_1_Button;
 
@@ -51,28 +51,28 @@ public class LoginFragmentOneActivity extends Fragment implements LoginPresenter
 //        login_1_Button = (Button)view.findViewById(R.id.login_button_fragment_1);
     }
 
-    @Override
-    public void changeToProfileActivity() {
-
-    }
-
-    @Override
-    public void changeToMatchingActivity() {
-
-    }
-
-    @Override
-    public void showProgress() {
-
-    }
-
-    @Override
-    public void hideProgress() {
-
-    }
-
-    @Override
-    public void showError(String message) {
-
-    }
+//    @Override
+//    public void changeToProfileActivity() {
+//
+//    }
+//
+//    @Override
+//    public void changeToMatchingActivity() {
+//
+//    }
+//
+//    @Override
+//    public void showProgress() {
+//
+//    }
+//
+//    @Override
+//    public void hideProgress() {
+//
+//    }
+//
+//    @Override
+//    public void showError(String message) {
+//
+//    }
 }

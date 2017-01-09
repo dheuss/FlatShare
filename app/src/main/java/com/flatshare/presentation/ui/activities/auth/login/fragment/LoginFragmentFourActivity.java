@@ -24,6 +24,7 @@ import com.flatshare.presentation.presenters.auth.LoginPresenter;
 import com.flatshare.presentation.presenters.auth.impl.LoginPresenterImpl;
 import com.flatshare.presentation.ui.activities.auth.RegisterActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
+import com.flatshare.presentation.ui.activities.matching.RoommateQRActivity;
 import com.flatshare.presentation.ui.activities.profile.PrimaryProfileActivity;
 import com.flatshare.threading.MainThreadImpl;
 import com.google.android.gms.common.SignInButton;
@@ -198,6 +199,17 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
         Intent intent = new Intent(getActivity(), MatchingActivity.class);
         startActivity(intent);
         getActivity().finish();
+    }
+
+    @Override
+    public void notifyRoommateGenerateQR(String roommateId) {
+
+            Intent intent = new Intent(getActivity(), RoommateQRActivity.class);
+            Bundle b = new Bundle();
+            b.putString("id", roommateId);
+            intent.putExtras(b);
+            startActivity(intent);
+//            getActivity().finish();
     }
 
     @Override

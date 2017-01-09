@@ -3,6 +3,7 @@ package com.flatshare.domain.interactors.profile.impl;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.db.common.ProfileType;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.interactors.profile.ProfileInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
@@ -56,7 +57,7 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onSentSuccess(1);
+                mCallback.onSentSuccess(ProfileType.APARTMENT.getValue());
             }
         });
     }
@@ -76,8 +77,6 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put(databaseRoot.getApartmentProfileNode(apartmentId).getRootPath(), this.apartmentProfile);
-
-        map.put(databaseRoot.getUserProfileNode(userId).getApartmentProfileId(), apartmentId);
         map.put(locationPath, apartmentId);
 
         mDatabase.updateChildren(map, new DatabaseReference.CompletionListener() {

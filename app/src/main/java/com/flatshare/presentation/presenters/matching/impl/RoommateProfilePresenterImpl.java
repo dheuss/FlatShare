@@ -60,7 +60,7 @@ public class RoommateProfilePresenterImpl extends AbstractPresenter implements R
 
     @Override
     public void notifyError(String errorMessage) {
-
+        onError(errorMessage);
     }
 
     @Override

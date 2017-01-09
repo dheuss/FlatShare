@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.flatshare.R;
+import com.flatshare.domain.datatypes.db.common.ProfileType;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.presentation.presenters.profile.PrimaryProfilePresenter;
 import com.flatshare.presentation.presenters.profile.impl.PrimaryProfilePresenterImpl;
@@ -47,22 +48,22 @@ public class PrimaryProfileActivity extends AbstractActivity implements PrimaryP
         createTenantProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PrimaryProfileActivity.this.sendProfile(0);
+                PrimaryProfileActivity.this.sendProfile(ProfileType.TENANT.getValue());
             }
         });
         createApartmentProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PrimaryProfileActivity.this.sendProfile(1);
+                PrimaryProfileActivity.this.sendProfile(ProfileType.APARTMENT.getValue());
             }
         });
-
         createRoommateQRCodeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PrimaryProfileActivity.this.createQRCode();
+                PrimaryProfileActivity.this.sendProfile(ProfileType.ROOMMATE.getValue());
             }
         });
+
 
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,9 +87,9 @@ public class PrimaryProfileActivity extends AbstractActivity implements PrimaryP
         return R.layout.activity_primary_profile;
     }
 
-    private void createQRCode() {
-        mPresenter.createQRCode();
-    }
+//    private void createQRCode() {
+//        mPresenter.createQRCode();
+//    }
 
     private void sendProfile(int classificationId) {
 
@@ -143,6 +144,6 @@ public class PrimaryProfileActivity extends AbstractActivity implements PrimaryP
         b.putString("id", roommateId);
         intent.putExtras(b);
         startActivity(intent);
-        finish();
+//            getActivity().finish();
     }
 }

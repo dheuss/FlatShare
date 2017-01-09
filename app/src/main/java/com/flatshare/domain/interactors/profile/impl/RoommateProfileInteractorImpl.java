@@ -4,37 +4,31 @@ import android.util.Log;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.common.ProfileType;
-import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
-import com.flatshare.domain.interactors.profile.ProfileInteractor;
+import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
+import com.flatshare.domain.interactors.profile.ProfileInteractor;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
- * Created by Arber on 12/12/2016.
+ * Created by Arber on 09/01/2017.
  */
-public class TenantProfileInteractorImpl extends AbstractInteractor implements ProfileInteractor {
+public class RoommateProfileInteractorImpl extends AbstractInteractor implements ProfileInteractor {
 
-    private static final String TAG = "TenantProfileInt";
+    private static final String TAG = "RoommateProfileInt";
 
-    /**
-     * The Callback is responsible for talking to the UI on the main thread
-     */
     private ProfileInteractor.Callback mCallback;
 
-    private TenantProfile tenantProfile;
-
-    public TenantProfileInteractorImpl(
-            MainThread mainThread,
-            Callback callback, TenantProfile tenantProfile) {
+    public RoommateProfileInteractorImpl(MainThread mainThread,
+                                        Callback callback) {
 
         super(mainThread);
         this.mCallback = callback;
-        this.tenantProfile = tenantProfile;
     }
 
     private void notifyError(final String errorMessage) {
@@ -48,39 +42,35 @@ public class TenantProfileInteractorImpl extends AbstractInteractor implements P
         });
     }
 
-    /**
-     * callback method that posts message received into the main UI, through mainThread.post!!!
-     */
+
     private void notifySuccess() {
         Log.d(TAG, "inside postMessage(String msg)");
 
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onSentSuccess(ProfileType.TENANT.getValue());
+                mCallback.onSentSuccess(ProfileType.ROOMMATE.getValue());
             }
         });
     }
 
-    /**
-     * contains the business logic for this use case (Interactor), SHOULD ALWAYS CALL EXECUTE NOT START!!!!
-     */
+
     @Override
     public void execute() {
 
-        String tId = mDatabase.child(databaseRoot.getTenantProfiles()).push().getKey();
+        String rId = mDatabase.child(databaseRoot.getRoommateProfiles()).push().getKey();
 
         Map<String, Object> map = new HashMap<>();
-        map.put(databaseRoot.getTenantProfileNode(tId).getRootPath(), this.tenantProfile);
-        map.put(databaseRoot.getUserProfileNode(userId).getTenantProfileId(), tId);
+        map.put(databaseRoot.getTenantProfileNode(rId).getRootPath(), new RoommateProfile());
+        map.put(databaseRoot.getUserProfileNode(userId).getRoommateProfileId(), rId);
 
         mDatabase.updateChildren(map, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if (databaseError != null) { // Error
-                    TenantProfileInteractorImpl.this.notifyError(databaseError.toException().getMessage());
+                    notifyError(databaseError.toException().getMessage());
                 } else {
-                    TenantProfileInteractorImpl.this.notifySuccess();
+                    notifySuccess();
                 }
             }
         });

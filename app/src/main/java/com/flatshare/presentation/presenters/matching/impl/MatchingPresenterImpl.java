@@ -17,7 +17,7 @@ import java.util.List;
  * Created by Arber on 11/12/2016.
  */
 
-public class MatchingPresenterImpl extends AbstractPresenter implements MatchingPresenter, MatchingInteractor.Callback  {
+public class MatchingPresenterImpl extends AbstractPresenter implements MatchingPresenter, MatchingInteractor.Callback {
 
 
     private static final String TAG = "MatchingPresenterImpl";
@@ -70,7 +70,7 @@ public class MatchingPresenterImpl extends AbstractPresenter implements Matching
         int classificationId = userState.getPrimaryUserProfile().getClassificationId();
         TenantProfile tenantProfile = userState.getTenantProfile();
         ApartmentProfile apartmentProfile = userState.getApartmentProfile();
-        MatchingInteractor matchingInteractor = new MatchingInteractorImpl(mMainThread, this,classificationId, tenantProfile, apartmentProfile);
+        MatchingInteractor matchingInteractor = new MatchingInteractorImpl(mMainThread, this, classificationId, tenantProfile, apartmentProfile);
         matchingInteractor.execute();
     }
 

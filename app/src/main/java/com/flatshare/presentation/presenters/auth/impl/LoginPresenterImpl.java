@@ -7,6 +7,7 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.auth.LoginDataType;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.interactors.InitInteractor;
 import com.flatshare.domain.interactors.auth.LoginInteractor;
@@ -90,13 +91,26 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
     }
 
     @Override
-    public void onReceivedSuccess(PrimaryUserProfile primaryUserProfile, TenantProfile tenantProfile, ApartmentProfile apartmentProfile) {
-        userState.setApartmentProfile(apartmentProfile);
-        userState.setTenantProfile(tenantProfile);
+    public void onTenantFound(PrimaryUserProfile primaryUserProfile, TenantProfile tenantProfile) {
         userState.setPrimaryUserProfile(primaryUserProfile);
+        userState.setTenantProfile(tenantProfile);
 
         mView.hideProgress();
         mView.changeToMatchingActivity();
+    }
+
+    @Override
+    public void onRoommateFound(RoommateProfile roommateProfile, ApartmentProfile apartmentProfile) {
+        userState.setRoommateProfile(roommateProfile);
+        userState.setApartmentProfile(apartmentProfile);
+
+        mView.hideProgress();
+
+        if(apartmentProfile == null){ // no apartment found => roommate without apartment
+            mView.notifyRoommateGenerateQR(roommateProfile.getRoommateId());
+        } else {
+            mView.changeToMatchingActivity();
+        }
     }
 
     @Override
