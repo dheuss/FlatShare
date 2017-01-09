@@ -61,13 +61,13 @@
         <activity android:name=".presentation.ui.activities.settings.ProfilSettingsActivity" />
         <activity android:name=".presentation.ui.activities.matchingoverview.chat.ChatActivity" />
         <activity android:name=".presentation.ui.activities.settings.SettingsActivity" />
-        <activity android:name=".presentation.ui.activities.matchingoverview.calender.CalendarActivity">
-
-        </activity>
+        <activity android:name=".presentation.ui.activities.matchingoverview.calender.CalendarActivity" />
         <activity android:name=".presentation.ui.activities.matching.RoommateQRActivity" />
         <activity android:name=".presentation.ui.activities.matching.QRCodeReaderActivity" />
         <activity android:name=".presentation.ui.activities.matching.ShowDetailProfilApartmentActivity" />
-        <activity android:name=".presentation.ui.activities.matching.ShowDetailProfilTenantActivity"></activity>
+        <activity android:name=".presentation.ui.activities.matching.ShowDetailProfilTenantActivity" />
+        <activity android:name=".presentation.ui.activities.matchingoverview.MatchingOverviewActivity" />
+        <activity android:name=".presentation.ui.activities.matchingoverview.matchinginfo.MatchingInfoActivity"></activity>
     </application>
 
 </manifest>
