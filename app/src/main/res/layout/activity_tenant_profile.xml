@@ -124,15 +124,13 @@
                 android:id="@+id/maleRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="male                  "
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/male"/>
 
             <RadioButton
                 android:id="@+id/femaleRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="femal"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/female"/>
         </RadioGroup>
 
         <TextView
@@ -158,15 +156,13 @@
                 android:id="@+id/yesSmokerRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="yes                     "
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_up"/>
 
             <RadioButton
                 android:id="@+id/noSmokerRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="no      "
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_down"/>
         </RadioGroup>
 
         <TextView
@@ -192,15 +188,13 @@
                 android:id="@+id/yesPetsRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="yes                     "
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_up"/>
 
             <RadioButton
                 android:id="@+id/noPetsRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="no      "
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_down"/>
         </RadioGroup>
 
         <TextView

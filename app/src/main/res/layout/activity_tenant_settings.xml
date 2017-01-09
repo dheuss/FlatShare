@@ -181,15 +181,14 @@
                 android:id="@+id/necessaryPCRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_up"/>
 
             <RadioButton
                 android:id="@+id/notNecessaryPCRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary"
-                android:textColor="@color/text"/>
+                android:textColor="@color/text"
+                android:drawableRight="@drawable/thumb_down"/>
         </RadioGroup>
 
         <TextView
@@ -215,15 +214,13 @@
                 android:id="@+id/necessarySARadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_up"/>
 
             <RadioButton
                 android:id="@+id/notNecessarySARadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_down"/>
         </RadioGroup>
 
         <TextView
@@ -249,15 +246,13 @@
                 android:id="@+id/necessaryBRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_up"/>
 
             <RadioButton
                 android:id="@+id/notNecessaryBRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_down"/>
 
         </RadioGroup>
 
@@ -284,15 +279,13 @@
                 android:id="@+id/internetYESRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_up"/>
 
             <RadioButton
                 android:id="@+id/internetNORadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_down"/>
 
         </RadioGroup>
 
@@ -319,15 +312,13 @@
                 android:id="@+id/cabelTVYESRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_up"/>
 
             <RadioButton
                 android:id="@+id/cableTVNORadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_down"/>
 
         </RadioGroup>
 
@@ -354,15 +345,13 @@
                 android:id="@+id/washingMashineYESRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_up"/>
 
             <RadioButton
                 android:id="@+id/washingMashineNORadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_down"/>
         </RadioGroup>
 
         <TextView
@@ -388,15 +377,13 @@
                 android:id="@+id/dryerYESRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_up"/>
 
             <RadioButton
                 android:id="@+id/dryerNORadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_down"/>
 
         </RadioGroup>
 
@@ -423,15 +410,13 @@
                 android:id="@+id/bathTubeYESRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_up"/>
 
             <RadioButton
                 android:id="@+id/bathTubeNORadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_down"/>
 
         </RadioGroup>
 
@@ -458,15 +443,13 @@
                 android:id="@+id/petsYESRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/necessary"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_up"/>
 
             <RadioButton
                 android:id="@+id/petsNORadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notNecessary"
-                android:textColor="@color/text"/>
+                android:drawableRight="@drawable/thumb_down"/>
         </RadioGroup>
 
         <!-- Save Button -->
