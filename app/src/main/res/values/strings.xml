@@ -70,6 +70,7 @@
     <string name="settings">Settings</string>
     <string name="apartment_roommates">Roommates:</string>
     <string name="create_roommate_qr_code_button">Generate Roommate QR Code</string>
+    <string name="tenant_profil_string">In this section you should give us some more information about you, so that we can find the perfect apartment for you!</string>
 
     <string-array name="occupation">
         <item>Student</item>

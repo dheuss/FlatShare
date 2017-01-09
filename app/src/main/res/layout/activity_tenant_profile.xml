@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ScrollView01"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.flatshare.presentation.ui.activities.profile.TenantProfileActivity"
     android:background="@color/windowBackground">
 
@@ -24,31 +19,34 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="@string/create_your_tenant_profile"
+            android:textColor="@color/text"
             android:textAlignment="center"
-            android:textSize="30dp"
-            android:textColor="@color/text"/>
+            android:textSize="@dimen/textSizeHeadLine"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeftHeadLine"/>
 
         <TextView
             android:id="@+id/tenant_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:text="@string/tenant_profil_string"
             android:gravity="center_horizontal"
             android:padding="@dimen/activity_horizontal_margin"
-            android:text="In this section you should give us some more information about you, so that we can find the perfect apartment for you!"
             android:textColor="@color/text"
-            android:textSize="14dp"
-            android:layout_below="@+id/initial"/>
+            android:textSize="@dimen/textSizeNormalText"
+            android:layout_below="@+id/initial"
+            android:layout_marginTop="@dimen/marginTop"/>
 
         <TextView
             android:id="@+id/name_tenant_profile_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tenant_text"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/marginTop"
             android:text="@string/surname_primary_profile_textview"
-            android:textSize="20dp"
-            android:textColor="@color/text"/>
+            android:textSize="@dimen/textSizeLabel"
+            android:textColor="@color/text"
+            android:layout_marginLeft="@dimen/marginLeft"/>
 
         <EditText
             android:id="@+id/nameText_tenant_profile_editText"
@@ -59,7 +57,8 @@
             android:layout_marginTop="10dp"
             android:width="200dp"
             android:inputType="text"
-            android:textColor="@color/text"/>
+            android:textColor="@color/text"
+            android:layout_marginRight="@dimen/marginRight"/>
 
         <TextView
             android:id="@+id/email_tenant_profile_textView"
@@ -68,8 +67,9 @@
             android:layout_below="@+id/name_tenant_profile_textView"
             android:layout_marginTop="20dp"
             android:text="Email:"
-            android:textSize="20dp"
-            android:textColor="@color/text"/>
+            android:textSize="@dimen/textSizeLabel"
+            android:textColor="@color/text"
+            android:layout_marginLeft="@dimen/marginLeft"/>
 
         <EditText
             android:id="@+id/email_tenant_profile_editText"
@@ -79,7 +79,8 @@
             android:layout_below="@+id/nameText_tenant_profile_editText"
             android:width="200dp"
             android:inputType="textEmailAddress"
-            android:textColor="@color/text"/>
+            android:textColor="@color/text"
+            android:layout_marginRight="@dimen/marginRight"/>
 
         <TextView
             android:id="@+id/age_tenant_profile_textView"
@@ -88,8 +89,9 @@
             android:layout_below="@+id/email_tenant_profile_textView"
             android:layout_marginTop="20dp"
             android:text="Age:"
-            android:textSize="20dp"
-            android:textColor="@color/text"/>
+            android:textSize="@dimen/textSizeLabel"
+            android:textColor="@color/text"
+            android:layout_marginLeft="@dimen/marginLeft"/>
 
         <EditText
             android:id="@+id/ageText_tenant_profile_editText"
@@ -99,7 +101,8 @@
             android:layout_below="@+id/email_tenant_profile_editText"
             android:width="200dp"
             android:inputType="number"
-            android:textColor="@color/text"/>
+            android:textColor="@color/text"
+            android:layout_marginRight="@dimen/marginRight"/>
 
         <TextView
             android:id="@+id/gender_tenant_profile_textView"
@@ -108,8 +111,9 @@
             android:layout_below="@+id/age_tenant_profile_textView"
             android:layout_marginTop="20dp"
             android:text="Gender:"
-            android:textSize="20dp"
-            android:textColor="@color/text"/>
+            android:textSize="@dimen/textSizeLabel"
+            android:textColor="@color/text"
+            android:layout_marginLeft="@dimen/marginLeft"/>
 
         <RadioGroup
             android:id="@+id/genderRadioGroup"
@@ -118,7 +122,8 @@
             android:layout_alignParentRight="true"
             android:layout_below="@id/ageText_tenant_profile_editText"
             android:layout_marginTop="15dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginRight="@dimen/marginRight">
 
             <RadioButton
                 android:id="@+id/maleRadioButton"
@@ -140,8 +145,9 @@
             android:layout_below="@+id/gender_tenant_profile_textView"
             android:layout_marginTop="20dp"
             android:text="Smoker:"
-            android:textSize="20dp"
-            android:textColor="@color/text"/>
+            android:textSize="@dimen/textSizeLabel"
+            android:textColor="@color/text"
+            android:layout_marginLeft="@dimen/marginLeft"/>
 
         <RadioGroup
             android:id="@+id/smokerRadioGroup"
@@ -150,7 +156,8 @@
             android:layout_alignParentRight="true"
             android:layout_below="@id/gender_tenant_profile_textView"
             android:layout_marginTop="15dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginRight="@dimen/marginRight">
 
             <RadioButton
                 android:id="@+id/yesSmokerRadioButton"
@@ -172,8 +179,9 @@
             android:layout_below="@id/smoker"
             android:layout_marginTop="20dp"
             android:text="@string/pets"
-            android:textSize="20dp"
-            android:textColor="@color/text"/>
+            android:textSize="@dimen/textSizeLabel"
+            android:textColor="@color/text"
+            android:layout_marginLeft="@dimen/marginLeft"/>
 
         <RadioGroup
             android:id="@+id/petsRadioGroup"
@@ -182,7 +190,8 @@
             android:layout_alignParentRight="true"
             android:layout_below="@id/smoker"
             android:layout_marginTop="15dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginRight="@dimen/marginRight">
 
             <RadioButton
                 android:id="@+id/yesPetsRadioButton"
@@ -204,8 +213,9 @@
             android:layout_below="@+id/pets_tenant_activity"
             android:layout_marginTop="20dp"
             android:text="@string/occupation"
-            android:textSize="20dp"
-            android:textColor="@color/text"/>
+            android:textSize="@dimen/textSizeLabel"
+            android:textColor="@color/text"
+            android:layout_marginLeft="@dimen/marginLeft"/>
 
         <Spinner
             android:id="@+id/occupation_tenant_profile_spinner"
@@ -214,7 +224,8 @@
             android:layout_below="@id/petsRadioGroup"
             android:layout_alignParentRight="true"
             android:layout_marginTop="20dp"
-            android:entries="@array/occupation"/>
+            android:entries="@array/occupation"
+            android:layout_marginRight="@dimen/marginRight"/>
 
         <TextView
             android:id="@+id/short_bio_tenant_profile_textView"
@@ -223,8 +234,9 @@
             android:layout_below="@id/occupation_tenant_profile_textView"
             android:layout_marginTop="20dp"
             android:text="@string/short_bio"
-            android:textSize="20dp"
-            android:textColor="@color/text"/>
+            android:textSize="@dimen/textSizeLabel"
+            android:textColor="@color/text"
+            android:layout_marginLeft="@dimen/marginLeft"/>
 
         <EditText
             android:id="@+id/short_bio_tenant_profile_editText"
@@ -238,7 +250,9 @@
             android:gravity="top|left"
             android:inputType="textMultiLine"
             android:scrollHorizontally="false"
-            android:textColor="@color/text"/>
+            android:textColor="@color/text"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"/>
 
         <TextView
             android:id="@+id/duration_of_stay_tenant_profile_textView"
@@ -247,8 +261,9 @@
             android:layout_below="@id/short_bio_tenant_profile_editText"
             android:layout_marginTop="20dp"
             android:text="@string/durationOfStay"
-            android:textSize="20dp"
-            android:textColor="@color/text"/>
+            android:textSize="@dimen/textSizeLabel"
+            android:textColor="@color/text"
+            android:layout_marginLeft="@dimen/marginLeft"/>
 
 
         <Spinner
@@ -258,7 +273,8 @@
             android:layout_below="@id/short_bio_tenant_profile_editText"
             android:layout_alignParentRight="true"
             android:layout_marginTop="20dp"
-            android:entries="@array/durationOfStayArray"/>
+            android:entries="@array/durationOfStayArray"
+            android:layout_marginRight="@dimen/marginRight"/>
 
         <!-- Picture Button -->
 
@@ -272,7 +288,9 @@
             android:textColorHint="@color/buttonText"
             android:layout_marginTop="20dp"
             android:background="@color/button"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"/>
 
         <!-- Save Button -->
 
@@ -286,7 +304,10 @@
             android:textColorHint="@color/buttonText"
             android:layout_marginTop="20dp"
             android:background="@color/button"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginBottom="@dimen/marginBottom"/>
 
     </RelativeLayout>
 </ScrollView>
