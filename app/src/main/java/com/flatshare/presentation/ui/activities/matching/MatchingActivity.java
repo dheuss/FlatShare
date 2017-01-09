@@ -14,7 +14,7 @@ import com.flatshare.presentation.presenters.matching.MatchingPresenter;
 import com.flatshare.presentation.presenters.matching.impl.MatchingPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.settings.ProfilSettingsActivity;
-import com.flatshare.presentation.ui.activities.chat.ChatActivity;
+import com.flatshare.presentation.ui.activities.matchingoverview.chat.ChatActivity;
 import com.flatshare.threading.MainThreadImpl;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;

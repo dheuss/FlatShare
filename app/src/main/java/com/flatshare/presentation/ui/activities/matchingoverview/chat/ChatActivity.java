@@ -1,4 +1,4 @@
-package com.flatshare.presentation.ui.activities.chat;
+package com.flatshare.presentation.ui.activities.matchingoverview.chat;
 
 import android.content.Intent;
 import android.os.Bundle;

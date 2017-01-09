@@ -1,4 +1,4 @@
-package com.flatshare.presentation.ui.activities.chat;
+package com.flatshare.presentation.ui.activities.matchingoverview.calender;
 
 
 import android.content.Intent;
