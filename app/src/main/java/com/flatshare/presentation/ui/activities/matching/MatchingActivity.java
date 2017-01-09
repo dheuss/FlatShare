@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.flatshare.R;
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.presentation.presenters.matching.MatchingPresenter;
 import com.flatshare.presentation.presenters.matching.impl.MatchingPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
@@ -136,7 +136,7 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
     }
 
     @Override
-    public void showTenants(List<TenantUserProfile> tenants) {
+    public void showTenants(List<TenantProfile> tenants) {
         //TODO: display tenants
         mSwipeView.getBuilder()
                 .setDisplayViewCount(3)
@@ -151,20 +151,20 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
 
         int i = 0;
 
-        for (TenantUserProfile t : tenants){
+        for (TenantProfile t : tenants){
             Log.d(TAG, "i: " + i++ + "\n" + t.toString());
         }
 
     }
 
     @Override
-    public void showApartments(List<ApartmentUserProfile> apartments) {
+    public void showApartments(List<ApartmentProfile> apartments) {
 
         Log.d(TAG, "size of potential apartments: " + apartments.size());
 
         int i = 0;
 
-        for (ApartmentUserProfile a : apartments){
+        for (ApartmentProfile a : apartments){
             //Log.d(TAG, "i: " + i++ + "\n" + a.toString());
             mSwipeView.addView(new MatchingActivity_ProfileCard(mContext, a, mSwipeView));
         }

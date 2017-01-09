@@ -4,8 +4,8 @@ import android.util.Log;
 
 import com.flatshare.domain.datatypes.db.filters.ApartmentFilterSettings;
 import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.predicates.TenantMatchFinder;
 
 import java.util.ArrayList;
@@ -17,23 +17,23 @@ import java.util.List;
 
 public class MatchTest {
 
-    TenantUserProfile tenantUserProfile;
+    TenantProfile tenantProfile;
     TenantFilterSettings tenantFilterSettings;
 
     private String TAG = "MatchTest";
 
-//    ApartmentUserProfile apartmentUserProfile;
+//    ApartmentProfile apartmentUserProfile;
 //    ApartmentFilterSettings apartmentFilterSettings;
 
-    //    List<TenantUserProfile> tenantUserProfileList;
+    //    List<TenantProfile> tenantUserProfileList;
 //    List<TenantFilterSettings> tenantFilterSettingsList;
-    List<ApartmentUserProfile> apartmentUserProfileList;
+    List<ApartmentProfile> apartmentProfileList;
     List<ApartmentFilterSettings> apartmentFilterSettingsList;
 
     public MatchTest() {
-        this.tenantUserProfile = getTenantUserProfile();
+        this.tenantProfile = getTenantProfile();
         this.tenantFilterSettings = getTenantFilterSettings();
-        this.apartmentUserProfileList = new ArrayList<>(ProfileGenerator.generateApartmentProfiles(100));
+        this.apartmentProfileList = new ArrayList<>(ProfileGenerator.generateApartmentProfiles(100));
 
 
         init();
@@ -41,7 +41,7 @@ public class MatchTest {
 
     private void init() {
         Log.d(TAG, "Showing your tenant settings");
-        Log.d(TAG, show(tenantUserProfile.getTenantFilterSettings()));
+        Log.d(TAG, show(tenantProfile.getTenantFilterSettings()));
 
         Log.d(TAG, "Showing matches");
 
@@ -51,23 +51,23 @@ public class MatchTest {
 
         long time2 = System.currentTimeMillis();
 
-        Log.d(TAG, "POJO: TIME IT TOOK FOR: " + apartmentUserProfileList.size() + " WAS: " + (time2 - time1) + " milliseconds found: " + potentialApartmentMatches().size());
+        Log.d(TAG, "POJO: TIME IT TOOK FOR: " + apartmentProfileList.size() + " WAS: " + (time2 - time1) + " milliseconds found: " + potentialApartmentMatches().size());
 
     }
 
-    public List<ApartmentUserProfile> potentialApartmentMatches() {
+    public List<ApartmentProfile> potentialApartmentMatches() {
 
-        TenantMatchFinder matchFinder = new TenantMatchFinder(this.tenantUserProfile, this.apartmentUserProfileList);
+        TenantMatchFinder matchFinder = new TenantMatchFinder(this.tenantProfile, this.apartmentProfileList);
 
         return matchFinder.getMatches();
     }
 
 
-    private String show(List<ApartmentUserProfile> apartmentUserProfilesList) {
+    private String show(List<ApartmentProfile> apartmentProfilesList) {
 
         String result = "";
-        for (int i = 0; i < apartmentUserProfilesList.size(); i++) {
-            result += show(i, apartmentUserProfilesList.get(i));
+        for (int i = 0; i < apartmentProfilesList.size(); i++) {
+            result += show(i, apartmentProfilesList.get(i));
         }
 
         return result;
@@ -95,15 +95,15 @@ public class MatchTest {
 
     }
 
-    private String show(int i, ApartmentUserProfile apartmentUserProfile) {
+    private String show(int i, ApartmentProfile apartmentProfile) {
         String result = i + " \n";
 
-        result += "price: " + apartmentUserProfile.getPrice() + "\n";
-        result += "area: " + apartmentUserProfile.getArea() + "\n";
-        result += "pets? " + apartmentUserProfile.hasPets() + "\n";
-        result += "internet? " + apartmentUserProfile.hasInternet() + "\n";
-        result += "zweck-WG? " + apartmentUserProfile.isPurposeApartment() + "\n";
-        result += "washingM? " + apartmentUserProfile.hasWashingMachine() + "\n";
+        result += "price: " + apartmentProfile.getPrice() + "\n";
+        result += "area: " + apartmentProfile.getArea() + "\n";
+        result += "pets? " + apartmentProfile.hasPets() + "\n";
+        result += "internet? " + apartmentProfile.hasInternet() + "\n";
+        result += "zweck-WG? " + apartmentProfile.isPurposeApartment() + "\n";
+        result += "washingM? " + apartmentProfile.hasWashingMachine() + "\n";
 
         result += "\n\n\n";
 
@@ -111,15 +111,15 @@ public class MatchTest {
     }
 
 
-    public TenantUserProfile getTenantUserProfile() {
+    public TenantProfile getTenantProfile() {
 
-        TenantUserProfile tenantUserProfile = new TenantUserProfile();
+        TenantProfile tenantProfile = new TenantProfile();
 
-        tenantUserProfile.setSmoker(true);
-        tenantUserProfile.setDurationOfStay(2);
-        tenantUserProfile.setGender(0);
-        tenantUserProfile.setAge(22);
-        tenantUserProfile.setSmoker(false);
+        tenantProfile.setSmoker(true);
+        tenantProfile.setDurationOfStay(2);
+        tenantProfile.setGender(0);
+        tenantProfile.setAge(22);
+        tenantProfile.setSmoker(false);
 
 
         TenantFilterSettings tenantFilterSettings = new TenantFilterSettings();
@@ -137,9 +137,9 @@ public class MatchTest {
         tenantFilterSettings.setPriceTo(500);
 
 
-        tenantUserProfile.setTenantFilterSettings(tenantFilterSettings);
+        tenantProfile.setTenantFilterSettings(tenantFilterSettings);
 
-        return tenantUserProfile;
+        return tenantProfile;
     }
 
     public TenantFilterSettings getTenantFilterSettings() {

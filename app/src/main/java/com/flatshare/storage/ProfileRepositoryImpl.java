@@ -1,8 +1,8 @@
 package com.flatshare.storage;
 
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.repository.ProfileRepository;
 import com.flatshare.network.DatabaseManager;
 import com.flatshare.network.impl.DatabaseManagerImpl;
@@ -41,8 +41,8 @@ public class ProfileRepositoryImpl implements ProfileRepository {
     }
 
     @Override
-    public boolean createTenantProfile(TenantUserProfile tenantUserProfile) {
-        String tenantId = databaseManager.push(tenantUserProfile, tenantProfilesPath);
+    public boolean createTenantProfile(TenantProfile tenantProfile) {
+        String tenantId = databaseManager.push(tenantProfile, tenantProfilesPath);
         if (tenantId == null) {
             return false;
         }
@@ -50,13 +50,13 @@ public class ProfileRepositoryImpl implements ProfileRepository {
     }
 
     @Override
-    public boolean createApartmentProfile(ApartmentUserProfile apartmentUserProfile) {
+    public boolean createApartmentProfile(ApartmentProfile apartmentProfile) {
 
-        String apartmentId = databaseManager.push(apartmentUserProfile, apartmentProfilesPath);
+        String apartmentId = databaseManager.push(apartmentProfile, apartmentProfilesPath);
 
-        String city = apartmentUserProfile.getApartmentLocation().getCity();
-        String district = apartmentUserProfile.getApartmentLocation().getDistrict();
-        int zipCode = apartmentUserProfile.getApartmentLocation().getZipCode();
+        String city = apartmentProfile.getApartmentLocation().getCity();
+        String district = apartmentProfile.getApartmentLocation().getDistrict();
+        int zipCode = apartmentProfile.getApartmentLocation().getZipCode();
 
         String locationPath = "apartment_locations/" + city + "/" + district + "/" + zipCode;
 

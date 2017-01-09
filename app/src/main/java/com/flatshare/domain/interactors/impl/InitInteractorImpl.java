@@ -3,9 +3,9 @@ package com.flatshare.domain.interactors.impl;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.interactors.InitInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.google.firebase.database.DataSnapshot;
@@ -26,8 +26,8 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
     private Callback mCallback;
 
     private PrimaryUserProfile primaryUserProfile;
-    private TenantUserProfile tenantUserProfile;
-    private ApartmentUserProfile apartmentUserProfile;
+    private TenantProfile tenantProfile;
+    private ApartmentProfile apartmentProfile;
 
     public InitInteractorImpl(
             MainThread mainThread,
@@ -56,7 +56,7 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onReceivedSuccess(primaryUserProfile, tenantUserProfile, apartmentUserProfile);
+                mCallback.onReceivedSuccess(primaryUserProfile, tenantProfile, apartmentProfile);
             }
         });
     }
@@ -77,7 +77,7 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
                 if (primaryUserProfile == null) {
                     notifyError("No PrimaryProfile created!");
                 } else {
-                    getSecondaryUserProfiles(primaryUserProfile.getTenantProfileId(), primaryUserProfile.getApartmentProfileId());
+                    getSecondaryUserProfiles(primaryUserProfile.getTenantProfileId(), primaryUserProfile.getRoommateProfileId());
                 }
             }
 
@@ -97,8 +97,8 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
             mDatabase.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    tenantUserProfile = dataSnapshot.getValue(TenantUserProfile.class);
-                    if (tenantUserProfile == null) { // nothing found
+                    tenantProfile = dataSnapshot.getValue(TenantProfile.class);
+                    if (tenantProfile == null) { // nothing found
                         getApartmentProfile(apartmentProfileId, false);
                     } else {
                         getApartmentProfile(apartmentProfileId, true);
@@ -124,8 +124,8 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    apartmentUserProfile = dataSnapshot.getValue(ApartmentUserProfile.class);
-                    if (apartmentUserProfile == null) {
+                    apartmentProfile = dataSnapshot.getValue(ApartmentProfile.class);
+                    if (apartmentProfile == null) {
                         if (tenantFound) {
                             notifySuccess();
                             return;

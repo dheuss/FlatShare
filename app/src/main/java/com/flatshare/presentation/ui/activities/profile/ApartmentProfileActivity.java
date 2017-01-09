@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.common.ApartmentLocation;
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.presentation.presenters.profile.ApartmentProfilePresenter;
 import com.flatshare.presentation.presenters.profile.impl.ApartmentProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
@@ -120,19 +120,19 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         apartmentLocation.setHouseNr(houseNr);
         apartmentLocation.setZipCode(zipCode);
 
-        ApartmentUserProfile apartmentUserProfile = new ApartmentUserProfile();
-        apartmentUserProfile.setPrice(price);
-        apartmentUserProfile.setArea(area);
-        apartmentUserProfile.setInternet(hasInternet);
-        apartmentUserProfile.setSmokerApartment(isSmoker);
-        apartmentUserProfile.setPets(hasPets);
-        apartmentUserProfile.setWashingMachine(hasWashingMachine);
+        ApartmentProfile apartmentProfile = new ApartmentProfile();
+        apartmentProfile.setPrice(price);
+        apartmentProfile.setArea(area);
+        apartmentProfile.setInternet(hasInternet);
+        apartmentProfile.setSmokerApartment(isSmoker);
+        apartmentProfile.setPets(hasPets);
+        apartmentProfile.setWashingMachine(hasWashingMachine);
 
-        apartmentUserProfile.setApartmentLocation(apartmentLocation);
+        apartmentProfile.setApartmentLocation(apartmentLocation);
 
-        apartmentUserProfile.setRoommateIds(roommatesId);
+        apartmentProfile.setRoommateIds(roommatesId);
 
-        mPresenter.sendProfile(apartmentUserProfile);
+        mPresenter.sendProfile(apartmentProfile);
     }
 
     private void bindView() {

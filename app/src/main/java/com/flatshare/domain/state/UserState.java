@@ -1,8 +1,9 @@
 package com.flatshare.domain.state;
 
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class UserState {
     // Singleton
     static final UserState INSTANCE = new UserState();
 
-    private UserState(){
+    private UserState() {
 
     }
 
@@ -28,9 +29,9 @@ public class UserState {
     private boolean loggedIn;
 
     private PrimaryUserProfile primaryUserProfile;
-
-    private TenantUserProfile tenantUserProfile;
-    private ApartmentUserProfile apartmentUserProfile;
+    private TenantProfile tenantProfile;
+    private RoommateProfile roommateProfile;
+    private ApartmentProfile apartmentProfile;
 
     public PrimaryUserProfile getPrimaryUserProfile() {
         return primaryUserProfile;
@@ -40,36 +41,48 @@ public class UserState {
         this.primaryUserProfile = primaryUserProfile;
     }
 
-    public TenantUserProfile getTenantUserProfile() {
-        return tenantUserProfile;
+    public TenantProfile getTenantProfile() {
+        return tenantProfile;
     }
 
-    public void setTenantUserProfile(TenantUserProfile tenantUserProfile) {
-        this.tenantUserProfile = tenantUserProfile;
+    public void setTenantProfile(TenantProfile tenantProfile) {
+        this.tenantProfile = tenantProfile;
     }
 
-    public ApartmentUserProfile getApartmentUserProfile() {
-        return apartmentUserProfile;
+    public ApartmentProfile getApartmentProfile() {
+        return apartmentProfile;
     }
 
-    public void setApartmentUserProfile(ApartmentUserProfile apartmentUserProfile) {
-        this.apartmentUserProfile = apartmentUserProfile;
+    public void setApartmentProfile(ApartmentProfile apartmentProfile) {
+        this.apartmentProfile = apartmentProfile;
+    }
+
+    public RoommateProfile getRoommateProfile() {
+        return roommateProfile;
+    }
+
+    public void setRoommateProfile(RoommateProfile roommateProfile) {
+        this.roommateProfile = roommateProfile;
     }
 
     public String getTenantId() {
-        return getTenantUserProfile().getTenantId();
+        return getTenantProfile().getTenantId();
+    }
+
+    public String getRoommateId() {
+        return getRoommateProfile().getRoommateId();
     }
 
     public String getApartmentId() {
-        return getApartmentUserProfile().getApartmentId();
+        return getApartmentProfile().getApartmentId();
     }
 
     public String getApartmentMainImageId() {
-        return getApartmentUserProfile().getMainImageId();
+        return getApartmentProfile().getMainImageId();
     }
 
     public List<String> getApartmentImageIds() {
-        return new ArrayList<>(getApartmentUserProfile().getImageIds());
+        return new ArrayList<>(getApartmentProfile().getImageIds());
     }
 
     public boolean isLoggedIn() {

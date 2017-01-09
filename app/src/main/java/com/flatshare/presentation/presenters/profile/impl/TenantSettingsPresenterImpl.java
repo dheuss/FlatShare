@@ -57,7 +57,7 @@ public class TenantSettingsPresenterImpl extends AbstractPresenter implements Te
 
     @Override
     public void onSentFailure(String error) {
-        userState.getTenantUserProfile().setTenantFilterSettings(null);
+        userState.getTenantProfile().setTenantFilterSettings(null);
         mView.hideProgress();
         onError(error);
     }
@@ -71,9 +71,9 @@ public class TenantSettingsPresenterImpl extends AbstractPresenter implements Te
     public void sendFilterSettings(TenantFilterSettings tenantFilterSettings) {
         mView.showProgress();
 
-        Log.d(TAG, "userstate null? " + (userState == null) + " or is tenantuserprofile null? " + (userState.getTenantUserProfile() == null));
+        Log.d(TAG, "userstate null? " + (userState == null) + " or is tenantuserprofile null? " + (userState.getTenantProfile() == null));
 
-        userState.getTenantUserProfile().setTenantFilterSettings(tenantFilterSettings);
+        userState.getTenantProfile().setTenantFilterSettings(tenantFilterSettings);
         FilterSettingsInteractor interactor = new TenantSettingsInteractorImpl(mMainThread, this, tenantFilterSettings);
         interactor.execute();
     }

@@ -3,8 +3,8 @@ package com.flatshare.domain.interactors.impl;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.datatypes.db.profiles.UserProfile;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.utils.random.ProfileGenerator;
@@ -29,8 +29,8 @@ public class TestInteractor extends AbstractInteractor {
         String tPath = "test/" + databaseRoot.getTenantProfiles();
         String aPath = "test/" + databaseRoot.getApartmentProfiles();
 
-        List<TenantUserProfile> tList = ProfileGenerator.generateTenantProfiles(size);
-        List<ApartmentUserProfile> aList = ProfileGenerator.generateApartmentProfiles(size);
+        List<TenantProfile> tList = ProfileGenerator.generateTenantProfiles(size);
+        List<ApartmentProfile> aList = ProfileGenerator.generateApartmentProfiles(size);
 
 
         for (int i = 0; i < size; i++) {

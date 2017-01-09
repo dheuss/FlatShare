@@ -3,7 +3,7 @@ package com.flatshare.domain.interactors.profile.impl;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.interactors.profile.ProfileInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.google.firebase.database.DatabaseError;
@@ -25,15 +25,15 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
      */
     private ProfileInteractor.Callback mCallback;
 
-    private ApartmentUserProfile apartmentUserProfile;
+    private ApartmentProfile apartmentProfile;
 
     public ApartmentProfileInteractorImpl(MainThread mainThread,
-                                          Callback callback, ApartmentUserProfile apartmentUserProfile) {
+                                          Callback callback, ApartmentProfile apartmentProfile) {
 
         super(mainThread);
         this.mMainThread = mainThread;
         this.mCallback = callback;
-        this.apartmentUserProfile = apartmentUserProfile;
+        this.apartmentProfile = apartmentProfile;
     }
 
     private void notifyError(final String errorMessage) {
@@ -64,18 +64,18 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
     @Override
     public void execute() {
 
-        apartmentUserProfile.getRoommateIds().add(userId);
+        apartmentProfile.getRoommateIds().add(userId);
 
-        String city = apartmentUserProfile.getApartmentLocation().getCity();
-        String district = apartmentUserProfile.getApartmentLocation().getDistrict();
-        int zipCode = apartmentUserProfile.getApartmentLocation().getZipCode();
+        String city = apartmentProfile.getApartmentLocation().getCity();
+        String district = apartmentProfile.getApartmentLocation().getDistrict();
+        int zipCode = apartmentProfile.getApartmentLocation().getZipCode();
 
         String locationPath = databaseRoot.getApartmentLocationsNode().getCitiesNode(city).getDistrictsNode(district).getZipCodesNode(zipCode).getRootPath();
 
         String apartmentId = mDatabase.child(databaseRoot.getApartmentProfiles()).push().getKey();
 
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put(databaseRoot.getApartmentProfileNode(apartmentId).getRootPath(), this.apartmentUserProfile);
+        map.put(databaseRoot.getApartmentProfileNode(apartmentId).getRootPath(), this.apartmentProfile);
 
         map.put(databaseRoot.getUserProfileNode(userId).getApartmentProfileId(), apartmentId);
         map.put(locationPath, apartmentId);

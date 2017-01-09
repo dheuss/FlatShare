@@ -2,8 +2,8 @@ package com.flatshare.utils.random;
 
 import com.flatshare.domain.datatypes.db.filters.ApartmentFilterSettings;
 import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,17 +14,17 @@ import java.util.List;
 
 public class ProfileGenerator {
 
-    public static List<TenantUserProfile> generateTenantProfiles(int size) {
-        List<TenantUserProfile> tenantUserProfiles = new ArrayList<>();
+    public static List<TenantProfile> generateTenantProfiles(int size) {
+        List<TenantProfile> tenantProfiles = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            TenantUserProfile tenantUserProfile = new TenantUserProfile();
-            tenantUserProfile.setAge((int) (20 + Math.random() * 10));
-            tenantUserProfile.setFirstName("Tester" + i);
-            tenantUserProfile.setDurationOfStay(i % 4);
-            tenantUserProfile.setGender((int) (Math.random() * 2) == 0 ? 0 : 1);
+            TenantProfile tenantProfile = new TenantProfile();
+            tenantProfile.setAge((int) (20 + Math.random() * 10));
+            tenantProfile.setFirstName("Tester" + i);
+            tenantProfile.setDurationOfStay(i % 4);
+            tenantProfile.setGender((int) (Math.random() * 2) == 0 ? 0 : 1);
 
-            tenantUserProfile.setPets((int) (Math.random() * 2) == 1);
-            tenantUserProfile.setSmoker(i % 4 == 0);
+            tenantProfile.setPets((int) (Math.random() * 2) == 1);
+            tenantProfile.setSmoker(i % 4 == 0);
 
             TenantFilterSettings tenantFilterSettings = new TenantFilterSettings();
 
@@ -40,32 +40,32 @@ public class ProfileGenerator {
             tenantFilterSettings.setPurposeApartment((int) (Math.random() * 3));
             tenantFilterSettings.setSmokerApartment((int) (Math.random() * 3));
 
-            tenantUserProfile.setTenantFilterSettings(tenantFilterSettings);
+            tenantProfile.setTenantFilterSettings(tenantFilterSettings);
 
-            tenantUserProfiles.add(tenantUserProfile);
+            tenantProfiles.add(tenantProfile);
         }
 
-        return tenantUserProfiles;
+        return tenantProfiles;
     }
 
 
 
-    public static List<ApartmentUserProfile> generateApartmentProfiles(int size) {
-        List<ApartmentUserProfile> apartmentUserProfileList = new ArrayList<>();
+    public static List<ApartmentProfile> generateApartmentProfiles(int size) {
+        List<ApartmentProfile> apartmentProfileList = new ArrayList<>();
 
         for (int i = 0; i < size; i++) {
-            ApartmentUserProfile apartmentUserProfile = new ApartmentUserProfile();
+            ApartmentProfile apartmentProfile = new ApartmentProfile();
 
-            apartmentUserProfile.setArea((int) (30 + Math.random() * 20));
-            apartmentUserProfile.setPrice((int) (300 + Math.random() * 50));
+            apartmentProfile.setArea((int) (30 + Math.random() * 20));
+            apartmentProfile.setPrice((int) (300 + Math.random() * 50));
 
-            apartmentUserProfile.setInternet((int) (Math.random() * 2) == 1);
-            apartmentUserProfile.setPurposeApartment((int) (Math.random() * 2) == 1);
-            apartmentUserProfile.setSmokerApartment((int) (Math.random() * 2) == 1);
-            apartmentUserProfile.setWashingMachine((int) (Math.random() * 2) == 1);
+            apartmentProfile.setInternet((int) (Math.random() * 2) == 1);
+            apartmentProfile.setPurposeApartment((int) (Math.random() * 2) == 1);
+            apartmentProfile.setSmokerApartment((int) (Math.random() * 2) == 1);
+            apartmentProfile.setWashingMachine((int) (Math.random() * 2) == 1);
 
 
-            apartmentUserProfile.setPets((int) (Math.random() * 2) == 1);
+            apartmentProfile.setPets((int) (Math.random() * 2) == 1);
 
 
 
@@ -78,13 +78,13 @@ public class ProfileGenerator {
             apartmentFilterSettings.setGender(2);
             apartmentFilterSettings.setSmoker(2);
 
-            apartmentUserProfile.setApartmentFilterSettings(apartmentFilterSettings);
-            apartmentUserProfileList.add(apartmentUserProfile);
+            apartmentProfile.setApartmentFilterSettings(apartmentFilterSettings);
+            apartmentProfileList.add(apartmentProfile);
 
         }
 
         // TEST
-//        ApartmentUserProfile a1 = new ApartmentUserProfile();
+//        ApartmentProfile a1 = new ApartmentProfile();
 //        a1.setArea(30);
 //        a1.setPets(false);
 //        a1.setPrice(400);
@@ -102,9 +102,9 @@ public class ProfileGenerator {
 //
 //        a1.setApartmentFilterSettings(a1Set);
 //
-//        apartmentUserProfileList.add(a1);
+//        apartmentProfileList.add(a1);
 
-        return apartmentUserProfileList;
+        return apartmentProfileList;
     }
 
 }

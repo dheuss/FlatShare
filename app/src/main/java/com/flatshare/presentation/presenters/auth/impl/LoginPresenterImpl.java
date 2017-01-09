@@ -5,9 +5,9 @@ import android.util.Log;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.auth.LoginDataType;
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.interactors.InitInteractor;
 import com.flatshare.domain.interactors.auth.LoginInteractor;
 import com.flatshare.domain.interactors.impl.InitInteractorImpl;
@@ -90,9 +90,9 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
     }
 
     @Override
-    public void onReceivedSuccess(PrimaryUserProfile primaryUserProfile, TenantUserProfile tenantUserProfile, ApartmentUserProfile apartmentUserProfile) {
-        userState.setApartmentUserProfile(apartmentUserProfile);
-        userState.setTenantUserProfile(tenantUserProfile);
+    public void onReceivedSuccess(PrimaryUserProfile primaryUserProfile, TenantProfile tenantProfile, ApartmentProfile apartmentProfile) {
+        userState.setApartmentProfile(apartmentProfile);
+        userState.setTenantProfile(tenantProfile);
         userState.setPrimaryUserProfile(primaryUserProfile);
 
         mView.hideProgress();

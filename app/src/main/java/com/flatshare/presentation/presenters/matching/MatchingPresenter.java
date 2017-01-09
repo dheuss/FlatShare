@@ -1,8 +1,8 @@
 package com.flatshare.presentation.presenters.matching;
 
 
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.presentation.presenters.base.BasePresenter;
 import com.flatshare.presentation.ui.BaseView;
 
@@ -13,7 +13,7 @@ public interface MatchingPresenter extends BasePresenter {
     void getMatches();
 
     interface View extends BaseView {
-        void showTenants(List<TenantUserProfile> tenants);
-        void showApartments(List<ApartmentUserProfile> apartments);
+        void showTenants(List<TenantProfile> tenants);
+        void showApartments(List<ApartmentProfile> apartments);
     }
 }

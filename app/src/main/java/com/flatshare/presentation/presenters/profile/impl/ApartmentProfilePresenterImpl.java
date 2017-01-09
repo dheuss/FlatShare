@@ -4,7 +4,7 @@ import android.widget.ImageView;
 import android.widget.VideoView;
 
 import com.flatshare.domain.MainThread;
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.interactors.matching.EmailRetrieverInteractor;
 import com.flatshare.domain.interactors.matching.impl.EmailRetrieverInteractorImpl;
 import com.flatshare.domain.interactors.media.MediaInteractor;
@@ -63,17 +63,17 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
 
     @Override
     public void onSentFailure(String error) {
-        userState.setApartmentUserProfile(null);
+        userState.setApartmentProfile(null);
         mView.hideProgress();
         onError(error);
     }
 
     @Override
-    public void sendProfile(ApartmentUserProfile apartmentUserProfile) {
+    public void sendProfile(ApartmentProfile apartmentProfile) {
 
         mView.showProgress();
-        userState.setApartmentUserProfile(apartmentUserProfile);
-        ProfileInteractor interactor = new ApartmentProfileInteractorImpl(mMainThread, this, apartmentUserProfile);
+        userState.setApartmentProfile(apartmentProfile);
+        ProfileInteractor interactor = new ApartmentProfileInteractorImpl(mMainThread, this, apartmentProfile);
         interactor.execute();
 
     }

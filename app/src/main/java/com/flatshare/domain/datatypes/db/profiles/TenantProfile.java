@@ -1,5 +1,6 @@
 package com.flatshare.domain.datatypes.db.profiles;
 
+import com.flatshare.domain.datatypes.db.common.ProfileType;
 import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.PropertyName;
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by Arber on 06/12/2016.
  */
 
-public class TenantUserProfile extends UserProfile {
+public class TenantProfile extends UserProfile {
 
     @PropertyName("tenant_filter_settings")
     public TenantFilterSettings tenantFilterSettings;
@@ -61,8 +62,10 @@ public class TenantUserProfile extends UserProfile {
     @PropertyName("matched_apartments")
     public List<String> matchedApartments;
 
+    @PropertyName("timestamp")
+    public long timestamp;
 
-    public TenantUserProfile() {
+    public TenantProfile() {
 
         this.tenantFilterSettings = new TenantFilterSettings();
         this.hobbies = new ArrayList<>();
@@ -227,6 +230,16 @@ public class TenantUserProfile extends UserProfile {
     }
 
     @Exclude
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    @Exclude
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    @Exclude
     @Override
     public String getId() {
         return getTenantId();
@@ -235,6 +248,6 @@ public class TenantUserProfile extends UserProfile {
     @Exclude
     @Override
     public int getType() {
-        return 0;
+        return ProfileType.TENANT.getValue();
     }
 }

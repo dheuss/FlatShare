@@ -3,7 +3,7 @@ package com.flatshare.presentation.presenters.profile;
 import android.net.Uri;
 import android.widget.VideoView;
 
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.presentation.presenters.base.BasePresenter;
 import com.flatshare.presentation.ui.BaseView;
 
@@ -13,7 +13,7 @@ import com.flatshare.presentation.ui.BaseView;
 
 public interface TenantProfilePresenter extends BasePresenter {
 
-    void sendProfile(TenantUserProfile tenantUserProfile);
+    void sendProfile(TenantProfile tenantProfile);
 
     void uploadVideo(VideoView videoView);
 

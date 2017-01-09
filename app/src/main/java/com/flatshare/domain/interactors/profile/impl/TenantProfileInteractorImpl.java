@@ -3,7 +3,7 @@ package com.flatshare.domain.interactors.profile.impl;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.interactors.profile.ProfileInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.google.firebase.database.DatabaseError;
@@ -25,15 +25,15 @@ public class TenantProfileInteractorImpl extends AbstractInteractor implements P
      */
     private ProfileInteractor.Callback mCallback;
 
-    private TenantUserProfile tenantUserProfile;
+    private TenantProfile tenantProfile;
 
     public TenantProfileInteractorImpl(
             MainThread mainThread,
-            Callback callback, TenantUserProfile tenantUserProfile) {
+            Callback callback, TenantProfile tenantProfile) {
 
         super(mainThread);
         this.mCallback = callback;
-        this.tenantUserProfile = tenantUserProfile;
+        this.tenantProfile = tenantProfile;
     }
 
     private void notifyError(final String errorMessage) {
@@ -70,7 +70,7 @@ public class TenantProfileInteractorImpl extends AbstractInteractor implements P
         String tId = mDatabase.child(databaseRoot.getTenantProfiles()).push().getKey();
 
         Map<String, Object> map = new HashMap<>();
-        map.put(databaseRoot.getTenantProfileNode(tId).getRootPath(), this.tenantUserProfile);
+        map.put(databaseRoot.getTenantProfileNode(tId).getRootPath(), this.tenantProfile);
         map.put(databaseRoot.getUserProfileNode(userId).getTenantProfileId(), tId);
 
         mDatabase.updateChildren(map, new DatabaseReference.CompletionListener() {

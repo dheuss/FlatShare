@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.flatshare.R;
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.Resolve;
@@ -32,11 +32,11 @@ public class MatchingActivity_ProfileCard {
     @View(R.id.locationNameTxt)
     private TextView locationNameTxt;
 
-    private ApartmentUserProfile mProfile;
+    private ApartmentProfile mProfile;
     private Context mContext;
     private SwipePlaceHolderView mSwipeView;
 
-    public MatchingActivity_ProfileCard(Context context, ApartmentUserProfile profile, SwipePlaceHolderView swipeView) {
+    public MatchingActivity_ProfileCard(Context context, ApartmentProfile profile, SwipePlaceHolderView swipeView) {
         mContext = context;
         mProfile = profile;
         mSwipeView = swipeView;

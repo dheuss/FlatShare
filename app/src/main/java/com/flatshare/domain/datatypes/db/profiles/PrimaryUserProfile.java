@@ -15,8 +15,8 @@ public class PrimaryUserProfile {
     @PropertyName("tenant_profile_id")
     public String tenantProfileId;
 
-    @PropertyName("apartment_profile_id")
-    public String apartmentProfileId;
+    @PropertyName("roommate_profile_id")
+    public String roommateProfileId;
 
     @PropertyName("email_address")
     public String email;
@@ -45,13 +45,13 @@ public class PrimaryUserProfile {
     }
 
     @Exclude
-    public String getApartmentProfileId() {
-        return apartmentProfileId;
+    public String getRoommateProfileId() {
+        return roommateProfileId;
     }
 
     @Exclude
-    public void setApartmentProfileId(String apartmentProfileId) {
-        this.apartmentProfileId = apartmentProfileId;
+    public void setRoommateProfileId(String roommateProfileId) {
+        this.roommateProfileId = roommateProfileId;
     }
 
     @Exclude

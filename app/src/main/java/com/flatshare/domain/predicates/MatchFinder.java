@@ -3,15 +3,15 @@ package com.flatshare.domain.predicates;
 
 import com.flatshare.domain.datatypes.db.filters.ApartmentFilterSettings;
 import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 
 /**
  * Created by Arber on 13/12/2016.
  */
 class MatchFinder {
 
-    public boolean apMatchesTenantFilter(ApartmentUserProfile a, TenantFilterSettings tf) {
+    public boolean apMatchesTenantFilter(ApartmentProfile a, TenantFilterSettings tf) {
         return (a != null && tf != null)
                 && (a.getArea() >= tf.getAreaFrom() && a.getArea() <= tf.getAreaTo())
                 && (a.getPrice() >= tf.getPriceFrom() && a.getPrice() <= tf.getPriceTo())
@@ -22,7 +22,7 @@ class MatchFinder {
                 && ((tf.wantsPurposeApartment() == 2) || (!a.isPurposeApartment() && tf.wantsPurposeApartment() == 0) || (a.isPurposeApartment() && tf.wantsPurposeApartment() == 1));
     }
 
-    public boolean tenantMatchesApFilter(TenantUserProfile t, ApartmentFilterSettings af) {
+    public boolean tenantMatchesApFilter(TenantProfile t, ApartmentFilterSettings af) {
         return (t != null && af != null)
                 && (t.getAge() >= af.getAgeFrom() && t.getAge() <= af.getAgeTo())
                 && ((af.getGender() == 2) || (t.getGender() == af.getGender()))

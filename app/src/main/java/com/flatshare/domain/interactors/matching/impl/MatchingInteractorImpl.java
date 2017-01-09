@@ -3,9 +3,9 @@ package com.flatshare.domain.interactors.matching.impl;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.interactors.matching.MatchingInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.domain.predicates.ApartmentMatchFinder;
@@ -33,20 +33,20 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
     private MatchingInteractor.Callback mCallback;
 
     private int classificationId;
-    private TenantUserProfile tenantUserProfile;
-    private ApartmentUserProfile apartmentUserProfile;
+    private TenantProfile tenantProfile;
+    private ApartmentProfile apartmentProfile;
 
     public MatchingInteractorImpl(MainThread mainThread,
-                                  Callback callback, int classificationId, TenantUserProfile tenantUserProfile, ApartmentUserProfile apartmentUserProfile) {
+                                  Callback callback, int classificationId, TenantProfile tenantProfile, ApartmentProfile apartmentProfile) {
 
         super(mainThread);
         this.mCallback = callback;
         this.classificationId = classificationId;
-        this.tenantUserProfile = tenantUserProfile;
-        this.apartmentUserProfile = apartmentUserProfile;
+        this.tenantProfile = tenantProfile;
+        this.apartmentProfile = apartmentProfile;
     }
 
-    private void notifyTenantMatchesFound(final List<TenantUserProfile> tenants) {
+    private void notifyTenantMatchesFound(final List<TenantProfile> tenants) {
         Log.d(TAG, "inside notifyError()");
         mMainThread.post(new Runnable() {
             @Override
@@ -56,7 +56,7 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
         });
     }
 
-    private void notifyApartmentMatchesFound(final List<ApartmentUserProfile> apartments) {
+    private void notifyApartmentMatchesFound(final List<ApartmentProfile> apartments) {
         Log.d(TAG, "inside notifyError()");
         mMainThread.post(new Runnable() {
             @Override
@@ -90,12 +90,12 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
     @Override
     public void execute() {
 
-        if (tenantUserProfile != null || apartmentUserProfile != null) {
+        if (tenantProfile != null || apartmentProfile != null) {
 
             if (classificationId == 0) { // tenant is looking for matches
-                matchTenant(tenantUserProfile);
+                matchTenant(tenantProfile);
             } else { // apartment is looking for matches
-                matchApartment(apartmentUserProfile);
+                matchApartment(apartmentProfile);
             }
         } else {
 
@@ -110,7 +110,7 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
                         if (cId == 0) {
                             getTenant(pUP.getTenantProfileId());
                         } else {
-                            getApartment(pUP.getApartmentProfileId());
+                            getApartment(pUP.getRoommateProfileId());
                         }
                     }
                 }
@@ -124,7 +124,7 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
 
     }
 
-    private void matchApartment(final ApartmentUserProfile apUP) {
+    private void matchApartment(final ApartmentProfile apUP) {
 
         String path = databaseRoot.getTenantProfiles();
         String testPath = "test/" + databaseRoot.getTenantProfiles();
@@ -133,17 +133,17 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                GenericTypeIndicator<Map<String, TenantUserProfile>> t = new GenericTypeIndicator<Map<String, TenantUserProfile>>() {
+                GenericTypeIndicator<Map<String, TenantProfile>> t = new GenericTypeIndicator<Map<String, TenantProfile>>() {
                 };
 
-                List<TenantUserProfile> tenants = new ArrayList<>(dataSnapshot.getValue(t).values());
+                List<TenantProfile> tenants = new ArrayList<>(dataSnapshot.getValue(t).values());
 
                 if (tenants == null) {
                     notifyError("No tenants were found in the database!");
                     return;
                 }
 
-                List<TenantUserProfile> potentialMatches = new ApartmentMatchFinder(apUP, tenants).getMatches();
+                List<TenantProfile> potentialMatches = new ApartmentMatchFinder(apUP, tenants).getMatches();
 
                 if (potentialMatches.size() == 0) {
                     notifyNoMatchFound();
@@ -160,7 +160,7 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
 
     }
 
-    private void matchTenant(final TenantUserProfile tUP) {
+    private void matchTenant(final TenantProfile tUP) {
 
         String path = databaseRoot.getApartmentProfiles();
         String testPath = "test/" + databaseRoot.getApartmentProfiles();
@@ -169,17 +169,17 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                GenericTypeIndicator<Map<String, ApartmentUserProfile>> t = new GenericTypeIndicator<Map<String, ApartmentUserProfile>>() {
+                GenericTypeIndicator<Map<String, ApartmentProfile>> t = new GenericTypeIndicator<Map<String, ApartmentProfile>>() {
                 };
 
-                List<ApartmentUserProfile> apartments = new ArrayList<>((dataSnapshot.getValue(t).values()));
+                List<ApartmentProfile> apartments = new ArrayList<>((dataSnapshot.getValue(t).values()));
 
                 if (apartments == null) {
                     notifyError("No apartments were found in the database!");
                     return;
                 }
 
-                List<ApartmentUserProfile> potentialMatches = new TenantMatchFinder(tUP, apartments).getMatches();
+                List<ApartmentProfile> potentialMatches = new TenantMatchFinder(tUP, apartments).getMatches();
 
                 if (potentialMatches.size() == 0) {
                     notifyNoMatchFound();
@@ -205,7 +205,7 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
                 if (dataSnapshot.getValue() == null) {
                     notifyError("No ApartmentProfile found!");
                 } else {
-                    ApartmentUserProfile apUP = dataSnapshot.getValue(ApartmentUserProfile.class);
+                    ApartmentProfile apUP = dataSnapshot.getValue(ApartmentProfile.class);
                     matchApartment(apUP);
                 }
             }
@@ -225,7 +225,7 @@ public class MatchingInteractorImpl extends AbstractInteractor implements Matchi
                 if (dataSnapshot.getValue() == null) {
                     notifyError("No ApartmentProfile found!");
                 } else {
-                    TenantUserProfile tUP = dataSnapshot.getValue(TenantUserProfile.class);
+                    TenantProfile tUP = dataSnapshot.getValue(TenantProfile.class);
                     matchTenant(tUP);
                 }
             }

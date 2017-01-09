@@ -4,7 +4,7 @@ import android.net.Uri;
 import android.widget.VideoView;
 
 import com.flatshare.domain.MainThread;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.datatypes.enums.MediaType;
 import com.flatshare.domain.interactors.media.MediaInteractor;
 import com.flatshare.domain.interactors.profile.ProfileInteractor;
@@ -62,17 +62,17 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
 
     @Override
     public void onSentFailure(String error) {
-        userState.setTenantUserProfile(null);
+        userState.setTenantProfile(null);
         mView.hideProgress();
         onError(error);
     }
 
     @Override
-    public void sendProfile(TenantUserProfile tenantUserProfile) {
+    public void sendProfile(TenantProfile tenantProfile) {
 
         mView.showProgress();
-        userState.setTenantUserProfile(tenantUserProfile);
-        ProfileInteractor interactor = new TenantProfileInteractorImpl(mMainThread, this, tenantUserProfile);
+        userState.setTenantProfile(tenantProfile);
+        ProfileInteractor interactor = new TenantProfileInteractorImpl(mMainThread, this, tenantProfile);
         interactor.execute();
 
     }

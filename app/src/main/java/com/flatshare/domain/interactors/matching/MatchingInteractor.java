@@ -1,7 +1,7 @@
 package com.flatshare.domain.interactors.matching;
 
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.interactors.base.Interactor;
 
 import java.util.List;
@@ -16,8 +16,8 @@ public interface MatchingInteractor extends Interactor{
         void onNoMatchFound();
         void notifyError(String errorMessage);
 
-        void onTenantsFound(List<TenantUserProfile> tenants);
+        void onTenantsFound(List<TenantProfile> tenants);
 
-        void onApartmentsFound(List<ApartmentUserProfile> apartments);
+        void onApartmentsFound(List<ApartmentProfile> apartments);
     }
 }

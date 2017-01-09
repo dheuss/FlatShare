@@ -2,8 +2,8 @@ package com.flatshare.domain.predicates;
 
 import com.flatshare.domain.datatypes.db.filters.ApartmentFilterSettings;
 import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +13,15 @@ import java.util.List;
  */
 public class TenantMatchFinder extends MatchFinder {
 
-    private TenantUserProfile t;
-    private List<ApartmentUserProfile> matchedApartments;
+    private TenantProfile t;
+    private List<ApartmentProfile> matchedApartments;
 
-    public TenantMatchFinder(TenantUserProfile tenantUserProfile, List<ApartmentUserProfile> apartmentUserProfileList) {
+    public TenantMatchFinder(TenantProfile tenantProfile, List<ApartmentProfile> apartmentProfileList) {
 
-        t = tenantUserProfile;
+        t = tenantProfile;
         matchedApartments = new ArrayList<>();
 
-        for (ApartmentUserProfile a : apartmentUserProfileList) {
+        for (ApartmentProfile a : apartmentProfileList) {
             if (predicatesApply(a)) {
                 matchedApartments.add(a);
             }
@@ -29,7 +29,7 @@ public class TenantMatchFinder extends MatchFinder {
 
     }
 
-    public boolean predicatesApply(ApartmentUserProfile a) {
+    public boolean predicatesApply(ApartmentProfile a) {
 
         TenantFilterSettings tf = t.getTenantFilterSettings();
         ApartmentFilterSettings af = a.getApartmentFilterSettings();
@@ -39,7 +39,7 @@ public class TenantMatchFinder extends MatchFinder {
     }
 
 
-    public List<ApartmentUserProfile> getMatches() {
+    public List<ApartmentProfile> getMatches() {
         return matchedApartments;
     }
 }

@@ -13,7 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.flatshare.R;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.presentation.presenters.profile.TenantProfilePresenter;
 import com.flatshare.presentation.presenters.profile.impl.TenantProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
@@ -119,18 +119,18 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         String shortBio = shortBioText.getText().toString();
         int duration = Integer.parseInt(durationSpinner.getSelectedItem().toString());
 
-        TenantUserProfile tenantUserProfile = new TenantUserProfile();
-        tenantUserProfile.setFirstName(firstname);
-        tenantUserProfile.setAge(age);
-        tenantUserProfile.setEmail(email);
-        tenantUserProfile.setSmoker(isSmoker);
-        tenantUserProfile.setGender(gender);
-        tenantUserProfile.setOccupation(occupation);
-        tenantUserProfile.setPets(isPets);
-        tenantUserProfile.setShortBio(shortBio);
-        tenantUserProfile.setDurationOfStay(duration);
+        TenantProfile tenantProfile = new TenantProfile();
+        tenantProfile.setFirstName(firstname);
+        tenantProfile.setAge(age);
+        tenantProfile.setEmail(email);
+        tenantProfile.setSmoker(isSmoker);
+        tenantProfile.setGender(gender);
+        tenantProfile.setOccupation(occupation);
+        tenantProfile.setPets(isPets);
+        tenantProfile.setShortBio(shortBio);
+        tenantProfile.setDurationOfStay(duration);
 
-        mPresenter.sendProfile(tenantUserProfile);
+        mPresenter.sendProfile(tenantProfile);
     }
 
     private void bindView() {

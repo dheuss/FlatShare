@@ -3,8 +3,8 @@ package com.flatshare.presentation.presenters.matching.impl;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
-import com.flatshare.domain.datatypes.db.profiles.ApartmentUserProfile;
-import com.flatshare.domain.datatypes.db.profiles.TenantUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.interactors.matching.MatchingInteractor;
 import com.flatshare.domain.interactors.matching.impl.MatchingInteractorImpl;
 import com.flatshare.presentation.presenters.matching.MatchingPresenter;
@@ -23,7 +23,6 @@ public class MatchingPresenterImpl extends AbstractPresenter implements Matching
     private static final String TAG = "MatchingPresenterImpl";
 
     private MatchingPresenter.View mView;
-//    private MessageRepository  mMessageRepository;
 
     public MatchingPresenterImpl(MainThread mainThread,
                                  View view) {
@@ -32,7 +31,6 @@ public class MatchingPresenterImpl extends AbstractPresenter implements Matching
         Log.d(TAG, "inside constructor");
 
         mView = view;
-//        mMessageRepository = messageRepository;
     }
 
     @Override
@@ -70,9 +68,9 @@ public class MatchingPresenterImpl extends AbstractPresenter implements Matching
     public void getMatches() {
         mView.showProgress();
         int classificationId = userState.getPrimaryUserProfile().getClassificationId();
-        TenantUserProfile tenantUserProfile = userState.getTenantUserProfile();
-        ApartmentUserProfile apartmentUserProfile = userState.getApartmentUserProfile();
-        MatchingInteractor matchingInteractor = new MatchingInteractorImpl(mMainThread, this,classificationId, tenantUserProfile, apartmentUserProfile);
+        TenantProfile tenantProfile = userState.getTenantProfile();
+        ApartmentProfile apartmentProfile = userState.getApartmentProfile();
+        MatchingInteractor matchingInteractor = new MatchingInteractorImpl(mMainThread, this,classificationId, tenantProfile, apartmentProfile);
         matchingInteractor.execute();
     }
 
@@ -87,13 +85,13 @@ public class MatchingPresenterImpl extends AbstractPresenter implements Matching
     }
 
     @Override
-    public void onTenantsFound(List<TenantUserProfile> tenants) {
+    public void onTenantsFound(List<TenantProfile> tenants) {
         mView.hideProgress();
         mView.showTenants(tenants);
     }
 
     @Override
-    public void onApartmentsFound(List<ApartmentUserProfile> apartments) {
+    public void onApartmentsFound(List<ApartmentProfile> apartments) {
         mView.hideProgress();
         mView.showApartments(apartments);
     }
