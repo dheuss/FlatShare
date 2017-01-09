@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/create_tenant_profile"
             android:textColor="@color/buttonText"
-            android:textColorHint="@color/textColorPrimary"
+            android:textColorHint="@color/buttonText"
             android:layout_marginTop="20dp"
             android:background="@color/button"
             android:textStyle="bold"
