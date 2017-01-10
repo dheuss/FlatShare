@@ -80,28 +80,35 @@ public class TenantSettingsActivity extends AbstractActivity implements TenantSe
                 this
         );
 
+        minPrice.setText(priceRange.getLeftPinValue());
+        maxPrice.setText(priceRange.getRightPinValue());
+
         priceRange.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
             @Override
-            public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex,
+            public void onRangeChangeListener(RangeBar rangeBar,
+                                              int leftPinIndex,
                                               int rightPinIndex,
                                               String leftPinValue, String rightPinValue) {
-                minPrice.setText("" + leftPinIndex);
-                maxPrice.setText("" + rightPinIndex);
+                minPrice.setText(priceRange.getLeftPinValue());
+                maxPrice.setText(priceRange.getRightPinValue());
             }
 
         });
+
+        minSize.setText(sizeRange.getLeftPinValue());
+        maxSize.setText(sizeRange.getRightPinValue());
 
         sizeRange.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
             @Override
-            public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex,
+            public void onRangeChangeListener(RangeBar rangeBar,
+                                              int leftPinIndex,
                                               int rightPinIndex,
-                                              String leftPinValue, String rightPinValue) {
-                minSize.setText("" + leftPinIndex);
-                maxSize.setText("" + rightPinIndex);
+                                              String leftPinValue,
+                                              String rightPinValue) {
+                minSize.setText(sizeRange.getLeftPinValue());
+                maxSize.setText(sizeRange.getRightPinValue());
             }
-
         });
-
 
         profileDoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,51 +159,51 @@ public class TenantSettingsActivity extends AbstractActivity implements TenantSe
     }
 
     private void bindView() {
-        minPrice = (TextView) findViewById(R.id.price_range_textview_minPRICE);
-        maxPrice = (TextView) findViewById(R.id.price_range_textview_maxPRICE);
+        minPrice = (TextView) findViewById(R.id.tenant_settings_price_range_2);
+        maxPrice = (TextView) findViewById(R.id.tenant_settings_price_range_4);
         priceRange = (RangeBar) findViewById(R.id.rangebar_price_range);
 
-        minSize = (TextView) findViewById(R.id.size_range_textview_minSIZE);
-        maxSize = (TextView) findViewById(R.id.size_range_textview_maxSIZE);
+        minSize = (TextView) findViewById(R.id.tenant_settings_size_range_2);
+        maxSize = (TextView) findViewById(R.id.tenant_settings_size_range_4);
         sizeRange = (RangeBar) findViewById(R.id.rangebar_size_range);
 
         //TODO AREA
 
-        purposeCommunityRadioGroup = (RadioGroup) findViewById(R.id.purposeCommunityRadioGroup);
-        yesPurposeCommunityRadioButton = (RadioButton) findViewById(R.id.necessaryPCRadioButton);
-        noPurposeCommunityRadioButton = (RadioButton) findViewById(R.id.notNecessaryPCRadioButton);
+        purposeCommunityRadioGroup = (RadioGroup) findViewById(R.id.purposeCommunity_RadioGroup);
+        yesPurposeCommunityRadioButton = (RadioButton) findViewById(R.id.purposeCommunityYES_RadioButton);
+        noPurposeCommunityRadioButton = (RadioButton) findViewById(R.id.purposeCommunityNO_RadioButton);
 
-        smokingApartmentRadioGroup = (RadioGroup) findViewById(R.id.smoker_apartment_RadioGroup);
-        yesSmokingApartmentRadioButton = (RadioButton) findViewById(R.id.necessarySARadioButton);
-        noSmokingApartmentRadioButton = (RadioButton) findViewById(R.id.notNecessarySARadioButton);
+        smokingApartmentRadioGroup = (RadioGroup) findViewById(R.id.smokingApartment_RadioGroup);
+        yesSmokingApartmentRadioButton = (RadioButton) findViewById(R.id.smokingApartmentYES_RadioButton);
+        noSmokingApartmentRadioButton = (RadioButton) findViewById(R.id.smokingApartmentNO_RadioButton);
 
-        balconyRadioGroup = (RadioGroup) findViewById(R.id.balconyRadioGroup);
-        yesBalconyRadioButton = (RadioButton) findViewById(R.id.necessaryBRadioButton);
-        noBalconyRadioButton = (RadioButton) findViewById(R.id.notNecessaryBRadioButton);
+        balconyRadioGroup = (RadioGroup) findViewById(R.id.balcony_RadioGroup);
+        yesBalconyRadioButton = (RadioButton) findViewById(R.id.balconyYES_RadioButton);
+        noBalconyRadioButton = (RadioButton) findViewById(R.id.balconyNO_RadioButton);
 
-        internetRadioGroup = (RadioGroup) findViewById(R.id.internetRadioGroup);
-        yesInternetRadioButton = (RadioButton) findViewById(R.id.internetYESRadioButton);
-        noInternetRadioButton = (RadioButton) findViewById(R.id.internetNORadioButton);
+        internetRadioGroup = (RadioGroup) findViewById(R.id.internet_RadioGroup);
+        yesInternetRadioButton = (RadioButton) findViewById(R.id.internetYES_RadioButton);
+        noInternetRadioButton = (RadioButton) findViewById(R.id.internetNO_RadioButton);
 
-        cabelTVRadioGroup = (RadioGroup) findViewById(R.id.cabelTVRadioGroup);
-        yesCabelTVRadioButton = (RadioButton) findViewById(R.id.cabelTVYESRadioButton);
-        noCabelTVRadioButton = (RadioButton) findViewById(R.id.cableTVNORadioButton);
+        cabelTVRadioGroup = (RadioGroup) findViewById(R.id.tv_RadioGroup);
+        yesCabelTVRadioButton = (RadioButton) findViewById(R.id.tvYES_RadioButton);
+        noCabelTVRadioButton = (RadioButton) findViewById(R.id.tvNO_RadioButton);
 
-        washingMashineRadioGroup = (RadioGroup) findViewById(R.id.washingMashineRadioGroup);
-        yesWashingMashineRadioButton = (RadioButton) findViewById(R.id.washingMashineYESRadioButton);
-        noWashingMashineRadioButton = (RadioButton) findViewById(R.id.washingMashineNORadioButton);
+        washingMashineRadioGroup = (RadioGroup) findViewById(R.id.washingMashine_RadioGroup);
+        yesWashingMashineRadioButton = (RadioButton) findViewById(R.id.washingMashineYES_RadioButton);
+        noWashingMashineRadioButton = (RadioButton) findViewById(R.id.washingMashineNO_RadioButton);
 
-        dryerRadioGroup = (RadioGroup) findViewById(R.id.dryerRadioGroup);
-        yesDryerRadioButton = (RadioButton) findViewById(R.id.dryerYESRadioButton);
-        noDryerRadioButton = (RadioButton) findViewById(R.id.dryerNORadioButton);
+        dryerRadioGroup = (RadioGroup) findViewById(R.id.dryer_RadioGroup);
+        yesDryerRadioButton = (RadioButton) findViewById(R.id.dryerYES_RadioButton);
+        noDryerRadioButton = (RadioButton) findViewById(R.id.dryerNO_RadioButton);
 
-        bathTubeRadioGroup = (RadioGroup) findViewById(R.id.bathTubeRadioGroup);
-        yesBathTubeRadioButton = (RadioButton) findViewById(R.id.bathTubeYESRadioButton);
-        noBathTubeButton = (RadioButton) findViewById(R.id.bathTubeNORadioButton);
+        bathTubeRadioGroup = (RadioGroup) findViewById(R.id.bathTube_RadioGroup);
+        yesBathTubeRadioButton = (RadioButton) findViewById(R.id.bathTubeYES_RadioButton);
+        noBathTubeButton = (RadioButton) findViewById(R.id.bathTubeNO_RadioButton);
 
-        petsRadioGroup = (RadioGroup) findViewById(R.id.petsRadioGroup);
-        yesPetsRadioButton = (RadioButton) findViewById(R.id.petsYESRadioButton);
-        noPetsRadioButton = (RadioButton) findViewById(R.id.petsNORadioButton);
+        petsRadioGroup = (RadioGroup) findViewById(R.id.pets_RadioGroup);
+        yesPetsRadioButton = (RadioButton) findViewById(R.id.petsYES_RadioButton);
+        noPetsRadioButton = (RadioButton) findViewById(R.id.petsNO_RadioButton);
 
         profileDoneButton = (Button) findViewById(R.id.done_2_tenant_profile);
 

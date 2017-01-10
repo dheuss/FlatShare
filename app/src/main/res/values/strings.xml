@@ -71,6 +71,10 @@
     <string name="apartment_roommates">Roommates:</string>
     <string name="create_roommate_qr_code_button">Generate Roommate QR Code</string>
     <string name="tenant_profil_string">In this section you should give us some more information about you, so that we can find the perfect apartment for you!</string>
+    <string name="tenant_settings_description">Here we would like to know more abour you! We would like that you tell us some of your preferances, so we can search the perfect apartment for you!</string>
+    <string name="price_range_info">Please tell us something about your budget:</string>
+    <string name="size_apartment">How big should your room be:</string>
+    <string name="area_apartment">Where do you want to live?</string>
 
     <string-array name="occupation">
         <item>Student</item>

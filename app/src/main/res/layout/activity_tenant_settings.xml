@@ -3,470 +3,550 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_tenant_settings"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.flatshare.presentation.ui.activities.profile.TenantSettingsActivity"
-    android:background="@color/windowBackground">
+    android:layout_height="wrap_content"
+    android:background="@color/windowBackground"
+    tools:context="com.flatshare.presentation.ui.activities.profile.TenantSettingsActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/initial_tenant_setting"
+            android:id="@+id/tenant_setting_inital"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginTop="@dimen/marginTop"
             android:text="@string/create_your_tenant_setting"
             android:textAlignment="center"
-            android:textSize="30dp"
             android:textColor="@color/text"
-            android:layout_marginTop="@dimen/marginTop"
-            android:layout_marginLeft="@dimen/marginLeft"/>
+            android:textSize="30dp" />
 
         <TextView
-            android:id="@+id/price_range_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/price_range"
-            android:layout_marginTop="@dimen/marginTop"
+            android:id="@+id/tenant_settings_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tenant_setting_inital"
             android:layout_marginLeft="@dimen/marginLeft"
-            android:textSize="15dp"
-            android:layout_below="@+id/initial_tenant_setting"
-            android:textColor="@color/text" />
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:gravity="center"
+            android:text="@string/tenant_settings_description" />
 
         <TextView
-            android:id="@+id/price_range_textview_minPRICE"
+            android:id="@+id/tenant_settings_price_range_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tenant_settings_info"
+            android:layout_marginLeft="@dimen/marginTop"
+            android:layout_marginRight="@dimen/marginTop"
+            android:layout_marginTop="@dimen/marginTop"
+            android:text="@string/price_range_info" />
+
+        <TextView
+            android:id="@+id/tenant_settings_price_range_1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@id/price_range_textview"
+            android:layout_below="@+id/tenant_settings_price_range_info"
             android:layout_marginLeft="@dimen/marginLeft"
-            android:text=""
+            android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
-            android:textSize="15dp"
-            android:layout_below="@id/initial_tenant_setting"
-            android:textColor="@color/text"/>
+            android:text="My price range is from " />
 
         <TextView
-            android:id="@+id/price_range_textview_TO"
+            android:id="@+id/tenant_settings_price_range_2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@id/price_range_textview_minPRICE"
-            android:layout_marginLeft="30dp"
-            android:text="to"
+            android:layout_below="@id/tenant_settings_price_range_info"
             android:layout_marginTop="@dimen/marginTop"
-            android:textSize="15dp"
-            android:layout_below="@id/initial_tenant_setting"
-            android:textColor="@color/text"/>
+            android:layout_toRightOf="@+id/tenant_settings_price_range_1"
+            android:text="0"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/price_range_textview_maxPRICE"
+            android:id="@+id/tenant_settings_price_range_3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@id/price_range_textview_TO"
-            android:layout_marginLeft="30dp"
-            android:text=""
+            android:layout_below="@id/tenant_settings_price_range_info"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
-            android:textSize="15dp"
-            android:layout_below="@id/initial_tenant_setting"
-            android:textColor="@color/text"/>
+            android:layout_toRightOf="@id/tenant_settings_price_range_2"
+            android:text="€ to" />
 
-        <com.appyvet.rangebar.RangeBar
-            xmlns:custom="http://schemas.android.com/apk/res-auto"
+        <TextView
+            android:id="@+id/tenant_settings_price_range_4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tenant_settings_price_range_info"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_toRightOf="@id/tenant_settings_price_range_3"
+            android:text="0"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tenant_settings_price_range_5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tenant_settings_price_range_info"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_toRightOf="@id/tenant_settings_price_range_4"
+            android:text="€" />
+
+        <com.appyvet.rangebar.RangeBar xmlns:custom="http://schemas.android.com/apk/res-auto"
             android:id="@+id/rangebar_price_range"
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            custom:tickStart="300"
-            custom:tickInterval="50"
-            custom:tickEnd="2500"
-            custom:selectorSize="4dp"
-            android:layout_below="@+id/price_range_textview"
+            android:layout_below="@+id/tenant_settings_price_range_1"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
             custom:connectingLineColor="@color/colorPrimary"
             custom:pinColor="@color/colorPrimary"
+            custom:pinRadius="17.5dp"
             custom:rangeBarColor="@color/colorPrimary"
             custom:selectorColor="@color/colorPrimary"
-            android:layout_marginTop="@dimen/marginTop"
-            android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight"/>
+            custom:selectorSize="5dp"
+            custom:tickEnd="1200"
+            custom:tickInterval="50"
+            custom:tickStart="300" />
 
         <TextView
-            android:id="@+id/size_range_textview"
-            android:layout_width="wrap_content"
+            android:id="@+id/size_apartment_0"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/size_range"
-            android:layout_marginTop="20dp"
-            android:textSize="15dp"
-            android:layout_below="@+id/rangebar_price_range"
-            android:textColor="@color/text"/>
-
-        <TextView
-            android:id="@+id/size_range_textview_minSIZE"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@id/size_range_textview"
-            android:layout_marginLeft="20dp"
-            android:text=""
-            android:layout_marginTop="20dp"
-            android:textSize="15dp"
-            android:layout_below="@id/rangebar_price_range" />
-
-        <TextView
-            android:id="@+id/size_range_textview_TO"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@id/size_range_textview_minSIZE"
-            android:layout_marginLeft="30dp"
-            android:text="to"
-            android:layout_marginTop="20dp"
-            android:textSize="15dp"
             android:layout_below="@id/rangebar_price_range"
-            android:textColor="@color/text"/>
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:text="@string/size_apartment" />
 
         <TextView
-            android:id="@+id/size_range_textview_maxSIZE"
+            android:id="@+id/tenant_settings_size_range_1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@id/size_range_textview_TO"
-            android:layout_marginLeft="30dp"
-            android:text=""
-            android:layout_marginTop="20dp"
-            android:textSize="15dp"
-            android:layout_below="@id/rangebar_price_range"
-            android:textColor="@color/text"/>
+            android:layout_below="@+id/size_apartment_0"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:text="The room size should be from " />
 
-        <com.appyvet.rangebar.RangeBar
-            xmlns:custom="http://schemas.android.com/apk/res-auto"
+        <TextView
+            android:id="@+id/tenant_settings_size_range_2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/size_apartment_0"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_toRightOf="@+id/tenant_settings_size_range_1"
+            android:text="0"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tenant_settings_size_range_3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/size_apartment_0"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_toRightOf="@id/tenant_settings_size_range_2"
+            android:text="qm to" />
+
+        <TextView
+            android:id="@+id/tenant_settings_size_range_4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/size_apartment_0"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_toRightOf="@id/tenant_settings_size_range_3"
+            android:text="0"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tenant_settings_size_range_5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/size_apartment_0"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_toRightOf="@id/tenant_settings_size_range_4"
+            android:text="qm" />
+
+        <com.appyvet.rangebar.RangeBar xmlns:custom="http://schemas.android.com/apk/res-auto"
             android:id="@+id/rangebar_size_range"
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            custom:tickStart="15"
-            custom:tickInterval="5"
-            custom:tickEnd="60"
-            android:layout_below="@+id/size_range_textview"
+            android:layout_below="@+id/tenant_settings_size_range_5"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
             custom:connectingLineColor="@color/colorPrimary"
             custom:pinColor="@color/colorPrimary"
+            custom:pinRadius="17.5dp"
             custom:rangeBarColor="@color/colorPrimary"
-            custom:selectorColor="@color/colorPrimary"/>
+            custom:selectorColor="@color/colorPrimary"
+            custom:selectorSize="5dp"
+            custom:tickEnd="30"
+            custom:tickInterval="1"
+            custom:tickStart="12" />
 
         <TextView
-            android:id="@+id/area_textview"
-            android:layout_width="wrap_content"
+            android:id="@+id/area_0"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/area"
-            android:layout_marginTop="20dp"
-            android:textSize="15dp"
-            android:layout_below="@+id/rangebar_size_range"
-            android:textColor="@color/text"/>
+            android:layout_below="@id/rangebar_size_range"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:text="@string/area_apartment" />
 
-        <TextView
-            android:id="@+id/purpose_community_textview"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/LinearLayoutPurposeCommunity"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/purpose_community"
-            android:layout_marginTop="20dp"
-            android:textSize="15dp"
-            android:layout_below="@+id/area_textview"
-            android:textColor="@color/text"/>
+            android:layout_below="@id/area_0"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight">
 
-        <RadioGroup
-            android:id="@+id/purposeCommunityRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/area_textview"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/necessaryPCRadioButton"
+            <TextView
+                android:id="@+id/purpose_community_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_up"/>
+                android:layout_gravity="center"
+                android:text="@string/purpose_community" />
 
-            <RadioButton
-                android:id="@+id/notNecessaryPCRadioButton"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/purposeCommunity_RadioGroup"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text"
-                android:drawableRight="@drawable/thumb_down"/>
-        </RadioGroup>
+                android:gravity="right"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/smoking_apartment_textview"
-            android:layout_width="wrap_content"
+                <RadioButton
+                    android:id="@+id/purposeCommunityYES_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up" />
+
+                <RadioButton
+                    android:id="@+id/purposeCommunityNO_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_down" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutSmokingApartment"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/smoking_apartment"
-            android:layout_marginTop="20dp"
-            android:textSize="15dp"
-            android:layout_below="@id/purpose_community_textview"
-            android:textColor="@color/text"/>
+            android:layout_below="@+id/LinearLayoutPurposeCommunity"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight">
 
-        <RadioGroup
-            android:id="@+id/smoker_apartment_RadioGroup"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/smoking_apartment_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/smoking_apartment" />
+
+            <RadioGroup
+                android:id="@+id/smokingApartment_RadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/smokingApartmentYES_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up" />
+
+                <RadioButton
+                    android:id="@+id/smokingApartmentNO_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_down" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutBalcony"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/purposeCommunityRadioGroup"
-            android:layout_marginTop="7dp"
-            android:orientation="horizontal">
+            android:layout_below="@+id/LinearLayoutSmokingApartment"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight">
 
-            <RadioButton
-                android:id="@+id/necessarySARadioButton"
+            <TextView
+                android:id="@+id/balcony_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_up"/>
+                android:layout_gravity="center"
+                android:text="@string/balcony" />
 
-            <RadioButton
-                android:id="@+id/notNecessarySARadioButton"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/balcony_RadioGroup"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_down"/>
-        </RadioGroup>
+                android:gravity="right"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/balcony_textview"
-            android:layout_width="wrap_content"
+                <RadioButton
+                    android:id="@+id/balconyYES_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up" />
+
+                <RadioButton
+                    android:id="@+id/balconyNO_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_down" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutInternet"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/balcony"
-            android:layout_marginTop="20dp"
-            android:textSize="15dp"
-            android:layout_below="@id/smoking_apartment_textview"
-            android:textColor="@color/text"/>
+            android:layout_below="@id/LinearLayoutBalcony"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight">
 
-        <RadioGroup
-            android:id="@+id/balconyRadioGroup"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/internet_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/internet" />
+
+            <RadioGroup
+                android:id="@+id/internet_RadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/internetYES_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up" />
+
+                <RadioButton
+                    android:id="@+id/internetNO_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_down" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutCabelTV"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/smoker_apartment_RadioGroup"
-            android:layout_marginTop="7dp"
-            android:orientation="horizontal">
+            android:layout_below="@+id/LinearLayoutInternet"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight">
 
-            <RadioButton
-                android:id="@+id/necessaryBRadioButton"
+            <TextView
+                android:id="@+id/tv_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_up"/>
+                android:layout_gravity="center"
+                android:text="@string/cabeltv" />
 
-            <RadioButton
-                android:id="@+id/notNecessaryBRadioButton"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/tv_RadioGroup"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_down"/>
+                android:gravity="right"
+                android:orientation="horizontal">
 
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/tvYES_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up" />
 
-        <TextView
-            android:id="@+id/internet_textview"
-            android:layout_width="wrap_content"
+                <RadioButton
+                    android:id="@+id/tvNO_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_down" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutWashingMashine"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/internet"
-            android:layout_marginTop="20dp"
-            android:textSize="15dp"
-            android:layout_below="@id/balcony_textview"
-            android:textColor="@color/text"/>
+            android:layout_below="@id/LinearLayoutCabelTV"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight">
 
-        <RadioGroup
-            android:id="@+id/internetRadioGroup"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/wahsing_maschine_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/washing_machine" />
+
+            <RadioGroup
+                android:id="@+id/washingMashine_RadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/washingMashineYES_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up" />
+
+                <RadioButton
+                    android:id="@+id/washingMashineNO_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_down" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutDryer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/balconyRadioGroup"
-            android:layout_marginTop="7dp"
-            android:orientation="horizontal">
+            android:layout_below="@id/LinearLayoutWashingMashine"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight">
 
-            <RadioButton
-                android:id="@+id/internetYESRadioButton"
+            <TextView
+                android:id="@+id/dryer_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_up"/>
+                android:layout_gravity="center"
+                android:text="@string/dryer" />
 
-            <RadioButton
-                android:id="@+id/internetNORadioButton"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/dryer_RadioGroup"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_down"/>
+                android:gravity="right"
+                android:orientation="horizontal">
 
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/dryerYES_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up" />
 
-        <TextView
-            android:id="@+id/cabel_tv_textview"
-            android:layout_width="wrap_content"
+                <RadioButton
+                    android:id="@+id/dryerNO_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_down" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutBathtube"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cabeltv"
-            android:layout_marginTop="20dp"
-            android:textSize="15dp"
-            android:layout_below="@id/internet_textview"
-            android:textColor="@color/text"/>
+            android:layout_below="@+id/LinearLayoutDryer"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight">
 
-        <RadioGroup
-            android:id="@+id/cabelTVRadioGroup"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/batchtube_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/bathtube" />
+
+            <RadioGroup
+                android:id="@+id/bathTube_RadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/bathTubeYES_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up" />
+
+                <RadioButton
+                    android:id="@+id/bathTubeNO_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_down" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutPets"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/internetRadioGroup"
-            android:layout_marginTop="7dp"
-            android:orientation="horizontal">
+            android:layout_below="@+id/LinearLayoutBathtube"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight">
 
-            <RadioButton
-                android:id="@+id/cabelTVYESRadioButton"
+            <TextView
+                android:id="@+id/pets_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_up"/>
+                android:layout_gravity="center"
+                android:text="@string/pets" />
 
-            <RadioButton
-                android:id="@+id/cableTVNORadioButton"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/pets_RadioGroup"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_down"/>
+                android:gravity="right"
+                android:orientation="horizontal">
 
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/petsYES_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up" />
 
-        <TextView
-            android:id="@+id/washing_machine_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/washing_machine"
-            android:layout_marginTop="20dp"
-            android:textSize="15dp"
-            android:layout_below="@id/cabel_tv_textview"
-            android:textColor="@color/text"/>
-
-        <RadioGroup
-            android:id="@+id/washingMashineRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/cabelTVRadioGroup"
-            android:layout_marginTop="7dp"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/washingMashineYESRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_up"/>
-
-            <RadioButton
-                android:id="@+id/washingMashineNORadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_down"/>
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/dryer_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dryer"
-            android:layout_marginTop="20dp"
-            android:textSize="15dp"
-            android:layout_below="@id/washing_machine_textview"
-            android:textColor="@color/text"/>
-
-        <RadioGroup
-            android:id="@+id/dryerRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/washing_machine_textview"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/dryerYESRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_up"/>
-
-            <RadioButton
-                android:id="@+id/dryerNORadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_down"/>
-
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/bathtube_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bathtube"
-            android:layout_marginTop="20dp"
-            android:textSize="15dp"
-            android:layout_below="@id/dryer_textview"
-            android:textColor="@color/text"/>
-
-        <RadioGroup
-            android:id="@+id/bathTubeRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/dryer_textview"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/bathTubeYESRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_up"/>
-
-            <RadioButton
-                android:id="@+id/bathTubeNORadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_down"/>
-
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/pets_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/pets"
-            android:layout_marginTop="20dp"
-            android:textSize="15dp"
-            android:layout_below="@id/bathtube_textview"
-            android:textColor="@color/text"/>
-
-        <RadioGroup
-            android:id="@+id/petsRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/bathtube_textview"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/petsYESRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_up"/>
-
-            <RadioButton
-                android:id="@+id/petsNORadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_down"/>
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/petsNO_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_down" />
+            </RadioGroup>
+        </LinearLayout>
 
         <!-- Save Button -->
-
         <Button
             android:id="@+id/done_2_tenant_profile"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/LinearLayoutPets"
+            android:layout_marginBottom="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/colorPrimaryDark"
             android:hint="@string/done_1_tenant_profile"
             android:textColor="@color/buttonText"
             android:textColorHint="@color/buttonText"
-            android:layout_marginTop="20dp"
-            android:background="@color/colorPrimaryDark"
-            android:textStyle="bold"
-            android:layout_below="@id/pets_textview"/>
+            android:textStyle="bold" />
 
     </RelativeLayout>
 </ScrollView>
