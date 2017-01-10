@@ -1,7 +1,7 @@
-package com.flatshare.presentation.presenters.chat.impl;
+package com.flatshare.presentation.presenters.matchingoverview.chat.impl;
 
 import com.flatshare.domain.MainThread;
-import com.flatshare.presentation.presenters.chat.ChatPresenter;
+import com.flatshare.presentation.presenters.matchingoverview.chat.ChatPresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 
 /**

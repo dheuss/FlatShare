@@ -1,4 +1,4 @@
-package com.flatshare.presentation.presenters.chat;
+package com.flatshare.presentation.presenters.matchingoverview.calendar;
 
 import com.flatshare.presentation.presenters.base.BasePresenter;
 import com.flatshare.presentation.ui.BaseView;

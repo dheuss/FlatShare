@@ -1,4 +1,4 @@
-package com.flatshare.presentation.ui.activities.matchingoverview.calender;
+package com.flatshare.presentation.ui.activities.matchingoverview.calendar;
 
 
 import android.app.DatePickerDialog;
@@ -14,8 +14,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.flatshare.R;
-import com.flatshare.presentation.presenters.chat.CalendarPresenter;
-import com.flatshare.presentation.presenters.chat.impl.CalendarPresenterImpl;
+import com.flatshare.presentation.presenters.matchingoverview.calendar.CalendarPresenter;
+import com.flatshare.presentation.presenters.matchingoverview.calendar.impl.CalendarPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.threading.MainThreadImpl;

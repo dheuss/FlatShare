@@ -1,8 +1,8 @@
-package com.flatshare.presentation.presenters.chat.impl;
+package com.flatshare.presentation.presenters.matchingoverview.calendar.impl;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
-import com.flatshare.presentation.presenters.chat.CalendarPresenter;
+import com.flatshare.presentation.presenters.matchingoverview.calendar.CalendarPresenter;
 
 /**
  * Created by Sandro on 07.01.17.

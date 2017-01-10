@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.flatshare.R;
-import com.flatshare.presentation.presenters.chat.ChatPresenter;
-import com.flatshare.presentation.presenters.chat.impl.ChatPresenterImpl;
+import com.flatshare.presentation.presenters.matchingoverview.chat.ChatPresenter;
+import com.flatshare.presentation.presenters.matchingoverview.chat.impl.ChatPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.threading.MainThreadImpl;
