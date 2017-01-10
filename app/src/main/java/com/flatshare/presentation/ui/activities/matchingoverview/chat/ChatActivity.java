@@ -10,6 +10,7 @@ import com.flatshare.presentation.presenters.matchingoverview.chat.ChatPresenter
 import com.flatshare.presentation.presenters.matchingoverview.chat.impl.ChatPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
+import com.flatshare.presentation.ui.activities.matchingoverview.calendar.CalendarActivity;
 import com.flatshare.threading.MainThreadImpl;
 
 public class ChatActivity extends AbstractActivity implements ChatPresenter.View {
@@ -49,5 +50,9 @@ public class ChatActivity extends AbstractActivity implements ChatPresenter.View
     @Override
     public void showError(String message) {
 
+    }
+
+    public void calendarView(View view) {
+        startActivity(new Intent(ChatActivity.this, CalendarActivity.class));
     }
 }

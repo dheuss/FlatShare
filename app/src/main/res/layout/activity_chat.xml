@@ -16,6 +16,17 @@
             android:background="@drawable/couch_button"/>
     </LinearLayout>
     <LinearLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="top|right">
+        <Button
+            android:text="Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="calendarView"
+            android:id="@+id/button2" />
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="50dp">
@@ -30,4 +41,5 @@
             android:textSize="20dp"
             android:textColor="@color/text"/>
     </LinearLayout>
+
 </FrameLayout>
