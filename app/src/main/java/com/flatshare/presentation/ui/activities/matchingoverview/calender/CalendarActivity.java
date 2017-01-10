@@ -1,14 +1,16 @@
 package com.flatshare.presentation.ui.activities.matchingoverview.calender;
 
 
-
-
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.flatshare.R;
@@ -19,16 +21,21 @@ import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.threading.MainThreadImpl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
-
 
 public class CalendarActivity extends AbstractActivity implements CalendarPresenter.View {
 
     private CalendarPresenter mPresenter;
-    private CalendarView calendarView;
     private ImageButton couchChatButton;
+
+
+    private Calendar calendar;
     private TextView dateDisplay;
-    List<Long> dateList = new ArrayList<Long>();
+    private int year, month, day, hour, min;
+
+    List<String> dateList = new ArrayList<String>();
+    List<String> timeList = new ArrayList<String>();
 
     private static final String TAG = "CalenderAct";
 
@@ -47,35 +54,74 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             }
         });
 
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        hour = calendar.get(Calendar.HOUR_OF_DAY);
+        min = calendar.get(Calendar.MINUTE);
 
-        calendarView.setFirstDayOfWeek(2);
 
-        calendarView.setMinDate(System.currentTimeMillis() - 1000);
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
+        showDate(year, month+1, day);
 
-        dateDisplay.setText("Date: ");
+    }
 
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(CalendarView calendarView, int year, int month, int day) {
+    @SuppressWarnings("deprecation")
+    public void setDate(View view) {
+        showDialog(999);
+    }
 
-                //for (int i = 0; i <= dateList.size(); i++){
-                //    if (dateList.get(i) != calendarView.getDate()){
-                        dateList.add(calendarView.getDate());
-                        //calendarView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                //    }
-                //}
+    @SuppressWarnings("deprecation")
+    public void setTime(View view) {
+        showDialog(888);
+    }
 
-                dateDisplay.setText("Date: " + day + " / " + month + " / " + year);
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        // TODO Auto-generated method stub
+        if (id == 999) {
+            return new DatePickerDialog(this, datePickerListener, year, month, day);
+        }else if(id == 888){
+            return new TimePickerDialog(this, timePickerListener, year, month, true);
+        }
+        return null;
+    }
 
-                Toast.makeText(getApplicationContext(), "Selected Date:\n" + "Day = " + day + "\n" + "Month = " + month + "\n" + "Year = " + year, Toast.LENGTH_LONG).show();
-            }
-        });
+    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker datePicker1, int year, int month, int day) {
+            // TODO Auto-generated method stub
+
+            // Toast.makeText(getApplicationContext(), "ca: " + datePicker1, Toast.LENGTH_SHORT).show();
+            showDate(year, month+1, day);
+        }
+    };
+
+    private TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker timePicker1, int hour, int min) {
+            // TODO Auto-generated method stub
+
+            // Toast.makeText(getApplicationContext(), "ca: " + datePicker1, Toast.LENGTH_SHORT).show();
+            showDate(hour, min, 999);
+        }
+    };
+
+
+    private void showDate(int arg1, int arg2, int arg3) {
+        if(arg3 != 999){
+            dateList.add(arg3 + "/" + arg2 + "/" + arg1);
+        }else{
+            timeList.add(arg1 + ":" + arg2);
+        }
+
+        dateDisplay.setText(dateList.toString() + " " + timeList.toString());
     }
 
 
     private void bindView() {
         couchChatButton = (ImageButton)findViewById(R.id.couchChatBtn);
-        calendarView = (CalendarView) findViewById(R.id.calendarView);
         dateDisplay = (TextView) findViewById(R.id.date_display);
     }
 
@@ -86,7 +132,5 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     }
 
     @Override
-    public void showError(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-    }
+    public void showError(String message) {Toast.makeText(this, message, Toast.LENGTH_LONG).show();}
 }

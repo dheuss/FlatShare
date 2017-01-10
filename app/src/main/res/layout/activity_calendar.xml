@@ -9,7 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_gravity="top|left">
+        android:layout_gravity="top|left"
+        android:orientation="vertical">
         <ImageButton
             android:id="@+id/couchChatBtn"
             android:layout_width="wrap_content"
@@ -17,12 +18,10 @@
             android:background="@drawable/logo_neu"/>
     </LinearLayout>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical"
-        android:scrollbars="vertical">
-
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
@@ -30,23 +29,46 @@
             android:text="Choose a date for an appointment to view a flat:"
             android:textColor="@color/text"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="70dp"
 
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
+        android:orientation="horizontal"><!-- android:layout_gravity="top|left" -->
+        <Button
+            android:id="@+id/setDate"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:onClick="setDate"
+            android:text="Set Date"
             android:background="@drawable/background_calendar"/>
+        <View
+            android:layout_width="35dp"
+            android:layout_height="match_parent"></View>
+        <Button
+            android:id="@+id/setTime"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:onClick="setTime"
+            android:text="Set Time"
+            android:background="@drawable/background_calendar"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="120dp"
+        android:orientation="vertical"
+        android:scrollbars="vertical">
 
         <TextView
             android:id="@+id/date_display"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Calendar View Date Display"
-            android:textColor="@color/colorPrimary"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
+            android:textColor="@color/text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:background="@drawable/background_calendar"/>
     </LinearLayout>
 
 </FrameLayout>

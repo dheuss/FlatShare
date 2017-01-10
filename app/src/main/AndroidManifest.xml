@@ -28,12 +28,7 @@
 
         <!--LoginActivity always starts-->
         <activity android:name=".presentation.ui.activities.auth.login.LoginActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <!--All other Activities, all Activities are in Portrait-Mode-->
         <activity android:name=".presentation.ui.activities.matching.MatchingActivity"
             android:screenOrientation="portrait"/>
@@ -58,7 +53,13 @@
         <activity android:name=".presentation.ui.activities.settings.SettingsActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".presentation.ui.activities.matchingoverview.calender.CalendarActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".presentation.ui.activities.matching.RoommateQRActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".presentation.ui.activities.matching.QRCodeReaderActivity"
