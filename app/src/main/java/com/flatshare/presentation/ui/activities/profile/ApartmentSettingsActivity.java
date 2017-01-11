@@ -142,7 +142,7 @@ public class ApartmentSettingsActivity extends AbstractActivity implements Apart
 
     @Override
     public void changeToMatchingActivity() {
-        Log.d(TAG, "success! changed to TenantSettings!");
+        Log.d(TAG, "success! changed to MatchingActivity!");
         Intent intent = new Intent(this, MatchingActivity.class);
         startActivity(intent);
     }
