@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
@@ -33,7 +34,6 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
     private ImageButton rejectBtn;
     private ImageButton profileBtn;
     private ImageButton chatBtn;
-    private ImageButton cardViewInfoButton;
 
     private static final String TAG = "MatchingActivity";
 
@@ -89,13 +89,6 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
                 mSwipeView.doSwipe(true);
             }
         });
-
-        cardViewInfoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                detailedInfoCard();
-            }
-        });
     }
 
     @Override
@@ -112,8 +105,10 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
 
         rejectBtn = (ImageButton) findViewById(R.id.rejectBtn);
         acceptBtn = (ImageButton) findViewById(R.id.acceptBtn);
+    }
 
-        cardViewInfoButton = (ImageButton) findViewById(R.id.cardViewInfoButton);
+    public void cardClick(View view){
+        Toast.makeText(MatchingActivity.this, "CARD Clicked", Toast.LENGTH_SHORT).show();
     }
 
     public void detailedInfoCard(){

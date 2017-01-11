@@ -1,10 +1,12 @@
 package com.flatshare.presentation.ui.activities.matching;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
@@ -22,7 +24,7 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeOutState;
  */
 
 @Layout(R.layout.activity_matching_card)
-public class MatchingActivity_ProfileCard {
+public class MatchingActivity_ProfileCard{
     @View(R.id.profileImageView)
     private ImageView profileImageView;
 
@@ -44,7 +46,7 @@ public class MatchingActivity_ProfileCard {
 
     @Resolve
     private void onResolved(){
-        //Glide.with(mContext).load(mProfile.getImageUrl()).into(profileImageView);
+        //Glide.with(mContext).load(mProfile.getImageIds()).into(profileImageView);
         nameAgeTxt.setText("Location: " + mProfile.getApartmentLocation().city + ", " + mProfile.getApartmentLocation().district);
         locationNameTxt.setText("Price: " + mProfile.getPrice() + "€");
     }

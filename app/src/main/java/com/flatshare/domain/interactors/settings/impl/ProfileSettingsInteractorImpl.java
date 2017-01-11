@@ -60,12 +60,12 @@ public class ProfileSettingsInteractorImpl extends AbstractInteractor implements
         System.out.println("USERID --- " + userId);
         System.out.println("FIREBASEUSERID --- " + firebaserUserId);
         System.out.println("GETROOTPATH --- " + databaseRoot.getTenantProfileNode(tId).getRootPath());
-        System.out.println("GETTENANTPROFILID --- " + databaseRoot.getUserProfileNode(userId).getTenantProfileId().toString());
+        System.out.println("GETTENANTPROFILID --- " + databaseRoot.getUserProfileNode(userId).getTenantProfileId());
         System.out.println("DATABASEROOT --- " + databaseRoot.getTenantProfileNode(tId).toString());
         System.out.println("--- " + databaseRoot.getTenantProfileNode(tId));
+        System.out.println("FILTERSETTINGS ---     " + databaseRoot.getTenantProfileNode(tId));
         ProfileSettingsInteractorImpl.this.notifySuccess();
 
-        //ProfileSettingsInteractorImpl.this.notifySuccess();
 //        String tId = mDatabase.child(databaseRoot.getTenantProfiles()).push().getKey();
 //
 //        Map<String, Object> map = new HashMap<>();
