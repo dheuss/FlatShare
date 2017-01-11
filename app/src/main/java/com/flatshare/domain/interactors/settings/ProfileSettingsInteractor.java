@@ -1,15 +1,14 @@
-package com.flatshare.domain.interactors.profile;
+package com.flatshare.domain.interactors.settings;
 
 import com.flatshare.domain.interactors.base.Interactor;
 
 /**
- * Created by Arber on 10/12/2016.
+ * Created by david on 11.01.2017.
  */
 
-public interface ProfileInteractor extends Interactor {
+public interface ProfileSettingsInteractor extends Interactor {
     interface Callback {
         void onSentSuccess(int classificationId);
         void onSentFailure(String error);
     }
-
 }

@@ -55,7 +55,6 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
 
     @Override
     public void onSentSuccess(int classificationId) {
-
         mView.hideProgress();
         mView.changeToTenantSettings();
     }
@@ -69,19 +68,15 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
 
     @Override
     public void sendProfile(TenantProfile tenantProfile) {
-
         mView.showProgress();
         userState.setTenantProfile(tenantProfile);
         ProfileInteractor interactor = new TenantProfileInteractorImpl(mMainThread, this, tenantProfile);
         interactor.execute();
-
     }
 
     @Override
     public void uploadImage(Uri uri) {
-
 //        mView.showProgress();
-
         MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, true, MediaType.IMAGE, uri, userState.getTenantId());
         mediaInteractor.execute();
     }
@@ -98,7 +93,6 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
 
     @Override
     public void onUploadSuccess() {
-
         mView.uploadSuccess();
     }
 }

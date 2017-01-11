@@ -9,9 +9,11 @@ import com.flatshare.presentation.ui.BaseView;
  */
 
 public interface ProfileSettingsPresenter extends BasePresenter{
+
     void changeProfile(TenantProfile tenantProfile);
+
     interface View extends BaseView {
-        void changeToTenantSettings();
+        void changeToMatchingActivity();
         void uploadSucces();
     }
 

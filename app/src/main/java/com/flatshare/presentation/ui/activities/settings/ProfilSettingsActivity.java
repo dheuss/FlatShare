@@ -95,25 +95,25 @@ public class ProfilSettingsActivity extends AbstractActivity implements ProfileS
     private void sendProfile() {
 
         String changeName = changeNameEditText.getText().toString();
-        String changeEmail = changeEmailEditText.getText().toString();
-        int changeAge = Integer.parseInt(changeAgeEditText.getText().toString());;
-        int changGender = changeGenderRadioGroup.getCheckedRadioButtonId() == changeGenderMaleRadioButton.getId() ? 0 : 1;
-        boolean changeSmoker = changeSmokerRadioGroup.getCheckedRadioButtonId() == changeSmokerYesRadioButton.getId();;
-        boolean changePets = changePetsRadioGroup.getCheckedRadioButtonId() == changePetsYesRadioButton.getId();;
-        String changeOccupation = changeOccupationSpinner.getSelectedItem().toString();;
-        String changeInfo = changeInfoEditText.getText().toString();;
-        int changeDuration = Integer.parseInt(changeDurationOfStaySpinner.getSelectedItem().toString());;
+//        String changeEmail = changeEmailEditText.getText().toString();
+//        int changeAge = Integer.parseInt(changeAgeEditText.getText().toString());;
+//        int changGender = changeGenderRadioGroup.getCheckedRadioButtonId() == changeGenderMaleRadioButton.getId() ? 0 : 1;
+//        boolean changeSmoker = changeSmokerRadioGroup.getCheckedRadioButtonId() == changeSmokerYesRadioButton.getId();;
+//        boolean changePets = changePetsRadioGroup.getCheckedRadioButtonId() == changePetsYesRadioButton.getId();;
+//        String changeOccupation = changeOccupationSpinner.getSelectedItem().toString();;
+//        String changeInfo = changeInfoEditText.getText().toString();;
+//        int changeDuration = Integer.parseInt(changeDurationOfStaySpinner.getSelectedItem().toString());;
 
         TenantProfile tenantProfile = new TenantProfile();
         tenantProfile.setFirstName(changeName);
-        tenantProfile.setEmail(changeEmail);
-        tenantProfile.setAge(changeAge);
-        tenantProfile.setGender(changGender);
-        tenantProfile.setSmoker(changeSmoker);
-        tenantProfile.setPets(changePets);
-        tenantProfile.setOccupation(changeOccupation);
-        tenantProfile.setShortBio(changeInfo);
-        tenantProfile.setDurationOfStay(changeDuration);
+//        tenantProfile.setEmail(changeEmail);
+//        tenantProfile.setAge(changeAge);
+//        tenantProfile.setGender(changGender);
+//        tenantProfile.setSmoker(changeSmoker);
+//        tenantProfile.setPets(changePets);
+//        tenantProfile.setOccupation(changeOccupation);
+//        tenantProfile.setShortBio(changeInfo);
+//        tenantProfile.setDurationOfStay(changeDuration);
         mPresenter.changeProfile(tenantProfile);
     }
 
@@ -146,10 +146,11 @@ public class ProfilSettingsActivity extends AbstractActivity implements ProfileS
         saveChangesButton = (Button)findViewById(R.id.saveChangesProfileSettingsButton);
     }
 
-
     @Override
-    public void changeToTenantSettings() {
-
+    public void changeToMatchingActivity() {
+        Log.d(TAG, "success! changed to MatchingActivity!");
+        Intent intent = new Intent(this, MatchingActivity.class);
+        startActivity(intent);
     }
 
     @Override

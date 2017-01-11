@@ -2,6 +2,9 @@ package com.flatshare.presentation.presenters.settings.impl;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
+import com.flatshare.domain.interactors.profile.impl.TenantSettingsInteractorImpl;
+import com.flatshare.domain.interactors.settings.ProfileSettingsInteractor;
+import com.flatshare.domain.interactors.settings.impl.ProfileSettingsInteractorImpl;
 import com.flatshare.presentation.presenters.settings.ProfileSettingsPresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 
@@ -9,7 +12,8 @@ import com.flatshare.presentation.presenters.base.AbstractPresenter;
  * Created by david on 28.12.2016.
  */
 
-public class ProfileSettingsPresenterImpl extends AbstractPresenter implements ProfileSettingsPresenter {
+public class ProfileSettingsPresenterImpl extends AbstractPresenter implements ProfileSettingsPresenter,
+        ProfileSettingsInteractor.Callback {
 
     private ProfileSettingsPresenter.View mView;
 
@@ -45,6 +49,22 @@ public class ProfileSettingsPresenterImpl extends AbstractPresenter implements P
 
     @Override
     public void changeProfile(TenantProfile tenantProfile) {
+        mView.showProgress();
+        userState.setTenantProfile(tenantProfile);
+        ProfileSettingsInteractor interactor = new ProfileSettingsInteractorImpl(mMainThread, this, tenantProfile);
+        interactor.execute();
+    }
 
+    @Override
+    public void onSentSuccess(int classificationId) {
+        mView.hideProgress();
+        mView.changeToMatchingActivity();
+    }
+
+    @Override
+    public void onSentFailure(String error) {
+        userState.setTenantProfile(null);
+        mView.hideProgress();
+        onError(error);
     }
 }
