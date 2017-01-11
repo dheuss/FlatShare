@@ -10,7 +10,7 @@
     <string name="male">male</string>
     <string name="female">female</string>
     <string name="smoker">Smoker:</string>
-    <string name="age">age</string>
+    <string name="age">Age:</string>
     <string name="hint_firstname">firstname</string>
     <string name="done">Done!</string>
     <string name="tenant_profile_button">Create Tenant Profie</string>
@@ -19,7 +19,7 @@
     <string name="age_hint">Enter your age</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
-    <string name="gender">Gender</string>
+    <string name="gender">Gender:</string>
     <string name="internet">Internet:</string>
     <string name="washing_machine">Washing machine:</string>
     <string name="create_tenant_profile">Create Tenant Profle</string>
@@ -75,6 +75,12 @@
     <string name="price_range_info">Please tell us something about your budget:</string>
     <string name="size_apartment">How big should your room be:</string>
     <string name="area_apartment">Where do you want to live?</string>
+    <string name="update_profile">Profile Settings</string>
+    <string name="profile_settings_description">Here you can update and change your settings and your profile so that we always find the perfect apartment for your needs!</string>
+    <string name="name">Name:</string>
+    <string name="email">Email:</string>
+    <string name="info">Info:</string>
+    <string name="save_profile_settings">SAVE!</string>
 
     <string-array name="occupation">
         <item>Student</item>

@@ -1,6 +1,7 @@
 package com.flatshare.presentation.presenters.settings.impl;
 
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.presentation.presenters.settings.ProfileSettingsPresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 
@@ -39,6 +40,11 @@ public class ProfileSettingsPresenterImpl extends AbstractPresenter implements P
 
     @Override
     public void onError(String message) {
+
+    }
+
+    @Override
+    public void changeProfile(TenantProfile tenantProfile) {
 
     }
 }
