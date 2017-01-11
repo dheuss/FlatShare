@@ -240,7 +240,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/smoker" />
+                android:text="@string/pets" />
 
             <RadioGroup
                 android:id="@+id/petsApartmentSettingsRadioGroup"

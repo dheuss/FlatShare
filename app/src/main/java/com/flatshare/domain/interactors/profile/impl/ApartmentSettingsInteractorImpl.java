@@ -3,28 +3,28 @@ package com.flatshare.domain.interactors.profile.impl;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
-import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
+import com.flatshare.domain.datatypes.db.filters.ApartmentFilterSettings;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
-import com.flatshare.domain.interactors.profile.FilterSettingsInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
+import com.flatshare.domain.interactors.profile.FilterSettingsInteractor;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 /**
- * Created by Arber on 10/12/2016.
+ * Created by david on 11.01.2017.
  */
-public class TenantSettingsInteractorImpl extends AbstractInteractor implements FilterSettingsInteractor {
+public class ApartmentSettingsInteractorImpl extends AbstractInteractor implements FilterSettingsInteractor {
 
-    private static final String TAG = "TenantSettingsInt";
+    private static final String TAG = "ApartmentSettingsInteractorImpl";
     private Callback mCallback;
-    private TenantFilterSettings tenantFilterSettings;
+    private ApartmentFilterSettings apartmentFilterSettings;
 
-    public TenantSettingsInteractorImpl(MainThread mainThread, Callback callback, TenantFilterSettings tenantFilterSettings) {
+    public ApartmentSettingsInteractorImpl(MainThread mainThread, Callback callback, ApartmentFilterSettings apartmentFilterSettings) {
         super(mainThread);
         this.mCallback = callback;
-        this.tenantFilterSettings = tenantFilterSettings;
+        this.apartmentFilterSettings = apartmentFilterSettings;
     }
 
     private void notifyError(final String errorMessage) {
@@ -51,9 +51,9 @@ public class TenantSettingsInteractorImpl extends AbstractInteractor implements 
         mDatabase.child(databaseRoot.getUserProfileNode(userId).getRootPath()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                PrimaryUserProfile primaryUserProfile = dataSnapshot.getValue(PrimaryUserProfile.class);
-                String tId = primaryUserProfile.getTenantProfileId();
-                createTenantSettings(databaseRoot.getTenantProfileNode(tId).getTenantFilterSettings());
+                //PrimaryUserProfile primaryUserProfile = dataSnapshot.getValue(PrimaryUserProfile.class);
+                //String aId = primaryUserProfile.getApartmentProfileId();
+                //createApartmentSettings(databaseRoot.getApartmentProfileNode(aId).getApartmentFilterSettings());
             }
 
             @Override
@@ -63,14 +63,14 @@ public class TenantSettingsInteractorImpl extends AbstractInteractor implements 
         });
     }
 
-    private void createTenantSettings(String path) {
-        mDatabase.child(path).setValue(this.tenantFilterSettings, new DatabaseReference.CompletionListener() {
+    private void createApartmentSettings(String path) {
+        mDatabase.child(path).setValue(this.apartmentFilterSettings, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if (databaseError == null) {
-                    TenantSettingsInteractorImpl.this.notifySuccess();
+                    ApartmentSettingsInteractorImpl.this.notifySuccess();
                 } else {
-                    TenantSettingsInteractorImpl.this.notifyError(databaseError.getMessage());
+                    ApartmentSettingsInteractorImpl.this.notifyError(databaseError.getMessage());
                 }
             }
         });
