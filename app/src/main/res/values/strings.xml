@@ -92,6 +92,8 @@
     <string name="occupation_info">What should your new roommate do for a living?</string>
     <string name="duration_info">For how long do you rent this room in your living community?</string>
     <string name="setup">Setup Your Account</string>
+    <string name="apartment_info_headline">Apartment Info</string>
+    <string name="apartment_info_description">Here we are going to show you some more information about this specific living community you\'re looking at!</string>
 
     <string-array name="occupation">
         <item>Student</item>

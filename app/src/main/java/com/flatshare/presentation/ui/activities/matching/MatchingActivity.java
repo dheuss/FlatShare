@@ -108,10 +108,6 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
     }
 
     public void cardClick(View view){
-        Toast.makeText(MatchingActivity.this, "CARD Clicked", Toast.LENGTH_SHORT).show();
-    }
-
-    public void detailedInfoCard(){
         startActivity(new Intent(MatchingActivity.this, ShowDetailProfilApartmentActivity.class));
     }
 
