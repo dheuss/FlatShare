@@ -134,27 +134,27 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
     }
 
     private void bindView() {
-        firstNameEditText = (EditText) findViewById(R.id.nameText_tenant_profile_editText);
-        ageEditText = (EditText) findViewById(R.id.ageText_tenant_profile_editText);
-        emailText = (EditText) findViewById(R.id.email_tenant_profile_editText);
-        shortBioText = (EditText) findViewById(R.id.short_bio_tenant_profile_editText);
+        firstNameEditText = (EditText) findViewById(R.id.nameProfileEditText);
+        ageEditText = (EditText) findViewById(R.id.ageProfileEditText);
+        emailText = (EditText) findViewById(R.id.emailProfileEditText);
+        shortBioText = (EditText) findViewById(R.id.infoProfileEditText);
 
-        genderRadioGroup = (RadioGroup) findViewById(R.id.genderRadioGroup);
-        maleRadioButton = (RadioButton) findViewById(R.id.maleRadioButton);
-        femaleRadioButton = (RadioButton) findViewById(R.id.femaleRadioButton);
+        genderRadioGroup = (RadioGroup) findViewById(R.id.genderProfileEditTextRadioGroup);
+        maleRadioButton = (RadioButton) findViewById(R.id.genderMaleProfileRadioButton);
+        femaleRadioButton = (RadioButton) findViewById(R.id.genderFemaleProlfileButton);
 
-        smokerRadioGroup = (RadioGroup) findViewById(R.id.smokerRadioGroup);
-        smokerYesRadioButton = (RadioButton) findViewById(R.id.yesSmokerRadioButton);
-        smokerNoRadioButton = (RadioButton) findViewById(R.id.noSmokerRadioButton);
+        smokerRadioGroup = (RadioGroup) findViewById(R.id.smokerProfileRadioGroup);
+        smokerYesRadioButton = (RadioButton) findViewById(R.id.smokerYesProfileRadioButton);
+        smokerNoRadioButton = (RadioButton) findViewById(R.id.smokerNoProfileRadioButton);
 
-        petsRadioGroup = (RadioGroup) findViewById(R.id.petsRadioGroup);
-        petsYesRadioButton = (RadioButton) findViewById(R.id.yesPetsRadioButton);
-        petsNoRadioButton = (RadioButton) findViewById(R.id.noPetsRadioButton);
+        petsRadioGroup = (RadioGroup) findViewById(R.id.petsProfileRadioGroup);
+        petsYesRadioButton = (RadioButton) findViewById(R.id.petsYesProfileRadioButton);
+        petsNoRadioButton = (RadioButton) findViewById(R.id.petsNOProfileRadioButton);
 
-        occupationSpinner = (Spinner) findViewById(R.id.occupation_tenant_profile_spinner);
-        durationSpinner = (Spinner) findViewById(R.id.duration_of_stay_tenant_profile_spinner);
+        occupationSpinner = (Spinner) findViewById(R.id.occupationProfileSpinner);
+        durationSpinner = (Spinner) findViewById(R.id.durationOfStayProfileSpinner);
 
-        takeAPictureButton = (Button) findViewById(R.id.take_a_picture_tenant_profile_button);
+        takeAPictureButton = (Button) findViewById(R.id.saveChangesProfileSettingsButton);
         profileDoneButton = (Button) findViewById(R.id.done_1_tenant_profile);
     }
 

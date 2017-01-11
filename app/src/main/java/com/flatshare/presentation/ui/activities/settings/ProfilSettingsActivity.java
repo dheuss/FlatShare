@@ -125,7 +125,7 @@ public class ProfilSettingsActivity extends AbstractActivity implements ProfileS
         changeEmailEditText = (EditText)findViewById(R.id.changeEmailProfileSettingsEditText);
         changeAgeEditText = (EditText)findViewById(R.id.changeAgeProfileSettingsEditText);
 
-        changeGenderRadioGroup = (RadioGroup)findViewById(R.id.changeGenderProfileEditTextRadioGroup);
+        changeGenderRadioGroup = (RadioGroup)findViewById(R.id.changeGenderProfileSettingsEditTextRadioGroup);
         changeGenderMaleRadioButton = (RadioButton)findViewById(R.id.changeGenderMaleProfileSettingsRadioButton);
         changeGenderFemaleRadioButton = (RadioButton)findViewById(R.id.changeGenderFemaleProlfileSettingsButton);
 

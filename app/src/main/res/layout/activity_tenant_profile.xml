@@ -2,312 +2,303 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    tools:context="com.flatshare.presentation.ui.activities.profile.TenantProfileActivity"
-    android:background="@color/windowBackground">
+    android:layout_height="wrap_content"
+    android:background="@color/windowBackground"
+    tools:context="com.flatshare.presentation.ui.activities.profile.TenantProfileActivity">
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/initial"
+            android:id="@+id/tenant_profile_inital"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="@string/create_your_tenant_profile"
-            android:textColor="@color/text"
-            android:textAlignment="center"
-            android:textSize="@dimen/textSizeHeadLine"
-            android:layout_marginTop="@dimen/marginTop"
-            android:layout_marginLeft="@dimen/marginLeftHeadLine"/>
-
-        <TextView
-            android:id="@+id/tenant_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tenant_profil_string"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/activity_horizontal_margin"
-            android:textColor="@color/text"
-            android:textSize="@dimen/textSizeNormalText"
-            android:layout_below="@+id/initial"
-            android:layout_marginTop="@dimen/marginTop"/>
-
-        <TextView
-            android:id="@+id/name_tenant_profile_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tenant_text"
-            android:layout_marginTop="@dimen/marginTop"
-            android:text="@string/surname_primary_profile_textview"
-            android:textSize="@dimen/textSizeLabel"
-            android:textColor="@color/text"
-            android:layout_marginLeft="@dimen/marginLeft"/>
-
-        <EditText
-            android:id="@+id/nameText_tenant_profile_editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/tenant_text"
-            android:layout_marginTop="10dp"
-            android:width="200dp"
-            android:inputType="text"
-            android:textColor="@color/text"
-            android:layout_marginRight="@dimen/marginRight"/>
-
-        <TextView
-            android:id="@+id/email_tenant_profile_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/name_tenant_profile_textView"
-            android:layout_marginTop="20dp"
-            android:text="Email:"
-            android:textSize="@dimen/textSizeLabel"
-            android:textColor="@color/text"
-            android:layout_marginLeft="@dimen/marginLeft"/>
-
-        <EditText
-            android:id="@+id/email_tenant_profile_editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/nameText_tenant_profile_editText"
-            android:width="200dp"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/text"
-            android:layout_marginRight="@dimen/marginRight"/>
-
-        <TextView
-            android:id="@+id/age_tenant_profile_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/email_tenant_profile_textView"
-            android:layout_marginTop="20dp"
-            android:text="Age:"
-            android:textSize="@dimen/textSizeLabel"
-            android:textColor="@color/text"
-            android:layout_marginLeft="@dimen/marginLeft"/>
-
-        <EditText
-            android:id="@+id/ageText_tenant_profile_editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/email_tenant_profile_editText"
-            android:width="200dp"
-            android:inputType="number"
-            android:textColor="@color/text"
-            android:layout_marginRight="@dimen/marginRight"/>
-
-        <TextView
-            android:id="@+id/gender_tenant_profile_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/age_tenant_profile_textView"
-            android:layout_marginTop="20dp"
-            android:text="Gender:"
-            android:textSize="@dimen/textSizeLabel"
-            android:textColor="@color/text"
-            android:layout_marginLeft="@dimen/marginLeft"/>
-
-        <RadioGroup
-            android:id="@+id/genderRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/ageText_tenant_profile_editText"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal"
-            android:layout_marginRight="@dimen/marginRight">
-
-            <RadioButton
-                android:id="@+id/maleRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/male"/>
-
-            <RadioButton
-                android:id="@+id/femaleRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/female"/>
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/smoker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/gender_tenant_profile_textView"
-            android:layout_marginTop="20dp"
-            android:text="Smoker:"
-            android:textSize="@dimen/textSizeLabel"
-            android:textColor="@color/text"
-            android:layout_marginLeft="@dimen/marginLeft"/>
-
-        <RadioGroup
-            android:id="@+id/smokerRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/gender_tenant_profile_textView"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal"
-            android:layout_marginRight="@dimen/marginRight">
-
-            <RadioButton
-                android:id="@+id/yesSmokerRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_up"/>
-
-            <RadioButton
-                android:id="@+id/noSmokerRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_down"/>
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/pets_tenant_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/smoker"
-            android:layout_marginTop="20dp"
-            android:text="@string/pets"
-            android:textSize="@dimen/textSizeLabel"
-            android:textColor="@color/text"
-            android:layout_marginLeft="@dimen/marginLeft"/>
-
-        <RadioGroup
-            android:id="@+id/petsRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/smoker"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal"
-            android:layout_marginRight="@dimen/marginRight">
-
-            <RadioButton
-                android:id="@+id/yesPetsRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_up"/>
-
-            <RadioButton
-                android:id="@+id/noPetsRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/thumb_down"/>
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/occupation_tenant_profile_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/pets_tenant_activity"
-            android:layout_marginTop="20dp"
-            android:text="@string/occupation"
-            android:textSize="@dimen/textSizeLabel"
-            android:textColor="@color/text"
-            android:layout_marginLeft="@dimen/marginLeft"/>
-
-        <Spinner
-            android:id="@+id/occupation_tenant_profile_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/petsRadioGroup"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="20dp"
-            android:entries="@array/occupation"
-            android:layout_marginRight="@dimen/marginRight"/>
-
-        <TextView
-            android:id="@+id/short_bio_tenant_profile_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/occupation_tenant_profile_textView"
-            android:layout_marginTop="20dp"
-            android:text="@string/short_bio"
-            android:textSize="@dimen/textSizeLabel"
-            android:textColor="@color/text"
-            android:layout_marginLeft="@dimen/marginLeft"/>
-
-        <EditText
-            android:id="@+id/short_bio_tenant_profile_editText"
-            android:layout_width="fill_parent"
-            android:layout_height="100dp"
-            android:layout_below="@id/short_bio_tenant_profile_textView"
-            android:hint="@string/insert_your_bio"
-            android:textSize="10dp"
-            android:lines="5"
-            android:maxLines="5"
-            android:gravity="top|left"
-            android:inputType="textMultiLine"
-            android:scrollHorizontally="false"
-            android:textColor="@color/text"
             android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight"/>
+            android:layout_marginTop="@dimen/marginTop"
+            android:text="@string/create_your_tenant_profile"
+            android:textAlignment="center"
+            android:textColor="@color/text"
+            android:textSize="30dp" />
 
         <TextView
-            android:id="@+id/duration_of_stay_tenant_profile_textView"
-            android:layout_width="wrap_content"
+            android:id="@+id/tenant_settings_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tenant_profile_inital"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:gravity="center"
+            android:text="@string/tenant_profil_string" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/short_bio_tenant_profile_editText"
-            android:layout_marginTop="20dp"
-            android:text="@string/durationOfStay"
-            android:textSize="@dimen/textSizeLabel"
-            android:textColor="@color/text"
-            android:layout_marginLeft="@dimen/marginLeft"/>
+            android:id="@+id/LinearLayoutProfileName"
+            android:layout_below="@id/tenant_settings_info"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/name" />
+            <EditText
+                android:id="@+id/nameProfileEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:hint="change your name"
+                android:inputType="text" />
+        </LinearLayout>
 
-
-        <Spinner
-            android:id="@+id/duration_of_stay_tenant_profile_spinner"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/short_bio_tenant_profile_editText"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="20dp"
-            android:entries="@array/durationOfStayArray"
-            android:layout_marginRight="@dimen/marginRight"/>
+            android:id="@+id/LinearLayoutProfileEmail"
+            android:layout_below="@id/LinearLayoutProfileName"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/email" />
+            <EditText
+                android:id="@+id/emailProfileEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:hint="change your email-address"
+                android:inputType="textEmailAddress" />
+        </LinearLayout>
 
-        <!-- Picture Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/LinearLayoutProfileAge"
+            android:layout_below="@id/LinearLayoutProfileEmail"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/age" />
+            <EditText
+                android:id="@+id/ageProfileEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:hint="change your age"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/LinearLayoutProfileGender"
+            android:layout_below="@id/LinearLayoutProfileAge"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/gender" />
+            <RadioGroup
+                android:id="@+id/genderProfileEditTextRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/genderMaleProfileRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/male"/>
+                <RadioButton
+                    android:id="@+id/genderFemaleProlfileButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/female"/>
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/LinearLayoutProfileSmoker"
+            android:layout_below="@id/LinearLayoutProfileGender"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/smoker" />
+            <RadioGroup
+                android:id="@+id/smokerProfileRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/smokerYesProfileRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up"/>
+                <RadioButton
+                    android:id="@+id/smokerNoProfileRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_down"/>
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/LinearLayoutProfilePets"
+            android:layout_below="@id/LinearLayoutProfileSmoker"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/pets" />
+            <RadioGroup
+                android:id="@+id/petsProfileRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/petsYesProfileRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up"/>
+                <RadioButton
+                    android:id="@+id/petsNOProfileRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_down"/>
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/LinearLayoutProfileOccupation"
+            android:layout_below="@id/LinearLayoutProfilePets"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/occupation" />
+            <Spinner
+                android:id="@+id/occupationProfileSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/occupation"
+                android:textAlignment="center"
+                android:gravity="right"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/LinearLayoutProfileInfo"
+            android:layout_below="@id/LinearLayoutProfileOccupation"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/LinearLayoutInfoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|top"
+                android:text="@string/info" />
+            <EditText
+                android:id="@+id/infoProfileEditText"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@id/LinearLayoutInfoText"
+                android:hint="@string/insert_your_bio"
+                android:textSize="10dp"
+                android:lines="5"
+                android:maxLines="5"
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:scrollHorizontally="false"
+                android:textColor="@color/text"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/LinearLayoutProfileDuration"
+            android:layout_below="@id/LinearLayoutProfileInfo"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/durationOfStay" />
+            <Spinner
+                android:id="@+id/durationOfStayProfileSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/durationOfStayArray"
+                android:gravity="right"
+                android:textAlignment="center"/>
+        </LinearLayout>
 
         <Button
-            android:id="@+id/take_a_picture_tenant_profile_button"
+            android:id="@+id/saveChangesProfileSettingsButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/duration_of_stay_tenant_profile_textView"
+            android:layout_below="@+id/LinearLayoutProfileDuration"
+            android:layout_marginBottom="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/colorPrimaryDark"
             android:hint="@string/take_picture_tenant_profile"
             android:textColor="@color/buttonText"
             android:textColorHint="@color/buttonText"
-            android:layout_marginTop="20dp"
-            android:background="@color/colorPrimaryDark"
             android:textStyle="bold"
-            android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight"/>
-
-        <!-- Save Button -->
+            />
 
         <Button
             android:id="@+id/done_1_tenant_profile"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/take_a_picture_tenant_profile_button"
-            android:hint="@string/done_1_tenant_profile"
-            android:textColor="@color/buttonText"
-            android:textColorHint="@color/buttonText"
-            android:layout_marginTop="20dp"
-            android:background="@color/colorPrimaryDark"
-            android:textStyle="bold"
+            android:layout_below="@+id/saveChangesProfileSettingsButton"
+            android:layout_marginBottom="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginBottom="@dimen/marginBottom"/>
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/colorPrimaryDark"
+            android:hint="@string/done_profile"
+            android:textColor="@color/buttonText"
+            android:textColorHint="@color/buttonText"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 </ScrollView>

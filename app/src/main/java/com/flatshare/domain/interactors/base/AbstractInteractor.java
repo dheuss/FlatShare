@@ -6,6 +6,7 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.network.path.database.DatabaseRoot;
 import com.flatshare.network.path.storage.StorageRoot;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -25,6 +26,7 @@ public abstract class AbstractInteractor implements Interactor {
     protected StorageReference mStorage;
 
     protected String userId;
+    protected FirebaseUser firebaserUserId;
 
     // Paths in Database/Storage
     protected DatabaseRoot databaseRoot;
@@ -37,6 +39,7 @@ public abstract class AbstractInteractor implements Interactor {
         this.mDatabase = FirebaseDatabase.getInstance().getReference();
 
         this.userId = FirebaseAuth.getInstance().getCurrentUser() == null ? null : FirebaseAuth.getInstance().getCurrentUser().getUid();
+        this.firebaserUserId = FirebaseAuth.getInstance().getCurrentUser();
 
         databaseRoot = new DatabaseRoot();
         storageRoot = new StorageRoot();
