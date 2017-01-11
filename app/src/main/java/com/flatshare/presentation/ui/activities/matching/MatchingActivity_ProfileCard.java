@@ -21,7 +21,7 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeOutState;
  * Created by david on 08.01.2017.
  */
 
-@Layout(R.layout.activity_main_card)
+@Layout(R.layout.activity_matching_card)
 public class MatchingActivity_ProfileCard {
     @View(R.id.profileImageView)
     private ImageView profileImageView;

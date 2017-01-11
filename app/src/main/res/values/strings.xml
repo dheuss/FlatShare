@@ -91,6 +91,7 @@
     <string name="pets_info">Does it matter for you if your new roommate has a pet?</string>
     <string name="occupation_info">What should your new roommate do for a living?</string>
     <string name="duration_info">For how long do you rent this room in your living community?</string>
+    <string name="setup">Setup Your Account</string>
 
     <string-array name="occupation">
         <item>Student</item>

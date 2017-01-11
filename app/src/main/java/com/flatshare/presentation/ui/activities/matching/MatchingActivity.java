@@ -59,8 +59,8 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
                 .setSwipeDecor(new SwipeDecor()
                         .setPaddingTop(20)
                         .setRelativeScale(0.01f)
-                        .setSwipeInMsgLayoutId(R.layout.activity_main_card_in)
-                        .setSwipeOutMsgLayoutId(R.layout.activity_main_card_out));
+                        .setSwipeInMsgLayoutId(R.layout.activity_matching_card_in)
+                        .setSwipeOutMsgLayoutId(R.layout.activity_matching_card_out));
 
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +100,7 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
 
     @Override
     protected int getLayoutResourceId() {
-        return R.layout.activity_main;
+        return R.layout.activity_matching;
     }
 
     private void bindView() {
@@ -143,8 +143,8 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
                 .setSwipeDecor(new SwipeDecor()
                         .setPaddingTop(20)
                         .setRelativeScale(0.01f)
-                        .setSwipeInMsgLayoutId(R.layout.activity_main_card_in)
-                        .setSwipeOutMsgLayoutId(R.layout.activity_main_card_out));
+                        .setSwipeInMsgLayoutId(R.layout.activity_matching_card_in)
+                        .setSwipeOutMsgLayoutId(R.layout.activity_matching_card_out));
 
 
         Log.d(TAG, "size of potential apartments: " + tenants.size());
