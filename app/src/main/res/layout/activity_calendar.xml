@@ -26,49 +26,47 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choose a date for an appointment to view a flat:"
+            android:text="Send date(s) for an appointment to view the flat:"
             android:textColor="@color/text"
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="70dp"
-
-        android:orientation="horizontal"><!-- android:layout_gravity="top|left" -->
+        android:layout_marginTop="100dp"
+        android:orientation="horizontal">
         <Button
             android:id="@+id/setDate"
-            android:layout_width="175dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="setDate"
             android:text="Set Date"
             android:background="@drawable/background_calendar"/>
-        <View
-            android:layout_width="35dp"
-            android:layout_height="match_parent"></View>
-        <Button
-            android:id="@+id/setTime"
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:onClick="setTime"
-            android:text="Set Time"
-            android:background="@drawable/background_calendar"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="120dp"
+        android:layout_height="450dp"
+        android:layout_marginTop="150dp"
         android:orientation="vertical"
-        android:scrollbars="vertical">
+        android:scrollbars="vertical"
+        android:weightSum="1">
 
-        <TextView
+        <TableLayout
             android:id="@+id/date_display"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:text="Calendar View Date Display"
             android:textColor="@color/text"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:background="@drawable/background_calendar"/>
+            android:background="@drawable/background_calendar"
+            android:layout_weight="0.66" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Send"
+            android:alpha="0.2"
+            android:background="@color/lightGreenA400"/>
     </LinearLayout>
 
 </FrameLayout>
