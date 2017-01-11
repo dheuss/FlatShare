@@ -65,6 +65,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         couchChatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 startActivity(new Intent(CalendarActivity.this, MatchingActivity.class));
             }
         });
@@ -94,7 +95,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
             // TODO Auto-generated method stub
-            //datePicker.setMinDate(System.currentTimeMillis() - 1000);
+            datePicker.setMinDate(System.currentTimeMillis() - 1000);
             //datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
             showDate(year, month+1, day);
             showDialog(888);
