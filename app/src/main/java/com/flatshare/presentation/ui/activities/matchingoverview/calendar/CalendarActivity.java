@@ -22,6 +22,7 @@ import com.flatshare.presentation.presenters.matchingoverview.calendar.CalendarP
 import com.flatshare.presentation.presenters.matchingoverview.calendar.impl.CalendarPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
+import com.flatshare.presentation.ui.activities.matchingoverview.chat.ChatActivity;
 import com.flatshare.threading.MainThreadImpl;
 
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(CalendarActivity.this, MatchingActivity.class));
+                startActivity(new Intent(CalendarActivity.this, ChatActivity.class));
             }
         });
     }
