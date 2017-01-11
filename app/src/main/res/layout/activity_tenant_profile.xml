@@ -34,18 +34,20 @@
             android:text="@string/tenant_profil_string" />
 
         <LinearLayout
+            android:id="@+id/LinearLayoutProfileName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/LinearLayoutProfileName"
             android:layout_below="@id/tenant_settings_info"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight">
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/name" />
+
             <EditText
                 android:id="@+id/nameProfileEditText"
                 android:layout_width="match_parent"
@@ -56,18 +58,20 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LinearLayoutProfileEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/LinearLayoutProfileEmail"
             android:layout_below="@id/LinearLayoutProfileName"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight">
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/email" />
+
             <EditText
                 android:id="@+id/emailProfileEditText"
                 android:layout_width="match_parent"
@@ -78,18 +82,20 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LinearLayoutProfileAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/LinearLayoutProfileAge"
             android:layout_below="@id/LinearLayoutProfileEmail"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight">
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/age" />
+
             <EditText
                 android:id="@+id/ageProfileEditText"
                 android:layout_width="match_parent"
@@ -100,173 +106,191 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LinearLayoutProfileGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/LinearLayoutProfileGender"
             android:layout_below="@id/LinearLayoutProfileAge"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight">
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/gender" />
+
             <RadioGroup
                 android:id="@+id/genderProfileEditTextRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:orientation="horizontal">
+
                 <RadioButton
                     android:id="@+id/genderMaleProfileRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/male"/>
+                    android:drawableRight="@drawable/male" />
+
                 <RadioButton
                     android:id="@+id/genderFemaleProlfileButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/female"/>
+                    android:drawableRight="@drawable/female" />
             </RadioGroup>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LinearLayoutProfileSmoker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/LinearLayoutProfileSmoker"
             android:layout_below="@id/LinearLayoutProfileGender"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight">
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/smoker" />
+
             <RadioGroup
                 android:id="@+id/smokerProfileRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:orientation="horizontal">
+
                 <RadioButton
                     android:id="@+id/smokerYesProfileRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up"/>
+                    android:drawableRight="@drawable/thumb_up" />
+
                 <RadioButton
                     android:id="@+id/smokerNoProfileRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_down"/>
+                    android:drawableRight="@drawable/thumb_down" />
             </RadioGroup>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LinearLayoutProfilePets"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/LinearLayoutProfilePets"
             android:layout_below="@id/LinearLayoutProfileSmoker"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight">
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/pets" />
+
             <RadioGroup
                 android:id="@+id/petsProfileRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:orientation="horizontal">
+
                 <RadioButton
                     android:id="@+id/petsYesProfileRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up"/>
+                    android:drawableRight="@drawable/thumb_up" />
+
                 <RadioButton
                     android:id="@+id/petsNOProfileRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_down"/>
+                    android:drawableRight="@drawable/thumb_down" />
             </RadioGroup>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LinearLayoutProfileOccupation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/LinearLayoutProfileOccupation"
             android:layout_below="@id/LinearLayoutProfilePets"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight">
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/occupation" />
+
             <Spinner
                 android:id="@+id/occupationProfileSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/occupation"
-                android:textAlignment="center"
-                android:gravity="right"/>
+                android:gravity="right"
+                android:textAlignment="center" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LinearLayoutProfileInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/LinearLayoutProfileInfo"
             android:layout_below="@id/LinearLayoutProfileOccupation"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/LinearLayoutInfoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left|top"
                 android:text="@string/info" />
+
             <EditText
                 android:id="@+id/infoProfileEditText"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_below="@id/LinearLayoutInfoText"
+                android:gravity="top|left"
                 android:hint="@string/insert_your_bio"
-                android:textSize="10dp"
+                android:inputType="textMultiLine"
                 android:lines="5"
                 android:maxLines="5"
-                android:gravity="top|left"
-                android:inputType="textMultiLine"
                 android:scrollHorizontally="false"
-                android:textColor="@color/text"/>
+                android:textColor="@color/text"
+                android:textSize="10dp" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LinearLayoutProfileDuration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/LinearLayoutProfileDuration"
             android:layout_below="@id/LinearLayoutProfileInfo"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight">
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/durationOfStay" />
+
             <Spinner
                 android:id="@+id/durationOfStayProfileSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/durationOfStayArray"
                 android:gravity="right"
-                android:textAlignment="center"/>
+                android:textAlignment="center" />
         </LinearLayout>
 
         <Button
@@ -282,8 +306,7 @@
             android:hint="@string/take_picture_tenant_profile"
             android:textColor="@color/buttonText"
             android:textColorHint="@color/buttonText"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/done_1_tenant_profile"

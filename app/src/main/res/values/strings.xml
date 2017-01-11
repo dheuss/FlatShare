@@ -82,6 +82,15 @@
     <string name="info">Info:</string>
     <string name="save_profile_settings">SAVE!</string>
     <string name="done_profile">DONE!</string>
+    <string name="apartment_profil_string">In this section, we would like to know more about your apartment. When you tell us something about your residence, we could find the perfect roommate for your living community.</string>
+    <string name="create_your_apartment_setting">Create Your Apartment Settings</string>
+    <string name="apartment_settings_description">Here we would like to know more about your preferences and how your new roommate should be, so that we can find the perfect match for your living community!</string>
+    <string name="age_range_info">How old should your new roommate be?</string>
+    <string name="gender_info">Should your new roommate be a girl or a boy?</string>
+    <string name="smoker_info">Does it matter for you if your new roommate is a smoker?</string>
+    <string name="pets_info">Does it matter for you if your new roommate has a pet?</string>
+    <string name="occupation_info">What should your new roommate do for a living?</string>
+    <string name="duration_info">For how long do you rent this room in your living community?</string>
 
     <string-array name="occupation">
         <item>Student</item>
@@ -90,6 +99,14 @@
         <item>Official</item>
         <item>No Job</item>
     </string-array>
+    <string-array name="occupation_apartment_settings">
+        <item>Student</item>
+        <item>Employee</item>
+        <item>Lowly employed</item>
+        <item>Official</item>
+        <item>No Job</item>
+        <item>Does not matter</item>
+    </string-array>
     <string-array name="durationOfStayArray">
         <item>0</item>
         <item>1</item>
@@ -97,5 +114,14 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
+    </string-array>
+    <string-array name="durationOfStayArrayApartmentSettings">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>Does not matter</item>
     </string-array>
 </resources>
