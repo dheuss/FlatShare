@@ -51,12 +51,12 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
     /**
      * callback method that posts message received into the main UI, through mainThread.post!!!
      */
-    private void notifyProfileCreated(final UserProfile secondaryProfile) {
+    private void notifyProfileCreated(final UserProfile secondaryProfile, final ApartmentProfile apartmentProfile) {
 
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onProfileCreated(primaryUserProfile, secondaryProfile);
+                mCallback.onProfileCreated(primaryUserProfile, secondaryProfile, apartmentProfile);
             }
         });
     }
@@ -77,7 +77,7 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
             TenantProfile tenantProfile = new TenantProfile();
             tenantProfile.setTenantId(secondaryProfileId);
 
-            pushId(secondaryProfilePath + secondaryProfileId, tenantProfile);
+            pushId(secondaryProfilePath + secondaryProfileId, tenantProfile, null);
         } else if (primaryUserProfile.getClassificationId() == ProfileType.ROOMMATE.getValue()) {
             secondaryProfilePath = databaseRoot.getRoommateProfiles();
             secondaryProfileId = mDatabase.child(secondaryProfilePath).push().getKey();
@@ -86,7 +86,7 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
             RoommateProfile roommateProfile = new RoommateProfile();
             roommateProfile.setRoommateId(secondaryProfileId);
 
-            pushId(secondaryProfilePath + secondaryProfileId, roommateProfile);
+            pushId(secondaryProfilePath + secondaryProfileId, roommateProfile, null);
         } else if (primaryUserProfile.getClassificationId() == ProfileType.APARTMENT.getValue()) {
             secondaryProfilePath = databaseRoot.getRoommateProfiles();
             secondaryProfileId = mDatabase.child(secondaryProfilePath).push().getKey();
@@ -110,13 +110,13 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
         }
     }
 
-    private void pushId(final String secondaryProfilePath, final UserProfile userProfile) {
+    private void pushId(final String secondaryProfilePath, final UserProfile userProfile, final ApartmentProfile apartmentProfile) {
         mDatabase.child(secondaryProfilePath).setValue(userProfile, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if (databaseError == null) {
                     Log.d(TAG, "execute: PUSHING TO " + secondaryProfilePath);
-                    createProfile(userProfile);
+                    createProfile(userProfile, apartmentProfile);
                 } else {
                     PrimaryProfileInteractorImpl.this.notifyError(databaseError.getMessage());
                 }
@@ -135,14 +135,14 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
         roommateProfile.setApartmentId(apartmentId);
         roommateProfile.setAvailable(true);
 
-        pushId(roommateProfilePath, roommateProfile);
 
         ApartmentProfile apartmentProfile = new ApartmentProfile();
         apartmentProfile.setApartmentId(apartmentId);
+        pushId(roommateProfilePath, roommateProfile, apartmentProfile);
         mDatabase.child(apartmentProfilePath).setValue(apartmentProfile);
     }
 
-    private void createProfile(final UserProfile userProfile) {
+    private void createProfile(final UserProfile userProfile, final ApartmentProfile apartmentProfile) {
 
         Log.d(TAG, "creating main profile!");
 
@@ -152,7 +152,7 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if (databaseError == null) {
-                    PrimaryProfileInteractorImpl.this.notifyProfileCreated(userProfile);
+                    PrimaryProfileInteractorImpl.this.notifyProfileCreated(userProfile, apartmentProfile);
                 } else {
                     PrimaryProfileInteractorImpl.this.notifyError(databaseError.getMessage());
                 }

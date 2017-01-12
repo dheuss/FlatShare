@@ -127,13 +127,17 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
         userState.setRoommateProfile(roommateProfile);
         userState.setApartmentProfile(apartmentProfile);
 
-        if(apartmentProfile.getApartmentFilterSettings() == null){
-            mView.hideProgress();
-            mView.changeToApartmentSettingsActivity();
+        mView.hideProgress();
+        if(apartmentProfile.isDone()){
+            if(apartmentProfile.getApartmentFilterSettings() == null){
+                mView.changeToApartmentSettingsActivity();
+            } else {
+                mView.changeToMatchingActivity();
+            }
         } else {
-            mView.hideProgress();
-            mView.changeToMatchingActivity();
+            mView.changeToApartmentProfileActivity();
         }
+
     }
 
     @Override
