@@ -64,11 +64,13 @@ public class PrimaryUserProfile extends UserProfile{
         this.email = email;
     }
 
+    @Exclude
     @Override
     public String getId() {
         return null;
     }
 
+    @Exclude
     @Override
     public int getType() {
         return -1;

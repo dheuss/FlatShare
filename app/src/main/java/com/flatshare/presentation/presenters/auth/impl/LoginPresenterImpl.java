@@ -13,6 +13,7 @@ import com.flatshare.domain.interactors.InitInteractor;
 import com.flatshare.domain.interactors.auth.LoginInteractor;
 import com.flatshare.domain.interactors.impl.InitInteractorImpl;
 import com.flatshare.domain.interactors.auth.impl.LoginInteractorImpl;
+import com.flatshare.domain.interactors.impl.TestInteractor;
 import com.flatshare.presentation.presenters.auth.LoginPresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 
@@ -62,6 +63,12 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
 
     @Override
     public void login(LoginDataType loginDataType) {
+
+        // TEST
+        TestInteractor testInteractor = new TestInteractor(mMainThread, 20);
+        testInteractor.execute();
+        // TEST
+
         mView.showProgress();
 
         if(userState.getPrimaryUserProfile() != null){

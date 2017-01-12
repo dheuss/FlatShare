@@ -18,13 +18,15 @@ import java.util.List;
  */
 public class TestInteractor extends AbstractInteractor {
 
-    public TestInteractor(MainThread mainThread) {
+    int size;
+
+    public TestInteractor(MainThread mainThread, int size) {
         super(mainThread);
+        this.size = size;
     }
 
     @Override
     public void execute() {
-        int size = 1000;
 
         String tPath = "test/" + databaseRoot.getTenantProfiles();
         String aPath = "test/" + databaseRoot.getApartmentProfiles();
