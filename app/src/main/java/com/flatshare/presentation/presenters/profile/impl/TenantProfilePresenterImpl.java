@@ -5,9 +5,10 @@ import android.widget.VideoView;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
+import com.flatshare.domain.datatypes.db.profiles.UserProfile;
 import com.flatshare.domain.datatypes.enums.MediaType;
 import com.flatshare.domain.interactors.media.MediaInteractor;
-import com.flatshare.domain.interactors.profile.ProfileInteractor;
+import com.flatshare.domain.interactors.profile.SecondaryProfileInteractor;
 import com.flatshare.domain.interactors.profile.impl.TenantProfileInteractorImpl;
 import com.flatshare.domain.interactors.media.impl.UploadInteractorImpl;
 import com.flatshare.presentation.presenters.profile.TenantProfilePresenter;
@@ -18,7 +19,7 @@ import com.flatshare.presentation.presenters.base.AbstractPresenter;
  */
 
 public class TenantProfilePresenterImpl extends AbstractPresenter implements TenantProfilePresenter,
-        ProfileInteractor.Callback, MediaInteractor.UploadCallback {
+        SecondaryProfileInteractor.Callback, MediaInteractor.UploadCallback {
 
 
     private static final String TAG = "TenantProfilePresenter";
@@ -54,12 +55,6 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
     }
 
     @Override
-    public void onSentSuccess(int classificationId) {
-        mView.hideProgress();
-        mView.changeToTenantSettings();
-    }
-
-    @Override
     public void onSentFailure(String error) {
         userState.setTenantProfile(null);
         mView.hideProgress();
@@ -67,10 +62,16 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
     }
 
     @Override
+    public void onProfileCreated(UserProfile profile) {
+        mView.hideProgress();
+        userState.setTenantProfile((TenantProfile) profile);
+        mView.changeToTenantSettings();
+    }
+
+    @Override
     public void sendProfile(TenantProfile tenantProfile) {
         mView.showProgress();
-        userState.setTenantProfile(tenantProfile);
-        ProfileInteractor interactor = new TenantProfileInteractorImpl(mMainThread, this, tenantProfile);
+        SecondaryProfileInteractor interactor = new TenantProfileInteractorImpl(mMainThread, this, tenantProfile);
         interactor.execute();
     }
 

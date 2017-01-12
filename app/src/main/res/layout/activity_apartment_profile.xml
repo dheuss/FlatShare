@@ -33,11 +33,27 @@
             android:gravity="center"
             android:text="@string/apartment_profil_string" />
 
+        <Button
+            android:id="@+id/scan_roommate_QR_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/apartment_profile_info"
+            android:layout_marginBottom="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/colorPrimaryDark"
+            android:hint="@string/scan_qr"
+            android:textColor="@color/buttonText"
+            android:textColorHint="@color/buttonText"
+            android:textStyle="bold" />
+
+
         <LinearLayout
             android:id="@+id/LinearLayoutApartmentProfileRoomMates"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/apartment_profile_info"
+            android:layout_below="@id/scan_roommate_QR_button"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">

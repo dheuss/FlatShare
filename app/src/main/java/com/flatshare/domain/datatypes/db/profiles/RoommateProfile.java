@@ -28,8 +28,12 @@ public class RoommateProfile extends UserProfile {
     @PropertyName("timestamp")
     public long timestamp;
 
+    @PropertyName("available")
+    public boolean available;
+
     public RoommateProfile() {
         potentialTenants = new ArrayList<>();
+        this.available = true;
     }
 
     @Exclude
@@ -80,6 +84,16 @@ public class RoommateProfile extends UserProfile {
     @Exclude
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    @Exclude
+    public boolean isAvailable() {
+        return available;
+    }
+
+    @Exclude
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     @Exclude

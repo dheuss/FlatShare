@@ -3,9 +3,9 @@ package com.flatshare.presentation.presenters.profile.impl;
 import com.flatshare.domain.datatypes.db.common.ProfileType;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.MainThread;
-import com.flatshare.domain.interactors.profile.ProfileInteractor;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
+import com.flatshare.domain.interactors.profile.PrimaryProfileInteractor;
 import com.flatshare.domain.interactors.profile.impl.PrimaryProfileInteractorImpl;
-import com.flatshare.domain.interactors.profile.impl.RoommateProfileInteractorImpl;
 import com.flatshare.presentation.presenters.profile.PrimaryProfilePresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 
@@ -14,7 +14,7 @@ import com.flatshare.presentation.presenters.base.AbstractPresenter;
  */
 
 public class PrimaryProfilePresenterImpl extends AbstractPresenter implements PrimaryProfilePresenter,
-        ProfileInteractor.Callback {
+        PrimaryProfileInteractor.Callback {
 
 
     private PrimaryProfilePresenter.View mView;
@@ -49,7 +49,10 @@ public class PrimaryProfilePresenterImpl extends AbstractPresenter implements Pr
     }
 
     @Override
-    public void onSentSuccess(int classificationId) {
+    public void onProfileCreated(PrimaryUserProfile primaryUserProfile) {
+
+        userState.setPrimaryUserProfile(primaryUserProfile);
+        int classificationId = primaryUserProfile.getClassificationId();
 
         mView.hideProgress();
 
@@ -58,7 +61,7 @@ public class PrimaryProfilePresenterImpl extends AbstractPresenter implements Pr
         } else if (classificationId == ProfileType.APARTMENT.getValue()) {
             mView.changeToApartmentProfile();
         } else if (classificationId == ProfileType.ROOMMATE.getValue()) {
-            mView.changeToRoomateQR(userState.getRoommateId());
+            mView.changeToRoomateQR(primaryUserProfile.getRoommateProfileId());
         } else {
 
             mView.showError("Invalid  classificationId: " + classificationId);
@@ -88,25 +91,8 @@ public class PrimaryProfilePresenterImpl extends AbstractPresenter implements Pr
             userState.setPrimaryUserProfile(primaryUserProfile);
         }
 
-        ProfileInteractor interactor = new PrimaryProfileInteractorImpl(mMainThread, this, primaryUserProfile);
+        PrimaryProfileInteractor interactor = new PrimaryProfileInteractorImpl(mMainThread, this, primaryUserProfile);
         interactor.execute();
-
-    }
-
-    @Override
-    public void createRoommateProfile() {
-        mView.showProgress();
-
-        if (userState.getRoommateProfile() != null) { // already exists, update profile
-
-            mView.changeToRoomateQR(userState.getRoommateId());
-
-        } else { // create it
-
-            ProfileInteractor interactor = new RoommateProfileInteractorImpl(mMainThread, this);
-            interactor.execute();
-
-        }
 
     }
 

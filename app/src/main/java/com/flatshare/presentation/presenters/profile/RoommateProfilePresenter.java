@@ -1,4 +1,4 @@
-package com.flatshare.presentation.presenters.matching;
+package com.flatshare.presentation.presenters.profile;
 
 import com.flatshare.presentation.presenters.base.BasePresenter;
 import com.flatshare.presentation.ui.BaseView;
@@ -11,9 +11,13 @@ public interface RoommateProfilePresenter extends BasePresenter{
 
     void listenToDB(String roommateId);
 
+    void checkIfApartmentProfileCreated();
+
     interface View extends BaseView{
 
-        void changeToSwipingActivity();
+        void onQRCodeRead(String apartmentId);
+
+        void changeToWaitingActivity();
     }
 
 }

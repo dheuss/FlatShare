@@ -25,7 +25,9 @@ import com.flatshare.presentation.presenters.auth.impl.LoginPresenterImpl;
 import com.flatshare.presentation.ui.activities.auth.RegisterActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.presentation.ui.activities.matching.RoommateQRActivity;
+import com.flatshare.presentation.ui.activities.profile.ApartmentSettingsActivity;
 import com.flatshare.presentation.ui.activities.profile.PrimaryProfileActivity;
+import com.flatshare.presentation.ui.activities.profile.TenantSettingsActivity;
 import com.flatshare.threading.MainThreadImpl;
 import com.google.android.gms.common.SignInButton;
 
@@ -197,6 +199,22 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
     public void changeToMatchingActivity() {
         Log.d("LoginActivity", "success! changed to MatchingActivity!");
         Intent intent = new Intent(getActivity(), MatchingActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
+
+    @Override
+    public void changeToTenantSettingsActivity() {
+        Log.d("LoginActivity", "success! changed to TenantSettingsActivity!");
+        Intent intent = new Intent(getActivity(), TenantSettingsActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
+
+    @Override
+    public void changeToApartmentSettingsActivity() {
+        Log.d("LoginActivity", "success! changed to ApartmentSettingsActivity!");
+        Intent intent = new Intent(getActivity(), ApartmentSettingsActivity.class);
         startActivity(intent);
         getActivity().finish();
     }

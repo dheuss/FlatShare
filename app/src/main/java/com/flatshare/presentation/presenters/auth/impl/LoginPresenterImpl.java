@@ -95,20 +95,33 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
         userState.setPrimaryUserProfile(primaryUserProfile);
         userState.setTenantProfile(tenantProfile);
 
-        mView.hideProgress();
-        mView.changeToMatchingActivity();
+        if(tenantProfile.getTenantFilterSettings() == null){
+            mView.hideProgress();
+            mView.changeToTenantSettingsActivity();
+        } else {
+            mView.hideProgress();
+            mView.changeToMatchingActivity();
+        }
     }
 
     @Override
-    public void onRoommateFound(RoommateProfile roommateProfile, ApartmentProfile apartmentProfile) {
+    public void onRoommateFound(RoommateProfile roommateProfile) {
+        userState.setRoommateProfile(roommateProfile);
+        mView.hideProgress();
+
+        mView.notifyRoommateGenerateQR(roommateProfile.getRoommateId());
+    }
+
+    @Override
+    public void onApartmentFound(RoommateProfile roommateProfile, ApartmentProfile apartmentProfile) {
         userState.setRoommateProfile(roommateProfile);
         userState.setApartmentProfile(apartmentProfile);
 
-        mView.hideProgress();
-
-        if(apartmentProfile == null){ // no apartment found => roommate without apartment
-            mView.notifyRoommateGenerateQR(roommateProfile.getRoommateId());
+        if(apartmentProfile.getApartmentFilterSettings() == null){
+            mView.hideProgress();
+            mView.changeToApartmentSettingsActivity();
         } else {
+            mView.hideProgress();
             mView.changeToMatchingActivity();
         }
     }

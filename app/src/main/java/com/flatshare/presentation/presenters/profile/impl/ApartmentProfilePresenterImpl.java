@@ -5,10 +5,11 @@ import android.widget.VideoView;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
+import com.flatshare.domain.datatypes.db.profiles.UserProfile;
 import com.flatshare.domain.interactors.matching.EmailRetrieverInteractor;
 import com.flatshare.domain.interactors.matching.impl.EmailRetrieverInteractorImpl;
 import com.flatshare.domain.interactors.media.MediaInteractor;
-import com.flatshare.domain.interactors.profile.ProfileInteractor;
+import com.flatshare.domain.interactors.profile.SecondaryProfileInteractor;
 import com.flatshare.domain.interactors.profile.impl.ApartmentProfileInteractorImpl;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 import com.flatshare.presentation.presenters.profile.ApartmentProfilePresenter;
@@ -20,7 +21,7 @@ import java.util.Map;
  */
 
 public class ApartmentProfilePresenterImpl extends AbstractPresenter implements ApartmentProfilePresenter,
-        ProfileInteractor.Callback, MediaInteractor.UploadCallback, EmailRetrieverInteractor.Callback {
+        SecondaryProfileInteractor.Callback, MediaInteractor.UploadCallback, EmailRetrieverInteractor.Callback {
 
 
     private ApartmentProfilePresenter.View mView;
@@ -55,13 +56,6 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
     }
 
     @Override
-    public void onSentSuccess(int classificationId) {
-
-        mView.hideProgress();
-        mView.changeToApartmentSettings();
-    }
-
-    @Override
     public void onSentFailure(String error) {
         userState.setApartmentProfile(null);
         mView.hideProgress();
@@ -69,11 +63,17 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
     }
 
     @Override
+    public void onProfileCreated(UserProfile profile) {
+        mView.hideProgress();
+        userState.setApartmentProfile((ApartmentProfile) profile);
+        mView.changeToApartmentSettings();
+    }
+
+    @Override
     public void sendProfile(ApartmentProfile apartmentProfile) {
 
         mView.showProgress();
-        userState.setApartmentProfile(apartmentProfile);
-        ProfileInteractor interactor = new ApartmentProfileInteractorImpl(mMainThread, this, apartmentProfile);
+        SecondaryProfileInteractor interactor = new ApartmentProfileInteractorImpl(mMainThread, this, apartmentProfile);
         interactor.execute();
 
     }

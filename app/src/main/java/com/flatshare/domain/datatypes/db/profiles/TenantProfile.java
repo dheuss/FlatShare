@@ -67,7 +67,7 @@ public class TenantProfile extends UserProfile {
 
     public TenantProfile() {
 
-        this.tenantFilterSettings = new TenantFilterSettings();
+//        this.tenantFilterSettings = new TenantFilterSettings();
         this.hobbies = new ArrayList<>();
         this.apartmentsToShow = new ArrayList<>();
         this.matchedApartments = new ArrayList<>();
@@ -237,6 +237,11 @@ public class TenantProfile extends UserProfile {
     @Exclude
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    @Exclude
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
     }
 
     @Exclude

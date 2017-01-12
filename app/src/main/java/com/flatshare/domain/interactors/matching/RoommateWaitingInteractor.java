@@ -3,13 +3,15 @@ package com.flatshare.domain.interactors.matching;
 import com.flatshare.domain.interactors.base.Interactor;
 
 /**
- * Created by Arber on 08/01/2017.
+ * Created by Arber on 11/01/2017.
  */
-public interface RoommateQRInteractor extends Interactor{
+
+public interface RoommateWaitingInteractor extends Interactor {
 
     interface Callback {
 
         void notifyError(String errorMessage);
-        void onCodeRead(String apartmentId);
+        void onApartmentReady();
     }
+
 }

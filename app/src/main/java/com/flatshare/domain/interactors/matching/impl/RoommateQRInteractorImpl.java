@@ -1,9 +1,11 @@
 package com.flatshare.domain.interactors.matching.impl;
 
+import android.util.Log;
+
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.domain.interactors.matching.RoommateQRInteractor;
-import com.flatshare.presentation.presenters.matching.impl.RoommateProfilePresenterImpl;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -30,14 +32,31 @@ public class RoommateQRInteractorImpl extends AbstractInteractor implements Room
 
     @Override
     public void execute() {
-        String path = databaseRoot.getRoommateProfileNode(this.roommateId).getApartmentId();
+        String path = databaseRoot.getRoommateProfileNode(this.roommateId).getRootPath();
+        mDatabase.child(path).removeEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d(TAG, "onDataChange: removeEventListener");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG, "onCancelled: removeEventListener");
+            }
+        });
         mDatabase.child(path).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getValue() == null){
+
+                RoommateProfile roommateProfile = dataSnapshot.getValue(RoommateProfile.class);
+
+                if(roommateProfile == null){
                     // Do nothing
+                    notifyError("Roommate profile with profileID: " + roommateId + " does not exist!");
                 } else { // Apartment ID was written
-                    notifyCodeRead();
+                    if(!roommateProfile.isAvailable()) {
+                        notifyCodeRead(roommateProfile.getApartmentId());
+                    }
                 }
             }
 
@@ -58,11 +77,11 @@ public class RoommateQRInteractorImpl extends AbstractInteractor implements Room
         });
     }
 
-    private void notifyCodeRead() {
+    private void notifyCodeRead(final String apartmentId) {
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onCodeRead();
+                mCallback.onCodeRead(apartmentId);
             }
         });
     }

@@ -18,6 +18,7 @@ import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.presentation.presenters.profile.ApartmentProfilePresenter;
 import com.flatshare.presentation.presenters.profile.impl.ApartmentProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
+import com.flatshare.presentation.ui.activities.matching.QRCodeReaderActivity;
 import com.flatshare.threading.MainThreadImpl;
 
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ import java.util.Map;
  */
 public class ApartmentProfileActivity extends AbstractActivity implements ApartmentProfilePresenter.View {
 
+    private static final int STATIC_VALUE = 1;
+    public static final String STATIC_ID = "id";
     private EditText apartmentPriceEditText;
     private EditText apartmentAreaEditText;
     private EditText apartmentStreetEditText;
@@ -50,8 +53,8 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     private MultiAutoCompleteTextView roommatesEmailsMultiAC;
     private ArrayAdapter<String> adapter;
 
-    //    private Button profileDoneButton;
     private Button createApartmentButton;
+    private Button scanRoommateQRButton;
 
     private ApartmentProfilePresenter mPresenter;
     private static final String TAG = "ApartmentProfileAct";
@@ -70,12 +73,41 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         );
 
         initMultiAutoComplete();
+
+
+        scanRoommateQRButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scanQR();
+            }
+        });
+
         createApartmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ApartmentProfileActivity.this.sendProfile();
             }
         });
+
+    }
+
+
+    // need it in order to get value from destroyed activity (QR Scanner)
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == STATIC_VALUE) {
+            if(resultCode == RESULT_OK){
+                String roommateId = data.getStringExtra(STATIC_ID);
+                roommatesEmailsMultiAC.getText().append(", " + roommateId);
+            }
+        }
+    }
+
+    private void scanQR() {
+
+        Intent intent = new Intent(this, QRCodeReaderActivity.class);
+        startActivityForResult(intent, STATIC_VALUE);
 
     }
 
@@ -161,6 +193,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         washingMachineNoRB = (RadioButton) findViewById(R.id.washing_machine_no_rb);
 
         createApartmentButton = (Button) findViewById(R.id.create_apartment_profile_button);
+        scanRoommateQRButton  = (Button) findViewById(R.id.scan_roommate_QR_button);
 
         roommatesEmailsMultiAC = (MultiAutoCompleteTextView) findViewById(R.id.apartment_roommates_edit_text);
 

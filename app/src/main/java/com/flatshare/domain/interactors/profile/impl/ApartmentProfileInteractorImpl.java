@@ -5,7 +5,7 @@ import android.util.Log;
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.common.ProfileType;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
-import com.flatshare.domain.interactors.profile.ProfileInteractor;
+import com.flatshare.domain.interactors.profile.SecondaryProfileInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,14 +17,14 @@ import java.util.Map;
 /**
  * Created by Arber on 10/12/2016.
  */
-public class ApartmentProfileInteractorImpl extends AbstractInteractor implements ProfileInteractor {
+public class ApartmentProfileInteractorImpl extends AbstractInteractor implements SecondaryProfileInteractor {
 
     private static final String TAG = "ApartmentProfileInt";
 
     /**
      * The Callback is responsible for talking to the UI on the main thread
      */
-    private ProfileInteractor.Callback mCallback;
+    private SecondaryProfileInteractor.Callback mCallback;
 
     private ApartmentProfile apartmentProfile;
 
@@ -51,13 +51,13 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
     /**
      * callback method that posts message received into the main UI, through mainThread.post!!!
      */
-    private void notifySuccess() {
+    private void notifySuccess(final ApartmentProfile apartmentProfile) {
         Log.d(TAG, "inside postMessage(String msg)");
 
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onSentSuccess(ProfileType.APARTMENT.getValue());
+                mCallback.onProfileCreated(apartmentProfile);
             }
         });
     }
@@ -65,7 +65,8 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
     @Override
     public void execute() {
 
-        apartmentProfile.getRoommateIds().add(userId);
+        //TODO: add roommateID! here or at the object in presenter
+//        apartmentProfile.getRoommateIds().add(this.roommateId);
 
         String city = apartmentProfile.getApartmentLocation().getCity();
         String district = apartmentProfile.getApartmentLocation().getDistrict();
@@ -85,7 +86,7 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
                 if (databaseError != null) { // Error
                     ApartmentProfileInteractorImpl.this.notifyError(databaseError.toException().getMessage());
                 } else {
-                    ApartmentProfileInteractorImpl.this.notifySuccess();
+                    ApartmentProfileInteractorImpl.this.notifySuccess(apartmentProfile);
                 }
             }
         });

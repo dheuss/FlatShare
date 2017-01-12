@@ -3,6 +3,7 @@ package com.flatshare.domain.interactors.impl;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.db.common.ProfileType;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
@@ -63,11 +64,20 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
         });
     }
 
+    private void notifyApartmentFound() {
+        mMainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                mCallback.onApartmentFound(roommateProfile, apartmentProfile);
+            }
+        });
+    }
+
     private void notifyRoommateFound() {
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onRoommateFound(roommateProfile, apartmentProfile);
+                mCallback.onRoommateFound(roommateProfile);
             }
         });
     }
@@ -90,7 +100,11 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
                 if (primaryUserProfile == null) {
                     notifyError("No PrimaryProfile created!");
                 } else { // if something found, get secondary profiles (either tenant or roommate)
-                    getSecondaryUserProfiles(primaryUserProfile.getTenantProfileId(), primaryUserProfile.getRoommateProfileId());
+                    if(primaryUserProfile.getClassificationId() == ProfileType.TENANT.getValue()){
+                        getTenantUserProfile(primaryUserProfile.getTenantProfileId());
+                    } else {
+                        getRoommateProfile(primaryUserProfile.getRoommateProfileId());
+                    }
                 }
             }
 
@@ -102,9 +116,9 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
 
     }
 
-    private void getSecondaryUserProfiles(String tenantProfileId, final String roommateProfileId) {
+    private void getTenantUserProfile(final String tenantProfileId) {
 
-        if (tenantProfileId != null && tenantProfileId != "") { // if no tenant ID
+        if (tenantProfileId != null && tenantProfileId != "") { // if tenant ID valid
 
             String path = databaseRoot.getTenantProfileNode(tenantProfileId).getRootPath();
 
@@ -114,10 +128,10 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
 
                     tenantProfile = dataSnapshot.getValue(TenantProfile.class);
 
-                    if (tenantProfile == null) { // nothing found
-                        getRoommateProfile(roommateProfileId, false);
+                    if (tenantProfile == null) { // no settings yet
+                        notifyError("tenantProfile with ID: " + tenantProfileId + " does not exist!");
                     } else {
-                        getRoommateProfile(roommateProfileId, true);
+                        notifyTenantFound();
                     }
                 }
 
@@ -126,14 +140,15 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
                     notifyError(databaseError.getMessage());
                 }
             });
-        } else {
-            getRoommateProfile(roommateProfileId, false);
+        } else { // tenantId was wrong
+            notifyError("tenantID: " + tenantProfileId + " is invalid!");
         }
     }
 
-    private void getRoommateProfile(String roommateProfileId, final boolean tenantFound) {
+    private void getRoommateProfile(final String roommateProfileId) {
 
-        if (roommateProfileId != null && roommateProfileId != "") {
+        if (roommateProfileId != null && roommateProfileId != "") { // if roommate ID valid
+
             String path = databaseRoot.getRoommateProfileNode(roommateProfileId).getRootPath();
 
             mDatabase.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -141,15 +156,11 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
                     roommateProfile = dataSnapshot.getValue(RoommateProfile.class);
+
                     if (roommateProfile == null) {
-                        if (tenantFound) {
-                            notifyTenantFound();
-                        } else {
-                            notifyError("Neither tenantId, nor roommateId found!");
-                        }
+                        notifyError("roommateProfile with ID: " + roommateProfileId + " does not exist!");
                     } else {
-                        String apartmentProfileId = roommateProfile.getApartmentId();
-                        getApartmentProfile(apartmentProfileId);
+                        getApartmentProfile(roommateProfile.getApartmentId());
                     }
                 }
 
@@ -158,16 +169,12 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
                     notifyError(databaseError.getMessage());
                 }
             });
-        } else { // only tenant could be found (no apartment)
-            if (tenantFound) { // if tenant found => call callback
-                notifyTenantFound();
-            } else { // if neither tenant nor roommate found (there cannot be any apartment
-                notifyError("Neither tenantId, nor roommateId found!");
-            }
+        } else { // roommateId was wrong
+            notifyError("roommateID: " + roommateProfileId + " is invalid!");
         }
     }
 
-    private void getApartmentProfile(String apartmentProfileId) {
+    private void getApartmentProfile(final String apartmentProfileId) {
 
         if (apartmentProfileId != null && apartmentProfileId != "") {
             String path = databaseRoot.getApartmentProfileNode(apartmentProfileId).getRootPath();
@@ -177,8 +184,11 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
                     apartmentProfile = dataSnapshot.getValue(ApartmentProfile.class);
-
-                    notifyRoommateFound();
+                    if (apartmentProfile == null) {
+                        notifyError("apartmentProfile with ID: " + apartmentProfileId + " does not exist!");
+                    } else {
+                        notifyApartmentFound();
+                    }
                 }
 
                 @Override

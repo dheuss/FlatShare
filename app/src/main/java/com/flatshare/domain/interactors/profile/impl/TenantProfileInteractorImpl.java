@@ -5,7 +5,7 @@ import android.util.Log;
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.common.ProfileType;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
-import com.flatshare.domain.interactors.profile.ProfileInteractor;
+import com.flatshare.domain.interactors.profile.SecondaryProfileInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,14 +17,14 @@ import java.util.Map;
 /**
  * Created by Arber on 12/12/2016.
  */
-public class TenantProfileInteractorImpl extends AbstractInteractor implements ProfileInteractor {
+public class TenantProfileInteractorImpl extends AbstractInteractor implements SecondaryProfileInteractor {
 
     private static final String TAG = "TenantProfileInt";
 
     /**
      * The Callback is responsible for talking to the UI on the main thread
      */
-    private ProfileInteractor.Callback mCallback;
+    private SecondaryProfileInteractor.Callback mCallback;
 
     private TenantProfile tenantProfile;
 
@@ -57,7 +57,7 @@ public class TenantProfileInteractorImpl extends AbstractInteractor implements P
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onSentSuccess(ProfileType.TENANT.getValue());
+                mCallback.onProfileCreated(tenantProfile);
             }
         });
     }

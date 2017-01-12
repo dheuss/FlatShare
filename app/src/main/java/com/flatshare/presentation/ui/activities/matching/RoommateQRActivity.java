@@ -1,17 +1,19 @@
 package com.flatshare.presentation.ui.activities.matching;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.flatshare.R;
-import com.flatshare.presentation.presenters.matching.RoommateProfilePresenter;
-import com.flatshare.presentation.presenters.matching.impl.RoommateProfilePresenterImpl;
+import com.flatshare.presentation.presenters.profile.RoommateProfilePresenter;
+import com.flatshare.presentation.presenters.profile.impl.RoommateProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
+import com.flatshare.presentation.ui.activities.profile.RoommateWaitingActivity;
 import com.flatshare.threading.MainThreadImpl;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -31,7 +33,7 @@ public class RoommateQRActivity extends AbstractActivity implements RoommateProf
     private ImageView qrImageView;
     private final static int QR_CODE_DIM = 800;
     private Bitmap bitmap;
-    private String roommateId;
+    private String qrCodeString;
 
     private RoommateProfilePresenter mPresenter;
 
@@ -47,12 +49,14 @@ public class RoommateQRActivity extends AbstractActivity implements RoommateProf
         );
 
         Bundle b = getIntent().getExtras();
-        if(b != null){
+        String roommateId;
+        if (b != null) {
             roommateId = b.getString("id");
-            encodeStringToQR(roommateId);
+            qrCodeString = QRCodeReaderActivity.QR_IDENTIFIER + ":" + roommateId;
+            encodeStringToQR(qrCodeString);
+            mPresenter.listenToDB(roommateId);
         }
 
-        mPresenter.listenToDB(roommateId);
 
     }
 
@@ -125,9 +129,19 @@ public class RoommateQRActivity extends AbstractActivity implements RoommateProf
     }
 
     @Override
-    public void changeToSwipingActivity() {
-        Intent intent = new Intent(this, MatchingActivity.class);
-        startActivity(intent);
-        Log.d(TAG, "success! changed to MatchingActivity!");
+    public void onQRCodeRead(String apartmentId) {
+
+        Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        v.vibrate(500);
+        changeToWaitingActivity();
     }
+
+    @Override
+    public void changeToWaitingActivity() {
+        Intent intent = new Intent(this, RoommateWaitingActivity.class);
+        startActivity(intent);
+        Log.d(TAG, "success! changed to RoommateWaitingActivity!");
+    }
+
 }

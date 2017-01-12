@@ -2,7 +2,11 @@ package com.flatshare.presentation.ui.activities.matching;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -13,26 +17,37 @@ import android.view.SurfaceView;
 import android.widget.TextView;
 
 import com.flatshare.R;
+import com.flatshare.presentation.presenters.profile.QRScannerPresenter;
+import com.flatshare.presentation.presenters.profile.impl.PrimaryProfilePresenterImpl;
+import com.flatshare.presentation.presenters.profile.impl.QRScannerPresenterImpl;
+import com.flatshare.presentation.ui.activities.profile.ApartmentProfileActivity;
+import com.flatshare.threading.MainThreadImpl;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import dmax.dialog.SpotsDialog;
 
 /**
  * Created by Arber on 07/01/2017.
  */
-public class QRCodeReaderActivity extends Activity {
+public class QRCodeReaderActivity extends Activity implements QRScannerPresenter.View {
 
     private static final int PERMISSIONS_REQUEST_CAMERA = 100;
 
     private static final int WIDTH = 640;
     private static final int HEIGHT = 480;
+    public static final String QR_IDENTIFIER = "123123123";
 
+    QRScannerPresenter mPresenter;
+
+    private AlertDialog progressDialog;
 
     private SurfaceView cameraView;
-    private TextView barcodeInfo;
     private BarcodeDetector barcodeDetector;
 
     private CameraSource cameraSource;
@@ -42,8 +57,14 @@ public class QRCodeReaderActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode_reader);
 
+        progressDialog = new SpotsDialog(this, R.style.Custom);
+
+        mPresenter = new QRScannerPresenterImpl(
+                MainThreadImpl.getInstance(),
+                this
+        );
+
         setupReader();
-        bindView();
         checkForPermission();
     }
 
@@ -56,6 +77,8 @@ public class QRCodeReaderActivity extends Activity {
     }
 
     private void setupBarcodeDetector() {
+
+        final AtomicBoolean flag = new AtomicBoolean(false);
 
         if (barcodeDetector == null) {
             barcodeDetector =
@@ -72,18 +95,17 @@ public class QRCodeReaderActivity extends Activity {
                     public void receiveDetections(Detector.Detections<Barcode> detections) {
                         final SparseArray<Barcode> barcodes = detections.getDetectedItems();
 
+                        if(flag.get()){
+                            return;
+                        }
+
                         if (barcodes.size() != 0) {
-                            barcodeInfo.post(new Runnable() {
-                                @Override
-                                public void run() {
-
-                                    System.out.println("CODE = " + barcodes.valueAt(0));
-
-                                    barcodeInfo.setText(    // Update the TextView
-                                            barcodes.valueAt(0).displayValue
-                                    );
-                                }
-                            });
+                            String[] values = barcodes.valueAt(0).displayValue.split(":");
+                            if(values[0].equals(QR_IDENTIFIER)) {
+                                String roommateId = values[1];
+                                flag.set(true);
+                                mPresenter.addRoomate(roommateId);
+                            }
                         }
                     }
                 });
@@ -152,11 +174,41 @@ public class QRCodeReaderActivity extends Activity {
         cameraSource.stop();
     }
 
+    @Override
+    public void showProgress() {
+        progressDialog.show();
+    }
 
-    private void bindView() {
+    @Override
+    public void hideProgress() {
+        progressDialog.hide();
+    }
 
-        barcodeInfo = (TextView) findViewById(R.id.code_info);
+    @Override
+    public void showError(String message) {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        try {
+            if (progressDialog != null && progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    public void displayReadCode(String roommateId) {
+        Intent intent = new Intent();
+        intent.putExtra(ApartmentProfileActivity.STATIC_ID, roommateId);
+        setResult(Activity.RESULT_OK, intent);
+        Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        v.vibrate(100);
+        finish();
+    }
 }

@@ -67,7 +67,6 @@ public class ApartmentProfile extends UserProfile {
     public List<String> matchedTenantIds;
 
     public ApartmentProfile() {
-        this.apartmentFilterSettings = new ApartmentFilterSettings();
         this.roommateIds = new ArrayList<>();
         this.apartmentLocation = new ApartmentLocation();
         this.imageIds = new ArrayList<>();
@@ -228,6 +227,11 @@ public class ApartmentProfile extends UserProfile {
     @Exclude
     public String getMainImageId() {
         return mainImageId;
+    }
+
+    @Exclude
+    public void setApartmentId(String apartmentId) {
+        this.apartmentId = apartmentId;
     }
 
     @Exclude
