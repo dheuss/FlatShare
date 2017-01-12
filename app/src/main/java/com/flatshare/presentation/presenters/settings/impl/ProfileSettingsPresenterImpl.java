@@ -63,7 +63,6 @@ public class ProfileSettingsPresenterImpl extends AbstractPresenter implements P
 
     @Override
     public void onSentFailure(String error) {
-        userState.setTenantProfile(null);
         mView.hideProgress();
         onError(error);
     }

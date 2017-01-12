@@ -7,8 +7,10 @@ import com.flatshare.domain.datatypes.db.common.ProfileType;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.interactors.profile.SecondaryProfileInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +31,7 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
     private ApartmentProfile apartmentProfile;
 
     public ApartmentProfileInteractorImpl(MainThread mainThread,
-                                          Callback callback, ApartmentProfile apartmentProfile) {
+                                          Callback callback,ApartmentProfile apartmentProfile) {
 
         super(mainThread);
         this.mMainThread = mainThread;
@@ -65,16 +67,13 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
     @Override
     public void execute() {
 
-        //TODO: add roommateID! here or at the object in presenter
-//        apartmentProfile.getRoommateIds().add(this.roommateId);
+        String apartmentId = apartmentProfile.getApartmentId();
 
         String city = apartmentProfile.getApartmentLocation().getCity();
         String district = apartmentProfile.getApartmentLocation().getDistrict();
         int zipCode = apartmentProfile.getApartmentLocation().getZipCode();
 
         String locationPath = databaseRoot.getApartmentLocationsNode().getCitiesNode(city).getDistrictsNode(district).getZipCodesNode(zipCode).getRootPath();
-
-        String apartmentId = mDatabase.child(databaseRoot.getApartmentProfiles()).push().getKey();
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put(databaseRoot.getApartmentProfileNode(apartmentId).getRootPath(), this.apartmentProfile);

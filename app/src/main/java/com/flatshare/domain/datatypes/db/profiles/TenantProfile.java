@@ -65,6 +65,9 @@ public class TenantProfile extends UserProfile {
     @PropertyName("timestamp")
     public long timestamp;
 
+    @PropertyName("profile_done")
+    public boolean done;
+
     public TenantProfile() {
 
 //        this.tenantFilterSettings = new TenantFilterSettings();
@@ -242,6 +245,16 @@ public class TenantProfile extends UserProfile {
     @Exclude
     public void setTenantId(String tenantId) {
         this.tenantId = tenantId;
+    }
+
+    @Exclude
+    public boolean isDone() {
+        return done;
+    }
+
+    @Exclude
+    public void setDone(boolean done) {
+        this.done = done;
     }
 
     @Exclude

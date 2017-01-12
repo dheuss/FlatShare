@@ -66,6 +66,9 @@ public class ApartmentProfile extends UserProfile {
     @PropertyName("matched_tenant_ids")
     public List<String> matchedTenantIds;
 
+    @PropertyName("profile_done")
+    public boolean done;
+
     public ApartmentProfile() {
         this.roommateIds = new ArrayList<>();
         this.apartmentLocation = new ApartmentLocation();
@@ -80,7 +83,7 @@ public class ApartmentProfile extends UserProfile {
     }
 
     @Exclude
-    public void setOwnerUserId(String ownerUserId) {
+    public void setOwnerRoommateId(String ownerUserId) {
         this.ownerUserId = ownerUserId;
     }
 
@@ -232,6 +235,16 @@ public class ApartmentProfile extends UserProfile {
     @Exclude
     public void setApartmentId(String apartmentId) {
         this.apartmentId = apartmentId;
+    }
+
+    @Exclude
+    public boolean isDone() {
+        return done;
+    }
+
+    @Exclude
+    public void setDone(boolean done) {
+        this.done = done;
     }
 
     @Exclude

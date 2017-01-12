@@ -68,11 +68,11 @@ public class TenantProfileInteractorImpl extends AbstractInteractor implements S
     @Override
     public void execute() {
 
-        String tId = mDatabase.child(databaseRoot.getTenantProfiles()).push().getKey();
+        String tenantId = tenantProfile.getTenantId();
 
         Map<String, Object> map = new HashMap<>();
-        map.put(databaseRoot.getTenantProfileNode(tId).getRootPath(), this.tenantProfile);
-        map.put(databaseRoot.getUserProfileNode(userId).getTenantProfileId(), tId);
+        map.put(databaseRoot.getTenantProfileNode(tenantId).getRootPath(), this.tenantProfile);
+        map.put(databaseRoot.getUserProfileNode(userId).getTenantProfileId(), tenantId);
 
         mDatabase.updateChildren(map, new DatabaseReference.CompletionListener() {
             @Override

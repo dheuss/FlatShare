@@ -71,7 +71,6 @@ public class PrimaryProfilePresenterImpl extends AbstractPresenter implements Pr
 
     @Override
     public void onSentFailure(String error) {
-        userState.setPrimaryUserProfile(null);
         mView.hideProgress();
         onError(error);
     }

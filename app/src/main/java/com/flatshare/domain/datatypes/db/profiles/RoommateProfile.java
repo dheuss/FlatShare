@@ -16,6 +16,12 @@ public class RoommateProfile extends UserProfile {
     @PropertyName("roommate_id")
     public String roommateId;
 
+    @PropertyName("nickname")
+    public String nickname;
+
+    @PropertyName("gender")
+    public int gender;
+
     @PropertyName("owner")
     public boolean owner;
 
@@ -30,6 +36,9 @@ public class RoommateProfile extends UserProfile {
 
     @PropertyName("available")
     public boolean available;
+
+    @PropertyName("profile_done")
+    public boolean done;
 
     public RoommateProfile() {
         potentialTenants = new ArrayList<>();
@@ -94,6 +103,36 @@ public class RoommateProfile extends UserProfile {
     @Exclude
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    @Exclude
+    public String getNickname() {
+        return nickname;
+    }
+
+    @Exclude
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    @Exclude
+    public boolean isDone() {
+        return done;
+    }
+
+    @Exclude
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
+    @Exclude
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    @Exclude
+    public int getGender() {
+        return gender;
     }
 
     @Exclude

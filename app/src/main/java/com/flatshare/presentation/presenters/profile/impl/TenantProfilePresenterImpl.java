@@ -56,21 +56,23 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
 
     @Override
     public void onSentFailure(String error) {
-        userState.setTenantProfile(null);
         mView.hideProgress();
         onError(error);
     }
 
     @Override
     public void onProfileCreated(UserProfile profile) {
+        TenantProfile tenantProfile = (TenantProfile) profile;
+        tenantProfile.setDone(true);
+        userState.setTenantProfile(tenantProfile);
         mView.hideProgress();
-        userState.setTenantProfile((TenantProfile) profile);
         mView.changeToTenantSettings();
     }
 
     @Override
     public void sendProfile(TenantProfile tenantProfile) {
         mView.showProgress();
+        tenantProfile.setTenantId(userState.getTenantId());
         SecondaryProfileInteractor interactor = new TenantProfileInteractorImpl(mMainThread, this, tenantProfile);
         interactor.execute();
     }

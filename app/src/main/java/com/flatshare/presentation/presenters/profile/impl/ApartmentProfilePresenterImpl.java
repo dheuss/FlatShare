@@ -57,15 +57,17 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
 
     @Override
     public void onSentFailure(String error) {
-        userState.setApartmentProfile(null);
         mView.hideProgress();
         onError(error);
     }
 
     @Override
     public void onProfileCreated(UserProfile profile) {
+        ApartmentProfile apartmentProfile = (ApartmentProfile) profile;
+        apartmentProfile.setDone(true);
+        userState.setApartmentProfile(apartmentProfile);
+
         mView.hideProgress();
-        userState.setApartmentProfile((ApartmentProfile) profile);
         mView.changeToApartmentSettings();
     }
 
@@ -73,6 +75,16 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
     public void sendProfile(ApartmentProfile apartmentProfile) {
 
         mView.showProgress();
+
+        // set id
+        String apartmentId = userState.getRoommateProfile().getApartmentId();
+        apartmentProfile.setApartmentId(apartmentId);
+
+        // ad owner
+        String ownerId = userState.getRoommateId();
+        apartmentProfile.setOwnerRoommateId(ownerId);
+        apartmentProfile.getRoommateIds().add(ownerId);
+
         SecondaryProfileInteractor interactor = new ApartmentProfileInteractorImpl(mMainThread, this, apartmentProfile);
         interactor.execute();
 

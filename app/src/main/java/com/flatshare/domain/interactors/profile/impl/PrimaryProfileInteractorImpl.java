@@ -158,7 +158,7 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
 
 //    private void updateClassificationId() {
 //
-//        //TODO: check if redundant => can it be deleted?
+//        //TODO: check if redundant => change its place
 //
 //        Map<String, Object> map = new HashMap<>();
 //        map.put(databaseRoot.getUserProfileNode(userId).getClassificationId(), this.primaryUserProfile.getClassificationId());
