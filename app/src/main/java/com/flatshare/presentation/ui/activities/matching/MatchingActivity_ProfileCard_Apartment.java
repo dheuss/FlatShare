@@ -24,7 +24,7 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeOutState;
  */
 
 @Layout(R.layout.activity_matching_card)
-public class MatchingActivity_ProfileCard{
+public class MatchingActivity_ProfileCard_Apartment {
     @View(R.id.profileImageView)
     private ImageView profileImageView;
 
@@ -38,7 +38,7 @@ public class MatchingActivity_ProfileCard{
     private Context mContext;
     private SwipePlaceHolderView mSwipeView;
 
-    public MatchingActivity_ProfileCard(Context context, ApartmentProfile profile, SwipePlaceHolderView swipeView) {
+    public MatchingActivity_ProfileCard_Apartment(Context context, ApartmentProfile profile, SwipePlaceHolderView swipeView) {
         mContext = context;
         mProfile = profile;
         mSwipeView = swipeView;
