@@ -18,8 +18,13 @@ public interface LoginPresenter extends BasePresenter {
         void changeToProfileActivity();
         void changeToMatchingActivity();
 
+        void changeToTenantProfileActivity();
         void changeToTenantSettingsActivity();
+
+
         void notifyRoommateGenerateQR(String roommateId);
+
+        void changeToApartmentProfileActivity();
         void changeToApartmentSettingsActivity();
     }
 

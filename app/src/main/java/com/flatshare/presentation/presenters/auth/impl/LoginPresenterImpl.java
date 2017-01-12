@@ -102,12 +102,15 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
         userState.setPrimaryUserProfile(primaryUserProfile);
         userState.setTenantProfile(tenantProfile);
 
-        if(tenantProfile.getTenantFilterSettings() == null){
-            mView.hideProgress();
-            mView.changeToTenantSettingsActivity();
+        mView.hideProgress();
+        if(tenantProfile.isDone()){
+            if(tenantProfile.getTenantFilterSettings() == null){
+                mView.changeToTenantSettingsActivity();
+            } else {
+                mView.changeToMatchingActivity();
+            }
         } else {
-            mView.hideProgress();
-            mView.changeToMatchingActivity();
+            mView.changeToTenantProfileActivity();
         }
     }
 
