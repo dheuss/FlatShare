@@ -71,7 +71,7 @@
             android:name=".presentation.ui.activities.settings.SettingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.activities.matchingoverview.calender.CalendarActivity"
+            android:name=".presentation.ui.activities.matchingoverview.calendar.CalendarActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.ui.activities.matching.RoommateQRActivity"
