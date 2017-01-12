@@ -57,6 +57,7 @@ public class RoommateQRInteractorImpl extends AbstractInteractor implements Room
                     if(roommateProfile.isAvailable()) {
                         notifyCodeRead(roommateProfile.getApartmentId());
                         roommateProfile.setAvailable(false);
+
                     }
                 }
             }
