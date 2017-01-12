@@ -74,6 +74,7 @@ public class RoommateProfilePresenterImpl extends AbstractPresenter implements R
     @Override
     public void onCodeRead(String apartmentId) {
         mView.onQRCodeRead(apartmentId);
+        userState.getRoommateProfile().setAvailable(false);
     }
 
     @Override

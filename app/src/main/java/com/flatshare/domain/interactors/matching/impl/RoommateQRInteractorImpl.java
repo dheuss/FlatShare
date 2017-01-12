@@ -54,8 +54,9 @@ public class RoommateQRInteractorImpl extends AbstractInteractor implements Room
                     // Do nothing
                     notifyError("Roommate profile with profileID: " + roommateId + " does not exist!");
                 } else { // Apartment ID was written
-                    if(!roommateProfile.isAvailable()) {
+                    if(roommateProfile.isAvailable()) {
                         notifyCodeRead(roommateProfile.getApartmentId());
+                        roommateProfile.setAvailable(false);
                     }
                 }
             }
