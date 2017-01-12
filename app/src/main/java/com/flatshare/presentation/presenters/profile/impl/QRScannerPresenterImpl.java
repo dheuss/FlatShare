@@ -66,6 +66,7 @@ public class QRScannerPresenterImpl extends AbstractPresenter implements QRScann
 
     @Override
     public void onSuccess(String roommateId) {
+        userState.getRoommateProfile().setAvailable(false);
         mView.displayReadCode(roommateId);
     }
 }

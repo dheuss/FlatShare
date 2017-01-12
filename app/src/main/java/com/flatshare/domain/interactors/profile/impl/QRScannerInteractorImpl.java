@@ -61,7 +61,7 @@ public class QRScannerInteractorImpl extends AbstractInteractor implements QRSca
     public void execute() {
         String path = databaseRoot.getRoommateProfileNode(this.roommateId).getAvailable();
 
-        mDatabase.child(path).setValue(true, new DatabaseReference.CompletionListener() {
+        mDatabase.child(path).setValue(false, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if (databaseError == null) {

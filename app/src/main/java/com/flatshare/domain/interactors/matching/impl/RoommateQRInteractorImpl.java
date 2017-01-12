@@ -8,6 +8,7 @@ import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.domain.interactors.matching.RoommateQRInteractor;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 /**
@@ -54,9 +55,8 @@ public class RoommateQRInteractorImpl extends AbstractInteractor implements Room
                     // Do nothing
                     notifyError("Roommate profile with profileID: " + roommateId + " does not exist!");
                 } else { // Apartment ID was written
-                    if(roommateProfile.isAvailable()) {
+                    if(!roommateProfile.isAvailable()) {
                         notifyCodeRead(roommateProfile.getApartmentId());
-                        roommateProfile.setAvailable(false);
                     }
                 }
             }
@@ -67,6 +67,23 @@ public class RoommateQRInteractorImpl extends AbstractInteractor implements Room
             }
         });
     }
+
+//    private void updateRoommateAvailable(final RoommateProfile roommateProfile) {
+//
+//        String path = databaseRoot.getRoommateProfileNode(roommateProfile.getRoommateId()).getAvailable();
+//
+//        mDatabase.child(path).setValue(false, new DatabaseReference.CompletionListener() {
+//            @Override
+//            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+//                if(databaseError == null){ // no error
+//                    roommateProfile.setAvailable(false);
+//                } else {
+//                    notifyError(databaseError.getMessage());
+//                }
+//            }
+//        });
+//
+//    }
 
 
     private void notifyError(final String errorMessage) {
