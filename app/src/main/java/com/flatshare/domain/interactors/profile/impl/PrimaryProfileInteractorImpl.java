@@ -51,12 +51,12 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
     /**
      * callback method that posts message received into the main UI, through mainThread.post!!!
      */
-    private void notifyProfileCreated(final PrimaryUserProfile primaryUserProfile) {
+    private void notifyProfileCreated(final UserProfile secondaryProfile) {
 
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onProfileCreated(primaryUserProfile);
+                mCallback.onProfileCreated(primaryUserProfile, secondaryProfile);
             }
         });
     }
@@ -92,8 +92,13 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
             secondaryProfileId = mDatabase.child(secondaryProfilePath).push().getKey();
             primaryUserProfile.setRoommateProfileId(secondaryProfileId);
 
+
+            RoommateProfile roommateProfile = new RoommateProfile();
+            roommateProfile.setRoommateId(secondaryProfileId);
+
             String apartmentProfilePath = databaseRoot.getApartmentProfiles();
             String apartmentId = mDatabase.child(apartmentProfilePath).push().getKey();
+            roommateProfile.setApartmentId(apartmentId);
 
             ApartmentProfile apartmentProfile = new ApartmentProfile();
             apartmentProfile.setApartmentId(apartmentId);
@@ -105,12 +110,13 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
         }
     }
 
-    private void pushId(final String secondaryProfilePath, UserProfile userProfile) {
+    private void pushId(final String secondaryProfilePath, final UserProfile userProfile) {
         mDatabase.child(secondaryProfilePath).setValue(userProfile, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if (databaseError == null) {
-                    createProfile();
+                    Log.d(TAG, "execute: PUSHING TO " + secondaryProfilePath);
+                    createProfile(userProfile);
                 } else {
                     PrimaryProfileInteractorImpl.this.notifyError(databaseError.getMessage());
                 }
@@ -127,8 +133,7 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
         RoommateProfile roommateProfile = new RoommateProfile();
         roommateProfile.setRoommateId(roommateId);
         roommateProfile.setApartmentId(apartmentId);
-        roommateProfile.setAvailable(false);
-        roommateProfile.setOwner(true);
+        roommateProfile.setAvailable(true);
 
         pushId(roommateProfilePath, roommateProfile);
 
@@ -137,7 +142,7 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
         mDatabase.child(apartmentProfilePath).setValue(apartmentProfile);
     }
 
-    private void createProfile() {
+    private void createProfile(final UserProfile userProfile) {
 
         Log.d(TAG, "creating main profile!");
 
@@ -147,7 +152,7 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if (databaseError == null) {
-                    PrimaryProfileInteractorImpl.this.notifyProfileCreated(primaryUserProfile);
+                    PrimaryProfileInteractorImpl.this.notifyProfileCreated(userProfile);
                 } else {
                     PrimaryProfileInteractorImpl.this.notifyError(databaseError.getMessage());
                 }
@@ -158,7 +163,7 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
 
 //    private void updateClassificationId() {
 //
-//        //TODO: check if redundant => change its place
+//        //TODO: check if redundant => can it be deleted?
 //
 //        Map<String, Object> map = new HashMap<>();
 //        map.put(databaseRoot.getUserProfileNode(userId).getClassificationId(), this.primaryUserProfile.getClassificationId());

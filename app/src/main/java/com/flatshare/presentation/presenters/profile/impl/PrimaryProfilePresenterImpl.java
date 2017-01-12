@@ -1,9 +1,12 @@
 package com.flatshare.presentation.presenters.profile.impl;
 
 import com.flatshare.domain.datatypes.db.common.ProfileType;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
+import com.flatshare.domain.datatypes.db.profiles.UserProfile;
 import com.flatshare.domain.interactors.profile.PrimaryProfileInteractor;
 import com.flatshare.domain.interactors.profile.impl.PrimaryProfileInteractorImpl;
 import com.flatshare.presentation.presenters.profile.PrimaryProfilePresenter;
@@ -49,7 +52,7 @@ public class PrimaryProfilePresenterImpl extends AbstractPresenter implements Pr
     }
 
     @Override
-    public void onProfileCreated(PrimaryUserProfile primaryUserProfile) {
+    public void onProfileCreated(PrimaryUserProfile primaryUserProfile, UserProfile secondaryProfile) {
 
         userState.setPrimaryUserProfile(primaryUserProfile);
         int classificationId = primaryUserProfile.getClassificationId();
@@ -57,10 +60,13 @@ public class PrimaryProfilePresenterImpl extends AbstractPresenter implements Pr
         mView.hideProgress();
 
         if (classificationId == ProfileType.TENANT.getValue()) {
+            userState.setTenantProfile((TenantProfile) secondaryProfile);
             mView.changeToTenantProfile();
         } else if (classificationId == ProfileType.APARTMENT.getValue()) {
+            userState.setApartmentProfile((ApartmentProfile) secondaryProfile);
             mView.changeToApartmentProfile();
         } else if (classificationId == ProfileType.ROOMMATE.getValue()) {
+            userState.setRoommateProfile((RoommateProfile) secondaryProfile);
             mView.changeToRoomateQR(primaryUserProfile.getRoommateProfileId());
         } else {
 

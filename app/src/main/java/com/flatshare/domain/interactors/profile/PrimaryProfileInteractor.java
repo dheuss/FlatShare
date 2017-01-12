@@ -1,6 +1,7 @@
 package com.flatshare.domain.interactors.profile;
 
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.UserProfile;
 import com.flatshare.domain.interactors.base.Interactor;
 
 /**
@@ -12,7 +13,7 @@ public interface PrimaryProfileInteractor extends Interactor {
     interface Callback {
 
         void onSentFailure(String error);
-        void onProfileCreated(PrimaryUserProfile primaryUserProfile);
+        void onProfileCreated(PrimaryUserProfile primaryUserProfile, UserProfile secondaryProfile);
 
     }
 
