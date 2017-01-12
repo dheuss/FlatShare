@@ -92,13 +92,8 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
             secondaryProfileId = mDatabase.child(secondaryProfilePath).push().getKey();
             primaryUserProfile.setRoommateProfileId(secondaryProfileId);
 
-
-            RoommateProfile roommateProfile = new RoommateProfile();
-            roommateProfile.setRoommateId(secondaryProfileId);
-
             String apartmentProfilePath = databaseRoot.getApartmentProfiles();
             String apartmentId = mDatabase.child(apartmentProfilePath).push().getKey();
-            roommateProfile.setApartmentId(apartmentId);
 
             ApartmentProfile apartmentProfile = new ApartmentProfile();
             apartmentProfile.setApartmentId(apartmentId);
@@ -115,7 +110,6 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if (databaseError == null) {
-                    Log.d(TAG, "execute: PUSHING TO " + secondaryProfilePath);
                     createProfile(userProfile, apartmentProfile);
                 } else {
                     PrimaryProfileInteractorImpl.this.notifyError(databaseError.getMessage());
@@ -129,12 +123,10 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
         String roommateProfilePath = databaseRoot.getRoommateProfileNode(roommateId).getRootPath();
         String apartmentProfilePath = databaseRoot.getApartmentProfileNode(apartmentId).getRootPath();
 
-
         RoommateProfile roommateProfile = new RoommateProfile();
         roommateProfile.setRoommateId(roommateId);
         roommateProfile.setApartmentId(apartmentId);
-        roommateProfile.setAvailable(true);
-
+        roommateProfile.setAvailable(false);
 
         ApartmentProfile apartmentProfile = new ApartmentProfile();
         apartmentProfile.setApartmentId(apartmentId);

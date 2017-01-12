@@ -1,5 +1,7 @@
 package com.flatshare.domain.interactors.matching.impl;
 
+import android.util.Log;
+
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.filters.ApartmentFilterSettings;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
@@ -34,6 +36,18 @@ public class RoommateWaitingInteractorImpl extends AbstractInteractor implements
     @Override
     public void execute() {
         final String path = databaseRoot.getApartmentProfileNode(this.apartmentId).getApartmentFilterSettings();
+
+        mDatabase.child(path).removeEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG, "onCancelled: something went wrong but its not important");
+            }
+        });
 
         mDatabase.child(path).addValueEventListener(new ValueEventListener() {
             @Override
