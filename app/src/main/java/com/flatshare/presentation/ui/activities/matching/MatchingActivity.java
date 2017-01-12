@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
@@ -128,36 +127,26 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
 
     @Override
     public void showTenants(List<TenantProfile> tenants) {
-        //TODO: display tenants
-        mSwipeView.getBuilder()
-                .setDisplayViewCount(3)
-                .setSwipeDecor(new SwipeDecor()
-                        .setPaddingTop(20)
-                        .setRelativeScale(0.01f)
-                        .setSwipeInMsgLayoutId(R.layout.activity_matching_card_in)
-                        .setSwipeOutMsgLayoutId(R.layout.activity_matching_card_out));
-
-
         Log.d(TAG, "size of potential apartments: " + tenants.size());
 
         int i = 0;
 
         for (TenantProfile t : tenants){
-            Log.d(TAG, "i: " + i++ + "\n" + t.toString());
+            //Log.d(TAG, "i: " + i++ + "\n" + t.toString());
+            mSwipeView.addView(new MatchingActivity_ProfileCard_Tenant(mContext, t, mSwipeView));
         }
 
     }
 
     @Override
     public void showApartments(List<ApartmentProfile> apartments) {
-
         Log.d(TAG, "size of potential apartments: " + apartments.size());
 
         int i = 0;
 
         for (ApartmentProfile a : apartments){
             //Log.d(TAG, "i: " + i++ + "\n" + a.toString());
-            mSwipeView.addView(new MatchingActivity_ProfileCard(mContext, a, mSwipeView));
+            mSwipeView.addView(new MatchingActivity_ProfileCard_Apartment(mContext, a, mSwipeView));
         }
     }
 }

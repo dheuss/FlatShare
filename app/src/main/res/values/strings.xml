@@ -95,6 +95,8 @@
     <string name="apartment_info_headline">Apartment Info</string>
     <string name="apartment_info_description">Here we are going to show you some more information about this specific living community you\'re looking at!</string>
     <string name="scan_qr">Scan QR</string>
+    <string name="tenant_info_headline">Tenant Info</string>
+    <string name="tenant_info_description">Here we are going to show you some information about your possible new tenant.</string>
 
     <string-array name="occupation">
         <item>Student</item>
