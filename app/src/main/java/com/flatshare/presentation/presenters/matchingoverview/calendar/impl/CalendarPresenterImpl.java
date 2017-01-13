@@ -4,6 +4,8 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 import com.flatshare.presentation.presenters.matchingoverview.calendar.CalendarPresenter;
 
+import java.util.List;
+
 /**
  * Created by Sandro on 07.01.17.
  */
@@ -44,4 +46,8 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
         mView.showError(error);
     }
 
+    @Override
+    public void send(List<String> dateList, List<String> timeList) {
+
+    }
 }
