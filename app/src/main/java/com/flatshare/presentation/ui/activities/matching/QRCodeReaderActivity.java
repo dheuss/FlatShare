@@ -17,6 +17,7 @@ import android.view.SurfaceView;
 import android.widget.TextView;
 
 import com.flatshare.R;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.presentation.presenters.profile.QRScannerPresenter;
 import com.flatshare.presentation.presenters.profile.impl.PrimaryProfilePresenterImpl;
 import com.flatshare.presentation.presenters.profile.impl.QRScannerPresenterImpl;
@@ -205,6 +206,7 @@ public class QRCodeReaderActivity extends Activity implements QRScannerPresenter
     public void displayReadCode(String roommateId) {
         Intent intent = new Intent();
         intent.putExtra(ApartmentProfileActivity.STATIC_ID, roommateId);
+        TenantProfile tenantProfile = new TenantProfile();
         setResult(Activity.RESULT_OK, intent);
         Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
         // Vibrate for 500 milliseconds

@@ -3,12 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/windowBackground"
-    tools:context="com.flatshare.presentation.ui.activities.matching.ShowDetailProfilApartmentActivity">
+    android:background="@color/windowBackground">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/ib_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:src="@drawable/reject_button" />
 
         <TextView
             android:id="@+id/apartment_info_inital"
@@ -32,6 +40,226 @@
             android:layout_marginTop="@dimen/marginTop"
             android:gravity="center"
             android:text="@string/apartment_info_description" />
+
+        <TextView
+            android:id="@+id/apartment_info_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/apartment_info"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:gravity="center"
+            android:text="@string/apartment_info_description_2"/>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutApartmentProfilePrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/apartment_info_2"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/apartment_price" />
+
+            <TextView
+                android:id="@+id/apartmentPriceTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="0,00€"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutApartmentProfileArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LinearLayoutApartmentProfilePrice"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/area"/>
+
+            <TextView
+                android:id="@+id/apartmentAreaTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="12345"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutApartmentProfileZIP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LinearLayoutApartmentProfileArea"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/apartment_zip_code"/>
+
+            <TextView
+                android:id="@+id/apartmentZIPTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="12345"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutApartmentProfileRoomSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LinearLayoutApartmentProfileZIP"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/roomSize"/>
+
+            <TextView
+                android:id="@+id/apartmentRoomSizeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="12345"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutApartmentProfileApartmentSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LinearLayoutApartmentProfileRoomSize"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/apartmentSize"/>
+
+            <TextView
+                android:id="@+id/apartmentApartmentSizeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="12345"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutApartmentProfileIntenet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LinearLayoutApartmentProfileApartmentSize"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/internet"/>
+
+            <TextView
+                android:id="@+id/apartmentInternetTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="12345"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutApartmentProfileSmoker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LinearLayoutApartmentProfileIntenet"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/smoker"/>
+
+            <TextView
+                android:id="@+id/apartmentSmokerTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="12345"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutApartmentProfilePets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LinearLayoutApartmentProfileSmoker"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/pets"/>
+
+            <TextView
+                android:id="@+id/apartmentPetsTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="12345"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutApartmentProfileWashingsMashine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LinearLayoutApartmentProfilePets"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/washing_machine"/>
+
+            <TextView
+                android:id="@+id/apartmentWashingMashineTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="12345"/>
+        </LinearLayout>
+
 
     </RelativeLayout>
 </ScrollView>

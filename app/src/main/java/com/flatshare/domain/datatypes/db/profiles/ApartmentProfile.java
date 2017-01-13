@@ -69,6 +69,12 @@ public class ApartmentProfile extends UserProfile {
     @PropertyName("profile_done")
     public boolean done;
 
+    @PropertyName("roomSize")
+    public int roomSize;
+
+    @PropertyName("apartmentSize")
+    public int apartmentSize;
+
     public ApartmentProfile() {
         this.roommateIds = new ArrayList<>();
         this.apartmentLocation = new ApartmentLocation();
@@ -245,6 +251,26 @@ public class ApartmentProfile extends UserProfile {
     @Exclude
     public void setDone(boolean done) {
         this.done = done;
+    }
+
+    @Exclude
+    public int getRoomSize() {
+        return roomSize;
+    }
+
+    @Exclude
+    public void setRoomSize(int roomSize) {
+        this.roomSize = roomSize;
+    }
+
+    @Exclude
+    public int getApartmentSize(){
+        return apartmentSize;
+    }
+
+    @Exclude
+    public void setApartmentSize(int apartmentSize){
+        this.apartmentSize = apartmentSize;
     }
 
     @Exclude

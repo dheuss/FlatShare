@@ -68,7 +68,7 @@
                 android:id="@+id/apartment_roommates_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"/>
+                android:gravity="right" />
         </LinearLayout>
 
         <LinearLayout
@@ -188,10 +188,57 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LinearLayoutRoomSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LinearLayoutApartmentProfileZipCode"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/roomSize" />
+
+            <EditText
+                android:id="@+id/apartment_room_size_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutApartmentSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LinearLayoutRoomSize"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:inputType="numberDecimal"
+                android:text="@string/apartmentSize" />
+
+            <EditText
+                android:id="@+id/apartment_apartment_size_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:inputType="numberDecimal"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/LinearLayoutApartmentProfileInternet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutApartmentProfileZipCode"
+            android:layout_below="@id/LinearLayoutApartmentSize"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
@@ -285,13 +332,13 @@
                     android:id="@+id/pets_yes_rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up"/>
+                    android:drawableRight="@drawable/thumb_up" />
 
                 <RadioButton
                     android:id="@+id/pets_no_rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_down"/>
+                    android:drawableRight="@drawable/thumb_down" />
             </RadioGroup>
         </LinearLayout>
 
@@ -321,13 +368,13 @@
                     android:id="@+id/washing_machine_yes_rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up"/>
+                    android:drawableRight="@drawable/thumb_up" />
 
                 <RadioButton
                     android:id="@+id/washing_machine_no_rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_down"/>
+                    android:drawableRight="@drawable/thumb_down" />
             </RadioGroup>
         </LinearLayout>
 

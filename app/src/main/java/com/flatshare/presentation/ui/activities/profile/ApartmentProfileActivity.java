@@ -37,6 +37,8 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     private EditText apartmentStreetEditText;
     private EditText apartmentHouseNrEditText;
     private EditText apartmentZipCodeEditText;
+    private EditText apartmentRoomSize;
+    private EditText apartmentApartmentSize;
 
     private RadioGroup internetRadioGroup;
     private RadioButton internetYesRB, internetNoRB;
@@ -137,6 +139,9 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         int price = Integer.parseInt(apartmentPriceEditText.getText().toString());
         int area = Integer.parseInt(apartmentAreaEditText.getText().toString());
 
+        int roomSzie = Integer.parseInt(apartmentRoomSize.getText().toString());
+        int apartmentSize = Integer.parseInt(apartmentApartmentSize.getText().toString());
+
         String street = apartmentStreetEditText.getText().toString();
         String houseNr = apartmentHouseNrEditText.getText().toString();
         int zipCode = Integer.parseInt(apartmentZipCodeEditText.getText().toString());
@@ -155,6 +160,8 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         ApartmentProfile apartmentProfile = new ApartmentProfile();
         apartmentProfile.setPrice(price);
         apartmentProfile.setArea(area);
+        apartmentProfile.setRoomSize(roomSzie);
+        apartmentProfile.setApartmentSize(apartmentSize);
         apartmentProfile.setInternet(hasInternet);
         apartmentProfile.setSmokerApartment(isSmoker);
         apartmentProfile.setPets(hasPets);
@@ -175,6 +182,8 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         apartmentStreetEditText = (EditText) findViewById(R.id.apartment_street_edit_text);
         apartmentHouseNrEditText = (EditText) findViewById(R.id.apartment_house_nr_edit_text);
         apartmentZipCodeEditText = (EditText) findViewById(R.id.apartment_zip_code_edit_text);
+        apartmentRoomSize = (EditText) findViewById(R.id.apartment_room_size_edit_text);
+        apartmentApartmentSize = (EditText)findViewById(R.id.apartment_apartment_size_edit_text);
 
         internetRadioGroup = (RadioGroup) findViewById(R.id.internet_apartment_rg);
         internetYesRB = (RadioButton) findViewById(R.id.internet_yes_rb);

@@ -80,12 +80,6 @@
             android:name=".presentation.ui.activities.matching.QRCodeReaderActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.activities.matching.ShowDetailProfilApartmentActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".presentation.ui.activities.matching.ShowDetailProfilTenantActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".presentation.ui.activities.matchingoverview.MatchingOverviewActivity"
             android:screenOrientation="portrait" />
         <activity
