@@ -38,6 +38,8 @@ public class MatchingActivity_ProfileCard_Apartment {
     private Context mContext;
     private SwipePlaceHolderView mSwipeView;
 
+
+
     public MatchingActivity_ProfileCard_Apartment(Context context, ApartmentProfile profile, SwipePlaceHolderView swipeView) {
         mContext = context;
         mProfile = profile;

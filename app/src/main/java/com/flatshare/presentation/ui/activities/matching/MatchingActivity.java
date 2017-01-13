@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flatshare.R;
@@ -53,6 +54,17 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
     private ApartmentProfile mApartmetProfile;
 
     private int popupFlag; //0 == Apartment; 1 == Tenant
+
+    private TextView apartmentPriceTextView;
+    private TextView apartmentAreaTextView;
+    private TextView apartmentZipCodeTextView;
+    private TextView apartmentRoomSizeTextView;
+    private TextView apartmentApartmentSizeTextView;
+    private TextView apartmentInternetTextView;
+    private TextView apartmentSmokerTextView;
+    private TextView apartmentPetsTextView;
+    private TextView apartmentWashingMashineTextView;
+    private ImageButton closeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,7 +157,18 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
                 LayoutParams.MATCH_PARENT
         );
 
-        ImageButton closeButton = (ImageButton) customView.findViewById(R.id.ib_close);
+        apartmentPriceTextView = (TextView)findViewById(R.id.apartmentPriceTextView);
+        apartmentAreaTextView = (TextView)findViewById(R.id.apartmentAreaTextView);
+        apartmentZipCodeTextView = (TextView)findViewById(R.id.apartmentZIPTextView);
+        apartmentRoomSizeTextView = (TextView)findViewById(R.id.apartmentRoomSizeTextView);
+        apartmentApartmentSizeTextView = (TextView)findViewById(R.id.apartmentAreaTextView);
+        apartmentInternetTextView = (TextView)findViewById(R.id.apartmentInternetTextView);
+        apartmentSmokerTextView = (TextView)findViewById(R.id.apartmentSmokerTextView);
+        apartmentPetsTextView = (TextView)findViewById(R.id.apartmentPetsTextView);
+        apartmentWashingMashineTextView = (TextView)findViewById(R.id.apartmentWashingMashineTextView);
+        closeButton = (ImageButton) customView.findViewById(R.id.ib_close);
+
+        apartmentPriceTextView.setText(mApartmetProfile.getPrice()+"");
 
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
