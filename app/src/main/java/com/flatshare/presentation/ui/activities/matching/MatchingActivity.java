@@ -34,6 +34,7 @@ import java.util.List;
  */
 public class MatchingActivity extends AbstractActivity implements PotentialMatchingPresenter.View {
 
+    private static final String EVENT_LISTENER_KEY = "eventListenerKey";
     private SwipePlaceHolderView mSwipeView;
     private Context mContext;
 
@@ -79,6 +80,12 @@ public class MatchingActivity extends AbstractActivity implements PotentialMatch
         );
 
         mPresenter.getPotentialMatches();
+
+        boolean eventListenerExists = sharedPref.getBoolean(getResources().getString(R.string.pot_matching_listener_attached), false);
+
+        if (!eventListenerExists) {
+            mPresenter.setPotentialMatchesListener();
+        }
 
         mSwipeView.getBuilder()
                 .setDisplayViewCount(3)
@@ -245,6 +252,11 @@ public class MatchingActivity extends AbstractActivity implements PotentialMatch
             mSwipeView.addView(new MatchingActivity_ProfileCard_Apartment(mContext, a, mSwipeView));
             mApartmetProfile = a;
         }
+    }
+
+    @Override
+    public void updateListener(boolean listenerAttached) {
+        writeToSharedPreferences(R.string.pot_matching_listener_attached, listenerAttached);
     }
 
     private void tenantSwipedApartment(ApartmentProfile apartmentProfile, boolean accepted) {

@@ -16,8 +16,12 @@ public interface PotentialMatchingPresenter extends BasePresenter {
 
     void roommateSwipedTenant(String tenantProfileId, boolean accepted);
 
+    void setPotentialMatchesListener();
+
     interface View extends BaseView {
         void showTenants(List<TenantProfile> tenants);
         void showApartments(List<ApartmentProfile> apartments);
+
+        void updateListener(boolean listenerAttached);
     }
 }

@@ -12,9 +12,10 @@ public class DatabaseRoot implements Node {
     private final String users = "users/";
     private final String tenantProfiles= "tenant_profiles/";
     private final String apartmentProfiles = "apartment_profiles/";
-    private final String potentialMatches = "potential_matches/";
     private final String apartmentLocations = "apartment_locations/";
     private final String roommateProfiles = "roommate_profiles/";
+    private final String potentialMatches = "potential_matches/";
+    private final String matches = "matches/";
 
 
     public UserProfileNode getUserProfileNode(String userId){
@@ -41,6 +42,10 @@ public class DatabaseRoot implements Node {
         return new PotentialMatchesNode(potentialMatches, tenantId, apartmentId);
     }
 
+    public MatchesNode getMatchesNode(String tenantId, String apartmentId){
+        return new MatchesNode(potentialMatches, tenantId, apartmentId);
+    }
+
     public String getUsers() {
         return users;
     }
@@ -63,5 +68,9 @@ public class DatabaseRoot implements Node {
 
     public String getRoommateProfiles() {
         return roommateProfiles;
+    }
+
+    public String getMatches() {
+        return matches;
     }
 }

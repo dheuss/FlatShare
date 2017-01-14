@@ -100,6 +100,7 @@
     <string name="roomSize">Room Size:</string>
     <string name="apartmentSize">Apartment Size:</string>
     <string name="apartment_info_description_2">We will start to show you the more important once at the top.</string>
+    <string name="pot_matching_listener_attached">eventListenerKey</string>
 
     <string-array name="occupation">
         <item>Student</item>

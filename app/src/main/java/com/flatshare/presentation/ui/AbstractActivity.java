@@ -62,19 +62,19 @@ public abstract class AbstractActivity extends AppCompatActivity {
 //        super.onDestroy();
 //    }
 
-    private void writeToSharedPreferences(int key, String value) {
+    protected void writeToSharedPreferences(int key, String value) {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(getString(key), value);
         editor.apply();
     }
 
-    private void writeToSharedPreferences(int key, boolean value) {
+    protected void writeToSharedPreferences(int key, boolean value) {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean(getString(key), value);
         editor.apply();
     }
 
-    private void writeToSharedPreferences(int key, int value) {
+    protected void writeToSharedPreferences(int key, int value) {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt(getString(key), value);
         editor.apply();

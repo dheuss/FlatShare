@@ -6,9 +6,11 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
+import com.flatshare.domain.interactors.matching.PMatchesListenerInteractor;
 import com.flatshare.domain.interactors.matching.PotentialMatchingInteractor;
 import com.flatshare.domain.interactors.matching.SwipeInteractor;
 import com.flatshare.domain.interactors.matching.impl.ApartmentSwipeInteractorImpl;
+import com.flatshare.domain.interactors.matching.impl.PMatchesListenerInteractorImpl;
 import com.flatshare.domain.interactors.matching.impl.PotentialMatchingInteractorImpl;
 import com.flatshare.domain.interactors.matching.impl.TenantSwipeInteractorImpl;
 import com.flatshare.presentation.presenters.matching.PotentialMatchingPresenter;
@@ -21,7 +23,7 @@ import java.util.List;
  * Created by Arber on 11/12/2016.
  */
 
-public class PotentialMatchingPresenterImpl extends AbstractPresenter implements PotentialMatchingPresenter, PotentialMatchingInteractor.Callback, SwipeInteractor.Callback {
+public class PotentialMatchingPresenterImpl extends AbstractPresenter implements PotentialMatchingPresenter, PotentialMatchingInteractor.Callback, SwipeInteractor.Callback, PMatchesListenerInteractor.Callback {
 
 
     private static final String TAG = "PotentialMatchingPresenterImpl";
@@ -94,6 +96,12 @@ public class PotentialMatchingPresenterImpl extends AbstractPresenter implements
     }
 
     @Override
+    public void setPotentialMatchesListener() {
+        PMatchesListenerInteractor pMatchesListenerInteractor = new PMatchesListenerInteractorImpl(mMainThread, this);
+        pMatchesListenerInteractor.execute();
+    }
+
+    @Override
     public void onNoMatchFound() {
         onError("No Matches were found!");
     }
@@ -115,4 +123,18 @@ public class PotentialMatchingPresenterImpl extends AbstractPresenter implements
         mView.showApartments(apartments);
     }
 
+    @Override
+    public void onFailure(String errorMessage) {
+        onError("Error on matching Interactor: " + errorMessage);
+    }
+
+    @Override
+    public void onListenerUpdated(boolean listenerAttached) {
+        mView.updateListener(listenerAttached);
+    }
+
+    @Override
+    public void onMatchCreated(String key) {
+        Log.d(TAG, "onMatchCreated: " + key);
+    }
 }
