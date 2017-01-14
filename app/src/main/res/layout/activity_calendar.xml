@@ -305,7 +305,8 @@
             android:layout_height="wrap_content"
             android:text="Send"
             android:background="@color/button"
-            android:textColor="@color/buttonText"/>
+            android:textColor="@color/buttonText"
+            android:visibility="gone"/>
     </LinearLayout>
 
 </FrameLayout>

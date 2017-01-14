@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -47,6 +48,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     private TextView[] dateTextView = {};
     private Button[] dateButton = {};
     private int[] buttonView = {};
+    private boolean tendant;
 
 
     @Override
@@ -77,8 +79,6 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         dateButton = new Button[] {deleteButton1, deleteButton2, deleteButton3, deleteButton4, deleteButton5, deleteButton6, deleteButton7, deleteButton8, deleteButton9, deleteButton10};
         buttonView = new int[]{R.id.delete1,R.id.delete2,R.id.delete3,R.id.delete4,R.id.delete5,R.id.delete6,R.id.delete7,R.id.delete8,R.id.delete9,R.id.delete10};
 
-        //setButtonOnDelete(999);
-
         send.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -88,7 +88,11 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             }
         });
 
-
+        for(int i =0;i<=dateTextView.length-1;i++){
+            if(dateTextView[i].getText() == ""){
+                dateButton[i].setVisibility(View.GONE);
+            }
+        }
 
         /*
         deleteButton1.setOnClickListener(myDeleteButtonHandler);
@@ -191,9 +195,18 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     public void handleClick(View view) {
         for(int i =0;i<=buttonView.length-1;i++){
             if(view.getId() == buttonView[i]){
-                deleteButtonPressed(i, view);
+                if (tendant){
+                    chooseTendantDate(i, view);
+                }else {
+                    deleteButtonPressed(i, view);
+                }
             }
         }
+    }
+
+    private void chooseTendantDate(int i, View view) {
+        //TODO markiere gewältes Datum - Sendbutton sichtbar und verschicken
+        send.setVisibility(View.VISIBLE);
     }
 
     private void deleteButtonPressed(int i, View v) {
@@ -219,6 +232,8 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         if (dateList.size() <= 10){
             showDialog(999);
             counter++;
+            tendant = false;
+            send.setVisibility(View.VISIBLE);
         }else{
             Toast.makeText(getApplicationContext(), "Reach the maximum of Dates!", Toast.LENGTH_SHORT).show();
         }
@@ -226,7 +241,6 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
     @Override
     protected Dialog onCreateDialog(int id) {
-        // TODO Auto-generated method stub
         if (id == 999) {
             DatePickerDialog datePicker = new DatePickerDialog(this, datePickerListener, yearCurrent, monthCurrent, dayCurrent);
             datePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -242,7 +256,6 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-            // TODO Auto-generated method stub
             showDate(year, month+1, day);
             showDialog(888);
         }
@@ -251,7 +264,6 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     private TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hour, int min) {
-            // TODO Auto-generated method stub
             showTime(hour, min);
         }
     };
@@ -270,6 +282,15 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         dateButton[counter].setVisibility(View.VISIBLE);
     }
 
+    private void showDatesForTendants(List<String> dateTendantList, List<String> timeTendantList){
+        //TODO wird vom Presenter aufgerufen sobald Daten kommen
+        for(int i = 0; i < dateTendantList.size() - 1; i++){
+            dateTextView[i].setText(dateTendantList.get(i) + " " + timeTendantList.get(i));
+            dateButton[i].setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.delete1));
+            dateButton[i].setVisibility(View.VISIBLE);
+            tendant = true;
+        }
+    }
 
     private void bindView() {
         couchChatButton = (ImageButton)findViewById(R.id.couchChatBtn);
@@ -295,6 +316,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         date9 = (TextView) findViewById(R.id.date9);
         date10 = (TextView) findViewById(R.id.date10);
     }
+
 
     @Override
     protected int getLayoutResourceId() {return R.layout.activity_calendar;}
