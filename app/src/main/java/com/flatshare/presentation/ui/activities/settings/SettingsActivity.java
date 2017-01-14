@@ -103,7 +103,7 @@ public class SettingsActivity extends AbstractActivity implements SettingsPresen
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SettingsActivity.this, ProfilSettingsActivity.class));
+                startActivity(new Intent(SettingsActivity.this, ProfileTenantSettingsActivity.class));
             }
         });
 

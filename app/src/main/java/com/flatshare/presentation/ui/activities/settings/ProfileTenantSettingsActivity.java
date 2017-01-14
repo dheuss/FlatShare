@@ -13,13 +13,14 @@ import android.widget.Spinner;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
+import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.settings.ProfileSettingsPresenter;
 import com.flatshare.presentation.presenters.settings.impl.ProfileSettingsPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-public class ProfilSettingsActivity extends AbstractActivity implements ProfileSettingsPresenter.View {
+public class ProfileTenantSettingsActivity extends AbstractActivity implements ProfileSettingsPresenter.View {
 
     private ImageButton settingsButton;
     private ImageButton matchingActivityButton;
@@ -48,15 +49,21 @@ public class ProfilSettingsActivity extends AbstractActivity implements ProfileS
 
     private Button saveChangesButton;
 
-    private static final String TAG = "ProfilSettingsActivity";
+    private static final String TAG = "ProfileTenantSettingsActivity";
 
     private ProfileSettingsPresenter mPresenter;
 
+    private UserState userState;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        userState = UserState.getInstance();
         super.onCreate(savedInstanceState);
 
         bindView();
+
+
+        System.out.println("ClassificationID: " + userState.getPrimaryUserProfile().getClassificationId());
 
         Log.d(TAG, "inside onCreate(), creating presenter fr this view");
 
@@ -68,28 +75,28 @@ public class ProfilSettingsActivity extends AbstractActivity implements ProfileS
         settingsButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(ProfilSettingsActivity.this, SettingsActivity.class));
+                startActivity(new Intent(ProfileTenantSettingsActivity.this, SettingsActivity.class));
             }
         });
 
         matchingActivityButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(ProfilSettingsActivity.this, MatchingActivity.class));
+                startActivity(new Intent(ProfileTenantSettingsActivity.this, MatchingActivity.class));
             }
         });
 
         saveChangesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ProfilSettingsActivity.this.sendProfile();
+                ProfileTenantSettingsActivity.this.sendProfile();
             }
         });
     }
 
     @Override
     protected int getLayoutResourceId() {
-        return R.layout.activity_profil_settings;
+            return R.layout.activity_profile_tenant_settings;
     }
 
     private void sendProfile() {
@@ -122,26 +129,79 @@ public class ProfilSettingsActivity extends AbstractActivity implements ProfileS
         matchingActivityButton = (ImageButton)findViewById(R.id.couchBtn);
 
         changeNameEditText = (EditText)findViewById(R.id.changeNameProfileSettingsEditText);
+        changeNameEditText.setText(userState.getTenantProfile().getFirstName());
         changeEmailEditText = (EditText)findViewById(R.id.changeEmailProfileSettingsEditText);
+        changeEmailEditText.setText(userState.getTenantProfile().getEmail());
         changeAgeEditText = (EditText)findViewById(R.id.changeAgeProfileSettingsEditText);
+        changeAgeEditText.setText(userState.getTenantProfile().getAge()+"");
 
         changeGenderRadioGroup = (RadioGroup)findViewById(R.id.changeGenderProfileSettingsEditTextRadioGroup);
         changeGenderMaleRadioButton = (RadioButton)findViewById(R.id.changeGenderMaleProfileSettingsRadioButton);
         changeGenderFemaleRadioButton = (RadioButton)findViewById(R.id.changeGenderFemaleProlfileSettingsButton);
+        if (userState.getTenantProfile().getGender() == 0) {
+            changeGenderMaleRadioButton.setChecked(true);
+            changeGenderFemaleRadioButton.setChecked(false);
+        } else {
+            changeGenderMaleRadioButton.setChecked(false);
+            changeGenderFemaleRadioButton.setChecked(true);
+        }
 
         changeSmokerRadioGroup = (RadioGroup)findViewById(R.id.changeSmokerProfileSettingsRadioGroup);
         changeSmokerYesRadioButton = (RadioButton)findViewById(R.id.changeSmokerYesProfileSettingsRadioButton);
         changeSmokerNoRadioButton = (RadioButton)findViewById(R.id.changeSmokerNoProfileSettingsRadioButton);
+        if (userState.getTenantProfile().isSmoker()){
+            changeSmokerYesRadioButton.setChecked(true);
+            changeSmokerNoRadioButton.setChecked(false);
+        } else {
+            changeSmokerYesRadioButton.setChecked(false);
+            changeSmokerNoRadioButton.setChecked(true);
+        }
 
         changePetsRadioGroup = (RadioGroup)findViewById(R.id.changePetsProfileSettingsRadioGroup);
         changePetsYesRadioButton = (RadioButton)findViewById(R.id.changePetsYesProfileSettingsRadioButton);
         changePetsNoRadioButton = (RadioButton)findViewById(R.id.changePetsNOProfileSettingsRadioButton);
+        if (userState.getTenantProfile().hasPets()){
+            changePetsYesRadioButton.setChecked(true);
+            changePetsNoRadioButton.setChecked(false);
+        } else {
+            changePetsYesRadioButton.setChecked(false);
+            changePetsNoRadioButton.setChecked(true);
+        }
 
         changeOccupationSpinner = (Spinner)findViewById(R.id.changeOccupationProfileSettingsSpinner);
+        if (userState.getTenantProfile().getOccupation().equals("Student")){
+            changeOccupationSpinner.setSelection(0);
+        } else if (userState.getTenantProfile().getOccupation().equals("Employee")){
+            changeOccupationSpinner.setSelection(1);
+        } else if (userState.getTenantProfile().getOccupation().equals("Lowly emplyed")){
+            changeOccupationSpinner.setSelection(2);
+        } else if (userState.getTenantProfile().getOccupation().equals("Official")) {
+            changeOccupationSpinner.setSelection(3);
+        } else if (userState.getTenantProfile().getOccupation().equals("No Job")) {
+            changeOccupationSpinner.setSelection(4);
+        } else {
+            changeOccupationSpinner.setSelection(0);
+        }
 
         changeInfoEditText = (EditText)findViewById(R.id.changeInfoProfileSettingsEditText);
+        changeInfoEditText.setText(userState.getTenantProfile().getShortBio());
 
         changeDurationOfStaySpinner = (Spinner)findViewById(R.id.changeDurationOfStayProfileSettingsSpinner);
+        if (userState.getTenantProfile().getDurationOfStay() == 0){
+            changeOccupationSpinner.setSelection(0);
+        } else if (userState.getTenantProfile().getDurationOfStay() == 1){
+            changeOccupationSpinner.setSelection(1);
+        } else if (userState.getTenantProfile().getDurationOfStay() == 2){
+            changeOccupationSpinner.setSelection(2);
+        } else if (userState.getTenantProfile().getDurationOfStay() == 3) {
+            changeOccupationSpinner.setSelection(3);
+        } else if (userState.getTenantProfile().getDurationOfStay() == 4) {
+            changeOccupationSpinner.setSelection(4);
+        } else if (userState.getTenantProfile().getDurationOfStay() == 5){
+            changeOccupationSpinner.setSelection(5);
+        } else {
+            changeOccupationSpinner.setSelection(0);
+        }
 
         saveChangesButton = (Button)findViewById(R.id.saveChangesProfileSettingsButton);
     }

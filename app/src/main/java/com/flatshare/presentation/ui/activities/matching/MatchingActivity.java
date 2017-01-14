@@ -18,7 +18,7 @@ import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.presentation.presenters.matching.PotentialMatchingPresenter;
 import com.flatshare.presentation.presenters.matching.impl.PotentialMatchingPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
-import com.flatshare.presentation.ui.activities.settings.ProfilSettingsActivity;
+import com.flatshare.presentation.ui.activities.settings.ProfileTenantSettingsActivity;
 import com.flatshare.presentation.ui.activities.matchingoverview.chat.ChatActivity;
 import com.flatshare.threading.MainThreadImpl;
 import com.mindorks.placeholderview.SwipeDecor;
@@ -98,7 +98,7 @@ public class MatchingActivity extends AbstractActivity implements PotentialMatch
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MatchingActivity.this.startActivity(new Intent(MatchingActivity.this, ProfilSettingsActivity.class));
+                MatchingActivity.this.startActivity(new Intent(MatchingActivity.this, ProfileTenantSettingsActivity.class));
             }
         });
 
@@ -174,7 +174,7 @@ public class MatchingActivity extends AbstractActivity implements PotentialMatch
         apartmentWashingMashineTextView = (TextView) findViewById(R.id.apartmentWashingMashineTextView);
         closeButton = (ImageButton) customView.findViewById(R.id.ib_close);
 
-        apartmentPriceTextView.setText(mApartmetProfile.getPrice() + "");
+        //apartmentPriceTextView.setText(mApartmetProfile.getPrice() + "");
 
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override

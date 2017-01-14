@@ -62,7 +62,7 @@
             android:name=".presentation.ui.activities.profile.ApartmentSettingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.activities.settings.ProfilSettingsActivity"
+            android:name=".presentation.ui.activities.settings.ProfileTenantSettingsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.ui.activities.matchingoverview.chat.ChatActivity"
@@ -105,7 +105,10 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.ui.activities.profile.RoommateWaitingActivity"></activity>
+        <activity android:name=".presentation.ui.activities.profile.RoommateWaitingActivity" />
+        <activity android:name=".presentation.ui.activities.settings.ProfileApartmentSettingsActivity" />
+        <activity android:name=".presentation.ui.activities.settings.ProfileTenantSettingsFilterActivity" />
+        <activity android:name=".presentation.ui.activities.settings.ProfileApartmentSettingsFilterActivity"></activity>
     </application>
 
 </manifest>
