@@ -50,4 +50,10 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
     public void send(List<String> dateList, List<String> timeList) {
 
     }
+
+    @Override
+    public boolean checkForTendant() {
+        //TODO bist du tendant - aus FIrebase holen
+        return false;
+    }
 }

@@ -59,6 +59,8 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
         mPresenter = new CalendarPresenterImpl(MainThreadImpl.getInstance(), this);
 
+        tendant = mPresenter.checkForTendant();
+
         Calendar calendar = Calendar.getInstance();
         yearCurrent = calendar.get(Calendar.YEAR);
         monthCurrent = calendar.get(Calendar.MONTH);
@@ -83,8 +85,12 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             @Override
             public void onClick(View v) {
                 //TODO send dateList and timeList to firebase
-                mPresenter.send(dateList, timeList);
-                Toast.makeText(getApplicationContext(), "Send", Toast.LENGTH_SHORT).show();
+                if (tendant){
+                    //mPresenter.sendBackFromTendant(finalDate);
+                }else {
+                    mPresenter.send(dateList, timeList);
+                    Toast.makeText(getApplicationContext(), "Send", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -94,131 +100,37 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             }
         }
 
-        /*
-        deleteButton1.setOnClickListener(myDeleteButtonHandler);
-        deleteButton2.setOnClickListener(myDeleteButtonHandler);
-        deleteButton3.setOnClickListener(myDeleteButtonHandler);
-        deleteButton4.setOnClickListener(myDeleteButtonHandler);
-        deleteButton5.setOnClickListener(myDeleteButtonHandler);
-        deleteButton6.setOnClickListener(myDeleteButtonHandler);
-        deleteButton7.setOnClickListener(myDeleteButtonHandler);
-        deleteButton8.setOnClickListener(myDeleteButtonHandler);
-        deleteButton9.setOnClickListener(myDeleteButtonHandler);
-        deleteButton10.setOnClickListener(myDeleteButtonHandler);
-
-        deleteButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteButtonPressed(0);
-            }
-        });
-
-        deleteButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteButtonPressed(1);
-            }
-        });
-
-        deleteButton3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteButtonPressed(2);
-            }
-        });
-
-        deleteButton4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteButtonPressed(3);
-            }
-        });
-
-        deleteButton5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteButtonPressed(4);
-            }
-        });
-
-        deleteButton6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteButtonPressed(5);
-            }
-        });
-
-        deleteButton7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteButtonPressed(6);
-            }
-        });
-
-        deleteButton8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteButtonPressed(7);
-            }
-        });
-
-        deleteButton9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteButtonPressed(8);
-            }
-        });
-
-        deleteButton10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteButtonPressed(9);
-            }
-        });
-    */
-
     }
-
-    /*
-    private View.OnClickListener myDeleteButtonHandler = new View.OnClickListener() {
-
-        public void onClick(View v) {
-            for(int i =0;i<=buttonView.length-1;i++){
-                if(v.getId() == buttonView[i]){
-                    deleteButtonPressed(i, v);
-                }
-            }
-        }
-    };
-    */
 
     public void handleClick(View view) {
         for(int i =0;i<=buttonView.length-1;i++){
             if(view.getId() == buttonView[i]){
                 if (tendant){
-                    chooseTendantDate(i, view);
+                    chooseTendantDate(i);
                 }else {
-                    deleteButtonPressed(i, view);
+                    deleteButtonPressed(i);
                 }
             }
         }
     }
 
-    private void chooseTendantDate(int i, View view) {
+    private void chooseTendantDate(int i) {
         //TODO markiere gewältes Datum - Sendbutton sichtbar und verschicken
         send.setVisibility(View.VISIBLE);
+        //dateButton[i].setBackground();
     }
 
-    private void deleteButtonPressed(int i, View v) {
+    private void deleteButtonPressed(int i) {
         counter--;
         for (int j = i; j <= dateTextView.length-1; j++){
             if (j == dateTextView.length-1){
                 dateTextView[j].setText("");
-                //dateButton[j].setVisibility(dateButton[2].getRootView().getGONE);
+                dateButton[j].setVisibility(View.GONE);
             }else {
                 dateTextView[j].setText(dateTextView[j + 1].getText());
                 if (dateTextView[j + 1].getText() == "") {
                     //dateButton[j + 1].setVisibility(dateButton[2].getRootView().GONE);
+                    dateButton[j + 1].setVisibility(View.GONE);
                 }
             }
         }
@@ -282,15 +194,16 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         dateButton[counter].setVisibility(View.VISIBLE);
     }
 
-    private void showDatesForTendants(List<String> dateTendantList, List<String> timeTendantList){
+    public void showDatesForTendants(List<String> dateTendantList, List<String> timeTendantList){
         //TODO wird vom Presenter aufgerufen sobald Daten kommen
         for(int i = 0; i < dateTendantList.size() - 1; i++){
             dateTextView[i].setText(dateTendantList.get(i) + " " + timeTendantList.get(i));
-            dateButton[i].setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.delete1));
+            dateButton[i].setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.checkmark));
             dateButton[i].setVisibility(View.VISIBLE);
             tendant = true;
         }
     }
+
 
     private void bindView() {
         couchChatButton = (ImageButton)findViewById(R.id.couchChatBtn);
