@@ -40,6 +40,8 @@ public class TestInteractor extends AbstractInteractor {
             addNode(tPath, tList.get(i));
         }
 
+//        mDatabase.child("test").removeValue();
+
 
     }
 

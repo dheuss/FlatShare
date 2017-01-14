@@ -1,7 +1,7 @@
 package com.flatshare.storage;
 
-import com.flatshare.domain.interactors.matching.MatchingInteractor;
-import com.flatshare.domain.interactors.matching.impl.MatchingInteractorImpl;
+import com.flatshare.domain.interactors.matching.PotentialMatchingInteractor;
+import com.flatshare.domain.interactors.matching.impl.PotentialMatchingInteractorImpl;
 import com.flatshare.domain.repository.MatchingRepository;
 
 /**
@@ -10,10 +10,10 @@ import com.flatshare.domain.repository.MatchingRepository;
 
 public class MatchingRepositoryImpl implements MatchingRepository {
 
-    private MatchingInteractor matchingInteractor;
+    private PotentialMatchingInteractor potentialMatchingInteractor;
 
-    public MatchingRepositoryImpl(MatchingInteractorImpl matchingInteractor) {
-        this.matchingInteractor = matchingInteractor;
+    public MatchingRepositoryImpl(PotentialMatchingInteractorImpl matchingInteractor) {
+        this.potentialMatchingInteractor = matchingInteractor;
     }
 
 }

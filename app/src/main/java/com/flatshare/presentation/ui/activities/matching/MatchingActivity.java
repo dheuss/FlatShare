@@ -10,21 +10,20 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
-import com.flatshare.presentation.presenters.matching.MatchingPresenter;
-import com.flatshare.presentation.presenters.matching.impl.MatchingPresenterImpl;
+import com.flatshare.presentation.presenters.matching.PotentialMatchingPresenter;
+import com.flatshare.presentation.presenters.matching.impl.PotentialMatchingPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.settings.ProfilSettingsActivity;
 import com.flatshare.presentation.ui.activities.matchingoverview.chat.ChatActivity;
 import com.flatshare.threading.MainThreadImpl;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
+
 import android.view.ViewGroup.LayoutParams;
 
 
@@ -33,7 +32,7 @@ import java.util.List;
 /**
  * Created by Arber on 20/12/2016.
  */
-public class MatchingActivity extends AbstractActivity implements MatchingPresenter.View {
+public class MatchingActivity extends AbstractActivity implements PotentialMatchingPresenter.View {
 
     private SwipePlaceHolderView mSwipeView;
     private Context mContext;
@@ -49,12 +48,12 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
 
     private static final String TAG = "MatchingActivity";
 
-    private MatchingPresenter mPresenter;
+    private PotentialMatchingPresenter mPresenter;
 
     private ApartmentProfile mApartmetProfile;
+    private TenantProfile mTenantProfile;
 
     private int popupFlag; //0 == Apartment; 1 == Tenant
-
     private TextView apartmentPriceTextView;
     private TextView apartmentAreaTextView;
     private TextView apartmentZipCodeTextView;
@@ -74,12 +73,12 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
 
         Log.d(TAG, "inside onCreate(), creating presenter for this view");
 
-        mPresenter = new MatchingPresenterImpl(
+        mPresenter = new PotentialMatchingPresenterImpl(
                 MainThreadImpl.getInstance(),
                 this
         );
 
-        mPresenter.getMatches();
+        mPresenter.getPotentialMatches();
 
         mSwipeView.getBuilder()
                 .setDisplayViewCount(3)
@@ -139,15 +138,15 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
         popupFlag = 0;
     }
 
-    public void cardClick(View view){
-        if (popupFlag == 0){
+    public void cardClick(View view) {
+        if (popupFlag == 0) {
             apartmentPopUp(view);
         } else {
             tenantPopUp(view);
         }
     }
 
-    public void apartmentPopUp(View view){
+    public void apartmentPopUp(View view) {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
         View customView = inflater.inflate(R.layout.activity_show_detail_profil_apartment, null);
 
@@ -157,18 +156,18 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
                 LayoutParams.MATCH_PARENT
         );
 
-        apartmentPriceTextView = (TextView)findViewById(R.id.apartmentPriceTextView);
-        apartmentAreaTextView = (TextView)findViewById(R.id.apartmentAreaTextView);
-        apartmentZipCodeTextView = (TextView)findViewById(R.id.apartmentZIPTextView);
-        apartmentRoomSizeTextView = (TextView)findViewById(R.id.apartmentRoomSizeTextView);
-        apartmentApartmentSizeTextView = (TextView)findViewById(R.id.apartmentAreaTextView);
-        apartmentInternetTextView = (TextView)findViewById(R.id.apartmentInternetTextView);
-        apartmentSmokerTextView = (TextView)findViewById(R.id.apartmentSmokerTextView);
-        apartmentPetsTextView = (TextView)findViewById(R.id.apartmentPetsTextView);
-        apartmentWashingMashineTextView = (TextView)findViewById(R.id.apartmentWashingMashineTextView);
+        apartmentPriceTextView = (TextView) findViewById(R.id.apartmentPriceTextView);
+        apartmentAreaTextView = (TextView) findViewById(R.id.apartmentAreaTextView);
+        apartmentZipCodeTextView = (TextView) findViewById(R.id.apartmentZIPTextView);
+        apartmentRoomSizeTextView = (TextView) findViewById(R.id.apartmentRoomSizeTextView);
+        apartmentApartmentSizeTextView = (TextView) findViewById(R.id.apartmentAreaTextView);
+        apartmentInternetTextView = (TextView) findViewById(R.id.apartmentInternetTextView);
+        apartmentSmokerTextView = (TextView) findViewById(R.id.apartmentSmokerTextView);
+        apartmentPetsTextView = (TextView) findViewById(R.id.apartmentPetsTextView);
+        apartmentWashingMashineTextView = (TextView) findViewById(R.id.apartmentWashingMashineTextView);
         closeButton = (ImageButton) customView.findViewById(R.id.ib_close);
 
-        apartmentPriceTextView.setText(mApartmetProfile.getPrice()+"");
+        apartmentPriceTextView.setText(mApartmetProfile.getPrice() + "");
 
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,10 +178,10 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
             }
         });
 
-        mPopupWindow.showAtLocation(mFrameLayout, Gravity.CENTER,0,0);
+        mPopupWindow.showAtLocation(mFrameLayout, Gravity.CENTER, 0, 0);
     }
 
-    public void tenantPopUp(View view){
+    public void tenantPopUp(View view) {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
         View customView = inflater.inflate(R.layout.activity_show_detail_profil_tenant, null);
 
@@ -203,7 +202,7 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
             }
         });
 
-        mPopupWindow.showAtLocation(mFrameLayout, Gravity.CENTER,0,0);
+        mPopupWindow.showAtLocation(mFrameLayout, Gravity.CENTER, 0, 0);
     }
 
     @Override
@@ -227,10 +226,10 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
         popupFlag = 1;//set Flag for popUpView;
         int i = 0;
 
-        for (TenantProfile t : tenants){
+        for (TenantProfile t : tenants) {
             //Log.d(TAG, "i: " + i++ + "\n" + t.toString());
             mSwipeView.addView(new MatchingActivity_ProfileCard_Tenant(mContext, t, mSwipeView));
-
+            mTenantProfile = t;
         }
 
     }
@@ -241,10 +240,19 @@ public class MatchingActivity extends AbstractActivity implements MatchingPresen
         popupFlag = 0;//set Flag for popUpView;
         int i = 0;
 
-        for (ApartmentProfile a : apartments){
+        for (ApartmentProfile a : apartments) {
             //Log.d(TAG, "i: " + i++ + "\n" + a.toString());
             mSwipeView.addView(new MatchingActivity_ProfileCard_Apartment(mContext, a, mSwipeView));
             mApartmetProfile = a;
         }
     }
+
+    private void tenantSwipedApartment(ApartmentProfile apartmentProfile, boolean accepted) {
+        mPresenter.tenantSwipedApartment(apartmentProfile.getId(), accepted);
+    }
+
+    private void roommateSwipedTenant(TenantProfile tenantProfile, boolean accepted) {
+        mPresenter.roommateSwipedTenant(tenantProfile.getId(), accepted);
+    }
+
 }

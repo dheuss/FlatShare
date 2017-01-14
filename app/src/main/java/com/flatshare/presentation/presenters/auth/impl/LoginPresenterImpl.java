@@ -65,13 +65,13 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
     public void login(LoginDataType loginDataType) {
 
         // TEST
-        TestInteractor testInteractor = new TestInteractor(mMainThread, 20);
-        testInteractor.execute();
+//        TestInteractor testInteractor = new TestInteractor(mMainThread, 20);
+//        testInteractor.execute();
         // TEST
 
         mView.showProgress();
 
-        if(userState.getPrimaryUserProfile() != null){
+        if (userState.getPrimaryUserProfile() != null) {
             userState.getPrimaryUserProfile().setEmail(loginDataType.getEmail());
         } else {
             PrimaryUserProfile primaryUserProfile = new PrimaryUserProfile();
@@ -103,8 +103,8 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
         userState.setTenantProfile(tenantProfile);
 
         mView.hideProgress();
-        if(tenantProfile.isDone()){
-            if(tenantProfile.getTenantFilterSettings() == null){
+        if (tenantProfile.isDone()) {
+            if (tenantProfile.getTenantFilterSettings() == null) {
                 mView.changeToTenantSettingsActivity();
             } else {
                 mView.changeToMatchingActivity();
@@ -128,8 +128,8 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
         userState.setApartmentProfile(apartmentProfile);
 
         mView.hideProgress();
-        if(apartmentProfile.isDone()){
-            if(apartmentProfile.getApartmentFilterSettings() == null){
+        if (apartmentProfile.isDone()) {
+            if (apartmentProfile.getApartmentFilterSettings() == null) {
                 mView.changeToApartmentSettingsActivity();
             } else {
                 mView.changeToMatchingActivity();

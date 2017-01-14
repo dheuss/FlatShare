@@ -3,7 +3,7 @@ package com.flatshare.domain.interactors.profile.impl;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
-import com.flatshare.domain.datatypes.db.common.ProfileType;
+import com.flatshare.domain.datatypes.enums.ProfileType;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
@@ -126,6 +126,7 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
         RoommateProfile roommateProfile = new RoommateProfile();
         roommateProfile.setRoommateId(roommateId);
         roommateProfile.setApartmentId(apartmentId);
+        roommateProfile.setOwner(true);
         roommateProfile.setAvailable(false);
 
         ApartmentProfile apartmentProfile = new ApartmentProfile();

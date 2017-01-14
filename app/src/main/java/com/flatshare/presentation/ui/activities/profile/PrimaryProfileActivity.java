@@ -8,12 +8,11 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.flatshare.R;
-import com.flatshare.domain.datatypes.db.common.ProfileType;
+import com.flatshare.domain.datatypes.enums.ProfileType;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.presentation.presenters.profile.PrimaryProfilePresenter;
 import com.flatshare.presentation.presenters.profile.impl.PrimaryProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
-import com.flatshare.presentation.ui.activities.matching.QRCodeReaderActivity;
 import com.flatshare.presentation.ui.activities.matching.RoommateQRActivity;
 import com.flatshare.threading.MainThreadImpl;
 

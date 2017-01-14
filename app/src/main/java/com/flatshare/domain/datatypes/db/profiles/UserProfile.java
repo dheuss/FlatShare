@@ -1,7 +1,6 @@
 package com.flatshare.domain.datatypes.db.profiles;
 
 import com.flatshare.domain.datatypes.db.DatabaseItem;
-import com.flatshare.domain.datatypes.db.common.ProfileType;
 import com.google.gson.Gson;
 
 /**

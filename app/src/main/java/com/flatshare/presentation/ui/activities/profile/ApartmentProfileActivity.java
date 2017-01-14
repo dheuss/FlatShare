@@ -99,7 +99,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == STATIC_VALUE) {
-            if(resultCode == RESULT_OK){
+            if (resultCode == RESULT_OK) {
                 String roommateId = data.getStringExtra(STATIC_ID);
                 roommatesEmailsMultiAC.getText().append(", " + roommateId);
             }
@@ -123,11 +123,14 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         String[] emails = roommatesEmailsMultiAC.getText().toString().split(",");
 
         List<String> roommatesId = new ArrayList<>();
-
+        String id = null;
         for (int i = 0; i < emails.length; i++) {
 
-            String id = emailIdMap.get(emails[i].trim());
-
+            try {
+                id = emailIdMap.get(emails[i].trim());
+            } catch (NullPointerException e) {
+                Log.w(TAG, "sendProfile: NullPointer", e);
+            }
 //            System.out.println("email of " + i + ":" + emails[i].trim());
 //            System.out.println("ID of " + i + ":" + id);
 
@@ -171,6 +174,8 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
         apartmentProfile.setRoommateIds(roommatesId);
 
+        apartmentProfile.setDone(true);
+
         mPresenter.sendProfile(apartmentProfile);
     }
 
@@ -183,7 +188,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         apartmentHouseNrEditText = (EditText) findViewById(R.id.apartment_house_nr_edit_text);
         apartmentZipCodeEditText = (EditText) findViewById(R.id.apartment_zip_code_edit_text);
         apartmentRoomSize = (EditText) findViewById(R.id.apartment_room_size_edit_text);
-        apartmentApartmentSize = (EditText)findViewById(R.id.apartment_apartment_size_edit_text);
+        apartmentApartmentSize = (EditText) findViewById(R.id.apartment_apartment_size_edit_text);
 
         internetRadioGroup = (RadioGroup) findViewById(R.id.internet_apartment_rg);
         internetYesRB = (RadioButton) findViewById(R.id.internet_yes_rb);
@@ -202,7 +207,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         washingMachineNoRB = (RadioButton) findViewById(R.id.washing_machine_no_rb);
 
         createApartmentButton = (Button) findViewById(R.id.create_apartment_profile_button);
-        scanRoommateQRButton  = (Button) findViewById(R.id.scan_roommate_QR_button);
+        scanRoommateQRButton = (Button) findViewById(R.id.scan_roommate_QR_button);
 
         roommatesEmailsMultiAC = (MultiAutoCompleteTextView) findViewById(R.id.apartment_roommates_edit_text);
 

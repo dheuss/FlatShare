@@ -3,15 +3,10 @@ package com.flatshare.domain.interactors.settings.impl;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
-import com.flatshare.domain.datatypes.db.common.ProfileType;
+import com.flatshare.domain.datatypes.enums.ProfileType;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.domain.interactors.settings.ProfileSettingsInteractor;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by david on 28.12.2016.

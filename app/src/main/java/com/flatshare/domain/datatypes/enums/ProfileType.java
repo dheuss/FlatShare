@@ -1,4 +1,4 @@
-package com.flatshare.domain.datatypes.db.common;
+package com.flatshare.domain.datatypes.enums;
 
 /**
  * Created by Arber on 08/01/2017.

@@ -1,6 +1,6 @@
 package com.flatshare.presentation.presenters.profile.impl;
 
-import com.flatshare.domain.datatypes.db.common.ProfileType;
+import com.flatshare.domain.datatypes.enums.ProfileType;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.MainThread;

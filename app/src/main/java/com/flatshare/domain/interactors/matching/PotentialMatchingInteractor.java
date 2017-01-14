@@ -10,7 +10,7 @@ import java.util.List;
  * Created by Arber on 10/12/2016.
  */
 
-public interface MatchingInteractor extends Interactor{
+public interface PotentialMatchingInteractor extends Interactor{
 
     interface Callback {
         void onNoMatchFound();

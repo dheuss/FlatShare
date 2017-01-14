@@ -1,7 +1,7 @@
 package com.flatshare.domain.datatypes.db.profiles;
 
 import com.flatshare.domain.datatypes.db.common.ApartmentLocation;
-import com.flatshare.domain.datatypes.db.common.ProfileType;
+import com.flatshare.domain.datatypes.enums.ProfileType;
 import com.flatshare.domain.datatypes.db.filters.ApartmentFilterSettings;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.PropertyName;

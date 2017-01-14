@@ -8,9 +8,13 @@ import com.flatshare.presentation.ui.BaseView;
 
 import java.util.List;
 
-public interface MatchingPresenter extends BasePresenter {
+public interface PotentialMatchingPresenter extends BasePresenter {
 
-    void getMatches();
+    void getPotentialMatches();
+
+    void tenantSwipedApartment(String apartmentProfileId, boolean accepted);
+
+    void roommateSwipedTenant(String tenantProfileId, boolean accepted);
 
     interface View extends BaseView {
         void showTenants(List<TenantProfile> tenants);

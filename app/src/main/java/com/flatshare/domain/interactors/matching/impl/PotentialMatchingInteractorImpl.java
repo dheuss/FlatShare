@@ -6,7 +6,7 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
-import com.flatshare.domain.interactors.matching.MatchingInteractor;
+import com.flatshare.domain.interactors.matching.PotentialMatchingInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.domain.predicates.ApartmentMatchFinder;
 import com.flatshare.domain.predicates.TenantMatchFinder;
@@ -23,21 +23,21 @@ import java.util.Map;
 /**
  * Created by Arber on 20/12/2016.
  */
-public class MatchingInteractorImpl extends AbstractInteractor implements MatchingInteractor {
+public class PotentialMatchingInteractorImpl extends AbstractInteractor implements PotentialMatchingInteractor {
 
     private static final String TAG = "MatchingInt";
 
     /**
      * The Callback is responsible for talking to the UI on the main thread
      */
-    private MatchingInteractor.Callback mCallback;
+    private PotentialMatchingInteractor.Callback mCallback;
 
     private int classificationId;
     private TenantProfile tenantProfile;
     private ApartmentProfile apartmentProfile;
 
-    public MatchingInteractorImpl(MainThread mainThread,
-                                  Callback callback, int classificationId, TenantProfile tenantProfile, ApartmentProfile apartmentProfile) {
+    public PotentialMatchingInteractorImpl(MainThread mainThread,
+                                           Callback callback, int classificationId, TenantProfile tenantProfile, ApartmentProfile apartmentProfile) {
 
         super(mainThread);
         this.mCallback = callback;
