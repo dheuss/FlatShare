@@ -158,8 +158,9 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
     }
 
     public void apartmentPopUp(View view) {
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-        View customView = inflater.inflate(R.layout.activity_show_detail_profil_apartment, null);
+        //LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
+        //View customView = inflater.inflate(R.layout.activity_show_detail_profil_apartment, null);
+        View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_apartment, null);
 
         mPopupWindow = new PopupWindow(
                 customView,
@@ -193,8 +194,9 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
     }
 
     public void tenantPopUp(View view) {
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-        View customView = inflater.inflate(R.layout.activity_show_detail_profil_tenant, null);
+        //LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
+        //View customView = inflater.inflate(R.layout.activity_show_detail_profil_tenant, null);
+        View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_tenant, null);
 
         mPopupWindow = new PopupWindow(
                 customView,
