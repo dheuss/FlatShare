@@ -93,6 +93,7 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
         sharedPref = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
 
         classificationId = userState.getPrimaryUserProfile().getClassificationId();
+        popupFlag = classificationId;
 
         bindView(view);
 
@@ -145,8 +146,6 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
 
         rejectBtn = (ImageButton) view.findViewById(R.id.rejectBtn);
         acceptBtn = (ImageButton) view.findViewById(R.id.acceptBtn);
-
-        popupFlag = 0;
     }
 
     public void cardClick(View view) {

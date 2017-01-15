@@ -2,14 +2,46 @@ package com.flatshare.presentation.ui.activities.settings;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.flatshare.R;
+import com.flatshare.domain.interactors.settings.ProfileApartmentSettingsInteractor;
+import com.flatshare.domain.state.UserState;
+import com.flatshare.presentation.presenters.settings.ProfileApartmentSettingsPresenter;
+import com.flatshare.presentation.ui.AbstarctFragmentAcivity;
 
-public class ProfileApartmentSettingsActivity extends AppCompatActivity {
+import java.util.Map;
+
+public class ProfileApartmentSettingsActivity extends AbstarctFragmentAcivity implements ProfileApartmentSettingsPresenter.View {
+
+    private UserState userState;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+        userState = UserState.getInstance();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_apartment_settings);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_profile_apartment_settings, container, false);
+        return view;
+    }
+
+    @Override
+    public void changeToMatchingActivity() {
+
+    }
+
+    @Override
+    public void updateAdapter(Map<String, String> idEmailsMap) {
+
+    }
+
+    @Override
+    public void showError(String message) {
+
     }
 }

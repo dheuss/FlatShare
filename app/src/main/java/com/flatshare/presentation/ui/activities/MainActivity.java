@@ -11,9 +11,12 @@ import android.view.LayoutInflater;
 import android.widget.TextView;
 
 import com.flatshare.R;
+import com.flatshare.domain.datatypes.enums.ProfileType;
+import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.presentation.ui.activities.matchingoverview.MatchingOverviewActivity;
+import com.flatshare.presentation.ui.activities.settings.ProfileApartmentSettingsActivity;
 import com.flatshare.presentation.ui.activities.settings.ProfileTenantSettingsActivity;
 import com.flatshare.presentation.ui.activities.settings.SettingsActivity;
 
@@ -32,10 +35,16 @@ public class MainActivity extends AbstractActivity {
 //            R.drawable.calendar_icon
     };
 
+    private UserState userState;
+    private int classificationId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        userState = UserState.getInstance();
         super.onCreate(savedInstanceState);
         bindView();
+
+        classificationId = userState.getPrimaryUserProfile().getClassificationId();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -86,7 +95,11 @@ public class MainActivity extends AbstractActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new SettingsActivity(), "SettingsActivity");
-        adapter.addFragment(new ProfileTenantSettingsActivity(), "ProfileTenantSettingsActivity");
+        if (classificationId == ProfileType.TENANT.getValue()){
+            adapter.addFragment(new ProfileTenantSettingsActivity(), "ProfileTenantSettingsActivity");
+        } else {
+            adapter.addFragment(new ProfileApartmentSettingsActivity(), "ProfileApartmentSettingsActivity");
+        }
         adapter.addFragment(new MatchingActivity(), "MatchingActivity");
         adapter.addFragment(new MatchingOverviewActivity(), "MatchingOverviewActivity");
         viewPager.setAdapter(adapter);
