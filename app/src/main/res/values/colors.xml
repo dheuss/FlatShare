@@ -26,22 +26,22 @@
     <color name="text">#000000</color>                   black -->
 
     <!-- more in Orange -->
-    <color name="amber50background">#FFF8E1</color>
-    <color name="amber100">#FFECB3</color>
-    <color name="amber200">#FFE082</color>
-    <color name="amber300">#FFD54F</color>
-    <color name="amber400">#FFCA28</color>
-    <color name="amber500">#FFC107</color>
-    <color name="amber600">#FFB300</color>
-    <color name="amber700">#FFA000</color>
-    <color name="amber800">#FF8F00</color>
-    <color name="amber900">#FF6F00</color>
+    <!--<color name="amber50background">#FFF8E1</color>-->
+    <!--<color name="amber100">#FFECB3</color>-->
+    <!--<color name="amber200">#FFE082</color>-->
+    <!--<color name="amber300">#FFD54F</color>-->
+    <!--<color name="amber400">#FFCA28</color>-->
+    <!--<color name="amber500">#FFC107</color>-->
+    <!--<color name="amber600">#FFB300</color>-->
+    <!--<color name="amber700">#FFA000</color>-->
+    <!--<color name="amber800">#FF8F00</color>-->
+    <!--<color name="amber900">#FF6F00</color>-->
 
-    <!-- accente - Amber -->
-    <color name="amberA100">#FFE57F</color>
-    <color name="amberA200">#FFD740</color>
-    <color name="amberA400">#FFC400</color>
-    <color name="amberA700">#FFAB00</color>
+    <!--&lt;!&ndash; accente - Amber &ndash;&gt;-->
+    <!--<color name="amberA100">#FFE57F</color>-->
+    <!--<color name="amberA200">#FFD740</color>-->
+    <!--<color name="amberA400">#FFC400</color>-->
+    <!--<color name="amberA700">#FFAB00</color>-->
 
 
 <!-- ################################################################################ -->
@@ -65,37 +65,49 @@
     <!--<color name="lightGreenDarkText">#FFFFFF</color>-->
 
     <!-- more in Light Green -->
-    <color name="lightGreen50background">#F1F8E9</color>
-    <color name="lightGreen100">#DCEDC8</color>
-    <color name="lightGreen200">#C5E1A5</color>
-    <color name="lightGreen300">#AED581</color>
-    <color name="lightGreen400">#9CCC65</color>
-    <color name="lightGreen500">#8BC34A</color>
-    <color name="lightGreen600">#7CB342</color>
-    <color name="lightGreen700">#689F38</color> <!-- &lt;!&ndash; weißer Text &ndash;&gt;-->
-    <color name="lightGreen800">#558B2F</color> <!--&lt;!&ndash; weißer Text &ndash;&gt;-->
-    <color name="lightGreen900">#33691E</color> <!--&lt;!&ndash; weißer Text &ndash;&gt;-->
+    <!--<color name="lightGreen50background">#F1F8E9</color>-->
+    <!--<color name="lightGreen100">#DCEDC8</color>-->
+    <!--<color name="lightGreen200">#C5E1A5</color>-->
+    <!--<color name="lightGreen300">#AED581</color>-->
+    <!--<color name="lightGreen400">#9CCC65</color>-->
+    <!--<color name="lightGreen500">#8BC34A</color>-->
+    <!--<color name="lightGreen600">#7CB342</color>-->
+    <!--<color name="lightGreen700">#689F38</color> &lt;!&ndash; &lt;!&ndash; weißer Text &ndash;&gt;&ndash;&gt;-->
+    <!--<color name="lightGreen800">#558B2F</color> &lt;!&ndash;&lt;!&ndash; weißer Text &ndash;&gt;&ndash;&gt;-->
+    <!--<color name="lightGreen900">#33691E</color> &lt;!&ndash;&lt;!&ndash; weißer Text &ndash;&gt;&ndash;&gt;-->
 
-    <!-- accente - Light Green -->
-    <color name="lightGreenA100">#CCFF90</color>
-    <color name="lightGreenA200">#B2FF59</color>
-    <color name="lightGreenA400">#76FF03</color>
-    <color name="lightGreenA700">#64DD17</color>
+    <!--&lt;!&ndash; accente - Light Green &ndash;&gt;-->
+    <!--<color name="lightGreenA100">#CCFF90</color>-->
+    <!--<color name="lightGreenA200">#B2FF59</color>-->
+    <!--<color name="lightGreenA400">#76FF03</color>-->
+    <!--<color name="lightGreenA700">#64DD17</color>-->
 
 
     <!-- ################################################################################ -->
 
     <!--PRUPLE-->
-    <color name="windowBackground">#D5BDFF</color>
-    <color name="colorPrimaryDark">#6A5F75</color>
-    <color name="colorPrimary">#A470FF</color>
-    <color name="textColorPrimary">#9264E3</color>
-    <color name="colorAccent">#835ACC</color>
-    <color name="navigationBar">#000000</color>
-    <color name="text">#000000</color>
-    <color name="button">#6A5F75</color>
+    <!--<color name="windowBackground">#D5BDFF</color>-->
+    <!--<color name="colorPrimaryDark">#6A5F75</color>-->
+    <!--<color name="colorPrimary">#A470FF</color>-->
+    <!--<color name="textColorPrimary">#9264E3</color>-->
+    <!--<color name="colorAccent">#835ACC</color>-->
+    <!--<color name="navigationBar">#000000</color>-->
+    <!--<color name="text">#000000</color>-->
+    <!--<color name="button">#6A5F75</color>-->
+    <!--<color name="ButtonWithoutRectangle">#6A5F75</color>-->
+    <!--<color name="buttonText">#FFFFFF</color>-->
+
+    <!--ORANGE || BLUE-->
+    <color name="windowBackground">#F2FFFF</color>
+    <color name="colorPrimaryDark">#FF5C27</color>
+    <color name="colorPrimary">#547299</color>
+    <color name="textColorPrimary">#CCB1AE</color>
+    <color name="colorAccent">#547299</color>
+    <color name="navigationBar">#AEBBCC</color>
+    <color name="text">#AEBBCC</color>
+    <color name="button">#FF5C27</color>
     <color name="ButtonWithoutRectangle">#6A5F75</color>
-    <color name="buttonText">#FFFFFF</color>
+    <color name="buttonText">#AEBBCC</color>
 
 
 </resources>
