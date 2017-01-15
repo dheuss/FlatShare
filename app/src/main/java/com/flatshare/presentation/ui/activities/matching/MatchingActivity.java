@@ -1,12 +1,14 @@
 package com.flatshare.presentation.ui.activities.matching;
 
+import android.support.v4.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
@@ -18,23 +20,21 @@ import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.matching.PotentialMatchingPresenter;
 import com.flatshare.presentation.presenters.matching.impl.PotentialMatchingPresenterImpl;
-import com.flatshare.presentation.ui.AbstractActivity;
-import com.flatshare.presentation.ui.activities.settings.ProfileApartmentSettingsActivity;
-import com.flatshare.presentation.ui.activities.settings.ProfileTenantSettingsActivity;
-import com.flatshare.presentation.ui.activities.matchingoverview.chat.ChatActivity;
+import com.flatshare.presentation.ui.AbstarctFragmentAcivity;
 import com.flatshare.threading.MainThreadImpl;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 import android.view.ViewGroup.LayoutParams;
 
-
 import java.util.List;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * Created by Arber on 20/12/2016.
  */
-public class MatchingActivity extends AbstractActivity implements PotentialMatchingPresenter.View {
+public class MatchingActivity extends AbstarctFragmentAcivity implements PotentialMatchingPresenter.View {
 
     private static final String EVENT_LISTENER_KEY = "eventListenerKey";
     private SwipePlaceHolderView mSwipeView;
@@ -44,8 +44,6 @@ public class MatchingActivity extends AbstractActivity implements PotentialMatch
 
     private ImageButton acceptBtn;
     private ImageButton rejectBtn;
-    private ImageButton profileBtn;
-    private ImageButton chatBtn;
 
     private PopupWindow mPopupWindow;
 
@@ -70,14 +68,26 @@ public class MatchingActivity extends AbstractActivity implements PotentialMatch
     private TextView apartmentWashingMashineTextView;
     private ImageButton closeButton;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    private SharedPreferences sharedPref;
 
+    public MatchingActivity() {
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         userState = UserState.getInstance();
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_matching, container, false);
+
+        sharedPref = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+
         classificationId = userState.getPrimaryUserProfile().getClassificationId();
 
-        bindView();
+        bindView(view);
 
         Log.d(TAG, "inside onCreate(), creating presenter for this view");
 
@@ -102,25 +112,6 @@ public class MatchingActivity extends AbstractActivity implements PotentialMatch
                         .setSwipeInMsgLayoutId(R.layout.activity_matching_card_in)
                         .setSwipeOutMsgLayoutId(R.layout.activity_matching_card_out));
 
-        profileBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (classificationId == 0){
-                    MatchingActivity.this.startActivity(new Intent(MatchingActivity.this, ProfileTenantSettingsActivity.class));
-                } else {
-                    MatchingActivity.this.startActivity(new Intent(MatchingActivity.this, ProfileApartmentSettingsActivity.class));
-                }
-
-            }
-        });
-
-        chatBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MatchingActivity.this.startActivity(new Intent(MatchingActivity.this, ChatActivity.class));
-            }
-        });
-
         rejectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,25 +125,19 @@ public class MatchingActivity extends AbstractActivity implements PotentialMatch
                 mSwipeView.doSwipe(true);
             }
         });
-    }
 
-    @Override
-    protected int getLayoutResourceId() {
-        return R.layout.activity_matching;
+        return view;
     }
 
 
-    private void bindView() {
-        mSwipeView = (SwipePlaceHolderView) findViewById(R.id.swipeView);
-        mContext = getApplicationContext();
+    private void bindView(View view) {
+        mSwipeView = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
+        this.mContext = getActivity();
 
-        mFrameLayout = (FrameLayout) findViewById(R.id.mactchingActivityFrameLayout);
+        mFrameLayout = (FrameLayout) view.findViewById(R.id.mactchingActivityFrameLayout);
 
-        profileBtn = (ImageButton) findViewById(R.id.profilsettingsBtn);
-        chatBtn = (ImageButton) findViewById(R.id.chatBtn);
-
-        rejectBtn = (ImageButton) findViewById(R.id.rejectBtn);
-        acceptBtn = (ImageButton) findViewById(R.id.acceptBtn);
+        rejectBtn = (ImageButton) view.findViewById(R.id.rejectBtn);
+        acceptBtn = (ImageButton) view.findViewById(R.id.acceptBtn);
 
         popupFlag = 0;
     }
@@ -175,15 +160,15 @@ public class MatchingActivity extends AbstractActivity implements PotentialMatch
                 LayoutParams.MATCH_PARENT
         );
 
-        apartmentPriceTextView = (TextView) findViewById(R.id.apartmentPriceTextView);
-        apartmentAreaTextView = (TextView) findViewById(R.id.apartmentAreaTextView);
-        apartmentZipCodeTextView = (TextView) findViewById(R.id.apartmentZIPTextView);
-        apartmentRoomSizeTextView = (TextView) findViewById(R.id.apartmentRoomSizeTextView);
-        apartmentApartmentSizeTextView = (TextView) findViewById(R.id.apartmentAreaTextView);
-        apartmentInternetTextView = (TextView) findViewById(R.id.apartmentInternetTextView);
-        apartmentSmokerTextView = (TextView) findViewById(R.id.apartmentSmokerTextView);
-        apartmentPetsTextView = (TextView) findViewById(R.id.apartmentPetsTextView);
-        apartmentWashingMashineTextView = (TextView) findViewById(R.id.apartmentWashingMashineTextView);
+        apartmentPriceTextView = (TextView) view.findViewById(R.id.apartmentPriceTextView);
+        apartmentAreaTextView = (TextView) view.findViewById(R.id.apartmentAreaTextView);
+        apartmentZipCodeTextView = (TextView) view.findViewById(R.id.apartmentZIPTextView);
+        apartmentRoomSizeTextView = (TextView) view.findViewById(R.id.apartmentRoomSizeTextView);
+        apartmentApartmentSizeTextView = (TextView) view.findViewById(R.id.apartmentAreaTextView);
+        apartmentInternetTextView = (TextView) view.findViewById(R.id.apartmentInternetTextView);
+        apartmentSmokerTextView = (TextView) view.findViewById(R.id.apartmentSmokerTextView);
+        apartmentPetsTextView = (TextView) view.findViewById(R.id.apartmentPetsTextView);
+        apartmentWashingMashineTextView = (TextView) view.findViewById(R.id.apartmentWashingMashineTextView);
         closeButton = (ImageButton) customView.findViewById(R.id.ib_close);
 
         //apartmentPriceTextView.setText(mApartmetProfile.getPrice() + "");
@@ -225,13 +210,23 @@ public class MatchingActivity extends AbstractActivity implements PotentialMatch
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         Log.d(TAG, "inside onResume()");
 
         // let's start welcome message retrieval when the app resumes
         mPresenter.resume();
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
     }
 
     @Override
@@ -268,7 +263,7 @@ public class MatchingActivity extends AbstractActivity implements PotentialMatch
 
     @Override
     public void updateListener(boolean listenerAttached) {
-        writeToSharedPreferences(R.string.pot_matching_listener_attached, listenerAttached);
+        //writeToSharedPreferences(R.string.pot_matching_listener_attached, listenerAttached);
     }
 
     private void tenantSwipedApartment(ApartmentProfile apartmentProfile, boolean accepted) {
@@ -277,6 +272,12 @@ public class MatchingActivity extends AbstractActivity implements PotentialMatch
 
     private void roommateSwipedTenant(TenantProfile tenantProfile, boolean accepted) {
         mPresenter.roommateSwipedTenant(tenantProfile.getId(), accepted);
+    }
+
+    protected void writeToSharedPreferences(int key, String value) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(key), value);
+        editor.apply();
     }
 
 }

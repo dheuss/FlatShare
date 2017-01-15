@@ -11,30 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/LinearLayoutSettings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left">
-            <ImageButton
-                android:id="@+id/settingsBtn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/settings_button"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/LinearLayoutCouch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right">
-            <ImageButton
-                android:id="@+id/couchBtn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/couch_button"/>
-        </LinearLayout>
-
         <TextView
             android:id="@+id/tenant_setting_inital"
             android:layout_width="match_parent"
@@ -45,7 +21,7 @@
             android:layout_marginTop="@dimen/marginTop"
             android:text="@string/update_profile"
             android:textAlignment="center"
-            android:textColor="@color/text"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/textSizeHeadLine"/>
 
         <TextView
@@ -270,7 +246,7 @@
                 android:gravity="top|left"
                 android:inputType="textMultiLine"
                 android:scrollHorizontally="false"
-                android:textColor="@color/text"/>
+                android:textColor="@color/colorText"/>
         </LinearLayout>
 
         <LinearLayout
@@ -304,10 +280,10 @@
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:hint="@string/change_profile_filter_settings"
-            android:textColor="@color/buttonText"
-            android:textColorHint="@color/buttonText"
+            android:textColor="@color/colorButtonText"
+            android:textColorHint="@color/colorButtonText"
             android:textStyle="bold" />
 
         <!-- Save Button -->
@@ -319,10 +295,10 @@
             android:layout_marginBottom="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:hint="@string/save_profile_settings"
-            android:textColor="@color/buttonText"
-            android:textColorHint="@color/buttonText"
+            android:textColor="@color/colorButtonText"
+            android:textColorHint="@color/colorButtonText"
             android:textStyle="bold" />
 
     </RelativeLayout>

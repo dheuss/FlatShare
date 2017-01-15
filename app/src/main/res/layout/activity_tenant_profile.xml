@@ -19,7 +19,7 @@
             android:layout_marginTop="@dimen/marginTop"
             android:text="@string/create_your_tenant_profile"
             android:textAlignment="center"
-            android:textColor="@color/text"
+            android:textColor="@color/colorPrimary"
             android:textSize="30dp" />
 
         <TextView
@@ -265,7 +265,7 @@
                 android:lines="5"
                 android:maxLines="5"
                 android:scrollHorizontally="false"
-                android:textColor="@color/text"
+                android:textColor="@color/colorText"
                 android:textSize="10dp" />
         </LinearLayout>
 
@@ -302,10 +302,10 @@
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:hint="@string/take_picture_tenant_profile"
-            android:textColor="@color/buttonText"
-            android:textColorHint="@color/buttonText"
+            android:textColor="@color/colorButtonText"
+            android:textColorHint="@color/colorButtonText"
             android:textStyle="bold" />
 
         <Button
@@ -317,10 +317,10 @@
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:hint="@string/done_profile"
-            android:textColor="@color/buttonText"
-            android:textColorHint="@color/buttonText"
+            android:textColor="@color/colorButtonText"
+            android:textColorHint="@color/colorButtonText"
             android:textStyle="bold" />
 
     </RelativeLayout>

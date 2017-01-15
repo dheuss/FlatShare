@@ -2,8 +2,11 @@ package com.flatshare.presentation.ui.activities.settings;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -16,7 +19,7 @@ import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.auth.login.LoginActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-public class SettingsActivity extends AbstractActivity implements SettingsPresenter.View {
+public class SettingsActivity extends Fragment implements SettingsPresenter.View {
 
     private Button btnChangeEmail;
     private Button btnChangePassword;
@@ -35,17 +38,19 @@ public class SettingsActivity extends AbstractActivity implements SettingsPresen
 
     private ProgressBar progressBar;
 
-    private ImageButton back;
-
     private static final String TAG = "SettingsActivity";
 
     private SettingsPresenter mPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
-        bindView();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        View view = inflater.inflate(R.layout.activity_settings, container, false);
+        bindView(view);
 
         Log.d(TAG, "inside onCreate(), creating presenter fr this view");
 
@@ -100,13 +105,6 @@ public class SettingsActivity extends AbstractActivity implements SettingsPresen
             }
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SettingsActivity.this, ProfileTenantSettingsActivity.class));
-            }
-        });
-
         changeEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,32 +135,27 @@ public class SettingsActivity extends AbstractActivity implements SettingsPresen
                 SettingsActivity.this.resetEmail();
             }
         });
+
+        return view;
     }
 
-    @Override
-    protected int getLayoutResourceId() {
-        return R.layout.activity_settings;
-    }
+    private void bindView(View view){
+        btnChangeEmail = (Button) view.findViewById(R.id.change_email_button);
+        btnChangePassword = (Button) view.findViewById(R.id.change_password_button);
+        btnSendResetEmail = (Button) view.findViewById(R.id.sending_pass_reset_button);
+        btnRemoveUser = (Button) view.findViewById(R.id.remove_user_button);
+        changeEmail = (Button) view.findViewById(R.id.changeEmail);
+        changePassword = (Button) view.findViewById(R.id.changePass);
+        sendEmail = (Button) view.findViewById(R.id.send);
+        remove = (Button) view.findViewById(R.id.remove);
+        signOut = (Button) view.findViewById(R.id.sign_out);
 
-    private void bindView(){
-        btnChangeEmail = (Button) findViewById(R.id.change_email_button);
-        btnChangePassword = (Button) findViewById(R.id.change_password_button);
-        btnSendResetEmail = (Button) findViewById(R.id.sending_pass_reset_button);
-        btnRemoveUser = (Button) findViewById(R.id.remove_user_button);
-        changeEmail = (Button) findViewById(R.id.changeEmail);
-        changePassword = (Button) findViewById(R.id.changePass);
-        sendEmail = (Button) findViewById(R.id.send);
-        remove = (Button) findViewById(R.id.remove);
-        signOut = (Button) findViewById(R.id.sign_out);
+        oldEmail = (EditText) view.findViewById(R.id.old_email);
+        newEmail = (EditText) view.findViewById(R.id.new_email);
+        password = (EditText) view.findViewById(R.id.password);
+        newPassword = (EditText) view.findViewById(R.id.newPassword);
 
-        oldEmail = (EditText) findViewById(R.id.old_email);
-        newEmail = (EditText) findViewById(R.id.new_email);
-        password = (EditText) findViewById(R.id.password);
-        newPassword = (EditText) findViewById(R.id.newPassword);
-
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
-        back = (ImageButton)findViewById(R.id.settings_profil_back_button);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 
         oldEmail.setVisibility(View.GONE);
         newEmail.setVisibility(View.GONE);
@@ -195,14 +188,21 @@ public class SettingsActivity extends AbstractActivity implements SettingsPresen
     }
 
     @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
     public void showError(String message) {
 
     }
 
     @Override
     public void changeToLoginActivity() {
-        Log.d(TAG, "success! changed to PrimaryProfileActivity!");
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
     }
 }

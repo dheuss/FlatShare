@@ -27,7 +27,7 @@
             android:layout_marginTop="@dimen/marginTop"
             android:text="@string/apartment_info_headline"
             android:textAlignment="center"
-            android:textColor="@color/text"
+            android:textColor="@color/colorPrimary"
             android:textSize="30dp" />
 
         <TextView

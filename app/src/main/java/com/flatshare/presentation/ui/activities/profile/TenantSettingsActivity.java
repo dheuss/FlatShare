@@ -17,6 +17,7 @@ import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
 import com.flatshare.presentation.presenters.profile.TenantSettingsPresenter;
 import com.flatshare.presentation.presenters.profile.impl.TenantSettingsPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
+import com.flatshare.presentation.ui.activities.MainActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.threading.MainThreadImpl;
 
@@ -129,6 +130,8 @@ public class TenantSettingsActivity extends AbstractActivity implements TenantSe
 
         int priceFrom = Integer.parseInt(minPrice.getText().toString());
         int priceTo = Integer.parseInt(maxPrice.getText().toString());
+        int sizeFrom = Integer.parseInt(minSize.getText().toString());
+        int sizeTo = Integer.parseInt(maxSize.getText().toString());
 
         //TODO Area
 
@@ -145,6 +148,8 @@ public class TenantSettingsActivity extends AbstractActivity implements TenantSe
         TenantFilterSettings tenantFilterSettings = new TenantFilterSettings();
         tenantFilterSettings.setPriceFrom(priceFrom);
         tenantFilterSettings.setPriceTo(priceTo);
+        tenantFilterSettings.setSizeFrom(sizeFrom);
+        tenantFilterSettings.setSizeTo(sizeTo);
         tenantFilterSettings.setInternet(isInternet);
         tenantFilterSettings.setSmokerApartment(isSomkerApartment);
         tenantFilterSettings.setPetsAllowed(isPetAllowed);
@@ -224,7 +229,7 @@ public class TenantSettingsActivity extends AbstractActivity implements TenantSe
     @Override
     public void changeToMatchingActivity() {
         Log.d(TAG, "success! changed to TenantSettings!");
-        Intent intent = new Intent(this, MatchingActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

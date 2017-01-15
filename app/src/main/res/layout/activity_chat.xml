@@ -39,7 +39,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:textColor="@color/text"/>
+            android:textColor="@color/colorText"/>
     </LinearLayout>
 
 </FrameLayout>

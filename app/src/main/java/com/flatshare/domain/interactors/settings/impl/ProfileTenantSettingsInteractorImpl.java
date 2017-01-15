@@ -49,8 +49,16 @@ public class ProfileTenantSettingsInteractorImpl extends AbstractInteractor impl
     @Override
     public void execute() {
         Log.v(TAG, "execute methode called in ProfileTenantSettingsInteractorImpl");
+
+        String tId = databaseRoot.getUserProfileNode(userId).getTenantProfileId();
+        String lId = databaseRoot.getTenantProfiles();
+
+        System.out.println("tId: " + tId);
+        System.out.println("lId: " + lId);
+
+
         notifySuccess();
-//        String tId = mDatabase.child(databaseRoot.getTenantProfiles()).push().getKey();
+//
 //
 //        Map<String, Object> map = new HashMap<>();
 //        map.put(databaseRoot.getTenantProfileNode(tId).getRootPath(), this.tenantProfile);

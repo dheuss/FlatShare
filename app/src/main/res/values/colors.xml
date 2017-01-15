@@ -85,29 +85,17 @@
 
     <!-- ################################################################################ -->
 
-    <!--PRUPLE-->
-    <!--<color name="windowBackground">#D5BDFF</color>-->
-    <!--<color name="colorPrimaryDark">#6A5F75</color>-->
-    <!--<color name="colorPrimary">#A470FF</color>-->
-    <!--<color name="textColorPrimary">#9264E3</color>-->
-    <!--<color name="colorAccent">#835ACC</color>-->
-    <!--<color name="navigationBar">#000000</color>-->
-    <!--<color name="text">#000000</color>-->
-    <!--<color name="button">#6A5F75</color>-->
-    <!--<color name="ButtonWithoutRectangle">#6A5F75</color>-->
-    <!--<color name="buttonText">#FFFFFF</color>-->
+    <!--!!!NUR NOCH DIESE NAMEN VERWENDEN FÜR FABREN!!!-->
 
-    <!--ORANGE || BLUE-->
-    <color name="windowBackground">#F2FFFF</color>
-    <color name="colorPrimaryDark">#FF5C27</color>
-    <color name="colorPrimary">#547299</color>
-    <color name="textColorPrimary">#CCB1AE</color>
-    <color name="colorAccent">#547299</color>
-    <color name="navigationBar">#AEBBCC</color>
-    <color name="text">#AEBBCC</color>
-    <color name="button">#FF5C27</color>
-    <color name="ButtonWithoutRectangle">#6A5F75</color>
-    <color name="buttonText">#AEBBCC</color>
+    <color name="colorPrimary">#125688</color>
+    <color name="colorPrimaryDark">#125688</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+    <color name="colorAccent">#c8e8ff</color>
+    <color name="colorText">#000000</color>
+    <color name="colorButtonText">#FFFFFF</color>
 
+    <!--!!!NUR NOCH DIESE NAMEN VERWENDEN FÜR FABREN!!!-->
 
 </resources>

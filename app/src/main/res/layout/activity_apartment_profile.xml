@@ -19,7 +19,7 @@
             android:layout_marginTop="@dimen/marginTop"
             android:text="@string/create_your_apartment_profile"
             android:textAlignment="center"
-            android:textColor="@color/text"
+            android:textColor="@color/colorText"
             android:textSize="30dp" />
 
         <TextView
@@ -44,8 +44,8 @@
             android:layout_marginTop="@dimen/marginTop"
             android:background="@color/colorPrimaryDark"
             android:hint="@string/scan_qr"
-            android:textColor="@color/buttonText"
-            android:textColorHint="@color/buttonText"
+            android:textColor="@color/colorButtonText"
+            android:textColorHint="@color/colorButtonText"
             android:textStyle="bold" />
 
 
@@ -389,8 +389,8 @@
             android:layout_marginTop="@dimen/marginTop"
             android:background="@color/colorPrimaryDark"
             android:hint="@string/done_profile"
-            android:textColor="@color/buttonText"
-            android:textColorHint="@color/buttonText"
+            android:textColor="@color/colorButtonText"
+            android:textColorHint="@color/colorButtonText"
             android:textStyle="bold" />
 
     </RelativeLayout>

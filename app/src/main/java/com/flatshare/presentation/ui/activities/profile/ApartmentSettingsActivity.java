@@ -18,6 +18,7 @@ import com.flatshare.domain.datatypes.db.filters.ApartmentFilterSettings;
 import com.flatshare.presentation.presenters.profile.ApartmentSettingsPresenter;
 import com.flatshare.presentation.presenters.profile.impl.ApartmentSettingsPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
+import com.flatshare.presentation.ui.activities.MainActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.threading.MainThreadImpl;
 
@@ -143,7 +144,7 @@ public class ApartmentSettingsActivity extends AbstractActivity implements Apart
     @Override
     public void changeToMatchingActivity() {
         Log.d(TAG, "success! changed to MatchingActivity!");
-        Intent intent = new Intent(this, MatchingActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

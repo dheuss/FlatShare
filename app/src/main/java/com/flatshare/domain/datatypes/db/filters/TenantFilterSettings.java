@@ -52,13 +52,20 @@ public class TenantFilterSettings extends FilterSettings {
     @PropertyName("tv_cable")
     public int tvCable;
 
-    public TenantFilterSettings() {
+    @PropertyName("size_from")
+    public int sizeFrom;
 
+    @PropertyName("size_to")
+    public int sizeTo;
+
+    public TenantFilterSettings() {
         this.apartmentLocation = new ApartmentLocation();
         this.priceFrom = Integer.MIN_VALUE;
         this.priceTo = Integer.MAX_VALUE;
         this.areaFrom = Integer.MIN_VALUE;
         this.areaTo = Integer.MAX_VALUE;
+        this.sizeFrom = Integer.MIN_VALUE;
+        this.sizeTo = Integer.MAX_VALUE;
         this.internet = 2;
         this.smokerApartment = 2;
         this.petsAllowed = 2;
@@ -68,7 +75,6 @@ public class TenantFilterSettings extends FilterSettings {
         this.balcony = 2;
         this.bathtub = 2;
         this.tvCable = 2;
-
     }
 
     @Exclude
@@ -210,4 +216,23 @@ public class TenantFilterSettings extends FilterSettings {
         this.washingMachine = washingMachine;
     }
 
+    @Exclude
+    public int getSizeFrom() {
+        return sizeFrom;
+    }
+
+    @Exclude
+    public void setSizeFrom(int sizeFrom) {
+        this.sizeFrom = sizeFrom;
+    }
+
+    @Exclude
+    public int getSizeTo() {
+        return sizeTo;
+    }
+
+    @Exclude
+    public void setSizeTo(int sizeTo) {
+        this.sizeTo = sizeTo;
+    }
 }

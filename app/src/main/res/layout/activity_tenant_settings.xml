@@ -19,7 +19,7 @@
             android:layout_marginTop="@dimen/marginTop"
             android:text="@string/create_your_tenant_setting"
             android:textAlignment="center"
-            android:textColor="@color/text"
+            android:textColor="@color/colorPrimary"
             android:textSize="30dp" />
 
         <TextView
@@ -546,10 +546,10 @@
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:hint="@string/done_1_tenant_profile"
-            android:textColor="@color/buttonText"
-            android:textColorHint="@color/buttonText"
+            android:textColor="@color/colorButtonText"
+            android:textColorHint="@color/colorButtonText"
             android:textStyle="bold" />
 
     </RelativeLayout>

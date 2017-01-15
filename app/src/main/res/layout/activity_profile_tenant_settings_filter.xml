@@ -20,7 +20,7 @@
             android:layout_marginTop="@dimen/marginTop"
             android:text="@string/update_profile_filter"
             android:textAlignment="center"
-            android:textColor="@color/text"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/textSizeHeadLine" />
 
         <TextView
@@ -548,10 +548,10 @@
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:hint="@string/save_profile_settings"
-            android:textColor="@color/buttonText"
-            android:textColorHint="@color/buttonText"
+            android:textColor="@color/colorButtonText"
+            android:textColorHint="@color/colorButtonText"
             android:textStyle="bold" />
     </RelativeLayout>
 </ScrollView>

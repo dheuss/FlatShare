@@ -28,7 +28,7 @@
             android:layout_marginTop="@dimen/marginTop"
             android:text="@string/tenant_info_headline"
             android:textAlignment="center"
-            android:textColor="@color/text"
+            android:textColor="@color/colorPrimary"
             android:textSize="30dp" />
 
         <TextView
