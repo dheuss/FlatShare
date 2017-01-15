@@ -15,9 +15,11 @@ import android.widget.TextView;
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
+import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.matching.PotentialMatchingPresenter;
 import com.flatshare.presentation.presenters.matching.impl.PotentialMatchingPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
+import com.flatshare.presentation.ui.activities.settings.ProfileApartmentSettingsActivity;
 import com.flatshare.presentation.ui.activities.settings.ProfileTenantSettingsActivity;
 import com.flatshare.presentation.ui.activities.matchingoverview.chat.ChatActivity;
 import com.flatshare.threading.MainThreadImpl;
@@ -37,6 +39,8 @@ public class MatchingActivity extends AbstractActivity implements PotentialMatch
     private static final String EVENT_LISTENER_KEY = "eventListenerKey";
     private SwipePlaceHolderView mSwipeView;
     private Context mContext;
+    private UserState userState;
+    private int classificationId;
 
     private ImageButton acceptBtn;
     private ImageButton rejectBtn;
@@ -70,6 +74,9 @@ public class MatchingActivity extends AbstractActivity implements PotentialMatch
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        userState = UserState.getInstance();
+        classificationId = userState.getPrimaryUserProfile().getClassificationId();
+
         bindView();
 
         Log.d(TAG, "inside onCreate(), creating presenter for this view");
@@ -98,7 +105,12 @@ public class MatchingActivity extends AbstractActivity implements PotentialMatch
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MatchingActivity.this.startActivity(new Intent(MatchingActivity.this, ProfileTenantSettingsActivity.class));
+                if (classificationId == 0){
+                    MatchingActivity.this.startActivity(new Intent(MatchingActivity.this, ProfileTenantSettingsActivity.class));
+                } else {
+                    MatchingActivity.this.startActivity(new Intent(MatchingActivity.this, ProfileApartmentSettingsActivity.class));
+                }
+
             }
         });
 

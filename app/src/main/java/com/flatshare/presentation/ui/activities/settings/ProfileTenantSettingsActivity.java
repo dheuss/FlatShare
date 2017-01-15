@@ -47,6 +47,7 @@ public class ProfileTenantSettingsActivity extends AbstractActivity implements P
 
     private Spinner changeDurationOfStaySpinner;
 
+    private Button changeFilterSettingsButton;
     private Button saveChangesButton;
 
     private static final String TAG = "ProfileTenantSettingsActivity";
@@ -76,6 +77,13 @@ public class ProfileTenantSettingsActivity extends AbstractActivity implements P
             @Override
             public void onClick(View v){
                 startActivity(new Intent(ProfileTenantSettingsActivity.this, SettingsActivity.class));
+            }
+        });
+
+        changeFilterSettingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProfileTenantSettingsActivity.this, ProfileTenantSettingsFilterActivity.class));
             }
         });
 
@@ -203,6 +211,7 @@ public class ProfileTenantSettingsActivity extends AbstractActivity implements P
             changeOccupationSpinner.setSelection(0);
         }
 
+        changeFilterSettingsButton = (Button)findViewById(R.id.changeFilterProfileSettingsButton);
         saveChangesButton = (Button)findViewById(R.id.saveChangesProfileSettingsButton);
     }
 

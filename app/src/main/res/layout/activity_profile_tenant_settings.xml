@@ -295,9 +295,8 @@
                 android:textAlignment="center"/>
         </LinearLayout>
 
-        <!-- Save Button -->
         <Button
-            android:id="@+id/saveChangesProfileSettingsButton"
+            android:id="@+id/changeFilterProfileSettingsButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/LinearLayoutDuration"
@@ -305,6 +304,21 @@
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/colorPrimaryDark"
+            android:hint="@string/change_profile_filter_settings"
+            android:textColor="@color/buttonText"
+            android:textColorHint="@color/buttonText"
+            android:textStyle="bold" />
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/saveChangesProfileSettingsButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/changeFilterProfileSettingsButton"
+            android:layout_marginBottom="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
             android:background="@color/colorPrimaryDark"
             android:hint="@string/save_profile_settings"
             android:textColor="@color/buttonText"

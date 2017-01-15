@@ -101,6 +101,9 @@
     <string name="apartmentSize">Apartment Size:</string>
     <string name="apartment_info_description_2">We will start to show you the more important once at the top.</string>
     <string name="pot_matching_listener_attached">eventListenerKey</string>
+    <string name="change_profile_filter_settings">CHANGE FILTER SETTINGS!</string>
+    <string name="update_profile_filter">Profile Filter Settings</string>
+    <string name="profile_filter_settings_description">Here you can change your filter settings. That means that you can change the parameters to search for the right apartment. We will find the perfect apartment for you!</string>
 
     <string-array name="occupation">
         <item>Student</item>
