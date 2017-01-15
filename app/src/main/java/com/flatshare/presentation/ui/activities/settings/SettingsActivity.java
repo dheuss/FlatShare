@@ -1,16 +1,22 @@
 package com.flatshare.presentation.ui.activities.settings;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.view.ViewGroup.LayoutParams;
 
 import com.flatshare.R;
 import com.flatshare.presentation.presenters.settings.SettingsPresenter;
@@ -19,6 +25,8 @@ import com.flatshare.presentation.ui.AbstarctFragmentAcivity;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.auth.login.LoginActivity;
 import com.flatshare.threading.MainThreadImpl;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class SettingsActivity extends AbstarctFragmentAcivity implements SettingsPresenter.View {
 
@@ -36,6 +44,13 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
     private EditText newEmail;
     private EditText password;
     private EditText newPassword;
+
+    private PopupWindow logoutPopupWindow;
+    private RelativeLayout logoutRelativeLayout;
+    private Button logoutYESButton;
+    private Button logoutNOButton;
+
+    private Context mContext;
 
     private ProgressBar progressBar;
 
@@ -112,12 +127,16 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
                 SettingsActivity.this.changeMail();
             }
         });
+
+
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SettingsActivity.this.signOut();
+                signOut(view);
             }
         });
+
+
         btnRemoveUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -141,6 +160,8 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
     }
 
     private void bindView(View view){
+
+        mContext = getActivity();
         btnChangeEmail = (Button) view.findViewById(R.id.change_email_button);
         btnChangePassword = (Button) view.findViewById(R.id.change_password_button);
         btnSendResetEmail = (Button) view.findViewById(R.id.sending_pass_reset_button);
@@ -166,10 +187,41 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
         changePassword.setVisibility(View.GONE);
         sendEmail.setVisibility(View.GONE);
         remove.setVisibility(View.GONE);
+
+
     }
 
-    public void signOut() {
-        mPresenter.logOut();
+    public void signOut(View view) {
+        LayoutInflater inflater = (LayoutInflater)getActivity().getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View popupView = getActivity().getLayoutInflater().inflate(R.layout.activity_logout_popup, null);
+
+        logoutPopupWindow = new PopupWindow(
+                popupView,
+                LayoutParams.WRAP_CONTENT,
+                LayoutParams.WRAP_CONTENT);
+
+        logoutPopupWindow.setFocusable(false);
+        int location[] = new int[2];
+        view.getLocationOnScreen(location);
+
+        logoutYESButton = (Button)popupView.findViewById(R.id.yes_logout_button);
+        logoutNOButton = (Button)popupView.findViewById(R.id.no_logout_button);
+
+        logoutYESButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.logOut();
+            }
+        });
+
+        logoutNOButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logoutPopupWindow.dismiss();
+            }
+        });
+
+        logoutPopupWindow.showAtLocation(view, Gravity.CENTER,0,0);
     }
 
     public void changeMail(){
@@ -205,5 +257,7 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
 
     @Override
     public void changeToLoginActivity() {
+        Log.v(TAG, ": logout Scucess");
+        startActivity(new Intent(getActivity(), LoginActivity.class));
     }
 }

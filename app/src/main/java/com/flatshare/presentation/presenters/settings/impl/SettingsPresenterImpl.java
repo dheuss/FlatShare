@@ -92,6 +92,7 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
 
     @Override
     public void onLogoutSuccess() {
+        System.out.println("983754897435698235270982356324");
         userState.setLoggedIn(false);
         mView.hideProgress();
         mView.changeToLoginActivity();
