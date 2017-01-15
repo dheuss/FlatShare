@@ -17,6 +17,7 @@ import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.TextView;
 
 import com.flatshare.R;
 import com.flatshare.presentation.presenters.settings.SettingsPresenter;
@@ -49,6 +50,7 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
     private RelativeLayout logoutRelativeLayout;
     private Button logoutYESButton;
     private Button logoutNOButton;
+    private TextView popUpTextView;
 
     private Context mContext;
 
@@ -140,7 +142,7 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
         btnRemoveUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SettingsActivity.this.deleteAccount();
+                SettingsActivity.this.deleteAccount(view);
             }
         });
         changePassword.setOnClickListener(new View.OnClickListener() {
@@ -187,12 +189,9 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
         changePassword.setVisibility(View.GONE);
         sendEmail.setVisibility(View.GONE);
         remove.setVisibility(View.GONE);
-
-
     }
 
     public void signOut(View view) {
-        LayoutInflater inflater = (LayoutInflater)getActivity().getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View popupView = getActivity().getLayoutInflater().inflate(R.layout.activity_logout_popup, null);
 
         logoutPopupWindow = new PopupWindow(
@@ -228,8 +227,39 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
         mPresenter.changeMailAddress(newEmail.getText().toString());
     }
 
-    public void deleteAccount() {
-        mPresenter.deleteAccount();
+    public void deleteAccount(View view) {
+        View popupView = getActivity().getLayoutInflater().inflate(R.layout.activity_logout_popup, null);
+
+        logoutPopupWindow = new PopupWindow(
+                popupView,
+                LayoutParams.WRAP_CONTENT,
+                LayoutParams.WRAP_CONTENT);
+
+        logoutPopupWindow.setFocusable(false);
+        int location[] = new int[2];
+        view.getLocationOnScreen(location);
+
+        logoutYESButton = (Button)popupView.findViewById(R.id.yes_logout_button);
+        logoutNOButton = (Button)popupView.findViewById(R.id.no_logout_button);
+        popUpTextView = (TextView)popupView.findViewById(R.id.logout_popup_TextView);
+
+        popUpTextView.setText("Do you really want to remove this user?");
+
+        logoutYESButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.deleteAccount();
+            }
+        });
+
+        logoutNOButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logoutPopupWindow.dismiss();
+            }
+        });
+
+        logoutPopupWindow.showAtLocation(view, Gravity.CENTER,0,0);
     }
 
     public void changeToNewPassword() {

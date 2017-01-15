@@ -52,8 +52,8 @@ public class DeleteAccountInteractorImpl extends AbstractAuthenticator implement
 
     @Override
     public void execute() {
-        if(userFirebase != null){
-            userFirebase.delete()
+        if(firebaserUserId != null){
+            firebaserUserId.delete()
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
