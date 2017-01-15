@@ -104,6 +104,7 @@
     <string name="change_profile_filter_settings">CHANGE FILTER SETTINGS!</string>
     <string name="update_profile_filter">Profile Filter Settings</string>
     <string name="profile_filter_settings_description">Here you can change your filter settings. That means that you can change the parameters to search for the right apartment. We will find the perfect apartment for you!</string>
+    <string name="change_to_calendar">CALENDAR!</string>
 
     <string-array name="occupation">
         <item>Student</item>
