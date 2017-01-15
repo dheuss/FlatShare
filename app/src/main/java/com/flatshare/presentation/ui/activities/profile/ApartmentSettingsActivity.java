@@ -85,6 +85,7 @@ public class ApartmentSettingsActivity extends AbstractActivity implements Apart
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO: warum wurde das auskommentiert?
                 //ApartmentSettingsActivity.this.sendFilterSettings();
                 startActivity(new Intent(ApartmentSettingsActivity.this, MatchingActivity.class));
             }

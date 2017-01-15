@@ -4,8 +4,60 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/mactchingActivityFrameLayout"
+    android:id="@+id/matchingActivityFrameLayout"
     android:background="@color/windowBackground">
+
+
+    <!-- notif -->
+    <RelativeLayout
+        android:id="@+id/badge_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/relative_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/badge_button"
+                android:layout_width="65dip"
+                android:layout_height="65dip"
+                android:background="@drawable/bell" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/badge_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/relative_layout"
+            android:textColor="#000"
+            android:inputType="number"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+            <!--android:background="@drawable/badge_item_count"-->
+
+        <!--<shape xmlns:android="http://schemas.android.com/apk/res/android"-->
+
+            <!--android:id="@+id/badge_item_count"-->
+            <!--android:shape="rectangle">-->
+
+            <!--<corners android:radius="8dp" />-->
+            <!--<solid android:color="#f20000" />-->
+            <!--<stroke-->
+                <!--android:width="2dip"-->
+                <!--android:color="#FFF" />-->
+            <!--<padding-->
+                <!--android:bottom="6dp"-->
+                <!--android:left="6dp"-->
+                <!--android:right="6dp"-->
+                <!--android:top="6dp" />-->
+        <!--</shape>-->
+
+    </RelativeLayout>
+
+    <!--notif-->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"

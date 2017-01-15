@@ -129,6 +129,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         tenantProfile.setPets(isPets);
         tenantProfile.setShortBio(shortBio);
         tenantProfile.setDurationOfStay(duration);
+        tenantProfile.setDone(true);
 
         mPresenter.sendProfile(tenantProfile);
     }

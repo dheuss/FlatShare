@@ -23,6 +23,7 @@ public interface LoginPresenter extends BasePresenter {
 
 
         void notifyRoommateGenerateQR(String roommateId);
+        void changeToRoommateWaitingActivity();
 
         void changeToApartmentProfileActivity();
         void changeToApartmentSettingsActivity();

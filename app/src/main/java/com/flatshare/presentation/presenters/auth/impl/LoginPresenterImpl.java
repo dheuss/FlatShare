@@ -119,7 +119,11 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
         userState.setRoommateProfile(roommateProfile);
         mView.hideProgress();
 
-        mView.notifyRoommateGenerateQR(roommateProfile.getRoommateId());
+        if(roommateProfile.isAvailable()) {
+            mView.notifyRoommateGenerateQR(roommateProfile.getRoommateId());
+        } else {
+            mView.changeToRoommateWaitingActivity();
+        }
     }
 
     @Override

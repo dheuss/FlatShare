@@ -228,7 +228,7 @@ public class TenantSettingsActivity extends AbstractActivity implements TenantSe
 
     @Override
     public void changeToMatchingActivity() {
-        Log.d(TAG, "success! changed to TenantSettings!");
+        Log.d(TAG, "success! changed to MainActivity!");
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

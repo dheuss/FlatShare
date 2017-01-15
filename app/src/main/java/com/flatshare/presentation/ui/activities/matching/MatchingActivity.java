@@ -9,8 +9,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -36,20 +38,25 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
  */
 public class MatchingActivity extends AbstarctFragmentAcivity implements PotentialMatchingPresenter.View {
 
-    private static final String EVENT_LISTENER_KEY = "eventListenerKey";
+    private static final String TAG = "MatchingActivity";
+
     private SwipePlaceHolderView mSwipeView;
     private Context mContext;
     private UserState userState;
-    private int classificationId;
 
+    private int classificationId;
     private ImageButton acceptBtn;
     private ImageButton rejectBtn;
+    private ImageButton profileBtn;
+
+    private ImageButton chatBtn;
+
+    private TextView badgeCounter;
+    private Button badgeIcon;
 
     private PopupWindow mPopupWindow;
 
     private FrameLayout mFrameLayout;
-
-    private static final String TAG = "MatchingActivity";
 
     private PotentialMatchingPresenter mPresenter;
 
@@ -134,7 +141,7 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
         mSwipeView = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
         this.mContext = getActivity();
 
-        mFrameLayout = (FrameLayout) view.findViewById(R.id.mactchingActivityFrameLayout);
+        mFrameLayout = (FrameLayout) view.findViewById(R.id.matchingActivityFrameLayout);
 
         rejectBtn = (ImageButton) view.findViewById(R.id.rejectBtn);
         acceptBtn = (ImageButton) view.findViewById(R.id.acceptBtn);

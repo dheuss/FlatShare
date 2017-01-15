@@ -14,4 +14,6 @@
     <dimen name="textSizeHeadLine">30dp</dimen>
     <dimen name="textSizeNormalText">14dp</dimen>
     <dimen name="textSizeLabel">20dp</dimen>
+    <dimen name="badge_text_size">16sp</dimen>
+
 </resources>

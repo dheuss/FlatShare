@@ -22,12 +22,14 @@ import com.flatshare.R;
 import com.flatshare.domain.datatypes.auth.LoginDataType;
 import com.flatshare.presentation.presenters.auth.LoginPresenter;
 import com.flatshare.presentation.presenters.auth.impl.LoginPresenterImpl;
+import com.flatshare.presentation.ui.activities.MainActivity;
 import com.flatshare.presentation.ui.activities.auth.RegisterActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.presentation.ui.activities.matching.RoommateQRActivity;
 import com.flatshare.presentation.ui.activities.profile.ApartmentProfileActivity;
 import com.flatshare.presentation.ui.activities.profile.ApartmentSettingsActivity;
 import com.flatshare.presentation.ui.activities.profile.PrimaryProfileActivity;
+import com.flatshare.presentation.ui.activities.profile.RoommateWaitingActivity;
 import com.flatshare.presentation.ui.activities.profile.TenantProfileActivity;
 import com.flatshare.presentation.ui.activities.profile.TenantSettingsActivity;
 import com.flatshare.threading.MainThreadImpl;
@@ -199,8 +201,8 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
 
     @Override
     public void changeToMatchingActivity() {
-        Log.d("LoginActivity", "success! changed to MatchingActivity!");
-        Intent intent = new Intent(getActivity(), MatchingActivity.class);
+        Log.d(TAG, "success! changed to MatchingActivity!");
+        Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
         getActivity().finish();
     }
@@ -233,6 +235,14 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
     public void changeToApartmentSettingsActivity() {
         Log.d("LoginActivity", "success! changed to ApartmentSettingsActivity!");
         Intent intent = new Intent(getActivity(), ApartmentSettingsActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
+
+    @Override
+    public void changeToRoommateWaitingActivity() {
+        Log.d("LoginActivity", "success! changed to RoommateWaitingActivity!");
+        Intent intent = new Intent(getActivity(), RoommateWaitingActivity.class);
         startActivity(intent);
         getActivity().finish();
     }
