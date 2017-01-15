@@ -6,21 +6,21 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.enums.ProfileType;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
-import com.flatshare.domain.interactors.settings.ProfileSettingsInteractor;
+import com.flatshare.domain.interactors.settings.ProfileTenantSettingsInteractor;
 
 /**
  * Created by david on 28.12.2016.
  */
 
-public class ProfileSettingsInteractorImpl extends AbstractInteractor implements ProfileSettingsInteractor {
+public class ProfileTenantSettingsInteractorImpl extends AbstractInteractor implements ProfileTenantSettingsInteractor {
 
-    private static final String TAG = "ProfileSettingsInteractorImpl";
+    private static final String TAG = "ProfileTenantSettingsInteractorImpl";
 
     private TenantProfile tenantProfile;
 
-    private ProfileSettingsInteractor.Callback mCallback;
+    private ProfileTenantSettingsInteractor.Callback mCallback;
 
-    public ProfileSettingsInteractorImpl(MainThread mainThread, Callback callback, TenantProfile tenantProfile) {
+    public ProfileTenantSettingsInteractorImpl(MainThread mainThread, Callback callback, TenantProfile tenantProfile) {
         super(mainThread);
         this.mCallback = callback;
         this.tenantProfile = tenantProfile;
@@ -41,26 +41,15 @@ public class ProfileSettingsInteractorImpl extends AbstractInteractor implements
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onSentSuccess(ProfileType.TENANT.getValue());
+                mCallback.onSentSuccess();//ProfileType.TENANT.getValue()
             }
         });
     }
 
     @Override
     public void execute() {
-
-        String tId = mDatabase.child(databaseRoot.getTenantProfiles()).push().getKey();
-
-        System.out.println("GETKEY ---" + mDatabase.child(databaseRoot.getTenantProfiles()).push().getKey());
-        System.out.println("USERID --- " + userId);
-        System.out.println("FIREBASEUSERID --- " + firebaserUserId);
-        System.out.println("GETROOTPATH --- " + databaseRoot.getTenantProfileNode(tId).getRootPath());
-        System.out.println("GETTENANTPROFILID --- " + databaseRoot.getUserProfileNode(userId).getTenantProfileId());
-        System.out.println("DATABASEROOT --- " + databaseRoot.getTenantProfileNode(tId).toString());
-        System.out.println("--- " + databaseRoot.getTenantProfileNode(tId));
-        System.out.println("FILTERSETTINGS ---     " + databaseRoot.getTenantProfileNode(tId));
-        ProfileSettingsInteractorImpl.this.notifySuccess();
-
+        Log.v(TAG, "execute methode called in ProfileTenantSettingsInteractorImpl");
+        notifySuccess();
 //        String tId = mDatabase.child(databaseRoot.getTenantProfiles()).push().getKey();
 //
 //        Map<String, Object> map = new HashMap<>();
@@ -71,9 +60,9 @@ public class ProfileSettingsInteractorImpl extends AbstractInteractor implements
 //            @Override
 //            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
 //                if (databaseError != null) { // Error
-//                    ProfileSettingsInteractorImpl.this.notifyError(databaseError.toException().getMessage());
+//                    ProfileTenantSettingsInteractorImpl.this.notifyError(databaseError.toException().getMessage());
 //                } else {
-//                    ProfileSettingsInteractorImpl.this.notifySuccess();
+//                    ProfileTenantSettingsInteractorImpl.this.notifySuccess();
 //                }
 //            }
 //        });

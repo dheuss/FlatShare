@@ -15,5 +15,4 @@ public interface ApartmentSettingsPresenter extends BasePresenter {
     interface View extends BaseView {
         void changeToMatchingActivity();
     }
-
 }

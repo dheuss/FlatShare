@@ -14,13 +14,13 @@ import android.widget.Spinner;
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.state.UserState;
-import com.flatshare.presentation.presenters.settings.ProfileSettingsPresenter;
-import com.flatshare.presentation.presenters.settings.impl.ProfileSettingsPresenterImpl;
+import com.flatshare.presentation.presenters.settings.ProfileTenantSettingsPresenter;
+import com.flatshare.presentation.presenters.settings.impl.ProfileTenantSettingsPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-public class ProfileTenantSettingsActivity extends AbstractActivity implements ProfileSettingsPresenter.View {
+public class ProfileTenantSettingsActivity extends AbstractActivity implements ProfileTenantSettingsPresenter.View {
 
     private ImageButton settingsButton;
     private ImageButton matchingActivityButton;
@@ -52,7 +52,7 @@ public class ProfileTenantSettingsActivity extends AbstractActivity implements P
 
     private static final String TAG = "ProfileTenantSettingsActivity";
 
-    private ProfileSettingsPresenter mPresenter;
+    private ProfileTenantSettingsPresenter mPresenter;
 
     private UserState userState;
 
@@ -68,7 +68,7 @@ public class ProfileTenantSettingsActivity extends AbstractActivity implements P
 
         Log.d(TAG, "inside onCreate(), creating presenter fr this view");
 
-        mPresenter = new ProfileSettingsPresenterImpl(
+        mPresenter = new ProfileTenantSettingsPresenterImpl(
                 MainThreadImpl.getInstance(),
                 this
         );
