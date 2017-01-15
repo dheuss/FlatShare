@@ -29,7 +29,7 @@ public class MainActivity extends AbstractActivity {
             R.drawable.home_icon,
             R.drawable.settings_icon,
             R.drawable.profile_icon,
-            R.drawable.calendar_icon
+//            R.drawable.calendar_icon
     };
 
     @Override
@@ -79,7 +79,7 @@ public class MainActivity extends AbstractActivity {
 
         TextView tabFour = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabFour.setText("MatchingOverviewActivity");
-        tabFour.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.calendar_icon, 0, 0);
+        tabFour.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.bell, 0, 0);
         tabLayout.getTabAt(3).setCustomView(tabFour);
     }
 
