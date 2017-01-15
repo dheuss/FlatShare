@@ -19,11 +19,12 @@ import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.settings.ProfileTenantSettingsPresenter;
 import com.flatshare.presentation.presenters.settings.impl.ProfileTenantSettingsPresenterImpl;
+import com.flatshare.presentation.ui.AbstarctFragmentAcivity;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-public class ProfileTenantSettingsActivity extends Fragment implements ProfileTenantSettingsPresenter.View {
+public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity implements ProfileTenantSettingsPresenter.View {
 
     private EditText changeNameEditText;
     private EditText changeEmailEditText;

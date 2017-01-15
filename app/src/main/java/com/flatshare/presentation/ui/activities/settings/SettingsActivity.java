@@ -15,11 +15,12 @@ import android.widget.ProgressBar;
 import com.flatshare.R;
 import com.flatshare.presentation.presenters.settings.SettingsPresenter;
 import com.flatshare.presentation.presenters.settings.impl.SettingsPresenterImpl;
+import com.flatshare.presentation.ui.AbstarctFragmentAcivity;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.auth.login.LoginActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-public class SettingsActivity extends Fragment implements SettingsPresenter.View {
+public class SettingsActivity extends AbstarctFragmentAcivity implements SettingsPresenter.View {
 
     private Button btnChangeEmail;
     private Button btnChangePassword;

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.flatshare.R;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
+import com.flatshare.presentation.ui.activities.matchingoverview.MatchingOverviewActivity;
 import com.flatshare.presentation.ui.activities.settings.ProfileTenantSettingsActivity;
 import com.flatshare.presentation.ui.activities.settings.SettingsActivity;
 
@@ -27,7 +28,8 @@ public class MainActivity extends AbstractActivity {
     private int[] tabIcons = {
             R.drawable.home_icon,
             R.drawable.settings_icon,
-            R.drawable.profile_icon
+            R.drawable.profile_icon,
+            R.drawable.calendar_icon
     };
 
     @Override
@@ -74,6 +76,11 @@ public class MainActivity extends AbstractActivity {
         tabThree.setText("ProfileTenantSettingsActivity");
         tabThree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.profile_icon, 0, 0);
         tabLayout.getTabAt(1).setCustomView(tabThree);
+
+        TextView tabFour = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
+        tabFour.setText("MatchingOverviewActivity");
+        tabFour.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.calendar_icon, 0, 0);
+        tabLayout.getTabAt(3).setCustomView(tabFour);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -81,6 +88,7 @@ public class MainActivity extends AbstractActivity {
         adapter.addFragment(new SettingsActivity(), "SettingsActivity");
         adapter.addFragment(new ProfileTenantSettingsActivity(), "ProfileTenantSettingsActivity");
         adapter.addFragment(new MatchingActivity(), "MatchingActivity");
+        adapter.addFragment(new MatchingOverviewActivity(), "MatchingOverviewActivity");
         viewPager.setAdapter(adapter);
     }
 
