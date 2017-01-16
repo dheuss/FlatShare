@@ -19,11 +19,13 @@ public class TenantSettingsInteractorImpl extends AbstractInteractor implements 
 
     private static final String TAG = "TenantSettingsInt";
     private Callback mCallback;
+    private String tenantId;
     private TenantFilterSettings tenantFilterSettings;
 
-    public TenantSettingsInteractorImpl(MainThread mainThread, Callback callback, TenantFilterSettings tenantFilterSettings) {
+    public TenantSettingsInteractorImpl(MainThread mainThread, Callback callback, String tenandId, TenantFilterSettings tenantFilterSettings) {
         super(mainThread);
         this.mCallback = callback;
+        this.tenantId = tenandId;
         this.tenantFilterSettings = tenantFilterSettings;
     }
 
@@ -41,24 +43,24 @@ public class TenantSettingsInteractorImpl extends AbstractInteractor implements 
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onSentSuccess();
+                mCallback.onSentSuccess(tenantFilterSettings);
             }
         });
     }
 
     @Override
     public void execute() {
-        mDatabase.child(databaseRoot.getUserProfileNode(userId).getRootPath()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                PrimaryUserProfile primaryUserProfile = dataSnapshot.getValue(PrimaryUserProfile.class);
-                String tId = primaryUserProfile.getTenantProfileId();
-                createTenantSettings(databaseRoot.getTenantProfileNode(tId).getTenantFilterSettings());
-            }
 
+        String path = databaseRoot.getTenantProfileNode(tenantId).getTenantFilterSettings();
+
+        mDatabase.child(path).setValue(this.tenantFilterSettings, new DatabaseReference.CompletionListener() {
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                notifyError(databaseError.getMessage());
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError == null) {
+                    TenantSettingsInteractorImpl.this.notifySuccess();
+                } else {
+                    TenantSettingsInteractorImpl.this.notifyError(databaseError.getMessage());
+                }
             }
         });
     }

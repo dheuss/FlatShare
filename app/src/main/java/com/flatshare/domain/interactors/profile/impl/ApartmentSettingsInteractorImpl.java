@@ -19,11 +19,13 @@ public class ApartmentSettingsInteractorImpl extends AbstractInteractor implemen
 
     private static final String TAG = "ApartmentSettingsInteractorImpl";
     private Callback mCallback;
+    private String apartmentId;
     private ApartmentFilterSettings apartmentFilterSettings;
 
-    public ApartmentSettingsInteractorImpl(MainThread mainThread, Callback callback, ApartmentFilterSettings apartmentFilterSettings) {
+    public ApartmentSettingsInteractorImpl(MainThread mainThread, Callback callback, String apartmentId, ApartmentFilterSettings apartmentFilterSettings) {
         super(mainThread);
         this.mCallback = callback;
+        this.apartmentId = apartmentId;
         this.apartmentFilterSettings = apartmentFilterSettings;
     }
 
@@ -41,26 +43,29 @@ public class ApartmentSettingsInteractorImpl extends AbstractInteractor implemen
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onSentSuccess();
+                mCallback.onSentSuccess(apartmentFilterSettings);
             }
         });
     }
 
     @Override
     public void execute() {
-        mDatabase.child(databaseRoot.getUserProfileNode(userId).getRootPath()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //PrimaryUserProfile primaryUserProfile = dataSnapshot.getValue(PrimaryUserProfile.class);
-                //String aId = primaryUserProfile.getApartmentProfileId();
-                //createApartmentSettings(databaseRoot.getApartmentProfileNode(aId).getApartmentFilterSettings());
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                notifyError(databaseError.getMessage());
-            }
-        });
+        String path = databaseRoot.getApartmentProfileNode(apartmentId).getApartmentFilterSettings();
+
+            mDatabase.child(path).setValue(this.apartmentFilterSettings, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                    if (databaseError == null) {
+                        ApartmentSettingsInteractorImpl.this.notifySuccess();
+                    } else {
+                        ApartmentSettingsInteractorImpl.this.notifyError(databaseError.getMessage());
+                    }
+                }
+            });
+
+
+        // TODO: if anything goes wrong do it the hard way...get roommateId, get apartmentId, and then store it...
     }
 
     private void createApartmentSettings(String path) {

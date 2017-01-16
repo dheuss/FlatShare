@@ -1,5 +1,6 @@
 package com.flatshare.domain.interactors.profile;
 
+import com.flatshare.domain.datatypes.db.filters.FilterSettings;
 import com.flatshare.domain.interactors.base.Interactor;
 
 /**
@@ -10,7 +11,7 @@ public interface FilterSettingsInteractor extends Interactor {
 
     interface Callback {
         // TODO: CHANGE parameter type?
-        void onSentSuccess();
+        void onSentSuccess(FilterSettings filterSettings);
         void onSentFailure(String error);
     }
 

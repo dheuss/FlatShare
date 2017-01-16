@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.filters.ApartmentFilterSettings;
+import com.flatshare.domain.datatypes.db.filters.FilterSettings;
 import com.flatshare.domain.interactors.profile.FilterSettingsInteractor;
 import com.flatshare.domain.interactors.profile.impl.ApartmentSettingsInteractorImpl;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
@@ -25,14 +26,14 @@ public class ApartmentSettingsPresenterImpl extends AbstractPresenter implements
     }
 
     @Override
-    public void onSentSuccess() {
+    public void onSentSuccess(FilterSettings apartmentFilterSettings) {
+        userState.getApartmentProfile().setApartmentFilterSettings((ApartmentFilterSettings) apartmentFilterSettings);
         mView.hideProgress();
         mView.changeToMatchingActivity();
     }
 
     @Override
     public void onSentFailure(String error) {
-        userState.getTenantProfile().setTenantFilterSettings(null);
         mView.hideProgress();
         onError(error);
     }
@@ -41,11 +42,8 @@ public class ApartmentSettingsPresenterImpl extends AbstractPresenter implements
     public void sendFilterSettings(ApartmentFilterSettings apartmentFilterSettings) {
         mView.showProgress();
 
-        Log.d(TAG, "userstate null? " + (userState == null) + " or is tenantuserprofile null? " + (userState.getTenantProfile() == null));
-
-        //userState.getTenantProfile().(apartmentFilterSettings);
-        userState.getApartmentProfile().setApartmentFilterSettings(apartmentFilterSettings);
-        FilterSettingsInteractor interactor = new ApartmentSettingsInteractorImpl(mMainThread, this, apartmentFilterSettings);
+        String apartmentId = userState.getRoommateProfile().getApartmentId();
+        FilterSettingsInteractor interactor = new ApartmentSettingsInteractorImpl(mMainThread, this, apartmentId, apartmentFilterSettings);
         interactor.execute();
     }
 

@@ -2,6 +2,7 @@ package com.flatshare.presentation.presenters.profile.impl;
 
 import android.util.Log;
 
+import com.flatshare.domain.datatypes.db.filters.FilterSettings;
 import com.flatshare.domain.datatypes.db.filters.TenantFilterSettings;
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.profile.FilterSettingsInteractor;
@@ -50,14 +51,16 @@ public class TenantSettingsPresenterImpl extends AbstractPresenter implements Te
     }
 
     @Override
-    public void onSentSuccess() {
+    public void onSentSuccess(FilterSettings tenantFilterSettings) {
+
+        userState.getTenantProfile().setTenantFilterSettings((TenantFilterSettings) tenantFilterSettings);
+
         mView.hideProgress();
         mView.changeToMatchingActivity();
     }
 
     @Override
     public void onSentFailure(String error) {
-        userState.getTenantProfile().setTenantFilterSettings(null);
         mView.hideProgress();
         onError(error);
     }
@@ -71,10 +74,9 @@ public class TenantSettingsPresenterImpl extends AbstractPresenter implements Te
     public void sendFilterSettings(TenantFilterSettings tenantFilterSettings) {
         mView.showProgress();
 
-        Log.d(TAG, "userstate null? " + (userState == null) + " or is tenantuserprofile null? " + (userState.getTenantProfile() == null));
+        String tenantId = userState.getTenantId();
 
-        userState.getTenantProfile().setTenantFilterSettings(tenantFilterSettings);
-        FilterSettingsInteractor interactor = new TenantSettingsInteractorImpl(mMainThread, this, tenantFilterSettings);
+        FilterSettingsInteractor interactor = new TenantSettingsInteractorImpl(mMainThread, this, tenantId, tenantFilterSettings);
         interactor.execute();
     }
 }

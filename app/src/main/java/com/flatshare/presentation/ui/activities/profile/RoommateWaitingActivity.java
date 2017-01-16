@@ -8,7 +8,7 @@ import com.flatshare.presentation.presenters.matching.impl.RoommateWaitingPresen
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-public class RoommateWaitingActivity extends AbstractActivity implements RoommateWaitingPresenter.View{
+public class RoommateWaitingActivity extends AbstractActivity implements RoommateWaitingPresenter.View {
 
     private RoommateWaitingPresenter mPresenter;
 
@@ -16,13 +16,16 @@ public class RoommateWaitingActivity extends AbstractActivity implements Roommat
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //TODO: add some waiting Image
+        addWaitingImage();
 
+        mPresenter = new RoommateWaitingPresenterImpl(
+                MainThreadImpl.getInstance(),
+                this
+        );
+    }
 
-            mPresenter = new RoommateWaitingPresenterImpl(
-                    MainThreadImpl.getInstance(),
-                    this
-            );
+    private void addWaitingImage() {
+        //TODO: add some waiting image
     }
 
     @Override
