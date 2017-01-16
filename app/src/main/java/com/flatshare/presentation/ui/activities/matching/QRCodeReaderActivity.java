@@ -205,7 +205,7 @@ public class QRCodeReaderActivity extends Activity implements QRScannerPresenter
     @Override
     public void displayReadCode(String roommateId) {
         Intent intent = new Intent();
-        intent.putExtra(ApartmentProfileActivity.STATIC_ID, roommateId);
+        intent.putExtra(ApartmentProfileActivity.ROOMMATE_ID, roommateId);
         TenantProfile tenantProfile = new TenantProfile();
         setResult(Activity.RESULT_OK, intent);
         Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
