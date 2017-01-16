@@ -4,7 +4,6 @@ package com.flatshare.presentation.ui.activities.matchingoverview.calendar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
@@ -20,7 +19,6 @@ import com.flatshare.R;
 import com.flatshare.presentation.presenters.matchingoverview.calendar.CalendarPresenter;
 import com.flatshare.presentation.presenters.matchingoverview.calendar.impl.CalendarPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
-import com.flatshare.presentation.ui.activities.matchingoverview.chat.ChatActivity;
 import com.flatshare.threading.MainThreadImpl;
 
 import java.util.ArrayList;
@@ -32,8 +30,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
     private CalendarPresenter mPresenter;
 
-    private ImageButton couchChatButton;
-    private Button send, deleteButton1, deleteButton2, deleteButton3, deleteButton4, deleteButton5, deleteButton6, deleteButton7, deleteButton8, deleteButton9, deleteButton10;
+    private Button setDate, send, deleteButton1, deleteButton2, deleteButton3, deleteButton4, deleteButton5, deleteButton6, deleteButton7, deleteButton8, deleteButton9, deleteButton10;
 
     private int yearCurrent, monthCurrent, dayCurrent, hourCurrent, minCurrent;
 
@@ -50,6 +47,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     private int[] buttonView = {};
     private boolean tendant;
     private boolean deleteButtonToGONE = false;
+    private String finalDate;
 
 
     @Override
@@ -60,7 +58,11 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
         mPresenter = new CalendarPresenterImpl(MainThreadImpl.getInstance(), this);
 
-        tendant = mPresenter.checkForTendant();
+        tendant = mPresenter.checkForTenant();
+
+        if (tendant){
+            setDate.setVisibility(View.GONE);
+        }
 
         Calendar calendar = Calendar.getInstance();
         yearCurrent = calendar.get(Calendar.YEAR);
@@ -70,13 +72,6 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         minCurrent = calendar.get(Calendar.MINUTE);
 
         calendar.setFirstDayOfWeek(Calendar.MONDAY);
-
-        couchChatButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(CalendarActivity.this, ChatActivity.class));
-            }
-        });
 
         dateTextView = new TextView[] {date1, date2, date3, date4, date5, date6, date7, date8, date9, date10};
         dateButton = new Button[] {deleteButton1, deleteButton2, deleteButton3, deleteButton4, deleteButton5, deleteButton6, deleteButton7, deleteButton8, deleteButton9, deleteButton10};
@@ -88,7 +83,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             public void onClick(View v) {
                 //TODO send dateList and timeList to firebase
                 if (tendant){
-                    //mPresenter.sendBackFromTendant(finalDate);
+                    mPresenter.sendBackFromTendant(finalDate);
                 }else {
                     mPresenter.send(dateList, timeList);
                     Toast.makeText(getApplicationContext(), "Send", Toast.LENGTH_SHORT).show();
@@ -97,9 +92,6 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         });
 
     }
-
-
-
 
     //klick on delete Date
     public void handleClick(View view) {
@@ -139,14 +131,23 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         timeList.remove(i);
     }
 
-
-    private void chooseTendantDate(int i) {
-        //TODO markiere gewältes Datum - Sendbutton sichtbar und verschicken
-        send.setVisibility(View.VISIBLE);
-        //dateButton[i].setBackground();
+    //Tendant set Dates
+    public void setDatesFromWG(List<String> dateList, List<String> timeList){
+        for (int i = 0; i < dateList.size()-1; i++) {
+            dateTextView[i].setText(dateList.get(i) + " " + timeList.get(i));
+        }
     }
 
-    private void showFinalDate(String finalDate){
+    //Tendant choose a Date
+    private void chooseTendantDate(int i) {
+        finalDate = dateList.get(i) + " " + timeList.get(i);
+        send.setVisibility(View.VISIBLE);
+        dateButton[i].setBackground(getResources().getDrawable(R.color.colorAccent));
+    }
+
+
+    //WG and Tendant
+    public void showFinalDate(String finalDate){
         for (int i=0; i <= dateTextView.length-1; i++){
             dateTextView[i].setText("");
         }
@@ -223,7 +224,6 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
 
     private void bindView() {
-        couchChatButton = (ImageButton)findViewById(R.id.couchChatBtn);
         send = (Button) findViewById(R.id.send);
         deleteButton1 = (Button) findViewById(R.id.delete1);
         deleteButton2 = (Button) findViewById(R.id.delete2);
@@ -245,6 +245,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         date8 = (TextView) findViewById(R.id.date8);
         date9 = (TextView) findViewById(R.id.date9);
         date10 = (TextView) findViewById(R.id.date10);
+        setDate = (Button) findViewById(R.id.setDate);
     }
 
 

@@ -10,11 +10,6 @@
         android:layout_marginTop="10dp"
         android:layout_gravity="top|left"
         android:orientation="vertical">
-        <ImageButton
-            android:id="@+id/couchChatBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/logo_neu"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"

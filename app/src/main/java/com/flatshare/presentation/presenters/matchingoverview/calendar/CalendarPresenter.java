@@ -13,7 +13,9 @@ public interface CalendarPresenter extends BasePresenter {
 
     void send(List<String> dateList, List<String> timeList);
 
-    boolean checkForTendant();
+    boolean checkForTenant();
+
+    void sendBackFromTendant(String finalDate);
 
     interface View extends BaseView {
 

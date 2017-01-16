@@ -31,14 +31,14 @@
             <ImageButton
                 android:id="@+id/custom_google_button"
                 android:layout_width="75dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/google_btn"
+                android:layout_height="75dp"
+                android:background="@drawable/google_icon"
                 android:layout_alignParentLeft="true"/>
             <ImageButton
                 android:id="@+id/custom_fb_button"
                 android:layout_width="75dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/facebook_btn"
+                android:layout_height="75dp"
+                android:background="@drawable/facebook_icon"
                 android:layout_alignParentRight="true"/>
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/facebook_sign_in_button"
