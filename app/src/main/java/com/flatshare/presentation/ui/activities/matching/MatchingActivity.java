@@ -267,7 +267,6 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
         int i = 0;
 
         for (ApartmentProfile a : apartments) {
-            //Log.d(TAG, "i: " + i++ + "\n" + a.toString());
             mSwipeView.addView(new MatchingActivity_ProfileCard_Apartment(mContext, a, mSwipeView));
             mApartmetProfile = a;
         }

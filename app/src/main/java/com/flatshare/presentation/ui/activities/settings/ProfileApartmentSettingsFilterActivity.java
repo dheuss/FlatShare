@@ -19,6 +19,6 @@ public class ProfileApartmentSettingsFilterActivity extends AbstractActivity {
 
     @Override
     protected int getLayoutResourceId() {
-        return R.layout.activity_profile_apartment_settings_filter;
+        return R.layout.activity_apartment_settings;
     }
 }

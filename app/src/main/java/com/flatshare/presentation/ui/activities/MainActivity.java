@@ -43,9 +43,11 @@ public class MainActivity extends AbstractActivity {
     protected void onCreate(Bundle savedInstanceState) {
         userState = UserState.getInstance();
         super.onCreate(savedInstanceState);
-        bindView();
 
         classificationId = userState.getPrimaryUserProfile().getClassificationId();
+        System.out.println("classificationID: " + classificationId);
+
+        bindView();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -102,6 +104,8 @@ public class MainActivity extends AbstractActivity {
             adapter.addFragment(new ProfileApartmentSettingsActivity(), "ProfileApartmentSettingsActivity");
         } else if (classificationId == ProfileType.ROOMMATE.getValue()) {
             Toast.makeText(getApplicationContext(), "Not avalabele", Toast.LENGTH_SHORT);
+        } else {
+
         }
         adapter.addFragment(new MatchingActivity(), "MatchingActivity");
         adapter.addFragment(new MatchingOverviewActivity(), "MatchingOverviewActivity");

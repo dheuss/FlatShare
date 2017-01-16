@@ -26,7 +26,6 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
 
     private EditText firstNameEditText;
     private EditText ageEditText;
-    private EditText emailText;
     private EditText shortBioText;
 
     private RadioGroup genderRadioGroup;
@@ -111,7 +110,6 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
 
         String firstname = firstNameEditText.getText().toString();
         int age = Integer.parseInt(ageEditText.getText().toString());
-        String email = emailText.getText().toString();
         boolean isSmoker = smokerRadioGroup.getCheckedRadioButtonId() == smokerYesRadioButton.getId();
         int gender = genderRadioGroup.getCheckedRadioButtonId() == maleRadioButton.getId() ? 0 : 1;
         boolean isPets = petsRadioGroup.getCheckedRadioButtonId() == petsYesRadioButton.getId();
@@ -122,7 +120,6 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         TenantProfile tenantProfile = new TenantProfile();
         tenantProfile.setFirstName(firstname);
         tenantProfile.setAge(age);
-        tenantProfile.setEmail(email);
         tenantProfile.setSmoker(isSmoker);
         tenantProfile.setGender(gender);
         tenantProfile.setOccupation(occupation);
@@ -137,7 +134,6 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
     private void bindView() {
         firstNameEditText = (EditText) findViewById(R.id.nameProfileEditText);
         ageEditText = (EditText) findViewById(R.id.ageProfileEditText);
-        emailText = (EditText) findViewById(R.id.emailProfileEditText);
         shortBioText = (EditText) findViewById(R.id.infoProfileEditText);
 
         genderRadioGroup = (RadioGroup) findViewById(R.id.genderProfileEditTextRadioGroup);

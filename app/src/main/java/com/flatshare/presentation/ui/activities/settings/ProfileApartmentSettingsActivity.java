@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.flatshare.R;
 import com.flatshare.domain.interactors.settings.ProfileApartmentSettingsInteractor;
@@ -16,6 +18,10 @@ import java.util.Map;
 
 public class ProfileApartmentSettingsActivity extends AbstarctFragmentAcivity implements ProfileApartmentSettingsPresenter.View {
 
+    private TextView apartmentInitialTextView;
+    private TextView apartmentInfoTextView;
+    private Button qrButton;
+
     private UserState userState;
 
     @Override
@@ -26,7 +32,7 @@ public class ProfileApartmentSettingsActivity extends AbstarctFragmentAcivity im
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_profile_apartment_settings, container, false);
+        View view = inflater.inflate(R.layout.activity_apartment_profile, container, false);
         return view;
     }
 
