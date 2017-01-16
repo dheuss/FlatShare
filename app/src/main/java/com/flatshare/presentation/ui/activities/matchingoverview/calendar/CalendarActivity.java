@@ -49,7 +49,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     private Button[] dateButton = {};
     private int[] buttonView = {};
     private boolean tendant;
-    private boolean deleteIt = false;
+    private boolean deleteButtonToGONE = false;
 
 
     @Override
@@ -82,6 +82,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         dateButton = new Button[] {deleteButton1, deleteButton2, deleteButton3, deleteButton4, deleteButton5, deleteButton6, deleteButton7, deleteButton8, deleteButton9, deleteButton10};
         buttonView = new int[]{R.id.delete1,R.id.delete2,R.id.delete3,R.id.delete4,R.id.delete5,R.id.delete6,R.id.delete7,R.id.delete8,R.id.delete9,R.id.delete10};
 
+        //Send Button
         send.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -95,33 +96,27 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             }
         });
 
-        for(int i =0;i<=dateTextView.length-1;i++){
-            if(dateTextView[i].getText() == ""){
-                dateButton[i].setVisibility(View.GONE);
-            }
-        }
-
     }
 
+
+
+
+    //klick on delete Date
     public void handleClick(View view) {
         for(int i =0;i<=buttonView.length-1;i++){
-            if(view.getId() == buttonView[i]){
-                if (tendant){
-                    chooseTendantDate(i);
-                }else if (!deleteIt) {
-                    deleteButtonPressed(i);
+            if(view.getId() == buttonView[i]) {
+                if (tendant) {
+                    chooseTendantDate(1);
+                } else {
+                    if (deleteButtonToGONE) {
+                        deleteButtonToGONE = false;
+                        deleteButton1.setVisibility(View.GONE);
+                    } else {
+                        deleteButtonPressed(1);
+                    }
                 }
-                deleteIt = false;
-                dateButton[i].setVisibility(View.GONE);
             }
         }
-    }
-
-
-    private void chooseTendantDate(int i) {
-        //TODO markiere gewältes Datum - Sendbutton sichtbar und verschicken
-        send.setVisibility(View.VISIBLE);
-        //dateButton[i].setBackground();
     }
 
     private void deleteButtonPressed(int i) {
@@ -129,18 +124,26 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         for (int j = i; j <= dateTextView.length-1; j++){
             if (j == dateTextView.length-1){
                 dateTextView[j].setText("");
-                dateButton[j].setVisibility(View.GONE);
+                deleteButtonToGONE = true;
+                dateButton[j].performClick();
             }else {
                 dateTextView[j].setText(dateTextView[j + 1].getText());
-                if (dateTextView[j + 1].getText() == "") {
-                    //dateButton[j + 1].setVisibility(dateButton[2].getRootView().GONE);
-                    deleteIt = true;
-                    dateButton[j + 1].performClick();
+                if (dateTextView[j +1].getText() == "") {
+                    deleteButtonToGONE = true;
+                    dateButton[j +1].performClick();
+                    //dateButton[j +1].setVisibility(View.GONE);
                 }
             }
         }
         dateList.remove(i);
         timeList.remove(i);
+    }
+
+
+    private void chooseTendantDate(int i) {
+        //TODO markiere gewältes Datum - Sendbutton sichtbar und verschicken
+        send.setVisibility(View.VISIBLE);
+        //dateButton[i].setBackground();
     }
 
 
