@@ -60,7 +60,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
     private ApartmentProfilePresenter mPresenter;
     private static final String TAG = "ApartmentProfileAct";
-    private Map<String, String> emailIdMap;
+    private Map<String, String> nicknameIdMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +127,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         for (int i = 0; i < emails.length; i++) {
 
             try {
-                id = emailIdMap.get(emails[i].trim());
+                id = nicknameIdMap.get(emails[i].trim());
             } catch (NullPointerException e) {
                 Log.w(TAG, "sendProfile: NullPointer", e);
             }
@@ -234,10 +234,10 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     }
 
     @Override
-    public void updateAdapter(Map<String, String> emailIdMap) {
+    public void updateAdapter(Map<String, String> nicknameIdMap) {
 
-        this.emailIdMap = emailIdMap;
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>(emailIdMap.keySet()));
+        this.nicknameIdMap = nicknameIdMap;
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>(nicknameIdMap.keySet()));
 
         roommatesEmailsMultiAC.setAdapter(adapter);
 
@@ -245,7 +245,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
     private void initMultiAutoComplete() {
         roommatesEmailsMultiAC.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-        roommatesEmailsMultiAC.setThreshold(2);
+        roommatesEmailsMultiAC.setThreshold(1);
         mPresenter.getUserEmails();
     }
 }

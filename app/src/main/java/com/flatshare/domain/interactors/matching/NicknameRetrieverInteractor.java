@@ -7,10 +7,10 @@ import java.util.Map;
 /**
  * Created by Arber on 06/01/2017.
  */
-public interface EmailRetrieverInteractor extends Interactor{
+public interface NicknameRetrieverInteractor extends Interactor{
 
     interface Callback {
-        void emailsRetrievedSuccess(Map<String, String> emailIdMap);
-        void emailsRetrievedFailure(String errorMessage);
+        void nicknamesRetrievedSuccess(Map<String, String> emailIdMap);
+        void nicknamesRetrievedFailure(String errorMessage);
     }
 }

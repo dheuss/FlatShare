@@ -6,8 +6,8 @@ import android.widget.VideoView;
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.UserProfile;
-import com.flatshare.domain.interactors.matching.EmailRetrieverInteractor;
-import com.flatshare.domain.interactors.matching.impl.EmailRetrieverInteractorImpl;
+import com.flatshare.domain.interactors.matching.NicknameRetrieverInteractor;
+import com.flatshare.domain.interactors.matching.impl.NicknameRetrieverInteractorImpl;
 import com.flatshare.domain.interactors.media.MediaInteractor;
 import com.flatshare.domain.interactors.profile.SecondaryProfileInteractor;
 import com.flatshare.domain.interactors.profile.impl.ApartmentProfileInteractorImpl;
@@ -21,7 +21,7 @@ import java.util.Map;
  */
 
 public class ApartmentProfilePresenterImpl extends AbstractPresenter implements ApartmentProfilePresenter,
-        SecondaryProfileInteractor.Callback, MediaInteractor.UploadCallback, EmailRetrieverInteractor.Callback {
+        SecondaryProfileInteractor.Callback, MediaInteractor.UploadCallback, NicknameRetrieverInteractor.Callback {
 
 
     private ApartmentProfilePresenter.View mView;
@@ -102,8 +102,9 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
 
     @Override
     public void getUserEmails() {
-        EmailRetrieverInteractor emailRetrieverInteractor = new EmailRetrieverInteractorImpl(mMainThread, this);
-        emailRetrieverInteractor.execute();
+        String roommateId = userState.getRoommateProfile().getId();
+        NicknameRetrieverInteractor nicknameRetrieverInteractor = new NicknameRetrieverInteractorImpl(mMainThread, this, roommateId);
+        nicknameRetrieverInteractor.execute();
     }
 
     @Override
@@ -118,12 +119,12 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
     }
 
     @Override
-    public void emailsRetrievedSuccess(Map<String, String> emailIdMap) {
-        mView.updateAdapter(emailIdMap);
+    public void nicknamesRetrievedSuccess(Map<String, String> nicknameIdMap) {
+        mView.updateAdapter(nicknameIdMap);
     }
 
     @Override
-    public void emailsRetrievedFailure(String errorMessage) {
+    public void nicknamesRetrievedFailure(String errorMessage) {
         mView.showError(errorMessage);
     }
 }
