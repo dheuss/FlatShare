@@ -54,7 +54,7 @@ public class RoommateQRInteractorImpl extends AbstractInteractor implements Room
                 if(roommateProfile == null){
                     // Do nothing
                     notifyError("Roommate profile with profileID: " + roommateId + " does not exist!");
-                } else { // Apartment ID was written
+                } else { // ID was scanned
                     if(!roommateProfile.isAvailable()) {
                         notifyCodeRead(roommateProfile.getApartmentId());
                     }

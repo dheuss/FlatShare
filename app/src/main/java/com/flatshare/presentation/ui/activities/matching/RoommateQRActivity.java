@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.presentation.presenters.profile.RoommateQRPresenter;
@@ -126,15 +127,16 @@ public class RoommateQRActivity extends AbstractActivity implements RoommateQRPr
     @Override
     public void showError(String message) {
         //TODO: show something
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onQRCodeRead(String apartmentId) {
 
         Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-        // Vibrate for 500 milliseconds
-        v.vibrate(500);
+        v.vibrate(100);
         changeToWaitingActivity();
+
     }
 
     @Override
