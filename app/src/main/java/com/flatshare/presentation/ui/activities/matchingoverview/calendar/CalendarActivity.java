@@ -146,6 +146,15 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         //dateButton[i].setBackground();
     }
 
+    private void showFinalDate(String finalDate){
+        for (int i=0; i <= dateTextView.length-1; i++){
+            dateTextView[i].setText("");
+        }
+        dateTextView[5].setText("Your appointment is: " + finalDate);
+        dateTextView[4].setBackground(getResources().getDrawable(R.color.colorPrimary));
+        dateTextView[6].setBackground(getResources().getDrawable(R.color.colorPrimary));
+    }
+
 
     @SuppressWarnings("deprecation")
     public void setDate(View view) {
