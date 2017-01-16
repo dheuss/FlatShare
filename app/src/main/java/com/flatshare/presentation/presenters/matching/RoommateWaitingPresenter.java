@@ -10,8 +10,11 @@ import com.flatshare.presentation.ui.BaseView;
 public interface RoommateWaitingPresenter extends BasePresenter{
 
 
+    void listenToDB(String apartmentId);
+
     interface View extends BaseView {
 
+        void changeToMatchingActivity();
     }
 
 }

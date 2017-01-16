@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.matching.RoommateWaitingInteractor;
+import com.flatshare.domain.interactors.matching.impl.RoommateWaitingInteractorImpl;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 import com.flatshare.presentation.presenters.matching.RoommateWaitingPresenter;
 import com.flatshare.presentation.ui.activities.profile.RoommateWaitingActivity;
@@ -58,6 +59,12 @@ public class RoommateWaitingPresenterImpl extends AbstractPresenter implements R
 
     @Override
     public void onApartmentReady() {
+        mView.changeToMatchingActivity();
+    }
 
+    @Override
+    public void listenToDB(String apartmentId) {
+        RoommateWaitingInteractor roommateWaitingInteractor = new RoommateWaitingInteractorImpl(mMainThread, this, apartmentId);
+        roommateWaitingInteractor.execute();
     }
 }

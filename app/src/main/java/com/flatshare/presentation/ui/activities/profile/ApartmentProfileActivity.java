@@ -31,7 +31,10 @@ import java.util.Map;
 public class ApartmentProfileActivity extends AbstractActivity implements ApartmentProfilePresenter.View {
 
     private static final int STATIC_VALUE = 1;
-    public static final String STATIC_ID = "id";
+
+    public static final String ROOMMATE_ID = "roommateId";
+    public static final String APARTMENT_ID = "apartmentId";
+
     private EditText apartmentPriceEditText;
     private EditText apartmentAreaEditText;
     private EditText apartmentStreetEditText;
@@ -100,7 +103,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == STATIC_VALUE) {
             if (resultCode == RESULT_OK) {
-                String roommateId = data.getStringExtra(STATIC_ID);
+                String roommateId = data.getStringExtra(ROOMMATE_ID);
                 roommatesEmailsMultiAC.getText().append(", " + roommateId);
             }
         }

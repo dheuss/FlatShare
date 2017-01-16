@@ -52,12 +52,11 @@ public class RoommateQRActivity extends AbstractActivity implements RoommateQRPr
         Bundle b = getIntent().getExtras();
         String roommateId;
         if (b != null) {
-            roommateId = b.getString("id");
+            roommateId = b.getString("roommateId");
             qrCodeString = QRCodeReaderActivity.QR_IDENTIFIER + ":" + roommateId;
             encodeStringToQR(qrCodeString);
             mPresenter.listenToDB(roommateId);
         }
-
 
     }
 
