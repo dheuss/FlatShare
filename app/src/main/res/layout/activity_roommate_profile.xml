@@ -107,13 +107,13 @@
                     android:id="@+id/roommate_gender_male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/male" />
+                    android:drawableRight="@drawable/male_icon" />
 
                 <RadioButton
                     android:id="@+id/roommate_gender_female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/female" />
+                    android:drawableRight="@drawable/female_icon" />
             </RadioGroup>
         </LinearLayout>
 

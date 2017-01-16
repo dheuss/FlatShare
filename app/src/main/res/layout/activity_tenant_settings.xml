@@ -187,7 +187,7 @@
             custom:rangeBarColor="@color/colorPrimary"
             custom:selectorColor="@color/colorPrimary"
             custom:selectorSize="5dp"
-            custom:tickEnd="30"
+            custom:tickEnd="45"
             custom:tickInterval="1"
             custom:tickStart="12" />
 
@@ -201,18 +201,14 @@
             android:layout_marginTop="@dimen/marginTop"
             android:text="@string/area_apartment" />
 
-        <!--<com.google.android.gms.maps.MapView-->
-            <!--android:id="@+id/map"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent" />-->
-
         <LinearLayout
             android:id="@+id/LinearLayoutPurposeCommunity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/area_0"
             android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight">
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
 
             <TextView
                 android:id="@+id/purpose_community_text"
@@ -239,6 +235,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/purposeCommunityNEI_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
         </LinearLayout>
 
@@ -275,6 +277,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/smokingApartmentNEI_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
         </LinearLayout>
 
@@ -311,6 +319,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/balconyNEI_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
 
         </LinearLayout>
@@ -348,6 +362,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/internetNEI_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
 
         </LinearLayout>
@@ -385,6 +405,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/tvNEI_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon"/>
+
             </RadioGroup>
 
         </LinearLayout>
@@ -422,6 +449,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/washingMashineNEI_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon"/>
             </RadioGroup>
 
         </LinearLayout>
@@ -459,6 +492,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/dryerNEI_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon"/>
             </RadioGroup>
 
         </LinearLayout>
@@ -496,6 +535,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/bathTubeNEI_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon"/>
             </RadioGroup>
 
         </LinearLayout>
@@ -533,6 +578,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/petsNEI_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon"/>
             </RadioGroup>
         </LinearLayout>
 

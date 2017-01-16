@@ -33,77 +33,41 @@
             android:gravity="center"
             android:text="@string/tenant_profil_string" />
 
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/LinearLayoutProfileName"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tenant_settings_info"
-            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_below="@+id/tenant_settings_info"
+            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginTop="@dimen/marginTop">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/name" />
-
+            android:layout_marginLeft="@dimen/marginLeft">
             <EditText
                 android:id="@+id/nameProfileEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:hint="change your name"
-                android:inputType="text" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:hint="@string/name"
+                android:inputType="text"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"/>
+        </android.support.design.widget.TextInputLayout>
 
-        <LinearLayout
-            android:id="@+id/LinearLayoutProfileEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutProfileName"
-            android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginTop="@dimen/marginTop">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/email" />
-
-            <EditText
-                android:id="@+id/emailProfileEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:hint="change your email-address"
-                android:inputType="textEmailAddress" />
-        </LinearLayout>
-
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/LinearLayoutProfileAge"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutProfileEmail"
-            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_below="@+id/LinearLayoutProfileName"
+            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginTop="@dimen/marginTop">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/age" />
-
+            android:layout_marginLeft="@dimen/marginLeft">
             <EditText
                 android:id="@+id/ageProfileEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:hint="change your age"
-                android:inputType="number" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:hint="@string/age"
+                android:inputType="number"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"/>
+        </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
             android:id="@+id/LinearLayoutProfileGender"
@@ -131,13 +95,19 @@
                     android:id="@+id/genderMaleProfileRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/male" />
+                    android:drawableRight="@drawable/male_icon" />
 
                 <RadioButton
                     android:id="@+id/genderFemaleProlfileButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/female" />
+                    android:drawableRight="@drawable/female_icon" />
+
+                <RadioButton
+                    android:id="@+id/genderAllProfileButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/transgender_icon"/>
             </RadioGroup>
         </LinearLayout>
 
@@ -174,6 +144,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/smokerNEIProfileRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon"/>
             </RadioGroup>
         </LinearLayout>
 
@@ -210,6 +186,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/petsNEIProfileRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon"/>
             </RadioGroup>
         </LinearLayout>
 
@@ -266,6 +248,7 @@
                 android:maxLines="5"
                 android:scrollHorizontally="false"
                 android:textColor="@color/colorText"
+                android:textColorHint="@color/colorPrimary"
                 android:textSize="10dp" />
         </LinearLayout>
 

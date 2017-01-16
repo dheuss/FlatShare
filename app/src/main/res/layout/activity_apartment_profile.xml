@@ -19,7 +19,7 @@
             android:layout_marginTop="@dimen/marginTop"
             android:text="@string/create_your_apartment_profile"
             android:textAlignment="center"
-            android:textColor="@color/colorText"
+            android:textColor="@color/colorPrimary"
             android:textSize="30dp" />
 
         <TextView

@@ -56,7 +56,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
-            android:background="@drawable/background_field"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginLeft="@dimen/marginLeft">
             <EditText
@@ -72,7 +71,6 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_field"
             android:layout_marginTop="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight">
