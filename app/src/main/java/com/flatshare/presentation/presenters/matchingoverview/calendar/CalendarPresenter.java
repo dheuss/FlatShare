@@ -11,11 +11,12 @@ import java.util.List;
 
 public interface CalendarPresenter extends BasePresenter {
 
-    void send(List<String> dateList, List<String> timeList);
+    void sendDateToTendant(List<String> dateList, List<String> timeList, String tenantID, String apartmentID);
 
     boolean checkForTenant();
 
-    void sendBackFromTendant(String finalDate);
+    void sendBackFromTenant(String finalDate, String tenantID, String apartmentID);
+
 
     interface View extends BaseView {
 

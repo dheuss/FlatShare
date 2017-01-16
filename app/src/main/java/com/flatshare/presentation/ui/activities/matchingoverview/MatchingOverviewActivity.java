@@ -76,15 +76,26 @@ public class MatchingOverviewActivity extends AbstarctFragmentAcivity implements
     }
 
     public void generateMatchingOverview(List<String> matchingList){
-        for(int i = 0; i < matchingList.size(); i++){
-            TableRow row = new TableRow(this.getActivity());
-            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-            row.setLayoutParams(lp);
-            System.out.println("Sandro: " + matchingList.get(i));
-            TextView machtingText = new TextView(this.getActivity()) ;
-            machtingText.setText(matchingList.get(i));
-            row.addView(machtingText);
-            machingOverview.addView(row, i);
+        for(int i = 0, h=0; i < matchingList.size(); i++){
+            if(i>h) {
+                TableRow row = new TableRow(this.getActivity());
+                TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+                row.setLayoutParams(lp);
+                TextView machtingText = new TextView(this.getActivity());
+                TextView machtingText2 = new TextView(this.getActivity());
+                TextView machtingText3 = new TextView(this.getActivity());
+
+                machtingText.setText(matchingList.get(i));
+                if(i+1 < matchingList.size()){machtingText2.setText(matchingList.get(i + 1));}
+                if(i+2 < matchingList.size()){machtingText3.setText(matchingList.get(h));}
+
+                row.addView(machtingText);
+                row.addView(machtingText2);
+                row.addView(machtingText3);
+
+                machingOverview.addView(row, i);
+                h= h + 2;
+            }
         }
 
     }

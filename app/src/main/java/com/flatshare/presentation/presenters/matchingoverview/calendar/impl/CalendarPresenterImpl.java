@@ -1,6 +1,11 @@
 package com.flatshare.presentation.presenters.matchingoverview.calendar.impl;
 
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.enums.ProfileType;
+import com.flatshare.domain.interactors.calendar.CalendarInitInteractor;
+import com.flatshare.domain.interactors.calendar.CalendarSendFinalInteractor;
+import com.flatshare.domain.interactors.calendar.impl.CalendarInitInteractorImpl;
+import com.flatshare.domain.interactors.calendar.impl.CalendarSendFinalInteractorImpl;
 import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 import com.flatshare.presentation.presenters.matchingoverview.calendar.CalendarPresenter;
@@ -50,20 +55,21 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
     }
 
     @Override
-    public void send(List<String> dateList, List<String> timeList) {
+    public void sendDateToTendant(List<String> dateList, List<String> timeList, String tenantID, String apartmentID) {
+        CalendarInitInteractor calendarInteractor = new CalendarInitInteractorImpl(mMainThread, this, dateList, timeList, tenantID, apartmentID);
+        calendarInteractor.execute();
+    }
 
+    @Override
+    public void sendBackFromTenant(String finalDate, String tenantID, String apartmentID) {
+        CalendarSendFinalInteractor calendarFinalInteractor = new CalendarSendFinalInteractorImpl(mMainThread, this, finalDate, tenantID, apartmentID);
+        calendarFinalInteractor.execute();
     }
 
     @Override
     public boolean checkForTenant() {
-        //TODO bist du tendant - aus FIrebase holen
-        //userState.getPrimaryUserProfile().pro;
-        return false;
+        return userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue();
     }
 
-    @Override
-    public void sendBackFromTendant(String finalDate) {
-        //TODO call back with the final date
-    }
 
 }

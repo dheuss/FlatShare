@@ -9,7 +9,6 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -45,9 +44,9 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     private TextView[] dateTextView = {};
     private Button[] dateButton = {};
     private int[] buttonView = {};
-    private boolean tendant;
+    private boolean istenant;
     private boolean deleteButtonToGONE = false;
-    private String finalDate;
+    private String finalDate, tenantID, apartmentID;
 
 
     @Override
@@ -58,9 +57,10 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
         mPresenter = new CalendarPresenterImpl(MainThreadImpl.getInstance(), this);
 
-        tendant = mPresenter.checkForTenant();
+        istenant = mPresenter.checkForTenant();
 
-        if (tendant){
+
+        if (istenant){
             setDate.setVisibility(View.GONE);
         }
 
@@ -82,10 +82,10 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             @Override
             public void onClick(View v) {
                 //TODO send dateList and timeList to firebase
-                if (tendant){
-                    mPresenter.sendBackFromTendant(finalDate);
+                if (istenant){
+                    mPresenter.sendBackFromTenant(finalDate, tenantID, apartmentID);
                 }else {
-                    mPresenter.send(dateList, timeList);
+                    mPresenter.sendDateToTendant(dateList, timeList, tenantID, apartmentID);
                     Toast.makeText(getApplicationContext(), "Send", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -97,7 +97,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     public void handleClick(View view) {
         for(int i =0;i<=buttonView.length-1;i++){
             if(view.getId() == buttonView[i]) {
-                if (tendant) {
+                if (istenant) {
                     chooseTendantDate(1);
                 } else {
                     if (deleteButtonToGONE) {
@@ -162,7 +162,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         if (dateList.size() <= 10){
             showDialog(999);
             counter++;
-            tendant = false;
+            istenant = false;
             send.setVisibility(View.VISIBLE);
         }else{
             Toast.makeText(getApplicationContext(), "Reach the maximum of Dates!", Toast.LENGTH_SHORT).show();
@@ -218,7 +218,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             dateTextView[i].setText(dateTendantList.get(i) + " " + timeTendantList.get(i));
             dateButton[i].setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.checkmark));
             dateButton[i].setVisibility(View.VISIBLE);
-            tendant = true;
+            istenant = true;
         }
     }
 
