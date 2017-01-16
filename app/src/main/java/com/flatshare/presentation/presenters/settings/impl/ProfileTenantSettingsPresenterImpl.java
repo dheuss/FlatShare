@@ -5,8 +5,9 @@ import android.widget.VideoView;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
-import com.flatshare.domain.interactors.settings.ProfileTenantSettingsInteractor;
-import com.flatshare.domain.interactors.settings.impl.ProfileTenantSettingsInteractorImpl;
+import com.flatshare.domain.datatypes.db.profiles.UserProfile;
+import com.flatshare.domain.interactors.profile.SecondaryProfileInteractor;
+import com.flatshare.domain.interactors.profile.impl.TenantProfileInteractorImpl;
 import com.flatshare.presentation.presenters.settings.ProfileTenantSettingsPresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 
@@ -15,7 +16,7 @@ import com.flatshare.presentation.presenters.base.AbstractPresenter;
  */
 
 public class ProfileTenantSettingsPresenterImpl extends AbstractPresenter implements ProfileTenantSettingsPresenter,
-        ProfileTenantSettingsInteractor.Callback {
+        SecondaryProfileInteractor.Callback {
 
     private ProfileTenantSettingsPresenter.View mView;
 
@@ -53,7 +54,7 @@ public class ProfileTenantSettingsPresenterImpl extends AbstractPresenter implem
     public void changeProfile(TenantProfile tenantProfile) {
         mView.showProgress();
         userState.setTenantProfile(tenantProfile);
-        ProfileTenantSettingsInteractor interactor = new ProfileTenantSettingsInteractorImpl(mMainThread, this, tenantProfile);
+        SecondaryProfileInteractor interactor = new TenantProfileInteractorImpl(mMainThread, this, tenantProfile);
         interactor.execute();
     }
 
@@ -68,14 +69,14 @@ public class ProfileTenantSettingsPresenterImpl extends AbstractPresenter implem
     }
 
     @Override
-    public void onSentSuccess() {
-        mView.hideProgress();
-        mView.changeToMatchingActivity();
-    }
-
-    @Override
     public void onSentFailure(String error) {
         mView.hideProgress();
         onError(error);
+    }
+
+    @Override
+    public void onProfileCreated(UserProfile profile) {
+        mView.hideProgress();
+        mView.changeToMatchingActivity();
     }
 }

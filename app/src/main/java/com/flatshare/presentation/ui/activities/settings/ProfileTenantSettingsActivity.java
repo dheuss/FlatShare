@@ -2,14 +2,12 @@ package com.flatshare.presentation.ui.activities.settings;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -17,14 +15,12 @@ import android.widget.Spinner;
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.state.UserState;
-import com.flatshare.presentation.presenters.settings.ProfileTenantSettingsPresenter;
-import com.flatshare.presentation.presenters.settings.impl.ProfileTenantSettingsPresenterImpl;
+import com.flatshare.presentation.presenters.profile.TenantProfilePresenter;
+import com.flatshare.presentation.presenters.profile.impl.TenantProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstarctFragmentAcivity;
-import com.flatshare.presentation.ui.AbstractActivity;
-import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity implements ProfileTenantSettingsPresenter.View {
+public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity implements TenantProfilePresenter.View {
 
     private EditText changeNameEditText;
     private EditText changeEmailEditText;
@@ -53,7 +49,7 @@ public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity imple
 
     private static final String TAG = "ProfileTenantSettingsActivity";
 
-    private ProfileTenantSettingsPresenter mPresenter;
+    private TenantProfilePresenter mPresenter;
 
     private UserState userState;
 
@@ -68,7 +64,7 @@ public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity imple
         View view = inflater.inflate(R.layout.activity_profile_tenant_settings, container, false);
         bindView(view);
 
-        mPresenter = new ProfileTenantSettingsPresenterImpl(
+        mPresenter = new TenantProfilePresenterImpl(
                 MainThreadImpl.getInstance(),
                 this
         );
@@ -111,7 +107,7 @@ public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity imple
         tenantProfile.setOccupation(changeOccupation);
         tenantProfile.setShortBio(changeInfo);
         tenantProfile.setDurationOfStay(changeDuration);
-        mPresenter.changeProfile(tenantProfile);
+        mPresenter.sendProfile(tenantProfile);
     }
 
     private void bindView(View view){
@@ -168,15 +164,6 @@ public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity imple
     }
 
     @Override
-    public void changeToMatchingActivity() {
-    }
-
-    @Override
-    public void uploadSucces() {
-
-    }
-
-    @Override
     public void showProgress() {
 
     }
@@ -188,6 +175,16 @@ public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity imple
 
     @Override
     public void showError(String message) {
+
+    }
+
+    @Override
+    public void changeToTenantSettings() {
+        Log.v(TAG, "!!!!CHANGE SUCESS!!!");
+    }
+
+    @Override
+    public void uploadSuccess() {
 
     }
 }

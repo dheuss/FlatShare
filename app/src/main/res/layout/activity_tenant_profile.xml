@@ -167,13 +167,13 @@
                     android:id="@+id/smokerYesProfileRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up" />
+                    android:drawableRight="@drawable/thumb_up_icon" />
 
                 <RadioButton
                     android:id="@+id/smokerNoProfileRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_down" />
+                    android:drawableRight="@drawable/thumb_down_icon" />
             </RadioGroup>
         </LinearLayout>
 
@@ -203,13 +203,13 @@
                     android:id="@+id/petsYesProfileRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up" />
+                    android:drawableRight="@drawable/thumb_up_icon" />
 
                 <RadioButton
                     android:id="@+id/petsNOProfileRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_down" />
+                    android:drawableRight="@drawable/thumb_down_icon" />
             </RadioGroup>
         </LinearLayout>
 

@@ -70,6 +70,12 @@
             android:layout_height="50dp"
             android:background="@drawable/clear_icon"/>
         <ImageButton
+            android:id="@+id/infoBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/info_icon"/>
+        <ImageButton
             android:id="@+id/acceptBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"

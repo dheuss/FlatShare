@@ -28,6 +28,7 @@ import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -47,9 +48,7 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
     private int classificationId;
     private ImageButton acceptBtn;
     private ImageButton rejectBtn;
-    private ImageButton profileBtn;
-
-    private ImageButton chatBtn;
+    private ImageButton infoBtn;
 
     private TextView badgeCounter;
     private Button badgeIcon;
@@ -134,6 +133,14 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
             }
         });
 
+        infoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "Info", Toast.LENGTH_SHORT).show();
+                apartmentPopUp(view);
+            }
+        });
+
         return view;
     }
 
@@ -145,6 +152,7 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
         mFrameLayout = (FrameLayout) view.findViewById(R.id.matchingActivityFrameLayout);
 
         rejectBtn = (ImageButton) view.findViewById(R.id.rejectBtn);
+        infoBtn = (ImageButton) view.findViewById(R.id.infoBtn);
         acceptBtn = (ImageButton) view.findViewById(R.id.acceptBtn);
     }
 
@@ -157,8 +165,6 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
     }
 
     public void apartmentPopUp(View view) {
-        //LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-        //View customView = inflater.inflate(R.layout.activity_show_detail_profil_apartment, null);
         View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_apartment, null);
 
         mPopupWindow = new PopupWindow(
@@ -193,8 +199,6 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
     }
 
     public void tenantPopUp(View view) {
-        //LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-        //View customView = inflater.inflate(R.layout.activity_show_detail_profil_tenant, null);
         View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_tenant, null);
 
         mPopupWindow = new PopupWindow(

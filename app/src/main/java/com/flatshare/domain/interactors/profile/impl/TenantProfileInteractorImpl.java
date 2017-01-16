@@ -69,6 +69,8 @@ public class TenantProfileInteractorImpl extends AbstractInteractor implements S
 
         String tenantId = tenantProfile.getTenantId();
 
+        System.out.println("ID ID ID ID ID ID: " + tenantId);
+
         Map<String, Object> map = new HashMap<>();
         map.put(databaseRoot.getTenantProfileNode(tenantId).getRootPath(), this.tenantProfile);
         map.put(databaseRoot.getUserProfileNode(userId).getTenantProfileId(), tenantId);

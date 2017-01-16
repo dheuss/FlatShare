@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.enums.ProfileType;
@@ -32,7 +33,7 @@ public class MainActivity extends AbstractActivity {
             R.drawable.home_icon,
             R.drawable.settings_icon,
             R.drawable.profile_icon,
-//            R.drawable.calendar_icon
+            R.drawable.notifications_icon
     };
 
     private UserState userState;
@@ -88,7 +89,7 @@ public class MainActivity extends AbstractActivity {
 
         TextView tabFour = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabFour.setText("MatchingOverviewActivity");
-        tabFour.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.bell, 0, 0);
+        tabFour.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.notifications_icon, 0, 0);
         tabLayout.getTabAt(3).setCustomView(tabFour);
     }
 
@@ -97,8 +98,10 @@ public class MainActivity extends AbstractActivity {
         adapter.addFragment(new SettingsActivity(), "SettingsActivity");
         if (classificationId == ProfileType.TENANT.getValue()){
             adapter.addFragment(new ProfileTenantSettingsActivity(), "ProfileTenantSettingsActivity");
-        } else {
+        } else if (classificationId == ProfileType.APARTMENT.getValue()){
             adapter.addFragment(new ProfileApartmentSettingsActivity(), "ProfileApartmentSettingsActivity");
+        } else if (classificationId == ProfileType.ROOMMATE.getValue()) {
+            Toast.makeText(getApplicationContext(), "Not avalabele", Toast.LENGTH_SHORT);
         }
         adapter.addFragment(new MatchingActivity(), "MatchingActivity");
         adapter.addFragment(new MatchingOverviewActivity(), "MatchingOverviewActivity");

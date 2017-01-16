@@ -161,7 +161,7 @@
                     android:id="@+id/genderALLApartmentSettingsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_side"/>
+                    android:drawableRight="@drawable/thumb_up_down_icon"/>
             </RadioGroup>
         </LinearLayout>
 
@@ -201,19 +201,19 @@
                     android:id="@+id/smokerYesApartmentSettingsRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up" />
+                    android:drawableRight="@drawable/thumb_up_icon" />
 
                 <RadioButton
                     android:id="@+id/smokerNoApartmentSettingsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_down" />
+                    android:drawableRight="@drawable/thumb_down_icon" />
 
                 <RadioButton
                     android:id="@+id/smokerALLApartmentSettingsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_side"/>
+                    android:drawableRight="@drawable/thumb_up_down_icon"/>
             </RadioGroup>
         </LinearLayout>
 
@@ -253,19 +253,19 @@
                     android:id="@+id/petYesApartmentSettingsRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up" />
+                    android:drawableRight="@drawable/thumb_up_icon" />
 
                 <RadioButton
                     android:id="@+id/petNoApartmentSettingsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_down" />
+                    android:drawableRight="@drawable/thumb_down_icon" />
 
                 <RadioButton
                     android:id="@+id/petALLApartmentSettingsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_side"/>
+                    android:drawableRight="@drawable/thumb_up_down_icon"/>
             </RadioGroup>
         </LinearLayout>
 

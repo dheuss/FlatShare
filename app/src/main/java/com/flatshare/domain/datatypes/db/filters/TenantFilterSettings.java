@@ -235,4 +235,24 @@ public class TenantFilterSettings extends FilterSettings {
     public void setSizeTo(int sizeTo) {
         this.sizeTo = sizeTo;
     }
+
+    @Exclude
+    public int getInternet() {
+        return internet;
+    }
+
+    @Exclude
+    public int getWashingMachine() {
+        return washingMachine;
+    }
+
+    @Exclude
+    public int getPurposeApartment() {
+        return purposeApartment;
+    }
+
+    @Exclude
+    public int getSmokerApartment() {
+        return smokerApartment;
+    }
 }

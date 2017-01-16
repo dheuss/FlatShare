@@ -232,13 +232,13 @@
                     android:id="@+id/purposeCommunityYES_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up" />
+                    android:drawableRight="@drawable/thumb_up_icon" />
 
                 <RadioButton
                     android:id="@+id/purposeCommunityNO_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_down" />
+                    android:drawableRight="@drawable/thumb_down_icon" />
             </RadioGroup>
         </LinearLayout>
 
@@ -268,13 +268,13 @@
                     android:id="@+id/smokingApartmentYES_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up" />
+                    android:drawableRight="@drawable/thumb_up_icon" />
 
                 <RadioButton
                     android:id="@+id/smokingApartmentNO_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_down" />
+                    android:drawableRight="@drawable/thumb_down_icon" />
             </RadioGroup>
         </LinearLayout>
 
@@ -304,13 +304,13 @@
                     android:id="@+id/balconyYES_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up" />
+                    android:drawableRight="@drawable/thumb_up_icon" />
 
                 <RadioButton
                     android:id="@+id/balconyNO_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_down" />
+                    android:drawableRight="@drawable/thumb_down_icon" />
             </RadioGroup>
 
         </LinearLayout>
@@ -341,13 +341,13 @@
                     android:id="@+id/internetYES_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up" />
+                    android:drawableRight="@drawable/thumb_up_icon" />
 
                 <RadioButton
                     android:id="@+id/internetNO_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_down" />
+                    android:drawableRight="@drawable/thumb_down_icon" />
             </RadioGroup>
 
         </LinearLayout>
@@ -378,13 +378,13 @@
                     android:id="@+id/tvYES_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up" />
+                    android:drawableRight="@drawable/thumb_up_icon" />
 
                 <RadioButton
                     android:id="@+id/tvNO_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_down" />
+                    android:drawableRight="@drawable/thumb_down_icon" />
             </RadioGroup>
 
         </LinearLayout>
@@ -415,13 +415,13 @@
                     android:id="@+id/washingMashineYES_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up" />
+                    android:drawableRight="@drawable/thumb_up_icon" />
 
                 <RadioButton
                     android:id="@+id/washingMashineNO_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_down" />
+                    android:drawableRight="@drawable/thumb_down_icon" />
             </RadioGroup>
 
         </LinearLayout>
@@ -452,13 +452,13 @@
                     android:id="@+id/dryerYES_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up" />
+                    android:drawableRight="@drawable/thumb_up_icon" />
 
                 <RadioButton
                     android:id="@+id/dryerNO_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_down" />
+                    android:drawableRight="@drawable/thumb_down_icon" />
             </RadioGroup>
 
         </LinearLayout>
@@ -489,13 +489,13 @@
                     android:id="@+id/bathTubeYES_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up" />
+                    android:drawableRight="@drawable/thumb_up_icon" />
 
                 <RadioButton
                     android:id="@+id/bathTubeNO_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_down" />
+                    android:drawableRight="@drawable/thumb_down_icon" />
             </RadioGroup>
 
         </LinearLayout>
@@ -526,13 +526,13 @@
                     android:id="@+id/petsYES_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up" />
+                    android:drawableRight="@drawable/thumb_up_icon" />
 
                 <RadioButton
                     android:id="@+id/petsNO_RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_down" />
+                    android:drawableRight="@drawable/thumb_down_icon" />
             </RadioGroup>
         </LinearLayout>
 
