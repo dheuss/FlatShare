@@ -109,6 +109,11 @@
     <string name="create_roommate_profile_button">Searching for a roommate</string>
     <string name="create_your_roommate_profile">Create Your Roommate Profile</string>
     <string name="nickname">Nickname</string>
+    <string name="price">Price</string>
+    <string name="size">Size</string>
+    <string name="street">Street</string>
+    <string name="housenumber">House Number</string>
+    <string name="zipcode">ZIP Code</string>
 
     <string-array name="occupation">
         <item>Student</item>

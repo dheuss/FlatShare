@@ -40,20 +40,18 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     private EditText apartmentStreetEditText;
     private EditText apartmentHouseNrEditText;
     private EditText apartmentZipCodeEditText;
-    private EditText apartmentRoomSize;
-    private EditText apartmentApartmentSize;
 
     private RadioGroup internetRadioGroup;
-    private RadioButton internetYesRB, internetNoRB;
+    private RadioButton internetYesRB, internetNoRB, internetNeiRB;
 
     private RadioGroup smokerRadioGroup;
-    private RadioButton smokerYesRB, smokerNoRB;
+    private RadioButton smokerYesRB, smokerNoRB, smokerNeiRB;
 
     private RadioGroup petsRadioGroup;
-    private RadioButton petsYesRB, petsNoRB;
+    private RadioButton petsYesRB, petsNoRB, petsNeiRB;
 
     private RadioGroup washingMachineRadioGroup;
-    private RadioButton washingMachineYesRB, washingMachineNoRB;
+    private RadioButton washingMachineYesRB, washingMachineNoRB, washingMashineNeiRB;
 
     private MultiAutoCompleteTextView roommatesEmailsMultiAC;
     private ArrayAdapter<String> adapter;
@@ -134,8 +132,6 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             } catch (NullPointerException e) {
                 Log.w(TAG, "sendProfile: NullPointer", e);
             }
-//            System.out.println("email of " + i + ":" + emails[i].trim());
-//            System.out.println("ID of " + i + ":" + id);
 
             if (id != null) {
                 roommatesId.add(id);
@@ -144,9 +140,6 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
         int price = Integer.parseInt(apartmentPriceEditText.getText().toString());
         int area = Integer.parseInt(apartmentAreaEditText.getText().toString());
-
-        int roomSzie = Integer.parseInt(apartmentRoomSize.getText().toString());
-        int apartmentSize = Integer.parseInt(apartmentApartmentSize.getText().toString());
 
         String street = apartmentStreetEditText.getText().toString();
         String houseNr = apartmentHouseNrEditText.getText().toString();
@@ -166,8 +159,6 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         ApartmentProfile apartmentProfile = new ApartmentProfile();
         apartmentProfile.setPrice(price);
         apartmentProfile.setArea(area);
-        apartmentProfile.setRoomSize(roomSzie);
-        apartmentProfile.setApartmentSize(apartmentSize);
         apartmentProfile.setInternet(hasInternet);
         apartmentProfile.setSmokerApartment(isSmoker);
         apartmentProfile.setPets(hasPets);
@@ -190,8 +181,6 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         apartmentStreetEditText = (EditText) findViewById(R.id.apartment_street_edit_text);
         apartmentHouseNrEditText = (EditText) findViewById(R.id.apartment_house_nr_edit_text);
         apartmentZipCodeEditText = (EditText) findViewById(R.id.apartment_zip_code_edit_text);
-        apartmentRoomSize = (EditText) findViewById(R.id.apartment_room_size_edit_text);
-        apartmentApartmentSize = (EditText) findViewById(R.id.apartment_apartment_size_edit_text);
 
         internetRadioGroup = (RadioGroup) findViewById(R.id.internet_apartment_rg);
         internetYesRB = (RadioButton) findViewById(R.id.internet_yes_rb);

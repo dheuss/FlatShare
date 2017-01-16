@@ -89,10 +89,10 @@ public class MainActivity extends AbstractActivity {
         tabThree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.profile_icon, 0, 0);
         tabLayout.getTabAt(1).setCustomView(tabThree);
 
-        TextView tabFour = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-        tabFour.setText("MatchingOverviewActivity");
-        tabFour.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.notifications_icon, 0, 0);
-        tabLayout.getTabAt(3).setCustomView(tabFour);
+//        TextView tabFour = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
+//        tabFour.setText("MatchingOverviewActivity");
+//        tabFour.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.notifications_icon, 0, 0);
+//        tabLayout.getTabAt(3).setCustomView(tabFour);
     }
 
     private void setupViewPager(ViewPager viewPager) {

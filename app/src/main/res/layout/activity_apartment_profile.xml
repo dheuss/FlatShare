@@ -48,197 +48,125 @@
             android:textColorHint="@color/colorButtonText"
             android:textStyle="bold" />
 
-
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/LinearLayoutApartmentProfileRoomMates"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/scan_roommate_QR_button"
+            android:layout_below="@+id/scan_roommate_QR_button"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/apartment_roommates" />
 
             <MultiAutoCompleteTextView
                 android:id="@+id/apartment_roommates_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right" />
-        </LinearLayout>
+                android:gravity="left"
+                android:hint="Roommates"
+                android:inputType="textEmailAddress" />
+        </android.support.design.widget.TextInputLayout>
 
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/LinearLayoutApartmentProfilePrice"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutApartmentProfileRoomMates"
+            android:layout_below="@+id/LinearLayoutApartmentProfileRoomMates"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/apartment_price" />
 
             <EditText
                 android:id="@+id/apartment_price_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:inputType="numberDecimal" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:hint="@string/price"
+                android:inputType="numberDecimal"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText" />
+        </android.support.design.widget.TextInputLayout>
 
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/LinearLayoutApartmentProfileArea"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutApartmentProfilePrice"
+            android:layout_below="@+id/LinearLayoutApartmentProfilePrice"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/apartment_area" />
 
             <EditText
                 android:id="@+id/apartment_area_editText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:inputType="numberDecimal" />
+                android:layout_height="match_parent"
+                android:hint="@string/size"
+                android:inputType="numberDecimal"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText" />
+        </android.support.design.widget.TextInputLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/LinearLayoutApartmentProfileStreet"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutApartmentProfileArea"
+            android:layout_below="@+id/LinearLayoutApartmentProfileArea"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/apartment_street" />
 
             <EditText
                 android:id="@+id/apartment_street_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:inputType="text" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:hint="@string/street"
+                android:inputType="text"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText" />
+        </android.support.design.widget.TextInputLayout>
 
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/LinearLayoutApartmentProfileHouseNumber"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutApartmentProfileStreet"
+            android:layout_below="@+id/LinearLayoutApartmentProfileStreet"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/apartment_house_nr" />
 
             <EditText
                 android:id="@+id/apartment_house_nr_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:inputType="text" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:hint="@string/housenumber"
+                android:inputType="text"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText" />
+        </android.support.design.widget.TextInputLayout>
 
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/LinearLayoutApartmentProfileZipCode"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutApartmentProfileHouseNumber"
+            android:layout_below="@+id/LinearLayoutApartmentProfileHouseNumber"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/apartment_zip_code" />
 
             <EditText
                 android:id="@+id/apartment_zip_code_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:inputType="numberDecimal" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:hint="@string/zipcode"
+                android:inputType="number"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText" />
+        </android.support.design.widget.TextInputLayout>
 
-        <LinearLayout
-            android:id="@+id/LinearLayoutRoomSize"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/LinearLayoutApartmentProfileZipCode"
-            android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginTop="@dimen/marginTop">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/roomSize" />
-
-            <EditText
-                android:id="@+id/apartment_room_size_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:inputType="numberDecimal" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/LinearLayoutApartmentSize"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutRoomSize"
-            android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginTop="@dimen/marginTop">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:inputType="numberDecimal"
-                android:text="@string/apartmentSize" />
-
-            <EditText
-                android:id="@+id/apartment_apartment_size_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:inputType="numberDecimal"/>
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/LinearLayoutApartmentProfileInternet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutApartmentSize"
+            android:layout_below="@id/LinearLayoutApartmentProfileZipCode"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
@@ -267,6 +195,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/internet_nei_rb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
         </LinearLayout>
 
@@ -303,6 +237,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/smoker_nei_rb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
         </LinearLayout>
 
@@ -339,6 +279,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/pets_nei_rb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
         </LinearLayout>
 
@@ -375,6 +321,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/washing_machine_nei_rb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
         </LinearLayout>
 
