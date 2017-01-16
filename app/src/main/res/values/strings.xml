@@ -22,7 +22,7 @@
     <string name="gender">Gender:</string>
     <string name="internet">Internet:</string>
     <string name="washing_machine">Washing machine:</string>
-    <string name="create_tenant_profile">Create Tenant Profle</string>
+    <string name="create_tenant_profile">Searching for an apartment</string>
     <string name="create_apartment_profile_button">Create Apartment Profile</string>
     <string name="join_apartment_profile_button">Join Apartment</string>
     <string name="create_your_profile">Create Your Profile</string>
@@ -106,6 +106,9 @@
     <string name="profile_filter_settings_description">Here you can change your filter settings. That means that you can change the parameters to search for the right apartment. We will find the perfect apartment for you!</string>
     <string name="change_to_calendar">CALENDAR!</string>
     <string name="logout_popup">Do you really want to logout?</string>
+    <string name="create_roommate_profile_button">Searching for a roommate</string>
+    <string name="create_your_roommate_profile">Create Your Roommate Profile</string>
+    <string name="nickname">Nickname</string>
 
     <string-array name="occupation">
         <item>Student</item>

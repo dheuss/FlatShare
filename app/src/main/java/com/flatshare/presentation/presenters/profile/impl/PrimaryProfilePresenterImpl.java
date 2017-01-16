@@ -52,7 +52,7 @@ public class PrimaryProfilePresenterImpl extends AbstractPresenter implements Pr
     }
 
     @Override
-    public void onProfileCreated(PrimaryUserProfile primaryUserProfile, UserProfile secondaryProfile, ApartmentProfile apartmentProfile) {
+    public void onProfileCreated(PrimaryUserProfile primaryUserProfile, UserProfile secondaryProfile) {
 
         userState.setPrimaryUserProfile(primaryUserProfile);
         int classificationId = primaryUserProfile.getClassificationId();
@@ -62,13 +62,9 @@ public class PrimaryProfilePresenterImpl extends AbstractPresenter implements Pr
         if (classificationId == ProfileType.TENANT.getValue()) {
             userState.setTenantProfile((TenantProfile) secondaryProfile);
             mView.changeToTenantProfile();
-        } else if (classificationId == ProfileType.APARTMENT.getValue()) {
-            userState.setRoommateProfile((RoommateProfile) secondaryProfile);
-            userState.setApartmentProfile(apartmentProfile);
-            mView.changeToApartmentProfile();
         } else if (classificationId == ProfileType.ROOMMATE.getValue()) {
             userState.setRoommateProfile((RoommateProfile) secondaryProfile);
-            mView.changeToRoomateQR(primaryUserProfile.getRoommateProfileId());
+            mView.changeToRoommateActivity();
         } else {
 
             mView.showError("Invalid  classificationId: " + classificationId);

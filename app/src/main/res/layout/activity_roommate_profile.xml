@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/windowBackground"
+    tools:context="com.flatshare.presentation.ui.activities.profile.RoommateProfileActivity">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/roommate_profile_initial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginTop="@dimen/marginTop"
+            android:text="@string/create_your_roommate_profile"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30dp" />
+
+        <!--<TextView-->
+            <!--android:id="@+id/roommate_settings_info"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_below="@+id/roommate_profile_inital"-->
+            <!--android:layout_marginLeft="@dimen/marginLeft"-->
+            <!--android:layout_marginRight="@dimen/marginRight"-->
+            <!--android:layout_marginTop="@dimen/marginTop"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/roommate_profil_string" />-->
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutProfileNickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/roommate_profile_initial"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/nickname" />
+
+            <EditText
+                android:id="@+id/roommate_nickname_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:inputType="text" />
+            <!--android:hint="Enter a nickname"-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutProfileAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LinearLayoutProfileNickname"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/age" />
+
+            <EditText
+                android:id="@+id/roommate_age_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:hint="Enter your age..."
+                android:inputType="number" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutProfileGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LinearLayoutProfileAge"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/gender" />
+
+            <RadioGroup
+                android:id="@+id/roommate_gender_rg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/roommate_gender_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/male" />
+
+                <RadioButton
+                    android:id="@+id/roommate_gender_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/female" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/LinearLayoutProfileInfo"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/LinearLayoutProfileOccupation"-->
+            <!--android:layout_marginLeft="@dimen/marginLeft"-->
+            <!--android:layout_marginRight="@dimen/marginRight"-->
+            <!--android:layout_marginTop="@dimen/marginTop"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/LinearLayoutInfoText"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="left|top"-->
+                <!--android:text="@string/info" />-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/infoProfileEditText"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:layout_below="@id/LinearLayoutInfoText"-->
+                <!--android:gravity="top|left"-->
+                <!--android:hint="@string/insert_your_bio"-->
+                <!--android:inputType="textMultiLine"-->
+                <!--android:lines="5"-->
+                <!--android:maxLines="5"-->
+                <!--android:scrollHorizontally="false"-->
+                <!--android:textColor="@color/colorText"-->
+                <!--android:textSize="10dp" />-->
+        <!--</LinearLayout>-->
+
+        <Button
+            android:id="@+id/roommate_profile_done_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LinearLayoutProfileGender"
+            android:layout_marginBottom="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/colorPrimary"
+            android:hint="@string/done_profile"
+            android:textColor="@color/colorButtonText"
+            android:textColorHint="@color/colorButtonText"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+</ScrollView>

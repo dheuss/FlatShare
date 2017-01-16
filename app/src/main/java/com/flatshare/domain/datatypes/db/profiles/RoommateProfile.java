@@ -22,6 +22,9 @@ public class RoommateProfile extends UserProfile {
     @PropertyName("gender")
     public int gender;
 
+    @PropertyName("age")
+    public int age;
+
     @PropertyName("owner")
     public boolean owner;
 
@@ -133,6 +136,16 @@ public class RoommateProfile extends UserProfile {
     @Exclude
     public int getGender() {
         return gender;
+    }
+
+    @Exclude
+    public int getAge() {
+        return age;
+    }
+
+    @Exclude
+    public void setAge(int age) {
+        this.age = age;
     }
 
     @Exclude

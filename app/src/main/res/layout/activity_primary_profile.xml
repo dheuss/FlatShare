@@ -55,39 +55,39 @@
             />
 
         <Button
-            android:id="@+id/create_apartment_profile_button"
+            android:id="@+id/create_roommate_profile_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/create_tenant_profile_button"
-            android:hint="@string/create_apartment_profile_button"
+            android:hint="@string/create_roommate_profile_button"
             android:textColor="@color/colorButtonText"
             android:textColorHint="@color/colorButtonText"
             android:layout_marginTop="20dp"
             android:background="@color/colorPrimary"
             android:textStyle="bold"/>
 
-    <Button
-        android:id="@+id/create_roommate_qr_code_button"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/create_apartment_profile_button"
-        android:hint="@string/create_roommate_qr_code_button"
-        android:textColor="@color/colorButtonText"
-        android:textColorHint="@color/colorButtonText"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorPrimary"
-        android:textStyle="bold"/>
+    <!--<Button-->
+        <!--android:id="@+id/create_roommate_qr_code_button"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/create_apartment_profile_button"-->
+        <!--android:hint="@string/create_roommate_qr_code_button"-->
+        <!--android:textColor="@color/colorButtonText"-->
+        <!--android:textColorHint="@color/colorButtonText"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:background="@color/colorPrimary"-->
+        <!--android:textStyle="bold"/>-->
 
-    <Button
-        android:id="@+id/test_button"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/create_roommate_qr_code_button"
-        android:hint="test scanner"
-        android:textColor="@color/colorButtonText"
-        android:textColorHint="@color/colorButtonText"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorPrimary"
-        android:textStyle="bold"/>
+    <!--<Button-->
+        <!--android:id="@+id/test_button"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/create_roommate_qr_code_button"-->
+        <!--android:hint="test scanner"-->
+        <!--android:textColor="@color/colorButtonText"-->
+        <!--android:textColorHint="@color/colorButtonText"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:background="@color/colorPrimary"-->
+        <!--android:textStyle="bold"/>-->
 
     </LinearLayout>

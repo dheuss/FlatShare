@@ -13,8 +13,8 @@ public interface PrimaryProfileInteractor extends Interactor {
 
     interface Callback {
 
+        void onProfileCreated(PrimaryUserProfile primaryUserProfile, UserProfile secondaryProfile);
         void onSentFailure(String error);
-        void onProfileCreated(PrimaryUserProfile primaryUserProfile, UserProfile secondaryProfile, ApartmentProfile apartmentProfile);
 
     }
 

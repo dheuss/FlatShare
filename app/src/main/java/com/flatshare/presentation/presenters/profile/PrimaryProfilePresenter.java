@@ -14,8 +14,7 @@ public interface PrimaryProfilePresenter extends BasePresenter {
 
     interface View extends BaseView {
         void changeToTenantProfile();
-        void changeToApartmentProfile();
-        void changeToRoomateQR(String roommateId);
+        void changeToRoommateActivity();
     }
 
 }

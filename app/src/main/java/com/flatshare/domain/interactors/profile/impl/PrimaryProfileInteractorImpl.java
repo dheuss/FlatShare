@@ -51,12 +51,12 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
     /**
      * callback method that posts message received into the main UI, through mainThread.post!!!
      */
-    private void notifyProfileCreated(final UserProfile secondaryProfile, final ApartmentProfile apartmentProfile) {
+    private void notifyProfileCreated(final UserProfile secondaryProfile) {
 
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onProfileCreated(primaryUserProfile, secondaryProfile, apartmentProfile);
+                mCallback.onProfileCreated(primaryUserProfile, secondaryProfile);
             }
         });
     }
@@ -77,7 +77,7 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
             TenantProfile tenantProfile = new TenantProfile();
             tenantProfile.setTenantId(secondaryProfileId);
 
-            pushId(secondaryProfilePath + secondaryProfileId, tenantProfile, null);
+            pushId(secondaryProfilePath + secondaryProfileId, tenantProfile);
         } else if (primaryUserProfile.getClassificationId() == ProfileType.ROOMMATE.getValue()) {
             secondaryProfilePath = databaseRoot.getRoommateProfiles();
             secondaryProfileId = mDatabase.child(secondaryProfilePath).push().getKey();
@@ -86,31 +86,19 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
             RoommateProfile roommateProfile = new RoommateProfile();
             roommateProfile.setRoommateId(secondaryProfileId);
 
-            pushId(secondaryProfilePath + secondaryProfileId, roommateProfile, null);
-        } else if (primaryUserProfile.getClassificationId() == ProfileType.APARTMENT.getValue()) {
-            secondaryProfilePath = databaseRoot.getRoommateProfiles();
-            secondaryProfileId = mDatabase.child(secondaryProfilePath).push().getKey();
-            primaryUserProfile.setRoommateProfileId(secondaryProfileId);
-
-            String apartmentProfilePath = databaseRoot.getApartmentProfiles();
-            String apartmentId = mDatabase.child(apartmentProfilePath).push().getKey();
-
-            ApartmentProfile apartmentProfile = new ApartmentProfile();
-            apartmentProfile.setApartmentId(apartmentId);
-
-            bindRoommateWithApartment(secondaryProfileId, apartmentId);
+            pushId(secondaryProfilePath + secondaryProfileId, roommateProfile);
         } else {
             notifyError("classificationID: " + primaryUserProfile.getClassificationId() + " is not valid!");
             return;
         }
     }
 
-    private void pushId(final String secondaryProfilePath, final UserProfile userProfile, final ApartmentProfile apartmentProfile) {
+    private void pushId(final String secondaryProfilePath, final UserProfile userProfile) {
         mDatabase.child(secondaryProfilePath).setValue(userProfile, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if (databaseError == null) {
-                    createProfile(userProfile, apartmentProfile);
+                    createProfile(userProfile);
                 } else {
                     PrimaryProfileInteractorImpl.this.notifyError(databaseError.getMessage());
                 }
@@ -118,24 +106,7 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
         });
     }
 
-    private void bindRoommateWithApartment(String roommateId, String apartmentId) {
-
-        String roommateProfilePath = databaseRoot.getRoommateProfileNode(roommateId).getRootPath();
-        String apartmentProfilePath = databaseRoot.getApartmentProfileNode(apartmentId).getRootPath();
-
-        RoommateProfile roommateProfile = new RoommateProfile();
-        roommateProfile.setRoommateId(roommateId);
-        roommateProfile.setApartmentId(apartmentId);
-        roommateProfile.setOwner(true);
-        roommateProfile.setAvailable(false);
-
-        ApartmentProfile apartmentProfile = new ApartmentProfile();
-        apartmentProfile.setApartmentId(apartmentId);
-        pushId(roommateProfilePath, roommateProfile, apartmentProfile);
-        mDatabase.child(apartmentProfilePath).setValue(apartmentProfile);
-    }
-
-    private void createProfile(final UserProfile userProfile, final ApartmentProfile apartmentProfile) {
+    private void createProfile(final UserProfile userProfile) {
 
         Log.d(TAG, "creating main profile!");
 
@@ -145,7 +116,7 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if (databaseError == null) {
-                    PrimaryProfileInteractorImpl.this.notifyProfileCreated(userProfile, apartmentProfile);
+                    PrimaryProfileInteractorImpl.this.notifyProfileCreated(userProfile);
                 } else {
                     PrimaryProfileInteractorImpl.this.notifyError(databaseError.getMessage());
                 }

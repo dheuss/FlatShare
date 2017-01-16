@@ -2,9 +2,7 @@ package com.flatshare.presentation.ui.activities.settings;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -12,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -23,11 +20,8 @@ import com.flatshare.R;
 import com.flatshare.presentation.presenters.settings.SettingsPresenter;
 import com.flatshare.presentation.presenters.settings.impl.SettingsPresenterImpl;
 import com.flatshare.presentation.ui.AbstarctFragmentAcivity;
-import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.auth.login.LoginActivity;
 import com.flatshare.threading.MainThreadImpl;
-
-import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class SettingsActivity extends AbstarctFragmentAcivity implements SettingsPresenter.View {
 
@@ -192,7 +186,7 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
     }
 
     public void signOut(View view) {
-        View popupView = getActivity().getLayoutInflater().inflate(R.layout.activity_logout_popup, null);
+        View popupView = getActivity().getLayoutInflater().inflate(R.layout.activity_popup, null);
 
         logoutPopupWindow = new PopupWindow(
                 popupView,
@@ -228,7 +222,7 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
     }
 
     public void deleteAccount(View view) {
-        View popupView = getActivity().getLayoutInflater().inflate(R.layout.activity_logout_popup, null);
+        View popupView = getActivity().getLayoutInflater().inflate(R.layout.activity_popup, null);
 
         logoutPopupWindow = new PopupWindow(
                 popupView,

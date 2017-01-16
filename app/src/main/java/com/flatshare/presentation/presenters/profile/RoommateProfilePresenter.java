@@ -1,23 +1,26 @@
 package com.flatshare.presentation.presenters.profile;
 
+import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
 import com.flatshare.presentation.presenters.base.BasePresenter;
 import com.flatshare.presentation.ui.BaseView;
 
 /**
- * Created by Arber on 08/01/2017.
+ * Created by Arber on 16/01/2017.
  */
-public interface RoommateProfilePresenter extends BasePresenter{
 
+public interface RoommateProfilePresenter extends BasePresenter {
 
-    void listenToDB(String roommateId);
+    void sendProfile(RoommateProfile roommateProfile);
+    void checkNicknameUnique(String nickname);
 
-    void checkIfApartmentProfileCreated();
+    interface View extends BaseView {
+        void changeToApartmentProfileActivity();
 
-    interface View extends BaseView{
+        void onNicknameError(String error);
 
-        void onQRCodeRead(String apartmentId);
+        void changeToRoommateQRActivity(String id);
 
-        void changeToWaitingActivity();
+        void onNicknameUnique();
     }
 
 }

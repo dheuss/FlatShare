@@ -10,8 +10,8 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.flatshare.R;
-import com.flatshare.presentation.presenters.profile.RoommateProfilePresenter;
-import com.flatshare.presentation.presenters.profile.impl.RoommateProfilePresenterImpl;
+import com.flatshare.presentation.presenters.profile.RoommateQRPresenter;
+import com.flatshare.presentation.presenters.profile.impl.RoommateQRPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.profile.RoommateWaitingActivity;
 import com.flatshare.threading.MainThreadImpl;
@@ -27,7 +27,7 @@ import java.util.Map;
 /**
  * Created by Arber on 07/01/2017.
  */
-public class RoommateQRActivity extends AbstractActivity implements RoommateProfilePresenter.View {
+public class RoommateQRActivity extends AbstractActivity implements RoommateQRPresenter.View {
 
     private static final String TAG = "RoommateQRActivity";
     private ImageView qrImageView;
@@ -35,7 +35,7 @@ public class RoommateQRActivity extends AbstractActivity implements RoommateProf
     private Bitmap bitmap;
     private String qrCodeString;
 
-    private RoommateProfilePresenter mPresenter;
+    private RoommateQRPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class RoommateQRActivity extends AbstractActivity implements RoommateProf
 
         bindView();
 
-        mPresenter = new RoommateProfilePresenterImpl(
+        mPresenter = new RoommateQRPresenterImpl(
                 MainThreadImpl.getInstance(),
                 this
         );

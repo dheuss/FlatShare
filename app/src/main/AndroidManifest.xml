@@ -101,8 +101,10 @@
         <activity android:name=".presentation.ui.activities.settings.ProfileApartmentSettingsActivity" />
         <activity android:name=".presentation.ui.activities.settings.ProfileTenantSettingsFilterActivity" />
         <activity android:name=".presentation.ui.activities.settings.ProfileApartmentSettingsFilterActivity" />
-        <activity android:name=".presentation.ui.activities.MainActivity"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".presentation.ui.activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".presentation.ui.activities.profile.RoommateProfileActivity"></activity>
     </application>
 
 </manifest>
