@@ -195,13 +195,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
-
-                <RadioButton
-                    android:id="@+id/internet_nei_rb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
         </LinearLayout>
 
@@ -239,12 +232,6 @@
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
 
-                <RadioButton
-                    android:id="@+id/smoker_nei_rb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
         </LinearLayout>
 
@@ -282,12 +269,6 @@
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
 
-                <RadioButton
-                    android:id="@+id/pets_nei_rb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
         </LinearLayout>
 
@@ -325,12 +306,6 @@
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
 
-                <RadioButton
-                    android:id="@+id/washing_machine_nei_rb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
         </LinearLayout>
 
