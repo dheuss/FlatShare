@@ -12,56 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dialog Title"
+        android:textColor="@color/colorPrimary"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <!--<EditText-->
-        <!--android:id="@+id/userInputDialog"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:hint="Enter Something"-->
-        <!--android:inputType="text" />-->
 </LinearLayout>
-
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<RelativeLayout-->
-    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:id="@+id/rl_custom_layout"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:padding="2dp"-->
-    <!--android:background="@color/colorAccent"-->
-    <!--&gt;-->
-    <!--<TextView-->
-        <!--android:id="@+id/logout_popup_TextView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/logout_popup"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:textColor="@color/colorText"-->
-        <!--android:padding="15dp"/>-->
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="25dp"-->
-        <!--android:layout_below="@+id/logout_popup_TextView"-->
-        <!--android:layout_marginLeft="@dimen/marginLeft">-->
-        <!--<Button-->
-            <!--android:id="@+id/yes_logout_button"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="YES"-->
-            <!--android:background="@color/colorPrimary"-->
-            <!--android:textColor="@color/colorButtonText"-->
-            <!--android:layout_marginRight="10dp"/>-->
-        <!--<Button-->
-            <!--android:id="@+id/no_logout_button"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="NO"-->
-            <!--android:background="@color/colorPrimary"-->
-            <!--android:textColor="@color/colorButtonText"/>-->
-    <!--</LinearLayout>-->
-
-
-<!--</RelativeLayout>-->
