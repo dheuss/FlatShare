@@ -1,9 +1,12 @@
 package com.flatshare.presentation.ui.activities.profile;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,11 +38,6 @@ public class RoommateProfileActivity extends AbstractActivity implements Roommat
     private RadioGroup genderRadioGroup;
     private RadioButton maleRadioButton, femaleRadioButton;
 
-    private PopupWindow popupWindow;
-    private Button popupYESButton;
-    private Button popupNOButton;
-    private TextView popUpTextView;
-
     private Button createProfileButton;
 
     private RoommateProfilePresenter mPresenter;
@@ -67,12 +65,12 @@ public class RoommateProfileActivity extends AbstractActivity implements Roommat
 
     private void checkNicknameUnique() {
         String nickname = nickNameEditText.getText().toString();
-        if(nickname == null || nickname.length() < 6){
+        if (nickname == null || nickname.length() < 6) {
             onNicknameError("Nickname too short, minimum of 6 characters needed");
             return;
         }
 
-        if(!nickname.matches("^[a-zA-Z0-9]*$")){
+        if (!nickname.matches("^[a-zA-Z0-9]*$")) {
             onNicknameError("Nickname contains invalid characters, enter only alphanumeric characters");
             return;
         }
@@ -107,7 +105,7 @@ public class RoommateProfileActivity extends AbstractActivity implements Roommat
         genderRadioGroup = (RadioGroup) findViewById(R.id.roommate_gender_rg);
         maleRadioButton = (RadioButton) findViewById(R.id.roommate_gender_male);
         femaleRadioButton = (RadioButton) findViewById(R.id.roommate_gender_female);
-        createProfileButton =  (Button) findViewById(R.id.roommate_profile_done_button);
+        createProfileButton = (Button) findViewById(R.id.roommate_profile_done_button);
     }
 
 
@@ -121,44 +119,38 @@ public class RoommateProfileActivity extends AbstractActivity implements Roommat
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
-    public void triggerPopup(View view) {
-        View popupView = getLayoutInflater().inflate(R.layout.activity_popup, null);
+    private void popUpView() {
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View mView = layoutInflater.inflate(R.layout.activity_popup, null);
 
-        popupWindow = new PopupWindow(
-                popupView,
-                LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT);
+        AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(this);
+        alertDialogBuilderUserInput.setView(mView);
 
-        popupWindow.setFocusable(false);
-        int location[] = new int[2];
-        view.getLocationOnScreen(location);
-
-        //popupYESButton = (Button)popupView.findViewById(R.id.yes_logout_button);
-        //popupNOButton = (Button)popupView.findViewById(R.id.no_logout_button);
-        popUpTextView = (TextView)popupView.findViewById(R.id.popup_TextView);
+        final TextView popUpTextView = (TextView) mView.findViewById(R.id.popup_TextView);
 
         popUpTextView.setText("Are you the owner of this apartment?");
 
-        popupYESButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                profileDone(true);
-            }
-        });
 
-        popupNOButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                profileDone(false);
-            }
-        });
+        alertDialogBuilderUserInput
+                .setCancelable(true)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        profileDone(true);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        profileDone(false);
+                    }
+                });
 
-        popupWindow.showAtLocation(view, Gravity.CENTER,0,0);
+        AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+        alertDialogAndroid.show();
     }
 
     private void profileDone(boolean isOwner) {
-
-        popupWindow.dismiss();
 
         RoommateProfile roommateProfile = new RoommateProfile();
         String nickname = nickNameEditText.getText().toString();
@@ -176,7 +168,7 @@ public class RoommateProfileActivity extends AbstractActivity implements Roommat
 
     @Override
     public void onNicknameUnique() {
-        triggerPopup(this.findViewById(android.R.id.content));
+        popUpView();
     }
 
     @Override
@@ -191,7 +183,7 @@ public class RoommateProfileActivity extends AbstractActivity implements Roommat
     }
 
     @Override
-    public void changeToApartmentProfileActivity(){
+    public void changeToApartmentProfileActivity() {
         Log.d(TAG, "changed to ApartmentProfileActivity");
         Intent intent = new Intent(this, ApartmentProfileActivity.class);
         startActivity(intent);
