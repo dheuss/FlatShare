@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import java.util.List;
 
 public class MainActivity extends AbstractActivity {
 
+    private static final String TAG = "MainActivity";
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -43,11 +45,13 @@ public class MainActivity extends AbstractActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        userState = UserState.getInstance();
+
         super.onCreate(savedInstanceState);
+        userState = UserState.getInstance();
 
         classificationId = userState.getPrimaryUserProfile().getClassificationId();
-        System.out.println("classificationID: " + classificationId);
+
+        Log.d(TAG, "onCreate: " + classificationId);
 
         bindView();
 
@@ -87,7 +91,7 @@ public class MainActivity extends AbstractActivity {
         tabLayout.getTabAt(0).setCustomView(tabTwo);
 
         TextView tabThree = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-        tabThree.setText("ProfileTenantSettingsActivity");
+        tabThree.setText("ProfileApartmentSettingsActivity");
         tabThree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.profile_icon, 0, 0);
         tabLayout.getTabAt(1).setCustomView(tabThree);
 
@@ -98,14 +102,22 @@ public class MainActivity extends AbstractActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
         adapter.addFragment(new SettingsActivity(), "SettingsActivity");
+
         if (classificationId == ProfileType.TENANT.getValue()){
             adapter.addFragment(new ProfileTenantSettingsActivity(), "ProfileTenantSettingsActivity");
+
         } else if (classificationId == ProfileType.APARTMENT.getValue()){
+            Log.d(TAG, "setupViewPager: APPPPART");
             adapter.addFragment(new ProfileApartmentSettingsActivity(), "ProfileApartmentSettingsActivity");
+
         } else if (classificationId == ProfileType.ROOMMATE.getValue()) {
+            Log.d(TAG, "setupViewPager: ROMMMM");
             adapter.addFragment(new RoommateProfileSettingsActivity(), "RoommateProfileSettingsActivity");
+
         } else {
 
         }

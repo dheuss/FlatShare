@@ -44,16 +44,16 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     private EditText apartmentZipCodeEditText;
 
     private RadioGroup internetRadioGroup;
-    private RadioButton internetYesRB, internetNoRB, internetNeiRB;
+    private RadioButton internetYesRB, internetNoRB;
 
     private RadioGroup smokerRadioGroup;
-    private RadioButton smokerYesRB, smokerNoRB, smokerNeiRB;
+    private RadioButton smokerYesRB, smokerNoRB;
 
     private RadioGroup petsRadioGroup;
-    private RadioButton petsYesRB, petsNoRB, petsNeiRB;
+    private RadioButton petsYesRB, petsNoRB;
 
     private RadioGroup washingMachineRadioGroup;
-    private RadioButton washingMachineYesRB, washingMachineNoRB, washingMashineNeiRB;
+    private RadioButton washingMachineYesRB, washingMachineNoRB;
 
     private MultiAutoCompleteTextView roommatesEmailsMultiAC;
     private ArrayAdapter<String> adapter;

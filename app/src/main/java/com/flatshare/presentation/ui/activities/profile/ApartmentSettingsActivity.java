@@ -101,8 +101,8 @@ public class ApartmentSettingsActivity extends AbstractActivity implements Apart
 //        int gender;
 //        int smoker;
 //        int pets;
-//        String occupation;
-//        int durationOfStay;
+//        String occupation = occupationSpinner.getSelectedItem().toString();
+//        int durationOfStay = durationOfStaySpinner.getSelectedItem().toString();
 
         ApartmentFilterSettings apartmentFilterSettings = new ApartmentFilterSettings();
         apartmentFilterSettings.setAgeFrom(minAge);

@@ -86,6 +86,7 @@ public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity imple
                 ProfileTenantSettingsActivity.this.sendProfile();
             }
         });
+
         return view;
     }
 

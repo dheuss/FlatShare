@@ -100,7 +100,9 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
                 if (primaryUserProfile == null) {
                     notifyError("No PrimaryProfile created!");
                 } else { // if something found, get secondary profiles (either tenant or roommate)
+                    Log.d(TAG, "onDataChange: " + primaryUserProfile.getClassificationId());
                     if(primaryUserProfile.getClassificationId() == ProfileType.TENANT.getValue()){
+
                         getTenantUserProfile(primaryUserProfile.getTenantProfileId());
                     } else {
                         getRoommateProfile(primaryUserProfile.getRoommateProfileId());
