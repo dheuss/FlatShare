@@ -66,27 +66,31 @@ public class RoommateProfileActivity extends AbstractActivity implements Roommat
 
     private void checkNicknameUnique() {
         String nickname = nickNameEditText.getText().toString().trim();
+        boolean validationFlag = true;
+
         if (nickname == null || nickname.length() < NICKNAME_LENGTH) {
             onNicknameError("Nickname too short, minimum of " + NICKNAME_LENGTH + " characters needed");
-            return;
+            validationFlag = false;
         }
 
         if (!nickname.matches("^[a-zA-Z0-9]*$")) {
             onNicknameError("Nickname contains invalid characters, enter only alphanumeric characters");
-            return;
+            validationFlag = false;
         }
 
-        if(ageEditText.getText().toString().trim().equals("")){
+        if (ageEditText.getText().toString().trim().equals("")) {
             ageEditText.setError(getString(R.string.field_cannot_be_empty));
-            return;
+            validationFlag = false;
         }
 
-        if(!maleRadioButton.isChecked() && !femaleRadioButton.isChecked()){
+        if (!maleRadioButton.isChecked() && !femaleRadioButton.isChecked()) {
             maleRadioButton.setError(getString(R.string.field_cannot_be_empty));
-            return;
+            validationFlag = false;
         }
 
-        mPresenter.checkNicknameUnique(nickname);
+        if (validationFlag) {
+            mPresenter.checkNicknameUnique(nickname);
+        }
     }
 
     @Override
