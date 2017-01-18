@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
@@ -22,8 +24,10 @@ import com.flatshare.threading.MainThreadImpl;
 
 public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity implements TenantProfilePresenter.View {
 
+    private TextView tenantProfileHeadline;
+    private TextView tenantProfileInfo;
+
     private EditText changeNameEditText;
-    private EditText changeEmailEditText;
     private EditText changeAgeEditText;
 
     private RadioGroup changeGenderRadioGroup;
@@ -31,12 +35,12 @@ public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity imple
     private RadioButton changeGenderFemaleRadioButton;
 
     private RadioGroup changeSmokerRadioGroup;
-    private RadioButton changeSmokerYesRadioButton;
-    private RadioButton changeSmokerNoRadioButton;
+    private RadioButton changeSmokerYESRadioButton;
+    private RadioButton changeSmokerNORadioButton;
 
     private RadioGroup changePetsRadioGroup;
-    private RadioButton changePetsYesRadioButton;
-    private RadioButton changePetsNoRadioButton;
+    private RadioButton changePetsYESRadioButton;
+    private RadioButton changePetsNORadioButton;
 
     private Spinner changeOccupationSpinner;
 
@@ -61,7 +65,7 @@ public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity imple
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.activity_profile_tenant_settings, container, false);
+        View view = inflater.inflate(R.layout.activity_tenant_profile, container, false);
         bindView(view);
 
         mPresenter = new TenantProfilePresenterImpl(
@@ -88,18 +92,16 @@ public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity imple
     private void sendProfile() {
 
         String changeName = changeNameEditText.getText().toString();
-        String changeEmail = changeEmailEditText.getText().toString();
         int changeAge = Integer.parseInt(changeAgeEditText.getText().toString());
         int changGender = changeGenderRadioGroup.getCheckedRadioButtonId() == changeGenderMaleRadioButton.getId() ? 0 : 1;
-        boolean changeSmoker = changeSmokerRadioGroup.getCheckedRadioButtonId() == changeSmokerYesRadioButton.getId();
-        boolean changePets = changePetsRadioGroup.getCheckedRadioButtonId() == changePetsYesRadioButton.getId();
+        boolean changeSmoker = changeSmokerRadioGroup.getCheckedRadioButtonId() == changeSmokerYESRadioButton.getId();
+        boolean changePets = changePetsRadioGroup.getCheckedRadioButtonId() == changePetsYESRadioButton.getId();
         String changeOccupation = changeOccupationSpinner.getSelectedItem().toString();
         String changeInfo = changeInfoEditText.getText().toString();
         int changeDuration = Integer.parseInt(changeDurationOfStaySpinner.getSelectedItem().toString());
 
         TenantProfile tenantProfile = new TenantProfile();
         tenantProfile.setFirstName(changeName);
-        tenantProfile.setEmail(changeEmail);
         tenantProfile.setAge(changeAge);
         tenantProfile.setGender(changGender);
         tenantProfile.setSmoker(changeSmoker);
@@ -112,55 +114,61 @@ public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity imple
 
     private void bindView(View view){
 
-        changeNameEditText = (EditText)view.findViewById(R.id.changeNameProfileSettingsEditText);
+        tenantProfileHeadline = (TextView)view.findViewById(R.id.tenant_profile_inital);
+        tenantProfileHeadline.setText("Tenant Profile");
+        tenantProfileInfo = (TextView)view.findViewById(R.id.tenant_settings_info);
+        tenantProfileInfo.setText("Here your can update all your personal information! Keep your profile uptodate!");
+
+        changeNameEditText = (EditText)view.findViewById(R.id.nameProfileEditText);
         changeNameEditText.setText(userState.getTenantProfile().getFirstName());
-        changeEmailEditText = (EditText)view.findViewById(R.id.changeEmailProfileSettingsEditText);
-        changeEmailEditText.setText(userState.getTenantProfile().getEmail());
-        changeAgeEditText = (EditText)view.findViewById(R.id.changeAgeProfileSettingsEditText);
+        changeAgeEditText = (EditText)view.findViewById(R.id.ageProfileEditText);
         changeAgeEditText.setText(userState.getTenantProfile().getAge()+"");
 
-        changeGenderRadioGroup = (RadioGroup)view.findViewById(R.id.changeGenderProfileSettingsEditTextRadioGroup);
-        changeGenderMaleRadioButton = (RadioButton)view.findViewById(R.id.changeGenderMaleProfileSettingsRadioButton);
-        changeGenderFemaleRadioButton = (RadioButton)view.findViewById(R.id.changeGenderFemaleProlfileSettingsButton);
+        changeGenderRadioGroup = (RadioGroup)view.findViewById(R.id.genderProfileEditTextRadioGroup);
+        changeGenderMaleRadioButton = (RadioButton)view.findViewById(R.id.genderMaleProfileRadioButton);
+        changeGenderFemaleRadioButton = (RadioButton)view.findViewById(R.id.genderFemaleProlfileButton);
         if (userState.getTenantProfile().getGender() == 0) {
             changeGenderMaleRadioButton.setChecked(true);
             changeGenderFemaleRadioButton.setChecked(false);
-        } else {
+        } else if (userState.getTenantProfile().getGender() == 1){
             changeGenderMaleRadioButton.setChecked(false);
             changeGenderFemaleRadioButton.setChecked(true);
         }
 
-        changeSmokerRadioGroup = (RadioGroup)view.findViewById(R.id.changeSmokerProfileSettingsRadioGroup);
-        changeSmokerYesRadioButton = (RadioButton)view.findViewById(R.id.changeSmokerYesProfileSettingsRadioButton);
-        changeSmokerNoRadioButton = (RadioButton)view.findViewById(R.id.changeSmokerNoProfileSettingsRadioButton);
+        changeSmokerRadioGroup = (RadioGroup)view.findViewById(R.id.smokerProfileRadioGroup);
+        changeSmokerYESRadioButton = (RadioButton)view.findViewById(R.id.smokerYesProfileRadioButton);
+        changeSmokerNORadioButton = (RadioButton)view.findViewById(R.id.smokerNoProfileRadioButton);
         if (userState.getTenantProfile().isSmoker()){
-            changeSmokerYesRadioButton.setChecked(true);
-            changeSmokerNoRadioButton.setChecked(false);
+            changeSmokerYESRadioButton.setChecked(true);
+            changeSmokerNORadioButton.setChecked(false);
         } else {
-            changeSmokerYesRadioButton.setChecked(false);
-            changeSmokerNoRadioButton.setChecked(true);
+            changeSmokerYESRadioButton.setChecked(false);
+            changeSmokerNORadioButton.setChecked(true);
         }
 
-        changePetsRadioGroup = (RadioGroup)view.findViewById(R.id.changePetsProfileSettingsRadioGroup);
-        changePetsYesRadioButton = (RadioButton)view.findViewById(R.id.changePetsYesProfileSettingsRadioButton);
-        changePetsNoRadioButton = (RadioButton)view.findViewById(R.id.changePetsNOProfileSettingsRadioButton);
+        changePetsRadioGroup = (RadioGroup)view.findViewById(R.id.petsProfileRadioGroup);
+        changePetsYESRadioButton = (RadioButton)view.findViewById(R.id.petsYesProfileRadioButton);
+        changePetsNORadioButton = (RadioButton)view.findViewById(R.id.petsNOProfileRadioButton);
         if (userState.getTenantProfile().hasPets()){
-            changePetsYesRadioButton.setChecked(true);
-            changePetsNoRadioButton.setChecked(false);
+            changePetsYESRadioButton.setChecked(true);
+            changePetsNORadioButton.setChecked(false);
         } else {
-            changePetsYesRadioButton.setChecked(false);
-            changePetsNoRadioButton.setChecked(true);
+            changePetsYESRadioButton.setChecked(false);
+            changePetsNORadioButton.setChecked(true);
         }
 
-        changeOccupationSpinner = (Spinner)view.findViewById(R.id.changeOccupationProfileSettingsSpinner);
+        changeOccupationSpinner = (Spinner)view.findViewById(R.id.occupationProfileSpinner);
 
-        changeInfoEditText = (EditText)view.findViewById(R.id.changeInfoProfileSettingsEditText);
+        changeInfoEditText = (EditText)view.findViewById(R.id.infoProfileEditText);
         changeInfoEditText.setText(userState.getTenantProfile().getShortBio());
 
-        changeDurationOfStaySpinner = (Spinner)view.findViewById(R.id.changeDurationOfStayProfileSettingsSpinner);
+        changeDurationOfStaySpinner = (Spinner)view.findViewById(R.id.durationOfStayProfileSpinner);
 
-        changeFilterSettingsButton = (Button)view.findViewById(R.id.changeFilterProfileSettingsButton);
-        saveChangesButton = (Button)view.findViewById(R.id.saveChangesProfileSettingsButton);
+        changeFilterSettingsButton = (Button)view.findViewById(R.id.saveChangesProfileSettingsButton);
+        changeFilterSettingsButton.setText("CHANGE YOUR SETTINGS!");
+
+        saveChangesButton = (Button)view.findViewById(R.id.done_1_tenant_profile);
+        saveChangesButton.setText("SAVE!");
     }
 
     @Override
@@ -180,7 +188,7 @@ public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity imple
 
     @Override
     public void changeToTenantSettings() {
-        Log.v(TAG, "!!!!CHANGE SUCESS!!!");
+        Toast.makeText(getActivity(), "Changes saved!", Toast.LENGTH_SHORT).show();
     }
 
     @Override

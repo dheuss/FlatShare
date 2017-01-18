@@ -38,9 +38,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tenant_settings_info"
-            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginLeft="@dimen/marginLeft">
+            android:layout_marginTop="@dimen/marginTop">
+
             <EditText
                 android:id="@+id/nameProfileEditText"
                 android:layout_width="match_parent"
@@ -48,7 +49,7 @@
                 android:hint="@string/name"
                 android:inputType="text"
                 android:textColor="@color/colorText"
-                android:textColorHint="@color/colorText"/>
+                android:textColorHint="@color/colorText" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -56,9 +57,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/LinearLayoutProfileName"
-            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginLeft="@dimen/marginLeft">
+            android:layout_marginTop="@dimen/marginTop">
+
             <EditText
                 android:id="@+id/ageProfileEditText"
                 android:layout_width="match_parent"
@@ -66,7 +68,7 @@
                 android:hint="@string/age"
                 android:inputType="number"
                 android:textColor="@color/colorText"
-                android:textColorHint="@color/colorText"/>
+                android:textColorHint="@color/colorText" />
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
@@ -103,11 +105,6 @@
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/female_icon" />
 
-                <RadioButton
-                    android:id="@+id/genderAllProfileButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/transgender_icon"/>
             </RadioGroup>
         </LinearLayout>
 
@@ -144,12 +141,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
-
-                <RadioButton
-                    android:id="@+id/smokerNEIProfileRadioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up_down_icon"/>
             </RadioGroup>
         </LinearLayout>
 
@@ -187,11 +178,6 @@
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
 
-                <RadioButton
-                    android:id="@+id/petsNEIProfileRadioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/thumb_up_down_icon"/>
             </RadioGroup>
         </LinearLayout>
 

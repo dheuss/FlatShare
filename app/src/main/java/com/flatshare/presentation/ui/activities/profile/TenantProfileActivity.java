@@ -29,13 +29,13 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
     private EditText shortBioText;
 
     private RadioGroup genderRadioGroup;
-    private RadioButton maleRadioButton, femaleRadioButton, transgenderRadioButton;
+    private RadioButton maleRadioButton, femaleRadioButton;
 
     private RadioGroup smokerRadioGroup;
-    private RadioButton smokerYesRadioButton, smokerNoRadioButton, smokerNEIRadioButton;
+    private RadioButton smokerYesRadioButton, smokerNoRadioButton;
 
     private RadioGroup petsRadioGroup;
-    private RadioButton petsYesRadioButton, petsNoRadioButton, petsNEIRadioButton;
+    private RadioButton petsYesRadioButton, petsNoRadioButton;
 
     private Spinner occupationSpinner;
     private Spinner durationSpinner;
@@ -184,17 +184,14 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         genderRadioGroup = (RadioGroup) findViewById(R.id.genderProfileEditTextRadioGroup);
         maleRadioButton = (RadioButton) findViewById(R.id.genderMaleProfileRadioButton);
         femaleRadioButton = (RadioButton) findViewById(R.id.genderFemaleProlfileButton);
-        transgenderRadioButton = (RadioButton) findViewById(R.id.genderAllProfileButton);
 
         smokerRadioGroup = (RadioGroup) findViewById(R.id.smokerProfileRadioGroup);
         smokerYesRadioButton = (RadioButton) findViewById(R.id.smokerYesProfileRadioButton);
         smokerNoRadioButton = (RadioButton) findViewById(R.id.smokerNoProfileRadioButton);
-        smokerNEIRadioButton = (RadioButton) findViewById(R.id.smokerNEIProfileRadioButton);
 
         petsRadioGroup = (RadioGroup) findViewById(R.id.petsProfileRadioGroup);
         petsYesRadioButton = (RadioButton) findViewById(R.id.petsYesProfileRadioButton);
         petsNoRadioButton = (RadioButton) findViewById(R.id.petsNOProfileRadioButton);
-        petsNEIRadioButton = (RadioButton) findViewById(R.id.petsNEI_RadioButton);
 
         occupationSpinner = (Spinner) findViewById(R.id.occupationProfileSpinner);
         durationSpinner = (Spinner) findViewById(R.id.durationOfStayProfileSpinner);

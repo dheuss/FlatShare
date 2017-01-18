@@ -142,4 +142,9 @@ public class MainActivity extends AbstractActivity {
             return null;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(getApplicationContext(), "Sorry, you can't close this app!", Toast.LENGTH_SHORT).show();
+    }
 }
