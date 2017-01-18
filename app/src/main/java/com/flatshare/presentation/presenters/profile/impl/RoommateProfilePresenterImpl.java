@@ -1,8 +1,10 @@
 package com.flatshare.presentation.presenters.profile.impl;
 
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
 import com.flatshare.domain.datatypes.db.profiles.UserProfile;
+import com.flatshare.domain.datatypes.enums.ProfileType;
 import com.flatshare.domain.interactors.profile.SecondaryProfileInteractor;
 import com.flatshare.domain.interactors.profile.UniqueNicknameInteractor;
 import com.flatshare.domain.interactors.profile.impl.RoommateProfileInteractorImpl;
@@ -63,6 +65,9 @@ public class RoommateProfilePresenterImpl extends AbstractPresenter implements R
         userState.setRoommateProfile(roommateProfile);
         mView.hideProgress();
         if(roommateProfile.isOwner()){
+            PrimaryUserProfile primaryUserProfile = userState.getPrimaryUserProfile();
+            primaryUserProfile.setClassificationId(ProfileType.APARTMENT.getValue());
+            userState.setPrimaryUserProfile(primaryUserProfile);
             mView.changeToApartmentProfileActivity();
         } else {
             mView.changeToRoommateQRActivity(roommateProfile.getId());
