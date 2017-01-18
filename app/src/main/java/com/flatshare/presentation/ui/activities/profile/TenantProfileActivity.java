@@ -51,6 +51,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
 
     private TenantProfilePresenter mPresenter;
     private static final String TAG = "TenantProfileAct";
+    private boolean profilePicUploaded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,28 +110,72 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
 
     private void sendProfile() {
 
-        String firstname = firstNameEditText.getText().toString();
-        int age = Integer.parseInt(ageEditText.getText().toString());
-        boolean isSmoker = smokerRadioGroup.getCheckedRadioButtonId() == smokerYesRadioButton.getId();
-        int gender = genderRadioGroup.getCheckedRadioButtonId() == maleRadioButton.getId() ? 0 : 1;
-        boolean isPets = petsRadioGroup.getCheckedRadioButtonId() == petsYesRadioButton.getId();
-        String occupation = occupationSpinner.getSelectedItem().toString();
-        String shortBio = shortBioText.getText().toString();
-        int duration = Integer.parseInt(durationSpinner.getSelectedItem().toString());
+        if(inputValid()) {
+            String firstname = firstNameEditText.getText().toString();
+            int age = Integer.parseInt(ageEditText.getText().toString());
+            boolean isSmoker = smokerRadioGroup.getCheckedRadioButtonId() == smokerYesRadioButton.getId();
+            int gender = genderRadioGroup.getCheckedRadioButtonId() == maleRadioButton.getId() ? 0 : 1;
+            boolean isPets = petsRadioGroup.getCheckedRadioButtonId() == petsYesRadioButton.getId();
+            String occupation = occupationSpinner.getSelectedItem().toString();
+            String shortBio = shortBioText.getText().toString();
+            int duration = Integer.parseInt(durationSpinner.getSelectedItem().toString());
 
-        TenantProfile tenantProfile = new TenantProfile();
-        tenantProfile.setFirstName(firstname);
-        tenantProfile.setAge(age);
-        tenantProfile.setSmoker(isSmoker);
-        tenantProfile.setGender(gender);
-        tenantProfile.setOccupation(occupation);
-        tenantProfile.setPets(isPets);
-        tenantProfile.setShortBio(shortBio);
-        tenantProfile.setDurationOfStay(duration);
-        tenantProfile.setDone(true);
+            TenantProfile tenantProfile = new TenantProfile();
+            tenantProfile.setFirstName(firstname);
+            tenantProfile.setAge(age);
+            tenantProfile.setSmoker(isSmoker);
+            tenantProfile.setGender(gender);
+            tenantProfile.setOccupation(occupation);
+            tenantProfile.setPets(isPets);
+            tenantProfile.setShortBio(shortBio);
+            tenantProfile.setDurationOfStay(duration);
+            tenantProfile.setDone(true);
 
-        mPresenter.sendProfile(tenantProfile);
+            mPresenter.sendProfile(tenantProfile);
+        }
     }
+
+    private boolean inputValid() {
+        boolean result = true;
+
+        if (firstNameEditText.getText().toString().trim().equals("")) {
+            firstNameEditText.setError(getString(R.string.field_cannot_be_empty));
+            result = false;
+        }
+
+        if (ageEditText.getText().toString().trim().equals("")) {
+            ageEditText.setError(getString(R.string.field_cannot_be_empty));
+            result = false;
+        }
+
+        if (!maleRadioButton.isChecked() && !femaleRadioButton.isChecked()) {
+            maleRadioButton.setError(getString(R.string.check_rb_error));
+            result = false;
+        }
+
+        if (!smokerYesRadioButton.isChecked() && !smokerNoRadioButton.isChecked()) {
+            smokerYesRadioButton.setError(getString(R.string.check_rb_error));
+            result = false;
+        }
+
+        if (!petsYesRadioButton.isChecked() && !petsNoRadioButton.isChecked()) {
+            petsYesRadioButton.setError(getString(R.string.check_rb_error));
+            result = false;
+        }
+
+        if (shortBioText.getText().toString().trim().equals("")) {
+            shortBioText.setError(getString(R.string.field_cannot_be_empty));
+            result = false;
+        }
+
+        if(profilePicUploaded){
+            takeAPictureButton.setError(getString(R.string.picture_required_error));
+            result = false;
+        }
+
+        return result;
+    }
+
 
     private void bindView() {
         firstNameEditText = (EditText) findViewById(R.id.nameProfileEditText);
@@ -180,6 +225,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
 
     @Override
     public void uploadSuccess() {
+        profilePicUploaded = true;
         Toast.makeText(this, "Upload Successful", Toast.LENGTH_LONG).show();
     }
 }

@@ -115,6 +115,8 @@
     <string name="housenumber">House Number</string>
     <string name="zipcode">ZIP Code</string>
     <string name="field_cannot_be_empty">This field cannot be empty</string>
+    <string name="check_rb_error">Please check one option</string>
+    <string name="picture_required_error">Please upload a profile picture</string>
 
     <string-array name="occupation">
         <item>Student</item>

@@ -84,7 +84,7 @@ public class RoommateProfileActivity extends AbstractActivity implements Roommat
         }
 
         if (!maleRadioButton.isChecked() && !femaleRadioButton.isChecked()) {
-            maleRadioButton.setError(getString(R.string.field_cannot_be_empty));
+            maleRadioButton.setError(getString(R.string.check_rb_error));
             validationFlag = false;
         }
 
