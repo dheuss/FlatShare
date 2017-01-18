@@ -1,6 +1,8 @@
 package com.flatshare.presentation.ui.activities.settings;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.presentation.presenters.settings.SettingsPresenter;
@@ -186,35 +189,32 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
     }
 
     public void signOut(View view) {
-        View popupView = getActivity().getLayoutInflater().inflate(R.layout.activity_popup, null);
+        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        View mView = layoutInflater.inflate(R.layout.activity_popup, null);
 
-        logoutPopupWindow = new PopupWindow(
-                popupView,
-                LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT);
+        AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(getActivity());
+        alertDialogBuilderUserInput.setView(mView);
 
-        logoutPopupWindow.setFocusable(false);
-        int location[] = new int[2];
-        view.getLocationOnScreen(location);
+        final TextView popUpTextView = (TextView) mView.findViewById(R.id.popup_TextView);
+        popUpTextView.setText("Do you really want to logout?");
 
-        //logoutYESButton = (Button)popupView.findViewById(R.id.yes_logout_button);
-        //logoutNOButton = (Button)popupView.findViewById(R.id.no_logout_button);
+        alertDialogBuilderUserInput
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mPresenter.logOut();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
 
-        logoutYESButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mPresenter.logOut();
-            }
-        });
-
-        logoutNOButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logoutPopupWindow.dismiss();
-            }
-        });
-
-        logoutPopupWindow.showAtLocation(view, Gravity.CENTER,0,0);
+        AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+        alertDialogAndroid.show();
     }
 
     public void changeMail(){
