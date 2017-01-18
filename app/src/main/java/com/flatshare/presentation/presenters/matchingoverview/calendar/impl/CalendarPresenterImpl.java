@@ -11,6 +11,9 @@ import com.flatshare.presentation.presenters.base.AbstractPresenter;
 import com.flatshare.presentation.presenters.matchingoverview.calendar.CalendarPresenter;
 import com.flatshare.presentation.ui.activities.matchingoverview.calendar.CalendarActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -81,6 +84,34 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
 
     @Override
     public void onSentSuccess() {
-        mView.datesSuccessfulToTenants();
+        if (checkForTenant()) {
+            //TODO appointmentList übergeben
+            List<Long> appointmentList = new ArrayList<>();
+            List<String> dateList = new ArrayList<>();
+            List<String> timeList = new ArrayList<>();
+            for (int i = 0; i<appointmentList.size(); i++){
+                Date date = new Date (appointmentList.get(i));
+                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                String dateText = df.format(date);
+                String[] partsDateTime = dateText.split(" ");
+                dateList.add(partsDateTime[0]);
+                timeList.add(partsDateTime[1]);
+            }
+            mView.setDatesFromWG(dateList, timeList);
+        }else{
+            mView.datesSuccessfulToTenants();
+        }
+    }
+
+    @Override
+    public void onSentFinalFailure(String errorMessage) {
+        mView.hideProgress();
+        onError(errorMessage);
+    }
+
+    @Override
+    public void onSentFinalSuccess() {
+        String finalDate = "appointment"; //TODO Appointment übergeben
+        mView.showFinalDate(finalDate);
     }
 }

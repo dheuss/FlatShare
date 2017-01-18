@@ -193,20 +193,13 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         dateButton[counter].setVisibility(View.VISIBLE);
     }
 
-    public void showDatesForTenants(List<String> dateTendantList, List<String> timeTendantList){
-        //TODO wird vom Presenter aufgerufen sobald Daten kommen
-        for(int i = 0; i < dateTendantList.size() - 1; i++){
-            dateTextView[i].setText(dateTendantList.get(i) + " " + timeTendantList.get(i));
-            dateButton[i].setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.checkmark));
-            dateButton[i].setVisibility(View.VISIBLE);
-            isTenant = true;
-        }
-    }
-
     //Tenant set Dates, show Tenant which dates send WG
     public void setDatesFromWG(List<String> dateList, List<String> timeList){
         for (int i = 0; i < dateList.size()-1; i++) {
             dateTextView[i].setText(dateList.get(i) + " " + timeList.get(i));
+            dateButton[i].setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.checkmark));
+            dateButton[i].setVisibility(View.VISIBLE);
+            isTenant = true;
         }
     }
 

@@ -10,9 +10,8 @@ public interface CalendarSendFinalInteractor extends Interactor {
 
     interface Callback {
 
-        void onSentFailure(String errorMessage);
+        void onSentFinalFailure(String errorMessage);
 
-        void onSentSuccess();
-
+        void onSentFinalSuccess();
     }
 }

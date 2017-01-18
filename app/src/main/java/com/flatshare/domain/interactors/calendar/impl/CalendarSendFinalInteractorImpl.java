@@ -42,7 +42,7 @@ public class CalendarSendFinalInteractorImpl extends AbstractInteractor implemen
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onSentFailure(errorMessage);
+                mCallback.onSentFinalFailure(errorMessage);
             }
         });
     }
@@ -52,7 +52,7 @@ public class CalendarSendFinalInteractorImpl extends AbstractInteractor implemen
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onSentSuccess();
+                mCallback.onSentFinalSuccess();
             }
         });
     }
@@ -70,7 +70,7 @@ public class CalendarSendFinalInteractorImpl extends AbstractInteractor implemen
 
         String path = databaseRoot.getMatchesNode(tenantID, apartmentID).getRootPath();
 
-        MatchEntry matchEntry = new MatchEntry();
+        final MatchEntry matchEntry = new MatchEntry();
 
         matchEntry.setAppointment(appointment);
 
