@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface CalendarPresenter extends BasePresenter {
 
-    void sendDateToTendant(List<String> dateList, List<String> timeList, String tenantID, String apartmentID);
+    void sendDateToTenant(List<String> dateList, List<String> timeList, String tenantID, String apartmentID);
 
     boolean checkForTenant();
 
@@ -19,6 +19,6 @@ public interface CalendarPresenter extends BasePresenter {
 
 
     interface View extends BaseView {
-
+        void datesSuccessfulToTenants();
     }
 }

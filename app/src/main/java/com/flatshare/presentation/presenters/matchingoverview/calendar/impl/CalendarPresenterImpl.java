@@ -9,6 +9,7 @@ import com.flatshare.domain.interactors.calendar.impl.CalendarSendFinalInteracto
 import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 import com.flatshare.presentation.presenters.matchingoverview.calendar.CalendarPresenter;
+import com.flatshare.presentation.ui.activities.matchingoverview.calendar.CalendarActivity;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
  * Created by Sandro on 07.01.17.
  */
 
-public class CalendarPresenterImpl extends AbstractPresenter implements CalendarPresenter {
+public class CalendarPresenterImpl extends AbstractPresenter implements CalendarPresenter, CalendarInitInteractor.Callback {
 
     private static final String TAG = "CalendarPresenter";
 
@@ -55,7 +56,7 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
     }
 
     @Override
-    public void sendDateToTendant(List<String> dateList, List<String> timeList, String tenantID, String apartmentID) {
+    public void sendDateToTenant(List<String> dateList, List<String> timeList, String tenantID, String apartmentID) {
         CalendarInitInteractor calendarInteractor = new CalendarInitInteractorImpl(mMainThread, this, dateList, timeList, tenantID, apartmentID);
         calendarInteractor.execute();
     }
@@ -72,4 +73,14 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
     }
 
 
+    @Override
+    public void onSentFailure(String errorMessage) {
+        mView.hideProgress();
+        onError(errorMessage);
+    }
+
+    @Override
+    public void onSentSuccess() {
+        mView.datesSuccessfulToTenants();
+    }
 }

@@ -10,5 +10,8 @@ public interface CalendarInitInteractor extends Interactor {
 
     interface Callback {
 
+        void onSentFailure(String errorMessage);
+
+        void onSentSuccess();
     }
 }

@@ -1,12 +1,14 @@
 package com.flatshare.presentation.ui.activities.matchingoverview;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -35,6 +37,8 @@ public class MatchingOverviewActivity extends AbstarctFragmentAcivity implements
 
     private MatchingOverviewPresenter mPresenter;
     private TableLayout machingOverview;
+    private View.OnClickListener myCalndarHandler;
+    private View.OnClickListener myDeleteHandler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,26 +80,36 @@ public class MatchingOverviewActivity extends AbstarctFragmentAcivity implements
     }
 
     public void generateMatchingOverview(List<String> matchingList){
-        for(int i = 0, h=0; i < matchingList.size(); i++){
-            if(i>h) {
-                TableRow row = new TableRow(this.getActivity());
-                TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-                row.setLayoutParams(lp);
-                TextView machtingText = new TextView(this.getActivity());
-                TextView machtingText2 = new TextView(this.getActivity());
-                TextView machtingText3 = new TextView(this.getActivity());
+        for(int i = 0; i < matchingList.size(); i++){
+            TableRow row = new TableRow(this.getActivity());
+            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+            row.setLayoutParams(lp);
+            TextView matchingText = new TextView(this.getActivity());
+            ImageView matchingImage = new ImageView(this.getActivity());
+            Button matchingCalendar = new Button(this.getActivity());
+            Button deleteButton = new Button(this.getActivity());
 
-                machtingText.setText(matchingList.get(i));
-                if(i+1 < matchingList.size()){machtingText2.setText(matchingList.get(i + 1));}
-                if(i+2 < matchingList.size()){machtingText3.setText(matchingList.get(h));}
+            //matchingImage.setImageResource(); TODO set image
+            matchingText.setText(matchingList.get(i));
+            //TODO button einstellungen
+            //matchingCalendar.setVisibility();
+            //matchingCalendar.setText();
+            //matchingCalendar.setBackground();
+            matchingCalendar.setOnClickListener(myCalndarHandler); //TODO write Handler
 
-                row.addView(machtingText);
-                row.addView(machtingText2);
-                row.addView(machtingText3);
+            //deleteButton.setVisibility();
+            //deleteButton.setText();
+            //deleteButton.setBackground();
+            deleteButton.setOnClickListener(myDeleteHandler);
 
-                machingOverview.addView(row, i);
-                h= h + 2;
-            }
+
+
+            row.addView(matchingImage);
+            row.addView(matchingText);
+            row.addView(matchingCalendar);
+            row.addView(deleteButton);
+
+            machingOverview.addView(row, i);
         }
 
     }

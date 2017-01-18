@@ -44,7 +44,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     private TextView[] dateTextView = {};
     private Button[] dateButton = {};
     private int[] buttonView = {};
-    private boolean istenant;
+    private boolean isTenant;
     private boolean deleteButtonToGONE = false;
     private String finalDate, tenantID, apartmentID;
 
@@ -57,10 +57,10 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
         mPresenter = new CalendarPresenterImpl(MainThreadImpl.getInstance(), this);
 
-        istenant = mPresenter.checkForTenant();
+        isTenant = mPresenter.checkForTenant();
 
 
-        if (istenant){
+        if (isTenant){
             setDate.setVisibility(View.GONE);
         }
 
@@ -81,11 +81,10 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         send.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //TODO send dateList and timeList to firebase
-                if (istenant){
+                if (isTenant){
                     mPresenter.sendBackFromTenant(finalDate, tenantID, apartmentID);
                 }else {
-                    mPresenter.sendDateToTendant(dateList, timeList, tenantID, apartmentID);
+                    mPresenter.sendDateToTenant(dateList, timeList, tenantID, apartmentID);
                     Toast.makeText(getApplicationContext(), "Send", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -97,18 +96,25 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     public void handleClick(View view) {
         for(int i =0;i<=buttonView.length-1;i++){
             if(view.getId() == buttonView[i]) {
-                if (istenant) {
-                    chooseTendantDate(1);
+                if (isTenant) {
+                    chooseTenantDate(1);
                 } else {
                     if (deleteButtonToGONE) {
                         deleteButtonToGONE = false;
-                        deleteButton1.setVisibility(View.GONE);
+                        deleteButton1.setVisibility(View.GONE); //TODO Test - muss noch angepasst werden
                     } else {
                         deleteButtonPressed(1);
                     }
                 }
             }
         }
+    }
+
+    //Tenant choose a Date
+    private void chooseTenantDate(int i) {
+        finalDate = dateList.get(i) + " " + timeList.get(i);
+        send.setVisibility(View.VISIBLE);
+        dateButton[i].setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.colorAccent));
     }
 
     private void deleteButtonPressed(int i) {
@@ -131,38 +137,13 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         timeList.remove(i);
     }
 
-    //Tendant set Dates
-    public void setDatesFromWG(List<String> dateList, List<String> timeList){
-        for (int i = 0; i < dateList.size()-1; i++) {
-            dateTextView[i].setText(dateList.get(i) + " " + timeList.get(i));
-        }
-    }
-
-    //Tendant choose a Date
-    private void chooseTendantDate(int i) {
-        finalDate = dateList.get(i) + " " + timeList.get(i);
-        send.setVisibility(View.VISIBLE);
-        dateButton[i].setBackground(getResources().getDrawable(R.color.colorAccent));
-    }
-
-
-    //WG and Tendant
-    public void showFinalDate(String finalDate){
-        for (int i=0; i <= dateTextView.length-1; i++){
-            dateTextView[i].setText("");
-        }
-        dateTextView[5].setText("Your appointment is: " + finalDate);
-        dateTextView[4].setBackground(getResources().getDrawable(R.color.colorPrimary));
-        dateTextView[6].setBackground(getResources().getDrawable(R.color.colorPrimary));
-    }
-
 
     @SuppressWarnings("deprecation")
     public void setDate(View view) {
         if (dateList.size() <= 10){
             showDialog(999);
             counter++;
-            istenant = false;
+            isTenant = false;
             send.setVisibility(View.VISIBLE);
         }else{
             Toast.makeText(getApplicationContext(), "Reach the maximum of Dates!", Toast.LENGTH_SHORT).show();
@@ -207,21 +188,45 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     }
 
     private void showTime(int arg1, int arg2){
-        timeList.add(counter, arg1 + ":" + arg2);
+        timeList.add(counter, " " + arg1 + ":" + arg2);
         dateTextView[counter].setText(dateList.get(counter) + " " + timeList.get(counter));
         dateButton[counter].setVisibility(View.VISIBLE);
     }
 
-    public void showDatesForTendants(List<String> dateTendantList, List<String> timeTendantList){
+    public void showDatesForTenants(List<String> dateTendantList, List<String> timeTendantList){
         //TODO wird vom Presenter aufgerufen sobald Daten kommen
         for(int i = 0; i < dateTendantList.size() - 1; i++){
             dateTextView[i].setText(dateTendantList.get(i) + " " + timeTendantList.get(i));
             dateButton[i].setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.checkmark));
             dateButton[i].setVisibility(View.VISIBLE);
-            istenant = true;
+            isTenant = true;
         }
     }
 
+    //Tenant set Dates, show Tenant which dates send WG
+    public void setDatesFromWG(List<String> dateList, List<String> timeList){
+        for (int i = 0; i < dateList.size()-1; i++) {
+            dateTextView[i].setText(dateList.get(i) + " " + timeList.get(i));
+        }
+    }
+
+    //WG and Tenant, show the final date
+    public void showFinalDate(String finalDate){
+        for (int i=0; i <= dateTextView.length-1; i++){
+            dateTextView[i].setText("");
+        }
+        dateTextView[5].setText("Your appointment is: " + finalDate);
+        dateTextView[4].setBackground(ContextCompat.getDrawable(getApplicationContext(),R.color.colorPrimary));
+        dateTextView[6].setBackground(ContextCompat.getDrawable(getApplicationContext(),R.color.colorPrimary));
+    }
+
+    public void datesSuccessfulToTenants(){
+        send.setEnabled(false);
+        setDate.setEnabled(false);
+        for (int i = 0; i < dateButton.length;i++){
+            dateButton[i].setEnabled(false);
+        }
+    }
 
     private void bindView() {
         send = (Button) findViewById(R.id.send);
