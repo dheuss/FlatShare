@@ -3,6 +3,7 @@ package com.flatshare.presentation.ui.activities.matchingoverview;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +31,6 @@ public class MatchingOverviewActivity extends AbstarctFragmentAcivity implements
     private Button changeToCalendarButton;
 
     private ProgressBar progressBar;
-    private List<String> testList = new ArrayList<>();
 
 
     private static final String TAG = "MatchingOverviewActivity";
@@ -67,20 +67,23 @@ public class MatchingOverviewActivity extends AbstarctFragmentAcivity implements
             @Override
             public void onClick(View view) {
                 //startActivity(new Intent(getActivity(), CalendarActivity.class));
+                List<String> testList = new ArrayList<>();
+                List<Integer> imageTest = new ArrayList<>();
 
                 for (int i = 0; i<4; i++){
                     testList.add("bla 1");
-
+                    imageTest.add(R.drawable.calendar_icon);
                 }
-                generateMatchingOverview(testList);
+                generateMatchingOverview(testList, imageTest);
             }
         });
 
         return view;
     }
 
-    public void generateMatchingOverview(List<String> matchingList){
-        for(int i = 0; i < matchingList.size(); i++){
+    public void generateMatchingOverview(List<String> matchingTitleList, List<Integer> matchingImageList){
+
+        for(int i = 0; i < matchingTitleList.size(); i++){
             TableRow row = new TableRow(this.getActivity());
             TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
             row.setLayoutParams(lp);
@@ -89,20 +92,16 @@ public class MatchingOverviewActivity extends AbstarctFragmentAcivity implements
             Button matchingCalendar = new Button(this.getActivity());
             Button deleteButton = new Button(this.getActivity());
 
-            //matchingImage.setImageResource(); TODO set image
-            matchingText.setText(matchingList.get(i));
-            //TODO button einstellungen
-            //matchingCalendar.setVisibility();
-            //matchingCalendar.setText();
-            //matchingCalendar.setBackground();
+            matchingImage.setImageResource(matchingImageList.get(i)); // TODO set image
+            matchingText.setText(matchingTitleList.get(i));
+
+            matchingCalendar.setVisibility(View.VISIBLE);
+            matchingCalendar.setBackground(getResources().getDrawable(R.drawable.calendar_icon));
             matchingCalendar.setOnClickListener(myCalndarHandler); //TODO write Handler
 
-            //deleteButton.setVisibility();
-            //deleteButton.setText();
-            //deleteButton.setBackground();
+            deleteButton.setVisibility(View.VISIBLE);
+            deleteButton.setBackground(getResources().getDrawable(R.drawable.clear_icon));
             deleteButton.setOnClickListener(myDeleteHandler);
-
-
 
             row.addView(matchingImage);
             row.addView(matchingText);
