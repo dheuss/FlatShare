@@ -68,7 +68,7 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onApartmentFound(roommateProfile, apartmentProfile);
+                mCallback.onApartmentFound(primaryUserProfile, roommateProfile, apartmentProfile);
             }
         });
     }
@@ -77,7 +77,7 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onRoommateFound(roommateProfile);
+                mCallback.onRoommateFound(primaryUserProfile, roommateProfile);
             }
         });
     }

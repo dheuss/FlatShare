@@ -14,8 +14,10 @@ public interface InitInteractor extends Interactor {
 
     interface Callback {
         void onTenantFound(PrimaryUserProfile primaryUserProfile, TenantProfile tenantProfile);
-        void onRoommateFound(RoommateProfile roommateProfile);
-        void onApartmentFound(RoommateProfile roommateProfile, ApartmentProfile apartmentProfile);
+
+        void onRoommateFound(PrimaryUserProfile primaryUserProfile, RoommateProfile roommateProfile);
+
+        void onApartmentFound(PrimaryUserProfile primaryUserProfile, RoommateProfile roommateProfile, ApartmentProfile apartmentProfile);
 
         void onReceivedFailure(String error);
     }

@@ -8,9 +8,7 @@ import com.flatshare.network.path.Node;
 
 public class StorageRoot implements Node {
 
-    public static final String PROFILE = "profile";
     private final String url = "gs://flatshare-5d4c6.appspot.com";
-    private final String tenants = "tenants/";
 
     public TenantsStorage getTenants(String tenantId) {
         return new TenantsStorage(tenantId);

@@ -115,7 +115,8 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
     }
 
     @Override
-    public void onRoommateFound(RoommateProfile roommateProfile) {
+    public void onRoommateFound(PrimaryUserProfile primaryUserProfile, RoommateProfile roommateProfile) {
+        userState.setPrimaryUserProfile(primaryUserProfile);
         userState.setRoommateProfile(roommateProfile);
         mView.hideProgress();
 
@@ -127,7 +128,8 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
     }
 
     @Override
-    public void onApartmentFound(RoommateProfile roommateProfile, ApartmentProfile apartmentProfile) {
+    public void onApartmentFound(PrimaryUserProfile primaryUserProfile, RoommateProfile roommateProfile, ApartmentProfile apartmentProfile) {
+        userState.setPrimaryUserProfile(primaryUserProfile);
         userState.setRoommateProfile(roommateProfile);
         userState.setApartmentProfile(apartmentProfile);
 
