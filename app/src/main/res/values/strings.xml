@@ -28,7 +28,7 @@
     <string name="create_your_profile">Create Your Profile</string>
     <string name="surname_primary_profile_textview">Name:</string>
     <string name="create_your_tenant_profile">Create Your Tenant Profile</string>
-    <string name="take_picture_tenant_profile">TAKE A PICTURE OF YOU!</string>
+    <string name="take_picture_tenant_profile">Upload profile picture</string>
     <string name="done_1_tenant_profile">Done!</string>
     <string name="pets">Pets:</string>
     <string name="occupation">Occupation:</string>
@@ -80,8 +80,8 @@
     <string name="name">Name:</string>
     <string name="email">Email:</string>
     <string name="info">Info:</string>
-    <string name="save_profile_settings">SAVE!</string>
-    <string name="done_profile">DONE!</string>
+    <string name="save_profile_settings">Save</string>
+    <string name="done_profile">Done</string>
     <string name="apartment_profil_string">In this section, we would like to know more about your apartment. When you tell us something about your residence, we could find the perfect roommate for your living community.</string>
     <string name="create_your_apartment_setting">Create Your Apartment Settings</string>
     <string name="apartment_settings_description">Here we would like to know more about your preferences and how your new roommate should be, so that we can find the perfect match for your living community!</string>
@@ -117,6 +117,7 @@
     <string name="field_cannot_be_empty">This field cannot be empty</string>
     <string name="check_rb_error">Please check one option</string>
     <string name="picture_required_error">Please upload a profile picture</string>
+    <string name="take_picture_apartment_profile">Upload a picture of your apartment</string>
 
     <string-array name="occupation">
         <item>Student</item>

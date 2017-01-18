@@ -194,13 +194,13 @@
                     android:id="@+id/internet_no_rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     android:drawableRight="@drawable/thumb_down_icon" />
 
                 <RadioButton
                     android:id="@+id/internet_nei_rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
         </LinearLayout>
@@ -237,13 +237,13 @@
                     android:id="@+id/smoker_no_rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     android:drawableRight="@drawable/thumb_down_icon" />
 
                 <RadioButton
                     android:id="@+id/smoker_nei_rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
         </LinearLayout>
@@ -280,13 +280,13 @@
                     android:id="@+id/pets_no_rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     android:drawableRight="@drawable/thumb_down_icon" />
 
                 <RadioButton
                     android:id="@+id/pets_nei_rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
         </LinearLayout>
@@ -323,22 +323,37 @@
                     android:id="@+id/washing_machine_no_rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     android:drawableRight="@drawable/thumb_down_icon" />
 
                 <RadioButton
                     android:id="@+id/washing_machine_nei_rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
         </LinearLayout>
 
         <Button
+            android:id="@+id/upload_picture_apartment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LinearLayoutApartmentProfileWashingsMashine"
+            android:layout_marginBottom="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/colorPrimary"
+            android:hint="@string/take_picture_apartment_profile"
+            android:textColor="@color/colorButtonText"
+            android:textColorHint="@color/colorButtonText"
+            android:textStyle="bold" />
+
+        <Button
             android:id="@+id/create_apartment_profile_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutApartmentProfileWashingsMashine"
+            android:layout_below="@id/upload_picture_apartment"
             android:layout_marginBottom="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"

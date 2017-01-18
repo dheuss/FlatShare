@@ -1,6 +1,7 @@
 package com.flatshare.presentation.ui.activities.profile;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,7 +31,8 @@ import java.util.Map;
  */
 public class ApartmentProfileActivity extends AbstractActivity implements ApartmentProfilePresenter.View {
 
-    private static final int STATIC_VALUE = 1;
+    private static final int STATIC_VALUE = 2;
+    private int PICK_IMAGE_REQUEST = 1;
 
     public static final String ROOMMATE_ID = "roommateId";
     public static final String APARTMENT_ID = "apartmentId";
@@ -56,8 +58,12 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     private MultiAutoCompleteTextView roommatesEmailsMultiAC;
     private ArrayAdapter<String> adapter;
 
-    private Button createApartmentButton;
     private Button scanRoommateQRButton;
+
+    private Button uploadPictureButton;
+    private boolean profilePicUploaded;
+
+    private Button createApartmentButton;
 
     private ApartmentProfilePresenter mPresenter;
     private static final String TAG = "ApartmentProfileAct";
@@ -84,6 +90,13 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             }
         });
 
+        uploadPictureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openGallery();
+            }
+        });
+
         createApartmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,6 +104,15 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             }
         });
 
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent();
+        // Show only images, no videos or anything else
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        // Always show the chooser (if there are multiple options available)
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
 
 
@@ -103,6 +125,14 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
                 String roommateId = data.getStringExtra(ROOMMATE_ID);
                 roommatesEmailsMultiAC.getText().append(", " + roommateId);
             }
+        }
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            Uri uri = data.getData();
+
+            mPresenter.uploadImage(uri);
+            // Log.d(TAG, String.valueOf(bitmap));
         }
     }
 
@@ -208,6 +238,11 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             result = false;
         }
 
+        if(profilePicUploaded){
+            uploadPictureButton.setError(getString(R.string.picture_required_error));
+            result = false;
+        }
+
         return result;
     }
 
@@ -236,8 +271,9 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         washingMachineYesRB = (RadioButton) findViewById(R.id.washing_machine_yes_rb);
         washingMachineNoRB = (RadioButton) findViewById(R.id.washing_machine_no_rb);
 
-        createApartmentButton = (Button) findViewById(R.id.create_apartment_profile_button);
         scanRoommateQRButton = (Button) findViewById(R.id.scan_roommate_QR_button);
+        uploadPictureButton = (Button) findViewById(R.id.upload_picture_apartment);
+        createApartmentButton = (Button) findViewById(R.id.create_apartment_profile_button);
 
         roommatesEmailsMultiAC = (MultiAutoCompleteTextView) findViewById(R.id.apartment_roommates_edit_text);
 
@@ -277,5 +313,11 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         roommatesEmailsMultiAC.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
         roommatesEmailsMultiAC.setThreshold(1);
         mPresenter.getUserEmails();
+    }
+
+    @Override
+    public void uploadSuccess() {
+        profilePicUploaded = true;
+        Toast.makeText(this, "Upload Successful", Toast.LENGTH_LONG).show();
     }
 }

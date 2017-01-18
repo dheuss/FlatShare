@@ -3,7 +3,6 @@ package com.flatshare.presentation.ui.activities.profile;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -43,7 +42,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
 
     private Button profileDoneButton;
     //TODO takeAPicture
-    private Button takeAPictureButton;
+    private Button uploadPictureButton;
 
     //TODO Hobbies
 
@@ -72,7 +71,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
                 TenantProfileActivity.this.sendProfile();
             }
         });
-        takeAPictureButton.setOnClickListener(new View.OnClickListener() {
+        uploadPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TenantProfileActivity.this.openGallery();
@@ -169,7 +168,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         }
 
         if(profilePicUploaded){
-            takeAPictureButton.setError(getString(R.string.picture_required_error));
+            uploadPictureButton.setError(getString(R.string.picture_required_error));
             result = false;
         }
 
@@ -200,7 +199,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         occupationSpinner = (Spinner) findViewById(R.id.occupationProfileSpinner);
         durationSpinner = (Spinner) findViewById(R.id.durationOfStayProfileSpinner);
 
-        takeAPictureButton = (Button) findViewById(R.id.saveChangesProfileSettingsButton);
+        uploadPictureButton = (Button) findViewById(R.id.saveChangesProfileSettingsButton);
         profileDoneButton = (Button) findViewById(R.id.done_1_tenant_profile);
     }
 

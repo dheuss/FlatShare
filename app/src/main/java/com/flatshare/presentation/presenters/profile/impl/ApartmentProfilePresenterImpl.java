@@ -1,14 +1,16 @@
 package com.flatshare.presentation.presenters.profile.impl;
 
-import android.widget.ImageView;
+import android.net.Uri;
 import android.widget.VideoView;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.UserProfile;
+import com.flatshare.domain.datatypes.enums.MediaType;
 import com.flatshare.domain.interactors.matching.NicknameRetrieverInteractor;
 import com.flatshare.domain.interactors.matching.impl.NicknameRetrieverInteractorImpl;
 import com.flatshare.domain.interactors.media.MediaInteractor;
+import com.flatshare.domain.interactors.media.impl.UploadInteractorImpl;
 import com.flatshare.domain.interactors.profile.SecondaryProfileInteractor;
 import com.flatshare.domain.interactors.profile.impl.ApartmentProfileInteractorImpl;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
@@ -91,8 +93,10 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
     }
 
     @Override
-    public void uploadImage(ImageView imageView) {
-
+    public void uploadImage(Uri uri) {
+//        mView.showProgress();
+        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, false, MediaType.IMAGE, uri, userState.getApartmentId());
+        mediaInteractor.execute();
     }
 
     @Override
@@ -115,7 +119,7 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
 
     @Override
     public void onUploadSuccess() {
-        //TODO: notify view that media was uploaded
+        mView.uploadSuccess();
     }
 
     @Override

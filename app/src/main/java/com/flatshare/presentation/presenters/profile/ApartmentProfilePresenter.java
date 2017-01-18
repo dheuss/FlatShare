@@ -1,5 +1,6 @@
 package com.flatshare.presentation.presenters.profile;
 
+import android.net.Uri;
 import android.widget.ImageView;
 import android.widget.VideoView;
 
@@ -17,7 +18,7 @@ public interface ApartmentProfilePresenter extends BasePresenter {
 
     void sendProfile(ApartmentProfile apartmentProfile);
 
-    void uploadImage(ImageView imageView);
+    void uploadImage(Uri uri);
     void uploadVideo(VideoView videoView);
 
     void getUserEmails();
@@ -26,6 +27,8 @@ public interface ApartmentProfilePresenter extends BasePresenter {
         void changeToApartmentSettings();
 
         void updateAdapter(Map<String, String> idEmailsMap);
+
+        void uploadSuccess();
     }
 
 }
