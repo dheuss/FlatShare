@@ -6,6 +6,7 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
 import com.flatshare.domain.datatypes.db.profiles.UserProfile;
+import com.flatshare.domain.datatypes.enums.ProfileType;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.domain.interactors.profile.SecondaryProfileInteractor;
 import com.google.firebase.database.DatabaseError;
@@ -71,14 +72,19 @@ public class RoommateProfileInteractorImpl extends AbstractInteractor implements
         String roommateId = roommateProfile.getRoommateId();
         String roommateProfilePath = databaseRoot.getRoommateProfileNode(roommateId).getRootPath();
 
+        String userClassificationPath = databaseRoot.getUserProfileNode(userId).getClassificationId();
+
         ApartmentProfile apartmentProfile = new ApartmentProfile();
         String apartmentId = roommateProfile.isOwner() ? roommateProfile.getApartmentId() : null;
         apartmentProfile.setApartmentId(apartmentId);
 
         Map<String, Object> map = new HashMap<>();
+        if (this.roommateProfile.isOwner()) {
+            map.put(userClassificationPath, ProfileType.APARTMENT.getValue());
+        }
         map.put(roommateProfilePath, this.roommateProfile);
 
-        if(apartmentId != null){
+        if (apartmentId != null) {
             String apartmentProfilePath = databaseRoot.getApartmentProfileNode(apartmentId).getRootPath();
             map.put(apartmentProfilePath, apartmentProfile);
         }
