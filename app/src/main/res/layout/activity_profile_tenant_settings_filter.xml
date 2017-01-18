@@ -14,7 +14,6 @@
             android:id="@+id/tenant_filter_setting_inital"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/LinearLayoutCouch"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginTop="@dimen/marginTop"
@@ -242,6 +241,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/purposeCommunityNEI_filter_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
         </LinearLayout>
 
@@ -278,6 +283,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/smokingApartmentNEI_filter_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
         </LinearLayout>
 
@@ -314,6 +325,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/thumb_down_icon" />
+
+                <RadioButton
+                    android:id="@+id/balconyNEI_filter_RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/thumb_up_down_icon" />
             </RadioGroup>
 
         </LinearLayout>

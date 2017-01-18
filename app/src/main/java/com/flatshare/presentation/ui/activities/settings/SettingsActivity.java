@@ -197,8 +197,8 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
         int location[] = new int[2];
         view.getLocationOnScreen(location);
 
-        logoutYESButton = (Button)popupView.findViewById(R.id.yes_logout_button);
-        logoutNOButton = (Button)popupView.findViewById(R.id.no_logout_button);
+        //logoutYESButton = (Button)popupView.findViewById(R.id.yes_logout_button);
+        //logoutNOButton = (Button)popupView.findViewById(R.id.no_logout_button);
 
         logoutYESButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,9 +233,9 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
         int location[] = new int[2];
         view.getLocationOnScreen(location);
 
-        logoutYESButton = (Button)popupView.findViewById(R.id.yes_logout_button);
-        logoutNOButton = (Button)popupView.findViewById(R.id.no_logout_button);
-        popUpTextView = (TextView)popupView.findViewById(R.id.logout_popup_TextView);
+        //logoutYESButton = (Button)popupView.findViewById(R.id.yes_logout_button);
+        //logoutNOButton = (Button)popupView.findViewById(R.id.no_logout_button);
+        popUpTextView = (TextView)popupView.findViewById(R.id.popup_TextView);
 
         popUpTextView.setText("Do you really want to remove this user?");
 

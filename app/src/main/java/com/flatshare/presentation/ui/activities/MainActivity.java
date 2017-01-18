@@ -17,8 +17,10 @@ import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.presentation.ui.activities.matchingoverview.MatchingOverviewActivity;
+import com.flatshare.presentation.ui.activities.profile.RoommateProfileActivity;
 import com.flatshare.presentation.ui.activities.settings.ProfileApartmentSettingsActivity;
 import com.flatshare.presentation.ui.activities.settings.ProfileTenantSettingsActivity;
+import com.flatshare.presentation.ui.activities.settings.RoommateProfileSettingsActivity;
 import com.flatshare.presentation.ui.activities.settings.SettingsActivity;
 
 import java.util.ArrayList;
@@ -89,10 +91,10 @@ public class MainActivity extends AbstractActivity {
         tabThree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.profile_icon, 0, 0);
         tabLayout.getTabAt(1).setCustomView(tabThree);
 
-//        TextView tabFour = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-//        tabFour.setText("MatchingOverviewActivity");
-//        tabFour.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.notifications_icon, 0, 0);
-//        tabLayout.getTabAt(3).setCustomView(tabFour);
+        TextView tabFour = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
+        tabFour.setText("MatchingOverviewActivity");
+        tabFour.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.notifications_icon, 0, 0);
+        tabLayout.getTabAt(3).setCustomView(tabFour);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -103,7 +105,7 @@ public class MainActivity extends AbstractActivity {
         } else if (classificationId == ProfileType.APARTMENT.getValue()){
             adapter.addFragment(new ProfileApartmentSettingsActivity(), "ProfileApartmentSettingsActivity");
         } else if (classificationId == ProfileType.ROOMMATE.getValue()) {
-            Toast.makeText(getApplicationContext(), "Not avalabele", Toast.LENGTH_SHORT);
+            adapter.addFragment(new RoommateProfileSettingsActivity(), "RoommateProfileSettingsActivity");
         } else {
 
         }

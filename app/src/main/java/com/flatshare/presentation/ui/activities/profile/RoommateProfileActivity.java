@@ -133,9 +133,9 @@ public class RoommateProfileActivity extends AbstractActivity implements Roommat
         int location[] = new int[2];
         view.getLocationOnScreen(location);
 
-        popupYESButton = (Button)popupView.findViewById(R.id.yes_logout_button);
-        popupNOButton = (Button)popupView.findViewById(R.id.no_logout_button);
-        popUpTextView = (TextView)popupView.findViewById(R.id.logout_popup_TextView);
+        //popupYESButton = (Button)popupView.findViewById(R.id.yes_logout_button);
+        //popupNOButton = (Button)popupView.findViewById(R.id.no_logout_button);
+        popUpTextView = (TextView)popupView.findViewById(R.id.popup_TextView);
 
         popUpTextView.setText("Are you the owner of this apartment?");
 

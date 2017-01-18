@@ -22,64 +22,44 @@
             android:textColor="@color/colorPrimary"
             android:textSize="30dp" />
 
-        <!--<TextView-->
-            <!--android:id="@+id/roommate_settings_info"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_below="@+id/roommate_profile_inital"-->
-            <!--android:layout_marginLeft="@dimen/marginLeft"-->
-            <!--android:layout_marginRight="@dimen/marginRight"-->
-            <!--android:layout_marginTop="@dimen/marginTop"-->
-            <!--android:gravity="center"-->
-            <!--android:text="@string/roommate_profil_string" />-->
 
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/LinearLayoutProfileNickname"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/roommate_profile_initial"
-            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_below="@+id/roommate_profile_initial"
+            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginTop="@dimen/marginTop">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/nickname" />
-
+            android:layout_marginLeft="@dimen/marginLeft">
             <EditText
                 android:id="@+id/roommate_nickname_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:inputType="text" />
-            <!--android:hint="Enter a nickname"-->
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:hint="@string/nickname"
+                android:inputType="text"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"/>
+        </android.support.design.widget.TextInputLayout>
 
-        <LinearLayout
+
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/LinearLayoutProfileAge"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutProfileNickname"
-            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_below="@+id/LinearLayoutProfileNickname"
+            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginTop="@dimen/marginTop">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/age" />
-
+            android:layout_marginLeft="@dimen/marginLeft">
             <EditText
                 android:id="@+id/roommate_age_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:hint="Enter your age..."
-                android:inputType="number" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:hint="@string/age"
+                android:inputType="text"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"/>
+        </android.support.design.widget.TextInputLayout>
+
 
         <LinearLayout
             android:id="@+id/LinearLayoutProfileGender"
@@ -114,6 +94,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/female_icon" />
+
+                <RadioButton
+                    android:id="@+id/roommate_gender_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/transgender_icon"/>
             </RadioGroup>
         </LinearLayout>
 
