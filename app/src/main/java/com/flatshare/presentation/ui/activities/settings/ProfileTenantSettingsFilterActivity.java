@@ -343,12 +343,6 @@ public class ProfileTenantSettingsFilterActivity extends AbstractActivity implem
 
         AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
         alertDialogAndroid.show();
-
-
-
-
-
-
     }
 
     @Override
