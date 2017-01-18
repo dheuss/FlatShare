@@ -43,14 +43,6 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
     private EditText password;
     private EditText newPassword;
 
-    private PopupWindow logoutPopupWindow;
-    private RelativeLayout logoutRelativeLayout;
-    private Button logoutYESButton;
-    private Button logoutNOButton;
-    private TextView popUpTextView;
-
-    private Context mContext;
-
     private ProgressBar progressBar;
 
     private static final String TAG = "SettingsActivity";
@@ -127,27 +119,13 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
             }
         });
 
-
-        signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signOut(view);
-            }
-        });
-
-
-        btnRemoveUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SettingsActivity.this.deleteAccount(view);
-            }
-        });
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SettingsActivity.this.changeToNewPassword();
             }
         });
+
         sendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,12 +133,24 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
             }
         });
 
+        btnRemoveUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SettingsActivity.this.deleteAccount();
+            }
+        });
+
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signOut();
+            }
+        });
+
         return view;
     }
 
     private void bindView(View view){
-
-        mContext = getActivity();
         btnChangeEmail = (Button) view.findViewById(R.id.change_email_button);
         btnChangePassword = (Button) view.findViewById(R.id.change_password_button);
         btnSendResetEmail = (Button) view.findViewById(R.id.sending_pass_reset_button);
@@ -188,80 +178,25 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
         remove.setVisibility(View.GONE);
     }
 
-    public void signOut(View view) {
-        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-        View mView = layoutInflater.inflate(R.layout.activity_popup, null);
-
-        AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(getActivity());
-        alertDialogBuilderUserInput.setView(mView);
-
-        final TextView popUpTextView = (TextView) mView.findViewById(R.id.popup_TextView);
-        popUpTextView.setText("Do you really want to logout?");
-
-        alertDialogBuilderUserInput
-                .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mPresenter.logOut();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-        AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
-        alertDialogAndroid.show();
-    }
-
     public void changeMail(){
-        mPresenter.changeMailAddress(newEmail.getText().toString());
-    }
-
-    public void deleteAccount(View view) {
-        View popupView = getActivity().getLayoutInflater().inflate(R.layout.activity_popup, null);
-
-        logoutPopupWindow = new PopupWindow(
-                popupView,
-                LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT);
-
-        logoutPopupWindow.setFocusable(false);
-        int location[] = new int[2];
-        view.getLocationOnScreen(location);
-
-        //logoutYESButton = (Button)popupView.findViewById(R.id.yes_logout_button);
-        //logoutNOButton = (Button)popupView.findViewById(R.id.no_logout_button);
-        popUpTextView = (TextView)popupView.findViewById(R.id.popup_TextView);
-
-        popUpTextView.setText("Do you really want to remove this user?");
-
-        logoutYESButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mPresenter.deleteAccount();
-            }
-        });
-
-        logoutNOButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logoutPopupWindow.dismiss();
-            }
-        });
-
-        logoutPopupWindow.showAtLocation(view, Gravity.CENTER,0,0);
+        popUpView(0);
     }
 
     public void changeToNewPassword() {
-        mPresenter.changePassword(newPassword.getText().toString());
+        popUpView(1);
     }
 
     public void resetEmail(){
-        mPresenter.resetPasswordMail(oldEmail.getText().toString());
+        popUpView(2);
+    }
+
+    public void deleteAccount() {
+        popUpView(3);
+    }
+
+
+    public void signOut() {
+        popUpView(4);
     }
 
     @Override
@@ -283,5 +218,59 @@ public class SettingsActivity extends AbstarctFragmentAcivity implements Setting
     public void changeToLoginActivity() {
         Log.v(TAG, ": logout Scucess");
         startActivity(new Intent(getActivity(), LoginActivity.class));
+    }
+
+    private void popUpView(final int task){
+        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        View mView = layoutInflater.inflate(R.layout.activity_popup, null);
+
+        AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(getActivity());
+        alertDialogBuilderUserInput.setView(mView);
+
+        final TextView popUpTextView = (TextView) mView.findViewById(R.id.popup_TextView);
+
+        if (task == 0){
+            popUpTextView.setText("Do you really want to change your emailaddress?");
+        } else if (task == 1){
+            popUpTextView.setText("Do you really want to change your password?");
+        } else if (task == 2){
+            popUpTextView.setText("Do you really want to reset your account?");
+        } else if (task == 3){
+            popUpTextView.setText("Do you really want to delte your account?");
+        } else if (task == 4){
+            popUpTextView.setText("Do you really want to sign out?");
+        } else {
+            popUpTextView.setText("Do you really want to sign out?");
+        }
+
+        alertDialogBuilderUserInput
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (task == 0){
+                            mPresenter.changeMailAddress(newEmail.getText().toString());
+                        } else if (task == 1){
+                            mPresenter.changePassword(newPassword.getText().toString());
+                        } else if (task == 2){
+                            mPresenter.resetPasswordMail(oldEmail.getText().toString());
+                        } else if (task == 3){
+                            mPresenter.deleteAccount();
+                        } else if (task == 4){
+                            mPresenter.logOut();
+                        } else {
+                            mPresenter.logOut();
+                        }
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+        alertDialogAndroid.show();
     }
 }
