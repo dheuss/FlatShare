@@ -31,6 +31,7 @@ import com.flatshare.threading.MainThreadImpl;
 public class RoommateProfileActivity extends AbstractActivity implements RoommateProfilePresenter.View {
 
     private static final String TAG = "RoommateProfileActivity";
+    private static final int NICKNAME_LENGTH = 6;
 
     private EditText nickNameEditText;
     private EditText ageEditText;
@@ -64,14 +65,24 @@ public class RoommateProfileActivity extends AbstractActivity implements Roommat
     }
 
     private void checkNicknameUnique() {
-        String nickname = nickNameEditText.getText().toString();
-        if (nickname == null || nickname.length() < 6) {
-            onNicknameError("Nickname too short, minimum of 6 characters needed");
+        String nickname = nickNameEditText.getText().toString().trim();
+        if (nickname == null || nickname.length() < NICKNAME_LENGTH) {
+            onNicknameError("Nickname too short, minimum of " + NICKNAME_LENGTH + " characters needed");
             return;
         }
 
         if (!nickname.matches("^[a-zA-Z0-9]*$")) {
             onNicknameError("Nickname contains invalid characters, enter only alphanumeric characters");
+            return;
+        }
+
+        if(ageEditText.getText().toString().trim().equals("")){
+            ageEditText.setError(getString(R.string.field_cannot_be_empty));
+            return;
+        }
+
+        if(!maleRadioButton.isChecked() && !femaleRadioButton.isChecked()){
+            maleRadioButton.setError(getString(R.string.field_cannot_be_empty));
             return;
         }
 

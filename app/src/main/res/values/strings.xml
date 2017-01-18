@@ -86,7 +86,7 @@
     <string name="create_your_apartment_setting">Create Your Apartment Settings</string>
     <string name="apartment_settings_description">Here we would like to know more about your preferences and how your new roommate should be, so that we can find the perfect match for your living community!</string>
     <string name="age_range_info">How old should your new roommate be?</string>
-    <string name="gender_info">Should your new roommate be a girl or a boy?</string>
+    <string name="gender_info">Should your new roommate be a female or a male?</string>
     <string name="smoker_info">Does it matter for you if your new roommate is a smoker?</string>
     <string name="pets_info">Does it matter for you if your new roommate has a pet?</string>
     <string name="occupation_info">What should your new roommate do for a living?</string>
@@ -114,6 +114,7 @@
     <string name="street">Street</string>
     <string name="housenumber">House Number</string>
     <string name="zipcode">ZIP Code</string>
+    <string name="field_cannot_be_empty">This field cannot be empty</string>
 
     <string-array name="occupation">
         <item>Student</item>

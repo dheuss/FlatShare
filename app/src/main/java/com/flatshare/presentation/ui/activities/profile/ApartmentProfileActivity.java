@@ -77,7 +77,6 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
         initMultiAutoComplete();
 
-
         scanRoommateQRButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,56 +120,95 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
     private void sendProfile() {
 
-        String[] emails = roommatesEmailsMultiAC.getText().toString().split(",");
+        if (inputValid()) {
 
-        List<String> roommatesId = new ArrayList<>();
-        String id = null;
-        for (int i = 0; i < emails.length; i++) {
+            String[] emails = roommatesEmailsMultiAC.getText().toString().split(",");
 
-            try {
-                id = nicknameIdMap.get(emails[i].trim());
-            } catch (NullPointerException e) {
-                Log.w(TAG, "sendProfile: NullPointer", e);
+            List<String> roommatesId = new ArrayList<>();
+            String id = null;
+            for (int i = 0; i < emails.length; i++) {
+
+                try {
+                    id = nicknameIdMap.get(emails[i].trim());
+                } catch (NullPointerException e) {
+                    Log.w(TAG, "sendProfile: NullPointer", e);
+                }
+
+                if (id != null) {
+                    roommatesId.add(id);
+                }
             }
 
-            if (id != null) {
-                roommatesId.add(id);
-            }
+            int price = Integer.parseInt(apartmentPriceEditText.getText().toString());
+            int area = Integer.parseInt(apartmentAreaEditText.getText().toString());
+
+            String street = apartmentStreetEditText.getText().toString();
+            String houseNr = apartmentHouseNrEditText.getText().toString();
+            int zipCode = Integer.parseInt(apartmentZipCodeEditText.getText().toString());
+
+            boolean hasInternet = internetRadioGroup.getCheckedRadioButtonId() == internetYesRB.getId();
+            boolean isSmoker = smokerRadioGroup.getCheckedRadioButtonId() == smokerYesRB.getId();
+            boolean hasPets = petsRadioGroup.getCheckedRadioButtonId() == petsYesRB.getId();
+            boolean hasWashingMachine = washingMachineRadioGroup.getCheckedRadioButtonId() == washingMachineYesRB.getId();
+
+            ApartmentLocation apartmentLocation = new ApartmentLocation();
+
+            apartmentLocation.setStreet(street);
+            apartmentLocation.setHouseNr(houseNr);
+            apartmentLocation.setZipCode(zipCode);
+
+            ApartmentProfile apartmentProfile = new ApartmentProfile();
+            apartmentProfile.setPrice(price);
+            apartmentProfile.setArea(area);
+            apartmentProfile.setInternet(hasInternet);
+            apartmentProfile.setSmokerApartment(isSmoker);
+            apartmentProfile.setPets(hasPets);
+            apartmentProfile.setWashingMachine(hasWashingMachine);
+
+            apartmentProfile.setApartmentLocation(apartmentLocation);
+
+            apartmentProfile.setRoommateIds(roommatesId);
+
+            apartmentProfile.setDone(true);
+
+            mPresenter.sendProfile(apartmentProfile);
+        }
+    }
+
+    private boolean inputValid() {
+        boolean result = true;
+
+        if (roommatesEmailsMultiAC.getText().toString().trim().equals("")) {
+            roommatesEmailsMultiAC.setError(getString(R.string.field_cannot_be_empty));
+            result = false;
         }
 
-        int price = Integer.parseInt(apartmentPriceEditText.getText().toString());
-        int area = Integer.parseInt(apartmentAreaEditText.getText().toString());
+        if (apartmentPriceEditText.getText().toString().trim().equals("")) {
+            apartmentPriceEditText.setError(getString(R.string.field_cannot_be_empty));
+            result = false;
+        }
 
-        String street = apartmentStreetEditText.getText().toString();
-        String houseNr = apartmentHouseNrEditText.getText().toString();
-        int zipCode = Integer.parseInt(apartmentZipCodeEditText.getText().toString());
+        if (apartmentAreaEditText.getText().toString().trim().equals("")) {
+            apartmentAreaEditText.setError(getString(R.string.field_cannot_be_empty));
+            result = false;
+        }
 
-        boolean hasInternet = internetRadioGroup.getCheckedRadioButtonId() == internetYesRB.getId();
-        boolean isSmoker = smokerRadioGroup.getCheckedRadioButtonId() == smokerYesRB.getId();
-        boolean hasPets = petsRadioGroup.getCheckedRadioButtonId() == petsYesRB.getId();
-        boolean hasWashingMachine = washingMachineRadioGroup.getCheckedRadioButtonId() == washingMachineYesRB.getId();
+        if (apartmentStreetEditText.getText().toString().trim().equals("")) {
+            apartmentStreetEditText.setError(getString(R.string.field_cannot_be_empty));
+            result = false;
+        }
 
-        ApartmentLocation apartmentLocation = new ApartmentLocation();
+        if (apartmentHouseNrEditText.getText().toString().trim().equals("")) {
+            apartmentHouseNrEditText.setError(getString(R.string.field_cannot_be_empty));
+            result = false;
+        }
 
-        apartmentLocation.setStreet(street);
-        apartmentLocation.setHouseNr(houseNr);
-        apartmentLocation.setZipCode(zipCode);
+        if (apartmentZipCodeEditText.getText().toString().trim().equals("")) {
+            apartmentZipCodeEditText.setError(getString(R.string.field_cannot_be_empty));
+            result = false;
+        }
 
-        ApartmentProfile apartmentProfile = new ApartmentProfile();
-        apartmentProfile.setPrice(price);
-        apartmentProfile.setArea(area);
-        apartmentProfile.setInternet(hasInternet);
-        apartmentProfile.setSmokerApartment(isSmoker);
-        apartmentProfile.setPets(hasPets);
-        apartmentProfile.setWashingMachine(hasWashingMachine);
-
-        apartmentProfile.setApartmentLocation(apartmentLocation);
-
-        apartmentProfile.setRoommateIds(roommatesId);
-
-        apartmentProfile.setDone(true);
-
-        mPresenter.sendProfile(apartmentProfile);
+        return result;
     }
 
     private void bindView() {

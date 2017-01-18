@@ -161,6 +161,7 @@
                     android:id="@+id/genderALLApartmentSettingsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:drawableRight="@drawable/transgender_icon"/>
             </RadioGroup>
         </LinearLayout>
@@ -213,6 +214,7 @@
                     android:id="@+id/smokerALLApartmentSettingsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:drawableRight="@drawable/thumb_up_down_icon"/>
             </RadioGroup>
         </LinearLayout>
@@ -265,6 +267,7 @@
                     android:id="@+id/petALLApartmentSettingsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:drawableRight="@drawable/thumb_up_down_icon"/>
             </RadioGroup>
         </LinearLayout>
