@@ -17,7 +17,7 @@ import java.util.List;
  * Created by Sandro on 07.01.17.
  */
 
-public class CalendarPresenterImpl extends AbstractPresenter implements CalendarPresenter, CalendarInitInteractor.Callback {
+public class CalendarPresenterImpl extends AbstractPresenter implements CalendarPresenter, CalendarInitInteractor.Callback, CalendarSendFinalInteractor.Callback {
 
     private static final String TAG = "CalendarPresenter";
 

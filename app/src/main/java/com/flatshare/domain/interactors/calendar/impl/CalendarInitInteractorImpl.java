@@ -40,7 +40,6 @@ public class CalendarInitInteractorImpl extends AbstractInteractor implements Ca
 
     }
 
-
     private void notifyError(final String errorMessage) {
         Log.d(TAG, "inside notifyError()");
         mMainThread.post(new Runnable() {
