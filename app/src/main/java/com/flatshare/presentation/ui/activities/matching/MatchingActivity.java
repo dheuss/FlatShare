@@ -1,6 +1,5 @@
 package com.flatshare.presentation.ui.activities.matching;
 
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,13 +11,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
+import com.flatshare.domain.datatypes.enums.ProfileType;
 import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.matching.PotentialMatchingPresenter;
 import com.flatshare.presentation.presenters.matching.impl.PotentialMatchingPresenterImpl;
@@ -28,15 +27,9 @@ import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Toast;
 
 import java.util.List;
 
-import static android.content.Context.LAYOUT_INFLATER_SERVICE;
-
-/**
- * Created by Arber on 20/12/2016.
- */
 public class MatchingActivity extends AbstarctFragmentAcivity implements PotentialMatchingPresenter.View {
 
     private static final String TAG = "MatchingActivity";
@@ -45,7 +38,6 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
     private Context mContext;
     private UserState userState;
 
-    private int classificationId;
     private ImageButton acceptBtn;
     private ImageButton rejectBtn;
     private ImageButton infoBtn;
@@ -62,7 +54,6 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
     private ApartmentProfile mApartmetProfile;
     private TenantProfile mTenantProfile;
 
-    private int popupFlag; //0 == Apartment; 1 == Tenant
     private TextView apartmentPriceTextView;
     private TextView apartmentAreaTextView;
     private TextView apartmentZipCodeTextView;
@@ -75,6 +66,7 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
     private ImageButton closeButton;
 
     private SharedPreferences sharedPref;
+
 
     public MatchingActivity() {
     }
@@ -90,9 +82,6 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
         View view = inflater.inflate(R.layout.activity_matching, container, false);
 
         sharedPref = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
-
-        classificationId = userState.getPrimaryUserProfile().getClassificationId();
-        popupFlag = classificationId;
 
         bindView(view);
 
@@ -136,8 +125,7 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
         infoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Info", Toast.LENGTH_SHORT).show();
-                apartmentPopUp(view);
+                cardClick(view);
             }
         });
 
@@ -157,7 +145,7 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
     }
 
     public void cardClick(View view) {
-        if (popupFlag == 0) {
+        if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
             apartmentPopUp(view);
         } else {
             tenantPopUp(view);
@@ -184,12 +172,9 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
         apartmentWashingMashineTextView = (TextView) view.findViewById(R.id.apartmentWashingMashineTextView);
         closeButton = (ImageButton) customView.findViewById(R.id.ib_close);
 
-        //apartmentPriceTextView.setText(mApartmetProfile.getPrice() + "");
-
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Dismiss the popup window
                 Log.v(TAG, "DISMISS");
                 mPopupWindow.dismiss();
             }
@@ -212,7 +197,6 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Dismiss the popup window
                 Log.v(TAG, "DISMISS");
                 mPopupWindow.dismiss();
             }
@@ -226,8 +210,6 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
         super.onResume();
 
         Log.d(TAG, "inside onResume()");
-
-        // let's start welcome message retrieval when the app resumes
         mPresenter.resume();
     }
 
@@ -249,13 +231,9 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
     @Override
     public void showTenants(List<TenantProfile> tenants) {
         Log.d(TAG, "size of potential apartments: " + tenants.size());
-        popupFlag = 1;//set Flag for popUpView;
-        int i = 0;
 
         for (TenantProfile t : tenants) {
-            //Log.d(TAG, "i: " + i++ + "\n" + t.toString());
             mSwipeView.addView(new MatchingActivity_ProfileCard_Tenant(mContext, t, mSwipeView));
-            mTenantProfile = t;
         }
 
     }
@@ -263,12 +241,9 @@ public class MatchingActivity extends AbstarctFragmentAcivity implements Potenti
     @Override
     public void showApartments(List<ApartmentProfile> apartments) {
         Log.d(TAG, "size of potential apartments: " + apartments.size());
-        popupFlag = 0;//set Flag for popUpView;
-        int i = 0;
 
         for (ApartmentProfile a : apartments) {
             mSwipeView.addView(new MatchingActivity_ProfileCard_Apartment(mContext, a, mSwipeView));
-            mApartmetProfile = a;
         }
     }
 
