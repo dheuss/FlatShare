@@ -40,31 +40,22 @@ public class ProfileTenantSettingsFilterActivity extends AbstractActivity implem
     private TextView minSizeRangeTextView;
     private TextView maxSizeRangeTextView;
 
-    private RadioGroup purposeCommunityRadioGroup;
     private RadioButton purposeCommunityRadioButtonYES, purposeCommunityRadioButtonNO, purposeCommunityRadioButtonNEI;
 
-    private RadioGroup smokingApartmentRadioGroup;
     private RadioButton smokingApartmentRadioButtonYES, smokingApartmentRadioButtonNO, smokingApartmentRadioButtonNEI;
 
-    private RadioGroup balconyRadioGroup;
     private RadioButton balconyRadioButtonYES, balconyRadioButtonNO, balconyRadioButtonNEI;
 
-    private RadioGroup internetRadioGroup;
     private RadioButton internetRadioButtonYES, internetRadioButtonNO, internetRadioButtonNEI;
 
-    private RadioGroup cabelTVRadioGroup;
     private RadioButton cabelTVRadioButtonYES, cabelTVRadioButtonNO, cabelTVRadioButtonNEI;
 
-    private RadioGroup washingMashineRadioGroup;
     private RadioButton washingMashineRadioButtonYES, washingMashineRadioButtonNO, washingMashineRadioButtonNEI;
 
-    private RadioGroup dryerRadioGroup;
     private RadioButton dryerRadioButtonYES, dryerRadioButtonNO, dryerRadioButtonNEI;
 
-    private RadioGroup bathtubeRadioGroup;
     private RadioButton bathtubeRadioButtonYES, bathtubeRadioButtonNO, bathtubeRadioButtonNEI;
 
-    private RadioGroup petsRadioGroup;
     private RadioButton petsRadioButtonYES, petsRadioButtonNO, petsRadioButtonNEI;
 
     private Button saveButton;
@@ -114,7 +105,6 @@ public class ProfileTenantSettingsFilterActivity extends AbstractActivity implem
         maxSizeRangeTextView.setText(userState.getTenantProfile().getTenantFilterSettings().getSizeTo()+"");
         sizeRangeBar.setRangePinsByValue(userState.getTenantProfile().getTenantFilterSettings().sizeFrom, userState.getTenantProfile().getTenantFilterSettings().getSizeTo());
 
-        purposeCommunityRadioGroup = (RadioGroup)findViewById(R.id.purposeCommunity_RadioGroup);
         purposeCommunityRadioButtonYES = (RadioButton)findViewById(R.id.purposeCommunityYES_RadioButton);
         purposeCommunityRadioButtonNO = (RadioButton)findViewById(R.id.purposeCommunityNO_RadioButton);
         purposeCommunityRadioButtonNEI = (RadioButton)findViewById(R.id.purposeCommunityNEI_RadioButton);
@@ -132,7 +122,6 @@ public class ProfileTenantSettingsFilterActivity extends AbstractActivity implem
             purposeCommunityRadioButtonNEI.setChecked(true);
         }
 
-        smokingApartmentRadioGroup = (RadioGroup)findViewById(R.id.smokingApartment_RadioGroup);
         smokingApartmentRadioButtonYES = (RadioButton)findViewById(R.id.smokingApartmentYES_RadioButton);
         smokingApartmentRadioButtonNO = (RadioButton)findViewById(R.id.smokingApartmentNO_RadioButton);
         smokingApartmentRadioButtonNEI = (RadioButton)findViewById(R.id.smokingApartmentNEI_RadioButton);
@@ -150,7 +139,6 @@ public class ProfileTenantSettingsFilterActivity extends AbstractActivity implem
             smokingApartmentRadioButtonNEI.setChecked(true);
         }
 
-        balconyRadioGroup = (RadioGroup)findViewById(R.id.balcony_RadioGroup);
         balconyRadioButtonYES = (RadioButton)findViewById(R.id.balconyYES_RadioButton);
         balconyRadioButtonNO = (RadioButton)findViewById(R.id.balconyNO_RadioButton);
         balconyRadioButtonNEI = (RadioButton)findViewById(R.id.balconyNEI_RadioButton);
@@ -168,7 +156,6 @@ public class ProfileTenantSettingsFilterActivity extends AbstractActivity implem
             balconyRadioButtonNEI.setChecked(true);
         }
 
-        internetRadioGroup = (RadioGroup)findViewById(R.id.internet_RadioGroup);
         internetRadioButtonYES = (RadioButton)findViewById(R.id.internetYES_RadioButton);
         internetRadioButtonNO = (RadioButton)findViewById(R.id.internetNO_RadioButton);
         internetRadioButtonNEI = (RadioButton)findViewById(R.id.internetNEI_RadioButton);
@@ -186,7 +173,6 @@ public class ProfileTenantSettingsFilterActivity extends AbstractActivity implem
             internetRadioButtonNEI.setChecked(true);
         }
 
-        cabelTVRadioGroup = (RadioGroup)findViewById(R.id.tv_RadioGroup);
         cabelTVRadioButtonYES = (RadioButton)findViewById(R.id.tvYES_RadioButton);
         cabelTVRadioButtonNO = (RadioButton)findViewById(R.id.tvNO_RadioButton);
         cabelTVRadioButtonNEI = (RadioButton)findViewById(R.id.tvNEI_RadioButton);
@@ -204,7 +190,6 @@ public class ProfileTenantSettingsFilterActivity extends AbstractActivity implem
             cabelTVRadioButtonNEI.setChecked(true);
         }
 
-        washingMashineRadioGroup = (RadioGroup)findViewById(R.id.washingMashine_RadioGroup);
         washingMashineRadioButtonYES = (RadioButton)findViewById(R.id.washingMashineYES_RadioButton);
         washingMashineRadioButtonNO = (RadioButton)findViewById(R.id.washingMashineNO_RadioButton);
         washingMashineRadioButtonNEI = (RadioButton)findViewById(R.id.washingMashineNEI_RadioButton);
@@ -222,7 +207,6 @@ public class ProfileTenantSettingsFilterActivity extends AbstractActivity implem
             washingMashineRadioButtonNEI.setChecked(true);
         }
 
-        dryerRadioGroup = (RadioGroup)findViewById(R.id.dryer_RadioGroup);
         dryerRadioButtonYES = (RadioButton)findViewById(R.id.dryerYES_RadioButton);
         dryerRadioButtonNO = (RadioButton)findViewById(R.id.dryerNO_RadioButton);
         dryerRadioButtonNEI = (RadioButton)findViewById(R.id.dryerNEI_RadioButton);
@@ -240,7 +224,6 @@ public class ProfileTenantSettingsFilterActivity extends AbstractActivity implem
             dryerRadioButtonNEI.setChecked(true);
         }
 
-        bathtubeRadioGroup = (RadioGroup)findViewById(R.id.bathTube_RadioGroup);
         bathtubeRadioButtonYES = (RadioButton)findViewById(R.id.bathTubeYES_RadioButton);
         bathtubeRadioButtonNO = (RadioButton)findViewById(R.id.bathTubeNO_RadioButton);
         bathtubeRadioButtonNEI = (RadioButton)findViewById(R.id.bathTubeNEI_RadioButton);
@@ -258,7 +241,6 @@ public class ProfileTenantSettingsFilterActivity extends AbstractActivity implem
             bathtubeRadioButtonNEI.setChecked(true);
         }
 
-        petsRadioGroup = (RadioGroup)findViewById(R.id.pets_RadioGroup);
         petsRadioButtonYES = (RadioButton)findViewById(R.id.petsYES_RadioButton);
         petsRadioButtonNO = (RadioButton)findViewById(R.id.petsNO_RadioButton);
         petsRadioButtonNEI = (RadioButton)findViewById(R.id.petsNEI_RadioButton);
@@ -277,6 +259,7 @@ public class ProfileTenantSettingsFilterActivity extends AbstractActivity implem
         }
 
         saveButton = (Button)findViewById(R.id.done_2_tenant_profile);
+        saveButton.setText("SAVE!");
     }
 
     private void sendProfile(){
@@ -302,30 +285,112 @@ public class ProfileTenantSettingsFilterActivity extends AbstractActivity implem
                         int changeMinSize = Integer.parseInt(minSizeRangeTextView.getText().toString());
                         int changeMaxSize = Integer.parseInt(maxSizeRangeTextView.getText().toString());
 
-                        int changePurposeCommunity = purposeCommunityRadioGroup.getCheckedRadioButtonId() == purposeCommunityRadioButtonYES.getId() ? 0 : 1;
-                        int changeSmokingApartment = smokingApartmentRadioGroup.getCheckedRadioButtonId() == smokingApartmentRadioButtonYES.getId() ? 0 : 1;
-                        int changeBalcony = balconyRadioGroup.getCheckedRadioButtonId() == balconyRadioButtonYES.getId() ? 0 : 1;
-                        int changeInternet = internetRadioGroup.getCheckedRadioButtonId() == balconyRadioButtonYES.getId() ? 0 : 1;
-                        int changeCabelTV = cabelTVRadioGroup.getCheckedRadioButtonId() == cabelTVRadioButtonYES.getId() ? 0 : 1;
-                        int changeWashingMachine = washingMashineRadioGroup.getCheckedRadioButtonId() == washingMashineRadioButtonYES.getId() ? 0 : 1;
-                        int changeDryer = dryerRadioGroup.getCheckedRadioButtonId() == dryerRadioButtonYES.getId() ? 0 : 1;
-                        int changeBathtube = bathtubeRadioGroup.getCheckedRadioButtonId() == bathtubeRadioButtonYES.getId() ? 0 : 1;
-                        int changePets = petsRadioGroup.getCheckedRadioButtonId() == petsRadioButtonYES.getId() ? 0 : 1;
+                        int isPurposeApartment = 2;
+                        int isSmokerApartment = 2;
+                        int isBalcony = 2;
+                        int isInternet = 2;
+                        int isTVCable = 2;
+                        int isWashingMashine = 2;
+                        int isDryer = 2;
+                        int isBathtube = 2;
+                        int isPetAllowed = 2;
+
+                        if (purposeCommunityRadioButtonYES.isChecked()){
+                            isPurposeApartment = 0;
+                        }
+                        if (purposeCommunityRadioButtonNO.isChecked()){
+                            isPurposeApartment = 1;
+                        }
+                        if (purposeCommunityRadioButtonNEI.isChecked()){
+                            isPurposeApartment = 2;
+                        }
+                        if (smokingApartmentRadioButtonYES.isChecked()){
+                            isSmokerApartment = 0;
+                        }
+                        if (smokingApartmentRadioButtonNO.isChecked()){
+                            isSmokerApartment = 1;
+                        }
+                        if (smokingApartmentRadioButtonNEI.isChecked()){
+                            isSmokerApartment = 2;
+                        }
+                        if (balconyRadioButtonYES.isChecked()){
+                            isBalcony = 0;
+                        }
+                        if (balconyRadioButtonNO.isChecked()){
+                            isBalcony = 1;
+                        }
+                        if (balconyRadioButtonNEI.isChecked()){
+                            isBalcony = 2;
+                        }
+                        if (internetRadioButtonYES.isChecked()){
+                            isInternet = 0;
+                        }
+                        if (internetRadioButtonNO.isChecked()){
+                            isInternet = 1;
+                        }
+                        if (internetRadioButtonNEI.isChecked()){
+                            isInternet = 2;
+                        }
+                        if (cabelTVRadioButtonYES.isChecked()){
+                            isTVCable = 0;
+                        }
+                        if (cabelTVRadioButtonNO.isChecked()){
+                            isTVCable = 1;
+                        }
+                        if (cabelTVRadioButtonNEI.isChecked()){
+                            isTVCable = 2;
+                        }
+                        if (washingMashineRadioButtonYES.isChecked()){
+                            isWashingMashine = 0;
+                        }
+                        if (washingMashineRadioButtonNO.isChecked()){
+                            isWashingMashine = 1;
+                        }
+                        if (washingMashineRadioButtonNEI.isChecked()){
+                            isWashingMashine = 2;
+                        }
+                        if (dryerRadioButtonYES.isChecked()){
+                            isDryer = 0;
+                        }
+                        if (dryerRadioButtonNO.isChecked()){
+                            isDryer = 1;
+                        }
+                        if (dryerRadioButtonNEI.isChecked()){
+                            isDryer = 2;
+                        }
+                        if (bathtubeRadioButtonYES.isChecked()){
+                            isBathtube = 0;
+                        }
+                        if (bathtubeRadioButtonNO.isChecked()){
+                            isBathtube = 1;
+                        }
+                        if (bathtubeRadioButtonNEI.isChecked()){
+                            isBathtube = 2;
+                        }
+                        if (petsRadioButtonYES.isChecked()){
+                            isPetAllowed = 0;
+                        }
+                        if (petsRadioButtonNO.isChecked()){
+                            isPetAllowed = 1;
+                        }
+                        if (petsRadioButtonNEI.isChecked()){
+                            isPetAllowed = 2;
+                        }
 
                         TenantFilterSettings tenantFilterSettings = new TenantFilterSettings();
                         tenantFilterSettings.setPriceFrom(changeMinPrice);
                         tenantFilterSettings.setPriceTo(changeMaxPrice);
                         tenantFilterSettings.setSizeFrom(changeMinSize);
                         tenantFilterSettings.setSizeTo(changeMaxSize);
-                        tenantFilterSettings.setPurposeApartment(changePurposeCommunity);
-                        tenantFilterSettings.setSmokerApartment(changeSmokingApartment);
-                        tenantFilterSettings.setBalcony(changeBalcony);
-                        tenantFilterSettings.setInternet(changeInternet);
-                        tenantFilterSettings.setTvCable(changeCabelTV);
-                        tenantFilterSettings.setWashingMachine(changeWashingMachine);
-                        tenantFilterSettings.setDryer(changeDryer);
-                        tenantFilterSettings.setBathtub(changeBathtube);
-                        tenantFilterSettings.setPetsAllowed(changePets);
+                        tenantFilterSettings.setPurposeApartment(isPurposeApartment);
+                        tenantFilterSettings.setSmokerApartment(isSmokerApartment);
+                        tenantFilterSettings.setBalcony(isBalcony);
+                        tenantFilterSettings.setInternet(isInternet);
+                        tenantFilterSettings.setTvCable(isTVCable);
+                        tenantFilterSettings.setWashingMachine(isWashingMashine);
+                        tenantFilterSettings.setDryer(isDryer);
+                        tenantFilterSettings.setBathtub(isBathtube);
+                        tenantFilterSettings.setPetsAllowed(isPetAllowed);
 
                         mPresenter.sendFilterSettings(tenantFilterSettings);
                     }

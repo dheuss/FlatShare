@@ -1,13 +1,11 @@
 package com.flatshare.presentation.ui.activities.profile;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,29 +17,22 @@ import com.flatshare.presentation.presenters.profile.ApartmentSettingsPresenter;
 import com.flatshare.presentation.presenters.profile.impl.ApartmentSettingsPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.MainActivity;
-import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-/**
- * Created by Arber on 16/12/2016.
- */
 public class ApartmentSettingsActivity extends AbstractActivity implements ApartmentSettingsPresenter.View{
 
     private TextView minAgeTextView;
     private TextView maxAgeTextView;
     private RangeBar ageRangeBar;
 
-    private RadioGroup genderRadioGroup;
     private RadioButton maleGenderRadioButton;
     private RadioButton femaleGenderRadioButton;
     private RadioButton allGenderRadioButton;
 
-    private RadioGroup smokerRadioGroup;
     private RadioButton yesSmokerRadioGroup;
     private RadioButton noSmokerRadioButton;
     private RadioButton allSmokerRadioButton;
 
-    private RadioGroup petsRadioGroup;
     private RadioButton yesPetsRadioButton;
     private RadioButton noPetsRadioButton;
     private RadioButton allPetsRadioButton;
@@ -54,7 +45,6 @@ public class ApartmentSettingsActivity extends AbstractActivity implements Apart
 
     private ApartmentSettingsPresenter mPresenter;
     private static final String TAG = "ApartmentSettingsActivity";
-    private AlertDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,17 +142,14 @@ public class ApartmentSettingsActivity extends AbstractActivity implements Apart
         maxAgeTextView = (TextView)findViewById(R.id.apartment_settings_age_range_4);
         ageRangeBar = (RangeBar)findViewById(R.id.rangebar_age_range);
 
-        genderRadioGroup = (RadioGroup)findViewById(R.id.genderApartmentSettingsRadioGroup);
         maleGenderRadioButton = (RadioButton)findViewById(R.id.genderMaleApartmentSettingsRadioButton);
         femaleGenderRadioButton = (RadioButton)findViewById(R.id.genderFemaleApartmentSettingsButton);
         allGenderRadioButton = (RadioButton)findViewById(R.id.genderALLApartmentSettingsButton);
 
-        smokerRadioGroup = (RadioGroup)findViewById(R.id.smokerApartmentSettingsRadioGroup);
         yesSmokerRadioGroup = (RadioButton)findViewById(R.id.smokerYesApartmentSettingsRadioButton);
         noSmokerRadioButton = (RadioButton)findViewById(R.id.smokerNoApartmentSettingsButton);
         allSmokerRadioButton = (RadioButton)findViewById(R.id.smokerALLApartmentSettingsButton);
 
-        petsRadioGroup = (RadioGroup)findViewById(R.id.petsApartmentSettingsRadioGroup);
         yesPetsRadioButton = (RadioButton)findViewById(R.id.petYesApartmentSettingsRadioButton);
         noPetsRadioButton = (RadioButton)findViewById(R.id.petNoApartmentSettingsButton);
         allPetsRadioButton = (RadioButton)findViewById(R.id.petALLApartmentSettingsButton);

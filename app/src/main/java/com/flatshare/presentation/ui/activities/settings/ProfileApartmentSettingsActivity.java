@@ -85,21 +85,48 @@ public class ProfileApartmentSettingsActivity extends AbstarctFragmentAcivity im
         qrButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getActivity(), "QR Code Scanner doesn't work at the moment", Toast.LENGTH_SHORT).show();
             }
         });
 
         changeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ProfileApartmentSettingsFilterActivity.class));
+
+                LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+                View mView = layoutInflater.inflate(R.layout.activity_popup, null);
+
+                AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(getActivity());
+                alertDialogBuilderUserInput.setView(mView);
+
+                final TextView popUpTextView = (TextView) mView.findViewById(R.id.popup_TextView);
+                popUpTextView.setText("Have you saved your apartment profile changes?");
+
+                alertDialogBuilderUserInput
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(getActivity(), ProfileApartmentSettingsFilterActivity.class));
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+                alertDialogAndroid.show();
+
             }
         });
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProfileApartmentSettingsActivity.this.sendProfile();
+                sendProfile();
             }
         });
 
@@ -177,8 +204,43 @@ public class ProfileApartmentSettingsActivity extends AbstarctFragmentAcivity im
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        startActivity(intent);
+                        roommatesTextView.setText(userState.getApartmentProfile().getRoommateIds().size()+"");
+                        priceEditText.setText(userState.getApartmentProfile().getPrice() + "");
+                        sizeEditText.setText(userState.getApartmentProfile().getArea() + "");
+                        streetEditText.setText(userState.getApartmentProfile().getApartmentLocation().getStreet()+"");
+                        houseNumberEditText.setText(userState.getApartmentProfile().getApartmentLocation().getHouseNr()+"");
+                        zipCodeEditText.setText(userState.getApartmentProfile().getApartmentLocation().getZipCode()+"");
+
+                        if (userState.getApartmentProfile().hasInternet()){
+                            internetYESRadioButton.setChecked(true);
+                            internetNORadioButton.setChecked(false);
+                        } else {
+                            internetYESRadioButton.setChecked(false);
+                            internetNORadioButton.setChecked(true);
+                        }
+                        if (userState.getApartmentProfile().isSmokerApartment()){
+                            smokerYESRadioButton.setChecked(true);
+                            smokerNORadioButton.setChecked(false);
+                        } else {
+                            smokerYESRadioButton.setChecked(false);
+                            smokerNORadioButton.setChecked(true);
+                        }
+                        if (userState.getApartmentProfile().hasPets()){
+                            petsYESRadioButton.setChecked(true);
+                            petsNORadioButton.setChecked(false);
+                        } else {
+                            petsYESRadioButton.setChecked(false);
+                            petsNORadioButton.setChecked(true);
+                        }
+                        if (userState.getApartmentProfile().hasWashingMachine()){
+                            washingMashineYESRadioButton.setChecked(true);
+                            washingMashineNORadioButton.setChecked(false);
+                        } else {
+                            washingMashineYESRadioButton.setChecked(false);
+                            washingMashineNORadioButton.setChecked(true);
+                        }
+
+                        dialog.dismiss();
                     }
                 });
 

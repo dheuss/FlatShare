@@ -1,8 +1,9 @@
 package com.flatshare.presentation.ui.activities.settings;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.profile.TenantProfilePresenter;
 import com.flatshare.presentation.presenters.profile.impl.TenantProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstarctFragmentAcivity;
+import com.flatshare.presentation.ui.activities.MainActivity;
 import com.flatshare.threading.MainThreadImpl;
 
 public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity implements TenantProfilePresenter.View {
@@ -76,7 +78,32 @@ public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity imple
         changeFilterSettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), ProfileTenantSettingsFilterActivity.class));
+                LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+                View mView = layoutInflater.inflate(R.layout.activity_popup, null);
+
+                AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(getActivity());
+                alertDialogBuilderUserInput.setView(mView);
+
+                final TextView popUpTextView = (TextView) mView.findViewById(R.id.popup_TextView);
+                popUpTextView.setText("Have you saved your user profile changes?");
+
+                alertDialogBuilderUserInput
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(getActivity(), ProfileTenantSettingsFilterActivity.class));
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+                alertDialogAndroid.show();
             }
         });
 
@@ -92,25 +119,81 @@ public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity imple
 
     private void sendProfile() {
 
-        String changeName = changeNameEditText.getText().toString();
-        int changeAge = Integer.parseInt(changeAgeEditText.getText().toString());
-        int changGender = changeGenderRadioGroup.getCheckedRadioButtonId() == changeGenderMaleRadioButton.getId() ? 0 : 1;
-        boolean changeSmoker = changeSmokerRadioGroup.getCheckedRadioButtonId() == changeSmokerYESRadioButton.getId();
-        boolean changePets = changePetsRadioGroup.getCheckedRadioButtonId() == changePetsYESRadioButton.getId();
-        String changeOccupation = changeOccupationSpinner.getSelectedItem().toString();
-        String changeInfo = changeInfoEditText.getText().toString();
-        int changeDuration = Integer.parseInt(changeDurationOfStaySpinner.getSelectedItem().toString());
+        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        View mView = layoutInflater.inflate(R.layout.activity_popup, null);
 
-        TenantProfile tenantProfile = new TenantProfile();
-        tenantProfile.setFirstName(changeName);
-        tenantProfile.setAge(changeAge);
-        tenantProfile.setGender(changGender);
-        tenantProfile.setSmoker(changeSmoker);
-        tenantProfile.setPets(changePets);
-        tenantProfile.setOccupation(changeOccupation);
-        tenantProfile.setShortBio(changeInfo);
-        tenantProfile.setDurationOfStay(changeDuration);
-        mPresenter.sendProfile(tenantProfile);
+        AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(getActivity());
+        alertDialogBuilderUserInput.setView(mView);
+
+        final TextView popUpTextView = (TextView) mView.findViewById(R.id.popup_TextView);
+        popUpTextView.setText("Do you want to save your profile?");
+
+
+        alertDialogBuilderUserInput
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String changeName = changeNameEditText.getText().toString();
+                        int changeAge = Integer.parseInt(changeAgeEditText.getText().toString());
+                        int changGender = changeGenderRadioGroup.getCheckedRadioButtonId() == changeGenderMaleRadioButton.getId() ? 0 : 1;
+                        boolean changeSmoker = changeSmokerRadioGroup.getCheckedRadioButtonId() == changeSmokerYESRadioButton.getId();
+                        boolean changePets = changePetsRadioGroup.getCheckedRadioButtonId() == changePetsYESRadioButton.getId();
+                        String changeOccupation = changeOccupationSpinner.getSelectedItem().toString();
+                        String changeInfo = changeInfoEditText.getText().toString();
+                        int changeDuration = Integer.parseInt(changeDurationOfStaySpinner.getSelectedItem().toString());
+
+                        TenantProfile tenantProfile = new TenantProfile();
+
+                        tenantProfile.setFirstName(changeName);
+                        tenantProfile.setAge(changeAge);
+                        tenantProfile.setGender(changGender);
+                        tenantProfile.setSmoker(changeSmoker);
+                        tenantProfile.setPets(changePets);
+                        tenantProfile.setOccupation(changeOccupation);
+                        tenantProfile.setShortBio(changeInfo);
+                        tenantProfile.setDurationOfStay(changeDuration);
+
+                        mPresenter.sendProfile(tenantProfile);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        changeNameEditText.setText(userState.getTenantProfile().getFirstName());
+                        changeAgeEditText.setText(userState.getTenantProfile().getAge()+"");
+
+                        if (userState.getTenantProfile().getGender() == 0) {
+                            changeGenderMaleRadioButton.setChecked(true);
+                            changeGenderFemaleRadioButton.setChecked(false);
+                        } else if (userState.getTenantProfile().getGender() == 1){
+                            changeGenderMaleRadioButton.setChecked(false);
+                            changeGenderFemaleRadioButton.setChecked(true);
+                        }
+
+                        if (userState.getTenantProfile().isSmoker()){
+                            changeSmokerYESRadioButton.setChecked(true);
+                            changeSmokerNORadioButton.setChecked(false);
+                        } else {
+                            changeSmokerYESRadioButton.setChecked(false);
+                            changeSmokerNORadioButton.setChecked(true);
+                        }
+
+                        if (userState.getTenantProfile().hasPets()){
+                            changePetsYESRadioButton.setChecked(true);
+                            changePetsNORadioButton.setChecked(false);
+                        } else {
+                            changePetsYESRadioButton.setChecked(false);
+                            changePetsNORadioButton.setChecked(true);
+                        }
+
+                        changeInfoEditText.setText(userState.getTenantProfile().getShortBio());
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+        alertDialogAndroid.show();
     }
 
     private void bindView(View view){
