@@ -197,7 +197,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     public void setDatesFromWG(List<String> dateList, List<String> timeList){
         for (int i = 0; i < dateList.size()-1; i++) {
             dateTextView[i].setText(dateList.get(i) + " " + timeList.get(i));
-            dateButton[i].setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.checkmark));
+            dateButton[i].setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.done_icon));
             dateButton[i].setVisibility(View.VISIBLE);
             isTenant = true;
         }
