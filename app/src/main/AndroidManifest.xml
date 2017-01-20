@@ -26,7 +26,6 @@
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
 
-
         <!-- LoginActivity always starts -->
         <activity
             android:name=".presentation.ui.activities.auth.login.LoginActivity"
@@ -72,9 +71,6 @@
             android:name=".presentation.ui.activities.matching.QRCodeReaderActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.activities.matchingoverview.MatchingOverviewActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".presentation.ui.activities.matchingoverview.matchinginfo.MatchingInfoActivity"
             android:screenOrientation="portrait" />
         <!-- Facebook Activity -->
@@ -97,14 +93,21 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.ui.activities.profile.RoommateWaitingActivity" />
-        <activity android:name=".presentation.ui.activities.settings.ProfileApartmentSettingsActivity" />
-        <activity android:name=".presentation.ui.activities.settings.ProfileTenantSettingsFilterActivity" />
-        <activity android:name=".presentation.ui.activities.settings.ProfileApartmentSettingsFilterActivity" />
+        <activity
+            android:name=".presentation.ui.activities.profile.RoommateWaitingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.ui.activities.settings.ProfileTenantSettingsFilterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.ui.activities.settings.ProfileApartmentSettingsFilterActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.ui.activities.MainActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".presentation.ui.activities.profile.RoommateProfileActivity"></activity>
+        <activity
+            android:name=".presentation.ui.activities.profile.RoommateProfileActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
