@@ -15,21 +15,14 @@ import com.flatshare.presentation.presenters.profile.impl.PrimaryProfilePresente
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-/**
- * Created by Arber on 16/12/2016.
- */
-public class PrimaryProfileActivity extends AbstractActivity implements PrimaryProfilePresenter.View {
 
+public class PrimaryProfileActivity extends AbstractActivity implements PrimaryProfilePresenter.View {
 
     private Button createTenantProfileButton;
     private Button createRoommateProfileButton;
 
-//    private Button createApartmentProfileButton;
-//    private Button createRoommateQRCodeButton;
-
     private PrimaryProfilePresenter mPresenter;
     private static final String TAG = "PrimaryProfileActivity";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +30,6 @@ public class PrimaryProfileActivity extends AbstractActivity implements PrimaryP
 
         bindView();
 
-        // create a presenter for this view
         mPresenter = new PrimaryProfilePresenterImpl(
                 MainThreadImpl.getInstance(),
                 this
@@ -56,20 +48,6 @@ public class PrimaryProfileActivity extends AbstractActivity implements PrimaryP
                 sendProfile(ProfileType.ROOMMATE.getValue());
             }
         });
-
-//        createApartmentProfileButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                PrimaryProfileActivity.this.sendProfile(ProfileType.APARTMENT.getValue());
-//            }
-//        });
-//        createRoommateQRCodeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                PrimaryProfileActivity.this.sendProfile(ProfileType.ROOMMATE.getValue());
-//            }
-//        });
-
     }
 
     @Override
@@ -78,7 +56,6 @@ public class PrimaryProfileActivity extends AbstractActivity implements PrimaryP
     }
 
     private void sendProfile(int classificationId) {
-
 
         PrimaryUserProfile primaryUserProfile = new PrimaryUserProfile();
         primaryUserProfile.setClassificationId(classificationId);
@@ -90,16 +67,11 @@ public class PrimaryProfileActivity extends AbstractActivity implements PrimaryP
     private void bindView() {
         createTenantProfileButton = (Button) findViewById(R.id.create_tenant_profile_button);
         createRoommateProfileButton = (Button) findViewById(R.id.create_roommate_profile_button);
-//        createApartmentProfileButton = (Button) findViewById(R.id.create_apartment_profile_button);
-//        createRoommateQRCodeButton = (Button) findViewById(R.id.create_roommate_qr_code_button);
     }
-
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // let's start welcome message retrieval when the app resumes
         mPresenter.resume();
     }
 

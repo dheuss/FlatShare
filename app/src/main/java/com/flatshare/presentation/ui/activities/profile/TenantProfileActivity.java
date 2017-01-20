@@ -41,7 +41,6 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
     private Spinner durationSpinner;
 
     private Button profileDoneButton;
-    //TODO takeAPicture
     private Button uploadPictureButton;
 
     //TODO Hobbies

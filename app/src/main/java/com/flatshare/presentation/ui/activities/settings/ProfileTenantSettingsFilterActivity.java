@@ -118,11 +118,11 @@ public class ProfileTenantSettingsFilterActivity extends AbstractActivity implem
         purposeCommunityRadioButtonYES = (RadioButton)findViewById(R.id.purposeCommunityYES_RadioButton);
         purposeCommunityRadioButtonNO = (RadioButton)findViewById(R.id.purposeCommunityNO_RadioButton);
         purposeCommunityRadioButtonNEI = (RadioButton)findViewById(R.id.purposeCommunityNEI_RadioButton);
-        if (userState.getTenantProfile().getTenantFilterSettings().getPurposeApartment() == 1){
+        if (userState.getTenantProfile().getTenantFilterSettings().getPurposeApartment() == 0){
             purposeCommunityRadioButtonYES.setChecked(true);
             purposeCommunityRadioButtonNO.setChecked(false);
             purposeCommunityRadioButtonNEI.setChecked(false);
-        } else if (userState.getTenantProfile().getTenantFilterSettings().getPurposeApartment() == 0){
+        } else if (userState.getTenantProfile().getTenantFilterSettings().getPurposeApartment() == 1){
             purposeCommunityRadioButtonYES.setChecked(false);
             purposeCommunityRadioButtonNO.setChecked(true);
             purposeCommunityRadioButtonNEI.setChecked(false);

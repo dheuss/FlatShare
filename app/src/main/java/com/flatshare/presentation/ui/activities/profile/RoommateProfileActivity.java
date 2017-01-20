@@ -5,13 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.PopupWindow;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -25,9 +22,6 @@ import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.RoommateQRActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-/**
- * Created by Arber on 16/01/2017.
- */
 public class RoommateProfileActivity extends AbstractActivity implements RoommateProfilePresenter.View {
 
     private static final String TAG = "RoommateProfileActivity";
@@ -43,14 +37,12 @@ public class RoommateProfileActivity extends AbstractActivity implements Roommat
 
     private RoommateProfilePresenter mPresenter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         bindView();
 
-        // create a presenter for this view
         mPresenter = new RoommateProfilePresenterImpl(
                 MainThreadImpl.getInstance(),
                 this
@@ -102,15 +94,6 @@ public class RoommateProfileActivity extends AbstractActivity implements Roommat
     protected int getLayoutResourceId() {
         return R.layout.activity_roommate_profile;
     }
-
-//    private void sendProfile(int classificationId) {
-//
-//        PrimaryUserProfile primaryUserProfile = new PrimaryUserProfile();
-//        primaryUserProfile.setClassificationId(classificationId);
-//
-//        mPresenter.sendProfile(primaryUserProfile);
-//
-//    }
 
     private void bindView() {
 
