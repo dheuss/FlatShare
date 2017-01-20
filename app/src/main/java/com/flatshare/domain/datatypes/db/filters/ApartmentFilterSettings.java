@@ -21,11 +21,11 @@ public class ApartmentFilterSettings extends FilterSettings {
     @PropertyName("smoker")
     public int smoker;
 
-//    @PropertyName("occupation")
-//    public String occupation;
-//
-//    @PropertyName("duration_of_stay")
-//    public int durationOfStay;
+    @PropertyName("occupation")
+    public String occupation;
+
+    @PropertyName("duration_of_stay")
+    public int durationOfStay;
 
     @PropertyName("pets_allowed")
     public int petsAllowed;
@@ -86,5 +86,25 @@ public class ApartmentFilterSettings extends FilterSettings {
     @Exclude
     public void setPetsAllowed(int petsAllowed) {
         this.petsAllowed = petsAllowed;
+    }
+
+    @Exclude
+    public String getOccupation() {
+        return occupation;
+    }
+
+    @Exclude
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
+    @Exclude
+    public int getDurationOfStay() {
+        return durationOfStay;
+    }
+
+    @Exclude
+    public void setDurationOfStay(int durationOfStay) {
+        this.durationOfStay = durationOfStay;
     }
 }

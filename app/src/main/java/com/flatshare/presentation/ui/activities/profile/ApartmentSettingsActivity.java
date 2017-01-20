@@ -141,6 +141,8 @@ public class ApartmentSettingsActivity extends AbstractActivity implements Apart
         apartmentFilterSettings.setGender(gender);
         apartmentFilterSettings.setSmoker(smoker);
         apartmentFilterSettings.setPetsAllowed(pets);
+        apartmentFilterSettings.setOccupation(occupation);
+        apartmentFilterSettings.setDurationOfStay(durationOfStay);
 
         mPresenter.sendFilterSettings(apartmentFilterSettings);
     }

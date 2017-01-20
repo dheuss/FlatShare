@@ -43,8 +43,6 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
     private Button profileDoneButton;
     private Button uploadPictureButton;
 
-    //TODO Hobbies
-
     private int PICK_IMAGE_REQUEST = 1;
 
     private TenantProfilePresenter mPresenter;
@@ -212,7 +210,6 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
 
     @Override
     public void changeToTenantSettings() {
-        //TODO change to PrimaryProfileActivity
         Log.d(TAG, "success! changed to TenantSettings!");
         Intent intent = new Intent(this, TenantSettingsActivity.class);
         startActivity(intent);

@@ -5,20 +5,14 @@ import android.util.Log;
 
 import timber.log.Timber;
 
-
 public class AndroidApplication extends Application {
 
-
     private static final String TAG = "AndroidApplication";
-
 
     @Override
     public void onCreate() {
         super.onCreate();
-
         Log.d(TAG, "inside onCreate(), Timber.plant(new DebugTree());");
-
-        // initiate Timber
         Timber.plant(new Timber.DebugTree());
     }
 }

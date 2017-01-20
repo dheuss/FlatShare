@@ -238,7 +238,27 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             result = false;
         }
 
-        if(profilePicUploaded){
+        if (!internetYesRB.isChecked() && !internetNoRB.isChecked()){
+            internetYesRB.setError(getString(R.string.check_rb_error));
+            result = false;
+        }
+
+        if (!smokerYesRB.isChecked() && !smokerNoRB.isChecked()){
+            smokerYesRB.setError(getString(R.string.check_rb_error));
+            result = false;
+        }
+
+        if (!petsYesRB.isChecked() && !petsNoRB.isChecked()){
+            petsYesRB.setError(getString(R.string.check_rb_error));
+            result = false;
+        }
+
+        if (!washingMachineYesRB.isChecked() && !washingMachineNoRB.isChecked()){
+            washingMachineYesRB.setError(getString(R.string.check_rb_error));
+            result = false;
+        }
+
+        if (profilePicUploaded) {
             uploadPictureButton.setError(getString(R.string.picture_required_error));
             result = false;
         }
@@ -301,12 +321,10 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
     @Override
     public void updateAdapter(Map<String, String> nicknameIdMap) {
-
         this.nicknameIdMap = nicknameIdMap;
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>(nicknameIdMap.keySet()));
 
         roommatesEmailsMultiAC.setAdapter(adapter);
-
     }
 
     private void initMultiAutoComplete() {
