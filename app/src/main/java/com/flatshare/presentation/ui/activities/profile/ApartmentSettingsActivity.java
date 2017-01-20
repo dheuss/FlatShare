@@ -53,7 +53,7 @@ public class ApartmentSettingsActivity extends AbstractActivity implements Apart
     private Button doneButton;
 
     private ApartmentSettingsPresenter mPresenter;
-    private static final String TAG = "TenantProfileAct";
+    private static final String TAG = "ApartmentSettingsActivity";
     private AlertDialog progressDialog;
 
     @Override
@@ -96,20 +96,52 @@ public class ApartmentSettingsActivity extends AbstractActivity implements Apart
     }
 
     private void sendFilterSettings() {
-        int minAge =  Integer.parseInt(minAgeTextView.getText().toString());;
-        int maxAge = Integer.parseInt(maxAgeTextView.getText().toString());;
-//        int gender;
-//        int smoker;
-//        int pets;
-//        String occupation = occupationSpinner.getSelectedItem().toString();
-//        int durationOfStay = durationOfStaySpinner.getSelectedItem().toString();
+        int minAge =  Integer.parseInt(minAgeTextView.getText().toString());
+        int maxAge = Integer.parseInt(maxAgeTextView.getText().toString());
+
+        int gender = 2;
+        int smoker = 2;
+        int pets = 2;
+
+        if (maleGenderRadioButton.isChecked()){
+            gender = 0;
+        }
+        if (femaleGenderRadioButton.isChecked()){
+            gender = 1;
+        }
+        if (allGenderRadioButton.isChecked()){
+            gender = 2;
+        }
+        if (yesSmokerRadioGroup.isChecked()){
+            smoker = 0;
+        }
+        if (noSmokerRadioButton.isChecked()){
+            smoker = 1;
+        }
+        if (allSmokerRadioButton.isChecked()){
+            smoker = 2;
+        }
+        if (yesPetsRadioButton.isChecked()){
+            pets = 0;
+        }
+        if (noPetsRadioButton.isChecked()){
+            pets = 1;
+        }
+        if (allPetsRadioButton.isChecked()){
+            pets = 2;
+        }
+
+        String occupation = occupationSpinner.getSelectedItem().toString();
+        int durationOfStay = Integer.parseInt(durationOfStaySpinner.getSelectedItem().toString());
 
         ApartmentFilterSettings apartmentFilterSettings = new ApartmentFilterSettings();
+
         apartmentFilterSettings.setAgeFrom(minAge);
         apartmentFilterSettings.setAgeTo(maxAge);
-//        apartmentFilterSettings.setGender(gender);
-//        apartmentFilterSettings.setSmoker(smoker);
-//        apartmentFilterSettings.setPetsAllowed(pets);
+        apartmentFilterSettings.setGender(gender);
+        apartmentFilterSettings.setSmoker(smoker);
+        apartmentFilterSettings.setPetsAllowed(pets);
+
         mPresenter.sendFilterSettings(apartmentFilterSettings);
     }
 

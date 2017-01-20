@@ -118,6 +118,8 @@
     <string name="check_rb_error">Please check one option</string>
     <string name="picture_required_error">Please upload a profile picture</string>
     <string name="take_picture_apartment_profile">Upload a picture of your apartment</string>
+    <string name="wait_roommate">Please Wait</string>
+    <string name="wait_roommate_info">Please wait until the apartment owner has added you to your group!</string>
 
     <string-array name="occupation">
         <item>Student</item>

@@ -1,6 +1,5 @@
 package com.flatshare.presentation.ui.activities.profile;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,11 +19,6 @@ import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.MainActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-import dmax.dialog.SpotsDialog;
-
-/**
- * Created by Arber on 16/12/2016.
- */
 public class TenantSettingsActivity extends AbstractActivity implements TenantSettingsPresenter.View {
 
     private TextView minPrice;
@@ -57,7 +51,6 @@ public class TenantSettingsActivity extends AbstractActivity implements TenantSe
 
     private TenantSettingsPresenter mPresenter;
     private static final String TAG = "TenantProfileAct";
-    private AlertDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +97,7 @@ public class TenantSettingsActivity extends AbstractActivity implements TenantSe
         profileDoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TenantSettingsActivity.this.sendFilterSettings();
+                sendFilterSettings();
             }
         });
 
@@ -283,8 +276,6 @@ public class TenantSettingsActivity extends AbstractActivity implements TenantSe
         neiPetsRadioButton = (RadioButton) findViewById(R.id.petsNEI_RadioButton);
 
         profileDoneButton = (Button) findViewById(R.id.done_2_tenant_profile);
-
-        progressDialog = new SpotsDialog(this, R.style.Custom);
     }
 
     @Override

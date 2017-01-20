@@ -37,7 +37,7 @@ public class RoommateWaitingActivity extends AbstractActivity implements Roommat
     }
 
     private void addWaitingImage() {
-        //TODO: add some waiting image
+        //TODO: add some waiting_gif image
     }
 
     @Override

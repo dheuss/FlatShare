@@ -1,13 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_roommate_waiting"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context="com.flatshare.presentation.ui.activities.profile.RoommateWaitingActivity">
+    android:layout_height="match_parent"
+    android:background="@color/windowBackground"
+    tools:context="com.flatshare.presentation.ui.activities.profile.ApartmentProfileActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></RelativeLayout>
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/apartment_profile_inital"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginTop="@dimen/marginTop"
+            android:text="@string/wait_roommate"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/apartment_profile_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/apartment_profile_inital"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:gravity="center"
+            android:text="@string/wait_roommate_info" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/apartment_profile_info"
+            android:background="@color/windowBackground"
+            android:src="@drawable/waiting_gif" />
+
+
+    </RelativeLayout>
 
 </ScrollView>

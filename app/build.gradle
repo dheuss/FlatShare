@@ -97,6 +97,6 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:10.0.1'
 
     // gif player
-//    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.4'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.4'
 }
 apply plugin: 'com.google.gms.google-services'
