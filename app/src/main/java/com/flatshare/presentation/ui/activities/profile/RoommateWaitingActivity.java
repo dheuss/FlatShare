@@ -3,13 +3,13 @@ package com.flatshare.presentation.ui.activities.profile;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.presentation.presenters.matching.RoommateWaitingPresenter;
 import com.flatshare.presentation.presenters.matching.impl.RoommateWaitingPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.MainActivity;
-import com.flatshare.presentation.ui.activities.matching.QRCodeReaderActivity;
 import com.flatshare.threading.MainThreadImpl;
 
 public class RoommateWaitingActivity extends AbstractActivity implements RoommateWaitingPresenter.View {
@@ -20,8 +20,6 @@ public class RoommateWaitingActivity extends AbstractActivity implements Roommat
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        addWaitingImage();
 
         mPresenter = new RoommateWaitingPresenterImpl(
                 MainThreadImpl.getInstance(),
@@ -36,10 +34,6 @@ public class RoommateWaitingActivity extends AbstractActivity implements Roommat
         }
     }
 
-    private void addWaitingImage() {
-        //TODO: add some waiting_gif image
-    }
-
     @Override
     protected int getLayoutResourceId() {
         return R.layout.activity_roommate_waiting;
@@ -47,7 +41,7 @@ public class RoommateWaitingActivity extends AbstractActivity implements Roommat
 
     @Override
     public void showError(String message) {
-        //TODO:
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
