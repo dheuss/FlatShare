@@ -17,9 +17,6 @@ import com.flatshare.presentation.ui.activities.auth.login.LoginActivity;
 import com.flatshare.presentation.ui.activities.profile.PrimaryProfileActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-/**
- * Created by Arber on 16/12/2016.
- */
 public class RegisterActivity extends AbstractActivity implements RegisterPresenter.View {
 
     private EditText emailEditText;
@@ -27,7 +24,6 @@ public class RegisterActivity extends AbstractActivity implements RegisterPresen
     private EditText nameEditText;
 
     private Button registerButton;
-    private Button forgotYourPasswordButton;
     private Button alreadyRegisteredButton;
 
     private RegisterPresenter mPresenter;
@@ -52,13 +48,7 @@ public class RegisterActivity extends AbstractActivity implements RegisterPresen
             }
         });
 
-        forgotYourPasswordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(RegisterActivity.this, ResetPasswordActivity.class));
-                finish();
-            }
-        });
+
         alreadyRegisteredButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,7 +68,6 @@ public class RegisterActivity extends AbstractActivity implements RegisterPresen
         passwordEditText = (EditText) findViewById(R.id.password_register_edittest);
         nameEditText = (EditText) findViewById(R.id.name_register_edittext);
         registerButton = (Button) findViewById(R.id.sign_up_register_button);
-        forgotYourPasswordButton = (Button) findViewById(R.id.reset_password_register_button);
         alreadyRegisteredButton = (Button) findViewById(R.id.sign_in_register_button);
     }
 
@@ -91,7 +80,6 @@ public class RegisterActivity extends AbstractActivity implements RegisterPresen
         super.onResume();
         mPresenter.resume();
     }
-
 
     @Override
     public void changeToProfileActivity() {

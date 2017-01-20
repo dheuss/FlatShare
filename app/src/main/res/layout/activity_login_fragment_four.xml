@@ -8,56 +8,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:text="FlatShare"
-            android:textSize="60dp"
-            android:textColor="@color/colorPrimaryDark"
             android:layout_gravity="center"
-            android:gravity="center"/>
-
-        <RelativeLayout
-            android:id="@+id/relativeLayout1"
-            android:layout_width="fill_parent"
-            android:layout_height="75dp"
-            android:layout_marginLeft="75dp"
-            android:layout_marginRight="75dp"
-            android:layout_marginTop="@dimen/marginTop">
-            <ImageButton
-                android:id="@+id/custom_google_button"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:background="@drawable/google_icon"
-                android:layout_alignParentLeft="true"/>
-            <ImageButton
-                android:id="@+id/custom_fb_button"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:background="@drawable/facebook_icon"
-                android:layout_alignParentRight="true"/>
-            <com.facebook.login.widget.LoginButton
-                android:id="@+id/facebook_sign_in_button"
-                android:layout_width="0px"
-                android:layout_height="0px"
-                android:visibility="gone"/>
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/google_sign_in_button"
-                android:layout_width="0px"
-                android:layout_height="0px"
-                android:visibility="gone"/>
-        </RelativeLayout>
+            android:gravity="center"
+            android:text="FlatShare"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="60dp" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
+            android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginLeft="@dimen/marginLeft">
+            android:layout_marginTop="35dp">
+
             <EditText
                 android:id="@+id/email_edittext"
                 android:layout_width="match_parent"
@@ -65,15 +35,16 @@
                 android:hint="@string/hint_email"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/colorText"
-                android:textColorHint="@color/colorText"/>
+                android:textColorHint="@color/colorText" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight">
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
             <EditText
                 android:id="@+id/password_edittext"
                 android:layout_width="match_parent"
@@ -83,7 +54,7 @@
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
                 android:textColor="@color/colorText"
-                android:textColorHint="@color/colorText"/>
+                android:textColorHint="@color/colorText" />
         </android.support.design.widget.TextInputLayout>
 
 
@@ -92,34 +63,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/password_edittext"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
-            android:checked="false"
-            android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimary"
+            android:layout_marginTop="@dimen/marginTop"
             android:buttonTint="@color/colorPrimary"
-            android:hint="@string/login_check_box"/>
+            android:checked="false"
+            android:hint="@string/login_check_box"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary" />
 
         <Button
             android:id="@+id/login_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/password_edittext"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/colorPrimary"
             android:text="@string/login_button"
-            android:textColor="@color/colorButtonText"
-            android:background="@color/colorPrimary" />
+            android:textColor="@color/colorButtonText" />
 
         <Button
             android:id="@+id/register_button"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginTop="@dimen/marginTop"
+            android:layout_below="@id/login_button"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
-            android:layout_below="@id/login_button"
+            android:layout_marginTop="@dimen/marginTop"
             android:background="@null"
             android:text="Register"
             android:textAllCaps="false"
@@ -129,14 +100,49 @@
             android:id="@+id/forgot_password_button"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginTop="@dimen/marginTop"
+            android:layout_below="@id/register_button"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
-            android:layout_below="@id/register_button"
+            android:layout_marginTop="@dimen/marginTop"
             android:background="@null"
             android:text="Fortgot Password"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="75dp"
+            android:layout_marginLeft="75dp"
+            android:layout_marginRight="75dp"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <ImageButton
+                android:id="@+id/custom_google_button"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/google_icon" />
+
+            <ImageButton
+                android:id="@+id/custom_fb_button"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/facebook_icon" />
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/facebook_sign_in_button"
+                android:layout_width="0px"
+                android:layout_height="0px"
+                android:visibility="gone" />
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/google_sign_in_button"
+                android:layout_width="0px"
+                android:layout_height="0px"
+                android:visibility="gone" />
+        </RelativeLayout>
 
     </LinearLayout>
 

@@ -24,7 +24,7 @@ import com.flatshare.presentation.presenters.auth.LoginPresenter;
 import com.flatshare.presentation.presenters.auth.impl.LoginPresenterImpl;
 import com.flatshare.presentation.ui.activities.MainActivity;
 import com.flatshare.presentation.ui.activities.auth.RegisterActivity;
-import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
+import com.flatshare.presentation.ui.activities.auth.ResetPasswordActivity;
 import com.flatshare.presentation.ui.activities.matching.RoommateQRActivity;
 import com.flatshare.presentation.ui.activities.profile.ApartmentProfileActivity;
 import com.flatshare.presentation.ui.activities.profile.ApartmentSettingsActivity;
@@ -46,6 +46,7 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
 
     private Button loginButton;
     private Button registerButton;
+    private Button forgotPasswordButton;
     private SharedPreferences sharedPref;
 
     //Google
@@ -101,11 +102,18 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
             }
         });
 
+        forgotPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ResetPasswordActivity.class));
+            }
+        });
+
         facebookCustomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 facebookSignInButton.performClick(); //TODO
-                System.out.println("FACEBOOK");
+                Toast.makeText(getActivity(), "Facebook login doesn't work", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -113,7 +121,7 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
             @Override
             public void onClick(View view) {
                 googleSignInButton.performClick(); //TODO
-                googleLogin();
+                Toast.makeText(getActivity(), "Google login doesn't work", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -126,6 +134,7 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
         loginCheckBox = (CheckBox) view.findViewById(R.id.login_check_box);
         loginButton = (Button) view.findViewById(R.id.login_button);
         registerButton = (Button) view.findViewById(R.id.register_button);
+        forgotPasswordButton = (Button)view.findViewById(R.id.forgot_password_button);
         googleSignInButton = (SignInButton) view.findViewById(R.id.google_sign_in_button);
         googleCustomButton = (ImageButton) view.findViewById(R.id.custom_google_button);
         facebookCustomButton = (ImageButton) view.findViewById(R.id.custom_fb_button);
@@ -153,7 +162,6 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
 
             emailEditText.setText(email);
             passwordEditText.setText(password);
-//            login();
         }
     }
 
@@ -161,10 +169,6 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         mPresenter.login(new LoginDataType(email, password));
-    }
-
-    private void googleLogin(){
-
     }
 
     private void writeToSharedPreferences(int key, String value) {
@@ -255,7 +259,6 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
             b.putString("id", roommateId);
             intent.putExtras(b);
             startActivity(intent);
-//            getActivity().finish();
     }
 
     @Override

@@ -96,18 +96,6 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/reset_password_register_button"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
-            android:background="@null"
-            android:text="Forgot your Pasword"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary" />
-
-        <!-- Link to Login Screen -->
-
-        <Button
             android:id="@+id/sign_in_register_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -117,6 +105,7 @@
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary"
             android:textSize="15dp" />
+
 
     </LinearLayout>
 

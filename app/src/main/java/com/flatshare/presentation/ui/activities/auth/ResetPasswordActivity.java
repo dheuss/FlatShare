@@ -2,24 +2,17 @@ package com.flatshare.presentation.ui.activities.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.flatshare.R;
-import com.flatshare.domain.datatypes.auth.ResetDataType;
 import com.flatshare.presentation.presenters.auth.ResetPasswordPresenter;
 import com.flatshare.presentation.presenters.auth.impl.ResetPasswordPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.auth.login.LoginActivity;
-import com.flatshare.presentation.ui.activities.profile.PrimaryProfileActivity;
 import com.flatshare.threading.MainThreadImpl;
-
-/**
- * Created by david on 19.12.2016.
- */
 
 public class ResetPasswordActivity extends AbstractActivity implements ResetPasswordPresenter.View {
 
@@ -74,7 +67,7 @@ public class ResetPasswordActivity extends AbstractActivity implements ResetPass
 
     @Override
     public void changeToLoginActivity() {
-        //Log.d(TAG, "success! changed to PrimaryProfileActivity!");
+        Toast.makeText(this, "Please check your emails!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
