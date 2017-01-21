@@ -223,7 +223,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             dateText.setText(dateList.get(i) + " " + timeList.get(i));
 
             checkButton.setVisibility(View.VISIBLE);
-            checkButton.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.checkmark));
+            checkButton.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.done_icon));
             checkButton.setOnClickListener(myCheckHandler);
 
             row.addView(dateText);
