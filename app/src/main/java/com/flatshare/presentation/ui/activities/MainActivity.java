@@ -16,6 +16,7 @@ import com.flatshare.R;
 import com.flatshare.domain.datatypes.enums.ProfileType;
 import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.ui.AbstractActivity;
+import com.flatshare.presentation.ui.activities.matching.FlatShareViewPager;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
 import com.flatshare.presentation.ui.activities.matchingoverview.MatchingOverviewActivity;
 import com.flatshare.presentation.ui.activities.profile.RoommateProfileActivity;
@@ -32,7 +33,7 @@ public class MainActivity extends AbstractActivity {
     private static final String TAG = "MainActivity";
     private Toolbar toolbar;
     private TabLayout tabLayout;
-    private ViewPager viewPager;
+    private FlatShareViewPager viewPager;
     private int[] tabIcons = {
             R.drawable.home_icon,
             R.drawable.settings_icon,
@@ -59,7 +60,6 @@ public class MainActivity extends AbstractActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -75,7 +75,7 @@ public class MainActivity extends AbstractActivity {
 
     private void bindView(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (FlatShareViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
     }
 

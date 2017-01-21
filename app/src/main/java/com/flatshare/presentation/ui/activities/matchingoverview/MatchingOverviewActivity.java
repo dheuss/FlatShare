@@ -47,7 +47,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
         bindView(view);
 
-        Log.d(TAG, "inside onCreate(), creating presenter fr this view");
+        Log.d(TAG, "inside onCreate(), creating presenter for this view");
 
         mPresenter = new MatchingOverviewPresenterImpl(
                 MainThreadImpl.getInstance(),

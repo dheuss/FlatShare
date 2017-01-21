@@ -1,8 +1,12 @@
 package com.flatshare.presentation.presenters.matching;
 
 
+import android.graphics.Bitmap;
+
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
+import com.flatshare.domain.datatypes.db.profiles.UserProfile;
+import com.flatshare.domain.datatypes.pair.Pair;
 import com.flatshare.presentation.presenters.base.BasePresenter;
 import com.flatshare.presentation.ui.BaseView;
 
@@ -18,9 +22,12 @@ public interface PotentialMatchingPresenter extends BasePresenter {
 
     void setPotentialMatchesListener();
 
+    void getProfilePictures(List<TenantProfile> tenantProfiles, List<ApartmentProfile> apartmentProfiles);
+
+
     interface View extends BaseView {
-        void showTenants(List<TenantProfile> tenants);
-        void showApartments(List<ApartmentProfile> apartments);
+        void showTenants(List<Pair<TenantProfile, Bitmap>> tenants);
+        void showApartments(List<Pair<ApartmentProfile, Bitmap>> apartments);
 
         void updateListener(boolean listenerAttached);
     }

@@ -2,6 +2,7 @@ package com.flatshare.presentation.ui.activities.matching;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -18,6 +20,7 @@ import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.datatypes.enums.ProfileType;
+import com.flatshare.domain.datatypes.pair.Pair;
 import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.matching.PotentialMatchingPresenter;
 import com.flatshare.presentation.presenters.matching.impl.PotentialMatchingPresenterImpl;
@@ -51,8 +54,8 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
 
     private PotentialMatchingPresenter mPresenter;
 
-    private ApartmentProfile mApartmetProfile;
-    private TenantProfile mTenantProfile;
+    private List<ApartmentProfile> apartmentProfiles;
+    private List<TenantProfile> tenantProfiles;
 
     private TextView apartmentPriceTextView;
     private TextView apartmentAreaTextView;
@@ -67,9 +70,6 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
 
     private SharedPreferences sharedPref;
 
-
-    public MatchingActivity() {
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,7 +92,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
                 this
         );
 
-        mPresenter.getPotentialMatches();
+//        mPresenter.getPotentialMatches();
 
         boolean eventListenerExists = sharedPref.getBoolean(getResources().getString(R.string.pot_matching_listener_attached), false);
 
@@ -214,36 +214,32 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     }
 
     @Override
-    public void showProgress() {
-
-    }
-
-    @Override
-    public void hideProgress() {
-
-    }
-
-    @Override
     public void showError(String message) {
         Log.d(TAG, "inside showError: " + message);
     }
 
     @Override
-    public void showTenants(List<TenantProfile> tenants) {
+    public void showTenants(List<Pair<TenantProfile, Bitmap>> tenants) {
         Log.d(TAG, "size of potential apartments: " + tenants.size());
 
-        for (TenantProfile t : tenants) {
-            mSwipeView.addView(new MatchingActivity_ProfileCard_Tenant(mContext, t, mSwipeView));
+        for (Pair<TenantProfile, Bitmap> pair : tenants) {
+            TenantProfile tenantProfile = pair.getLeft();
+            Bitmap bitmap = pair.getRight();
+            //TODO: get ImageView and show it, IF BITMAP IS NULL THEN PICK SOME DEFAULT IMAGE (apartment/ tenant (male/female))
+            mSwipeView.addView(new MatchingActivity_ProfileCard_Tenant(mContext, tenantProfile, mSwipeView));
         }
 
     }
 
     @Override
-    public void showApartments(List<ApartmentProfile> apartments) {
+    public void showApartments(List<Pair<ApartmentProfile, Bitmap>> apartments) {
         Log.d(TAG, "size of potential apartments: " + apartments.size());
 
-        for (ApartmentProfile a : apartments) {
-            mSwipeView.addView(new MatchingActivity_ProfileCard_Apartment(mContext, a, mSwipeView));
+        for (Pair<ApartmentProfile, Bitmap> pair : apartments) {
+            ApartmentProfile apartmentProfile = pair.getLeft();
+            Bitmap bitmap = pair.getRight();
+            //TODO: get ImageView and show it
+            mSwipeView.addView(new MatchingActivity_ProfileCard_Apartment(mContext, apartmentProfile, mSwipeView));
         }
     }
 
