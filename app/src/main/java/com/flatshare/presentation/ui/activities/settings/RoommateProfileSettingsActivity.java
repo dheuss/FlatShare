@@ -1,7 +1,5 @@
 package com.flatshare.presentation.ui.activities.settings;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,12 +16,10 @@ import com.flatshare.R;
 import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.profile.RoommateProfilePresenter;
 import com.flatshare.presentation.presenters.profile.impl.RoommateProfilePresenterImpl;
-import com.flatshare.presentation.ui.AbstarctFragmentAcivity;
+import com.flatshare.presentation.ui.AbstractFragmentActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-import java.util.Map;
-
-public class RoommateProfileSettingsActivity extends AbstarctFragmentAcivity implements RoommateProfilePresenter.View {
+public class RoommateProfileSettingsActivity extends AbstractFragmentActivity implements RoommateProfilePresenter.View {
 
     private static final String TAG = "RoommateProfileSettingsActivity";
     private RoommateProfilePresenter mPresenter;

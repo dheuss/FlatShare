@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 public class TenantMediaDownloadInteractorImpl extends AbstractInteractor implements MediaInteractor {
 
     private static final String TAG = "TenantProfileDownloadInt";
-    private static final String DEFAULT_NAME = "1";
 
     /**
      * The Callback is responsible for talking to the UI on the main thread
@@ -67,22 +66,22 @@ public class TenantMediaDownloadInteractorImpl extends AbstractInteractor implem
     @Override
     public void execute() {
 
-        String mediaPath = "";
+        String mediaPath;
 
-        final long ONE_MEGABYTE = 1024 * 1024;
-        final long TEN_MEGABYTE = 10 * ONE_MEGABYTE;
+        final long KB_200 = 1024 * 200; // ~ 200 kb
+        final long MB_10 = 50 * KB_200;
 
         long size;
 
         if (isImage) {
             mediaPath = storageRoot.getTenants(this.tenantId).getImagesPath();
-            size = ONE_MEGABYTE;
+            size = KB_200;
         } else {
             mediaPath = storageRoot.getTenants(this.tenantId).getVideosPath();
-            size = TEN_MEGABYTE;
+            size = MB_10;
         }
 
-        mStorage.child(mediaPath + DEFAULT_NAME).getBytes(size).addOnSuccessListener(
+        mStorage.child(mediaPath + UploadInteractorImpl.DEFAULT_NAME).getBytes(size).addOnSuccessListener(
                 new OnSuccessListener<byte[]>() {
                     @Override
                     public void onSuccess(byte[] bytes) {

@@ -1,8 +1,11 @@
 package com.flatshare.presentation.ui.activities.profile;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,6 +25,8 @@ import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.QRCodeReaderActivity;
 import com.flatshare.threading.MainThreadImpl;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -107,12 +112,14 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     }
 
     private void openGallery() {
-        Intent intent = new Intent();
-        // Show only images, no videos or anything else
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        // Always show the chooser (if there are multiple options available)
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+
+        // Create intent to Open Image applications like Gallery, Google Photos
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        // Start the Intent
+        startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
+
+        // startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
 
 
@@ -238,22 +245,22 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             result = false;
         }
 
-        if (!internetYesRB.isChecked() && !internetNoRB.isChecked()){
+        if (!internetYesRB.isChecked() && !internetNoRB.isChecked()) {
             internetYesRB.setError(getString(R.string.check_rb_error));
             result = false;
         }
 
-        if (!smokerYesRB.isChecked() && !smokerNoRB.isChecked()){
+        if (!smokerYesRB.isChecked() && !smokerNoRB.isChecked()) {
             smokerYesRB.setError(getString(R.string.check_rb_error));
             result = false;
         }
 
-        if (!petsYesRB.isChecked() && !petsNoRB.isChecked()){
+        if (!petsYesRB.isChecked() && !petsNoRB.isChecked()) {
             petsYesRB.setError(getString(R.string.check_rb_error));
             result = false;
         }
 
-        if (!washingMachineYesRB.isChecked() && !washingMachineNoRB.isChecked()){
+        if (!washingMachineYesRB.isChecked() && !washingMachineNoRB.isChecked()) {
             washingMachineYesRB.setError(getString(R.string.check_rb_error));
             result = false;
         }
@@ -338,4 +345,11 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         profilePicUploaded = true;
         Toast.makeText(this, "Upload Successful", Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public Context getContext() {
+        return getContext();
+    }
+
+
 }

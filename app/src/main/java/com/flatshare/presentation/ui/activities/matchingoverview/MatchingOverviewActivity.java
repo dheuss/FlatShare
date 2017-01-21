@@ -16,14 +16,14 @@ import android.widget.TextView;
 import com.flatshare.R;
 import com.flatshare.presentation.presenters.matchingoverview.MatchingOverviewPresenter;
 import com.flatshare.presentation.presenters.matchingoverview.impl.MatchingOverviewPresenterImpl;
-import com.flatshare.presentation.ui.AbstarctFragmentAcivity;
+import com.flatshare.presentation.ui.AbstractFragmentActivity;
 import com.flatshare.presentation.ui.activities.matchingoverview.calendar.CalendarActivity;
 import com.flatshare.threading.MainThreadImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MatchingOverviewActivity extends AbstarctFragmentAcivity implements MatchingOverviewPresenter.View {
+public class MatchingOverviewActivity extends AbstractFragmentActivity implements MatchingOverviewPresenter.View {
 
     private Button changeToCalendarButton;
 

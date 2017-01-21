@@ -16,11 +16,11 @@ import android.widget.TextView;
 import com.flatshare.R;
 import com.flatshare.presentation.presenters.settings.SettingsPresenter;
 import com.flatshare.presentation.presenters.settings.impl.SettingsPresenterImpl;
-import com.flatshare.presentation.ui.AbstarctFragmentAcivity;
+import com.flatshare.presentation.ui.AbstractFragmentActivity;
 import com.flatshare.presentation.ui.activities.auth.login.LoginActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-public class SettingsActivity extends AbstarctFragmentAcivity implements SettingsPresenter.View {
+public class SettingsActivity extends AbstractFragmentActivity implements SettingsPresenter.View {
 
     private Button btnChangeEmail;
     private Button btnChangePassword;

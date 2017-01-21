@@ -19,6 +19,7 @@ import com.google.firebase.storage.UploadTask;
 public class UploadInteractorImpl extends AbstractInteractor implements MediaInteractor {
 
     private static final String TAG = "UploadInt";
+    public static final String DEFAULT_NAME = "default";
 
     /**
      * The Callback is responsible for talking to the UI on the main thread
@@ -75,8 +76,12 @@ public class UploadInteractorImpl extends AbstractInteractor implements MediaInt
 
         String childNode;
 
-        String mediaName;
-
+//        Bitmap bitmap = MediaInteractorCompresser.compress(iStream);
+//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//
+//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//
+//        byte[] data = stream.toByteArray();
 
         if (isTenant) {
             if (mediaType == MediaType.IMAGE) {
@@ -84,13 +89,11 @@ public class UploadInteractorImpl extends AbstractInteractor implements MediaInt
             } else {
                 childNode = storageRoot.getTenants(this.id).getVideosPath();
             }
-            mediaName = userId;
         } else {
             childNode = storageRoot.getApartments(this.id).getImagesPath();
-            mediaName = uri.getLastPathSegment();
         }
 
-        UploadTask uploadTask = mStorage.child(childNode + mediaName).putFile(uri);
+        UploadTask uploadTask = mStorage.child(childNode + DEFAULT_NAME).putFile(uri);
 
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override

@@ -19,6 +19,8 @@ import com.flatshare.presentation.presenters.profile.impl.TenantProfilePresenter
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
 
+import java.io.File;
+
 /**
  * Created by Arber on 16/12/2016.
  */
@@ -78,12 +80,22 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
     }
 
     private void openGallery() {
-        Intent intent = new Intent();
-        // Show only images, no videos or anything else
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        // Always show the chooser (if there are multiple options available)
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+
+        // Create intent to Open Image applications like Gallery, Google Photos
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        // Start the Intent
+        startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
+
+        // startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+
+
+//        Intent intent = new Intent();
+//        // Show only images, no videos or anything else
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        // Always show the chooser (if there are multiple options available)
+//        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
 
     @Override
@@ -106,7 +118,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
 
     private void sendProfile() {
 
-        if(inputValid()) {
+        if (inputValid()) {
             String firstname = firstNameEditText.getText().toString();
             int age = Integer.parseInt(ageEditText.getText().toString());
             boolean isSmoker = smokerRadioGroup.getCheckedRadioButtonId() == smokerYesRadioButton.getId();
@@ -164,7 +176,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
             result = false;
         }
 
-        if(profilePicUploaded){
+        if (profilePicUploaded) {
             uploadPictureButton.setError(getString(R.string.picture_required_error));
             result = false;
         }

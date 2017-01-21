@@ -18,7 +18,7 @@ import dmax.dialog.SpotsDialog;
  * Created by david on 15.01.2017.
  */
 
-public abstract class AbstarctFragmentAcivity extends Fragment {
+public abstract class AbstractFragmentActivity extends Fragment {
 
     private AlertDialog progressDialog;
     protected SharedPreferences sharedPref;
@@ -28,7 +28,7 @@ public abstract class AbstarctFragmentAcivity extends Fragment {
         super.onCreate(savedInstanceState);
         //sharedPref = getPreferences(Context.MODE_PRIVATE);
         sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        //progressDialog = new SpotsDialog(this, R.style.Custom);
+        progressDialog = new SpotsDialog(getActivity(), R.style.Custom);
     }
 
     public void showProgress(){

@@ -1,5 +1,6 @@
 package com.flatshare.presentation.presenters.profile;
 
+import android.content.ContentResolver;
 import android.net.Uri;
 import android.widget.VideoView;
 

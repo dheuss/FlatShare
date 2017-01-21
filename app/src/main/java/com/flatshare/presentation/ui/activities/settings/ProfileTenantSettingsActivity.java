@@ -20,11 +20,10 @@ import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.profile.TenantProfilePresenter;
 import com.flatshare.presentation.presenters.profile.impl.TenantProfilePresenterImpl;
-import com.flatshare.presentation.ui.AbstarctFragmentAcivity;
-import com.flatshare.presentation.ui.activities.MainActivity;
+import com.flatshare.presentation.ui.AbstractFragmentActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-public class ProfileTenantSettingsActivity extends AbstarctFragmentAcivity implements TenantProfilePresenter.View {
+public class ProfileTenantSettingsActivity extends AbstractFragmentActivity implements TenantProfilePresenter.View {
 
     private TextView tenantProfileHeadline;
     private TextView tenantProfileInfo;

@@ -1,6 +1,8 @@
 package com.flatshare.presentation.presenters.profile.impl;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.widget.VideoView;
 
 import com.flatshare.domain.MainThread;
@@ -13,6 +15,8 @@ import com.flatshare.domain.interactors.profile.impl.TenantProfileInteractorImpl
 import com.flatshare.domain.interactors.media.impl.UploadInteractorImpl;
 import com.flatshare.presentation.presenters.profile.TenantProfilePresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
+
+import java.io.File;
 
 /**
  * Created by Arber on 11/12/2016.

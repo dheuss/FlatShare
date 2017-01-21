@@ -1,6 +1,9 @@
 package com.flatshare.presentation.presenters.profile.impl;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.widget.VideoView;
 
 import com.flatshare.domain.MainThread;
@@ -16,6 +19,7 @@ import com.flatshare.domain.interactors.profile.impl.ApartmentProfileInteractorI
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 import com.flatshare.presentation.presenters.profile.ApartmentProfilePresenter;
 
+import java.io.InputStream;
 import java.util.Map;
 
 /**
@@ -97,6 +101,22 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
 //        mView.showProgress();
         MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, false, MediaType.IMAGE, uri, userState.getApartmentId());
         mediaInteractor.execute();
+    }
+
+    public String getFullPathFromURI(Uri contentUri) {
+        Cursor cursor = null;
+        Context context = mView.getContext();
+        try {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
     }
 
     @Override

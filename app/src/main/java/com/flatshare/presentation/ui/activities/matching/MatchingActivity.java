@@ -21,7 +21,7 @@ import com.flatshare.domain.datatypes.enums.ProfileType;
 import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.matching.PotentialMatchingPresenter;
 import com.flatshare.presentation.presenters.matching.impl.PotentialMatchingPresenterImpl;
-import com.flatshare.presentation.ui.AbstarctFragmentAcivity;
+import com.flatshare.presentation.ui.AbstractFragmentActivity;
 import com.flatshare.threading.MainThreadImpl;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
@@ -30,7 +30,7 @@ import android.view.ViewGroup.LayoutParams;
 
 import java.util.List;
 
-public class MatchingActivity extends AbstarctFragmentAcivity implements PotentialMatchingPresenter.View {
+public class MatchingActivity extends AbstractFragmentActivity implements PotentialMatchingPresenter.View {
 
     private static final String TAG = "MatchingActivity";
 

@@ -22,8 +22,7 @@ import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.profile.ApartmentProfilePresenter;
 import com.flatshare.presentation.presenters.profile.impl.ApartmentProfilePresenterImpl;
-import com.flatshare.presentation.ui.AbstarctFragmentAcivity;
-import com.flatshare.presentation.ui.activities.MainActivity;
+import com.flatshare.presentation.ui.AbstractFragmentActivity;
 import com.flatshare.threading.MainThreadImpl;
 
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ import java.util.Map;
 
 import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
-public class ProfileApartmentSettingsActivity extends AbstarctFragmentAcivity implements ApartmentProfilePresenter.View {
+public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity implements ApartmentProfilePresenter.View {
 
     private ApartmentProfilePresenter mPresenter;
 
