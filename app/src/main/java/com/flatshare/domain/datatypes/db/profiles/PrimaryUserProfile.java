@@ -75,4 +75,10 @@ public class PrimaryUserProfile extends UserProfile{
     public int getType() {
         return -1;
     }
+
+    @Exclude
+    @Override
+    public void setId(String id) {
+        setId(id);
+    }
 }

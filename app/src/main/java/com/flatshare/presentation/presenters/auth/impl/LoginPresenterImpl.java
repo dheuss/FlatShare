@@ -65,8 +65,8 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
     public void login(LoginDataType loginDataType) {
 
         // TEST
-//        TestInteractor testInteractor = new TestInteractor(mMainThread, 20);
-//        testInteractor.execute();
+        TestInteractor testInteractor = new TestInteractor(mMainThread, 20);
+        testInteractor.execute();
         // TEST
 
         mView.showProgress();

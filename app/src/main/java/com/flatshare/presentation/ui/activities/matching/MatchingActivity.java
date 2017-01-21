@@ -38,7 +38,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     private static final String TAG = "MatchingActivity";
 
     private SwipePlaceHolderView mSwipeView;
-    private Context mContext;
+//    private Context mContext;
     private UserState userState;
 
     private ImageButton acceptBtn;
@@ -92,7 +92,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
                 this
         );
 
-//        mPresenter.getPotentialMatches();
+        mPresenter.getPotentialMatches();
 
         boolean eventListenerExists = sharedPref.getBoolean(getResources().getString(R.string.pot_matching_listener_attached), false);
 
@@ -135,7 +135,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
 
     private void bindView(View view) {
         mSwipeView = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
-        this.mContext = getActivity();
+//        this.mContext = getActivity();
 
         mFrameLayout = (FrameLayout) view.findViewById(R.id.matchingActivityFrameLayout);
 
@@ -226,7 +226,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
             TenantProfile tenantProfile = pair.getLeft();
             Bitmap bitmap = pair.getRight();
             //TODO: get ImageView and show it, IF BITMAP IS NULL THEN PICK SOME DEFAULT IMAGE (apartment/ tenant (male/female))
-            mSwipeView.addView(new MatchingActivity_ProfileCard_Tenant(mContext, tenantProfile, mSwipeView));
+            mSwipeView.addView(new MatchingActivity_ProfileCard_Tenant(this, tenantProfile, mSwipeView));
         }
 
     }
@@ -239,7 +239,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
             ApartmentProfile apartmentProfile = pair.getLeft();
             Bitmap bitmap = pair.getRight();
             //TODO: get ImageView and show it
-            mSwipeView.addView(new MatchingActivity_ProfileCard_Apartment(mContext, apartmentProfile, mSwipeView));
+            mSwipeView.addView(new MatchingActivity_ProfileCard_Apartment(this, apartmentProfile, mSwipeView));
         }
     }
 
@@ -248,11 +248,11 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
         //writeToSharedPreferences(R.string.pot_matching_listener_attached, listenerAttached);
     }
 
-    private void tenantSwipedApartment(ApartmentProfile apartmentProfile, boolean accepted) {
+    public void tenantSwipedApartment(ApartmentProfile apartmentProfile, boolean accepted) {
         mPresenter.tenantSwipedApartment(apartmentProfile.getId(), accepted);
     }
 
-    private void roommateSwipedTenant(TenantProfile tenantProfile, boolean accepted) {
+    public void roommateSwipedTenant(TenantProfile tenantProfile, boolean accepted) {
         mPresenter.roommateSwipedTenant(tenantProfile.getId(), accepted);
     }
 

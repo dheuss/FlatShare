@@ -35,13 +35,13 @@ public class MatchingActivity_ProfileCard_Apartment {
     private TextView locationNameTxt;
 
     private ApartmentProfile mProfile;
-    private Context mContext;
+    private MatchingActivity matchingActivity;
     private SwipePlaceHolderView mSwipeView;
 
 
 
-    public MatchingActivity_ProfileCard_Apartment(Context context, ApartmentProfile profile, SwipePlaceHolderView swipeView) {
-        mContext = context;
+    public MatchingActivity_ProfileCard_Apartment(MatchingActivity matchingActivity, ApartmentProfile profile, SwipePlaceHolderView swipeView) {
+        this.matchingActivity = matchingActivity;
         mProfile = profile;
         mSwipeView = swipeView;
     }
@@ -55,7 +55,8 @@ public class MatchingActivity_ProfileCard_Apartment {
 
     @SwipeOut
     private void onSwipedOut(){
-        Log.d("EVENT", "onSwipedOut");
+//        Log.d("EVENT", "onSwipedOut");
+        matchingActivity.tenantSwipedApartment(mProfile, false);
         mSwipeView.addView(this);
     }
 
@@ -66,7 +67,7 @@ public class MatchingActivity_ProfileCard_Apartment {
 
     @SwipeIn
     private void onSwipeIn(){
-
+        matchingActivity.tenantSwipedApartment(mProfile, true);
     }
 
     @SwipeInState

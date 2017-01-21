@@ -34,11 +34,11 @@ public class MatchingActivity_ProfileCard_Tenant {
     private TextView locationNameTxt;
 
     private TenantProfile mProfile;
-    private Context mContext;
+    private MatchingActivity matchingActivity;
     private SwipePlaceHolderView mSwipeView;
 
-    public MatchingActivity_ProfileCard_Tenant(Context context, TenantProfile profile, SwipePlaceHolderView swipeView) {
-        mContext = context;
+    public MatchingActivity_ProfileCard_Tenant(MatchingActivity matchingActivity, TenantProfile profile, SwipePlaceHolderView swipeView) {
+        this.matchingActivity = matchingActivity;
         mProfile = profile;
         mSwipeView = swipeView;
     }
@@ -52,7 +52,9 @@ public class MatchingActivity_ProfileCard_Tenant {
 
     @SwipeOut
     private void onSwipedOut(){
-        Log.d("EVENT", "onSwipedOut");
+//        Log.d("EVENT", "onSwipedOut");
+        matchingActivity.roommateSwipedTenant(mProfile, false);
+        // what does this addView do? and why not call it on swipeIn??
         mSwipeView.addView(this);
     }
 
@@ -63,7 +65,7 @@ public class MatchingActivity_ProfileCard_Tenant {
 
     @SwipeIn
     private void onSwipeIn(){
-
+        matchingActivity.roommateSwipedTenant(mProfile, true);
     }
 
     @SwipeInState

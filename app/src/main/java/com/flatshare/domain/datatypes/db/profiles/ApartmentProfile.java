@@ -284,4 +284,10 @@ public class ApartmentProfile extends UserProfile {
     public int getType() {
         return ProfileType.APARTMENT.getValue();
     }
+
+    @Exclude
+    @Override
+    public void setId(String id) {
+        setApartmentId(id);
+    }
 }

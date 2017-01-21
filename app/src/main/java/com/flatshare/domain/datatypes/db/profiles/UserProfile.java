@@ -22,4 +22,5 @@ public abstract class UserProfile implements DatabaseItem {
 
     }
 
+    public abstract void setId(String id);
 }

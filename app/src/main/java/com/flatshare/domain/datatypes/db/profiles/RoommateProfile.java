@@ -159,4 +159,10 @@ public class RoommateProfile extends UserProfile {
     public int getType() {
         return ProfileType.ROOMMATE.getValue();
     }
+
+    @Exclude
+    @Override
+    public void setId(String id) {
+        setRoommateId(id);
+    }
 }

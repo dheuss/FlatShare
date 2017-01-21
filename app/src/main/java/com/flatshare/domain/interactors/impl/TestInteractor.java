@@ -48,6 +48,7 @@ public class TestInteractor extends AbstractInteractor {
     private void addNode(String aPath, UserProfile node) {
 
         String id = mDatabase.child(aPath).push().getKey();
+        node.setId(id);
 
         mDatabase.child(aPath + id).setValue(node, new DatabaseReference.CompletionListener() {
             @Override

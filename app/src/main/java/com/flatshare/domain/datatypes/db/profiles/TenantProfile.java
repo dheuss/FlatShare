@@ -268,4 +268,10 @@ public class TenantProfile extends UserProfile {
     public int getType() {
         return ProfileType.TENANT.getValue();
     }
+
+    @Exclude
+    @Override
+    public void setId(String id) {
+        setTenantId(id);
+    }
 }
