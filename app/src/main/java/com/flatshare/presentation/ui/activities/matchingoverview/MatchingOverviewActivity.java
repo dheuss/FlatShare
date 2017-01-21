@@ -1,9 +1,7 @@
 package com.flatshare.presentation.ui.activities.matchingoverview;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +14,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.flatshare.R;
-import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.matchingoverview.MatchingOverviewPresenter;
 import com.flatshare.presentation.presenters.matchingoverview.impl.MatchingOverviewPresenterImpl;
 import com.flatshare.presentation.ui.AbstarctFragmentAcivity;
@@ -36,9 +33,7 @@ public class MatchingOverviewActivity extends AbstarctFragmentAcivity implements
     private static final String TAG = "MatchingOverviewActivity";
 
     private MatchingOverviewPresenter mPresenter;
-    private TableLayout machingOverview;
-    private View.OnClickListener myCalndarHandler;
-    private View.OnClickListener myDeleteHandler;
+    private TableLayout matchingOverview;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,7 +92,7 @@ public class MatchingOverviewActivity extends AbstarctFragmentAcivity implements
 
             matchingCalendar.setVisibility(View.VISIBLE);
             matchingCalendar.setBackground(getResources().getDrawable(R.drawable.calendar_icon));
-            matchingCalendar.setOnClickListener(myCalndarHandler); //TODO write Handler
+            matchingCalendar.setOnClickListener(myCalendarHandler); //TODO write Handler
 
             deleteButton.setVisibility(View.VISIBLE);
             deleteButton.setBackground(getResources().getDrawable(R.drawable.clear_icon));
@@ -108,16 +103,28 @@ public class MatchingOverviewActivity extends AbstarctFragmentAcivity implements
             row.addView(matchingCalendar);
             row.addView(deleteButton);
 
-            machingOverview.addView(row, i);
+            matchingOverview.addView(row, i);
         }
 
     }
 
+    View.OnClickListener myCalendarHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+            startActivity(new Intent(getActivity(), CalendarActivity.class));
+        }
+    };
 
+    View.OnClickListener myDeleteHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+            v.setVisibility(View.GONE);
+            v.getRootView().setBackground(getResources().getDrawable(R.color.colorPrimary));
+            //TODO element löschen und nachpben schieben
+        }
+    };
 
     public void bindView(View view){
         changeToCalendarButton = (Button)view.findViewById(R.id.change_to_calendar_button);
-        machingOverview = (TableLayout) view.findViewById(R.id.machingOverview);
+        matchingOverview = (TableLayout) view.findViewById(R.id.machingOverview);
     }
 
     @Override

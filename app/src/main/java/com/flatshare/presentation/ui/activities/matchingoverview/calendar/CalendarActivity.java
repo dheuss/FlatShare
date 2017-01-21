@@ -4,11 +4,14 @@ package com.flatshare.presentation.ui.activities.matchingoverview.calendar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -29,23 +32,18 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
     private CalendarPresenter mPresenter;
 
-    private Button setDate, send, deleteButton1, deleteButton2, deleteButton3, deleteButton4, deleteButton5, deleteButton6, deleteButton7, deleteButton8, deleteButton9, deleteButton10;
+    private Button setDate, send;
 
     private int yearCurrent, monthCurrent, dayCurrent, hourCurrent, minCurrent;
 
     private List<String> dateList = new ArrayList<>();
     private List<String> timeList = new ArrayList<>();
 
+    private TableLayout dateOverview;
 
     private static final String TAG = "CalenderAct";
 
-    private int counter = -1;
-    private TextView date1, date2, date3, date4, date5, date6, date7, date8, date9, date10;
-    private TextView[] dateTextView = {};
-    private Button[] dateButton = {};
-    private int[] buttonView = {};
     private boolean isTenant;
-    private boolean deleteButtonToGONE = false;
     private String finalDate, tenantID, apartmentID;
 
 
@@ -61,7 +59,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
 
         if (isTenant){
-            setDate.setVisibility(View.GONE);
+            //    setDate.setVisibility(View.GONE);
         }
 
         Calendar calendar = Calendar.getInstance();
@@ -73,9 +71,6 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
         calendar.setFirstDayOfWeek(Calendar.MONDAY);
 
-        dateTextView = new TextView[] {date1, date2, date3, date4, date5, date6, date7, date8, date9, date10};
-        dateButton = new Button[] {deleteButton1, deleteButton2, deleteButton3, deleteButton4, deleteButton5, deleteButton6, deleteButton7, deleteButton8, deleteButton9, deleteButton10};
-        buttonView = new int[]{R.id.delete1,R.id.delete2,R.id.delete3,R.id.delete4,R.id.delete5,R.id.delete6,R.id.delete7,R.id.delete8,R.id.delete9,R.id.delete10};
 
         //Send Button
         send.setOnClickListener(new View.OnClickListener(){
@@ -92,59 +87,12 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
     }
 
-    //klick on delete Date
-    public void handleClick(View view) {
-        for(int i =0;i<=buttonView.length-1;i++){
-            if(view.getId() == buttonView[i]) {
-                if (isTenant) {
-                    chooseTenantDate(1);
-                } else {
-                    if (deleteButtonToGONE) {
-                        deleteButtonToGONE = false;
-                        deleteButton1.setVisibility(View.GONE); //TODO Test - muss noch angepasst werden
-                    } else {
-                        deleteButtonPressed(1);
-                    }
-                }
-            }
-        }
-    }
-
-    //Tenant choose a Date
-    private void chooseTenantDate(int i) {
-        finalDate = dateList.get(i) + " " + timeList.get(i);
-        send.setVisibility(View.VISIBLE);
-        dateButton[i].setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.colorAccent));
-    }
-
-    private void deleteButtonPressed(int i) {
-        counter--;
-        for (int j = i; j <= dateTextView.length-1; j++){
-            if (j == dateTextView.length-1){
-                dateTextView[j].setText("");
-                deleteButtonToGONE = true;
-                dateButton[j].performClick();
-            }else {
-                dateTextView[j].setText(dateTextView[j + 1].getText());
-                if (dateTextView[j +1].getText() == "") {
-                    deleteButtonToGONE = true;
-                    dateButton[j +1].performClick();
-                    //dateButton[j +1].setVisibility(View.GONE);
-                }
-            }
-        }
-        dateList.remove(i);
-        timeList.remove(i);
-    }
-
-
     @SuppressWarnings("deprecation")
     public void setDate(View view) {
-        if (dateList.size() <= 10){
+        if (dateList.size() <= 20){
             showDialog(999);
-            counter++;
-            isTenant = false;
             send.setVisibility(View.VISIBLE);
+
         }else{
             Toast.makeText(getApplicationContext(), "Reach the maximum of Dates!", Toast.LENGTH_SHORT).show();
         }
@@ -155,10 +103,29 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         if (id == 999) {
             DatePickerDialog datePicker = new DatePickerDialog(this, datePickerListener, yearCurrent, monthCurrent, dayCurrent);
             datePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+            datePicker.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    if (which == DialogInterface.BUTTON_NEGATIVE)
+                    {
+                        //Nothing
+                    }
+                }
+            });
             return datePicker;
         }else if(id == 888){
             TimePickerDialog timePicker = new TimePickerDialog(this, timePickerListener, hourCurrent, minCurrent, true);
             timePicker.updateTime(hourCurrent, minCurrent);
+            timePicker.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    if (which == DialogInterface.BUTTON_NEGATIVE)
+                    {
+                        timeList.add("");
+                        showOnScreen();
+                    }
+                }
+            });
             return timePicker;
         }
         return null;
@@ -167,7 +134,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-            showDate(year, month+1, day);
+            dateList.add(day + "/" + month + 1 + "/" + year);
             showDialog(888);
         }
     };
@@ -175,75 +142,138 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     private TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hour, int min) {
-            showTime(hour, min);
+            timeList.add(" " + hour + ":" + min);
+            showOnScreen();
+        }
+    };
+
+    public void showOnScreen(){
+
+        TableRow row = new TableRow(this);
+        TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+        row.setLayoutParams(lp);
+        TextView dateText = new TextView(this);
+        Button deleteButton = new Button(this);
+
+        dateText.setText(dateList.get(dateList.size()-1) + " " + timeList.get(timeList.size()-1));
+
+        deleteButton.setVisibility(View.VISIBLE);
+        deleteButton.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.clear_icon));
+        deleteButton.setOnClickListener(myDeleteHandler);
+
+
+        row.addView(dateText);
+        row.addView(deleteButton);
+
+        dateOverview.addView(row, dateList.size()-1);
+
+    }
+
+    View.OnClickListener myDeleteHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+
+            String nextElementText = "";
+
+            for (int i =0; i < dateOverview.getChildCount() - 1; i++) {
+                View nextView = dateOverview.getChildAt(i + 1);
+
+                if (nextView instanceof TableRow) {
+                    TableRow nextRow = (TableRow) nextView;
+
+                    for (int j = 0; j < nextRow.getChildCount(); j++) {
+                        View nextElementView = nextRow.getChildAt(j);
+                        if (nextElementView instanceof TextView) {
+                            nextElementText = ((TextView) nextElementView).getText().toString();
+                        }
+                        nextElementView.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            for (int i =0; i < dateOverview.getChildCount(); i++){
+                View view = dateOverview.getChildAt(i);
+
+                if (view instanceof TableRow) {
+                    TableRow row = (TableRow) view;
+
+                    for (int x = 0; x < row.getChildCount(); x++) {
+                        View elementView = row.getChildAt(x);
+
+                        if (elementView instanceof TextView){
+                            ((TextView) elementView).setText(nextElementText);
+                        }
+                    }
+                    dateList.remove(i);
+                    timeList.remove(i);
+                }
+            }
         }
     };
 
 
-    private void showDate(int arg1, int arg2, int arg3) {
-        dateList.add(arg3 + "/" + arg2 + "/" + arg1);
-        timeList.add("");
-        dateTextView[counter].setText(dateList.get(counter));
-        dateButton[counter].setVisibility(View.VISIBLE);
-    }
-
-    private void showTime(int arg1, int arg2){
-        timeList.add(counter, " " + arg1 + ":" + arg2);
-        dateTextView[counter].setText(dateList.get(counter) + " " + timeList.get(counter));
-        dateButton[counter].setVisibility(View.VISIBLE);
-    }
-
     //Tenant set Dates, show Tenant which dates send WG
     public void setDatesFromWG(List<String> dateList, List<String> timeList){
-        for (int i = 0; i < dateList.size()-1; i++) {
-            dateTextView[i].setText(dateList.get(i) + " " + timeList.get(i));
-            dateButton[i].setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.done_icon));
-            dateButton[i].setVisibility(View.VISIBLE);
-            isTenant = true;
+        for(int i = 0; i < dateList.size(); i++){
+            TableRow row = new TableRow(this);
+            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+            row.setLayoutParams(lp);
+            TextView dateText = new TextView(this);
+            Button checkButton = new Button(this);
+
+            dateText.setText(dateList.get(i) + " " + timeList.get(i));
+
+            checkButton.setVisibility(View.VISIBLE);
+            checkButton.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.checkmark));
+            checkButton.setOnClickListener(myCheckHandler);
+
+            row.addView(dateText);
+            row.addView(checkButton);
+
+            dateOverview.addView(row, i);
         }
     }
+
+    View.OnClickListener myCheckHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+
+            v.setVisibility(View.GONE);
+            TableRow row = (TableRow) v;
+
+            for (int x = 0; x < row.getChildCount(); x++) {
+                View view = row.getChildAt(x);
+                if (view instanceof TextView){
+                    view.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.colorAccent));
+                    finalDate = ((TextView) view).getText().toString();
+                }
+            }
+            send.setVisibility(View.VISIBLE);
+        }
+    };
 
     //WG and Tenant, show the final date
     public void showFinalDate(String finalDate){
-        for (int i=0; i <= dateTextView.length-1; i++){
-            dateTextView[i].setText("");
-        }
-        dateTextView[5].setText("Your appointment is: " + finalDate);
-        dateTextView[4].setBackground(ContextCompat.getDrawable(getApplicationContext(),R.color.colorPrimary));
-        dateTextView[6].setBackground(ContextCompat.getDrawable(getApplicationContext(),R.color.colorPrimary));
+        TableRow row = new TableRow(this);
+        TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+        row.setLayoutParams(lp);
+        TextView dateText = new TextView(this);
+
+        dateText.setText("Your appointment is: " + finalDate);
+        dateText.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.color.colorAccent));
+
+        row.addView(dateText);
+
+        dateOverview.addView(row);
     }
 
     public void datesSuccessfulToTenants(){
         send.setEnabled(false);
         setDate.setEnabled(false);
-        for (int i = 0; i < dateButton.length;i++){
-            dateButton[i].setEnabled(false);
-        }
     }
 
     private void bindView() {
         send = (Button) findViewById(R.id.send);
-        deleteButton1 = (Button) findViewById(R.id.delete1);
-        deleteButton2 = (Button) findViewById(R.id.delete2);
-        deleteButton3 = (Button) findViewById(R.id.delete3);
-        deleteButton4 = (Button) findViewById(R.id.delete4);
-        deleteButton5 = (Button) findViewById(R.id.delete5);
-        deleteButton6 = (Button) findViewById(R.id.delete6);
-        deleteButton7 = (Button) findViewById(R.id.delete7);
-        deleteButton8 = (Button) findViewById(R.id.delete8);
-        deleteButton9 = (Button) findViewById(R.id.delete9);
-        deleteButton10 = (Button) findViewById(R.id.delete10);
-        date1 = (TextView) findViewById(R.id.date1);
-        date2 = (TextView) findViewById(R.id.date2);
-        date3 = (TextView) findViewById(R.id.date3);
-        date4 = (TextView) findViewById(R.id.date4);
-        date5 = (TextView) findViewById(R.id.date5);
-        date6 = (TextView) findViewById(R.id.date6);
-        date7 = (TextView) findViewById(R.id.date7);
-        date8 = (TextView) findViewById(R.id.date8);
-        date9 = (TextView) findViewById(R.id.date9);
-        date10 = (TextView) findViewById(R.id.date10);
         setDate = (Button) findViewById(R.id.setDate);
+        dateOverview = (TableLayout) findViewById(R.id.dateOverview);
     }
 
 

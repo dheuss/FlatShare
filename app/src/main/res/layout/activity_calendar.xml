@@ -34,7 +34,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="setDate"
-            android:text="Set Date"
+            android:text="
+            Set Date"
             android:textColor="@color/colorButtonText"
             android:background="@color/colorPrimary"/>
     </LinearLayout>
@@ -45,252 +46,13 @@
         android:orientation="vertical"
         android:scrollbars="vertical"
         android:weightSum="1">
-
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:id="@+id/dateOverview"
             android:textColor="@color/colorText"
             android:textAppearance="?android:attr/textAppearanceLarge">
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp">
-
-                <TextView
-                    android:text=""
-                    android:id="@+id/date1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_column="1" />
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="20dp" />
-                <Button
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:id="@+id/delete1"
-                    android:background="@drawable/clear_icon"
-                    android:layout_column="2"
-                    android:visibility="gone"
-                    android:onClick="handleClick"/>
-            </TableRow>
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp">
-
-                <TextView
-                    android:text=""
-                    android:id="@+id/date2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_column="1" />
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="20dp" />
-                <Button
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:id="@+id/delete2"
-                    android:background="@drawable/clear_icon"
-                    android:layout_column="2"
-                    android:visibility="gone"
-                    android:onClick="handleClick"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp">
-
-                <TextView
-                    android:text=""
-                    android:id="@+id/date3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_column="1" />
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="20dp" />
-                <Button
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:id="@+id/delete3"
-                    android:background="@drawable/clear_icon"
-                    android:layout_column="2"
-                    android:visibility="gone"
-                    android:onClick="handleClick"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp">
-
-                <TextView
-                    android:text=""
-                    android:id="@+id/date4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_column="1" />
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="20dp" />
-                <Button
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:id="@+id/delete4"
-                    android:background="@drawable/clear_icon"
-                    android:layout_column="2"
-                    android:visibility="gone"
-                    android:onClick="handleClick"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp">
-
-                <TextView
-                    android:text=""
-                    android:id="@+id/date5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_column="1" />
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="20dp" />
-                <Button
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:id="@+id/delete5"
-                    android:background="@drawable/clear_icon"
-                    android:layout_column="2"
-                    android:visibility="gone"
-                    android:onClick="handleClick"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp">
-
-                <TextView
-                    android:text=""
-                    android:id="@+id/date6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_column="1" />
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="20dp" />
-                <Button
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:id="@+id/delete6"
-                    android:background="@drawable/clear_icon"
-                    android:layout_column="2"
-                    android:visibility="gone"
-                    android:onClick="handleClick"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp">
-
-                <TextView
-                    android:text=""
-                    android:id="@+id/date7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_column="1" />
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="20dp" />
-                <Button
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:id="@+id/delete7"
-                    android:background="@drawable/clear_icon"
-                    android:layout_column="2"
-                    android:visibility="gone"
-                    android:onClick="handleClick"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp">
-
-                <TextView
-                    android:text=""
-                    android:id="@+id/date8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_column="1" />
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="20dp" />
-                <Button
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:id="@+id/delete8"
-                    android:background="@drawable/clear_icon"
-                    android:layout_column="2"
-                    android:visibility="gone"
-                    android:onClick="handleClick"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp">
-
-                <TextView
-                    android:text=""
-                    android:id="@+id/date9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_column="1" />
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="20dp" />
-                <Button
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:id="@+id/delete9"
-                    android:background="@drawable/clear_icon"
-                    android:layout_column="2"
-                    android:visibility="gone"
-                    android:onClick="handleClick"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp">
-
-                <TextView
-                    android:text=""
-                    android:id="@+id/date10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_column="1" />
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="20dp" />
-                <Button
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:id="@+id/delete10"
-                    android:background="@drawable/clear_icon"
-                    android:layout_column="2"
-                    android:visibility="gone"
-                    android:onClick="handleClick"/>
-            </TableRow>
         </TableLayout>
         <Button
             android:id="@+id/send"
@@ -302,5 +64,4 @@
             android:textColor="@color/colorButtonText"
             android:visibility="gone"/>
     </LinearLayout>
-
 </FrameLayout>
