@@ -172,12 +172,13 @@ public class PotentialMatchingInteractorImpl extends AbstractInteractor implemen
                 GenericTypeIndicator<Map<String, ApartmentProfile>> t = new GenericTypeIndicator<Map<String, ApartmentProfile>>() {
                 };
 
-                List<ApartmentProfile> apartments = new ArrayList<>((dataSnapshot.getValue(t).values()));
-
-                if (apartments == null) {
+                if (dataSnapshot.getValue(t) == null) {
                     notifyError("No apartments were found in the database!");
                     return;
                 }
+
+                List<ApartmentProfile> apartments = new ArrayList<>((dataSnapshot.getValue(t).values()));
+
 
                 List<ApartmentProfile> potentialMatches = new TenantMatchFinder(tUP, apartments).getMatches();
 

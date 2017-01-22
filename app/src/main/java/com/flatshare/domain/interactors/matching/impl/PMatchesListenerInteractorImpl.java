@@ -72,7 +72,7 @@ public class PMatchesListenerInteractorImpl extends AbstractInteractor implement
         mDatabase.child(potentialMatchesPath).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                checkIfMatchPossible(dataSnapshot);
+//                checkIfMatchPossible(dataSnapshot);
             }
 
             @Override

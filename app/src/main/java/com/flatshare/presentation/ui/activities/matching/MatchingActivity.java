@@ -246,7 +246,7 @@ public class  MatchingActivity extends AbstractFragmentActivity implements Poten
 
     @Override
     public void updateListener(boolean listenerAttached) {
-        //writeToSharedPreferences(R.string.pot_matching_listener_attached, listenerAttached);
+        writeToSharedPreferences(R.string.pot_matching_listener_attached, listenerAttached);
     }
 
     public void tenantSwipedApartment(ApartmentProfile apartmentProfile, boolean accepted) {
