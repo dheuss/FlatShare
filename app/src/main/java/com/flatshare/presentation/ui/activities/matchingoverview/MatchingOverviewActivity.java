@@ -14,6 +14,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.flatshare.R;
+
 import com.flatshare.presentation.presenters.matchingoverview.MatchingOverviewPresenter;
 import com.flatshare.presentation.presenters.matchingoverview.impl.MatchingOverviewPresenterImpl;
 import com.flatshare.presentation.ui.AbstractFragmentActivity;
