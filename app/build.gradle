@@ -8,7 +8,7 @@ android {
         abortOnError false
     }
 
-    sourceSets{
+    sourceSets {
         main {
             assets.srcDirs = ['src/main/assets', 'src/main/assets/']
             res.srcDirs = ['src/main/res', 'src/main/res/drawable']
@@ -50,53 +50,54 @@ dependencies {
     })
 
     // general
-    compile 'com.android.support:appcompat-v7:25.0.1'
-    compile 'com.android.support:design:25.0.1'
+    
 
     // butterknife
-    compile 'com.jakewharton:butterknife:7.0.1'
-//    annotationProcessor 'com.jakewharton:butterknife-compiler:7.0.1'
+    //    annotationProcessor 'com.jakewharton:butterknife-compiler:7.0.1'
 //    apt 'com.jakewharton:butterknife-compiler:8.4.0'
 
     // timber
-    compile 'com.jakewharton.timber:timber:4.1.0'
-
+    
     // firebase
+    
+    //tests
+    
+    //facebook
+    
+    //Gson
+    
+    //swipeview
+    
+    // loader
+    
+    //range bar
+    
+    // QR Code Generator
+    
+    // QR Code Reader
+    
+    // Google Maps
+    
+    // gif player
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:design:25.1.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.jakewharton.timber:timber:4.1.0'
     compile 'com.google.firebase:firebase-core:10.0.1'
     compile 'com.google.firebase:firebase-database:10.0.1'
     compile 'com.google.firebase:firebase-auth:10.0.1'
     compile 'com.google.firebase:firebase-storage:10.0.1'
-
-    //tests
-    testCompile 'junit:junit:4.12'
-
-    //facebook
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-
-    //Gson
     compile 'com.google.code.gson:gson:2.7'
-
-    //swipeview
     compile 'com.mindorks:placeholderview:0.5.2'
-    compile 'com.android.support:cardview-v7:25.0.0'
+    compile 'com.android.support:cardview-v7:25.1.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
-    // loader
     compile 'com.github.d-max:spots-dialog:0.4@aar'
-
-    //range bar
     compile 'com.appyvet:materialrangebar:1.3'
-
-    // QR Code Generator
     compile 'com.google.zxing:core:3.2.1'
-
-    // QR Code Reader
     compile 'com.google.android.gms:play-services:10.0.1'
-
-    // Google Maps
     compile 'com.google.android.gms:play-services-maps:10.0.1'
-
-    // gif player
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.4'
+    testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'

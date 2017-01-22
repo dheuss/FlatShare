@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/windowBackground">
 
     <RelativeLayout
@@ -259,6 +259,12 @@
                 android:gravity="right"
                 android:text="12345"/>
         </LinearLayout>
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/LinearLayoutApartmentProfileWashingsMashine"/>
 
 
     </RelativeLayout>
