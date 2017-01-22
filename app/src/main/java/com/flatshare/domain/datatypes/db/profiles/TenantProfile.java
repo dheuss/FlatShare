@@ -59,6 +59,7 @@ public class TenantProfile extends UserProfile {
     @PropertyName("apartments_to_show")
     public List<String> apartmentsToShow;
 
+    @Exclude
     @PropertyName("matched_apartments")
     public List<String> matchedApartments;
 

@@ -54,15 +54,16 @@ public class ApartmentProfile extends UserProfile {
     @PropertyName("washing_machine")
     public boolean washingMachine;
 
-    @PropertyName("image_ids")
-    public List<String> imageIds;
-
-    @PropertyName("main_image_id")
-    public String mainImageId;
+//    @PropertyName("image_ids")
+//    public List<String> imageIds;
+//
+//    @PropertyName("main_image_id")
+//    public String mainImageId;
 
     @PropertyName("languages")
     public List<String> languages;
 
+    @Exclude
     @PropertyName("matched_tenant_ids")
     public List<String> matchedTenantIds;
 
@@ -78,7 +79,6 @@ public class ApartmentProfile extends UserProfile {
     public ApartmentProfile() {
         this.roommateIds = new ArrayList<>();
         this.apartmentLocation = new ApartmentLocation();
-        this.imageIds = new ArrayList<>();
         this.languages = new ArrayList<>();
         this.matchedTenantIds = new ArrayList<>();
     }
@@ -226,16 +226,6 @@ public class ApartmentProfile extends UserProfile {
     @Exclude
     public String getApartmentId() {
         return apartmentId;
-    }
-
-    @Exclude
-    public List<String> getImageIds() {
-        return imageIds;
-    }
-
-    @Exclude
-    public String getMainImageId() {
-        return mainImageId;
     }
 
     @Exclude
