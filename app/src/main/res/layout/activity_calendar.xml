@@ -1,67 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <LinearLayout
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="top|left"
-        android:orientation="vertical">
-    </LinearLayout>
-    <LinearLayout
+        android:id="@+id/LinearLayoutCalender_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Send date(s) for an appointment to view the flat:"
-            android:textColor="@color/colorText"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorText" />
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/LinearLayoutCalender_2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="100dp"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/setDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:onClick="setDate"
             android:text="
             Set Date"
-            android:textColor="@color/colorButtonText"
-            android:background="@color/colorPrimary"/>
+            android:textColor="@color/colorButtonText" />
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/LinearLayoutCalender_3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="150dp"
         android:orientation="vertical"
         android:scrollbars="vertical"
         android:weightSum="1">
-        <TableLayout
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:id="@+id/dateOverview"
-            android:textColor="@color/colorText"
-            android:textAppearance="?android:attr/textAppearanceLarge">
-        </TableLayout>
-        <Button
-            android:id="@+id/send"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="Send"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/colorButtonText"
-            android:visibility="gone"/>
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:id="@+id/dateOverview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/colorText"
+                    android:textAppearance="?android:attr/textAppearanceLarge"></TableLayout>
+
+                <Button
+                    android:id="@+id/send"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:text="Send"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/colorButtonText"
+                    android:visibility="gone"/>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
     </LinearLayout>
 </FrameLayout>
