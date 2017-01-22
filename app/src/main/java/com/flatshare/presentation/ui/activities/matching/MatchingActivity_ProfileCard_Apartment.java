@@ -1,6 +1,7 @@
 package com.flatshare.presentation.ui.activities.matching;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
@@ -38,26 +39,31 @@ public class MatchingActivity_ProfileCard_Apartment {
     private MatchingActivity matchingActivity;
     private SwipePlaceHolderView mSwipeView;
 
+    private Bitmap mBitmap;
+    private Context mContext;
 
-
-    public MatchingActivity_ProfileCard_Apartment(MatchingActivity matchingActivity, ApartmentProfile profile, SwipePlaceHolderView swipeView) {
+    public MatchingActivity_ProfileCard_Apartment(MatchingActivity matchingActivity, ApartmentProfile profile, SwipePlaceHolderView swipeView, Bitmap bitmap) {
         this.matchingActivity = matchingActivity;
         mProfile = profile;
         mSwipeView = swipeView;
+        mBitmap = bitmap;
+        mContext  = matchingActivity.getActivity();
     }
 
     @Resolve
     private void onResolved(){
-        //Glide.with(mContext).load(mProfile.getImageIds()).into(profileImageView);
+        if (mBitmap == null){
+            Glide.with(mContext).load(R.drawable.apartment_default).into(profileImageView);
+        } else{
+            Glide.with(mContext).load(mBitmap).into(profileImageView);
+        }
         nameAgeTxt.setText("Location: " + mProfile.getApartmentLocation().city + ", " + mProfile.getApartmentLocation().district);
         locationNameTxt.setText("Price: " + mProfile.getPrice() + "€");
     }
 
     @SwipeOut
     private void onSwipedOut(){
-//        Log.d("EVENT", "onSwipedOut");
         matchingActivity.tenantSwipedApartment(mProfile, false);
-        mSwipeView.addView(this);
     }
 
     @SwipeCancelState

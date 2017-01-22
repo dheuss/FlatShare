@@ -1,10 +1,12 @@
 package com.flatshare.presentation.ui.activities.matching;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
@@ -37,25 +39,31 @@ public class MatchingActivity_ProfileCard_Tenant {
     private MatchingActivity matchingActivity;
     private SwipePlaceHolderView mSwipeView;
 
-    public MatchingActivity_ProfileCard_Tenant(MatchingActivity matchingActivity, TenantProfile profile, SwipePlaceHolderView swipeView) {
+    private Bitmap mBitmap;
+    private Context mContext;
+
+    public MatchingActivity_ProfileCard_Tenant(MatchingActivity matchingActivity, TenantProfile profile, SwipePlaceHolderView swipeView, Bitmap bitmap) {
         this.matchingActivity = matchingActivity;
         mProfile = profile;
         mSwipeView = swipeView;
+        mBitmap = bitmap;
+        mContext = matchingActivity.getActivity();
     }
 
     @Resolve
     private void onResolved(){
-        //Glide.with(mContext).load(mProfile.getImageIds()).into(profileImageView);
+        if (mBitmap == null) {
+            Glide.with(mContext).load(R.drawable.tenant_default).into(profileImageView);
+        } else {
+            Glide.with(mContext).load(mBitmap).into(profileImageView);
+        }
         nameAgeTxt.setText("Name: " + mProfile.getFirstName() + ", " + mProfile.getAge());
         locationNameTxt.setText("Job: " + mProfile.getOccupation() + ", Duration: " + mProfile.getDurationOfStay());
     }
 
     @SwipeOut
     private void onSwipedOut(){
-//        Log.d("EVENT", "onSwipedOut");
         matchingActivity.roommateSwipedTenant(mProfile, false);
-        // what does this addView do? and why not call it on swipeIn??
-        mSwipeView.addView(this);
     }
 
     @SwipeCancelState

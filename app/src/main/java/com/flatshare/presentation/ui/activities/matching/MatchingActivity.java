@@ -33,7 +33,7 @@ import android.view.ViewGroup.LayoutParams;
 
 import java.util.List;
 
-public class MatchingActivity extends AbstractFragmentActivity implements PotentialMatchingPresenter.View {
+public class  MatchingActivity extends AbstractFragmentActivity implements PotentialMatchingPresenter.View {
 
     private static final String TAG = "MatchingActivity";
 
@@ -135,7 +135,6 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
 
     private void bindView(View view) {
         mSwipeView = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
-//        this.mContext = getActivity();
 
         mFrameLayout = (FrameLayout) view.findViewById(R.id.matchingActivityFrameLayout);
 
@@ -229,8 +228,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
         for (Pair<TenantProfile, Bitmap> pair : tenants) {
             TenantProfile tenantProfile = pair.getLeft();
             Bitmap bitmap = pair.getRight();
-            //TODO: get ImageView and show it, IF BITMAP IS NULL THEN PICK SOME DEFAULT IMAGE (apartment/ tenant (male/female))
-            mSwipeView.addView(new MatchingActivity_ProfileCard_Tenant(this, tenantProfile, mSwipeView));
+            mSwipeView.addView(new MatchingActivity_ProfileCard_Tenant(this, tenantProfile, mSwipeView, bitmap));
         }
 
     }
@@ -242,8 +240,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
         for (Pair<ApartmentProfile, Bitmap> pair : apartments) {
             ApartmentProfile apartmentProfile = pair.getLeft();
             Bitmap bitmap = pair.getRight();
-            //TODO: get ImageView and show it
-            mSwipeView.addView(new MatchingActivity_ProfileCard_Apartment(this, apartmentProfile, mSwipeView));
+            mSwipeView.addView(new MatchingActivity_ProfileCard_Apartment(this, apartmentProfile, mSwipeView, bitmap));
         }
     }
 
