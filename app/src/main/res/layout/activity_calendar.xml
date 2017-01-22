@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <LinearLayout
         android:id="@+id/LinearLayoutCalender_1"
@@ -20,24 +21,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/LinearLayoutCalender_2"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="100dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/setDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:onClick="setDate"
-            android:text="
-            Set Date"
-            android:textColor="@color/colorButtonText" />
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/LinearLayoutCalender_3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -51,6 +34,7 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
+                android:id="@+id/LinearLayoutCalender_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -62,6 +46,20 @@
                     android:layout_margin="5dp"
                     android:textColor="@color/colorText"
                     android:textAppearance="?android:attr/textAppearanceLarge"></TableLayout>
+
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/setDate"
+                    android:onClick="setDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:clickable="true"
+                    android:src="@drawable/add_icon"
+                    android:backgroundTint="@android:color/transparent"
+                    android:layout_gravity="right"
+                    app:layout_anchor="@id/LinearLayoutCalender_4"
+                    app:layout_anchorGravity="bottom|right|end"/>
 
                 <Button
                     android:id="@+id/send"
