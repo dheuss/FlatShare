@@ -1,5 +1,7 @@
 package com.flatshare.domain.interactors.matching.impl;
 
+import android.util.Log;
+
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.common.MatchEntry;
 import com.flatshare.domain.datatypes.db.common.PotentialMatchEntry;
@@ -104,9 +106,13 @@ public class PMatchesListenerInteractorImpl extends AbstractInteractor implement
             notifyError("There is no entry with key: " + key);
         } else {
             if (decisionCanBeMade()) {
+                Log.d(TAG, "checkIfMatchPossible: Decision can be made");
                 if (tenantAccepts() && majorityAccepts() && ownerAccepts()) { // match found
+                    Log.d(TAG, "checkIfMatchPossible: Match FOUND");
                     createMatch(key);
+                    deleteMatch(key);
                 } else {// they seem to not like each other
+                    Log.d(TAG, "checkIfMatchPossible: DELETE MATCH!");
                     deleteMatch(key);
                 }
             }

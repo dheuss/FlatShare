@@ -32,11 +32,13 @@ public class ApartmentSwipeInteractorImpl extends AbstractInteractor implements 
 
     public ApartmentSwipeInteractorImpl(MainThread mMainThread, Callback callback, String tenantProfileId, RoommateProfile roommateProfile, int totalNrRoommates, boolean accepted) {
         super(mMainThread);
+        this.mCallback = callback;
         this.tenantProfileId = tenantProfileId;
         this.roommateProfileId = roommateProfile.getId();
         this.apartmentProfileId = roommateProfile.getApartmentId();
         this.totalNrRoommates = totalNrRoommates;
         this.isOwner = roommateProfile.isOwner();
+        this.accepted = accepted;
     }
 
 

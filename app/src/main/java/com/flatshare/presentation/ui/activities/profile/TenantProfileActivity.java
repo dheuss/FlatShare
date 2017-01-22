@@ -176,10 +176,10 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
             result = false;
         }
 
-        if (profilePicUploaded) {
-            uploadPictureButton.setError(getString(R.string.picture_required_error));
-            result = false;
-        }
+//        if (profilePicUploaded) {
+//            uploadPictureButton.setError(getString(R.string.picture_required_error));
+//            result = false;
+//        }
 
         return result;
     }
