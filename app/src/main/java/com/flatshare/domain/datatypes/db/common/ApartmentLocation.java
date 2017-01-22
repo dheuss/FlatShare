@@ -14,6 +14,12 @@ public class ApartmentLocation implements DatabaseItem {
     @PropertyName("city")
     public String city;
 
+    @PropertyName("state")
+    public String state;
+
+    @PropertyName("country")
+    public String country;
+
     @PropertyName("district")
     public String district;
 
@@ -28,6 +34,8 @@ public class ApartmentLocation implements DatabaseItem {
 
     public ApartmentLocation() {
         this.city = "Munich";
+        this.state = "Bavaria";
+        this.country = "Germany";
         this.district = "Schwabing";
         this.street = "someStreet";
         this.zipCode = 80805;
@@ -82,5 +90,25 @@ public class ApartmentLocation implements DatabaseItem {
     @Exclude
     public String getHouseNr() {
         return houseNr;
+    }
+
+    @Exclude
+    public String getState() {
+        return state;
+    }
+
+    @Exclude
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    @Exclude
+    public String getCountry() {
+        return country;
+    }
+
+    @Exclude
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

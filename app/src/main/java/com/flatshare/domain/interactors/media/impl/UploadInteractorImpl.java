@@ -19,7 +19,7 @@ import com.google.firebase.storage.UploadTask;
 public class UploadInteractorImpl extends AbstractInteractor implements MediaInteractor {
 
     private static final String TAG = "UploadInt";
-    public static final String DEFAULT_NAME = "default";
+    public static final String DEFAULT_NAME = "default.jpg";
 
     /**
      * The Callback is responsible for talking to the UI on the main thread

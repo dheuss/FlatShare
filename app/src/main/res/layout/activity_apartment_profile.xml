@@ -104,11 +104,26 @@
                 android:textColorHint="@color/colorText" />
         </android.support.design.widget.TextInputLayout>
 
+        <Button
+            android:id="@+id/getLocation_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LinearLayoutApartmentProfileArea"
+            android:layout_marginBottom="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/colorPrimaryDark"
+            android:hint="@string/getLocation"
+            android:textColor="@color/colorButtonText"
+            android:textColorHint="@color/colorButtonText"
+            android:textStyle="bold" />
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/LinearLayoutApartmentProfileStreet"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/LinearLayoutApartmentProfileArea"
+            android:layout_below="@+id/getLocation_button"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
@@ -124,29 +139,10 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/LinearLayoutApartmentProfileHouseNumber"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/LinearLayoutApartmentProfileStreet"
-            android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginTop="@dimen/marginTop">
-
-            <EditText
-                android:id="@+id/apartment_house_nr_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/housenumber"
-                android:inputType="text"
-                android:textColor="@color/colorText"
-                android:textColorHint="@color/colorText" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
             android:id="@+id/LinearLayoutApartmentProfileZipCode"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/LinearLayoutApartmentProfileHouseNumber"
+            android:layout_below="@+id/LinearLayoutApartmentProfileStreet"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
@@ -161,12 +157,69 @@
                 android:textColorHint="@color/colorText" />
         </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/LinearLayoutApartmentProfileCity"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LinearLayoutApartmentProfileZipCode"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <EditText
+                android:id="@+id/apartment_city_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/city"
+                android:inputType="number"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/LinearLayoutApartmentProfileState"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LinearLayoutApartmentProfileCity"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <EditText
+                android:id="@+id/apartment_state_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/state"
+                android:inputType="number"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/LinearLayoutApartmentProfileCountry"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LinearLayoutApartmentProfileState"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <EditText
+                android:id="@+id/apartment_country_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/country"
+                android:inputType="number"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText" />
+        </android.support.design.widget.TextInputLayout>
+
 
         <LinearLayout
             android:id="@+id/LinearLayoutApartmentProfileInternet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutApartmentProfileZipCode"
+            android:layout_below="@id/LinearLayoutApartmentProfileCountry"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">

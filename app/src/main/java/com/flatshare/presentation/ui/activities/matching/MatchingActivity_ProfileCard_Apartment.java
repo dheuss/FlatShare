@@ -2,7 +2,6 @@ package com.flatshare.presentation.ui.activities.matching;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +18,8 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeIn;
 import com.mindorks.placeholderview.annotations.swipe.SwipeInState;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOut;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOutState;
+
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 /**
  * Created by david on 08.01.2017.
@@ -42,16 +43,18 @@ public class MatchingActivity_ProfileCard_Apartment {
     private Bitmap mBitmap;
     private Context mContext;
 
+    private String TAG = "MatchingActivity_ProfileCard_Apartment";
+
     public MatchingActivity_ProfileCard_Apartment(MatchingActivity matchingActivity, ApartmentProfile profile, SwipePlaceHolderView swipeView, Bitmap bitmap) {
         this.matchingActivity = matchingActivity;
         mProfile = profile;
         mSwipeView = swipeView;
         mBitmap = bitmap;
-        mContext  = matchingActivity.getActivity();
-    }
+        mContext  = matchingActivity.getActivity();}
 
     @Resolve
     private void onResolved(){
+        Log.d(TAG, "onResolved: " + mBitmap);
         if (mBitmap == null){
             Glide.with(mContext).load(R.drawable.apartment_default).into(profileImageView);
         } else{

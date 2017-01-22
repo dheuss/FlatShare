@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -141,6 +140,11 @@ public class  MatchingActivity extends AbstractFragmentActivity implements Poten
         rejectBtn = (ImageButton) view.findViewById(R.id.rejectBtn);
         infoBtn = (ImageButton) view.findViewById(R.id.infoBtn);
         acceptBtn = (ImageButton) view.findViewById(R.id.acceptBtn);
+
+
+
+
+
     }
 
     public void cardClick(View view) {
@@ -154,21 +158,22 @@ public class  MatchingActivity extends AbstractFragmentActivity implements Poten
     public void apartmentPopUp(View view) {
         View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_apartment, null);
 
+        apartmentPriceTextView = (TextView) customView.findViewById(R.id.apartmentPriceTextView);
+        apartmentAreaTextView = (TextView) customView.findViewById(R.id.apartmentAreaTextView);
+        apartmentZipCodeTextView = (TextView) customView.findViewById(R.id.apartmentZIPTextView);
+        apartmentRoomSizeTextView = (TextView) customView.findViewById(R.id.apartmentRoomSizeTextView);
+        apartmentApartmentSizeTextView = (TextView) customView.findViewById(R.id.apartmentAreaTextView);
+        apartmentInternetTextView = (TextView) customView.findViewById(R.id.apartmentInternetTextView);
+        apartmentSmokerTextView = (TextView) customView.findViewById(R.id.apartmentSmokerTextView);
+        apartmentPetsTextView = (TextView) customView.findViewById(R.id.apartmentPetsTextView);
+        apartmentWashingMashineTextView = (TextView) customView.findViewById(R.id.apartmentWashingMashineTextView);
+
         mPopupWindow = new PopupWindow(
                 customView,
                 LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT
         );
 
-        apartmentPriceTextView = (TextView) view.findViewById(R.id.apartmentPriceTextView);
-        apartmentAreaTextView = (TextView) view.findViewById(R.id.apartmentAreaTextView);
-        apartmentZipCodeTextView = (TextView) view.findViewById(R.id.apartmentZIPTextView);
-        apartmentRoomSizeTextView = (TextView) view.findViewById(R.id.apartmentRoomSizeTextView);
-        apartmentApartmentSizeTextView = (TextView) view.findViewById(R.id.apartmentAreaTextView);
-        apartmentInternetTextView = (TextView) view.findViewById(R.id.apartmentInternetTextView);
-        apartmentSmokerTextView = (TextView) view.findViewById(R.id.apartmentSmokerTextView);
-        apartmentPetsTextView = (TextView) view.findViewById(R.id.apartmentPetsTextView);
-        apartmentWashingMashineTextView = (TextView) view.findViewById(R.id.apartmentWashingMashineTextView);
         closeButton = (ImageButton) customView.findViewById(R.id.ib_close);
 
         closeButton.setOnClickListener(new View.OnClickListener() {

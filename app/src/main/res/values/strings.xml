@@ -112,7 +112,7 @@
     <string name="nickname">Nickname</string>
     <string name="price">Price</string>
     <string name="size">Size</string>
-    <string name="street">Street</string>
+    <string name="street">Street and Housenumber</string>
     <string name="housenumber">House Number</string>
     <string name="zipcode">ZIP Code</string>
     <string name="field_cannot_be_empty">This field cannot be empty</string>
@@ -121,6 +121,7 @@
     <string name="take_picture_apartment_profile">Upload a picture of your apartment</string>
     <string name="wait_roommate">Please Wait</string>
     <string name="wait_roommate_info">Please wait until the apartment owner is done with the apartment settings!</string>
+    <string name="getLocation">Get my location!</string>
 
     <string-array name="occupation">
         <item>Student</item>
@@ -155,4 +156,7 @@
         <item>Does not matter</item>
     </string-array>
     <string name="title_activity_maps">Map</string>
+    <string name="city">City</string>
+    <string name="country">Country</string>
+    <string name="state">State</string>
 </resources>

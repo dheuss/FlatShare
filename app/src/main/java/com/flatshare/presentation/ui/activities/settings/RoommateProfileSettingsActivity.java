@@ -33,7 +33,6 @@ public class RoommateProfileSettingsActivity extends AbstractFragmentActivity im
     private EditText priceEditText;
     private EditText sizeEditText;
     private EditText streetEditText;
-    private EditText houseNumberEditText;
     private EditText zipCodeEditText;
 
     private RadioButton internetYESRadioButton, internetNORadioButton;
@@ -110,10 +109,6 @@ public class RoommateProfileSettingsActivity extends AbstractFragmentActivity im
         streetEditText = (EditText)view.findViewById(R.id.apartment_street_edit_text);
         streetEditText.setText(userState.getApartmentProfile().getApartmentLocation().getStreet()+"");
         streetEditText.setEnabled(false);
-
-        houseNumberEditText = (EditText)view.findViewById(R.id.apartment_house_nr_edit_text);
-        houseNumberEditText.setText(userState.getApartmentProfile().getApartmentLocation().getHouseNr()+"");
-        houseNumberEditText.setEnabled(false);
 
         zipCodeEditText = (EditText)view.findViewById(R.id.apartment_zip_code_edit_text);
         zipCodeEditText.setText(userState.getApartmentProfile().getApartmentLocation().getZipCode()+"");

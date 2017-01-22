@@ -1,11 +1,15 @@
 package com.flatshare.presentation.ui.activities.profile;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -24,11 +28,11 @@ import com.flatshare.presentation.presenters.profile.impl.ApartmentProfilePresen
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.QRCodeReaderActivity;
 import com.flatshare.threading.MainThreadImpl;
+import com.flatshare.utils.location.AppLocationService;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -45,8 +49,10 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     private EditText apartmentPriceEditText;
     private EditText apartmentAreaEditText;
     private EditText apartmentStreetEditText;
-    private EditText apartmentHouseNrEditText;
     private EditText apartmentZipCodeEditText;
+    private EditText apartmentCityEditText;
+    private EditText apartmentStateEditText;
+    private EditText apartmentCountryEditText;
 
     private RadioGroup internetRadioGroup;
     private RadioButton internetYesRB, internetNoRB;
@@ -64,11 +70,13 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     private ArrayAdapter<String> adapter;
 
     private Button scanRoommateQRButton;
-
+    private Button getLocationButton;
     private Button uploadPictureButton;
     private boolean profilePicUploaded;
 
     private Button createApartmentButton;
+
+    private AppLocationService appLocationService;
 
     private ApartmentProfilePresenter mPresenter;
     private static final String TAG = "ApartmentProfileAct";
@@ -76,8 +84,8 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+        appLocationService = new AppLocationService(ApartmentProfileActivity.this);
 
         bindView();
 
@@ -95,6 +103,23 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             }
         });
 
+        getLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(ApartmentProfileActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
+                Location location = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
+
+                if (location != null) {
+                    double latitude = location.getLatitude();
+                    double longitude = location.getLongitude();
+                    getCompleteAddressString(latitude, longitude);
+                } else {
+                    Log.d(TAG, "onClick: LOCATION IS NULL");
+                }
+            }
+        });
+
         uploadPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,6 +134,28 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             }
         });
 
+    }
+
+    private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
+        String strAdd = "";
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
+            if (addresses != null) {
+                Address returnedAddress = addresses.get(0);
+                apartmentStreetEditText.setText(returnedAddress.getAddressLine(0));
+                apartmentZipCodeEditText.setText(returnedAddress.getPostalCode());
+                apartmentCityEditText.setText(returnedAddress.getLocality());
+                apartmentStateEditText.setText("Bavaria");
+                apartmentCountryEditText.setText(returnedAddress.getCountryName());
+            } else {
+                Log.w("My Current loction address", "No Address returned!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.w("My Current loction address", "Canont get Address!");
+        }
+        return strAdd;
     }
 
     private void openGallery() {
@@ -180,8 +227,10 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             int area = Integer.parseInt(apartmentAreaEditText.getText().toString());
 
             String street = apartmentStreetEditText.getText().toString();
-            String houseNr = apartmentHouseNrEditText.getText().toString();
             int zipCode = Integer.parseInt(apartmentZipCodeEditText.getText().toString());
+            String city = apartmentCityEditText.getText().toString();
+            String state = apartmentStateEditText.getText().toString();
+            String country = apartmentCountryEditText.getText().toString();
 
             boolean hasInternet = internetRadioGroup.getCheckedRadioButtonId() == internetYesRB.getId();
             boolean isSmoker = smokerRadioGroup.getCheckedRadioButtonId() == smokerYesRB.getId();
@@ -191,8 +240,10 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             ApartmentLocation apartmentLocation = new ApartmentLocation();
 
             apartmentLocation.setStreet(street);
-            apartmentLocation.setHouseNr(houseNr);
             apartmentLocation.setZipCode(zipCode);
+            apartmentLocation.setCity(city);
+            apartmentLocation.setState(state);
+            apartmentLocation.setCountry(country);
 
             ApartmentProfile apartmentProfile = new ApartmentProfile();
             apartmentProfile.setPrice(price);
@@ -235,13 +286,23 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             result = false;
         }
 
-        if (apartmentHouseNrEditText.getText().toString().trim().equals("")) {
-            apartmentHouseNrEditText.setError(getString(R.string.field_cannot_be_empty));
+        if (apartmentZipCodeEditText.getText().toString().trim().equals("")) {
+            apartmentZipCodeEditText.setError(getString(R.string.field_cannot_be_empty));
             result = false;
         }
 
-        if (apartmentZipCodeEditText.getText().toString().trim().equals("")) {
-            apartmentZipCodeEditText.setError(getString(R.string.field_cannot_be_empty));
+        if (apartmentCityEditText.getText().toString().trim().equals("")) {
+            apartmentCityEditText.setError(getString(R.string.field_cannot_be_empty));
+            result = false;
+        }
+
+        if (apartmentStateEditText.getText().toString().trim().equals("")) {
+            apartmentStateEditText.setError(getString(R.string.field_cannot_be_empty));
+            result = false;
+        }
+
+        if (apartmentCountryEditText.getText().toString().trim().equals("")) {
+            apartmentCountryEditText.setError(getString(R.string.field_cannot_be_empty));
             result = false;
         }
 
@@ -274,13 +335,13 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     }
 
     private void bindView() {
-
-
         apartmentPriceEditText = (EditText) findViewById(R.id.apartment_price_edit_text);
         apartmentAreaEditText = (EditText) findViewById(R.id.apartment_area_editText);
         apartmentStreetEditText = (EditText) findViewById(R.id.apartment_street_edit_text);
-        apartmentHouseNrEditText = (EditText) findViewById(R.id.apartment_house_nr_edit_text);
         apartmentZipCodeEditText = (EditText) findViewById(R.id.apartment_zip_code_edit_text);
+        apartmentCityEditText = (EditText) findViewById(R.id.apartment_city_edit_text);
+        apartmentStateEditText = (EditText) findViewById(R.id.apartment_state_edit_text);
+        apartmentCountryEditText = (EditText) findViewById(R.id.apartment_country_edit_text);
 
         internetRadioGroup = (RadioGroup) findViewById(R.id.internet_apartment_rg);
         internetYesRB = (RadioButton) findViewById(R.id.internet_yes_rb);
@@ -299,6 +360,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         washingMachineNoRB = (RadioButton) findViewById(R.id.washing_machine_no_rb);
 
         scanRoommateQRButton = (Button) findViewById(R.id.scan_roommate_QR_button);
+        getLocationButton = (Button) findViewById(R.id.getLocation_button);
         uploadPictureButton = (Button) findViewById(R.id.upload_picture_apartment);
         createApartmentButton = (Button) findViewById(R.id.create_apartment_profile_button);
 
@@ -350,6 +412,4 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     public Context getContext() {
         return getContext();
     }
-
-
 }

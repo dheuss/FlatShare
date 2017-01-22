@@ -1,9 +1,15 @@
 package com.flatshare.presentation.ui.activities.settings;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,9 +30,11 @@ import com.flatshare.presentation.presenters.profile.ApartmentProfilePresenter;
 import com.flatshare.presentation.presenters.profile.impl.ApartmentProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstractFragmentActivity;
 import com.flatshare.threading.MainThreadImpl;
+import com.flatshare.utils.location.AppLocationService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
@@ -45,8 +53,10 @@ public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity i
     private EditText priceEditText;
     private EditText sizeEditText;
     private EditText streetEditText;
-    private EditText houseNumberEditText;
     private EditText zipCodeEditText;
+    private EditText cityEditText;
+    private EditText stateEditText;
+    private EditText countryEditText;
 
     private RadioGroup internetRadioGroup;
     private RadioButton internetYESRadioButton, internetNORadioButton;
@@ -61,13 +71,18 @@ public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity i
     private RadioButton washingMashineYESRadioButton, washingMashineNORadioButton;
 
     private Button qrButton;
+    private Button getLocationButton;
     private Button changeButton;
     private Button saveButton;
+
+    private AppLocationService appLocationService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         userState = UserState.getInstance();
         super.onCreate(savedInstanceState);
+
+        appLocationService = new AppLocationService(getActivity());
     }
 
     @Override
@@ -85,6 +100,23 @@ public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity i
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "QR Code Scanner doesn't work at the moment", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        getLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
+                Location location = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
+
+                if (location != null) {
+                    double latitude = location.getLatitude();
+                    double longitude = location.getLongitude();
+                    getCompleteAddressString(latitude, longitude);
+                } else {
+                    Log.d(TAG, "onClick: LOCATION IS NULL");
+                }
             }
         });
 
@@ -132,12 +164,34 @@ public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity i
         return view;
     }
 
+    private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
+        String strAdd = "";
+        Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
+            if (addresses != null) {
+                Address returnedAddress = addresses.get(0);
+                streetEditText.setText(returnedAddress.getAddressLine(0));
+                zipCodeEditText.setText(returnedAddress.getPostalCode());
+                cityEditText.setText(returnedAddress.getLocality());
+                stateEditText.setText("Bavaria");
+                countryEditText.setText(returnedAddress.getCountryName());
+            } else {
+                Log.w("My Current loction address", "No Address returned!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.w("My Current loction address", "Canont get Address!");
+        }
+        return strAdd;
+    }
+
     private void sendProfile() {
 
         LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
         View mView = layoutInflater.inflate(R.layout.activity_popup, null);
 
-        AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(getActivity());
         alertDialogBuilderUserInput.setView(mView);
 
         final TextView popUpTextView = (TextView) mView.findViewById(R.id.popup_TextView);
@@ -170,8 +224,10 @@ public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity i
                         int price = Integer.parseInt(priceEditText.getText().toString());
                         int size = Integer.parseInt(sizeEditText.getText().toString());
                         String street = streetEditText.getText().toString();
-                        String houseNr = houseNumberEditText.getText().toString();
                         int zip = Integer.parseInt(zipCodeEditText.getText().toString());
+                        String city = cityEditText.getText().toString();
+                        String state = stateEditText.getText().toString();
+                        String country = countryEditText.getText().toString();
 
                         boolean internet = internetRadioGroup.getCheckedRadioButtonId() == internetYESRadioButton.getId();
                         boolean smoker = smokerRadioGroup.getCheckedRadioButtonId() == smokerYESRadioButton.getId();
@@ -181,8 +237,10 @@ public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity i
                         ApartmentLocation apartmentLocation = new ApartmentLocation();
 
                         apartmentLocation.setStreet(street);
-                        apartmentLocation.setHouseNr(houseNr);
                         apartmentLocation.setZipCode(zip);
+                        apartmentLocation.setCity(city);
+                        apartmentLocation.setState(state);
+                        apartmentLocation.setCountry(country);
 
                         ApartmentProfile apartmentProfile = new ApartmentProfile();
                         apartmentProfile.setPrice(price);
@@ -207,7 +265,6 @@ public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity i
                         priceEditText.setText(userState.getApartmentProfile().getPrice() + "");
                         sizeEditText.setText(userState.getApartmentProfile().getArea() + "");
                         streetEditText.setText(userState.getApartmentProfile().getApartmentLocation().getStreet()+"");
-                        houseNumberEditText.setText(userState.getApartmentProfile().getApartmentLocation().getHouseNr()+"");
                         zipCodeEditText.setText(userState.getApartmentProfile().getApartmentLocation().getZipCode()+"");
 
                         if (userState.getApartmentProfile().hasInternet()){
@@ -265,11 +322,17 @@ public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity i
         streetEditText = (EditText)view.findViewById(R.id.apartment_street_edit_text);
         streetEditText.setText(userState.getApartmentProfile().getApartmentLocation().getStreet()+"");
 
-        houseNumberEditText = (EditText)view.findViewById(R.id.apartment_house_nr_edit_text);
-        houseNumberEditText.setText(userState.getApartmentProfile().getApartmentLocation().getHouseNr()+"");
-
         zipCodeEditText = (EditText)view.findViewById(R.id.apartment_zip_code_edit_text);
         zipCodeEditText.setText(userState.getApartmentProfile().getApartmentLocation().getZipCode()+"");
+
+        cityEditText = (EditText)view.findViewById(R.id.apartment_city_edit_text);
+        cityEditText.setText(userState.getApartmentProfile().getApartmentLocation().getCity());
+
+        stateEditText =(EditText) view.findViewById(R.id.apartment_state_edit_text);
+        stateEditText.setText(userState.getApartmentProfile().getApartmentLocation().getState());
+
+        countryEditText = (EditText)view.findViewById(R.id.apartment_country_edit_text);
+        countryEditText.setText(userState.getApartmentProfile().getApartmentLocation().getCountry());
 
         internetRadioGroup = (RadioGroup)view.findViewById(R.id.internet_apartment_rg);
         internetYESRadioButton = (RadioButton)view.findViewById(R.id.internet_yes_rb);
@@ -317,6 +380,7 @@ public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity i
 
         qrButton = (Button) view.findViewById(R.id.scan_roommate_QR_button);
         qrButton.setClickable(false);
+        getLocationButton = (Button) view.findViewById(R.id.getLocation_button);
         changeButton = (Button) view.findViewById(R.id.upload_picture_apartment);
         changeButton.setText("CHANGE YOUR SETTINGS!");
         saveButton = (Button) view.findViewById(R.id.create_apartment_profile_button);
