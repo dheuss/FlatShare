@@ -1,4 +1,5 @@
 <resources>
+    <string name="google_maps_id">AIzaSyC1lIyuW1ocG8hfZHfWe8ZeGrWtzh9oYiM</string>
     <string name="facebook_app_id">662377893941963</string>
     <string name="fb_login_protocol_scheme">fb662377893941963</string>
 
