@@ -14,6 +14,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 
 /**
  * Created by Arber on 28/12/2016.
@@ -101,7 +105,7 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
                     notifyError("No PrimaryProfile created!");
                 } else { // if something found, get secondary profiles (either tenant or roommate)
                     Log.d(TAG, "onDataChange: " + primaryUserProfile.getClassificationId());
-                    if(primaryUserProfile.getClassificationId() == ProfileType.TENANT.getValue()){
+                    if (primaryUserProfile.getClassificationId() == ProfileType.TENANT.getValue()) {
 
                         getTenantUserProfile(primaryUserProfile.getTenantProfileId());
                     } else {
@@ -127,7 +131,13 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
             mDatabase.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-
+                    List<String> matchedApartments;
+                    try {
+                        matchedApartments = new ArrayList<>(dataSnapshot.child("matched_apartments").getValue(HashMap.class).values());
+                        tenantProfile.setMatchedApartments(matchedApartments);
+                    } catch (NullPointerException npe){
+                        Log.d(TAG, "onDataChange: No matches found!");
+                    }
                     tenantProfile = dataSnapshot.getValue(TenantProfile.class);
 
                     if (tenantProfile == null) { // no settings yet
@@ -185,7 +195,17 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
+                    List<String> matchedTenants;
+
+                    try {
+                        matchedTenants = new ArrayList<>(dataSnapshot.child("matched_tenants").getValue(HashMap.class).values());
+                        apartmentProfile.setMatchedTenants(matchedTenants);
+                    } catch (NullPointerException npe){
+                        Log.d(TAG, "onDataChange: No matches found!");
+                    }
+
                     apartmentProfile = dataSnapshot.getValue(ApartmentProfile.class);
+
                     if (apartmentProfile == null) {
                         notifyError("apartmentProfile with ID: " + apartmentProfileId + " does not exist!");
                     } else {

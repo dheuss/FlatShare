@@ -64,8 +64,8 @@ public class ApartmentProfile extends UserProfile {
     public List<String> languages;
 
     @Exclude
-    @PropertyName("matched_tenant_ids")
-    public List<String> matchedTenantIds;
+    @PropertyName("matched_tenants")
+    public List<String> matchedTenants;
 
     @PropertyName("profile_done")
     public boolean done;
@@ -80,7 +80,7 @@ public class ApartmentProfile extends UserProfile {
         this.roommateIds = new ArrayList<>();
         this.apartmentLocation = new ApartmentLocation();
         this.languages = new ArrayList<>();
-        this.matchedTenantIds = new ArrayList<>();
+        this.matchedTenants= new ArrayList<>();
     }
 
     @Exclude
@@ -204,13 +204,13 @@ public class ApartmentProfile extends UserProfile {
     }
 
     @Exclude
-    public List<String> getMatchedTenantIds() {
-        return matchedTenantIds;
+    public List<String> getMatchedTenants() {
+        return matchedTenants;
     }
 
     @Exclude
-    public void setMatchedTenantIds(List<String> matchedTenantIds) {
-        this.matchedTenantIds = matchedTenantIds;
+    public void setMatchedTenants(List<String> matchedTenants) {
+        this.matchedTenants = matchedTenants;
     }
 
     @Exclude

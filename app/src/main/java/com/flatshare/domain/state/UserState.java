@@ -77,14 +77,6 @@ public class UserState {
         return getApartmentProfile().getApartmentId();
     }
 
-    public String getApartmentMainImageId() {
-        return getApartmentProfile().getMainImageId();
-    }
-
-    public List<String> getApartmentImageIds() {
-        return new ArrayList<>(getApartmentProfile().getImageIds());
-    }
-
     public boolean isLoggedIn() {
         return loggedIn;
     }
