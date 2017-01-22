@@ -260,11 +260,11 @@
                 android:text="12345"/>
         </LinearLayout>
 
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/mapView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/LinearLayoutApartmentProfileWashingsMashine"/>
+        <!--<com.google.android.gms.maps.MapView-->
+            <!--android:id="@+id/mapView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_below="@id/LinearLayoutApartmentProfileWashingsMashine"/>-->
 
 
     </RelativeLayout>
