@@ -66,7 +66,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                 List<String> testList = new ArrayList<>();
                 List<Integer> imageTest = new ArrayList<>();
 
-                for (int i = 0; i<4; i++){
+                for (int i = 0; i < 4; i++) {
                     testList.add("bla 1");
                     imageTest.add(R.drawable.calendar_icon);
                 }
@@ -77,9 +77,9 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
         return view;
     }
 
-    public void generateMatchingOverview(List<String> matchingTitleList, List<Integer> matchingImageList){
+    public void generateMatchingOverview(List<String> matchingTitleList, List<Integer> matchingImageList) {
 
-        for(int i = 0; i < matchingTitleList.size(); i++){
+        for (int i = 0; i < matchingTitleList.size(); i++) {
             TableRow row = new TableRow(this.getActivity());
             TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
             row.setLayoutParams(lp);
@@ -117,14 +117,81 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
     View.OnClickListener myDeleteHandler = new View.OnClickListener() {
         public void onClick(View v) {
-            v.setVisibility(View.GONE);
-            v.getRootView().setBackground(getResources().getDrawable(R.color.colorPrimary));
             //TODO element löschen und nachpben schieben
+
+            //aus CalendarView umschreiben
+            for (int i = 0; i < matchingOverview.getChildCount(); i++) {
+                View view = matchingOverview.getChildAt(i);
+
+                if (i < matchingOverview.getChildCount() - 1) {
+                    View viewNext = matchingOverview.getChildAt(i + 1);
+
+                    if (view instanceof TableRow) {
+                        TableRow row = (TableRow) view;
+                        TableRow rowNext = (TableRow) viewNext;
+
+                        for (int j = 0; j < row.getChildCount(); j++) {
+                            View elementView = row.getChildAt(j);
+
+                            if (elementView instanceof Button) {
+                                Button currentButton = (Button) elementView;
+
+                                View buttonViewNext = rowNext.getChildAt(1);
+                                Button buttonNext = (Button) buttonViewNext;
+
+                                View textViewNext = rowNext.getChildAt(0);
+                                TextView nextDateText = (TextView) textViewNext;
+
+                                View textView = row.getChildAt(0);
+                                TextView currentDateText = (TextView) textView;
+
+                                if (currentButton == v) {
+                                    //TODO semd gelöschtest zu firebase
+                                    //dateList.remove(i);
+                                    //timeList.remove(i);
+                                    currentDateText.setText(nextDateText.getText());
+                                    buttonNext.setVisibility(View.GONE);
+                                    nextDateText.setText("");
+                                    rowNext.setVisibility(View.GONE);
+                                    if (currentDateText.getText() == "") {
+                                        currentButton.setVisibility(View.GONE);
+                                        row.setVisibility(View.GONE);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if (view instanceof TableRow) {
+                        TableRow row = (TableRow) view;
+
+                        for (int j = 0; j < row.getChildCount(); j++) {
+                            View elementView = row.getChildAt(j);
+
+                            if (elementView instanceof Button) {
+                                Button currentButton = (Button) elementView;
+
+                                View textView = row.getChildAt(0);
+                                TextView currentDateText = (TextView) textView;
+
+                                if (currentButton == v) {
+                                    //TODO senden an FB
+                                    //dateList.remove(i);
+                                    //timeList.remove(i);
+                                    currentDateText.setText("");
+                                    currentButton.setVisibility(View.GONE);
+                                    row.setVisibility(View.GONE);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     };
 
-    public void bindView(View view){
-        changeToCalendarButton = (Button)view.findViewById(R.id.change_to_calendar_button);
+    public void bindView(View view) {
+        changeToCalendarButton = (Button) view.findViewById(R.id.change_to_calendar_button);
         matchingOverview = (TableLayout) view.findViewById(R.id.machingOverview);
     }
 

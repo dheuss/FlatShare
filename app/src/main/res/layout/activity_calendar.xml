@@ -45,18 +45,17 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:textColor="@color/colorText"
-                    android:textAppearance="?android:attr/textAppearanceLarge"></TableLayout>
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
 
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/setDate"
                     android:onClick="setDate"
+                    android:clickable="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:clickable="true"
-                    android:src="@drawable/add_icon"
-                    android:backgroundTint="@android:color/transparent"
+                    android:src="@drawable/add_plus_icon"
                     android:layout_gravity="right"
                     app:layout_anchor="@id/LinearLayoutCalender_4"
                     app:layout_anchorGravity="bottom|right|end"/>
@@ -65,7 +64,7 @@
                     android:id="@+id/send"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="10dp"
                     android:text="Send"
                     android:background="@color/colorPrimary"
                     android:textColor="@color/colorButtonText"

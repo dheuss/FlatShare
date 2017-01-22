@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +33,8 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
     private CalendarPresenter mPresenter;
 
-    private Button setDate, send;
+    private FloatingActionButton setDate;
+    private Button send;
 
     private int yearCurrent, monthCurrent, dayCurrent, hourCurrent, minCurrent;
 
@@ -298,7 +300,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
     private void bindView() {
         send = (Button) findViewById(R.id.send);
-        setDate = (Button) findViewById(R.id.setDate);
+        setDate = (FloatingActionButton) findViewById(R.id.setDate);
         dateOverview = (TableLayout) findViewById(R.id.dateOverview);
     }
 
