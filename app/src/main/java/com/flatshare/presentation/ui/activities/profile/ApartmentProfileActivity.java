@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.common.ApartmentLocation;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
+import com.flatshare.domain.datatypes.pair.ParcelablePair;
 import com.flatshare.presentation.presenters.profile.ApartmentProfilePresenter;
 import com.flatshare.presentation.presenters.profile.impl.ApartmentProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
@@ -48,7 +49,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     private static final int STATIC_VALUE = 2;
     private int PICK_IMAGE_REQUEST = 1;
 
-    public static final String ROOMMATE_NICKNAME = "roommateNickname";
+    public static final String ROOMMATE_ID_NICKNAME_PAIR = "idNicknamePair";
     public static final String ROOMMATE_ID = "roommateId";
     public static final String APARTMENT_ID = "apartmentId";
 
@@ -117,7 +118,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             @Override
             public void onClick(View view) {
 
-                ActivityCompat.requestPermissions(ApartmentProfileActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                ActivityCompat.requestPermissions(ApartmentProfileActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
                 Location location = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
 
@@ -199,9 +200,11 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == STATIC_VALUE) {
             if (resultCode == RESULT_OK) {
-                String nickname = data.getStringExtra(ROOMMATE_NICKNAME);
 
-                roommatesEmailsMultiAC.getText().append(nickname + "; ");
+                ParcelablePair idNicknamePair = data.getExtras().getParcelable(ROOMMATE_ID_NICKNAME_PAIR);
+                nicknameIdMap.put(idNicknamePair.getValue(), idNicknamePair.getId());
+                adapter.add(idNicknamePair.getValue());
+                roommatesEmailsMultiAC.getText().append(idNicknamePair.getValue() + "; ");
             }
         }
 

@@ -1,6 +1,7 @@
 package com.flatshare.presentation.presenters.profile.impl;
 
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.pair.Pair;
 import com.flatshare.domain.interactors.profile.QRScannerInteractor;
 import com.flatshare.domain.interactors.profile.impl.QRScannerInteractorImpl;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
@@ -65,8 +66,8 @@ public class QRScannerPresenterImpl extends AbstractPresenter implements QRScann
     }
 
     @Override
-    public void onSuccess(String nickname) {
+    public void onSuccess(Pair<String, String> idNicknamePair) {
         userState.getRoommateProfile().setAvailable(false);
-        mView.displayReadCode(nickname);
+        mView.displayReadCode(idNicknamePair);
     }
 }

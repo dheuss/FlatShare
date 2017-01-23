@@ -1,5 +1,6 @@
 package com.flatshare.presentation.presenters.profile;
 
+import com.flatshare.domain.datatypes.pair.Pair;
 import com.flatshare.presentation.presenters.base.BasePresenter;
 import com.flatshare.presentation.ui.BaseView;
 
@@ -13,6 +14,6 @@ public interface QRScannerPresenter extends BasePresenter {
 
     interface View extends BaseView {
 
-        void displayReadCode(String roommateId);
+        void displayReadCode(Pair<String, String> idNicknamePair);
     }
 }

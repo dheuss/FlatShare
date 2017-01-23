@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
+import com.flatshare.domain.datatypes.pair.Pair;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.domain.interactors.profile.QRScannerInteractor;
 import com.flatshare.presentation.presenters.profile.QRScannerPresenter;
@@ -47,13 +48,13 @@ public class QRScannerInteractorImpl extends AbstractInteractor implements QRSca
      *
      * @param nickname
      */
-    private void notifySuccess(final String nickname) {
+    private void notifySuccess(final Pair<String, String> idNicknamePair) {
         Log.d(TAG, "inside postMessage(String msg)");
 
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onSuccess(nickname);
+                mCallback.onSuccess(idNicknamePair);
             }
         });
     }
@@ -79,7 +80,7 @@ public class QRScannerInteractorImpl extends AbstractInteractor implements QRSca
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                             if (databaseError == null) {
-                                notifySuccess(roommateProfile.getNickname());
+                                notifySuccess(new Pair<String,String>(roommateProfile.getRoommateId(),roommateProfile.getNickname()));
                             } else {
                                 notifyError(databaseError.getMessage());
                             }

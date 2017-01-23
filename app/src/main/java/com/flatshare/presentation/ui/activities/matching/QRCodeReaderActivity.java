@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Parcelable;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
@@ -14,12 +15,11 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.TextView;
 
 import com.flatshare.R;
-import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
+import com.flatshare.domain.datatypes.pair.Pair;
+import com.flatshare.domain.datatypes.pair.ParcelablePair;
 import com.flatshare.presentation.presenters.profile.QRScannerPresenter;
-import com.flatshare.presentation.presenters.profile.impl.PrimaryProfilePresenterImpl;
 import com.flatshare.presentation.presenters.profile.impl.QRScannerPresenterImpl;
 import com.flatshare.presentation.ui.activities.profile.ApartmentProfileActivity;
 import com.flatshare.threading.MainThreadImpl;
@@ -207,9 +207,10 @@ public class QRCodeReaderActivity extends Activity implements QRScannerPresenter
     }
 
     @Override
-    public void displayReadCode(String nickname) {
+    public void displayReadCode(Pair<String, String> idNicknamePair) {
         Intent intent = new Intent();
-        intent.putExtra(ApartmentProfileActivity.ROOMMATE_NICKNAME, nickname);
+        Parcelable parcelablePair = new ParcelablePair(idNicknamePair);
+        intent.putExtra(ApartmentProfileActivity.ROOMMATE_ID_NICKNAME_PAIR, parcelablePair);
 
         setResult(Activity.RESULT_OK, intent);
         Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);

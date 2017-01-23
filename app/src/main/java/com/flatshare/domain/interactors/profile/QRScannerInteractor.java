@@ -1,5 +1,6 @@
 package com.flatshare.domain.interactors.profile;
 
+import com.flatshare.domain.datatypes.pair.Pair;
 import com.flatshare.domain.interactors.base.Interactor;
 
 /**
@@ -11,6 +12,6 @@ public interface QRScannerInteractor extends Interactor{
 
         void onFailure(String errorMessage);
 
-        void onSuccess(String roommateId);
+        void onSuccess(Pair<String, String> idNicknamePair);
     }
 }
