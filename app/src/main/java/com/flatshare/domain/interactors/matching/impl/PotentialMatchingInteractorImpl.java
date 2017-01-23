@@ -133,15 +133,16 @@ public class PotentialMatchingInteractorImpl extends AbstractInteractor implemen
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+
                 GenericTypeIndicator<Map<String, TenantProfile>> t = new GenericTypeIndicator<Map<String, TenantProfile>>() {
                 };
 
-                List<TenantProfile> tenants = new ArrayList<>(dataSnapshot.getValue(t).values());
-
-                if (tenants == null) {
-                    notifyError("No tenants were found in the database!");
+                if (dataSnapshot.getValue(t) == null) {
+                    notifyError("No apartments were found in the database!");
                     return;
                 }
+
+                List<TenantProfile> tenants = new ArrayList<>((dataSnapshot.getValue(t).values()));
 
                 List<TenantProfile> potentialMatches = new ApartmentMatchFinder(apUP, tenants).getMatches();
 
@@ -178,7 +179,6 @@ public class PotentialMatchingInteractorImpl extends AbstractInteractor implemen
                 }
 
                 List<ApartmentProfile> apartments = new ArrayList<>((dataSnapshot.getValue(t).values()));
-
 
                 List<ApartmentProfile> potentialMatches = new TenantMatchFinder(tUP, apartments).getMatches();
 

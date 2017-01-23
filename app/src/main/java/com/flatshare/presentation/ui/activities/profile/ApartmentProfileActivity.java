@@ -288,10 +288,10 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     private boolean inputValid() {
         boolean result = true;
 
-        if (roommatesEmailsMultiAC.getText().toString().trim().equals("")) {
-            roommatesEmailsMultiAC.setError(getString(R.string.field_cannot_be_empty));
-            result = false;
-        }
+//        if (roommatesEmailsMultiAC.getText().toString().trim().equals("")) {
+//            roommatesEmailsMultiAC.setError(getString(R.string.field_cannot_be_empty));
+//            result = false;
+//        }
 
         if (apartmentPriceEditText.getText().toString().trim().equals("")) {
             apartmentPriceEditText.setError(getString(R.string.field_cannot_be_empty));
