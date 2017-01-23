@@ -1,19 +1,19 @@
 package com.flatshare.presentation.ui.activities.matchingoverview;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flatshare.R;
 
@@ -28,8 +28,6 @@ import java.util.List;
 
 public class MatchingOverviewActivity extends AbstractFragmentActivity implements MatchingOverviewPresenter.View {
 
-    private Button changeToCalendarButton;
-
     private ProgressBar progressBar;
 
 
@@ -37,6 +35,8 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
     private MatchingOverviewPresenter mPresenter;
     private TableLayout matchingOverview;
+    private int elementHeight;
+    private int elementWidth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,20 +61,17 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
             progressBar.setVisibility(View.GONE);
         }
 
-        changeToCalendarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //startActivity(new Intent(getActivity(), CalendarActivity.class));
-                List<String> testList = new ArrayList<>();
-                List<Integer> imageTest = new ArrayList<>();
 
-                for (int i = 0; i < 4; i++) {
-                    testList.add("bla 1");
-                    imageTest.add(R.drawable.calendar_icon);
-                }
-                generateMatchingOverview(testList, imageTest);
-            }
-        });
+        List<String> testList = new ArrayList<>();
+        List<Integer> imageTest = new ArrayList<>();
+
+        for (int i = 0; i < 15; i++) {
+
+            testList.add("Match: " + i);
+            imageTest.add(R.drawable.tenant_default);
+        }
+        generateMatchingOverview(testList, imageTest);
+
 
         return view;
     }
@@ -82,29 +79,61 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     public void generateMatchingOverview(List<String> matchingTitleList, List<Integer> matchingImageList) {
 
         for (int i = 0; i < matchingTitleList.size(); i++) {
+
             TableRow row = new TableRow(this.getActivity());
-            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
             row.setLayoutParams(lp);
+
             TextView matchingText = new TextView(this.getActivity());
             ImageView matchingImage = new ImageView(this.getActivity());
             Button matchingCalendar = new Button(this.getActivity());
             Button deleteButton = new Button(this.getActivity());
 
             matchingImage.setImageResource(matchingImageList.get(i)); // TODO set image
+            //matchingImage.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams., ViewGroup.LayoutParams.MATCH_PARENT));
+
             matchingText.setText(matchingTitleList.get(i));
+            //matchingText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             matchingCalendar.setVisibility(View.VISIBLE);
             matchingCalendar.setBackground(getResources().getDrawable(R.drawable.calendar_icon));
             matchingCalendar.setOnClickListener(myCalendarHandler);
+            //matchingCalendar.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             deleteButton.setVisibility(View.VISIBLE);
             deleteButton.setBackground(getResources().getDrawable(R.drawable.clear_icon));
             deleteButton.setOnClickListener(myDeleteHandler);
+            //deleteButton.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            int buttonWidth = 120;
+            int buttonHeight =120;
+
+
+            Toast.makeText(this.getActivity(), "Sandro "  + buttonWidth, Toast.LENGTH_SHORT).show();
+
 
             row.addView(matchingImage);
             row.addView(matchingText);
             row.addView(matchingCalendar);
             row.addView(deleteButton);
+
+            TableRow.LayoutParams paramsImage = (TableRow.LayoutParams)matchingImage.getLayoutParams();
+            paramsImage.setMargins(20,0,20,0);
+            paramsImage.width = buttonWidth;
+            paramsImage.height = buttonHeight;
+            matchingCalendar.setLayoutParams(paramsImage);
+
+            TableRow.LayoutParams paramsText = (TableRow.LayoutParams)matchingText.getLayoutParams();
+            paramsText.setMargins(20,0,20,0);
+            paramsImage.width = buttonWidth;
+            paramsImage.height = buttonHeight;
+            matchingText.setLayoutParams(paramsText);
+
+            TableRow.LayoutParams paramsCalendar = (TableRow.LayoutParams)matchingCalendar.getLayoutParams();
+            paramsCalendar.setMargins(20,0,20,0);
+            paramsImage.width = buttonWidth;
+            paramsImage.height = buttonHeight;
+            matchingCalendar.setLayoutParams(paramsCalendar);
 
             matchingOverview.addView(row, i);
         }
@@ -120,7 +149,6 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
     View.OnClickListener myDeleteHandler = new View.OnClickListener() {
         public void onClick(View v) {
-            //aus CalendarView umschreiben
             for (int i = 0; i < matchingOverview.getChildCount(); i++) {
                 View view = matchingOverview.getChildAt(i);
 
@@ -150,7 +178,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                                 TextView currentDateText = (TextView) textView;
 
                                 View imageViewNext = rowNext.getChildAt(0);
-                                ImageView nextImageView= (ImageView) imageViewNext;
+                                ImageView nextImageView = (ImageView) imageViewNext;
 
                                 View imageView = row.getChildAt(0);
                                 ImageView currentImageView = (ImageView) imageView;
@@ -161,6 +189,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                                     //timeList.remove(i);
                                     currentDateText.setText(nextDateText.getText());
                                     currentImageView.setImageDrawable(nextImageView.getDrawable());
+                                    nextImageView.setVisibility(View.GONE);
                                     nextCalendarButton.setVisibility(View.GONE);
                                     buttonNext.setVisibility(View.GONE);
                                     nextDateText.setText("");
@@ -186,19 +215,20 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                                 View textView = row.getChildAt(1);
                                 TextView currentDateText = (TextView) textView;
 
-                              /*  View calendarButtonCurrentView = row.getChildAt(2);
+                                View calendarButtonCurrentView = row.getChildAt(2);
                                 Button currentCalendarButton = (Button) calendarButtonCurrentView;
 
                                 View imageView = row.getChildAt(0);
-                                ImageView currentImageView = (ImageView) imageView;*/
+                                ImageView currentImageView = (ImageView) imageView;
 
                                 if (currentButton == v) {
                                     //TODO senden an Firebase
                                     //dateList.remove(i);
                                     //timeList.remove(i);
                                     currentDateText.setText("");
-                                    //currentCalendarButton.setVisibility(View.GONE);
-                                    //currentButton.setVisibility(View.GONE);
+                                    currentCalendarButton.setVisibility(View.GONE);
+                                    currentButton.setVisibility(View.GONE);
+                                    currentImageView.setVisibility(View.GONE);
                                     row.setVisibility(View.GONE);
                                 }
                             }
@@ -210,8 +240,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     };
 
     public void bindView(View view) {
-        changeToCalendarButton = (Button) view.findViewById(R.id.change_to_calendar_button);
-        matchingOverview = (TableLayout) view.findViewById(R.id.machingOverview);
+        matchingOverview = (TableLayout) view.findViewById(R.id.matchingOverview);
     }
 
     @Override
