@@ -3,6 +3,7 @@ package com.flatshare.presentation.ui.activities.profile;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -10,6 +11,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -77,6 +79,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     private Button createApartmentButton;
 
     private AppLocationService appLocationService;
+    private static final int PERMISSIONS_REQUEST_LOCATION = 100;
 
     private ApartmentProfilePresenter mPresenter;
     private static final String TAG = "ApartmentProfileAct";
@@ -88,6 +91,8 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         appLocationService = new AppLocationService(ApartmentProfileActivity.this);
 
         bindView();
+
+        //checkForPermission();
 
         mPresenter = new ApartmentProfilePresenterImpl(
                 MainThreadImpl.getInstance(),
@@ -106,6 +111,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         getLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 ActivityCompat.requestPermissions(ApartmentProfileActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
                 Location location = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
@@ -134,6 +140,18 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             }
         });
 
+    }
+
+    private void checkForPermission() {
+        if (ActivityCompat.checkSelfPermission(ApartmentProfileActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(ApartmentProfileActivity.this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(ApartmentProfileActivity.this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        PERMISSIONS_REQUEST_LOCATION);
+            }
+
+        }
     }
 
     private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {

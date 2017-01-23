@@ -34,6 +34,9 @@ public class RoommateProfileSettingsActivity extends AbstractFragmentActivity im
     private EditText sizeEditText;
     private EditText streetEditText;
     private EditText zipCodeEditText;
+    private EditText cityEditText;
+    private EditText stateEditText;
+    private EditText countryEditText;
 
     private RadioButton internetYESRadioButton, internetNORadioButton;
 
@@ -44,6 +47,7 @@ public class RoommateProfileSettingsActivity extends AbstractFragmentActivity im
     private RadioButton washingMashineYESRadioButton, washingMashineNORadioButton;
 
     private Button qrButton;
+    private Button getLocationButton;
     private Button changeButton;
     private Button saveButton;
 
@@ -65,6 +69,13 @@ public class RoommateProfileSettingsActivity extends AbstractFragmentActivity im
         );
 
         qrButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "You're not allowed to click this button ,sorry!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        getLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "You're not allowed to click this button ,sorry!", Toast.LENGTH_SHORT).show();
@@ -113,6 +124,18 @@ public class RoommateProfileSettingsActivity extends AbstractFragmentActivity im
         zipCodeEditText = (EditText)view.findViewById(R.id.apartment_zip_code_edit_text);
         zipCodeEditText.setText(userState.getApartmentProfile().getApartmentLocation().getZipCode()+"");
         zipCodeEditText.setEnabled(false);
+
+        cityEditText = (EditText)view.findViewById(R.id.apartment_city_edit_text);
+        cityEditText.setText(userState.getApartmentProfile().getApartmentLocation().getCity()+"");
+        cityEditText.setEnabled(false);
+
+        stateEditText = (EditText)view.findViewById(R.id.apartment_state_edit_text);
+        stateEditText.setText(userState.getApartmentProfile().getApartmentLocation().getState());
+        stateEditText.setEnabled(false);
+
+        countryEditText = (EditText)view.findViewById(R.id.apartment_country_edit_text);
+        countryEditText.setText(userState.getApartmentProfile().getApartmentLocation().getCountry());
+        countryEditText.setEnabled(false);
 
         internetYESRadioButton = (RadioButton)view.findViewById(R.id.internet_yes_rb);
         internetNORadioButton = (RadioButton)view.findViewById(R.id.internet_no_rb);
@@ -164,6 +187,8 @@ public class RoommateProfileSettingsActivity extends AbstractFragmentActivity im
 
         qrButton = (Button) view.findViewById(R.id.scan_roommate_QR_button);
         qrButton.setClickable(false);
+        getLocationButton = (Button)view.findViewById(R.id.getLocation_button);
+        getLocationButton.setClickable(false);
         changeButton = (Button) view.findViewById(R.id.upload_picture_apartment);
         changeButton.setText("CHANGE YOUR SETTINGS!");
         saveButton = (Button) view.findViewById(R.id.create_apartment_profile_button);
