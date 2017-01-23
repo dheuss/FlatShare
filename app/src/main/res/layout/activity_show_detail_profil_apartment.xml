@@ -66,8 +66,7 @@
                 android:id="@+id/apartmentInfoImageView"
                 android:layout_gravity="center"
                 android:layout_width="350dp"
-                android:layout_height="350dp"
-                android:layout_below="@+id/apartment_info_2"/>
+                android:layout_height="350dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -316,7 +315,8 @@
             android:layout_below="@id/LinearLayoutApartmentProfileWashingMashine"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginTop="@dimen/marginTop">
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginBottom="@dimen/marginTop">
 
             <TextView
                 android:layout_width="wrap_content"
