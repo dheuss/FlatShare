@@ -97,6 +97,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
         //checkForPermission();
 
+
         mPresenter = new ApartmentProfilePresenterImpl(
                 MainThreadImpl.getInstance(),
                 this
