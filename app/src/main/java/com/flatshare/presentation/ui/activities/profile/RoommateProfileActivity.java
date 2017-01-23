@@ -22,6 +22,8 @@ import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.RoommateQRActivity;
 import com.flatshare.threading.MainThreadImpl;
 
+import static com.flatshare.presentation.ui.activities.profile.ApartmentProfileActivity.ROOMMATE_ID;
+
 public class RoommateProfileActivity extends AbstractActivity implements RoommateProfilePresenter.View {
 
     private static final String TAG = "RoommateProfileActivity";
@@ -174,7 +176,7 @@ public class RoommateProfileActivity extends AbstractActivity implements Roommat
 
         Intent intent = new Intent(this, RoommateQRActivity.class);
         Bundle b = new Bundle();
-        b.putString("id", roommateId);
+        b.putString(ROOMMATE_ID, roommateId);
         intent.putExtras(b);
         startActivity(intent);
         finish();

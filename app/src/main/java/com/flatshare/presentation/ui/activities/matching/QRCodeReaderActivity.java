@@ -43,6 +43,7 @@ public class QRCodeReaderActivity extends Activity implements QRScannerPresenter
     private static final int WIDTH = 640;
     private static final int HEIGHT = 480;
     public static final String QR_IDENTIFIER = "123123123";
+    private static final String TAG = "QRCodeReaderActivity";
 
     QRScannerPresenter mPresenter;
 
@@ -96,16 +97,19 @@ public class QRCodeReaderActivity extends Activity implements QRScannerPresenter
                     public void receiveDetections(Detector.Detections<Barcode> detections) {
                         final SparseArray<Barcode> barcodes = detections.getDetectedItems();
 
-                        if(flag.get()){
+                        if (flag.get()) {
                             return;
                         }
 
                         if (barcodes.size() != 0) {
                             String[] values = barcodes.valueAt(0).displayValue.split(":");
-                            if(values[0].equals(QR_IDENTIFIER)) {
+                            if (values[0].equals(QR_IDENTIFIER)) {
                                 String roommateId = values[1];
                                 flag.set(true);
+
+                                Log.d(TAG, "receiveDetections: RoommateID! " + roommateId);
                                 mPresenter.addRoomate(roommateId);
+
                             }
                         }
                     }
@@ -209,7 +213,7 @@ public class QRCodeReaderActivity extends Activity implements QRScannerPresenter
         TenantProfile tenantProfile = new TenantProfile();
         setResult(Activity.RESULT_OK, intent);
         Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-        // Vibrate for 500 milliseconds
+
         v.vibrate(100);
         finish();
     }

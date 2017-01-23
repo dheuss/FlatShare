@@ -37,6 +37,8 @@ import com.google.android.gms.common.SignInButton;
 
 import dmax.dialog.SpotsDialog;
 
+import static com.flatshare.presentation.ui.activities.profile.ApartmentProfileActivity.ROOMMATE_ID;
+
 public class LoginFragmentFourActivity extends Fragment implements LoginPresenter.View {
 
     private EditText emailEditText;
@@ -256,7 +258,7 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
 
             Intent intent = new Intent(getActivity(), RoommateQRActivity.class);
             Bundle b = new Bundle();
-            b.putString("id", roommateId);
+            b.putString(ROOMMATE_ID, roommateId);
             intent.putExtras(b);
             startActivity(intent);
     }

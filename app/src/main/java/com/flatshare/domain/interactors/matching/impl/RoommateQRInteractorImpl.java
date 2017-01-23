@@ -33,6 +33,12 @@ public class RoommateQRInteractorImpl extends AbstractInteractor implements Room
 
     @Override
     public void execute() {
+        
+        if(this.roommateId == null || this.roommateId.equals("")){
+            Log.d(TAG, "execute: roommateID is null!");
+            return;
+        }
+
         String path = databaseRoot.getRoommateProfileNode(this.roommateId).getRootPath();
         mDatabase.child(path).removeEventListener(new ValueEventListener() {
             @Override

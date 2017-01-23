@@ -25,6 +25,8 @@ import com.google.zxing.common.BitMatrix;
 import java.util.EnumMap;
 import java.util.Map;
 
+import static com.flatshare.presentation.ui.activities.profile.ApartmentProfileActivity.ROOMMATE_ID;
+
 /**
  * Created by Arber on 07/01/2017.
  */
@@ -52,7 +54,7 @@ public class RoommateQRActivity extends AbstractActivity implements RoommateQRPr
         Bundle b = getIntent().getExtras();
         String roommateId;
         if (b != null) {
-            roommateId = b.getString("roommateId");
+            roommateId = b.getString(ROOMMATE_ID);
             qrCodeString = QRCodeReaderActivity.QR_IDENTIFIER + ":" + roommateId;
             encodeStringToQR(qrCodeString);
             mPresenter.listenToDB(roommateId);

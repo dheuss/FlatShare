@@ -44,6 +44,7 @@ public class QRScannerInteractorImpl extends AbstractInteractor implements QRSca
 
     /**
      * callback method that posts message received into the main UI, through mainThread.post!!!
+     *
      * @param roommateId
      */
     private void notifySuccess(final String roommateId) {
@@ -59,6 +60,11 @@ public class QRScannerInteractorImpl extends AbstractInteractor implements QRSca
 
     @Override
     public void execute() {
+        if (this.roommateId == null || this.roommateId.equals("")) {
+            notifyError("RoommateID is null!");
+            return;
+        }
+
         String path = databaseRoot.getRoommateProfileNode(this.roommateId).getAvailable();
 
         mDatabase.child(path).setValue(false, new DatabaseReference.CompletionListener() {
