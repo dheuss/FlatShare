@@ -126,10 +126,10 @@ public class PotentialMatchingInteractorImpl extends AbstractInteractor implemen
 
     private void matchApartment(final ApartmentProfile apUP) {
 
-        //String path = databaseRoot.getTenantProfiles();
-        String testPath = "test/" + databaseRoot.getTenantProfiles();
+        String path = databaseRoot.getTenantProfiles();
+        //String testPath = "test/" + databaseRoot.getTenantProfiles();
 
-        mDatabase.child(testPath).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -162,10 +162,10 @@ public class PotentialMatchingInteractorImpl extends AbstractInteractor implemen
 
     private void matchTenant(final TenantProfile tUP) {
 
-        //String path = databaseRoot.getApartmentProfiles();
-        String testPath = "test/" + databaseRoot.getApartmentProfiles();
+        String path = databaseRoot.getApartmentProfiles();
+        //String testPath = "test/" + databaseRoot.getApartmentProfiles();
 
-        mDatabase.child(testPath).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
