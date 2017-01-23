@@ -45,15 +45,15 @@ public class QRScannerInteractorImpl extends AbstractInteractor implements QRSca
     /**
      * callback method that posts message received into the main UI, through mainThread.post!!!
      *
-     * @param roommateId
+     * @param nickname
      */
-    private void notifySuccess(final String roommateId) {
+    private void notifySuccess(final String nickname) {
         Log.d(TAG, "inside postMessage(String msg)");
 
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onSuccess(roommateId);
+                mCallback.onSuccess(nickname);
             }
         });
     }
@@ -65,16 +65,32 @@ public class QRScannerInteractorImpl extends AbstractInteractor implements QRSca
             return;
         }
 
-        String path = databaseRoot.getRoommateProfileNode(this.roommateId).getAvailable();
+        String path = databaseRoot.getRoommateProfileNode(this.roommateId).getRootPath();
 
-        mDatabase.child(path).setValue(false, new DatabaseReference.CompletionListener() {
+        mDatabase.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                if (databaseError == null) {
-                    notifySuccess(roommateId);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final RoommateProfile roommateProfile = dataSnapshot.getValue(RoommateProfile.class);
+                if(roommateProfile == null){
+                    notifyError("No Roommateprofile found with id: " + roommateId);
                 } else {
-                    notifyError(databaseError.getMessage());
+                    String availabilityPath = databaseRoot.getRoommateProfileNode(roommateId).getAvailable();
+                    mDatabase.child(availabilityPath).setValue(false, new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                            if (databaseError == null) {
+                                notifySuccess(roommateProfile.getNickname());
+                            } else {
+                                notifyError(databaseError.getMessage());
+                            }
+                        }
+                    });
                 }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                notifyError(databaseError.getMessage());
             }
         });
 
