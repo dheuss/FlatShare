@@ -32,7 +32,8 @@ public class PotentialMatchingPresenterImpl extends AbstractPresenter
         implements PotentialMatchingPresenter,
         PotentialMatchingInteractor.Callback,
         SwipeInteractor.Callback,
-        PMatchesListenerInteractor.Callback, MediaInteractor.DownloadCallback {
+        PMatchesListenerInteractor.Callback,
+        MediaInteractor.DownloadCallback {
 
 
     private static final String TAG = "PotentialMatchingPresenterImpl";
@@ -149,11 +150,6 @@ public class PotentialMatchingPresenterImpl extends AbstractPresenter
     @Override
     public void onFailure(String errorMessage) {
         onError("Error on matching Interactor: " + errorMessage);
-    }
-
-    @Override
-    public void onListenerUpdated(boolean listenerAttached) {
-        mView.updateListener(listenerAttached);
     }
 
     @Override

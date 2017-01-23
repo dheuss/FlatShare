@@ -47,15 +47,6 @@ public class PMatchesListenerInteractorImpl extends AbstractInteractor implement
         });
     }
 
-    private void notifyListenerUpdated(final boolean listenerAttached) {
-        mMainThread.post(new Runnable() {
-            @Override
-            public void run() {
-                mCallback.onListenerUpdated(listenerAttached);
-            }
-        });
-    }
-
     private void notifyMatchCreated(final String key) {
         mMainThread.post(new Runnable() {
             @Override
@@ -68,11 +59,10 @@ public class PMatchesListenerInteractorImpl extends AbstractInteractor implement
     @Override
     public void execute() {
         String potentialMatchesPath = databaseRoot.getPotentialMatches();
-        notifyListenerUpdated(true);
         mDatabase.child(potentialMatchesPath).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                checkIfMatchPossible(dataSnapshot);
+
             }
 
             @Override
@@ -92,7 +82,7 @@ public class PMatchesListenerInteractorImpl extends AbstractInteractor implement
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                notifyListenerUpdated(false);
+
             }
         });
     }

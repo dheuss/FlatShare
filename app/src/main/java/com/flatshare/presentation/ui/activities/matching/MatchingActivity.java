@@ -117,12 +117,6 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
 
         mPresenter.getPotentialMatches();
 
-        boolean eventListenerExists = sharedPref.getBoolean(getResources().getString(R.string.pot_matching_listener_attached), false);
-
-        if (!eventListenerExists) {
-            mPresenter.setPotentialMatchesListener();
-        }
-
         mSwipeView.getBuilder()
                 .setDisplayViewCount(1)
                 .setSwipeDecor(new SwipeDecor()
@@ -297,11 +291,6 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
             Bitmap bitmap = pair.getRight();
             mSwipeView.addView(new MatchingActivity_ProfileCard_Apartment(this, apartmentProfile, mSwipeView, bitmap));
         }
-    }
-
-    @Override
-    public void updateListener(boolean listenerAttached) {
-        writeToSharedPreferences(R.string.pot_matching_listener_attached, listenerAttached);
     }
 
     public void tenantSwipedApartment(ApartmentProfile apartmentProfile, boolean accepted) {

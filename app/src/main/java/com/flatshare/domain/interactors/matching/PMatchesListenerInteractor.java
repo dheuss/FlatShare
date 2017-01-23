@@ -12,8 +12,6 @@ public interface PMatchesListenerInteractor extends Interactor {
 
         void onFailure(String errorMessage);
 
-        void onListenerUpdated(boolean listenerAttached);
-
         void onMatchCreated(String key);
     }
 }
