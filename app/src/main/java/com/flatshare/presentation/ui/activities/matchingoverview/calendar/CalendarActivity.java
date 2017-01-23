@@ -61,7 +61,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
 
         if (isTenant) {
-            //    setDate.setVisibility(View.GONE);
+            setDate.setVisibility(View.GONE);
         }
 
         Calendar calendar = Calendar.getInstance();

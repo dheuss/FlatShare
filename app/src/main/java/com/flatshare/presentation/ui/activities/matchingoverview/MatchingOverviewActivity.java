@@ -1,12 +1,14 @@
 package com.flatshare.presentation.ui.activities.matchingoverview;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TableLayout;
@@ -93,7 +95,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
             matchingCalendar.setVisibility(View.VISIBLE);
             matchingCalendar.setBackground(getResources().getDrawable(R.drawable.calendar_icon));
-            matchingCalendar.setOnClickListener(myCalendarHandler); //TODO write Handler
+            matchingCalendar.setOnClickListener(myCalendarHandler);
 
             deleteButton.setVisibility(View.VISIBLE);
             deleteButton.setBackground(getResources().getDrawable(R.drawable.clear_icon));
@@ -111,14 +113,13 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
     View.OnClickListener myCalendarHandler = new View.OnClickListener() {
         public void onClick(View v) {
+            //TODO übergeben welcher Match übergeben wird
             startActivity(new Intent(getActivity(), CalendarActivity.class));
         }
     };
 
     View.OnClickListener myDeleteHandler = new View.OnClickListener() {
         public void onClick(View v) {
-            //TODO element löschen und nachpben schieben
-
             //aus CalendarView umschreiben
             for (int i = 0; i < matchingOverview.getChildCount(); i++) {
                 View view = matchingOverview.getChildAt(i);
@@ -136,20 +137,31 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                             if (elementView instanceof Button) {
                                 Button currentButton = (Button) elementView;
 
-                                View buttonViewNext = rowNext.getChildAt(1);
+                                View buttonViewNext = rowNext.getChildAt(3);
                                 Button buttonNext = (Button) buttonViewNext;
 
-                                View textViewNext = rowNext.getChildAt(0);
+                                View calendarButtonNextView = rowNext.getChildAt(2);
+                                Button nextCalendarButton = (Button) calendarButtonNextView;
+
+                                View textViewNext = rowNext.getChildAt(1);
                                 TextView nextDateText = (TextView) textViewNext;
 
-                                View textView = row.getChildAt(0);
+                                View textView = row.getChildAt(1);
                                 TextView currentDateText = (TextView) textView;
+
+                                View imageViewNext = rowNext.getChildAt(0);
+                                ImageView nextImageView= (ImageView) imageViewNext;
+
+                                View imageView = row.getChildAt(0);
+                                ImageView currentImageView = (ImageView) imageView;
 
                                 if (currentButton == v) {
                                     //TODO semd gelöschtest zu firebase
                                     //dateList.remove(i);
                                     //timeList.remove(i);
                                     currentDateText.setText(nextDateText.getText());
+                                    currentImageView.setImageDrawable(nextImageView.getDrawable());
+                                    nextCalendarButton.setVisibility(View.GONE);
                                     buttonNext.setVisibility(View.GONE);
                                     nextDateText.setText("");
                                     rowNext.setVisibility(View.GONE);
@@ -171,15 +183,22 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                             if (elementView instanceof Button) {
                                 Button currentButton = (Button) elementView;
 
-                                View textView = row.getChildAt(0);
+                                View textView = row.getChildAt(1);
                                 TextView currentDateText = (TextView) textView;
 
+                              /*  View calendarButtonCurrentView = row.getChildAt(2);
+                                Button currentCalendarButton = (Button) calendarButtonCurrentView;
+
+                                View imageView = row.getChildAt(0);
+                                ImageView currentImageView = (ImageView) imageView;*/
+
                                 if (currentButton == v) {
-                                    //TODO senden an FB
+                                    //TODO senden an Firebase
                                     //dateList.remove(i);
                                     //timeList.remove(i);
                                     currentDateText.setText("");
-                                    currentButton.setVisibility(View.GONE);
+                                    //currentCalendarButton.setVisibility(View.GONE);
+                                    //currentButton.setVisibility(View.GONE);
                                     row.setVisibility(View.GONE);
                                 }
                             }
