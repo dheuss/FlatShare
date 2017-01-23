@@ -12,11 +12,13 @@ import com.flatshare.domain.interactors.InitInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -133,9 +135,12 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     List<String> matchedApartments;
                     try {
-                        matchedApartments = new ArrayList<>(dataSnapshot.child("matched_apartments").getValue(HashMap.class).values());
+                        GenericTypeIndicator<Map<String, String>> t = new GenericTypeIndicator<Map<String, String>>() {
+                        };
+
+                        matchedApartments = new ArrayList<>(dataSnapshot.child("matched_apartments").getValue(t).values());
                         tenantProfile.setMatchedApartments(matchedApartments);
-                    } catch (NullPointerException npe){
+                    } catch (NullPointerException npe) {
                         Log.d(TAG, "onDataChange: No matches found!");
                     }
                     tenantProfile = dataSnapshot.getValue(TenantProfile.class);
@@ -198,9 +203,11 @@ public class InitInteractorImpl extends AbstractInteractor implements InitIntera
                     List<String> matchedTenants;
 
                     try {
-                        matchedTenants = new ArrayList<>(dataSnapshot.child("matched_tenants").getValue(HashMap.class).values());
+                        GenericTypeIndicator<Map<String, String>> t = new GenericTypeIndicator<Map<String, String>>() {
+                        };
+                        matchedTenants = new ArrayList<>(dataSnapshot.child("matched_tenants").getValue(t).values());
                         apartmentProfile.setMatchedTenants(matchedTenants);
-                    } catch (NullPointerException npe){
+                    } catch (NullPointerException npe) {
                         Log.d(TAG, "onDataChange: No matches found!");
                     }
 
