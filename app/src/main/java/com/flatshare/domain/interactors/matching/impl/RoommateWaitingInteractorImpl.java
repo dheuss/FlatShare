@@ -41,6 +41,31 @@ public class RoommateWaitingInteractorImpl extends AbstractInteractor implements
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                Log.d(TAG, "onDataChange: removed listener");
+
+                mDatabase.child(path).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        ApartmentFilterSettings apartmentFilterSettings = dataSnapshot.getValue(ApartmentFilterSettings.class);
+
+                        Log.d(TAG, "onDataChange: added Listener: " + (apartmentFilterSettings == null));
+
+                        if (apartmentFilterSettings == null) {
+                            // Do nothing
+                            notifyError("Settings of ap with apartmentID: " + apartmentId + " not ready yet!");
+                        } else { // Profile was created
+                            removeValueListener(path);
+                            notifySuccess();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        notifyError(databaseError.getMessage());
+                    }
+                });
+
             }
 
             @Override
@@ -49,26 +74,6 @@ public class RoommateWaitingInteractorImpl extends AbstractInteractor implements
             }
         });
 
-        mDatabase.child(path).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                ApartmentFilterSettings apartmentFilterSettings = dataSnapshot.getValue(ApartmentFilterSettings.class);
-
-                if (apartmentFilterSettings == null) {
-                    // Do nothing
-                    notifyError("Settings of ap with apartmentID: " + apartmentId + " not ready yet!");
-                } else { // Profile was created
-                    removeValueListener(path);
-                    notifySuccess();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                notifyError(databaseError.getMessage());
-            }
-        });
     }
 
     private void notifySuccess() {
@@ -85,6 +90,7 @@ public class RoommateWaitingInteractorImpl extends AbstractInteractor implements
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //TODO: read about it...
+                Log.d(TAG, "onDataChange: removed for 2nd time");
             }
 
             @Override

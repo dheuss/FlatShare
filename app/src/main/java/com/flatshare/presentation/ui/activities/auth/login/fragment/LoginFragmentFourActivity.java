@@ -37,6 +37,7 @@ import com.google.android.gms.common.SignInButton;
 
 import dmax.dialog.SpotsDialog;
 
+import static com.flatshare.presentation.ui.activities.profile.ApartmentProfileActivity.APARTMENT_ID;
 import static com.flatshare.presentation.ui.activities.profile.ApartmentProfileActivity.ROOMMATE_ID;
 
 public class LoginFragmentFourActivity extends Fragment implements LoginPresenter.View {

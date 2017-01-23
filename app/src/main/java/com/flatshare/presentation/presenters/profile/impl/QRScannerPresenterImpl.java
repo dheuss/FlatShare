@@ -1,5 +1,7 @@
 package com.flatshare.presentation.presenters.profile.impl;
 
+import android.util.Log;
+
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.pair.Pair;
 import com.flatshare.domain.interactors.profile.QRScannerInteractor;
@@ -15,6 +17,7 @@ public class QRScannerPresenterImpl extends AbstractPresenter implements QRScann
         QRScannerInteractor.Callback {
 
 
+    private static final String TAG = "QRScannerPresenter";
     private QRScannerPresenter.View mView;
 
     public QRScannerPresenterImpl(MainThread mainThread,

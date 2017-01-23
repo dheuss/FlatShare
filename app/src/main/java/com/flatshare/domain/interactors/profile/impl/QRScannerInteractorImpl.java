@@ -46,7 +46,7 @@ public class QRScannerInteractorImpl extends AbstractInteractor implements QRSca
     /**
      * callback method that posts message received into the main UI, through mainThread.post!!!
      *
-     * @param nickname
+     * @param idNicknamePair
      */
     private void notifySuccess(final Pair<String, String> idNicknamePair) {
         Log.d(TAG, "inside postMessage(String msg)");

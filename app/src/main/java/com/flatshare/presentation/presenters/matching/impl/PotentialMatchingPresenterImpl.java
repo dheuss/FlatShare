@@ -107,8 +107,8 @@ public class PotentialMatchingPresenterImpl extends AbstractPresenter
 
     @Override
     public void setPotentialMatchesListener() {
-        PMatchesListenerInteractor pMatchesListenerInteractor = new PMatchesListenerInteractorImpl(mMainThread, this);
-        pMatchesListenerInteractor.execute();
+//        PMatchesListenerInteractor pMatchesListenerInteractor = new PMatchesListenerInteractorImpl(mMainThread, this);
+//        pMatchesListenerInteractor.execute();
     }
 
     @Override
