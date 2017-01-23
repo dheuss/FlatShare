@@ -75,7 +75,9 @@ public class NicknameRetrieverInteractorImpl extends AbstractInteractor implemen
                         String id = entry.getKey();
                         String nickname = entry.getValue().getNickname();
 
-                        nicknameIdMap.put(nickname, id);
+                        if(id != null && nickname != null && !id.equals("") && !nickname.equals("")) {
+                            nicknameIdMap.put(nickname, id);
+                        }
                     }
                 }
 

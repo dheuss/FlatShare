@@ -209,7 +209,7 @@ public class QRCodeReaderActivity extends Activity implements QRScannerPresenter
     @Override
     public void displayReadCode(Pair<String, String> idNicknamePair) {
         Intent intent = new Intent();
-        Parcelable parcelablePair = new ParcelablePair(idNicknamePair);
+        ParcelablePair parcelablePair = new ParcelablePair(idNicknamePair);
         intent.putExtra(ApartmentProfileActivity.ROOMMATE_ID_NICKNAME_PAIR, parcelablePair);
 
         setResult(Activity.RESULT_OK, intent);

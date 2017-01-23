@@ -11,11 +11,14 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.support.v4.content.ContextCompat;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,6 +26,7 @@ import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flatshare.R;
@@ -35,8 +39,10 @@ import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.QRCodeReaderActivity;
 import com.flatshare.threading.MainThreadImpl;
 import com.flatshare.utils.location.AppLocationService;
+import com.google.zxing.common.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -201,7 +207,11 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         if (requestCode == STATIC_VALUE) {
             if (resultCode == RESULT_OK) {
 
-                ParcelablePair idNicknamePair = data.getExtras().getParcelable(ROOMMATE_ID_NICKNAME_PAIR);
+                ParcelablePair idNicknamePair = data.getParcelableExtra(ROOMMATE_ID_NICKNAME_PAIR);
+
+                if (nicknameIdMap == null) {
+                    nicknameIdMap = new HashMap<>();
+                }
                 nicknameIdMap.put(idNicknamePair.getValue(), idNicknamePair.getId());
                 adapter.add(idNicknamePair.getValue());
                 roommatesEmailsMultiAC.getText().append(idNicknamePair.getValue() + "; ");
@@ -424,9 +434,41 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     }
 
     private void initMultiAutoComplete() {
-        roommatesEmailsMultiAC.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
+        roommatesEmailsMultiAC.setTokenizer(new SemicolonTokenizer());
         roommatesEmailsMultiAC.setThreshold(1);
+
         mPresenter.getUserEmails();
+    }
+
+//    private void deleteLastWord(String oldText, String newText) {
+//
+//        String result = newText;
+//        for (int i = newText.length(); i < oldText.length(); i++) {
+//            if(oldText.charAt(i) == ';'){
+//                int lastIndex = Math.max(oldText.lastIndexOf(' '), oldText.lastIndexOf(';'));
+//
+//                if(lastIndex < 0){ // if no space found
+//                    result =  "";
+//                } else {
+//                    result = oldText.substring(0, lastIndex);
+//                }
+//            }
+//        }
+//
+//        this.oldText = result;
+//        roommatesEmailsMultiAC.setText(result);
+//        roommatesEmailsMultiAC.moveCursorToVisibleOffset();
+//    }
+
+    private int countOccur(String s, char c) {
+        int counter = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == c) {
+                counter++;
+            }
+        }
+        return counter;
     }
 
     @Override

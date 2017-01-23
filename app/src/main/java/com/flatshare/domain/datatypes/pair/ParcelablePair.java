@@ -18,11 +18,13 @@ public class ParcelablePair implements Parcelable {
     }
 
     public ParcelablePair(Parcel in) {
-        String[] data = new String[3];
+        this.id = in.readString();
+        this.value = in.readString();
 
-        in.readStringArray(data);
-        this.id = data[0];
-        this.value = data[1];
+//        String[] data = new String[2];
+//        in.readStringArray(data);
+//        this.id = data[0];
+//        this.value = data[1];
     }
 
     public static final Creator<ParcelablePair> CREATOR = new Creator<ParcelablePair>() {
@@ -44,8 +46,10 @@ public class ParcelablePair implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeStringArray(new String[] {this.id,
-                this.value});
+        dest.writeString(id);
+        dest.writeString(value);
+//        dest.writeStringArray(new String[] {this.id,
+//                this.value});
     }
 
     public String getId() {
