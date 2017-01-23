@@ -1,6 +1,7 @@
 package com.flatshare.presentation.ui.activities.matchingoverview.calendar;
 
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -8,6 +9,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -61,7 +63,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
 
         if (isTenant) {
-            setDate.setVisibility(View.GONE);
+            //setDate.setVisibility(View.GONE);
         }
 
         Calendar calendar = Calendar.getInstance();
@@ -78,12 +80,38 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isTenant) {
-                    mPresenter.sendBackFromTenant(finalDate, tenantID, apartmentID);
-                } else {
-                    mPresenter.sendDateToTenant(dateList, timeList, tenantID, apartmentID);
-                    Toast.makeText(getApplicationContext(), "Send", Toast.LENGTH_SHORT).show();
-                }
+
+                LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
+                View mView = layoutInflater.inflate(R.layout.activity_popup, null);
+
+                AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(getApplicationContext());
+                alertDialogBuilderUserInput.setView(mView);
+
+                final TextView popUpTextView = (TextView) mView.findViewById(R.id.popup_TextView);
+                popUpTextView.setText("Do you really want to send?");
+
+                alertDialogBuilderUserInput
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (isTenant) {
+                                    mPresenter.sendBackFromTenant(finalDate, tenantID, apartmentID);
+                                } else {
+                                    mPresenter.sendDateToTenant(dateList, timeList, tenantID, apartmentID);
+                                    Toast.makeText(getApplicationContext(), "Send", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+                alertDialogAndroid.show();
             }
         });
 
