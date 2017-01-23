@@ -61,9 +61,8 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
         isTenant = mPresenter.checkForTenant();
 
-
         if (isTenant) {
-            //setDate.setVisibility(View.GONE);
+            setDate.setVisibility(View.GONE);
         }
 
         Calendar calendar = Calendar.getInstance();
@@ -81,10 +80,10 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             @Override
             public void onClick(View v) {
 
-                LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
+                LayoutInflater layoutInflater = LayoutInflater.from(CalendarActivity.this);
                 View mView = layoutInflater.inflate(R.layout.activity_popup, null);
 
-                AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(getApplicationContext());
+                AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(CalendarActivity.this);
                 alertDialogBuilderUserInput.setView(mView);
 
                 final TextView popUpTextView = (TextView) mView.findViewById(R.id.popup_TextView);
