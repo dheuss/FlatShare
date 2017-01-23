@@ -34,13 +34,12 @@
             android:text="@string/wait_roommate_info" />
 
         <pl.droidsonroids.gif.GifImageView
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/apartment_profile_info"
+            android:layout_marginTop="@dimen/marginTop"
             android:background="@color/windowBackground"
             android:src="@drawable/waiting_gif" />
-
 
     </RelativeLayout>
 

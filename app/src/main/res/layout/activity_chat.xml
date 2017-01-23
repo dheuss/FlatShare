@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/windowBackground">
+    android:background="@color/windowBackground"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="top|left">
+
         <ImageButton
             android:id="@+id/couchChatBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/couch_button"/>
+            android:background="@drawable/couch_button" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="top|right">
+
         <Button
-            android:text="Button"
+            android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="calendarView"
-            android:id="@+id/button2" />
+            android:text="Button" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -34,12 +38,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:text="Chat"
             android:textAlignment="center"
-            android:gravity="center"
-            android:textStyle="bold"
+            android:textColor="@color/colorText"
             android:textSize="20dp"
-            android:textColor="@color/colorText"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
 </FrameLayout>

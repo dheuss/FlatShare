@@ -50,7 +50,7 @@
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
             android:gravity="center"
-            android:text="@string/apartment_info_description_2"/>
+            android:text="@string/apartment_info_description_2" />
 
         <LinearLayout
             android:id="@+id/LinearLayoutApartmentProfilePrice"
@@ -72,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="0,00€"/>
+                android:text="0,00€" />
 
         </LinearLayout>
 
@@ -89,14 +89,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/area"/>
+                android:text="@string/area" />
 
             <TextView
                 android:id="@+id/apartmentAreaTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="12345"/>
+                android:text="12345" />
         </LinearLayout>
 
         <LinearLayout
@@ -112,14 +112,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/apartment_zip_code"/>
+                android:text="@string/apartment_zip_code" />
 
             <TextView
                 android:id="@+id/apartmentZIPTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="12345"/>
+                android:text="12345" />
         </LinearLayout>
 
         <LinearLayout
@@ -135,14 +135,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/roomSize"/>
+                android:text="@string/roomSize" />
 
             <TextView
                 android:id="@+id/apartmentRoomSizeTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="12345"/>
+                android:text="12345" />
         </LinearLayout>
 
         <LinearLayout
@@ -158,14 +158,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/apartmentSize"/>
+                android:text="@string/apartmentSize" />
 
             <TextView
                 android:id="@+id/apartmentApartmentSizeTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="12345"/>
+                android:text="12345" />
         </LinearLayout>
 
         <LinearLayout
@@ -181,14 +181,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/internet"/>
+                android:text="@string/internet" />
 
             <TextView
                 android:id="@+id/apartmentInternetTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="12345"/>
+                android:text="12345" />
         </LinearLayout>
 
         <LinearLayout
@@ -204,14 +204,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/smoker"/>
+                android:text="@string/smoker" />
 
             <TextView
                 android:id="@+id/apartmentSmokerTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="12345"/>
+                android:text="12345" />
         </LinearLayout>
 
         <LinearLayout
@@ -227,14 +227,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/pets"/>
+                android:text="@string/pets" />
 
             <TextView
                 android:id="@+id/apartmentPetsTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="12345"/>
+                android:text="12345" />
         </LinearLayout>
 
         <LinearLayout
@@ -250,21 +250,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/washing_machine"/>
+                android:text="@string/washing_machine" />
 
             <TextView
                 android:id="@+id/apartmentWashingMashineTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="12345"/>
+                android:text="12345" />
         </LinearLayout>
 
         <!--<com.google.android.gms.maps.MapView-->
-            <!--android:id="@+id/mapView"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_below="@id/LinearLayoutApartmentProfileWashingsMashine"/>-->
+        <!--android:id="@+id/mapView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@id/LinearLayoutApartmentProfileWashingsMashine"/>-->
 
 
     </RelativeLayout>

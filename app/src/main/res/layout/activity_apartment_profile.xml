@@ -171,7 +171,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/city"
-                android:inputType="number"
+                android:inputType="text"
                 android:textColor="@color/colorText"
                 android:textColorHint="@color/colorText" />
         </android.support.design.widget.TextInputLayout>
@@ -190,7 +190,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/state"
-                android:inputType="number"
+                android:inputType="text"
                 android:textColor="@color/colorText"
                 android:textColorHint="@color/colorText" />
         </android.support.design.widget.TextInputLayout>
@@ -209,7 +209,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/country"
-                android:inputType="number"
+                android:inputType="text"
                 android:textColor="@color/colorText"
                 android:textColorHint="@color/colorText" />
         </android.support.design.widget.TextInputLayout>

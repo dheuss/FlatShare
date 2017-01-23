@@ -22,72 +22,47 @@
         android:textColor="@color/colorPrimary"
         android:textSize="30dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/marginTop"
-            android:padding="10dp"
-            android:text="You have two choices!"
-            android:textColor="@color/colorText"
-            android:textSize="20dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/marginTop"
+        android:padding="10dp"
+        android:text="You have two choices!"
+        android:textColor="@color/colorText"
+        android:textSize="20dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/activity_horizontal_margin"
-            android:text="You have to deceide wheather you want to search for an appartmant for yourself or if you want to offer an apartmant so somebodey else."
-            android:textColor="@color/colorText"
-            android:textSize="14dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="You have to deceide wheather you want to search for an appartmant for yourself or if you want to offer an apartmant so somebodey else."
+        android:textColor="@color/colorText"
+        android:textSize="14dp" />
 
-        <Button
-            android:id="@+id/create_tenant_profile_button"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/create_tenant_profile"
-            android:textColor="@color/colorButtonText"
-            android:textColorHint="@color/colorButtonText"
-            android:layout_marginTop="20dp"
-            android:background="@color/colorPrimary"
-            android:textStyle="bold"
-            />
+    <Button
+        android:id="@+id/create_tenant_profile_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:hint="@string/create_tenant_profile"
+        android:textColor="@color/colorButtonText"
+        android:textColorHint="@color/colorButtonText"
+        android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/create_roommate_profile_button"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/create_tenant_profile_button"
-            android:hint="@string/create_roommate_profile_button"
-            android:textColor="@color/colorButtonText"
-            android:textColorHint="@color/colorButtonText"
-            android:layout_marginTop="20dp"
-            android:background="@color/colorPrimary"
-            android:textStyle="bold"/>
+    <Button
+        android:id="@+id/create_roommate_profile_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/create_tenant_profile_button"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:hint="@string/create_roommate_profile_button"
+        android:textColor="@color/colorButtonText"
+        android:textColorHint="@color/colorButtonText"
+        android:textStyle="bold" />
 
-    <!--<Button-->
-        <!--android:id="@+id/create_roommate_qr_code_button"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/create_apartment_profile_button"-->
-        <!--android:hint="@string/create_roommate_qr_code_button"-->
-        <!--android:textColor="@color/colorButtonText"-->
-        <!--android:textColorHint="@color/colorButtonText"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:textStyle="bold"/>-->
-
-    <!--<Button-->
-        <!--android:id="@+id/test_button"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/create_roommate_qr_code_button"-->
-        <!--android:hint="test scanner"-->
-        <!--android:textColor="@color/colorButtonText"-->
-        <!--android:textColorHint="@color/colorButtonText"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:textStyle="bold"/>-->
-
-    </LinearLayout>
+</LinearLayout>

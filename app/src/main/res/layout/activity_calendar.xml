@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/LinearLayoutCalender_1"
         android:layout_width="wrap_content"
@@ -44,31 +45,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:textColor="@color/colorText"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/colorText" />
 
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/setDate"
-                    android:onClick="setDate"
-                    android:clickable="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
                     android:layout_gravity="right"
+                    android:layout_margin="16dp"
+                    android:clickable="true"
+                    android:onClick="setDate"
                     android:src="@drawable/add_plus_icon"
                     app:layout_anchor="@id/LinearLayoutCalender_4"
-                    app:layout_anchorGravity="bottom|right|end"/>
+                    app:layout_anchorGravity="bottom|right|end" />
 
                 <Button
                     android:id="@+id/send"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Send"
                     android:background="@color/colorPrimary"
+                    android:text="Send"
                     android:textColor="@color/colorButtonText"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
 
             </LinearLayout>
