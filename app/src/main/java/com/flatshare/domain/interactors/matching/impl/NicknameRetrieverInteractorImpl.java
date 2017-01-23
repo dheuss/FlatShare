@@ -70,10 +70,13 @@ public class NicknameRetrieverInteractorImpl extends AbstractInteractor implemen
                 Map<String, String> nicknameIdMap = new HashMap<>();
 
                 for (Map.Entry<String, RoommateProfile> entry : idProfileMap.entrySet()) {
-                    String id = entry.getKey();
-                    String nickname = entry.getValue().getNickname();
 
-                    nicknameIdMap.put(nickname, id);
+                    if (entry.getValue().isAvailable()) {
+                        String id = entry.getKey();
+                        String nickname = entry.getValue().getNickname();
+
+                        nicknameIdMap.put(nickname, id);
+                    }
                 }
 
                 if (nicknameIdMap.size() == 0) {
