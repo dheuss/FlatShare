@@ -171,11 +171,11 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
                 apartmentStateEditText.setText("Bavaria");
                 apartmentCountryEditText.setText(returnedAddress.getCountryName());
             } else {
-                Log.w("My Current loction address", "No Address returned!");
+                Log.w("My Current location address", "No Address returned!");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Log.w("My Current loction address", "Canont get Address!");
+            Log.w("My Current location address", "Cannot get Address!");
         }
         return strAdd;
     }
@@ -228,14 +228,14 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
         if (inputValid()) {
 
-            String[] emails = roommatesEmailsMultiAC.getText().toString().split(",");
+            String[] nicknames = roommatesEmailsMultiAC.getText().toString().split(";");
 
             List<String> roommatesId = new ArrayList<>();
             String id = null;
-            for (int i = 0; i < emails.length; i++) {
+            for (int i = 0; i < nicknames.length; i++) {
 
                 try {
-                    id = nicknameIdMap.get(emails[i].trim());
+                    id = nicknameIdMap.get(nicknames[i].trim());
                 } catch (NullPointerException e) {
                     Log.w(TAG, "sendProfile: NullPointer", e);
                 }
