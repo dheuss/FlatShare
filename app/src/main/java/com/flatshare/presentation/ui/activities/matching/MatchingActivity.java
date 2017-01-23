@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ import com.flatshare.presentation.presenters.matching.PotentialMatchingPresenter
 import com.flatshare.presentation.presenters.matching.impl.PotentialMatchingPresenterImpl;
 import com.flatshare.presentation.ui.AbstractFragmentActivity;
 import com.flatshare.threading.MainThreadImpl;
+import com.google.android.gms.vision.text.Text;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
@@ -32,12 +34,16 @@ import android.view.ViewGroup.LayoutParams;
 
 import java.util.List;
 
-public class  MatchingActivity extends AbstractFragmentActivity implements PotentialMatchingPresenter.View {
+import static com.flatshare.R.drawable.apartment_default;
+import static com.flatshare.R.drawable.thumb_down_icon;
+import static com.flatshare.R.drawable.thumb_up_icon;
+
+public class MatchingActivity extends AbstractFragmentActivity implements PotentialMatchingPresenter.View {
 
     private static final String TAG = "MatchingActivity";
 
     private SwipePlaceHolderView mSwipeView;
-//    private Context mContext;
+    //    private Context mContext;
     private UserState userState;
 
     private ImageButton acceptBtn;
@@ -57,15 +63,33 @@ public class  MatchingActivity extends AbstractFragmentActivity implements Poten
     private List<TenantProfile> tenantProfiles;
 
     private TextView apartmentPriceTextView;
-    private TextView apartmentAreaTextView;
+    private TextView apartmentSizeTextView;
     private TextView apartmentZipCodeTextView;
-    private TextView apartmentRoomSizeTextView;
-    private TextView apartmentApartmentSizeTextView;
-    private TextView apartmentInternetTextView;
-    private TextView apartmentSmokerTextView;
-    private TextView apartmentPetsTextView;
-    private TextView apartmentWashingMashineTextView;
+    private TextView apartmentCityTextView;
+    private TextView apartmentStateTextView;
+    private TextView apartmentCountryTextView;
+    private ImageView apartmentImageView;
+    private ImageView internetImageView;
+    private ImageView smokerImageView;
+    private ImageView petsImageView;
+    private ImageView washingMashineImageView;
+    private ImageView purposeImageView;
+
+    private int apartmentPrice;
+    private int apartmentSize;
+    private int apartmentZipCode;
+    private String apartmentCity;
+    private String apartmentState;
+    private String apartmentCountry;
+    private Bitmap apartmentImage;
+
     private ImageButton closeButton;
+
+    private Boolean internet;
+    private Boolean smoker;
+    private Boolean pets;
+    private Boolean washingMashine;
+    private Boolean purpose;
 
     private SharedPreferences sharedPref;
 
@@ -100,7 +124,7 @@ public class  MatchingActivity extends AbstractFragmentActivity implements Poten
         }
 
         mSwipeView.getBuilder()
-                .setDisplayViewCount(3)
+                .setDisplayViewCount(1)
                 .setSwipeDecor(new SwipeDecor()
                         .setPaddingTop(20)
                         .setRelativeScale(0.01f)
@@ -142,9 +166,6 @@ public class  MatchingActivity extends AbstractFragmentActivity implements Poten
         acceptBtn = (ImageButton) view.findViewById(R.id.acceptBtn);
 
 
-
-
-
     }
 
     public void cardClick(View view) {
@@ -159,14 +180,48 @@ public class  MatchingActivity extends AbstractFragmentActivity implements Poten
         View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_apartment, null);
 
         apartmentPriceTextView = (TextView) customView.findViewById(R.id.apartmentPriceTextView);
-        apartmentAreaTextView = (TextView) customView.findViewById(R.id.apartmentAreaTextView);
-        apartmentZipCodeTextView = (TextView) customView.findViewById(R.id.apartmentZIPTextView);
-        apartmentRoomSizeTextView = (TextView) customView.findViewById(R.id.apartmentRoomSizeTextView);
-        apartmentApartmentSizeTextView = (TextView) customView.findViewById(R.id.apartmentAreaTextView);
-        apartmentInternetTextView = (TextView) customView.findViewById(R.id.apartmentInternetTextView);
-        apartmentSmokerTextView = (TextView) customView.findViewById(R.id.apartmentSmokerTextView);
-        apartmentPetsTextView = (TextView) customView.findViewById(R.id.apartmentPetsTextView);
-        apartmentWashingMashineTextView = (TextView) customView.findViewById(R.id.apartmentWashingMashineTextView);
+        apartmentPriceTextView.setText(getApartmentPrice()+" €");
+        apartmentSizeTextView = (TextView) customView.findViewById(R.id.apartmentSizeTextView);
+        apartmentSizeTextView.setText(getApartmentSize()+" m2");
+        apartmentZipCodeTextView = (TextView)customView.findViewById(R.id.apartmentZIPCODETextView);
+        apartmentZipCodeTextView.setText(getApartmentZipCode()+"");
+        apartmentCityTextView = (TextView)customView.findViewById(R.id.apartmentCITYTextView);
+        apartmentCityTextView.setText(getApartmentCity());
+        apartmentStateTextView = (TextView)customView.findViewById(R.id.apartmentSTATETextView);
+        apartmentStateTextView.setText(getApartmentState());
+        apartmentCountryTextView = (TextView)customView.findViewById(R.id.apartmentCOUNTRYTextView);
+        apartmentCountryTextView.setText(getApartmentCountry());
+        apartmentImageView = (ImageView) customView.findViewById(R.id.apartmentInfoImageView);
+        if (getApartmentImage() == null){
+            apartmentImageView.setImageResource(apartment_default);
+        } else {
+            apartmentImageView.setImageBitmap(getApartmentImage());
+        }
+        internetImageView  = (ImageView) customView.findViewById(R.id.internetThumb);
+        if (getInternet()){
+            internetImageView.setImageResource(thumb_up_icon);
+        }else{
+            internetImageView.setImageResource(thumb_down_icon);
+        }
+        smokerImageView = (ImageView) customView.findViewById(R.id.smokerThumb);
+        if (getSmoker()){
+            smokerImageView.setImageResource(thumb_up_icon);
+        } else {
+            smokerImageView.setImageResource(thumb_down_icon);
+        }
+        petsImageView = (ImageView) customView.findViewById(R.id.petsThumb);
+        if (getPets()){
+            petsImageView.setImageResource(thumb_up_icon);
+        } else {
+            petsImageView.setImageResource(thumb_down_icon);
+        }
+        washingMashineImageView = (ImageView) customView.findViewById(R.id.washingMashineThumb);
+        if (getWashingMashine()){
+            washingMashineImageView.setImageResource(thumb_up_icon);
+        } else {
+            washingMashineImageView.setImageResource(thumb_down_icon);
+        }
+        purposeImageView = (ImageView) customView.findViewById(R.id.purpseThumb);
 
         mPopupWindow = new PopupWindow(
                 customView,
@@ -179,14 +234,11 @@ public class  MatchingActivity extends AbstractFragmentActivity implements Poten
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.v(TAG, "DISMISS");
                 mPopupWindow.dismiss();
             }
         });
 
-        // Google Maps
-
-
+        //Todo Google Maps
 
         mPopupWindow.showAtLocation(mFrameLayout, Gravity.CENTER, 0, 0);
     }
@@ -205,7 +257,6 @@ public class  MatchingActivity extends AbstractFragmentActivity implements Poten
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.v(TAG, "DISMISS");
                 mPopupWindow.dismiss();
             }
         });
@@ -235,7 +286,6 @@ public class  MatchingActivity extends AbstractFragmentActivity implements Poten
             Bitmap bitmap = pair.getRight();
             mSwipeView.addView(new MatchingActivity_ProfileCard_Tenant(this, tenantProfile, mSwipeView, bitmap));
         }
-
     }
 
     @Override
@@ -268,4 +318,99 @@ public class  MatchingActivity extends AbstractFragmentActivity implements Poten
         editor.apply();
     }
 
+    public int getApartmentPrice() {
+        return apartmentPrice;
+    }
+
+    public void setApartmentPrice(int apartmentPrice) {
+        this.apartmentPrice = apartmentPrice;
+    }
+
+    public int getApartmentSize() {
+        return apartmentSize;
+    }
+
+    public void setApartmentSize(int apartmentSize) {
+        this.apartmentSize = apartmentSize;
+    }
+
+    public int getApartmentZipCode() {
+        return apartmentZipCode;
+    }
+
+    public void setApartmentZipCode(int apartmentZipCode) {
+        this.apartmentZipCode = apartmentZipCode;
+    }
+
+    public String getApartmentCity() {
+        return apartmentCity;
+    }
+
+    public void setApartmentCity(String apartmentCity) {
+        this.apartmentCity = apartmentCity;
+    }
+
+    public String getApartmentState() {
+        return apartmentState;
+    }
+
+    public void setApartmentState(String apartmentState) {
+        this.apartmentState = apartmentState;
+    }
+
+    public String getApartmentCountry() {
+        return apartmentCountry;
+    }
+
+    public void setApartmentCountry(String apartmentCountry) {
+        this.apartmentCountry = apartmentCountry;
+    }
+
+    public Bitmap getApartmentImage() {
+        return apartmentImage;
+    }
+
+    public void setApartmentImage(Bitmap apartmentImage) {
+        this.apartmentImage = apartmentImage;
+    }
+
+    public Boolean getInternet() {
+        return internet;
+    }
+
+    public void setInternet(Boolean internet) {
+        this.internet = internet;
+    }
+
+    public Boolean getSmoker() {
+        return smoker;
+    }
+
+    public void setSmoker(Boolean smoker) {
+        this.smoker = smoker;
+    }
+
+    public Boolean getPets() {
+        return pets;
+    }
+
+    public void setPets(Boolean pets) {
+        this.pets = pets;
+    }
+
+    public Boolean getWashingMashine() {
+        return washingMashine;
+    }
+
+    public void setWashingMashine(Boolean washingMashine) {
+        this.washingMashine = washingMashine;
+    }
+
+    public Boolean getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(Boolean purpose) {
+        this.purpose = purpose;
+    }
 }

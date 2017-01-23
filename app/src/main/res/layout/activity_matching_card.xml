@@ -14,7 +14,7 @@
         android:clickable="true"
         android:orientation="vertical"
         app:cardCornerRadius="7dp"
-        app:cardElevation="4dp">
+        app:cardElevation="7dp">
         <!--android:onClick="cardClick"-->
         <ImageView
             android:id="@+id/profileImageView"

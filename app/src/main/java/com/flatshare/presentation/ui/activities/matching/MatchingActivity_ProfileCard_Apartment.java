@@ -45,6 +45,8 @@ public class MatchingActivity_ProfileCard_Apartment {
 
     private String TAG = "MatchingActivity_ProfileCard_Apartment";
 
+    private TextView priceTextView;
+
     public MatchingActivity_ProfileCard_Apartment(MatchingActivity matchingActivity, ApartmentProfile profile, SwipePlaceHolderView swipeView, Bitmap bitmap) {
         this.matchingActivity = matchingActivity;
         mProfile = profile;
@@ -62,6 +64,19 @@ public class MatchingActivity_ProfileCard_Apartment {
         }
         nameAgeTxt.setText("Location: " + mProfile.getApartmentLocation().city + ", " + mProfile.getApartmentLocation().district);
         locationNameTxt.setText("Price: " + mProfile.getPrice() + "€");
+
+        matchingActivity.setApartmentPrice(mProfile.getPrice());
+        matchingActivity.setApartmentSize(mProfile.getArea());
+        matchingActivity.setApartmentZipCode(mProfile.getApartmentLocation().getZipCode());
+        matchingActivity.setApartmentCity(mProfile.getApartmentLocation().getCity());
+        matchingActivity.setApartmentState(mProfile.getApartmentLocation().getState());
+        matchingActivity.setApartmentCountry(mProfile.getApartmentLocation().getCountry());
+        matchingActivity.setApartmentImage(mBitmap);
+        matchingActivity.setInternet(mProfile.hasInternet());
+        matchingActivity.setSmoker(mProfile.isSmokerApartment());
+        matchingActivity.setPets(mProfile.hasPets());
+        matchingActivity.setWashingMashine(mProfile.hasWashingMachine());
+        matchingActivity.setPurpose(mProfile.isPurposeApartment());
     }
 
     @SwipeOut

@@ -53,10 +53,28 @@
             android:text="@string/apartment_info_description_2" />
 
         <LinearLayout
+            android:id="@+id/imageLayout"
+            android:layout_below="@+id/apartment_info_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/apartmentInfoImageView"
+                android:layout_gravity="center"
+                android:layout_width="350dp"
+                android:layout_height="350dp"
+                android:layout_below="@+id/apartment_info_2"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/LinearLayoutApartmentProfilePrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/apartment_info_2"
+            android:layout_below="@id/imageLayout"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
@@ -65,68 +83,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/apartment_price" />
+                android:text="@string/price" />
 
             <TextView
                 android:id="@+id/apartmentPriceTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="0,00€" />
+                android:text="---" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/LinearLayoutApartmentProfileArea"
+            android:id="@+id/LinearLayoutApartmentProfileSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/LinearLayoutApartmentProfilePrice"
-            android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginTop="@dimen/marginTop">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/area" />
-
-            <TextView
-                android:id="@+id/apartmentAreaTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="12345" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/LinearLayoutApartmentProfileZIP"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/LinearLayoutApartmentProfileArea"
-            android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginTop="@dimen/marginTop">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/apartment_zip_code" />
-
-            <TextView
-                android:id="@+id/apartmentZIPTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="12345" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/LinearLayoutApartmentProfileRoomSize"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/LinearLayoutApartmentProfileZIP"
+            android:layout_below="@id/LinearLayoutApartmentProfilePrice"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
@@ -138,18 +110,19 @@
                 android:text="@string/roomSize" />
 
             <TextView
-                android:id="@+id/apartmentRoomSizeTextView"
+                android:id="@+id/apartmentSizeTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="12345" />
+                android:text="---" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/LinearLayoutApartmentProfileApartmentSize"
+            android:id="@+id/LinearLayoutApartmentProfileZIPCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/LinearLayoutApartmentProfileRoomSize"
+            android:layout_below="@id/LinearLayoutApartmentProfileSize"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
@@ -158,21 +131,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/apartmentSize" />
+                android:text="@string/apartment_zip_code" />
 
             <TextView
-                android:id="@+id/apartmentApartmentSizeTextView"
+                android:id="@+id/apartmentZIPCODETextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="12345" />
+                android:text="---" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/LinearLayoutApartmentProfileIntenet"
+            android:id="@+id/LinearLayoutApartmentProfileCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/LinearLayoutApartmentProfileApartmentSize"
+            android:layout_below="@id/LinearLayoutApartmentProfileZIPCode"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
@@ -181,21 +155,94 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/internet" />
+                android:text="@string/apartment_city" />
 
             <TextView
-                android:id="@+id/apartmentInternetTextView"
+                android:id="@+id/apartmentCITYTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="12345" />
+                android:text="---" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutApartmentProfileState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LinearLayoutApartmentProfileCity"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/apartment_state" />
+
+            <TextView
+                android:id="@+id/apartmentSTATETextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="---" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutApartmentProfileCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LinearLayoutApartmentProfileState"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/apartment_country" />
+
+            <TextView
+                android:id="@+id/apartmentCOUNTRYTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="---" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutApartmentProfileInternet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LinearLayoutApartmentProfileCountry"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/apartment_internet" />
+
+            <ImageView
+                android:id="@+id/internetThumb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/thumb_up_icon"
+                android:layout_marginLeft="@dimen/marginLeft"/>
+
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/LinearLayoutApartmentProfileSmoker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/LinearLayoutApartmentProfileIntenet"
+            android:layout_below="@id/LinearLayoutApartmentProfileInternet"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
@@ -204,21 +251,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/smoker" />
+                android:text="@string/apartment_smoker" />
 
-            <TextView
-                android:id="@+id/apartmentSmokerTextView"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/smokerThumb"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="12345" />
+                android:src="@drawable/thumb_up_icon"
+                android:layout_marginLeft="@dimen/marginLeft"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/LinearLayoutApartmentProfilePets"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/LinearLayoutApartmentProfileSmoker"
+            android:layout_below="@id/LinearLayoutApartmentProfileSmoker"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
@@ -227,21 +274,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/pets" />
+                android:text="@string/apartment_pets" />
 
-            <TextView
-                android:id="@+id/apartmentPetsTextView"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/petsThumb"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="12345" />
+                android:src="@drawable/thumb_up_icon"
+                android:layout_marginLeft="@dimen/marginLeft"/>
+
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/LinearLayoutApartmentProfileWashingsMashine"
+            android:id="@+id/LinearLayoutApartmentProfileWashingMashine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/LinearLayoutApartmentProfilePets"
+            android:layout_below="@id/LinearLayoutApartmentProfilePets"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
@@ -250,15 +298,41 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/washing_machine" />
+                android:text="@string/apartment_washingMashine" />
+
+            <ImageView
+                android:id="@+id/washingMashineThumb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/thumb_up_icon"
+                android:layout_marginLeft="@dimen/marginLeft"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutApartmentProfilePurpose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LinearLayoutApartmentProfileWashingMashine"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
 
             <TextView
-                android:id="@+id/apartmentWashingMashineTextView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="12345" />
+                android:layout_gravity="center"
+                android:text="@string/apartment_purpose" />
+
+            <ImageView
+                android:id="@+id/purpseThumb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/thumb_up_icon"
+                android:layout_marginLeft="@dimen/marginLeft"/>
+
         </LinearLayout>
+
 
         <!--<com.google.android.gms.maps.MapView-->
         <!--android:id="@+id/mapView"-->
