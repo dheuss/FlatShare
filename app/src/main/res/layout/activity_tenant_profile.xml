@@ -247,10 +247,9 @@
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
-            android:background="@color/colorPrimary"
+            android:background="@null"
             android:hint="@string/take_picture_tenant_profile"
-            android:textColor="@color/colorButtonText"
-            android:textColorHint="@color/colorButtonText"
+            android:textColorHint="@color/colorPrimary"
             android:textStyle="bold" />
 
         <Button

@@ -57,6 +57,7 @@ public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity i
     private EditText cityEditText;
     private EditText stateEditText;
     private EditText countryEditText;
+    private EditText infoEditText;
 
     private RadioGroup internetRadioGroup;
     private RadioButton internetYESRadioButton, internetNORadioButton;
@@ -228,6 +229,7 @@ public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity i
                         String city = cityEditText.getText().toString();
                         String state = stateEditText.getText().toString();
                         String country = countryEditText.getText().toString();
+                        String info = apartmentProfileInfo.getText().toString();
 
                         boolean internet = internetRadioGroup.getCheckedRadioButtonId() == internetYESRadioButton.getId();
                         boolean smoker = smokerRadioGroup.getCheckedRadioButtonId() == smokerYESRadioButton.getId();
@@ -249,6 +251,7 @@ public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity i
                         apartmentProfile.setSmokerApartment(smoker);
                         apartmentProfile.setPets(pets);
                         apartmentProfile.setWashingMachine(washingMashine);
+                        apartmentProfile.setApartmentInfo(info);
 
                         apartmentProfile.setApartmentLocation(apartmentLocation);
 
@@ -266,6 +269,7 @@ public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity i
                         sizeEditText.setText(userState.getApartmentProfile().getArea() + "");
                         streetEditText.setText(userState.getApartmentProfile().getApartmentLocation().getStreet()+"");
                         zipCodeEditText.setText(userState.getApartmentProfile().getApartmentLocation().getZipCode()+"");
+                        infoEditText.setText(userState.getApartmentProfile().getApartmentInfo());
 
                         if (userState.getApartmentProfile().hasInternet()){
                             internetYESRadioButton.setChecked(true);
@@ -377,6 +381,9 @@ public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity i
             washingMashineYESRadioButton.setChecked(false);
             washingMashineNORadioButton.setChecked(true);
         }
+
+        infoEditText = (EditText)view.findViewById(R.id.infoApartmentEditText);
+        infoEditText.setText(userState.getApartmentProfile().getApartmentInfo());
 
         qrButton = (Button) view.findViewById(R.id.scan_roommate_QR_button);
         qrButton.setClickable(false);

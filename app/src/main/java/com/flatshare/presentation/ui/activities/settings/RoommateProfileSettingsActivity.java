@@ -37,6 +37,7 @@ public class RoommateProfileSettingsActivity extends AbstractFragmentActivity im
     private EditText cityEditText;
     private EditText stateEditText;
     private EditText countryEditText;
+    private EditText infoEditText;
 
     private RadioButton internetYESRadioButton, internetNORadioButton;
 
@@ -136,6 +137,10 @@ public class RoommateProfileSettingsActivity extends AbstractFragmentActivity im
         countryEditText = (EditText)view.findViewById(R.id.apartment_country_edit_text);
         countryEditText.setText(userState.getApartmentProfile().getApartmentLocation().getCountry());
         countryEditText.setEnabled(false);
+
+        infoEditText = (EditText)view.findViewById(R.id.infoApartmentEditText);
+        infoEditText.setText(userState.getApartmentProfile().getApartmentInfo());
+        infoEditText.setEnabled(false);
 
         internetYESRadioButton = (RadioButton)view.findViewById(R.id.internet_yes_rb);
         internetNORadioButton = (RadioButton)view.findViewById(R.id.internet_no_rb);

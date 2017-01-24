@@ -66,6 +66,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     private EditText apartmentCityEditText;
     private EditText apartmentStateEditText;
     private EditText apartmentCountryEditText;
+    private EditText apartmentInfoEditText;
 
     private RadioGroup internetRadioGroup;
     private RadioButton internetYesRB, internetNoRB;
@@ -268,6 +269,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             String city = apartmentCityEditText.getText().toString();
             String state = apartmentStateEditText.getText().toString();
             String country = apartmentCountryEditText.getText().toString();
+            String info = apartmentInfoEditText.getText().toString();
 
             boolean hasInternet = internetRadioGroup.getCheckedRadioButtonId() == internetYesRB.getId();
             boolean isSmoker = smokerRadioGroup.getCheckedRadioButtonId() == smokerYesRB.getId();
@@ -289,6 +291,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             apartmentProfile.setSmokerApartment(isSmoker);
             apartmentProfile.setPets(hasPets);
             apartmentProfile.setWashingMachine(hasWashingMachine);
+            apartmentProfile.setApartmentInfo(info);
 
             apartmentProfile.setApartmentLocation(apartmentLocation);
 
@@ -343,6 +346,11 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             result = false;
         }
 
+        if (apartmentInfoEditText.getText().toString().trim().equals("")){
+            apartmentInfoEditText.setError(getString(R.string.field_cannot_be_empty));
+            result = false;
+        }
+
         if (!internetYesRB.isChecked() && !internetNoRB.isChecked()) {
             internetYesRB.setError(getString(R.string.check_rb_error));
             result = false;
@@ -379,6 +387,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         apartmentCityEditText = (EditText) findViewById(R.id.apartment_city_edit_text);
         apartmentStateEditText = (EditText) findViewById(R.id.apartment_state_edit_text);
         apartmentCountryEditText = (EditText) findViewById(R.id.apartment_country_edit_text);
+        apartmentInfoEditText = (EditText) findViewById(R.id.infoApartmentEditText);
 
         internetRadioGroup = (RadioGroup) findViewById(R.id.internet_apartment_rg);
         internetYesRB = (RadioButton) findViewById(R.id.internet_yes_rb);
