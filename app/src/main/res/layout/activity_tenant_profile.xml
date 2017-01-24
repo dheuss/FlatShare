@@ -238,35 +238,11 @@
                 android:textSize="10dp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/LinearLayoutProfileDuration"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutProfileInfo"
-            android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginTop="@dimen/marginTop">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/durationOfStay" />
-
-            <Spinner
-                android:id="@+id/durationOfStayProfileSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/durationOfStayArray"
-                android:gravity="right"
-                android:textAlignment="center" />
-        </LinearLayout>
-
         <Button
             android:id="@+id/saveChangesProfileSettingsButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/LinearLayoutProfileDuration"
+            android:layout_below="@+id/LinearLayoutProfileInfo"
             android:layout_marginBottom="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"

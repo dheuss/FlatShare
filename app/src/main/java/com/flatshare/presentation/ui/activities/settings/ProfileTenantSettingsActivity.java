@@ -47,8 +47,6 @@ public class ProfileTenantSettingsActivity extends AbstractFragmentActivity impl
 
     private EditText changeInfoEditText;
 
-    private Spinner changeDurationOfStaySpinner;
-
     private Button changeFilterSettingsButton;
     private Button saveChangesButton;
 
@@ -140,7 +138,6 @@ public class ProfileTenantSettingsActivity extends AbstractFragmentActivity impl
                         boolean changePets = changePetsRadioGroup.getCheckedRadioButtonId() == changePetsYESRadioButton.getId();
                         String changeOccupation = changeOccupationSpinner.getSelectedItem().toString();
                         String changeInfo = changeInfoEditText.getText().toString();
-                        int changeDuration = Integer.parseInt(changeDurationOfStaySpinner.getSelectedItem().toString());
 
                         TenantProfile tenantProfile = new TenantProfile();
 
@@ -151,7 +148,6 @@ public class ProfileTenantSettingsActivity extends AbstractFragmentActivity impl
                         tenantProfile.setPets(changePets);
                         tenantProfile.setOccupation(changeOccupation);
                         tenantProfile.setShortBio(changeInfo);
-                        tenantProfile.setDurationOfStay(changeDuration);
 
                         mPresenter.sendProfile(tenantProfile);
                     }
@@ -244,8 +240,6 @@ public class ProfileTenantSettingsActivity extends AbstractFragmentActivity impl
 
         changeInfoEditText = (EditText)view.findViewById(R.id.infoProfileEditText);
         changeInfoEditText.setText(userState.getTenantProfile().getShortBio());
-
-        changeDurationOfStaySpinner = (Spinner)view.findViewById(R.id.durationOfStayProfileSpinner);
 
         changeFilterSettingsButton = (Button)view.findViewById(R.id.saveChangesProfileSettingsButton);
         changeFilterSettingsButton.setText("CHANGE YOUR SETTINGS!");

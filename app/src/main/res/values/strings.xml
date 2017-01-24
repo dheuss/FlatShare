@@ -138,23 +138,6 @@
         <item>No Job</item>
         <item>Does not matter</item>
     </string-array>
-    <string-array name="durationOfStayArray">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
-    <string-array name="durationOfStayArrayApartmentSettings">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>Does not matter</item>
-    </string-array>
     <string name="title_activity_maps">Map</string>
     <string name="city">City</string>
     <string name="country">Country</string>

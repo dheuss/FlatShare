@@ -9,10 +9,6 @@ import com.google.firebase.database.PropertyName;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Arber on 06/12/2016.
- */
-
 public class ApartmentProfile extends UserProfile {
 
     @PropertyName("apartment_filter_settings")

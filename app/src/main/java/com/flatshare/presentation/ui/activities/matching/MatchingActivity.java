@@ -35,6 +35,9 @@ import android.view.ViewGroup.LayoutParams;
 import java.util.List;
 
 import static com.flatshare.R.drawable.apartment_default;
+import static com.flatshare.R.drawable.female_icon;
+import static com.flatshare.R.drawable.male_icon;
+import static com.flatshare.R.drawable.tenant_default;
 import static com.flatshare.R.drawable.thumb_down_icon;
 import static com.flatshare.R.drawable.thumb_up_icon;
 
@@ -62,6 +65,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     private List<ApartmentProfile> apartmentProfiles;
     private List<TenantProfile> tenantProfiles;
 
+    //ApartmentPopUp
     private TextView apartmentPriceTextView;
     private TextView apartmentSizeTextView;
     private TextView apartmentZipCodeTextView;
@@ -74,7 +78,6 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     private ImageView petsImageView;
     private ImageView washingMashineImageView;
     private ImageView purposeImageView;
-
     private int apartmentPrice;
     private int apartmentSize;
     private int apartmentZipCode;
@@ -82,14 +85,33 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     private String apartmentState;
     private String apartmentCountry;
     private Bitmap apartmentImage;
-
-    private ImageButton closeButton;
-
     private Boolean internet;
     private Boolean smoker;
     private Boolean pets;
     private Boolean washingMashine;
     private Boolean purpose;
+
+    //TenantPopUp
+    private TextView tenantNameTextView;
+    private TextView tenantAgeTextView;
+    private TextView tenantOccupationTextView;
+    private TextView tenantInfoTextView;
+    private ImageView tenantGenderImageView;
+    private ImageView tenantSmokerImgeeView;
+    private ImageView tenantPetsImageView;
+    private ImageView tenantImageView;
+    private String tenantName;
+    private int tenantAge;
+    private String tenantOccupation;
+    private String tenantInfo;
+    private Bitmap tenantImage;
+    private int tenantGender;
+    private Boolean tenantSmoker;
+    private Boolean tenantPets;
+
+    private ImageButton closeButton;
+
+
 
     private SharedPreferences sharedPref;
 
@@ -103,20 +125,14 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_matching, container, false);
-
         sharedPref = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
-
         bindView(view);
-
         Log.d(TAG, "inside onCreate(), creating presenter for this view");
-
         mPresenter = new PotentialMatchingPresenterImpl(
                 MainThreadImpl.getInstance(),
                 this
         );
-
         mPresenter.getPotentialMatches();
-
         mSwipeView.getBuilder()
                 .setDisplayViewCount(1)
                 .setSwipeDecor(new SwipeDecor()
@@ -124,42 +140,34 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
                         .setRelativeScale(0.01f)
                         .setSwipeInMsgLayoutId(R.layout.activity_matching_card_in)
                         .setSwipeOutMsgLayoutId(R.layout.activity_matching_card_out));
-
         rejectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mSwipeView.doSwipe(false);
             }
         });
-
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mSwipeView.doSwipe(true);
             }
         });
-
         infoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 cardClick(view);
             }
         });
-
         return view;
     }
 
 
     private void bindView(View view) {
         mSwipeView = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
-
         mFrameLayout = (FrameLayout) view.findViewById(R.id.matchingActivityFrameLayout);
-
         rejectBtn = (ImageButton) view.findViewById(R.id.rejectBtn);
         infoBtn = (ImageButton) view.findViewById(R.id.infoBtn);
         acceptBtn = (ImageButton) view.findViewById(R.id.acceptBtn);
-
-
     }
 
     public void cardClick(View view) {
@@ -172,7 +180,6 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
 
     public void apartmentPopUp(View view) {
         View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_apartment, null);
-
         apartmentPriceTextView = (TextView) customView.findViewById(R.id.apartmentPriceTextView);
         apartmentPriceTextView.setText(getApartmentPrice()+" €");
         apartmentSizeTextView = (TextView) customView.findViewById(R.id.apartmentSizeTextView);
@@ -216,15 +223,17 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
             washingMashineImageView.setImageResource(thumb_down_icon);
         }
         purposeImageView = (ImageView) customView.findViewById(R.id.purpseThumb);
-
+        if (getPurpose()){
+            purposeImageView.setImageResource(thumb_up_icon);
+        } else {
+            purposeImageView.setImageResource(thumb_down_icon);
+        }
         mPopupWindow = new PopupWindow(
                 customView,
                 LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT
         );
-
         closeButton = (ImageButton) customView.findViewById(R.id.ib_close);
-
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -239,29 +248,56 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
 
     public void tenantPopUp(View view) {
         View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_tenant, null);
-
+        tenantImageView = (ImageView)customView.findViewById(R.id.tenantInfoImageView);
+        if (getTenantImage() == null){
+            tenantImageView.setImageResource(tenant_default);
+        } else {
+            tenantImageView.setImageBitmap(getTenantImage());
+        }
+        tenantNameTextView = (TextView)customView.findViewById(R.id.tenantNameTextView);
+        tenantNameTextView.setText(getTenantName());
+        tenantAgeTextView = (TextView)customView.findViewById(R.id.tenantAgeTextView2);
+        tenantAgeTextView.setText(getTenantAge()+"");
+        tenantGenderImageView = (ImageView)customView.findViewById(R.id.genderThumb);
+        if (getTenantGender() == 0){
+            tenantGenderImageView.setImageResource(male_icon);
+        } else {
+            tenantGenderImageView.setImageResource(female_icon);
+        }
+        smokerImageView = (ImageView)customView.findViewById(R.id.smokerThumb);
+        if (getTenantSmoker()){
+            smokerImageView.setImageResource(thumb_up_icon);
+        } else {
+            smokerImageView.setImageResource(thumb_down_icon);
+        }
+        tenantPetsImageView = (ImageView)customView.findViewById(R.id.petsThumb);
+        if (getTenantPets()){
+            tenantPetsImageView.setImageResource(thumb_up_icon);
+        } else {
+            tenantPetsImageView.setImageResource(thumb_down_icon);
+        }
+        tenantOccupationTextView = (TextView)customView.findViewById(R.id.tenantOccupationTextView);
+        tenantOccupationTextView.setText(getTenantOccupation());
+        tenantInfoTextView = (TextView)customView.findViewById(R.id.tenantInfoTextView);
+        tenantInfoTextView.setText(getTenantInfo());
         mPopupWindow = new PopupWindow(
                 customView,
                 LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT
         );
-
         ImageButton closeButton = (ImageButton) customView.findViewById(R.id.ib_close);
-
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mPopupWindow.dismiss();
             }
         });
-
         mPopupWindow.showAtLocation(mFrameLayout, Gravity.CENTER, 0, 0);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
         Log.d(TAG, "inside onResume()");
         mPresenter.resume();
     }
@@ -274,7 +310,6 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     @Override
     public void showTenants(List<Pair<TenantProfile, Bitmap>> tenants) {
         Log.d(TAG, "size of potential apartments: " + tenants.size());
-
         for (Pair<TenantProfile, Bitmap> pair : tenants) {
             TenantProfile tenantProfile = pair.getLeft();
             Bitmap bitmap = pair.getRight();
@@ -285,7 +320,6 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     @Override
     public void showApartments(List<Pair<ApartmentProfile, Bitmap>> apartments) {
         Log.d(TAG, "size of potential apartments: " + apartments.size());
-
         for (Pair<ApartmentProfile, Bitmap> pair : apartments) {
             ApartmentProfile apartmentProfile = pair.getLeft();
             Bitmap bitmap = pair.getRight();
@@ -401,5 +435,69 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
 
     public void setPurpose(Boolean purpose) {
         this.purpose = purpose;
+    }
+
+    public Bitmap getTenantImage() {
+        return tenantImage;
+    }
+
+    public void setTenantImage(Bitmap tenantImage) {
+        this.tenantImage = tenantImage;
+    }
+
+    public String getTenantInfo() {
+        return tenantInfo;
+    }
+
+    public void setTenantInfo(String tenantInfo) {
+        this.tenantInfo = tenantInfo;
+    }
+
+    public String getTenantOccupation() {
+        return tenantOccupation;
+    }
+
+    public void setTenantOccupation(String tenantOccupation) {
+        this.tenantOccupation = tenantOccupation;
+    }
+
+    public int getTenantAge() {
+        return tenantAge;
+    }
+
+    public void setTenantAge(int tenantAge) {
+        this.tenantAge = tenantAge;
+    }
+
+    public String getTenantName() {
+        return tenantName;
+    }
+
+    public void setTenantName(String tenantName) {
+        this.tenantName = tenantName;
+    }
+
+    public int getTenantGender() {
+        return tenantGender;
+    }
+
+    public void setTenantGender(int tenantGender) {
+        this.tenantGender = tenantGender;
+    }
+
+    public Boolean getTenantSmoker() {
+        return tenantSmoker;
+    }
+
+    public void setTenantSmoker(Boolean tenantSmoker) {
+        this.tenantSmoker = tenantSmoker;
+    }
+
+    public Boolean getTenantPets() {
+        return tenantPets;
+    }
+
+    public void setTenantPets(Boolean tenantPets) {
+        this.tenantPets = tenantPets;
     }
 }

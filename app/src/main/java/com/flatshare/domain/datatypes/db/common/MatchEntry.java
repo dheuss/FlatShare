@@ -5,10 +5,6 @@ import com.google.firebase.database.PropertyName;
 
 import java.util.List;
 
-/**
- * Created by Arber on 14/01/2017.
- */
-
 public class MatchEntry {
 
     @PropertyName("appointments_list")

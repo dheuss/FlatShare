@@ -109,7 +109,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
             int buttonHeight =120;
 
 
-            Toast.makeText(this.getActivity(), "Sandro "  + buttonWidth, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this.getActivity(), "Sandro "  + buttonWidth, Toast.LENGTH_SHORT).show();
 
 
             row.addView(matchingImage);

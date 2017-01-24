@@ -4,9 +4,6 @@ import com.flatshare.domain.datatypes.enums.DecisionType;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.PropertyName;
 
-/**
- * Created by Arber on 14/01/2017.
- */
 public class PotentialMatchEntry {
 
     @PropertyName("potential_match_id")

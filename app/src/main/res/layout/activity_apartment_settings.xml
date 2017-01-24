@@ -306,45 +306,12 @@
                 android:textAlignment="center" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/apartment_settings_duration_info"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/LinearLayoutApartmentSettingsOccupation"
-            android:layout_marginLeft="@dimen/marginTop"
-            android:layout_marginRight="@dimen/marginTop"
-            android:layout_marginTop="@dimen/marginTop"
-            android:text="@string/duration_info" />
-
-        <LinearLayout
-            android:id="@+id/LinearLayoutApartmentSettingsDuration"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/apartment_settings_duration_info"
-            android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginTop="@dimen/marginTop">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/durationOfStay" />
-
-            <Spinner
-                android:id="@+id/durationOfStayApartmentSettingsSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/durationOfStayArrayApartmentSettings"
-                android:gravity="right"
-                android:textAlignment="center" />
-        </LinearLayout>
 
         <Button
             android:id="@+id/done_1_apartment_settings"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/LinearLayoutApartmentSettingsDuration"
+            android:layout_below="@+id/LinearLayoutApartmentSettingsOccupation"
             android:layout_marginBottom="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"

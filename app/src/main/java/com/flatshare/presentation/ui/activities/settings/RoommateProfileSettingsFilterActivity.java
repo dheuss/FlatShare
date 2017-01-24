@@ -34,7 +34,6 @@ public class RoommateProfileSettingsFilterActivity extends AbstractActivity impl
     private RadioButton yesPetsRadioButton, noPetsRadioButton, neiPetsRadioButton;
 
     private Spinner occupationSpiner;
-    private Spinner durationSpinner;
 
     private Button saveButton;
 
@@ -159,8 +158,6 @@ public class RoommateProfileSettingsFilterActivity extends AbstractActivity impl
 
         occupationSpiner = (Spinner)findViewById(R.id.occupationApartmentSettingsSpinner);
         occupationSpiner.setEnabled(false);
-        durationSpinner = (Spinner)findViewById(R.id.durationOfStayApartmentSettingsSpinner);
-        durationSpinner.setEnabled(false);
 
         saveButton = (Button)findViewById(R.id.done_1_apartment_settings);
         saveButton.setText("SAVE!");
