@@ -33,10 +33,8 @@ import com.flatshare.threading.MainThreadImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.flatshare.R.drawable.apartment_default;
 import static com.flatshare.R.drawable.female_icon;
 import static com.flatshare.R.drawable.male_icon;
-import static com.flatshare.R.drawable.tenant_default;
 import static com.flatshare.R.drawable.thumb_down_icon;
 import static com.flatshare.R.drawable.thumb_up_icon;
 
@@ -100,16 +98,13 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
             progressBar.setVisibility(View.GONE);
         }
 
-
-        List<String> testList = new ArrayList<>();
-        List<Integer> imageTest = new ArrayList<>();
-
-        for (int i = 0; i < 15; i++) {
-
-            testList.add("Match:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX " + i);
-            imageTest.add(tenant_default);
+        List<String> matchingTitleList = new ArrayList<>();
+        List<Integer> matchingImageList = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            matchingTitleList.add(i + " This should be a Title for the hole shit!");
+            matchingImageList.add(R.drawable.tenant_default);
         }
-        generateMatchingOverview(testList, imageTest);
+        generateMatchingOverview(matchingTitleList, matchingImageList);
 
         return view;
     }
@@ -128,10 +123,9 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
             ImageButton deleteButton = new ImageButton(this.getActivity());
             ImageButton infoButton = new ImageButton(this.getActivity());
 
-            matchingImage.setImageResource(matchingImageList.get(i)); // TODO set image
+            matchingImage.setImageResource(matchingImageList.get(i));
 
             matchingText.setText(matchingTitleList.get(i));
-            //matchingText.setSingleLine(false);
 
             matchingCalendar.setVisibility(View.VISIBLE);
             matchingCalendar.setBackground(getResources().getDrawable(R.drawable.calendar_icon));
@@ -155,42 +149,34 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
             paramsImage.setMargins(10, 1, 10, 1);
             paramsImage.width = 90;
             paramsImage.height = 90;
-            matchingCalendar.setLayoutParams(paramsImage);
+            matchingImage.setLayoutParams(paramsImage);
 
             TableRow.LayoutParams paramsText = (TableRow.LayoutParams) matchingText.getLayoutParams();
             paramsText.setMargins(10, 0, 10, 0);
             paramsText.weight = 1;
-            //paramsImage.width = 0;
-            //paramsImage.height = buttonHeight;
+            paramsText.width = TableRow.LayoutParams.FILL_PARENT;
             matchingText.setLayoutParams(paramsText);
 
             TableRow.LayoutParams paramsCalendar = (TableRow.LayoutParams) matchingCalendar.getLayoutParams();
             paramsCalendar.setMargins(0, 0, 0, 0);
-            //paramsImage.width = buttonWidth;
-            //paramsImage.height = buttonHeight;
             matchingCalendar.setLayoutParams(paramsCalendar);
 
             TableRow.LayoutParams paramsDelete = (TableRow.LayoutParams) deleteButton.getLayoutParams();
             paramsDelete.setMargins(0, 0, 0, 0);
-            //paramsImage.width = buttonWidth;
-            //paramsImage.height = buttonHeight;
-            matchingCalendar.setLayoutParams(paramsDelete);
+            deleteButton.setLayoutParams(paramsDelete);
 
             TableRow.LayoutParams paramsInfo = (TableRow.LayoutParams) infoButton.getLayoutParams();
             paramsInfo.setMargins(0, 0, 0, 0);
-            //paramsImage.width = buttonWidth;
-            //paramsImage.height = buttonHeight;
-            matchingCalendar.setLayoutParams(paramsInfo);
-
+            infoButton.setLayoutParams(paramsInfo);
 
             matchingOverview.addView(row, i);
         }
-
     }
 
     View.OnClickListener myCalendarHandler = new View.OnClickListener() {
         public void onClick(View v) {
             //TODO übergeben welcher Match übergeben wird
+            //TODO in der CalendarView die MatchingID oder so was überprüfen
             startActivity(new Intent(getActivity(), CalendarActivity.class));
         }
     };
@@ -298,49 +284,50 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     public void apartmentPopUp() {
         View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_apartment, null);
         apartmentPriceTextView = (TextView) customView.findViewById(R.id.apartmentPriceTextView);
-        apartmentPriceTextView.setText(getApartmentPrice() + " €");
+        apartmentPriceTextView.setText(userState.getApartmentProfile().getPrice() + " €");
         apartmentSizeTextView = (TextView) customView.findViewById(R.id.apartmentSizeTextView);
-        apartmentSizeTextView.setText(getApartmentSize() + " m2");
+        apartmentSizeTextView.setText(userState.getApartmentProfile().getApartmentSize() + " m2");
         apartmentZipCodeTextView = (TextView) customView.findViewById(R.id.apartmentZIPCODETextView);
-        apartmentZipCodeTextView.setText(getApartmentZipCode() + "");
+        apartmentZipCodeTextView.setText(userState.getApartmentProfile().getApartmentLocation().getZipCode() + "");
         apartmentCityTextView = (TextView) customView.findViewById(R.id.apartmentCITYTextView);
-        apartmentCityTextView.setText(getApartmentCity());
+        apartmentCityTextView.setText(userState.getApartmentProfile().getApartmentLocation().getCity());
         apartmentStateTextView = (TextView) customView.findViewById(R.id.apartmentSTATETextView);
-        apartmentStateTextView.setText(getApartmentState());
+        apartmentStateTextView.setText(userState.getApartmentProfile().getApartmentLocation().getState());
         apartmentCountryTextView = (TextView) customView.findViewById(R.id.apartmentCOUNTRYTextView);
-        apartmentCountryTextView.setText(getApartmentCountry());
+        apartmentCountryTextView.setText(userState.getApartmentProfile().getApartmentLocation().getCountry());
         apartmentImageView = (ImageView) customView.findViewById(R.id.apartmentInfoImageView);
+        /* TODO Image
         if (getApartmentImage() == null) {
             apartmentImageView.setImageResource(apartment_default);
         } else {
             apartmentImageView.setImageBitmap(getApartmentImage());
-        }
+        }*/
         internetImageView = (ImageView) customView.findViewById(R.id.internetThumb);
-        if (getInternet()) {
+        if (userState.getApartmentProfile().hasInternet()) {
             internetImageView.setImageResource(thumb_up_icon);
         } else {
             internetImageView.setImageResource(thumb_down_icon);
         }
         smokerImageView = (ImageView) customView.findViewById(R.id.smokerThumb);
-        if (getSmoker()) {
+        if (userState.getApartmentProfile().isSmokerApartment()) {
             smokerImageView.setImageResource(thumb_up_icon);
         } else {
             smokerImageView.setImageResource(thumb_down_icon);
         }
         petsImageView = (ImageView) customView.findViewById(R.id.petsThumb);
-        if (getPets()) {
+        if (userState.getApartmentProfile().hasPets()) {
             petsImageView.setImageResource(thumb_up_icon);
         } else {
             petsImageView.setImageResource(thumb_down_icon);
         }
         washingMashineImageView = (ImageView) customView.findViewById(R.id.washingMashineThumb);
-        if (getWashingMashine()) {
+        if (userState.getApartmentProfile().hasWashingMachine()) {
             washingMashineImageView.setImageResource(thumb_up_icon);
         } else {
             washingMashineImageView.setImageResource(thumb_down_icon);
         }
         purposeImageView = (ImageView) customView.findViewById(R.id.purpseThumb);
-        if (getPurpose()) {
+        if (userState.getApartmentProfile().isPurposeApartment()) {
             purposeImageView.setImageResource(thumb_up_icon);
         } else {
             purposeImageView.setImageResource(thumb_down_icon);
@@ -366,37 +353,38 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     public void tenantPopUp() {
         View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_tenant, null);
         tenantImageView = (ImageView) customView.findViewById(R.id.tenantInfoImageView);
+        /* TODO Image
         if (getTenantImage() == null) {
             tenantImageView.setImageResource(tenant_default);
         } else {
             tenantImageView.setImageBitmap(getTenantImage());
-        }
+        }*/
         tenantNameTextView = (TextView) customView.findViewById(R.id.tenantNameTextView);
-        tenantNameTextView.setText(getTenantName());
+        tenantNameTextView.setText(userState.getTenantProfile().getFirstName());
         tenantAgeTextView = (TextView) customView.findViewById(R.id.tenantAgeTextView2);
-        tenantAgeTextView.setText(getTenantAge() + "");
+        tenantAgeTextView.setText(userState.getTenantProfile().getAge() + "");
         tenantGenderImageView = (ImageView) customView.findViewById(R.id.genderThumb);
-        if (getTenantGender() == 0) {
+        if (userState.getTenantProfile().getGender() == 0) {
             tenantGenderImageView.setImageResource(male_icon);
         } else {
             tenantGenderImageView.setImageResource(female_icon);
         }
         tenantSmokerImageView = (ImageView) customView.findViewById(R.id.smokerThumb);
-        if (getTenantSmoker()) {
+        if (userState.getTenantProfile().isSmoker()) {
             tenantSmokerImageView.setImageResource(thumb_up_icon);
         } else {
             tenantSmokerImageView.setImageResource(thumb_down_icon);
         }
         tenantPetsImageView = (ImageView) customView.findViewById(R.id.petsThumb);
-        if (getTenantPets()) {
+        if (userState.getTenantProfile().hasPets()) {
             tenantPetsImageView.setImageResource(thumb_up_icon);
         } else {
             tenantPetsImageView.setImageResource(thumb_down_icon);
         }
         tenantOccupationTextView = (TextView) customView.findViewById(R.id.tenantOccupationTextView);
-        tenantOccupationTextView.setText(getTenantOccupation());
+        tenantOccupationTextView.setText(userState.getTenantProfile().getOccupation());
         tenantInfoTextView = (TextView) customView.findViewById(R.id.tenantInfoTextView);
-        tenantInfoTextView.setText(getTenantInfo());
+        tenantInfoTextView.setText(userState.getTenantProfile().getShortBio());
         mPopupWindow = new PopupWindow(
                 customView,
                 LayoutParams.MATCH_PARENT,
@@ -410,166 +398,6 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
             }
         });
         mPopupWindow.showAtLocation(mFrameLayout, Gravity.CENTER, 0, 0);
-    }
-
-    public int getApartmentPrice() {
-        return apartmentPrice;
-    }
-
-    public void setApartmentPrice(int apartmentPrice) {
-        this.apartmentPrice = apartmentPrice;
-    }
-
-    public int getApartmentSize() {
-        return apartmentSize;
-    }
-
-    public void setApartmentSize(int apartmentSize) {
-        this.apartmentSize = apartmentSize;
-    }
-
-    public int getApartmentZipCode() {
-        return apartmentZipCode;
-    }
-
-    public void setApartmentZipCode(int apartmentZipCode) {
-        this.apartmentZipCode = apartmentZipCode;
-    }
-
-    public String getApartmentCity() {
-        return apartmentCity;
-    }
-
-    public void setApartmentCity(String apartmentCity) {
-        this.apartmentCity = apartmentCity;
-    }
-
-    public String getApartmentState() {
-        return apartmentState;
-    }
-
-    public void setApartmentState(String apartmentState) {
-        this.apartmentState = apartmentState;
-    }
-
-    public String getApartmentCountry() {
-        return apartmentCountry;
-    }
-
-    public void setApartmentCountry(String apartmentCountry) {
-        this.apartmentCountry = apartmentCountry;
-    }
-
-    public Bitmap getApartmentImage() {
-        return apartmentImage;
-    }
-
-    public void setApartmentImage(Bitmap apartmentImage) {
-        this.apartmentImage = apartmentImage;
-    }
-
-    public Boolean getInternet() {
-        return internet;
-    }
-
-    public void setInternet(Boolean internet) {
-        this.internet = internet;
-    }
-
-    public Boolean getSmoker() {
-        return smoker;
-    }
-
-    public void setSmoker(Boolean smoker) {
-        this.smoker = smoker;
-    }
-
-    public Boolean getPets() {
-        return pets;
-    }
-
-    public void setPets(Boolean pets) {
-        this.pets = pets;
-    }
-
-    public Boolean getWashingMashine() {
-        return washingMashine;
-    }
-
-    public void setWashingMashine(Boolean washingMashine) {
-        this.washingMashine = washingMashine;
-    }
-
-    public Boolean getPurpose() {
-        return purpose;
-    }
-
-    public void setPurpose(Boolean purpose) {
-        this.purpose = purpose;
-    }
-
-    public Bitmap getTenantImage() {
-        return tenantImage;
-    }
-
-    public void setTenantImage(Bitmap tenantImage) {
-        this.tenantImage = tenantImage;
-    }
-
-    public String getTenantInfo() {
-        return tenantInfo;
-    }
-
-    public void setTenantInfo(String tenantInfo) {
-        this.tenantInfo = tenantInfo;
-    }
-
-    public String getTenantOccupation() {
-        return tenantOccupation;
-    }
-
-    public void setTenantOccupation(String tenantOccupation) {
-        this.tenantOccupation = tenantOccupation;
-    }
-
-    public int getTenantAge() {
-        return tenantAge;
-    }
-
-    public void setTenantAge(int tenantAge) {
-        this.tenantAge = tenantAge;
-    }
-
-    public String getTenantName() {
-        return tenantName;
-    }
-
-    public void setTenantName(String tenantName) {
-        this.tenantName = tenantName;
-    }
-
-    public int getTenantGender() {
-        return tenantGender;
-    }
-
-    public void setTenantGender(int tenantGender) {
-        this.tenantGender = tenantGender;
-    }
-
-    public Boolean getTenantSmoker() {
-        return tenantSmoker;
-    }
-
-    public void setTenantSmoker(Boolean tenantSmoker) {
-        this.tenantSmoker = tenantSmoker;
-    }
-
-    public Boolean getTenantPets() {
-        return tenantPets;
-    }
-
-    public void setTenantPets(Boolean tenantPets) {
-        this.tenantPets = tenantPets;
     }
 
     public void bindView(View view) {

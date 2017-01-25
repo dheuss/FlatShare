@@ -187,9 +187,18 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         deleteButton.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.clear_icon));
         deleteButton.setOnClickListener(myDeleteHandler);
 
-
         row.addView(dateText);
         row.addView(deleteButton);
+
+        TableRow.LayoutParams paramsText = (TableRow.LayoutParams) dateText.getLayoutParams();
+        paramsText.setMargins(10, 0, 10, 0);
+        paramsText.weight = 1;
+        paramsText.width = TableRow.LayoutParams.FILL_PARENT;
+        dateText.setLayoutParams(paramsText);
+
+        TableRow.LayoutParams paramsDelete = (TableRow.LayoutParams) deleteButton.getLayoutParams();
+        paramsDelete.setMargins(0, 0, 0, 0);
+        deleteButton.setLayoutParams(paramsDelete);
 
         dateOverview.addView(row, dateList.size() - 1);
 

@@ -6,9 +6,6 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.domain.interactors.matchingoverview.MatchingOverviewInteractor;
 
-/**
- * Created by david on 15.01.2017.
- */
 
 public class MatchingOverviewInteractorImpl extends AbstractInteractor implements MatchingOverviewInteractor {
 
@@ -44,6 +41,7 @@ public class MatchingOverviewInteractorImpl extends AbstractInteractor implement
     @Override
     public void execute() {
         Log.v(TAG, "execute methode called in MatchingOverviewInteractorImpl");
+
         notifySuccess();
     }
 }
