@@ -76,16 +76,21 @@ public class QRScannerInteractorImpl extends AbstractInteractor implements QRSca
                     notifyError("No Roommateprofile found with id: " + roommateId);
                 } else {
                     String availabilityPath = databaseRoot.getRoommateProfileNode(roommateId).getAvailable();
-                    mDatabase.child(availabilityPath).setValue(false, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                            if (databaseError == null) {
-                                notifySuccess(new Pair<String,String>(roommateProfile.getRoommateId(),roommateProfile.getNickname()));
-                            } else {
-                                notifyError(databaseError.getMessage());
-                            }
-                        }
-                    });
+
+                    //test
+                    notifySuccess(new Pair<>(roommateProfile.getRoommateId(), roommateProfile.getNickname()));
+                    //
+
+//                    mDatabase.child(availabilityPath).setValue(false, new DatabaseReference.CompletionListener() {
+//                        @Override
+//                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+//                            if (databaseError == null) {
+//                                notifySuccess(new Pair<>(roommateProfile.getRoommateId(), roommateProfile.getNickname()));
+//                            } else {
+//                                notifyError(databaseError.getMessage());
+//                            }
+//                        }
+//                    });
                 }
             }
 

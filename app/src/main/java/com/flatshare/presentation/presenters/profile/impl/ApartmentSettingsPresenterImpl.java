@@ -10,6 +10,8 @@ import com.flatshare.domain.interactors.profile.impl.ApartmentSettingsInteractor
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 import com.flatshare.presentation.presenters.profile.ApartmentSettingsPresenter;
 
+import java.util.List;
+
 /**
  * Created by Arber on 11/12/2016.
  */
@@ -41,9 +43,9 @@ public class ApartmentSettingsPresenterImpl extends AbstractPresenter implements
     @Override
     public void sendFilterSettings(ApartmentFilterSettings apartmentFilterSettings) {
         mView.showProgress();
-
+        List<String> roommateIds = userState.getApartmentProfile().getRoommateIds();
         String apartmentId = userState.getRoommateProfile().getApartmentId();
-        FilterSettingsInteractor interactor = new ApartmentSettingsInteractorImpl(mMainThread, this, apartmentId, apartmentFilterSettings);
+        FilterSettingsInteractor interactor = new ApartmentSettingsInteractorImpl(mMainThread, this, apartmentId, apartmentFilterSettings, roommateIds);
         interactor.execute();
     }
 

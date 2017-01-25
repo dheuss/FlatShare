@@ -10,6 +10,6 @@ public interface RoommateQRInteractor extends Interactor{
     interface Callback {
 
         void notifyError(String errorMessage);
-        void onCodeRead(String apartmentId);
+        void onCodeRead();
     }
 }

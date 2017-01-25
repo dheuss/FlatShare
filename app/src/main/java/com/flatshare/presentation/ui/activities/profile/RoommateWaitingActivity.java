@@ -28,6 +28,8 @@ public class RoommateWaitingActivity extends AbstractActivity implements Roommat
                 this
         );
 
+        mPresenter.listenToDB();
+
 //        Bundle b = getIntent().getExtras();
 //        String apartmentId;
 //        if (b != null) {
