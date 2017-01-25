@@ -5,9 +5,6 @@ import com.flatshare.domain.interactors.matchingoverview.MatchingOverviewInterac
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 import com.flatshare.presentation.presenters.matchingoverview.MatchingOverviewPresenter;
 
-/**
- * Created by david on 15.01.2017.
- */
 
 public class MatchingOverviewPresenterImpl extends AbstractPresenter implements MatchingOverviewPresenter,
         MatchingOverviewInteractor.Callback{
@@ -53,5 +50,10 @@ public class MatchingOverviewPresenterImpl extends AbstractPresenter implements 
     @Override
     public void onError(String message) {
         mView.showError(message);
+    }
+
+    @Override
+    public void deleteMatch() {
+
     }
 }

@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -178,7 +179,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
         row.setLayoutParams(lp);
         TextView dateText = new TextView(this);
-        Button deleteButton = new Button(this);
+        ImageButton deleteButton = new ImageButton(this);
 
         dateText.setText(dateList.get(dateList.size() - 1) + " " + timeList.get(timeList.size() - 1));
 
@@ -210,11 +211,11 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
                         for (int j = 0; j < row.getChildCount(); j++) {
                             View elementView = row.getChildAt(j);
 
-                            if (elementView instanceof Button) {
-                                Button currentButton = (Button) elementView;
+                            if (elementView instanceof ImageButton) {
+                                ImageButton currentButton = (ImageButton) elementView;
 
                                 View buttonViewNext = rowNext.getChildAt(1);
-                                Button buttonNext = (Button) buttonViewNext;
+                                ImageButton buttonNext = (ImageButton) buttonViewNext;
 
                                 View textViewNext = rowNext.getChildAt(0);
                                 TextView nextDateText = (TextView) textViewNext;
@@ -244,8 +245,8 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
                         for (int j = 0; j < row.getChildCount(); j++) {
                             View elementView = row.getChildAt(j);
 
-                            if (elementView instanceof Button) {
-                                Button currentButton = (Button) elementView;
+                            if (elementView instanceof ImageButton) {
+                                ImageButton currentButton = (ImageButton) elementView;
 
                                 View textView = row.getChildAt(0);
                                 TextView currentDateText = (TextView) textView;

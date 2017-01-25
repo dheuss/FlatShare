@@ -1,22 +1,29 @@
 package com.flatshare.presentation.ui.activities.matchingoverview;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.ViewGroup.LayoutParams;
+
 
 import com.flatshare.R;
 
+import com.flatshare.domain.datatypes.enums.ProfileType;
+import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.matchingoverview.MatchingOverviewPresenter;
 import com.flatshare.presentation.presenters.matchingoverview.impl.MatchingOverviewPresenterImpl;
 import com.flatshare.presentation.ui.AbstractFragmentActivity;
@@ -26,22 +33,53 @@ import com.flatshare.threading.MainThreadImpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.flatshare.R.drawable.apartment_default;
+import static com.flatshare.R.drawable.female_icon;
+import static com.flatshare.R.drawable.male_icon;
+import static com.flatshare.R.drawable.tenant_default;
+import static com.flatshare.R.drawable.thumb_down_icon;
+import static com.flatshare.R.drawable.thumb_up_icon;
+
+
 public class MatchingOverviewActivity extends AbstractFragmentActivity implements MatchingOverviewPresenter.View {
+
+    private UserState userState;
+
+
+    //ApartmentPopUp
+    private TextView apartmentPriceTextView, apartmentSizeTextView, apartmentZipCodeTextView, apartmentCityTextView, apartmentStateTextView, apartmentCountryTextView;
+    private ImageView apartmentImageView, internetImageView, smokerImageView, petsImageView, washingMashineImageView, purposeImageView;
+    private int apartmentPrice, apartmentSize, apartmentZipCode;
+    private String apartmentCity, apartmentState, apartmentCountry;
+    private Bitmap apartmentImage;
+    private Boolean internet, smoker, pets, washingMashine, purpose;
+
+    //TenantPopUp
+    private TextView tenantNameTextView, tenantAgeTextView, tenantOccupationTextView, tenantInfoTextView;
+    private ImageView tenantGenderImageView, tenantSmokerImageView, tenantPetsImageView, tenantImageView;
+    private String tenantName, tenantOccupation, tenantInfo;
+    private int tenantAge;
+    private Bitmap tenantImage;
+    private int tenantGender;
+    private Boolean tenantSmoker, tenantPets;
+
+    private ImageButton closeButton;
 
     private ProgressBar progressBar;
 
+    private PopupWindow mPopupWindow;
+    private FrameLayout mFrameLayout;
 
     private static final String TAG = "MatchingOverviewActivity";
 
     private MatchingOverviewPresenter mPresenter;
     private TableLayout matchingOverview;
-    private int elementHeight;
-    private int elementWidth;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        userState = UserState.getInstance();
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -57,6 +95,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                 this
         );
 
+
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
         }
@@ -67,11 +106,10 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
         for (int i = 0; i < 15; i++) {
 
-            testList.add("Match: " + i);
-            imageTest.add(R.drawable.tenant_default);
+            testList.add("Match:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX " + i);
+            imageTest.add(tenant_default);
         }
         generateMatchingOverview(testList, imageTest);
-
 
         return view;
     }
@@ -81,59 +119,69 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
         for (int i = 0; i < matchingTitleList.size(); i++) {
 
             TableRow row = new TableRow(this.getActivity());
-            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT);
             row.setLayoutParams(lp);
 
             TextView matchingText = new TextView(this.getActivity());
             ImageView matchingImage = new ImageView(this.getActivity());
-            Button matchingCalendar = new Button(this.getActivity());
-            Button deleteButton = new Button(this.getActivity());
+            ImageButton matchingCalendar = new ImageButton(this.getActivity());
+            ImageButton deleteButton = new ImageButton(this.getActivity());
+            ImageButton infoButton = new ImageButton(this.getActivity());
 
             matchingImage.setImageResource(matchingImageList.get(i)); // TODO set image
-            //matchingImage.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams., ViewGroup.LayoutParams.MATCH_PARENT));
 
             matchingText.setText(matchingTitleList.get(i));
-            //matchingText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            //matchingText.setSingleLine(false);
 
             matchingCalendar.setVisibility(View.VISIBLE);
             matchingCalendar.setBackground(getResources().getDrawable(R.drawable.calendar_icon));
             matchingCalendar.setOnClickListener(myCalendarHandler);
-            //matchingCalendar.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             deleteButton.setVisibility(View.VISIBLE);
             deleteButton.setBackground(getResources().getDrawable(R.drawable.clear_icon));
             deleteButton.setOnClickListener(myDeleteHandler);
-            //deleteButton.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-            int buttonWidth = 120;
-            int buttonHeight =120;
-
-
-            //Toast.makeText(this.getActivity(), "Sandro "  + buttonWidth, Toast.LENGTH_SHORT).show();
-
+            infoButton.setVisibility(View.VISIBLE);
+            infoButton.setBackground(getResources().getDrawable(R.drawable.info_icon));
+            infoButton.setOnClickListener(myInfoHandler);
 
             row.addView(matchingImage);
             row.addView(matchingText);
+            row.addView(infoButton);
             row.addView(matchingCalendar);
             row.addView(deleteButton);
 
-            TableRow.LayoutParams paramsImage = (TableRow.LayoutParams)matchingImage.getLayoutParams();
-            paramsImage.setMargins(20,0,20,0);
-            paramsImage.width = buttonWidth;
-            paramsImage.height = buttonHeight;
+            TableRow.LayoutParams paramsImage = (TableRow.LayoutParams) matchingImage.getLayoutParams();
+            paramsImage.setMargins(10, 1, 10, 1);
+            paramsImage.width = 90;
+            paramsImage.height = 90;
             matchingCalendar.setLayoutParams(paramsImage);
 
-            TableRow.LayoutParams paramsText = (TableRow.LayoutParams)matchingText.getLayoutParams();
-            paramsText.setMargins(20,0,20,0);
-            paramsImage.width = buttonWidth;
-            paramsImage.height = buttonHeight;
+            TableRow.LayoutParams paramsText = (TableRow.LayoutParams) matchingText.getLayoutParams();
+            paramsText.setMargins(10, 0, 10, 0);
+            paramsText.weight = 1;
+            //paramsImage.width = 0;
+            //paramsImage.height = buttonHeight;
             matchingText.setLayoutParams(paramsText);
 
-            TableRow.LayoutParams paramsCalendar = (TableRow.LayoutParams)matchingCalendar.getLayoutParams();
-            paramsCalendar.setMargins(20,0,20,0);
-            paramsImage.width = buttonWidth;
-            paramsImage.height = buttonHeight;
+            TableRow.LayoutParams paramsCalendar = (TableRow.LayoutParams) matchingCalendar.getLayoutParams();
+            paramsCalendar.setMargins(0, 0, 0, 0);
+            //paramsImage.width = buttonWidth;
+            //paramsImage.height = buttonHeight;
             matchingCalendar.setLayoutParams(paramsCalendar);
+
+            TableRow.LayoutParams paramsDelete = (TableRow.LayoutParams) deleteButton.getLayoutParams();
+            paramsDelete.setMargins(0, 0, 0, 0);
+            //paramsImage.width = buttonWidth;
+            //paramsImage.height = buttonHeight;
+            matchingCalendar.setLayoutParams(paramsDelete);
+
+            TableRow.LayoutParams paramsInfo = (TableRow.LayoutParams) infoButton.getLayoutParams();
+            paramsInfo.setMargins(0, 0, 0, 0);
+            //paramsImage.width = buttonWidth;
+            //paramsImage.height = buttonHeight;
+            matchingCalendar.setLayoutParams(paramsInfo);
+
 
             matchingOverview.addView(row, i);
         }
@@ -144,6 +192,16 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
         public void onClick(View v) {
             //TODO übergeben welcher Match übergeben wird
             startActivity(new Intent(getActivity(), CalendarActivity.class));
+        }
+    };
+
+    View.OnClickListener myInfoHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+            if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
+                apartmentPopUp();
+            } else {
+                tenantPopUp();
+            }
         }
     };
 
@@ -162,14 +220,14 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                         for (int j = 0; j < row.getChildCount(); j++) {
                             View elementView = row.getChildAt(j);
 
-                            if (elementView instanceof Button) {
-                                Button currentButton = (Button) elementView;
+                            if (elementView instanceof ImageButton) {
+                                ImageButton currentButton = (ImageButton) elementView;
 
                                 View buttonViewNext = rowNext.getChildAt(3);
-                                Button buttonNext = (Button) buttonViewNext;
+                                ImageButton buttonNext = (ImageButton) buttonViewNext;
 
                                 View calendarButtonNextView = rowNext.getChildAt(2);
-                                Button nextCalendarButton = (Button) calendarButtonNextView;
+                                ImageButton nextCalendarButton = (ImageButton) calendarButtonNextView;
 
                                 View textViewNext = rowNext.getChildAt(1);
                                 TextView nextDateText = (TextView) textViewNext;
@@ -185,8 +243,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
                                 if (currentButton == v) {
                                     //TODO semd gelöschtest zu firebase
-                                    //dateList.remove(i);
-                                    //timeList.remove(i);
+                                    mPresenter.deleteMatch();
                                     currentDateText.setText(nextDateText.getText());
                                     currentImageView.setImageDrawable(nextImageView.getDrawable());
                                     nextImageView.setVisibility(View.GONE);
@@ -209,22 +266,21 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                         for (int j = 0; j < row.getChildCount(); j++) {
                             View elementView = row.getChildAt(j);
 
-                            if (elementView instanceof Button) {
-                                Button currentButton = (Button) elementView;
+                            if (elementView instanceof ImageButton) {
+                                ImageButton currentButton = (ImageButton) elementView;
 
                                 View textView = row.getChildAt(1);
                                 TextView currentDateText = (TextView) textView;
 
                                 View calendarButtonCurrentView = row.getChildAt(2);
-                                Button currentCalendarButton = (Button) calendarButtonCurrentView;
+                                ImageButton currentCalendarButton = (ImageButton) calendarButtonCurrentView;
 
                                 View imageView = row.getChildAt(0);
                                 ImageView currentImageView = (ImageView) imageView;
 
                                 if (currentButton == v) {
                                     //TODO senden an Firebase
-                                    //dateList.remove(i);
-                                    //timeList.remove(i);
+                                    mPresenter.deleteMatch();
                                     currentDateText.setText("");
                                     currentCalendarButton.setVisibility(View.GONE);
                                     currentButton.setVisibility(View.GONE);
@@ -238,6 +294,283 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
             }
         }
     };
+
+    public void apartmentPopUp() {
+        View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_apartment, null);
+        apartmentPriceTextView = (TextView) customView.findViewById(R.id.apartmentPriceTextView);
+        apartmentPriceTextView.setText(getApartmentPrice() + " €");
+        apartmentSizeTextView = (TextView) customView.findViewById(R.id.apartmentSizeTextView);
+        apartmentSizeTextView.setText(getApartmentSize() + " m2");
+        apartmentZipCodeTextView = (TextView) customView.findViewById(R.id.apartmentZIPCODETextView);
+        apartmentZipCodeTextView.setText(getApartmentZipCode() + "");
+        apartmentCityTextView = (TextView) customView.findViewById(R.id.apartmentCITYTextView);
+        apartmentCityTextView.setText(getApartmentCity());
+        apartmentStateTextView = (TextView) customView.findViewById(R.id.apartmentSTATETextView);
+        apartmentStateTextView.setText(getApartmentState());
+        apartmentCountryTextView = (TextView) customView.findViewById(R.id.apartmentCOUNTRYTextView);
+        apartmentCountryTextView.setText(getApartmentCountry());
+        apartmentImageView = (ImageView) customView.findViewById(R.id.apartmentInfoImageView);
+        if (getApartmentImage() == null) {
+            apartmentImageView.setImageResource(apartment_default);
+        } else {
+            apartmentImageView.setImageBitmap(getApartmentImage());
+        }
+        internetImageView = (ImageView) customView.findViewById(R.id.internetThumb);
+        if (getInternet()) {
+            internetImageView.setImageResource(thumb_up_icon);
+        } else {
+            internetImageView.setImageResource(thumb_down_icon);
+        }
+        smokerImageView = (ImageView) customView.findViewById(R.id.smokerThumb);
+        if (getSmoker()) {
+            smokerImageView.setImageResource(thumb_up_icon);
+        } else {
+            smokerImageView.setImageResource(thumb_down_icon);
+        }
+        petsImageView = (ImageView) customView.findViewById(R.id.petsThumb);
+        if (getPets()) {
+            petsImageView.setImageResource(thumb_up_icon);
+        } else {
+            petsImageView.setImageResource(thumb_down_icon);
+        }
+        washingMashineImageView = (ImageView) customView.findViewById(R.id.washingMashineThumb);
+        if (getWashingMashine()) {
+            washingMashineImageView.setImageResource(thumb_up_icon);
+        } else {
+            washingMashineImageView.setImageResource(thumb_down_icon);
+        }
+        purposeImageView = (ImageView) customView.findViewById(R.id.purpseThumb);
+        if (getPurpose()) {
+            purposeImageView.setImageResource(thumb_up_icon);
+        } else {
+            purposeImageView.setImageResource(thumb_down_icon);
+        }
+        mPopupWindow = new PopupWindow(
+                customView,
+                LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT
+        );
+        closeButton = (ImageButton) customView.findViewById(R.id.ib_close);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPopupWindow.dismiss();
+            }
+        });
+
+        //Todo Google Maps
+
+        mPopupWindow.showAtLocation(mFrameLayout, Gravity.CENTER, 0, 0);
+    }
+
+    public void tenantPopUp() {
+        View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_tenant, null);
+        tenantImageView = (ImageView) customView.findViewById(R.id.tenantInfoImageView);
+        if (getTenantImage() == null) {
+            tenantImageView.setImageResource(tenant_default);
+        } else {
+            tenantImageView.setImageBitmap(getTenantImage());
+        }
+        tenantNameTextView = (TextView) customView.findViewById(R.id.tenantNameTextView);
+        tenantNameTextView.setText(getTenantName());
+        tenantAgeTextView = (TextView) customView.findViewById(R.id.tenantAgeTextView2);
+        tenantAgeTextView.setText(getTenantAge() + "");
+        tenantGenderImageView = (ImageView) customView.findViewById(R.id.genderThumb);
+        if (getTenantGender() == 0) {
+            tenantGenderImageView.setImageResource(male_icon);
+        } else {
+            tenantGenderImageView.setImageResource(female_icon);
+        }
+        tenantSmokerImageView = (ImageView) customView.findViewById(R.id.smokerThumb);
+        if (getTenantSmoker()) {
+            tenantSmokerImageView.setImageResource(thumb_up_icon);
+        } else {
+            tenantSmokerImageView.setImageResource(thumb_down_icon);
+        }
+        tenantPetsImageView = (ImageView) customView.findViewById(R.id.petsThumb);
+        if (getTenantPets()) {
+            tenantPetsImageView.setImageResource(thumb_up_icon);
+        } else {
+            tenantPetsImageView.setImageResource(thumb_down_icon);
+        }
+        tenantOccupationTextView = (TextView) customView.findViewById(R.id.tenantOccupationTextView);
+        tenantOccupationTextView.setText(getTenantOccupation());
+        tenantInfoTextView = (TextView) customView.findViewById(R.id.tenantInfoTextView);
+        tenantInfoTextView.setText(getTenantInfo());
+        mPopupWindow = new PopupWindow(
+                customView,
+                LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT
+        );
+        ImageButton closeButton = (ImageButton) customView.findViewById(R.id.ib_close);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPopupWindow.dismiss();
+            }
+        });
+        mPopupWindow.showAtLocation(mFrameLayout, Gravity.CENTER, 0, 0);
+    }
+
+    public int getApartmentPrice() {
+        return apartmentPrice;
+    }
+
+    public void setApartmentPrice(int apartmentPrice) {
+        this.apartmentPrice = apartmentPrice;
+    }
+
+    public int getApartmentSize() {
+        return apartmentSize;
+    }
+
+    public void setApartmentSize(int apartmentSize) {
+        this.apartmentSize = apartmentSize;
+    }
+
+    public int getApartmentZipCode() {
+        return apartmentZipCode;
+    }
+
+    public void setApartmentZipCode(int apartmentZipCode) {
+        this.apartmentZipCode = apartmentZipCode;
+    }
+
+    public String getApartmentCity() {
+        return apartmentCity;
+    }
+
+    public void setApartmentCity(String apartmentCity) {
+        this.apartmentCity = apartmentCity;
+    }
+
+    public String getApartmentState() {
+        return apartmentState;
+    }
+
+    public void setApartmentState(String apartmentState) {
+        this.apartmentState = apartmentState;
+    }
+
+    public String getApartmentCountry() {
+        return apartmentCountry;
+    }
+
+    public void setApartmentCountry(String apartmentCountry) {
+        this.apartmentCountry = apartmentCountry;
+    }
+
+    public Bitmap getApartmentImage() {
+        return apartmentImage;
+    }
+
+    public void setApartmentImage(Bitmap apartmentImage) {
+        this.apartmentImage = apartmentImage;
+    }
+
+    public Boolean getInternet() {
+        return internet;
+    }
+
+    public void setInternet(Boolean internet) {
+        this.internet = internet;
+    }
+
+    public Boolean getSmoker() {
+        return smoker;
+    }
+
+    public void setSmoker(Boolean smoker) {
+        this.smoker = smoker;
+    }
+
+    public Boolean getPets() {
+        return pets;
+    }
+
+    public void setPets(Boolean pets) {
+        this.pets = pets;
+    }
+
+    public Boolean getWashingMashine() {
+        return washingMashine;
+    }
+
+    public void setWashingMashine(Boolean washingMashine) {
+        this.washingMashine = washingMashine;
+    }
+
+    public Boolean getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(Boolean purpose) {
+        this.purpose = purpose;
+    }
+
+    public Bitmap getTenantImage() {
+        return tenantImage;
+    }
+
+    public void setTenantImage(Bitmap tenantImage) {
+        this.tenantImage = tenantImage;
+    }
+
+    public String getTenantInfo() {
+        return tenantInfo;
+    }
+
+    public void setTenantInfo(String tenantInfo) {
+        this.tenantInfo = tenantInfo;
+    }
+
+    public String getTenantOccupation() {
+        return tenantOccupation;
+    }
+
+    public void setTenantOccupation(String tenantOccupation) {
+        this.tenantOccupation = tenantOccupation;
+    }
+
+    public int getTenantAge() {
+        return tenantAge;
+    }
+
+    public void setTenantAge(int tenantAge) {
+        this.tenantAge = tenantAge;
+    }
+
+    public String getTenantName() {
+        return tenantName;
+    }
+
+    public void setTenantName(String tenantName) {
+        this.tenantName = tenantName;
+    }
+
+    public int getTenantGender() {
+        return tenantGender;
+    }
+
+    public void setTenantGender(int tenantGender) {
+        this.tenantGender = tenantGender;
+    }
+
+    public Boolean getTenantSmoker() {
+        return tenantSmoker;
+    }
+
+    public void setTenantSmoker(Boolean tenantSmoker) {
+        this.tenantSmoker = tenantSmoker;
+    }
+
+    public Boolean getTenantPets() {
+        return tenantPets;
+    }
+
+    public void setTenantPets(Boolean tenantPets) {
+        this.tenantPets = tenantPets;
+    }
 
     public void bindView(View view) {
         matchingOverview = (TableLayout) view.findViewById(R.id.matchingOverview);

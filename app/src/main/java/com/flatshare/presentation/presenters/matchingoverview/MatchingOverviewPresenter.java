@@ -9,6 +9,8 @@ import com.flatshare.presentation.ui.BaseView;
 
 public interface MatchingOverviewPresenter extends BasePresenter {
 
+    void deleteMatch();
+
     interface View extends BaseView {
 
     }
