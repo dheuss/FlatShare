@@ -101,7 +101,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
         List<String> matchingTitleList = new ArrayList<>();
         List<Integer> matchingImageList = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
-            matchingTitleList.add(i + " This should be a Title for the hole shit!");
+            matchingTitleList.add(i + " What the Fuck this is a title");
             matchingImageList.add(R.drawable.tenant_default);
         }
         generateMatchingOverview(matchingTitleList, matchingImageList);
