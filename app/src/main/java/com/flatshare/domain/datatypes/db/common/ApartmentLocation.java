@@ -29,9 +29,6 @@ public class ApartmentLocation implements DatabaseItem {
     @PropertyName("zip_code")
     public int zipCode;
 
-    @PropertyName("house_nr")
-    private String houseNr;
-
     public ApartmentLocation() {
         this.city = "Munich";
         this.state = "Bavaria";
@@ -39,7 +36,6 @@ public class ApartmentLocation implements DatabaseItem {
         this.district = "Schwabing";
         this.street = "someStreet";
         this.zipCode = 80805;
-        this.houseNr = "16";
     }
 
     @Exclude
@@ -80,16 +76,6 @@ public class ApartmentLocation implements DatabaseItem {
     @Exclude
     public void setZipCode(int zipCode) {
         this.zipCode = zipCode;
-    }
-
-    @Exclude
-    public void setHouseNr(String houseNr) {
-        this.houseNr = houseNr;
-    }
-
-    @Exclude
-    public String getHouseNr() {
-        return houseNr;
     }
 
     @Exclude

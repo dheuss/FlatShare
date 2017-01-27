@@ -8,10 +8,6 @@ import com.google.firebase.database.PropertyName;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Arber on 06/12/2016.
- */
-
 public class TenantProfile extends UserProfile {
 
     @PropertyName("tenant_filter_settings")
@@ -44,12 +40,6 @@ public class TenantProfile extends UserProfile {
     @PropertyName("short_bio")
     public String shortBio;
 
-    @PropertyName("duration_of_stay")
-    public int durationOfStay;
-
-    @PropertyName("hobbies")
-    public List<String> hobbies;
-
     @PropertyName("pets")
     public boolean pets;
 
@@ -70,12 +60,8 @@ public class TenantProfile extends UserProfile {
     public boolean done;
 
     public TenantProfile() {
-
-//        this.tenantFilterSettings = new TenantFilterSettings();
-        this.hobbies = new ArrayList<>();
         this.apartmentsToShow = new ArrayList<>();
         this.matchedApartments = new ArrayList<>();
-
     }
 
     @Exclude
@@ -146,26 +132,6 @@ public class TenantProfile extends UserProfile {
     @Exclude
     public void setShortBio(String shortBio) {
         this.shortBio = shortBio;
-    }
-
-    @Exclude
-    public int getDurationOfStay() {
-        return durationOfStay;
-    }
-
-    @Exclude
-    public void setDurationOfStay(int durationOfStay) {
-        this.durationOfStay = durationOfStay;
-    }
-
-    @Exclude
-    public List<String> getHobbies() {
-        return hobbies;
-    }
-
-    @Exclude
-    public void setHobbies(List<String> hobbies) {
-        this.hobbies = hobbies;
     }
 
     @Exclude

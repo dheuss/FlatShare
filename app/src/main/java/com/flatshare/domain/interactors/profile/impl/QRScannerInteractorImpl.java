@@ -46,7 +46,7 @@ public class QRScannerInteractorImpl extends AbstractInteractor implements QRSca
     /**
      * callback method that posts message received into the main UI, through mainThread.post!!!
      *
-     * @param nickname
+     * @param idNicknamePair
      */
     private void notifySuccess(final Pair<String, String> idNicknamePair) {
         Log.d(TAG, "inside postMessage(String msg)");
@@ -76,16 +76,21 @@ public class QRScannerInteractorImpl extends AbstractInteractor implements QRSca
                     notifyError("No Roommateprofile found with id: " + roommateId);
                 } else {
                     String availabilityPath = databaseRoot.getRoommateProfileNode(roommateId).getAvailable();
-                    mDatabase.child(availabilityPath).setValue(false, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                            if (databaseError == null) {
-                                notifySuccess(new Pair<String,String>(roommateProfile.getRoommateId(),roommateProfile.getNickname()));
-                            } else {
-                                notifyError(databaseError.getMessage());
-                            }
-                        }
-                    });
+
+                    //test
+                    notifySuccess(new Pair<>(roommateProfile.getRoommateId(), roommateProfile.getNickname()));
+                    //
+
+//                    mDatabase.child(availabilityPath).setValue(false, new DatabaseReference.CompletionListener() {
+//                        @Override
+//                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+//                            if (databaseError == null) {
+//                                notifySuccess(new Pair<>(roommateProfile.getRoommateId(), roommateProfile.getNickname()));
+//                            } else {
+//                                notifyError(databaseError.getMessage());
+//                            }
+//                        }
+//                    });
                 }
             }
 

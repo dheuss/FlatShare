@@ -8,52 +8,31 @@
     <string name="hint_password">Enter password...</string>
     <string name="login_button">Login!</string>
     <string name="register">Register</string>
-    <string name="male">male</string>
-    <string name="female">female</string>
     <string name="smoker">Smoker:</string>
     <string name="age">Age:</string>
-    <string name="hint_firstname">firstname</string>
     <string name="done">Done!</string>
     <string name="tenant_profile_button">Create Tenant Profie</string>
     <string name="apartment_profile_button">Create Apartment Profile</string>
-    <string name="firstname_hint">Enter your name</string>
-    <string name="age_hint">Enter your age</string>
-    <string name="yes">yes</string>
-    <string name="no">no</string>
     <string name="gender">Gender:</string>
     <string name="internet">Internet:</string>
     <string name="washing_machine">Washing machine:</string>
     <string name="create_tenant_profile">Searching for an apartment</string>
-    <string name="create_apartment_profile_button">Create Apartment Profile</string>
-    <string name="join_apartment_profile_button">Join Apartment</string>
-    <string name="create_your_profile">Create Your Profile</string>
-    <string name="surname_primary_profile_textview">Name:</string>
     <string name="create_your_tenant_profile">Create Your Tenant Profile</string>
     <string name="take_picture_tenant_profile">Upload profile picture</string>
     <string name="done_1_tenant_profile">Done!</string>
     <string name="pets">Pets:</string>
     <string name="occupation">Occupation:</string>
     <string name="create_your_apartment_profile">Create Your Apartment Profile</string>
-    <string name="apartment_price">Price:</string>
-    <string name="apartment_area">Area:</string>
-    <string name="apartment_street">Street:</string>
-    <string name="apartment_house_nr">House Nr:</string>
     <string name="apartment_zip_code">Zip Code:</string>
-    <string name="short_bio">Short bio:</string>
     <string name="insert_your_bio">insert your short bio</string>
     <string name="durationOfStay">Duration of Stay:</string>
     <string name="create_your_tenant_setting">Create Your Tenant Settings</string>
-    <string name="price_range">Pricing Range:</string>
-    <string name="size_range">Size Range:</string>
-    <string name="area">Area:</string>
     <string name="purpose_community">Purpose Community:</string>
     <string name="smoking_apartment">Somoking Apartment:</string>
     <string name="balcony">Balcony:</string>
     <string name="cabeltv">Cabel TV:</string>
     <string name="dryer">Dryer:</string>
     <string name="bathtube">Bathtube:</string>
-    <string name="necessary">necessary</string>
-    <string name="notNecessary">not necessary</string>
     <string name="email_login">emailLogin</string>
     <string name="password_login">passwordLogin</string>
     <string name="login_check_box">Remember Me</string>
@@ -122,7 +101,6 @@
     <string name="wait_roommate">Please Wait</string>
     <string name="wait_roommate_info">Please wait until the apartment owner is done with the apartment settings!</string>
     <string name="getLocation">Get my location!</string>
-
     <string-array name="occupation">
         <item>Student</item>
         <item>Employee</item>
@@ -138,23 +116,6 @@
         <item>No Job</item>
         <item>Does not matter</item>
     </string-array>
-    <string-array name="durationOfStayArray">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
-    <string-array name="durationOfStayArrayApartmentSettings">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>Does not matter</item>
-    </string-array>
     <string name="title_activity_maps">Map</string>
     <string name="city">City</string>
     <string name="country">Country</string>
@@ -167,4 +128,5 @@
     <string name="apartment_pets">Pets:</string>
     <string name="apartment_washingMashine">Washing Mashine</string>
     <string name="apartment_purpose">Purpose Apartment:</string>
+    <string name="insert_your_info">Insert your short info</string>
 </resources>

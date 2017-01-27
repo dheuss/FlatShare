@@ -58,7 +58,14 @@ public class MatchingActivity_ProfileCard_Tenant {
             Glide.with(mContext).load(mBitmap).into(profileImageView);
         }
         nameAgeTxt.setText("Name: " + mProfile.getFirstName() + ", " + mProfile.getAge());
-        locationNameTxt.setText("Job: " + mProfile.getOccupation() + ", Duration: " + mProfile.getDurationOfStay());
+        locationNameTxt.setText("Job: " + mProfile.getOccupation());
+        matchingActivity.setTenantName(mProfile.getFirstName());
+        matchingActivity.setTenantAge(mProfile.getAge());
+        matchingActivity.setTenantGender(mProfile.getGender());
+        matchingActivity.setTenantSmoker(mProfile.isSmoker());
+        matchingActivity.setTenantPets(mProfile.hasPets());
+        matchingActivity.setTenantOccupation(mProfile.getOccupation());
+        matchingActivity.setTenantInfo(mProfile.getShortBio());
     }
 
     @SwipeOut

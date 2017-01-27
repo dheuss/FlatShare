@@ -10,6 +10,7 @@ public class RoommateProfileNode {
     private final String tenantsToShow;
     private final String timestamp;
     private final String available;
+    private final String done;
 //    private final String acceptedTenants;
 
 
@@ -19,6 +20,7 @@ public class RoommateProfileNode {
         this.tenantsToShow = this.rootPath + "tenants_to_show/";
         this.timestamp = this.rootPath + "timestamp/";
         this.available = this.rootPath + "available/";
+        this.done = this.rootPath + "done/";
 //        this.acceptedTenants = this.rootPath + "accepted_tenants/";
     }
 
@@ -44,5 +46,9 @@ public class RoommateProfileNode {
 
     public String getTimestamp() {
         return timestamp;
+    }
+
+    public String getDone() {
+        return done;
     }
 }

@@ -16,8 +16,4 @@ public interface MatchingOverviewInteractor extends Interactor {
         void onSentSuccess(); //int classificationId
         void onSentFailure(String error);
     }
-
-    interface View extends BaseView {
-        void generateMatchingOverview(List<String> matchingTitleList, List<Integer> matchingImageList);
-    }
 }

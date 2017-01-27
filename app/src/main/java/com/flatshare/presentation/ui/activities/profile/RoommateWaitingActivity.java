@@ -12,6 +12,8 @@ import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.MainActivity;
 import com.flatshare.threading.MainThreadImpl;
 
+import static com.flatshare.presentation.ui.activities.profile.ApartmentProfileActivity.APARTMENT_ID;
+
 public class RoommateWaitingActivity extends AbstractActivity implements RoommateWaitingPresenter.View {
 
     private static final String TAG = "RoommateWaitingActivity";
@@ -26,12 +28,14 @@ public class RoommateWaitingActivity extends AbstractActivity implements Roommat
                 this
         );
 
-        Bundle b = getIntent().getExtras();
-        String apartmentId;
-        if (b != null) {
-            apartmentId = b.getString("apartmentId");
-            mPresenter.listenToDB(apartmentId);
-        }
+        mPresenter.listenToDB();
+
+//        Bundle b = getIntent().getExtras();
+//        String apartmentId;
+//        if (b != null) {
+//            apartmentId = b.getString(APARTMENT_ID);
+//            mPresenter.listenToDB(apartmentId);
+//        }
     }
 
     @Override

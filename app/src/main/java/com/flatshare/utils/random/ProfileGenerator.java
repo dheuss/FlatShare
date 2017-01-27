@@ -20,7 +20,6 @@ public class ProfileGenerator {
             TenantProfile tenantProfile = new TenantProfile();
             tenantProfile.setAge((int) (20 + Math.random() * 10));
             tenantProfile.setFirstName("Tester" + i);
-            tenantProfile.setDurationOfStay(i % 4);
             tenantProfile.setGender((int) (Math.random() * 2) == 0 ? 0 : 1);
 
             tenantProfile.setPets((int) (Math.random() * 2) == 1);

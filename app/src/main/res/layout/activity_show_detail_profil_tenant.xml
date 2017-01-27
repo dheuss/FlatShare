@@ -42,20 +42,9 @@
             android:gravity="center"
             android:text="@string/tenant_info_description" />
 
-        <TextView
-            android:id="@+id/tenant_info_2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/tenant_info"
-            android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight"
-            android:layout_marginTop="@dimen/marginTop"
-            android:gravity="center"
-            android:text="@string/apartment_info_description_2" />
-
         <LinearLayout
-            android:id="@+id/imageLayout_tenant"
-            android:layout_below="@+id/tenant_info_2"
+            android:id="@+id/imageLayoutTenant"
+            android:layout_below="@+id/tenant_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/marginLeft"
@@ -74,7 +63,7 @@
             android:id="@+id/LinearLayoutTenantName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/imageLayout_tenant"
+            android:layout_below="@id/imageLayoutTenant"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">
@@ -110,7 +99,7 @@
                 android:text="@string/age" />
 
             <TextView
-                android:id="@+id/tenantAgeTextView"
+                android:id="@+id/tenantAgeTextView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
@@ -133,12 +122,12 @@
                 android:layout_gravity="center"
                 android:text="@string/gender" />
 
-            <TextView
-                android:id="@+id/tenantGenderTextView"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/genderThumb"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="---" />
+                android:src="@drawable/thumb_up_icon"
+                android:layout_marginLeft="@dimen/marginLeft"/>
 
         </LinearLayout>
 
@@ -157,12 +146,12 @@
                 android:layout_gravity="center"
                 android:text="@string/smoker" />
 
-            <TextView
-                android:id="@+id/tenantSmokerTextView"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/smokerThumb"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="---" />
+                android:src="@drawable/thumb_up_icon"
+                android:layout_marginLeft="@dimen/marginLeft"/>
 
         </LinearLayout>
 
@@ -181,12 +170,12 @@
                 android:layout_gravity="center"
                 android:text="@string/pets" />
 
-            <TextView
-                android:id="@+id/tenantPetsTextView"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/petsThumb"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="---" />
+                android:src="@drawable/thumb_up_icon"
+                android:layout_marginLeft="@dimen/marginLeft"/>
 
         </LinearLayout>
 
@@ -215,7 +204,7 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:id="@+id/LinearLayoutTenantInfo"
+            android:id="@+id/LinearLayoutTenantInformation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/LinearLayoutTenantOccupation"
@@ -225,19 +214,20 @@
             android:layout_marginBottom="@dimen/marginTop">
 
             <TextView
-                android:id="@+id/infoid"
+                android:id="@+id/relativeinfoid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/info" />
+                android:text="@string/info"
+                android:layout_marginBottom="@dimen/marginTop"/>
 
             <TextView
-                android:layout_marginTop="@dimen/marginTop"
-                android:layout_below="@+id/infoid"
                 android:id="@+id/tenantInfoTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="---" />
+                android:layout_below="@+id/relativeinfoid"
+                android:text="---"
+                />
 
         </RelativeLayout>
 

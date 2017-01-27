@@ -76,6 +76,11 @@ public class ApartmentProfileInteractorImpl extends AbstractInteractor implement
         map.put(databaseRoot.getApartmentProfileNode(apartmentId).getRootPath(), this.apartmentProfile);
         map.put(locationPath, apartmentId);
 
+        for (String id : this.apartmentProfile.getRoommateIds()){
+            map.put(databaseRoot.getRoommateProfileNode(id).getApartmentId(), this.apartmentProfile.getId());
+            map.put(databaseRoot.getRoommateProfileNode(id).getAvailable(), false);
+        }
+
         mDatabase.updateChildren(map, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {

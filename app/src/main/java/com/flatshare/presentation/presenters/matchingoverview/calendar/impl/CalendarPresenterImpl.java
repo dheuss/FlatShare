@@ -1,6 +1,7 @@
 package com.flatshare.presentation.presenters.matchingoverview.calendar.impl;
 
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.db.common.MatchEntry;
 import com.flatshare.domain.datatypes.enums.ProfileType;
 import com.flatshare.domain.interactors.calendar.CalendarInitInteractor;
 import com.flatshare.domain.interactors.calendar.CalendarSendFinalInteractor;
@@ -85,8 +86,8 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
     @Override
     public void onSentSuccess() {
         if (checkForTenant()) {
-            //TODO appointmentList übergeben
-            List<Long> appointmentList = new ArrayList<>();
+            MatchEntry matchEntry = new MatchEntry();
+            List<Long> appointmentList = matchEntry.getAppointmentsList();
             List<String> dateList = new ArrayList<>();
             List<String> timeList = new ArrayList<>();
             for (int i = 0; i<appointmentList.size(); i++){
@@ -111,7 +112,11 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
 
     @Override
     public void onSentFinalSuccess() {
-        String finalDate = "appointment"; //TODO Appointment übergeben
-        mView.showFinalDate(finalDate);
+        MatchEntry matchEntry = new MatchEntry();
+        long appointment = matchEntry.getAppointment();
+        Date date = new Date (appointment);
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String dateText = df.format(date);
+        mView.showFinalDate(dateText);
     }
 }

@@ -118,7 +118,6 @@ public class MatchTest {
         TenantProfile tenantProfile = new TenantProfile();
 
         tenantProfile.setSmoker(true);
-        tenantProfile.setDurationOfStay(2);
         tenantProfile.setGender(0);
         tenantProfile.setAge(22);
         tenantProfile.setSmoker(false);

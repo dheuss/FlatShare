@@ -39,7 +39,6 @@ public class ProfileApartmentSettingsFilterActivity extends AbstractActivity imp
     private RadioButton yesPetsRadioButton, noPetsRadioButton, neiPetsRadioButton;
 
     private Spinner occupationSpiner;
-    private Spinner durationSpinner;
 
     private Button saveButton;
 
@@ -135,7 +134,6 @@ public class ProfileApartmentSettingsFilterActivity extends AbstractActivity imp
                         }
 
                         String occupation = occupationSpiner.getSelectedItem().toString();
-                        int durationOfStay = Integer.parseInt(durationSpinner.getSelectedItem().toString());
 
                         ApartmentFilterSettings apartmentFilterSettings = new ApartmentFilterSettings();
 
@@ -145,7 +143,6 @@ public class ProfileApartmentSettingsFilterActivity extends AbstractActivity imp
                         apartmentFilterSettings.setSmoker(smoker);
                         apartmentFilterSettings.setPetsAllowed(pets);
                         apartmentFilterSettings.setOccupation(occupation);
-                        apartmentFilterSettings.setDurationOfStay(durationOfStay);
 
                         mPresenter.sendFilterSettings(apartmentFilterSettings);
                     }
@@ -227,7 +224,6 @@ public class ProfileApartmentSettingsFilterActivity extends AbstractActivity imp
         }
 
         occupationSpiner = (Spinner)findViewById(R.id.occupationApartmentSettingsSpinner);
-        durationSpinner = (Spinner)findViewById(R.id.durationOfStayApartmentSettingsSpinner);
 
         saveButton = (Button)findViewById(R.id.done_1_apartment_settings);
         saveButton.setText("SAVE!");

@@ -9,10 +9,6 @@ import com.google.firebase.database.PropertyName;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Arber on 06/12/2016.
- */
-
 public class ApartmentProfile extends UserProfile {
 
     @PropertyName("apartment_filter_settings")
@@ -22,7 +18,7 @@ public class ApartmentProfile extends UserProfile {
     public String apartmentId;
 
     @PropertyName("owner_user_id")
-    public String ownerUserId;
+    public String ownerId;
 
     @PropertyName("roommate_ids")
     public List<String> roommateIds;
@@ -84,13 +80,13 @@ public class ApartmentProfile extends UserProfile {
     }
 
     @Exclude
-    public String getOwnerUserId() {
-        return ownerUserId;
+    public String getOwnerId() {
+        return ownerId;
     }
 
     @Exclude
     public void setOwnerRoommateId(String ownerUserId) {
-        this.ownerUserId = ownerUserId;
+        this.ownerId = ownerUserId;
     }
 
     @Exclude

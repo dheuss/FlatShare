@@ -59,12 +59,15 @@ public class RoommateWaitingPresenterImpl extends AbstractPresenter implements R
 
     @Override
     public void onApartmentReady() {
+//        mView.hideProgress();
         mView.changeToMatchingActivity();
     }
 
     @Override
-    public void listenToDB(String apartmentId) {
-        RoommateWaitingInteractor roommateWaitingInteractor = new RoommateWaitingInteractorImpl(mMainThread, this, apartmentId);
+    public void listenToDB() {
+        String roommateId = userState.getRoommateId();
+        Log.d(TAG, "listenToDB: " + roommateId);
+        RoommateWaitingInteractor roommateWaitingInteractor = new RoommateWaitingInteractorImpl(mMainThread, this, roommateId);
         roommateWaitingInteractor.execute();
     }
 }

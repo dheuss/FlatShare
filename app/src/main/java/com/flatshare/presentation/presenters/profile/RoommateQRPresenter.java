@@ -15,7 +15,7 @@ public interface RoommateQRPresenter extends BasePresenter{
 
     interface View extends BaseView{
 
-        void onQRCodeRead(String apartmentId);
+        void onQRCodeRead();
 
         void changeToWaitingActivity();
     }

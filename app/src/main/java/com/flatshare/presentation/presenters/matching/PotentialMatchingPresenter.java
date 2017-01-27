@@ -28,7 +28,5 @@ public interface PotentialMatchingPresenter extends BasePresenter {
     interface View extends BaseView {
         void showTenants(List<Pair<TenantProfile, Bitmap>> tenants);
         void showApartments(List<Pair<ApartmentProfile, Bitmap>> apartments);
-
-        void updateListener(boolean listenerAttached);
     }
 }

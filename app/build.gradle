@@ -48,37 +48,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
-    // general
-    
-
-    // butterknife
-    //    annotationProcessor 'com.jakewharton:butterknife-compiler:7.0.1'
-//    apt 'com.jakewharton:butterknife-compiler:8.4.0'
-
-    // timber
-    
-    // firebase
-    
-    //tests
-    
-    //facebook
-    
-    //Gson
-    
-    //swipeview
-    
-    // loader
-    
-    //range bar
-    
-    // QR Code Generator
-    
-    // QR Code Reader
-    
-    // Google Maps
-    
-    // gif player
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:design:25.1.0'
     compile 'com.jakewharton:butterknife:7.0.1'

@@ -37,6 +37,7 @@ public class RoommateProfileSettingsActivity extends AbstractFragmentActivity im
     private EditText cityEditText;
     private EditText stateEditText;
     private EditText countryEditText;
+    private EditText infoEditText;
 
     private RadioButton internetYESRadioButton, internetNORadioButton;
 
@@ -105,83 +106,88 @@ public class RoommateProfileSettingsActivity extends AbstractFragmentActivity im
         apartmentProfileInfo = (TextView)view.findViewById(R.id.apartment_profile_info);
         apartmentProfileInfo.setText("Here your can see all your apartment information! Sorry, you are not allowed to change anything!");
 
+        //TODO: nullpointer => maybe the db has to be updated first then userstate...must be tested
         roommatesTextView = (MultiAutoCompleteTextView)view.findViewById(R.id.apartment_roommates_edit_text);
-        roommatesTextView.setText(userState.getApartmentProfile().getRoommateIds().size()+"");
+//        roommatesTextView.setText(userState.getApartmentProfile().getRoommateIds().size()+"");
         roommatesTextView.setEnabled(false);
 
         priceEditText = (EditText)view.findViewById(R.id.apartment_price_edit_text);
-        priceEditText.setText(userState.getApartmentProfile().getPrice() + "");
+//        priceEditText.setText(userState.getApartmentProfile().getPrice() + "");
         priceEditText.setEnabled(false);
 
         sizeEditText = (EditText)view.findViewById(R.id.apartment_area_editText);
-        sizeEditText.setText(userState.getApartmentProfile().getArea() + "");
+//        sizeEditText.setText(userState.getApartmentProfile().getArea() + "");
         sizeEditText.setEnabled(false);
 
         streetEditText = (EditText)view.findViewById(R.id.apartment_street_edit_text);
-        streetEditText.setText(userState.getApartmentProfile().getApartmentLocation().getStreet()+"");
+//        streetEditText.setText(userState.getApartmentProfile().getApartmentLocation().getStreet()+"");
         streetEditText.setEnabled(false);
 
         zipCodeEditText = (EditText)view.findViewById(R.id.apartment_zip_code_edit_text);
-        zipCodeEditText.setText(userState.getApartmentProfile().getApartmentLocation().getZipCode()+"");
+//        zipCodeEditText.setText(userState.getApartmentProfile().getApartmentLocation().getZipCode()+"");
         zipCodeEditText.setEnabled(false);
 
         cityEditText = (EditText)view.findViewById(R.id.apartment_city_edit_text);
-        cityEditText.setText(userState.getApartmentProfile().getApartmentLocation().getCity()+"");
+//        cityEditText.setText(userState.getApartmentProfile().getApartmentLocation().getCity()+"");
         cityEditText.setEnabled(false);
 
         stateEditText = (EditText)view.findViewById(R.id.apartment_state_edit_text);
-        stateEditText.setText(userState.getApartmentProfile().getApartmentLocation().getState());
+//        stateEditText.setText(userState.getApartmentProfile().getApartmentLocation().getState());
         stateEditText.setEnabled(false);
 
         countryEditText = (EditText)view.findViewById(R.id.apartment_country_edit_text);
-        countryEditText.setText(userState.getApartmentProfile().getApartmentLocation().getCountry());
+//        countryEditText.setText(userState.getApartmentProfile().getApartmentLocation().getCountry());
         countryEditText.setEnabled(false);
+
+        infoEditText = (EditText)view.findViewById(R.id.infoApartmentEditText);
+//        infoEditText.setText(userState.getApartmentProfile().getApartmentInfo());
+        infoEditText.setEnabled(false);
 
         internetYESRadioButton = (RadioButton)view.findViewById(R.id.internet_yes_rb);
         internetNORadioButton = (RadioButton)view.findViewById(R.id.internet_no_rb);
-        if (userState.getApartmentProfile().hasInternet()){
-            internetYESRadioButton.setChecked(true);
-            internetNORadioButton.setChecked(false);
-        } else {
-            internetYESRadioButton.setChecked(false);
-            internetNORadioButton.setChecked(true);
-        }
+//        if (userState.getApartmentProfile().hasInternet()){
+//            internetYESRadioButton.setChecked(true);
+//            internetNORadioButton.setChecked(false);
+//        } else {
+//            internetYESRadioButton.setChecked(false);
+//            internetNORadioButton.setChecked(true);
+//        }
         internetYESRadioButton.setClickable(false);
         internetNORadioButton.setClickable(false);
 
         smokerYESRadioButton = (RadioButton)view.findViewById(R.id.smoker_yes_rb);
         smokerNORadioButton = (RadioButton)view.findViewById(R.id.smoker_no_rb);
-        if (userState.getApartmentProfile().isSmokerApartment()){
-            smokerYESRadioButton.setChecked(true);
-            smokerNORadioButton.setChecked(false);
-        } else {
-            smokerYESRadioButton.setChecked(false);
-            smokerNORadioButton.setChecked(true);
-        }
+//        if (userState.getApartmentProfile().isSmokerApartment()){
+//            smokerYESRadioButton.setChecked(true);
+//            smokerNORadioButton.setChecked(false);
+//        } else {
+//            smokerYESRadioButton.setChecked(false);
+//            smokerNORadioButton.setChecked(true);
+//        }
         smokerYESRadioButton.setClickable(false);
         smokerNORadioButton.setClickable(false);
 
         petsYESRadioButton = (RadioButton)view.findViewById(R.id.pets_yes_rb);
         petsNORadioButton = (RadioButton)view.findViewById(R.id.pets_no_rb);
-        if (userState.getApartmentProfile().hasPets()){
-            petsYESRadioButton.setChecked(true);
-            petsNORadioButton.setChecked(false);
-        } else {
-            petsYESRadioButton.setChecked(false);
-            petsNORadioButton.setChecked(true);
-        }
+//        if (userState.getApartmentProfile().hasPets()){
+//            petsYESRadioButton.setChecked(true);
+//            petsNORadioButton.setChecked(false);
+//        } else {
+//            petsYESRadioButton.setChecked(false);
+//            petsNORadioButton.setChecked(true);
+//        }
         petsYESRadioButton.setClickable(false);
         petsNORadioButton.setClickable(false);
 
         washingMashineYESRadioButton = (RadioButton)view.findViewById(R.id.washing_machine_yes_rb);
         washingMashineNORadioButton = (RadioButton)view.findViewById(R.id.washing_machine_no_rb);
-        if (userState.getApartmentProfile().hasWashingMachine()){
-            washingMashineYESRadioButton.setChecked(true);
-            washingMashineNORadioButton.setChecked(false);
-        } else {
-            washingMashineYESRadioButton.setChecked(false);
-            washingMashineNORadioButton.setChecked(true);
-        }
+//        if (userState.getApartmentProfile().hasWashingMachine()){
+//            washingMashineYESRadioButton.setChecked(true);
+//            washingMashineNORadioButton.setChecked(false);
+//        } else {
+//            washingMashineYESRadioButton.setChecked(false);
+//            washingMashineNORadioButton.setChecked(true);
+//        }
         washingMashineYESRadioButton.setClickable(false);
         washingMashineNORadioButton.setClickable(false);
 

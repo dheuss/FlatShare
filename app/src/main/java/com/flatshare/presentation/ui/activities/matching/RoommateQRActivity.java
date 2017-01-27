@@ -25,6 +25,7 @@ import com.google.zxing.common.BitMatrix;
 import java.util.EnumMap;
 import java.util.Map;
 
+import static com.flatshare.presentation.ui.activities.profile.ApartmentProfileActivity.APARTMENT_ID;
 import static com.flatshare.presentation.ui.activities.profile.ApartmentProfileActivity.ROOMMATE_ID;
 
 /**
@@ -132,7 +133,7 @@ public class RoommateQRActivity extends AbstractActivity implements RoommateQRPr
     }
 
     @Override
-    public void onQRCodeRead(String apartmentId) {
+    public void onQRCodeRead() {
 
         Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(100);

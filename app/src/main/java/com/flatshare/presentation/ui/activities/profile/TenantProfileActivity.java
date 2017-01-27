@@ -40,7 +40,6 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
     private RadioButton petsYesRadioButton, petsNoRadioButton;
 
     private Spinner occupationSpinner;
-    private Spinner durationSpinner;
 
     private Button profileDoneButton;
     private Button uploadPictureButton;
@@ -126,7 +125,6 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
             boolean isPets = petsRadioGroup.getCheckedRadioButtonId() == petsYesRadioButton.getId();
             String occupation = occupationSpinner.getSelectedItem().toString();
             String shortBio = shortBioText.getText().toString();
-            int duration = Integer.parseInt(durationSpinner.getSelectedItem().toString());
 
             TenantProfile tenantProfile = new TenantProfile();
             tenantProfile.setFirstName(firstname);
@@ -136,7 +134,6 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
             tenantProfile.setOccupation(occupation);
             tenantProfile.setPets(isPets);
             tenantProfile.setShortBio(shortBio);
-            tenantProfile.setDurationOfStay(duration);
             tenantProfile.setDone(true);
 
             mPresenter.sendProfile(tenantProfile);
@@ -203,7 +200,6 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         petsNoRadioButton = (RadioButton) findViewById(R.id.petsNOProfileRadioButton);
 
         occupationSpinner = (Spinner) findViewById(R.id.occupationProfileSpinner);
-        durationSpinner = (Spinner) findViewById(R.id.durationOfStayProfileSpinner);
 
         uploadPictureButton = (Button) findViewById(R.id.saveChangesProfileSettingsButton);
         profileDoneButton = (Button) findViewById(R.id.done_1_tenant_profile);

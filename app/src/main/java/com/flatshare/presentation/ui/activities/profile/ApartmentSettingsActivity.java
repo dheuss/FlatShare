@@ -39,8 +39,6 @@ public class ApartmentSettingsActivity extends AbstractActivity implements Apart
 
     private Spinner occupationSpinner;
 
-    private Spinner durationOfStaySpinner;
-
     private Button doneButton;
 
     private ApartmentSettingsPresenter mPresenter;
@@ -122,7 +120,6 @@ public class ApartmentSettingsActivity extends AbstractActivity implements Apart
         }
 
         String occupation = occupationSpinner.getSelectedItem().toString();
-        int durationOfStay = Integer.parseInt(durationOfStaySpinner.getSelectedItem().toString());
 
         ApartmentFilterSettings apartmentFilterSettings = new ApartmentFilterSettings();
 
@@ -132,7 +129,6 @@ public class ApartmentSettingsActivity extends AbstractActivity implements Apart
         apartmentFilterSettings.setSmoker(smoker);
         apartmentFilterSettings.setPetsAllowed(pets);
         apartmentFilterSettings.setOccupation(occupation);
-        apartmentFilterSettings.setDurationOfStay(durationOfStay);
 
         mPresenter.sendFilterSettings(apartmentFilterSettings);
     }
@@ -155,8 +151,6 @@ public class ApartmentSettingsActivity extends AbstractActivity implements Apart
         allPetsRadioButton = (RadioButton)findViewById(R.id.petALLApartmentSettingsButton);
 
         occupationSpinner = (Spinner)findViewById(R.id.occupationApartmentSettingsSpinner);
-
-        durationOfStaySpinner = (Spinner)findViewById(R.id.durationOfStayApartmentSettingsSpinner);
 
         doneButton = (Button)findViewById(R.id.done_1_apartment_settings);
     }

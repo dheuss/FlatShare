@@ -22,45 +22,42 @@ public class RoommateWaitingInteractorImpl extends AbstractInteractor implements
     private static final String TAG = "RoommateQRInt";
 
     private RoommateWaitingInteractor.Callback mCallback;
-    private String apartmentId;
+    private String roommateId;
 
     public RoommateWaitingInteractorImpl(MainThread mainThread,
-                                         Callback callback, String apartmentId) {
+                                         Callback callback, String roommateId) {
 
         super(mainThread);
         this.mCallback = callback;
-        this.apartmentId = apartmentId;
+        this.roommateId = roommateId;
+
+        Log.d(TAG, "RoommateWaitingInteractorImpl: CONSTRUCTOR!");
     }
 
 
     @Override
     public void execute() {
-        final String path = databaseRoot.getApartmentProfileNode(this.apartmentId).getApartmentFilterSettings();
+        final String path = databaseRoot.getRoommateProfileNode(this.roommateId).getDone();
 
-        mDatabase.child(path).removeEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.d(TAG, "onCancelled: something went wrong but its not important");
-            }
-        });
+        Log.d(TAG, "execute: trying to add value event listener");
 
         mDatabase.child(path).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                ApartmentFilterSettings apartmentFilterSettings = dataSnapshot.getValue(ApartmentFilterSettings.class);
+                Log.d(TAG, "onDataChange: ");
 
-                if (apartmentFilterSettings == null) {
+//                RoommateProfile roommateProfile = dataSnapshot.getValue(RoommateProfile.class);
+
+                if (dataSnapshot.getValue() == null) {
                     // Do nothing
-                    notifyError("Settings of ap with apartmentID: " + apartmentId + " not ready yet!");
+//                    notifyError("there is no roommateprofile with ID: " + roommateId + " created!");
+                    Log.d(TAG, "onDataChange: WaitingListener found null as value!");
                 } else { // Profile was created
-                    removeValueListener(path);
-                    notifySuccess();
+                    if (dataSnapshot.getValue(Boolean.class)) {
+                        removeValueListener(path);
+                        notifySuccess();
+                    }
                 }
             }
 
@@ -69,9 +66,11 @@ public class RoommateWaitingInteractorImpl extends AbstractInteractor implements
                 notifyError(databaseError.getMessage());
             }
         });
+
     }
 
     private void notifySuccess() {
+        Log.d(TAG, "notifySuccess: APARTMENT READY!!!");
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
@@ -85,6 +84,7 @@ public class RoommateWaitingInteractorImpl extends AbstractInteractor implements
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //TODO: read about it...
+                Log.d(TAG, "onDataChange: removed listener");
             }
 
             @Override

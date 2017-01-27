@@ -333,6 +333,34 @@
 
         </LinearLayout>
 
+        <RelativeLayout
+            android:id="@+id/LinearLayoutApartmentInformation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LinearLayoutApartmentProfilePurpose"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginBottom="@dimen/marginTop">
+
+            <TextView
+                android:id="@+id/relativeinfoidapartment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/info"
+                android:layout_marginBottom="@dimen/marginTop"/>
+
+            <TextView
+                android:id="@+id/apartmentInfoTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relativeinfoidapartment"
+                android:text="---"
+                />
+
+        </RelativeLayout>
+
 
         <!--<com.google.android.gms.maps.MapView-->
         <!--android:id="@+id/mapView"-->

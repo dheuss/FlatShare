@@ -12,20 +12,23 @@
 
     <TextView
         android:id="@+id/code_info"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="16dp"
-        android:text="Nothing to read."
-        android:textSize="20sp" />
+        android:text="Please scan an QR Code."
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30dp" />
 
     <SurfaceView
         android:id="@+id/camera_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/code_info"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/marginTop" />
 
 </RelativeLayout>

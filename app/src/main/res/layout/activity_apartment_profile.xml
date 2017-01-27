@@ -42,10 +42,9 @@
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
-            android:background="@color/colorPrimaryDark"
+            android:background="@null"
             android:hint="@string/scan_qr"
-            android:textColor="@color/colorButtonText"
-            android:textColorHint="@color/colorButtonText"
+            android:textColorHint="@color/colorPrimaryDark"
             android:textStyle="bold" />
 
         <android.support.design.widget.TextInputLayout
@@ -113,10 +112,9 @@
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
-            android:background="@color/colorPrimaryDark"
+            android:background="@null"
             android:hint="@string/getLocation"
-            android:textColor="@color/colorButtonText"
-            android:textColorHint="@color/colorButtonText"
+            android:textColorHint="@color/colorPrimaryDark"
             android:textStyle="bold" />
 
         <android.support.design.widget.TextInputLayout
@@ -362,19 +360,51 @@
             </RadioGroup>
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/LinearLayoutProfileInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LinearLayoutApartmentProfileWashingsMashine"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/LinearLayoutInfoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|top"
+                android:text="@string/info" />
+
+            <EditText
+                android:id="@+id/infoApartmentEditText"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@id/LinearLayoutInfoText"
+                android:gravity="top|left"
+                android:hint="@string/insert_your_info"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:maxLines="5"
+                android:scrollHorizontally="false"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="10dp" />
+        </LinearLayout>
+
         <Button
             android:id="@+id/upload_picture_apartment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/LinearLayoutApartmentProfileWashingsMashine"
+            android:layout_below="@+id/LinearLayoutProfileInfo"
             android:layout_marginBottom="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
-            android:background="@color/colorPrimary"
+            android:background="@null"
             android:hint="@string/take_picture_apartment_profile"
-            android:textColor="@color/colorButtonText"
-            android:textColorHint="@color/colorButtonText"
+            android:textColorHint="@color/colorPrimary"
             android:textStyle="bold" />
 
         <Button
