@@ -53,13 +53,13 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
     private SharedPreferences sharedPref;
 
     //Google
-    private SignInButton googleSignInButton;
-    private ImageButton googleCustomButton;
+//    private SignInButton googleSignInButton;
+//    private ImageButton googleCustomButton;
 
     //Facebook
-    private LoginButton facebookSignInButton;
-    private ImageButton facebookCustomButton;
-    private CallbackManager facebookCallbackManager;
+//    private LoginButton facebookSignInButton;
+//    private ImageButton facebookCustomButton;
+//    private CallbackManager facebookCallbackManager;
 
     // loader
     private AlertDialog progressDialog;
@@ -112,21 +112,21 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
             }
         });
 
-        facebookCustomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                facebookSignInButton.performClick(); //TODO
-                Toast.makeText(getActivity(), "Facebook login doesn't work", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        googleCustomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                googleSignInButton.performClick(); //TODO
-                Toast.makeText(getActivity(), "Google login doesn't work", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        facebookCustomButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                facebookSignInButton.performClick(); //TODO
+//                Toast.makeText(getActivity(), "Facebook login doesn't work", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        googleCustomButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                googleSignInButton.performClick(); //TODO
+//                Toast.makeText(getActivity(), "Google login doesn't work", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         return view;
     }
@@ -138,10 +138,10 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
         loginButton = (Button) view.findViewById(R.id.login_button);
         registerButton = (Button) view.findViewById(R.id.register_button);
         forgotPasswordButton = (Button)view.findViewById(R.id.forgot_password_button);
-        googleSignInButton = (SignInButton) view.findViewById(R.id.google_sign_in_button);
-        googleCustomButton = (ImageButton) view.findViewById(R.id.custom_google_button);
-        facebookCustomButton = (ImageButton) view.findViewById(R.id.custom_fb_button);
-        facebookSignInButton = (LoginButton) view.findViewById(R.id.facebook_sign_in_button);
+//        googleSignInButton = (SignInButton) view.findViewById(R.id.google_sign_in_button);
+//        googleCustomButton = (ImageButton) view.findViewById(R.id.custom_google_button);
+//        facebookCustomButton = (ImageButton) view.findViewById(R.id.custom_fb_button);
+//        facebookSignInButton = (LoginButton) view.findViewById(R.id.facebook_sign_in_button);
         progressDialog = new SpotsDialog(getActivity(), R.style.Custom);
     }
 
@@ -162,7 +162,6 @@ public class LoginFragmentFourActivity extends Fragment implements LoginPresente
         }
 
         if (email != null && password != null) {
-
             emailEditText.setText(email);
             passwordEditText.setText(password);
         }
