@@ -45,7 +45,6 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     private static final String TAG = "MatchingActivity";
 
     private SwipePlaceHolderView mSwipeView;
-    //    private Context mContext;
     private UserState userState;
 
     private ImageButton acceptBtn;
@@ -56,7 +55,6 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     private Button badgeIcon;
 
     private PopupWindow mPopupWindow;
-
     private FrameLayout mFrameLayout;
 
     private PotentialMatchingPresenter mPresenter;
@@ -109,7 +107,6 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     private Boolean tenantPets;
 
     private ImageButton closeButton;
-
 
 
     private SharedPreferences sharedPref;
