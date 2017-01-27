@@ -93,10 +93,20 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
         List<String> matchingTitleList = new ArrayList<>();
         List<Integer> matchingImageList = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            matchingTitleList.add(i + " What the Fuck this is a title");
-            matchingImageList.add(tenant_default);
+
+        if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()){
+            int tenantMatches = userState.getTenantProfile().getMatchedApartments().size();
+            for (int i = 0; i < tenantMatches; i++){
+                matchingTitleList.add(userState.getTenantProfile().getMatchedApartments().get(i));
+                matchingImageList.add(apartment_default);
+            }
         }
+
+
+//        for (int i = 0; i < 30; i++) {
+//            matchingTitleList.add(i + " What the Fuck this is a title");
+//            matchingImageList.add(tenant_default);
+//        }
         generateMatchingOverview(matchingTitleList, matchingImageList);
 
         return view;
