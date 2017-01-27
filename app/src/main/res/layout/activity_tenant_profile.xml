@@ -248,9 +248,8 @@
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
             android:background="@null"
-            android:hint="@string/take_picture_tenant_profile"
-            android:textColorHint="@color/colorPrimary"
-            android:textStyle="bold" />
+            android:text="@string/take_picture_tenant_profile"
+            android:textColor="@color/colorPrimary"/>
 
         <Button
             android:id="@+id/done_1_tenant_profile"

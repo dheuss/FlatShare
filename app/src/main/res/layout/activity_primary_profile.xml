@@ -48,9 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@color/colorPrimary"
-        android:hint="@string/create_tenant_profile"
+        android:text="@string/create_tenant_profile"
         android:textColor="@color/colorButtonText"
-        android:textColorHint="@color/colorButtonText"
         android:textStyle="bold" />
 
     <Button
@@ -60,9 +59,8 @@
         android:layout_below="@id/create_tenant_profile_button"
         android:layout_marginTop="20dp"
         android:background="@color/colorPrimary"
-        android:hint="@string/create_roommate_profile_button"
+        android:text="@string/create_roommate_profile_button"
         android:textColor="@color/colorButtonText"
-        android:textColorHint="@color/colorButtonText"
         android:textStyle="bold" />
 
 </LinearLayout>

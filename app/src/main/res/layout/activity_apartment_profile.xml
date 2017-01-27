@@ -43,8 +43,8 @@
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
             android:background="@null"
-            android:hint="@string/scan_qr"
-            android:textColorHint="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/scan_qr"
             android:textStyle="bold" />
 
         <android.support.design.widget.TextInputLayout
@@ -113,8 +113,8 @@
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
             android:background="@null"
-            android:hint="@string/getLocation"
-            android:textColorHint="@color/colorPrimaryDark"
+            android:text="@string/getLocation"
+            android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
 
         <android.support.design.widget.TextInputLayout
@@ -403,8 +403,8 @@
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
             android:background="@null"
-            android:hint="@string/take_picture_apartment_profile"
-            android:textColorHint="@color/colorPrimary"
+            android:text="@string/take_picture_apartment_profile"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 
         <Button
@@ -417,9 +417,8 @@
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"
             android:background="@color/colorPrimaryDark"
-            android:hint="@string/done_profile"
+            android:text="@string/done_profile"
             android:textColor="@color/colorButtonText"
-            android:textColorHint="@color/colorButtonText"
             android:textStyle="bold" />
 
     </RelativeLayout>

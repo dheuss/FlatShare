@@ -26,7 +26,6 @@ import com.flatshare.presentation.presenters.matching.PotentialMatchingPresenter
 import com.flatshare.presentation.presenters.matching.impl.PotentialMatchingPresenterImpl;
 import com.flatshare.presentation.ui.AbstractFragmentActivity;
 import com.flatshare.threading.MainThreadImpl;
-import com.google.android.gms.vision.text.Text;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
@@ -264,11 +263,11 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
         } else {
             tenantGenderImageView.setImageResource(female_icon);
         }
-        smokerImageView = (ImageView)customView.findViewById(R.id.smokerThumb);
+        tenantSmokerImgeeView = (ImageView)customView.findViewById(R.id.smokerThumb);
         if (getTenantSmoker()){
-            smokerImageView.setImageResource(thumb_up_icon);
+            tenantSmokerImgeeView.setImageResource(thumb_up_icon);
         } else {
-            smokerImageView.setImageResource(thumb_down_icon);
+            tenantSmokerImgeeView.setImageResource(thumb_down_icon);
         }
         tenantPetsImageView = (ImageView)customView.findViewById(R.id.petsThumb);
         if (getTenantPets()){
