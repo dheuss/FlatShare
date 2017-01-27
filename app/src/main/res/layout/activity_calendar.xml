@@ -5,76 +5,77 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/LinearLayoutCalender_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textView8"
+        <LinearLayout
+            android:id="@+id/LinearLayoutCalender_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send date(s) for an appointment to view the flat:"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/colorText" />
-    </LinearLayout>
+            android:layout_marginTop="40dp"
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/LinearLayoutCalender_3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="150dp"
-        android:orientation="vertical"
-        android:scrollbars="vertical"
-        android:weightSum="1">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:id="@+id/LinearLayoutCalender_4"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:text="Send date(s) for an appointment to view the flat:"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/colorText" />
+        </LinearLayout>
 
-                <TableLayout
-                    android:id="@+id/dateOverview"
+        <LinearLayout
+            android:id="@+id/LinearLayoutCalender_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LinearLayoutCalender_1"
+            android:orientation="vertical"
+            android:scrollbars="vertical"
+            android:weightSum="1">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/LinearLayoutCalender_4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/colorText" />
+                    android:orientation="vertical">
+
+                    <TableLayout
+                        android:id="@+id/dateOverview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/colorText" />
 
 
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/setDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_margin="16dp"
-                    android:clickable="true"
-                    android:onClick="setDate"
-                    android:src="@drawable/add_plus_icon"
-                    app:layout_anchor="@id/LinearLayoutCalender_4"
-                    app:layout_anchorGravity="bottom|right|end" />
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/setDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_margin="16dp"
+                        android:clickable="true"
+                        android:onClick="setDate"
+                        android:src="@drawable/add_plus_icon"
+                        app:layout_anchor="@id/LinearLayoutCalender_4"
+                        app:layout_anchorGravity="bottom|right|end" />
 
-                <Button
-                    android:id="@+id/send"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/colorPrimary"
-                    android:text="Send"
-                    android:textColor="@color/colorButtonText"
-                    android:visibility="gone" />
+                    <Button
+                        android:id="@+id/send"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimary"
+                        android:text="Send"
+                        android:textColor="@color/colorButtonText"
+                        android:visibility="gone" />
 
-
-            </LinearLayout>
-
-        </ScrollView>
-
-    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </RelativeLayout>
 </FrameLayout>

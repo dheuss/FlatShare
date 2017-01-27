@@ -13,7 +13,7 @@ public class MatchingOverviewInteractorImpl extends AbstractInteractor implement
 
     private MatchingOverviewInteractor.Callback mCallback;
 
-    public MatchingOverviewInteractorImpl(MainThread mainThread, Callback callback) {
+    public MatchingOverviewInteractorImpl(MainThread mainThread, Callback callback, String apartmentProfileId) {
         super(mainThread);
         this.mCallback = callback;
     }
