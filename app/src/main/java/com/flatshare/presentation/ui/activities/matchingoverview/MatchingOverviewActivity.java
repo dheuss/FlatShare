@@ -1,6 +1,7 @@
 package com.flatshare.presentation.ui.activities.matchingoverview;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.view.LayoutInflater;
 
 import android.widget.PopupWindow;
 
+import com.bumptech.glide.Glide;
 import com.flatshare.R;
 
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
@@ -28,8 +30,6 @@ import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.matchingoverview.MatchingOverviewPresenter;
 import com.flatshare.presentation.presenters.matchingoverview.impl.MatchingOverviewPresenterImpl;
 import com.flatshare.presentation.ui.AbstractFragmentActivity;
-import com.flatshare.presentation.ui.activities.matching.MatchingActivity_ProfileCard_Apartment;
-import com.flatshare.presentation.ui.activities.matching.MatchingActivity_ProfileCard_Tenant;
 import com.flatshare.presentation.ui.activities.matchingoverview.calendar.CalendarActivity;
 import com.flatshare.threading.MainThreadImpl;
 
@@ -76,6 +76,12 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     private MatchingOverviewPresenter mPresenter;
     private TableLayout matchingOverview;
 
+    List<Bitmap> matchingTenantBitmap = new ArrayList<>();
+    List<TenantProfile> matchingTenantProfile = new ArrayList<>();
+    List<ApartmentProfile> matchingApartmentProfile = new ArrayList<>();
+    List<Bitmap> matchingApartmentBitmap = new ArrayList<>();
+    private Context mContext;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,6 +93,8 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_matching_overview, container, false);
 
+        mContext = getContext();
+
         bindView(view);
 
         Log.d(TAG, "inside onCreate(), creating presenter for this view");
@@ -96,29 +104,27 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                 this
         );
 
-        createMatchingOverview();
+        //mPresenter.getPotentialMatches(); //TODO
 
         return view;
     }
 
-    private void createMatchingOverview() {
-        List<String> matchingTitleList = new ArrayList<>();
-        List<Integer> matchingImageList = new ArrayList<>();
+    public void generateMatchingOverview(List<TenantProfile> matchingTenantList, List<ApartmentProfile> matchingApartmentList, List<Bitmap> matchingBitmapList) {
 
+        List<String> matchingProfileList = new ArrayList<>();
         if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
-            int tenantMatches = userState.getTenantProfile().getMatchedApartments().size();
-            for (int i = 0; i < tenantMatches; i++) {
-                matchingTitleList.add(userState.getTenantProfile().getMatchedApartments().get(i));
-                matchingImageList.add(apartment_default);
+            for (int i = 0; i < matchingApartmentList.size(); i++) {
+                matchingProfileList.add(matchingApartmentList.get(i).getApartmentInfo() + " " + matchingApartmentList.get(i).getPrice() + " €");
             }
         }
 
-        generateMatchingOverview(matchingTitleList, matchingImageList);
-    }
+        if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.APARTMENT.getValue() || userState.getPrimaryUserProfile().getClassificationId() == ProfileType.ROOMMATE.getValue()) {
+            for (int i = 0; i < matchingTenantList.size(); i++) {
+                matchingProfileList.add(matchingTenantList.get(i).getFirstName() + " " + matchingTenantList.get(i).getShortBio());
+            }
+        }
 
-    public void generateMatchingOverview(List<String> matchingTitleList, List<Integer> matchingImageList) {
-
-        for (int i = 0; i < matchingTitleList.size(); i++) {
+        for (int i = 0; i < matchingProfileList.size(); i++) {
 
             TableRow row = new TableRow(this.getActivity());
             TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT);
@@ -130,9 +136,14 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
             ImageButton deleteButton = new ImageButton(this.getActivity());
             ImageButton infoButton = new ImageButton(this.getActivity());
 
-            matchingImage.setImageResource(matchingImageList.get(i));
 
-            matchingText.setText(matchingTitleList.get(i));
+            if (matchingBitmapList.get(i) == null) {
+                Glide.with(mContext).load(R.drawable.apartment_default).into(matchingImage);
+            } else {
+                Glide.with(mContext).load(matchingBitmapList.get(i)).into(matchingImage);
+            }
+
+            matchingText.setText(matchingProfileList.get(i));
 
             matchingCalendar.setVisibility(View.VISIBLE);
             matchingCalendar.setBackground(getResources().getDrawable(R.drawable.calendar_icon));
@@ -181,21 +192,58 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     }
 
     View.OnClickListener myCalendarHandler = new View.OnClickListener() {
-            public void onClick(View v) {
-                //TODO übergeben welcher Match übergeben wird
-                //TODO in der CalendarView die MatchingID oder so was überprüfen
-            startActivity(new Intent(getActivity(), CalendarActivity.class));
+        public void onClick(View v) {
+            for (int i = 0; i < matchingOverview.getChildCount(); i++) {
+                View view = matchingOverview.getChildAt(i);
+
+                if (view instanceof TableRow) {
+                    TableRow row = (TableRow) view;
+
+                    for (int j = 0; j < row.getChildCount(); j++) {
+                        View elementView = row.getChildAt(j);
+
+                        if (elementView instanceof ImageButton) {
+                            ImageButton currentButton = (ImageButton) elementView;
+
+                            if (currentButton == v) {
+                                if (currentButton == v) {
+                                    //TODO ID übergeben i
+                                    startActivity(new Intent(getActivity(), CalendarActivity.class));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     };
 
     View.OnClickListener myInfoHandler = new View.OnClickListener() {
-        //TODO übergeben welcher Match übergeben wird
-        //TODO in der CalendarView die MatchingID oder so was überprüfen
         public void onClick(View v) {
-            if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
-                apartmentPopUp(v);
-            } else {
-                tenantPopUp(v);
+            for (int i = 0; i < matchingOverview.getChildCount(); i++) {
+                View view = matchingOverview.getChildAt(i);
+
+                if (view instanceof TableRow) {
+                    TableRow row = (TableRow) view;
+
+                    for (int j = 0; j < row.getChildCount(); j++) {
+                        View elementView = row.getChildAt(j);
+
+                        if (elementView instanceof ImageButton) {
+                            ImageButton currentButton = (ImageButton) elementView;
+
+                            if (currentButton == v) {
+                                if (currentButton == v) {
+                                    if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
+                                        apartmentPopUp(v, i);
+                                    } else {
+                                        tenantPopUp(v, i);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     };
@@ -237,8 +285,12 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                                 ImageView currentImageView = (ImageView) imageView;
 
                                 if (currentButton == v) {
-                                    //TODO semd gelöschtest zu firebase wer ist das?
-                                    mPresenter.userDeleteApartment("");//ProfilID - wo bekomme ich dir her?
+                                    if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.APARTMENT.getValue() || userState.getPrimaryUserProfile().getClassificationId() == ProfileType.ROOMMATE.getValue()) {
+                                        mPresenter.userDeleteApartment(matchingApartmentProfile.get(i).getMatchedTenants().get(i));
+                                    }
+                                    if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
+                                        mPresenter.userDeleteApartment(matchingTenantProfile.get(i).getMatchedApartments().get(i));
+                                    }
                                     currentDateText.setText(nextDateText.getText());
                                     currentImageView.setImageDrawable(nextImageView.getDrawable());
                                     nextImageView.setVisibility(View.GONE);
@@ -274,7 +326,12 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                                 ImageView currentImageView = (ImageView) imageView;
 
                                 if (currentButton == v) {
-                                    mPresenter.userDeleteApartment("");//TODO ProfilID - wo bekomme ich dir her?
+                                    if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.APARTMENT.getValue() || userState.getPrimaryUserProfile().getClassificationId() == ProfileType.ROOMMATE.getValue()) {
+                                        mPresenter.userDeleteApartment(matchingApartmentProfile.get(i).getMatchedTenants().get(i));
+                                    }
+                                    if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
+                                        mPresenter.userDeleteApartment(matchingTenantProfile.get(i).getMatchedApartments().get(i));
+                                    }
                                     currentDateText.setText("");
                                     currentCalendarButton.setVisibility(View.GONE);
                                     currentButton.setVisibility(View.GONE);
@@ -289,7 +346,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
         }
     };
 
-    public void apartmentPopUp(View v) {
+    public void apartmentPopUp(View v, int i) {
         View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_apartment, null);
 
         apartmentPriceTextView = (TextView) customView.findViewById(R.id.apartmentPriceTextView);
@@ -305,11 +362,11 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
         apartmentCountryTextView = (TextView) customView.findViewById(R.id.apartmentCOUNTRYTextView);
         apartmentCountryTextView.setText("");
         apartmentImageView = (ImageView) customView.findViewById(R.id.apartmentInfoImageView);
-//        if (getApartmentImage() == null) {
-        apartmentImageView.setImageResource(apartment_default);
-//        } else {
-//            apartmentImageView.setImageBitmap(getApartmentImage());
-//        }
+        if (matchingApartmentBitmap.get(i) == null) {
+            apartmentImageView.setImageResource(apartment_default);
+        } else {
+            apartmentImageView.setImageBitmap(matchingApartmentBitmap.get(i));
+        }
         internetImageView = (ImageView) customView.findViewById(R.id.internetThumb);
         if (true) {
             internetImageView.setImageResource(thumb_up_icon);
@@ -358,15 +415,15 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
         mPopupWindow.showAtLocation(mFrameLayout, Gravity.CENTER, 0, 0);
     }
 
-    public void tenantPopUp(View v) {
+    public void tenantPopUp(View v, int i) {
         View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_tenant, null);
 
         tenantImageView = (ImageView) customView.findViewById(R.id.tenantInfoImageView);
-//        if (getTenantImage() == null) {
-        tenantImageView.setImageResource(tenant_default);
-//        } else {
-//            tenantImageView.setImageBitmap(getTenantImage());
-//        }
+        if (matchingTenantBitmap.get(i) == null) {
+            tenantImageView.setImageResource(tenant_default);
+        } else {
+            tenantImageView.setImageBitmap(matchingTenantBitmap.get(i));
+        }
         tenantNameTextView = (TextView) customView.findViewById(R.id.tenantNameTextView);
         tenantNameTextView.setText("");
         tenantAgeTextView = (TextView) customView.findViewById(R.id.tenantAgeTextView2);
@@ -418,20 +475,20 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     public void showTenants(List<Pair<TenantProfile, Bitmap>> tenants) {
         Log.d(TAG, "size of potential apartments: " + tenants.size());
         for (Pair<TenantProfile, Bitmap> pair : tenants) {
-            TenantProfile tenantProfile = pair.getLeft();
-            Bitmap bitmap = pair.getRight();
-            //TODO
+            matchingTenantProfile.add(pair.getLeft());
+            matchingTenantBitmap.add(pair.getRight());
         }
+        generateMatchingOverview(matchingTenantProfile, null, matchingTenantBitmap);
     }
 
     @Override
     public void showApartments(List<Pair<ApartmentProfile, Bitmap>> apartments) {
         Log.d(TAG, "size of potential apartments: " + apartments.size());
         for (Pair<ApartmentProfile, Bitmap> pair : apartments) {
-            ApartmentProfile apartmentProfile = pair.getLeft();
-            Bitmap bitmap = pair.getRight();
-            //TODO
+            matchingApartmentProfile.add(pair.getLeft());
+            matchingApartmentBitmap.add(pair.getRight());
         }
+        generateMatchingOverview(null, matchingApartmentProfile, matchingApartmentBitmap);
     }
 
     @Override

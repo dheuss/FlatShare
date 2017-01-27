@@ -20,8 +20,6 @@ public interface MatchingOverviewPresenter extends BasePresenter {
 
     void userDeleteApartment(String apartmentProfileId);
 
-    void setPotentialMatchesListener();
-
     void getProfilePictures(List<TenantProfile> tenantProfiles, List<ApartmentProfile> apartmentProfiles);
 
     interface View extends BaseView {

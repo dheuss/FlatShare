@@ -168,7 +168,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     private TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hour, int min) {
-            timeList.add(" " + hour + ":" + min);
+            timeList.add(" " + hour + ":" + (min < 10 ? '0' : "") + min);
             showOnScreen();
         }
     };
