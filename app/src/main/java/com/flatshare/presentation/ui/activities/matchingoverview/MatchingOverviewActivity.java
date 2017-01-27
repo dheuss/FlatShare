@@ -33,6 +33,7 @@ import com.flatshare.threading.MainThreadImpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.flatshare.R.drawable.female_icon;
 import static com.flatshare.R.drawable.male_icon;
 import static com.flatshare.R.drawable.thumb_down_icon;
@@ -282,56 +283,58 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     };
 
     public void apartmentPopUp() {
-        View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_apartment, null);
-        apartmentPriceTextView = (TextView) customView.findViewById(R.id.apartmentPriceTextView);
-        apartmentPriceTextView.setText(userState.getApartmentProfile().getPrice() + " €");
-        apartmentSizeTextView = (TextView) customView.findViewById(R.id.apartmentSizeTextView);
-        apartmentSizeTextView.setText(userState.getApartmentProfile().getApartmentSize() + " m2");
-        apartmentZipCodeTextView = (TextView) customView.findViewById(R.id.apartmentZIPCODETextView);
-        apartmentZipCodeTextView.setText(userState.getApartmentProfile().getApartmentLocation().getZipCode() + "");
-        apartmentCityTextView = (TextView) customView.findViewById(R.id.apartmentCITYTextView);
-        apartmentCityTextView.setText(userState.getApartmentProfile().getApartmentLocation().getCity());
-        apartmentStateTextView = (TextView) customView.findViewById(R.id.apartmentSTATETextView);
-        apartmentStateTextView.setText(userState.getApartmentProfile().getApartmentLocation().getState());
-        apartmentCountryTextView = (TextView) customView.findViewById(R.id.apartmentCOUNTRYTextView);
-        apartmentCountryTextView.setText(userState.getApartmentProfile().getApartmentLocation().getCountry());
-        apartmentImageView = (ImageView) customView.findViewById(R.id.apartmentInfoImageView);
-        /* TODO Image
-        if (getApartmentImage() == null) {
-            apartmentImageView.setImageResource(apartment_default);
-        } else {
-            apartmentImageView.setImageBitmap(getApartmentImage());
-        }*/
-        internetImageView = (ImageView) customView.findViewById(R.id.internetThumb);
-        if (userState.getApartmentProfile().hasInternet()) {
-            internetImageView.setImageResource(thumb_up_icon);
-        } else {
-            internetImageView.setImageResource(thumb_down_icon);
-        }
-        smokerImageView = (ImageView) customView.findViewById(R.id.smokerThumb);
-        if (userState.getApartmentProfile().isSmokerApartment()) {
-            smokerImageView.setImageResource(thumb_up_icon);
-        } else {
-            smokerImageView.setImageResource(thumb_down_icon);
-        }
-        petsImageView = (ImageView) customView.findViewById(R.id.petsThumb);
-        if (userState.getApartmentProfile().hasPets()) {
-            petsImageView.setImageResource(thumb_up_icon);
-        } else {
-            petsImageView.setImageResource(thumb_down_icon);
-        }
-        washingMashineImageView = (ImageView) customView.findViewById(R.id.washingMashineThumb);
-        if (userState.getApartmentProfile().hasWashingMachine()) {
-            washingMashineImageView.setImageResource(thumb_up_icon);
-        } else {
-            washingMashineImageView.setImageResource(thumb_down_icon);
-        }
-        purposeImageView = (ImageView) customView.findViewById(R.id.purpseThumb);
-        if (userState.getApartmentProfile().isPurposeApartment()) {
-            purposeImageView.setImageResource(thumb_up_icon);
-        } else {
-            purposeImageView.setImageResource(thumb_down_icon);
-        }
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
+        View customView = inflate(R.layout.activity_show_detail_profil_apartment, null);
+
+//        apartmentPriceTextView = (TextView) customView.findViewById(R.id.apartmentPriceTextView);
+//        apartmentPriceTextView.setText(userState.getApartmentProfile().getPrice() + " €");
+//        apartmentSizeTextView = (TextView) customView.findViewById(R.id.apartmentSizeTextView);
+//        apartmentSizeTextView.setText(userState.getApartmentProfile().getApartmentSize() + " m2");
+//        apartmentZipCodeTextView = (TextView) customView.findViewById(R.id.apartmentZIPCODETextView);
+//        apartmentZipCodeTextView.setText(userState.getApartmentProfile().getApartmentLocation().getZipCode() + "");
+//        apartmentCityTextView = (TextView) customView.findViewById(R.id.apartmentCITYTextView);
+//        apartmentCityTextView.setText(userState.getApartmentProfile().getApartmentLocation().getCity());
+//        apartmentStateTextView = (TextView) customView.findViewById(R.id.apartmentSTATETextView);
+//        apartmentStateTextView.setText(userState.getApartmentProfile().getApartmentLocation().getState());
+//        apartmentCountryTextView = (TextView) customView.findViewById(R.id.apartmentCOUNTRYTextView);
+//        apartmentCountryTextView.setText(userState.getApartmentProfile().getApartmentLocation().getCountry());
+//        apartmentImageView = (ImageView) customView.findViewById(R.id.apartmentInfoImageView);
+//        if (getApartmentImage() == null) {
+//            apartmentImageView.setImageResource(apartment_default);
+//        } else {
+//            apartmentImageView.setImageBitmap(getApartmentImage());
+//        }*/
+//        internetImageView = (ImageView) customView.findViewById(R.id.internetThumb);
+//        if (userState.getApartmentProfile().hasInternet()) {
+//            internetImageView.setImageResource(thumb_up_icon);
+//        } else {
+//            internetImageView.setImageResource(thumb_down_icon);
+//        }
+//        smokerImageView = (ImageView) customView.findViewById(R.id.smokerThumb);
+//        if (userState.getApartmentProfile().isSmokerApartment()) {
+//            smokerImageView.setImageResource(thumb_up_icon);
+//        } else {
+//            smokerImageView.setImageResource(thumb_down_icon);
+//        }
+//        petsImageView = (ImageView) customView.findViewById(R.id.petsThumb);
+//        if (userState.getApartmentProfile().hasPets()) {
+//            petsImageView.setImageResource(thumb_up_icon);
+//        } else {
+//            petsImageView.setImageResource(thumb_down_icon);
+//        }
+//        washingMashineImageView = (ImageView) customView.findViewById(R.id.washingMashineThumb);
+//        if (userState.getApartmentProfile().hasWashingMachine()) {
+//            washingMashineImageView.setImageResource(thumb_up_icon);
+//        } else {
+//            washingMashineImageView.setImageResource(thumb_down_icon);
+//        }
+//        purposeImageView = (ImageView) customView.findViewById(R.id.purpseThumb);
+//        if (userState.getApartmentProfile().isPurposeApartment()) {
+//            purposeImageView.setImageResource(thumb_up_icon);
+//        } else {
+//            purposeImageView.setImageResource(thumb_down_icon);
+//        }
+
         mPopupWindow = new PopupWindow(
                 customView,
                 LayoutParams.MATCH_PARENT,
@@ -345,46 +348,46 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
             }
         });
 
-        //Todo Google Maps
 
         mPopupWindow.showAtLocation(mFrameLayout, Gravity.CENTER, 0, 0);
     }
 
     public void tenantPopUp() {
-        View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_tenant, null);
-        tenantImageView = (ImageView) customView.findViewById(R.id.tenantInfoImageView);
-        /* TODO Image
-        if (getTenantImage() == null) {
-            tenantImageView.setImageResource(tenant_default);
-        } else {
-            tenantImageView.setImageBitmap(getTenantImage());
-        }*/
-        tenantNameTextView = (TextView) customView.findViewById(R.id.tenantNameTextView);
-        tenantNameTextView.setText(userState.getTenantProfile().getFirstName());
-        tenantAgeTextView = (TextView) customView.findViewById(R.id.tenantAgeTextView2);
-        tenantAgeTextView.setText(userState.getTenantProfile().getAge() + "");
-        tenantGenderImageView = (ImageView) customView.findViewById(R.id.genderThumb);
-        if (userState.getTenantProfile().getGender() == 0) {
-            tenantGenderImageView.setImageResource(male_icon);
-        } else {
-            tenantGenderImageView.setImageResource(female_icon);
-        }
-        tenantSmokerImageView = (ImageView) customView.findViewById(R.id.smokerThumb);
-        if (userState.getTenantProfile().isSmoker()) {
-            tenantSmokerImageView.setImageResource(thumb_up_icon);
-        } else {
-            tenantSmokerImageView.setImageResource(thumb_down_icon);
-        }
-        tenantPetsImageView = (ImageView) customView.findViewById(R.id.petsThumb);
-        if (userState.getTenantProfile().hasPets()) {
-            tenantPetsImageView.setImageResource(thumb_up_icon);
-        } else {
-            tenantPetsImageView.setImageResource(thumb_down_icon);
-        }
-        tenantOccupationTextView = (TextView) customView.findViewById(R.id.tenantOccupationTextView);
-        tenantOccupationTextView.setText(userState.getTenantProfile().getOccupation());
-        tenantInfoTextView = (TextView) customView.findViewById(R.id.tenantInfoTextView);
-        tenantInfoTextView.setText(userState.getTenantProfile().getShortBio());
+        View customView = this.getLayoutInflater().inflate(R.layout.activity_show_detail_profil_tenant, null);
+
+//        tenantImageView = (ImageView) customView.findViewById(R.id.tenantInfoImageView);
+//        if (getTenantImage() == null) {
+//            tenantImageView.setImageResource(tenant_default);
+//        } else {
+//            tenantImageView.setImageBitmap(getTenantImage());
+//        }*/
+//        tenantNameTextView = (TextView) customView.findViewById(R.id.tenantNameTextView);
+//        tenantNameTextView.setText(userState.getTenantProfile().getFirstName());
+//        tenantAgeTextView = (TextView) customView.findViewById(R.id.tenantAgeTextView2);
+//        tenantAgeTextView.setText(userState.getTenantProfile().getAge() + "");
+//        tenantGenderImageView = (ImageView) customView.findViewById(R.id.genderThumb);
+//        if (userState.getTenantProfile().getGender() == 0) {
+//            tenantGenderImageView.setImageResource(male_icon);
+//        } else {
+//            tenantGenderImageView.setImageResource(female_icon);
+//        }
+//        tenantSmokerImageView = (ImageView) customView.findViewById(R.id.smokerThumb);
+//        if (userState.getTenantProfile().isSmoker()) {
+//            tenantSmokerImageView.setImageResource(thumb_up_icon);
+//        } else {
+//            tenantSmokerImageView.setImageResource(thumb_down_icon);
+//        }
+//        tenantPetsImageView = (ImageView) customView.findViewById(R.id.petsThumb);
+//        if (userState.getTenantProfile().hasPets()) {
+//            tenantPetsImageView.setImageResource(thumb_up_icon);
+//        } else {
+//            tenantPetsImageView.setImageResource(thumb_down_icon);
+//        }
+//        tenantOccupationTextView = (TextView) customView.findViewById(R.id.tenantOccupationTextView);
+//        tenantOccupationTextView.setText(userState.getTenantProfile().getOccupation());
+//        tenantInfoTextView = (TextView) customView.findViewById(R.id.tenantInfoTextView);
+//        tenantInfoTextView.setText(userState.getTenantProfile().getShortBio());
+
         mPopupWindow = new PopupWindow(
                 customView,
                 LayoutParams.MATCH_PARENT,
