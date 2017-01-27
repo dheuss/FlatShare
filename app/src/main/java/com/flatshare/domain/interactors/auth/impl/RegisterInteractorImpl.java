@@ -12,10 +12,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
-/**
- * Created by Arber on 06/01/2017.
- */
-
 public class RegisterInteractorImpl extends AbstractAuthenticator implements RegisterInteractor {
 
     private static final String TAG = "RegisterInt";
@@ -69,12 +65,7 @@ public class RegisterInteractorImpl extends AbstractAuthenticator implements Reg
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
                         if (task.isSuccessful()) {
-                            // TODO: update view
                             RegisterInteractorImpl.this.notifySuccess();
                         } else {
                             RegisterInteractorImpl.this.notifyError(task.getException().getMessage());

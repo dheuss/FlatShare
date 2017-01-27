@@ -49,7 +49,6 @@ public class LogoutInteractorImpl extends AbstractAuthenticator implements Logou
 
     @Override
     public void execute() {
-        //TODO: Abfrage ob man sich wirklich ausloggen möchte
         mAuth.signOut();
         notifySuccess();
     }

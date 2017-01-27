@@ -10,7 +10,6 @@ import com.flatshare.domain.interactors.base.Interactor;
 public interface FilterSettingsInteractor extends Interactor {
 
     interface Callback {
-        // TODO: CHANGE parameter type?
         void onSentSuccess(FilterSettings filterSettings);
         void onSentFailure(String error);
     }

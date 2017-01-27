@@ -124,24 +124,4 @@ public class PrimaryProfileInteractorImpl extends AbstractInteractor implements 
         });
 
     }
-
-//    private void updateClassificationId() {
-//
-//        //TODO: check if redundant => can it be deleted?
-//
-//        Map<String, Object> map = new HashMap<>();
-//        map.put(databaseRoot.getUserProfileNode(userId).getClassificationId(), this.primaryUserProfile.getClassificationId());
-//
-//        mDatabase.updateChildren(map, new DatabaseReference.CompletionListener() {
-//            @Override
-//            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-//                if (databaseError != null) { // Error
-//                    PrimaryProfileInteractorImpl.this.notifyError(databaseError.toException().getMessage());
-//                } else {
-//                    PrimaryProfileInteractorImpl.this.notifyProfileCreated(primaryUserProfile);
-//                }
-//            }
-//        });
-//    }
-
 }

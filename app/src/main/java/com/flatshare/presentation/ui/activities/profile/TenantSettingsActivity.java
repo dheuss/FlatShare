@@ -126,8 +126,6 @@ public class TenantSettingsActivity extends AbstractActivity implements TenantSe
         int isBathtube = 2;
         int isPetAllowed = 2;
 
-        //TODO Area
-
         if (yesPurposeCommunityRadioButton.isChecked()){
             isPurposeApartment = 0;
         }
@@ -236,8 +234,6 @@ public class TenantSettingsActivity extends AbstractActivity implements TenantSe
         minSize = (TextView) findViewById(R.id.tenant_settings_size_range_2);
         maxSize = (TextView) findViewById(R.id.tenant_settings_size_range_4);
         sizeRange = (RangeBar) findViewById(R.id.rangebar_size_range);
-
-        //TODO AREA
 
         yesPurposeCommunityRadioButton = (RadioButton) findViewById(R.id.purposeCommunityYES_RadioButton);
         noPurposeCommunityRadioButton = (RadioButton) findViewById(R.id.purposeCommunityNO_RadioButton);
