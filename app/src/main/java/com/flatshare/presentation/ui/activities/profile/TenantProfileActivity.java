@@ -171,8 +171,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
             String selectedImagePath = cursor.getString(column_index);
 
             new CompressTask().execute(selectedImagePath);
-//            mPresenter.uploadImage(uri);
-            // Log.d(TAG, String.valueOf(bitmap));
+
         }
     }
 
@@ -182,26 +181,31 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
-            // Do something like display a progress bar
         }
 
         // This is run in a background thread
         @Override
         protected byte[] doInBackground(String... params) {
 
-            String selectedImagePath = params[0];
-
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;
             final int REQUIRED_SIZE = 200;
+
+            String selectedImagePath = params[0];
+            // Decode image size
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(selectedImagePath, o);
+
+            // Find the correct scale value. It should be the power of 2.
             int scale = 1;
-            while (options.outWidth / scale / 2 >= REQUIRED_SIZE
-                    && options.outHeight / scale / 2 >= REQUIRED_SIZE)
+            while (o.outWidth / scale / 2 >= REQUIRED_SIZE &&
+                    o.outHeight / scale / 2 >= REQUIRED_SIZE) {
                 scale *= 2;
-            options.inSampleSize = scale;
-            options.inJustDecodeBounds = false;
-            Bitmap bitmap = BitmapFactory.decodeFile(selectedImagePath, options);
+            }
+
+            // Decode with inSampleSize
+            BitmapFactory.Options o2 = new BitmapFactory.Options();
+            o2.inSampleSize = scale;
+            Bitmap bitmap = BitmapFactory.decodeFile(selectedImagePath, o2);
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
@@ -221,7 +225,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         @Override
         protected void onPostExecute(byte[] result) {
             super.onPostExecute(result);
-            Log.d(TAG, "onPostExecute: IS DATA EMPTY?! " + result.length);
+            mPresenter.uploadImage(result);
         }
     }
 

@@ -97,9 +97,9 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
     }
 
     @Override
-    public void uploadImage(Uri uri) {
+    public void uploadImage(byte[] data) {
 //        mView.showProgress();
-        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, false, MediaType.IMAGE, uri, userState.getApartmentId());
+        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, false, MediaType.IMAGE, data, userState.getApartmentId());
         mediaInteractor.execute();
     }
 

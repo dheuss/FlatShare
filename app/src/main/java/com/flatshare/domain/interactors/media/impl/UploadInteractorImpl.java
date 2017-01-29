@@ -28,18 +28,18 @@ public class UploadInteractorImpl extends AbstractInteractor implements MediaInt
 
     private MediaType mediaType;
 
-    private Uri uri;
+    private byte[] data;
     private boolean isTenant;
     private String id;
 
     public UploadInteractorImpl(MainThread mainThread,
-                                UploadCallback downloadCallback, boolean isTenant, MediaType mediaType, Uri uri, String id) {
+                                UploadCallback downloadCallback, boolean isTenant, MediaType mediaType, byte[] data, String id) {
 
         super(mainThread);
         this.mCallback = downloadCallback;
         this.isTenant = isTenant;
         this.mediaType = mediaType;
-        this.uri = uri;
+        this.data = data;
         this.id = id;
     }
 
@@ -76,13 +76,6 @@ public class UploadInteractorImpl extends AbstractInteractor implements MediaInt
 
         String childNode;
 
-//        Bitmap bitmap = MediaInteractorCompresser.compress(iStream);
-//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//
-//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//
-//        byte[] data = stream.toByteArray();
-
         if (isTenant) {
             if (mediaType == MediaType.IMAGE) {
                 childNode = storageRoot.getTenants(this.id).getImagesPath();
@@ -93,7 +86,7 @@ public class UploadInteractorImpl extends AbstractInteractor implements MediaInt
             childNode = storageRoot.getApartments(this.id).getImagesPath();
         }
 
-        UploadTask uploadTask = mStorage.child(childNode + DEFAULT_NAME).putFile(uri);
+        UploadTask uploadTask = mStorage.child(childNode + DEFAULT_NAME).putBytes(data);
 
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override

@@ -1,8 +1,5 @@
 package com.flatshare.presentation.presenters.profile.impl;
 
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.widget.VideoView;
 
 import com.flatshare.domain.MainThread;
@@ -15,8 +12,6 @@ import com.flatshare.domain.interactors.profile.impl.TenantProfileInteractorImpl
 import com.flatshare.domain.interactors.media.impl.UploadInteractorImpl;
 import com.flatshare.presentation.presenters.profile.TenantProfilePresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
-
-import java.io.File;
 
 /**
  * Created by Arber on 11/12/2016.
@@ -82,9 +77,9 @@ public class TenantProfilePresenterImpl extends AbstractPresenter implements Ten
     }
 
     @Override
-    public void uploadImage(Uri uri) {
+    public void uploadImage(byte[] data) {
 //        mView.showProgress();
-        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, true, MediaType.IMAGE, uri, userState.getTenantId());
+        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, true, MediaType.IMAGE, data, userState.getTenantId());
         mediaInteractor.execute();
     }
 

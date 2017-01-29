@@ -20,7 +20,7 @@ public interface ApartmentProfilePresenter extends BasePresenter {
 
     void sendProfile(ApartmentProfile apartmentProfile);
 
-    void uploadImage(Uri uri);
+    void uploadImage(byte[] uri);
 
     void uploadVideo(VideoView videoView);
 

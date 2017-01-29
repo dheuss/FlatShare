@@ -18,7 +18,7 @@ public interface TenantProfilePresenter extends BasePresenter {
 
     void uploadVideo(VideoView videoView);
 
-    void uploadImage(Uri uri);
+    void uploadImage(byte[] data);
 
     interface View extends BaseView {
         void changeToTenantSettings();

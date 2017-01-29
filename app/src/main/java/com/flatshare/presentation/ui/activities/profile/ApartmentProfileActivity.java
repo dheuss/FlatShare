@@ -256,29 +256,6 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
             Uri uri = data.getData();
 
-            new CompressTask().execute(uri);
-
-            mPresenter.uploadImage(uri);
-            // Log.d(TAG, String.valueOf(bitmap));
-        }
-    }
-
-    private class CompressTask extends AsyncTask<Uri, Integer, byte[]> {
-
-        // Runs in UI before background thread is called
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            // Do something like display a progress bar
-        }
-
-        // This is run in a background thread
-        @Override
-        protected byte[] doInBackground(Uri... params) {
-            // get the string from params, which is an array
-            Uri uri = params[0];
-
             String[] projection = {MediaStore.MediaColumns.DATA};
             CursorLoader cursorLoader = new CursorLoader(ApartmentProfileActivity.this, uri, projection, null, null, null);
             Cursor cursor = cursorLoader.loadInBackground();
@@ -286,16 +263,41 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             cursor.moveToFirst();
             String selectedImagePath = cursor.getString(column_index);
 
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;
+            new CompressTask().execute(selectedImagePath);
+        }
+    }
+
+    private class CompressTask extends AsyncTask<String, Integer, byte[]> {
+
+        // Runs in UI before background thread is called
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        // This is run in a background thread
+        @Override
+        protected byte[] doInBackground(String... params) {
+
             final int REQUIRED_SIZE = 200;
+
+            String selectedImagePath = params[0];
+            // Decode image size
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(selectedImagePath, o);
+
+            // Find the correct scale value. It should be the power of 2.
             int scale = 1;
-            while (options.outWidth / scale / 2 >= REQUIRED_SIZE
-                    && options.outHeight / scale / 2 >= REQUIRED_SIZE)
+            while (o.outWidth / scale / 2 >= REQUIRED_SIZE &&
+                    o.outHeight / scale / 2 >= REQUIRED_SIZE) {
                 scale *= 2;
-            options.inSampleSize = scale;
-            options.inJustDecodeBounds = false;
-            Bitmap bitmap = BitmapFactory.decodeFile(selectedImagePath, options);
+            }
+
+            // Decode with inSampleSize
+            BitmapFactory.Options o2 = new BitmapFactory.Options();
+            o2.inSampleSize = scale;
+            Bitmap bitmap = BitmapFactory.decodeFile(selectedImagePath, o2);
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
@@ -315,7 +317,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         @Override
         protected void onPostExecute(byte[] result) {
             super.onPostExecute(result);
-            Log.d(TAG, "onPostExecute: IS DATA EMPTY?! " + result.length);
+            mPresenter.uploadImage(result);
         }
     }
 
@@ -519,10 +521,10 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             result = false;
         }
 
-        if (profilePicUploaded) {
-            uploadPictureButton.setError(getString(R.string.picture_required_error));
-            result = false;
-        }
+//        if (profilePicUploaded) {
+//            uploadPictureButton.setError(getString(R.string.picture_required_error));
+//            result = false;
+//        }
 
         return result;
     }
