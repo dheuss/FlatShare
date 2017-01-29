@@ -1,8 +1,19 @@
 package com.flatshare.presentation.ui.activities.profile;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.CursorLoader;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,13 +30,14 @@ import com.flatshare.presentation.presenters.profile.impl.TenantProfilePresenter
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-import java.io.File;
+import java.io.ByteArrayOutputStream;
 
 /**
  * Created by Arber on 16/12/2016.
  */
 public class TenantProfileActivity extends AbstractActivity implements TenantProfilePresenter.View {
 
+    private static final int PERMISSIONS_REQUEST_STORAGE = 101;
     private EditText firstNameEditText;
     private EditText ageEditText;
     private EditText shortBioText;
@@ -80,11 +92,26 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
 
     private void openGallery() {
 
-        // Create intent to Open Image applications like Gallery, Google Photos
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        // Start the Intent
-        startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
+        boolean allowed = false;
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                checkForStoragePermission();
+            } else {
+                allowed = true;
+            }
+        } else {
+            allowed = true;
+        }
+
+        if (allowed) {
+            // Create intent to Open Image applications like Gallery, Google Photos
+            Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            // Start the Intent
+            startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
+        }
 
         // startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
 
@@ -97,16 +124,104 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
 //        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
 
+    private void checkForStoragePermission() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                PERMISSIONS_REQUEST_STORAGE);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSIONS_REQUEST_STORAGE) {
+
+            if (grantResults.length <= 0) {
+                return;
+            }
+
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Create intent to Open Image applications like Gallery, Google Photos
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                // Start the Intent
+                startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
+            } else {
+                Toast.makeText(this, "Access rejected, please allow access and try again.", Toast.LENGTH_LONG);
+            }
+
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
 
+            // get the string from params, which is an array
             Uri uri = data.getData();
 
-            mPresenter.uploadImage(uri);
+            String[] projection = {MediaStore.MediaColumns.DATA};
+            CursorLoader cursorLoader = new CursorLoader(TenantProfileActivity.this, uri, projection, null, null, null);
+            Cursor cursor = cursorLoader.loadInBackground();
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+            cursor.moveToFirst();
+            String selectedImagePath = cursor.getString(column_index);
+
+            new CompressTask().execute(selectedImagePath);
+//            mPresenter.uploadImage(uri);
             // Log.d(TAG, String.valueOf(bitmap));
+        }
+    }
+
+    private class CompressTask extends AsyncTask<String, Integer, byte[]> {
+
+        // Runs in UI before background thread is called
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            // Do something like display a progress bar
+        }
+
+        // This is run in a background thread
+        @Override
+        protected byte[] doInBackground(String... params) {
+
+            String selectedImagePath = params[0];
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            final int REQUIRED_SIZE = 200;
+            int scale = 1;
+            while (options.outWidth / scale / 2 >= REQUIRED_SIZE
+                    && options.outHeight / scale / 2 >= REQUIRED_SIZE)
+                scale *= 2;
+            options.inSampleSize = scale;
+            options.inJustDecodeBounds = false;
+            Bitmap bitmap = BitmapFactory.decodeFile(selectedImagePath, options);
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+
+            return byteArray;
+        }
+
+        // This is called from background thread but runs in UI
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+
+        }
+
+        // This runs in UI when background thread finishes
+        @Override
+        protected void onPostExecute(byte[] result) {
+            super.onPostExecute(result);
+            Log.d(TAG, "onPostExecute: IS DATA EMPTY?! " + result.length);
         }
     }
 

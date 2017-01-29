@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Parcelable;
 import android.os.Vibrator;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.pair.Pair;
@@ -38,11 +40,9 @@ import dmax.dialog.SpotsDialog;
  */
 public class QRCodeReaderActivity extends Activity implements QRScannerPresenter.View {
 
-    private static final int PERMISSIONS_REQUEST_CAMERA = 100;
-
     private static final int WIDTH = 640;
     private static final int HEIGHT = 480;
-    public static final String QR_IDENTIFIER = "123123123";
+    public static final String QR_IDENTIFIER = "d91dbdf280373c5b";
     private static final String TAG = "QRCodeReaderActivity";
 
     QRScannerPresenter mPresenter;
@@ -67,7 +67,7 @@ public class QRCodeReaderActivity extends Activity implements QRScannerPresenter
         );
 
         setupReader();
-        checkForPermission();
+//        checkForPermission();
     }
 
     private void setupReader() {
@@ -131,35 +131,24 @@ public class QRCodeReaderActivity extends Activity implements QRScannerPresenter
     }
 
     private void setupSurfaceView() {
-        cameraView = (SurfaceView) findViewById(R.id.camera_view);
 
-        cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
-            @Override
-            public void surfaceCreated(SurfaceHolder holder) {
-                openCamera();
-            }
+            cameraView = (SurfaceView) findViewById(R.id.camera_view);
+            cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
+                @Override
+                public void surfaceCreated(SurfaceHolder holder) {
+                    openCamera();
+                }
 
-            @Override
-            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-            }
+                @Override
+                public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+                }
 
-            @Override
-            public void surfaceDestroyed(SurfaceHolder holder) {
-                stopCamera();
-            }
-        });
-    }
+                @Override
+                public void surfaceDestroyed(SurfaceHolder holder) {
+                    stopCamera();
+                }
+            });
 
-    private void checkForPermission() {
-        if (ActivityCompat.checkSelfPermission(QRCodeReaderActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            if (ContextCompat.checkSelfPermission(QRCodeReaderActivity.this,
-                    Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(QRCodeReaderActivity.this,
-                        new String[]{Manifest.permission.CAMERA},
-                        PERMISSIONS_REQUEST_CAMERA);
-            }
-
-        }
     }
 
     private void openCamera() {

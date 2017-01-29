@@ -4,13 +4,20 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.CursorLoader;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -19,6 +26,8 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -33,6 +42,8 @@ import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.common.ApartmentLocation;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.pair.ParcelablePair;
+import com.flatshare.domain.interactors.media.MediaInteractor;
+import com.flatshare.domain.interactors.media.impl.MediaInteractorCompresser;
 import com.flatshare.presentation.presenters.profile.ApartmentProfilePresenter;
 import com.flatshare.presentation.presenters.profile.impl.ApartmentProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
@@ -41,6 +52,7 @@ import com.flatshare.threading.MainThreadImpl;
 import com.flatshare.utils.location.AppLocationService;
 import com.google.zxing.common.StringUtils;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -92,6 +104,8 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
     private AppLocationService appLocationService;
     private static final int PERMISSIONS_REQUEST_LOCATION = 99;
+    private static final int PERMISSIONS_REQUEST_CAMERA = 100;
+    private static final int PERMISSIONS_REQUEST_STORAGE = 101;
 
     private ApartmentProfilePresenter mPresenter;
     private static final String TAG = "ApartmentProfileAct";
@@ -191,15 +205,34 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
     private void openGallery() {
 
-        // Create intent to Open Image applications like Gallery, Google Photos
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        // Start the Intent
-        startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
+        boolean allowed = false;
 
-        // startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                checkForStoragePermission();
+            } else {
+                allowed = true;
+            }
+        } else {
+            allowed = true;
+        }
+
+        if (allowed) {
+            // Create intent to Open Image applications like Gallery, Google Photos
+            Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            // Start the Intent
+            startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
+        }
     }
 
+    private void checkForStoragePermission() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                PERMISSIONS_REQUEST_STORAGE);
+
+    }
 
     // need it in order to get value from destroyed activity (QR Scanner)
     @Override
@@ -223,16 +256,131 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
             Uri uri = data.getData();
 
+            new CompressTask().execute(uri);
+
             mPresenter.uploadImage(uri);
             // Log.d(TAG, String.valueOf(bitmap));
         }
     }
 
+    private class CompressTask extends AsyncTask<Uri, Integer, byte[]> {
+
+        // Runs in UI before background thread is called
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            // Do something like display a progress bar
+        }
+
+        // This is run in a background thread
+        @Override
+        protected byte[] doInBackground(Uri... params) {
+            // get the string from params, which is an array
+            Uri uri = params[0];
+
+            String[] projection = {MediaStore.MediaColumns.DATA};
+            CursorLoader cursorLoader = new CursorLoader(ApartmentProfileActivity.this, uri, projection, null, null, null);
+            Cursor cursor = cursorLoader.loadInBackground();
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+            cursor.moveToFirst();
+            String selectedImagePath = cursor.getString(column_index);
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            final int REQUIRED_SIZE = 200;
+            int scale = 1;
+            while (options.outWidth / scale / 2 >= REQUIRED_SIZE
+                    && options.outHeight / scale / 2 >= REQUIRED_SIZE)
+                scale *= 2;
+            options.inSampleSize = scale;
+            options.inJustDecodeBounds = false;
+            Bitmap bitmap = BitmapFactory.decodeFile(selectedImagePath, options);
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+
+            return byteArray;
+        }
+
+        // This is called from background thread but runs in UI
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+
+        }
+
+        // This runs in UI when background thread finishes
+        @Override
+        protected void onPostExecute(byte[] result) {
+            super.onPostExecute(result);
+            Log.d(TAG, "onPostExecute: IS DATA EMPTY?! " + result.length);
+        }
+    }
+
     private void scanQR() {
+        boolean allowed = false;
 
-        Intent intent = new Intent(this, QRCodeReaderActivity.class);
-        startActivityForResult(intent, STATIC_VALUE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                checkForCameraPermission();
+            } else {
+                allowed = true;
+            }
+        } else {
+            allowed = true;
+        }
 
+        if (allowed) {
+            Intent intent = new Intent(this, QRCodeReaderActivity.class);
+            startActivityForResult(intent, STATIC_VALUE);
+        }
+
+    }
+
+    private void checkForCameraPermission() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.CAMERA},
+                PERMISSIONS_REQUEST_CAMERA);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSIONS_REQUEST_CAMERA) {
+
+            if (grantResults.length <= 0) {
+                return;
+            }
+
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Intent intent = new Intent(this, QRCodeReaderActivity.class);
+                startActivityForResult(intent, STATIC_VALUE);
+            } else {
+                Toast.makeText(this, "Access rejected, please allow access and try again.", Toast.LENGTH_LONG);
+            }
+
+        } else if (requestCode == PERMISSIONS_REQUEST_STORAGE) {
+
+            if (grantResults.length <= 0) {
+                return;
+            }
+
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Create intent to Open Image applications like Gallery, Google Photos
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                // Start the Intent
+                startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
+            } else {
+                Toast.makeText(this, "Access rejected, please allow access and try again.", Toast.LENGTH_LONG);
+            }
+
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
     @Override
@@ -346,7 +494,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             result = false;
         }
 
-        if (apartmentInfoEditText.getText().toString().trim().equals("")){
+        if (apartmentInfoEditText.getText().toString().trim().equals("")) {
             apartmentInfoEditText.setError(getString(R.string.field_cannot_be_empty));
             result = false;
         }
