@@ -20,8 +20,6 @@ public interface PotentialMatchingPresenter extends BasePresenter {
 
     void roommateSwipedTenant(String tenantProfileId, boolean accepted);
 
-    void setPotentialMatchesListener();
-
     void getProfilePictures(List<TenantProfile> tenantProfiles, List<ApartmentProfile> apartmentProfiles);
 
 

@@ -32,7 +32,6 @@ public class PotentialMatchingPresenterImpl extends AbstractPresenter
         implements PotentialMatchingPresenter,
         PotentialMatchingInteractor.Callback,
         SwipeInteractor.Callback,
-        PMatchesListenerInteractor.Callback,
         MediaInteractor.DownloadCallback {
 
 
@@ -106,12 +105,6 @@ public class PotentialMatchingPresenterImpl extends AbstractPresenter
     }
 
     @Override
-    public void setPotentialMatchesListener() {
-//        PMatchesListenerInteractor pMatchesListenerInteractor = new PMatchesListenerInteractorImpl(mMainThread, this);
-//        pMatchesListenerInteractor.execute();
-    }
-
-    @Override
     public void getProfilePictures(List<TenantProfile> tenantProfiles, List<ApartmentProfile> apartmentProfiles) {
         MediaInteractor downloadInteractor;
         if (tenantProfiles == null) {
@@ -146,17 +139,6 @@ public class PotentialMatchingPresenterImpl extends AbstractPresenter
 //        mView.showApartments(apartments);
         getProfilePictures(null, apartments);
     }
-
-    @Override
-    public void onFailure(String errorMessage) {
-        onError("Error on matching Interactor: " + errorMessage);
-    }
-
-    @Override
-    public void onMatchCreated(String key) {
-        Log.d(TAG, "onMatchCreated: " + key);
-    }
-
 
     @Override
     public void onTenantDownloadSuccess(List<Pair<TenantProfile, Bitmap>> tenantsImageList) {

@@ -51,9 +51,6 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     private ImageButton rejectBtn;
     private ImageButton infoBtn;
 
-    private TextView badgeCounter;
-    private Button badgeIcon;
-
     private PopupWindow mPopupWindow;
     private FrameLayout mFrameLayout;
 

@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.enums.ProfileType;
 import com.flatshare.domain.state.UserState;
+import com.flatshare.presentation.presenters.matching.MatchesPresenter;
+import com.flatshare.presentation.presenters.matching.impl.MatchesPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.FlatShareViewPager;
 import com.flatshare.presentation.ui.activities.matching.MatchingActivity;
@@ -24,16 +26,19 @@ import com.flatshare.presentation.ui.activities.settings.ProfileApartmentSetting
 import com.flatshare.presentation.ui.activities.settings.ProfileTenantSettingsActivity;
 import com.flatshare.presentation.ui.activities.settings.RoommateProfileSettingsActivity;
 import com.flatshare.presentation.ui.activities.settings.SettingsActivity;
+import com.flatshare.threading.MainThreadImpl;
+import com.readystatesoftware.viewbadger.BadgeView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AbstractActivity {
+public class MainActivity extends AbstractActivity implements MatchesPresenter.View {
 
     private static final String TAG = "MainActivity";
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private FlatShareViewPager viewPager;
+    private BadgeView badge;
     private int[] tabIcons = {
             R.drawable.home_icon,
             R.drawable.settings_icon,
@@ -43,6 +48,7 @@ public class MainActivity extends AbstractActivity {
 
     private UserState userState;
     private int classificationId;
+    private MatchesPresenterImpl mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,12 @@ public class MainActivity extends AbstractActivity {
         Log.d(TAG, "onCreate: " + classificationId);
 
         bindView();
+
+        mPresenter = new MatchesPresenterImpl(
+                MainThreadImpl.getInstance(),
+                this
+        );
+        mPresenter.setPotentialMatchesListener();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -76,6 +88,7 @@ public class MainActivity extends AbstractActivity {
     private void bindView(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         viewPager = (FlatShareViewPager) findViewById(R.id.viewpager);
+        viewPager.setCallback(this);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
     }
 
@@ -99,6 +112,9 @@ public class MainActivity extends AbstractActivity {
         tabFour.setText("MatchingOverviewActivity");
         tabFour.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.notifications_icon, 0, 0);
         tabLayout.getTabAt(3).setCustomView(tabFour);
+
+        badge = new BadgeView(this, tabFour);
+        badge.hide();
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -127,9 +143,9 @@ public class MainActivity extends AbstractActivity {
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
+
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
-
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
         }
@@ -153,10 +169,26 @@ public class MainActivity extends AbstractActivity {
         public CharSequence getPageTitle(int position) {
             return null;
         }
-    }
 
+    }
     @Override
     public void onBackPressed() {
         Toast.makeText(getApplicationContext(), "Sorry, you can't close this app!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void incrementBadgeCounter(){
+        String text = badge.getText().toString();
+        if(text==null || text.trim().equals("")){
+            badge.setText("1");
+        } else {
+            badge.setText((Integer.parseInt(text) + 1) + "");
+        }
+        badge.show();
+    }
+
+    public void resetBadgeCounter() {
+        badge.setText("0");
+        badge.hide();
     }
 }
