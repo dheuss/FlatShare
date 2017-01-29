@@ -6,18 +6,23 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
+import com.flatshare.domain.datatypes.db.profiles.UserProfile;
+import com.flatshare.domain.datatypes.enums.ProfileType;
 import com.flatshare.domain.interactors.matching.PotentialMatchingInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.domain.predicates.ApartmentMatchFinder;
 import com.flatshare.domain.predicates.TenantMatchFinder;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 
 /**
@@ -26,6 +31,7 @@ import java.util.Map;
 public class PotentialMatchingInteractorImpl extends AbstractInteractor implements PotentialMatchingInteractor {
 
     private static final String TAG = "MatchingInt";
+    private static final long HOURS_24_IN_MIN = 24*60;
 
     /**
      * The Callback is responsible for talking to the UI on the main thread
@@ -107,7 +113,7 @@ public class PotentialMatchingInteractorImpl extends AbstractInteractor implemen
                     } else {
                         PrimaryUserProfile pUP = dataSnapshot.getValue(PrimaryUserProfile.class);
                         int cId = pUP.getClassificationId();
-                        if (cId == 0) {
+                        if (cId == ProfileType.TENANT.getValue()) {
                             getTenant(pUP.getTenantProfileId());
                         } else {
                             getApartment(pUP.getRoommateProfileId());
@@ -130,6 +136,7 @@ public class PotentialMatchingInteractorImpl extends AbstractInteractor implemen
         String testPath = "test/" + databaseRoot.getTenantProfiles();
 
         mDatabase.child(testPath).addListenerForSingleValueEvent(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -142,6 +149,10 @@ public class PotentialMatchingInteractorImpl extends AbstractInteractor implemen
                     return;
                 }
 
+                // if less than 24 hours elapsed => check if tenantsToShow not empty
+//                if(System.currentTimeMillis() - apUP.getTimestamp() <= HOURS_24_IN_MIN){
+//                }
+
                 List<TenantProfile> tenants = new ArrayList<>((dataSnapshot.getValue(t).values()));
 
                 List<TenantProfile> potentialMatches = new ApartmentMatchFinder(apUP, tenants).getMatches();
@@ -149,6 +160,7 @@ public class PotentialMatchingInteractorImpl extends AbstractInteractor implemen
                 if (potentialMatches.size() == 0) {
                     notifyNoMatchFound();
                 } else {
+                    updatePotentialMatches(potentialMatches, false);
                     notifyTenantMatchesFound(potentialMatches);
                 }
             }
@@ -159,6 +171,31 @@ public class PotentialMatchingInteractorImpl extends AbstractInteractor implemen
             }
         });
 
+    }
+
+    private void updatePotentialMatches(List<? extends UserProfile> potentialMatches, boolean isTenant) {
+        String pMatchesPath;
+        String timestampPath;
+
+        if (isTenant) {
+            pMatchesPath = databaseRoot.getTenantProfileNode(tenantProfile.getTenantId()).getApartmentsToShow();
+            timestampPath = databaseRoot.getTenantProfileNode(tenantProfile.getTenantId()).getTimestamp();
+        } else {
+            pMatchesPath = databaseRoot.getApartmentProfileNode(apartmentProfile.getApartmentId()).getTenantsToShow();
+            timestampPath = databaseRoot.getApartmentProfileNode(apartmentProfile.getApartmentId()).getTimestamp();
+        }
+
+        List<String> ids = new ArrayList<>();
+
+        for (UserProfile profile : potentialMatches) {
+            ids.add(profile.getId());
+        }
+
+        Map<String, Object> map = new HashMap<>();
+        map.put(pMatchesPath, ids);
+        map.put(timestampPath, System.currentTimeMillis());
+
+        mDatabase.updateChildren(map);
     }
 
     private void matchTenant(final TenantProfile tUP) {
@@ -185,6 +222,7 @@ public class PotentialMatchingInteractorImpl extends AbstractInteractor implemen
                 if (potentialMatches.size() == 0) {
                     notifyNoMatchFound();
                 } else {
+                    updatePotentialMatches(potentialMatches, true);
                     notifyApartmentMatchesFound(potentialMatches);
                 }
             }

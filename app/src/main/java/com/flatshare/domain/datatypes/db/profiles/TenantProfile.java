@@ -53,11 +53,11 @@ public class TenantProfile extends UserProfile {
     @PropertyName("matched_apartments")
     public List<String> matchedApartments;
 
-    @PropertyName("timestamp")
-    public long timestamp;
-
     @PropertyName("profile_done")
     public boolean done;
+
+    @PropertyName("timestamp")
+    public long timestamp;
 
     public TenantProfile() {
         this.apartmentsToShow = new ArrayList<>();
@@ -200,16 +200,6 @@ public class TenantProfile extends UserProfile {
     }
 
     @Exclude
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    @Exclude
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    @Exclude
     public void setTenantId(String tenantId) {
         this.tenantId = tenantId;
     }
@@ -222,6 +212,16 @@ public class TenantProfile extends UserProfile {
     @Exclude
     public void setDone(boolean done) {
         this.done = done;
+    }
+
+    @Exclude
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    @Exclude
+    public long getTimestamp() {
+        return timestamp;
     }
 
     @Exclude

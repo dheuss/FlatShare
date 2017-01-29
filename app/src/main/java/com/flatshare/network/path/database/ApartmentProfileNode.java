@@ -11,12 +11,14 @@ public class ApartmentProfileNode {
     private final String apartmentFilterSettings;
     private final String tenantsToShow;
     private final String matchedTenants;
+    private final String timestamp;
 
     public ApartmentProfileNode(String rootPath, String apartmentId) {
         this.rootPath = rootPath + apartmentId + "/";
         this.apartmentFilterSettings = this.rootPath + "apartment_filter_settings/";
         this.tenantsToShow = this.rootPath + "tenants_to_show/";
         this.matchedTenants = this.rootPath + "matched_tenants/";
+        this.timestamp = this.rootPath + "timestamp/";
     }
 
     public String getRootPath() {
@@ -33,5 +35,9 @@ public class ApartmentProfileNode {
 
     public String getMatchedTenants() {
         return matchedTenants;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
     }
 }

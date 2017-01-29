@@ -72,11 +72,14 @@ public class ApartmentProfile extends UserProfile {
     @PropertyName("apartmentSize")
     public int apartmentSize;
 
+    @PropertyName("timestamp")
+    public long timestamp;
+
     public ApartmentProfile() {
         this.roommateIds = new ArrayList<>();
         this.apartmentLocation = new ApartmentLocation();
         this.languages = new ArrayList<>();
-        this.matchedTenants= new ArrayList<>();
+        this.matchedTenants = new ArrayList<>();
     }
 
     @Exclude
@@ -250,13 +253,23 @@ public class ApartmentProfile extends UserProfile {
     }
 
     @Exclude
-    public int getApartmentSize(){
+    public int getApartmentSize() {
         return apartmentSize;
     }
 
     @Exclude
-    public void setApartmentSize(int apartmentSize){
+    public void setApartmentSize(int apartmentSize) {
         this.apartmentSize = apartmentSize;
+    }
+
+    @Exclude
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    @Exclude
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     @Exclude
