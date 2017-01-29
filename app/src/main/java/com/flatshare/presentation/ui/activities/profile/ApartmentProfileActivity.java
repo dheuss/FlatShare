@@ -18,16 +18,11 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.CursorLoader;
-import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.support.v4.content.ContextCompat;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -35,22 +30,18 @@ import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.common.ApartmentLocation;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.pair.ParcelablePair;
-import com.flatshare.domain.interactors.media.MediaInteractor;
-import com.flatshare.domain.interactors.media.impl.MediaInteractorCompresser;
 import com.flatshare.presentation.presenters.profile.ApartmentProfilePresenter;
 import com.flatshare.presentation.presenters.profile.impl.ApartmentProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.QRCodeReaderActivity;
 import com.flatshare.threading.MainThreadImpl;
 import com.flatshare.utils.location.AppLocationService;
-import com.google.zxing.common.StringUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -59,9 +50,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-/**
- * Created by Arber on 16/12/2016.
- */
 public class ApartmentProfileActivity extends AbstractActivity implements ApartmentProfilePresenter.View {
 
     private static final int STATIC_VALUE = 2;
@@ -118,9 +106,6 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
         bindView();
 
-        //checkForPermission();
-
-
         mPresenter = new ApartmentProfilePresenterImpl(
                 MainThreadImpl.getInstance(),
                 this
@@ -138,18 +123,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         getLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                ActivityCompat.requestPermissions(ApartmentProfileActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-
-                Location location = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
-
-                if (location != null) {
-                    double latitude = location.getLatitude();
-                    double longitude = location.getLongitude();
-                    getCompleteAddressString(latitude, longitude);
-                } else {
-                    Log.d(TAG, "onClick: LOCATION IS NULL");
-                }
+                ApartmentProfileActivity.this.getLocation();
             }
         });
 
@@ -169,16 +143,35 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
     }
 
-    private void checkForPermission() {
-        if (ActivityCompat.checkSelfPermission(ApartmentProfileActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (ContextCompat.checkSelfPermission(ApartmentProfileActivity.this,
-                    Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(ApartmentProfileActivity.this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        PERMISSIONS_REQUEST_LOCATION);
-            }
+    private void getLocation(){
+        boolean allowed = false;
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                checkForLocationPermission();
+            } else {
+                allowed = true;
+            }
+        } else {
+            allowed = true;
         }
+
+        if (allowed){
+            Toast.makeText(this, "you have access", Toast.LENGTH_SHORT).show();
+                Location location = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
+
+                if (location != null) {
+                    double latitude = location.getLatitude();
+                    double longitude = location.getLongitude();
+                    getCompleteAddressString(latitude, longitude);
+                } else {
+                    Log.d(TAG, "onClick: LOCATION IS NULL");
+                }
+        }
+    }
+
+    private void checkForLocationPermission(){
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},PERMISSIONS_REQUEST_LOCATION);
     }
 
     private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
@@ -219,19 +212,13 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         }
 
         if (allowed) {
-            // Create intent to Open Image applications like Gallery, Google Photos
-            Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            // Start the Intent
+            Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
         }
     }
 
     private void checkForStoragePermission() {
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                PERMISSIONS_REQUEST_STORAGE);
-
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_STORAGE);
     }
 
     // need it in order to get value from destroyed activity (QR Scanner)
@@ -371,10 +358,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             }
 
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Create intent to Open Image applications like Gallery, Google Photos
-                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                // Start the Intent
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
             } else {
                 Toast.makeText(this, "Access rejected, please allow access and try again.", Toast.LENGTH_LONG);
@@ -456,11 +440,6 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     private boolean inputValid() {
         boolean result = true;
 
-//        if (roommatesEmailsMultiAC.getText().toString().trim().equals("")) {
-//            roommatesEmailsMultiAC.setError(getString(R.string.field_cannot_be_empty));
-//            result = false;
-//        }
-
         if (apartmentPriceEditText.getText().toString().trim().equals("")) {
             apartmentPriceEditText.setError(getString(R.string.field_cannot_be_empty));
             result = false;
@@ -521,11 +500,6 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             result = false;
         }
 
-//        if (profilePicUploaded) {
-//            uploadPictureButton.setError(getString(R.string.picture_required_error));
-//            result = false;
-//        }
-
         return result;
     }
 
@@ -561,7 +535,6 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         createApartmentButton = (Button) findViewById(R.id.create_apartment_profile_button);
 
         roommatesEmailsMultiAC = (MultiAutoCompleteTextView) findViewById(R.id.apartment_roommates_edit_text);
-
     }
 
     @Override
@@ -577,11 +550,9 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
     @Override
     public void changeToApartmentSettings() {
-
         Log.d(TAG, "success! changed to ApartmentSettings!");
         Intent intent = new Intent(this, ApartmentSettingsActivity.class);
         startActivity(intent);
-
     }
 
     @Override
