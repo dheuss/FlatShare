@@ -129,6 +129,9 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
                                     apartmentImagePair.setRight(bitmap);
                                     apartmentsList.add(apartmentImagePair);
+                                }else{
+                                    apartmentImagePair.setRight(null);
+                                    apartmentsList.add(apartmentImagePair);
                                 }
 
                                 if(counter.incrementAndGet() == apartmentIds.size()){

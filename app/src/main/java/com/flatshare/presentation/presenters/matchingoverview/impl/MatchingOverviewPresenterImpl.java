@@ -80,8 +80,8 @@ public class MatchingOverviewPresenterImpl extends AbstractPresenter implements 
     }
 
     @Override
-    public void userDeleteApartment(String apartmentProfileId) {
-        MatchingOverviewInteractor machingOverviewInteractor = new MatchingOverviewInteractorImpl(mMainThread, this, apartmentProfileId);
+    public void userDeleteApartment(String tenantId, String apartmentId) {
+        MatchingOverviewInteractor machingOverviewInteractor = new MatchingOverviewInteractorImpl(mMainThread, this, tenantId, apartmentId);
         machingOverviewInteractor.execute();
     }
 

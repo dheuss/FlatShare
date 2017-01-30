@@ -25,6 +25,7 @@ import com.flatshare.R;
 import com.flatshare.presentation.presenters.matchingoverview.calendar.CalendarPresenter;
 import com.flatshare.presentation.presenters.matchingoverview.calendar.impl.CalendarPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
+import com.flatshare.presentation.ui.activities.matchingoverview.MatchingOverviewActivity;
 import com.flatshare.threading.MainThreadImpl;
 
 import java.util.ArrayList;
@@ -75,6 +76,8 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
         calendar.setFirstDayOfWeek(Calendar.MONDAY);
 
+        tenantID = getIntent().getStringExtra(MatchingOverviewActivity.TenantSessionId);
+        apartmentID = getIntent().getStringExtra(MatchingOverviewActivity.ApartmentSessionId);
 
         //Send Button
         send.setOnClickListener(new View.OnClickListener() {

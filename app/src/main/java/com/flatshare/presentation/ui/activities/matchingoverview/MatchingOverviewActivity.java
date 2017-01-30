@@ -72,6 +72,9 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     private ImageButton closeButton;
 
 
+    public  static final String TenantSessionId = "TenantSessionId";
+    public  static final String ApartmentSessionId = "ApartmentSessionId";
+
     private static final String TAG = "MatchingOverviewActivity";
 
     private MatchingOverviewPresenter mPresenter;
@@ -138,9 +141,12 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
 
             if (matchingBitmapList.get(i) == null) {
+                Log.d(TAG, "generateMatchingOverview: default");
                 Glide.with(mContext).load(R.drawable.apartment_default).into(matchingImage);
             } else {
-                Glide.with(mContext).load(matchingBitmapList.get(i)).into(matchingImage);
+                Log.d(TAG, "generateMatchingOverview: with picture");
+                //Glide.with(mContext).load(matchingBitmapList.get(i)).into(matchingImage);
+                matchingImage.setImageBitmap(matchingBitmapList.get(i));
             }
 
             matchingText.setText(matchingProfileList.get(i));
@@ -207,8 +213,10 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
                             if (currentButton == v) {
                                 if (currentButton == v) {
-                                    //TODO ID übergeben i
-                                    startActivity(new Intent(getActivity(), CalendarActivity.class));
+                                    Intent intent = new Intent(getContext(), CalendarActivity.class);
+                                    intent.putExtra(TenantSessionId, matchingTenantProfile.get(i).getId());
+                                    intent.putExtra(ApartmentSessionId, matchingApartmentProfile.get(i).getId());
+                                    startActivity(intent);
                                 }
                             }
                         }
@@ -284,13 +292,8 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                                 View imageView = row.getChildAt(0);
                                 ImageView currentImageView = (ImageView) imageView;
 
-                                if (currentButton == v) { //TODO delete Match
-                                    if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.APARTMENT.getValue() || userState.getPrimaryUserProfile().getClassificationId() == ProfileType.ROOMMATE.getValue()) {
-                                        mPresenter.userDeleteApartment(matchingApartmentProfile.get(i).getMatchedTenants().get(i));
-                                    }
-                                    if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
-                                        mPresenter.userDeleteApartment(matchingTenantProfile.get(i).getMatchedApartments().get(i));
-                                    }
+                                if (currentButton == v) {
+                                    mPresenter.userDeleteApartment(matchingTenantProfile.get(i).getId(), matchingApartmentProfile.get(i).getId());
                                     currentDateText.setText(nextDateText.getText());
                                     currentImageView.setImageDrawable(nextImageView.getDrawable());
                                     nextImageView.setVisibility(View.GONE);
@@ -326,12 +329,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                                 ImageView currentImageView = (ImageView) imageView;
 
                                 if (currentButton == v) {
-                                    if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.APARTMENT.getValue() || userState.getPrimaryUserProfile().getClassificationId() == ProfileType.ROOMMATE.getValue()) {
-                                        mPresenter.userDeleteApartment(matchingApartmentProfile.get(i).getMatchedTenants().get(i)); // appartmentID : tenantid löschen
-                                    }
-                                    if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
-                                        mPresenter.userDeleteApartment(matchingTenantProfile.get(i).getMatchedApartments().get(i));
-                                    }
+                                    mPresenter.userDeleteApartment(matchingTenantProfile.get(i).getId(), matchingApartmentProfile.get(i).getId());
                                     currentDateText.setText("");
                                     currentCalendarButton.setVisibility(View.GONE);
                                     currentButton.setVisibility(View.GONE);

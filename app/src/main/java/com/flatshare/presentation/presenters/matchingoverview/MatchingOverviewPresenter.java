@@ -17,7 +17,7 @@ import java.util.List;
 public interface MatchingOverviewPresenter extends BasePresenter {
 
     void getMatches();
-    void userDeleteApartment(String apartmentProfileId);
+    void userDeleteApartment(String tenantId, String apartmentId);
 
     interface View extends BaseView {
 
