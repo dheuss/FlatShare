@@ -72,8 +72,8 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     private ImageButton closeButton;
 
 
-    public  static final String TenantSessionId = "TenantSessionId";
-    public  static final String ApartmentSessionId = "ApartmentSessionId";
+    public static final String TenantSessionId = "TenantSessionId";
+    public static final String ApartmentSessionId = "ApartmentSessionId";
 
     private static final String TAG = "MatchingOverviewActivity";
 
@@ -121,7 +121,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
             for (int i = 0; i < matchingApartmentList.size(); i++) {
                 matchingProfileList.add(matchingApartmentList.get(i).getApartmentInfo() + " " + matchingApartmentList.get(i).getPrice() + " €");
             }
-        }else{
+        } else {
             for (int i = 0; i < matchingTenantList.size(); i++) {
                 matchingProfileList.add(matchingTenantList.get(i).getFirstName() + " " + matchingTenantList.get(i).getShortBio());
             }
@@ -214,9 +214,20 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                             if (currentButton == v) {
                                 if (currentButton == v) {
                                     Intent intent = new Intent(getContext(), CalendarActivity.class);
-                                    intent.putExtra(TenantSessionId, matchingTenantProfile.get(i).getId());
-                                    intent.putExtra(ApartmentSessionId, matchingApartmentProfile.get(i).getId());
-                                    startActivity(intent);
+                                    if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
+                                        Log.d(TAG, "onClick: matchingApartmentProfil: " + matchingApartmentProfile.get(i).getId());
+                                        Log.d(TAG, "onClick: matchingTenantProfil: " + userState.getTenantId());
+                                        intent.putExtra(TenantSessionId, userState.getTenantId());
+                                        intent.putExtra(ApartmentSessionId, matchingApartmentProfile.get(i).getId());
+                                        startActivity(intent);
+                                    } else {
+                                        Log.d(TAG, "onClick: matchingTenantProfil: " + matchingTenantProfile.get(i).getId());
+                                        Log.d(TAG, "onClick: matchingApartmentProfil" + userState.getApartmentId());
+                                        intent.putExtra(TenantSessionId, matchingTenantProfile.get(i).getId());
+                                        intent.putExtra(ApartmentSessionId, userState.getApartmentId());
+                                        startActivity(intent);
+                                    }
+
                                 }
                             }
                         }
@@ -293,7 +304,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                                 ImageView currentImageView = (ImageView) imageView;
 
                                 if (currentButton == v) {
-                                    mPresenter.userDeleteApartment(matchingTenantProfile.get(i).getId(), matchingApartmentProfile.get(i).getId());
+                                    sendDeleteToServer(i);
                                     currentDateText.setText(nextDateText.getText());
                                     currentImageView.setImageDrawable(nextImageView.getDrawable());
                                     nextImageView.setVisibility(View.GONE);
@@ -329,7 +340,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                                 ImageView currentImageView = (ImageView) imageView;
 
                                 if (currentButton == v) {
-                                    mPresenter.userDeleteApartment(matchingTenantProfile.get(i).getId(), matchingApartmentProfile.get(i).getId());
+                                    sendDeleteToServer(i);
                                     currentDateText.setText("");
                                     currentCalendarButton.setVisibility(View.GONE);
                                     currentButton.setVisibility(View.GONE);
@@ -343,6 +354,17 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
             }
         }
     };
+
+    private void sendDeleteToServer(int i) {
+        if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
+            Log.d(TAG, "onClick: Delete TenantID: " + userState.getTenantId() + " delete matchingApartment" + matchingApartmentProfile.get(i).getId());
+            mPresenter.userDeleteApartment(userState.getTenantId(), matchingApartmentProfile.get(i).getId());
+        } else {
+            Log.d(TAG, "onClick: Delete TenantID: " + matchingTenantProfile.get(i).getId() + " delete matchingApartment" + userState.getApartmentId());
+
+            mPresenter.userDeleteApartment(matchingTenantProfile.get(i).getId(), userState.getApartmentId());
+        }
+    }
 
     public void apartmentPopUp(View v, int i) {
         View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_apartment, null);
