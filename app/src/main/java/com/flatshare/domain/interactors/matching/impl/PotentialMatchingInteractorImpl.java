@@ -29,7 +29,7 @@ import java.util.Map;
  */
 public class PotentialMatchingInteractorImpl extends AbstractInteractor implements PotentialMatchingInteractor {
 
-    private static final String TAG = "MatchingInt";
+    private static final String TAG = "PotentialMatchingInt";
     private static final long HOURS_24_IN_MIN = 24*60;
 
     /**
