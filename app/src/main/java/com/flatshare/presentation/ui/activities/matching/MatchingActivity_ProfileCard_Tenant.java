@@ -52,6 +52,7 @@ public class MatchingActivity_ProfileCard_Tenant {
 
     @Resolve
     private void onResolved(){
+        //ToDo
         if (mBitmap == null) {
             Glide.with(mContext).load(R.drawable.tenant_default).into(profileImageView);
         } else {
