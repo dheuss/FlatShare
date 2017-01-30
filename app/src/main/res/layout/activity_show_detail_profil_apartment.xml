@@ -333,11 +333,36 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/LinearLayoutApartmentProfileEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LinearLayoutApartmentProfilePurpose"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginBottom="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/apartment_email" />
+
+            <TextView
+                android:id="@+id/apartmentEMAILTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/notallowed" />
+
+        </LinearLayout>
+
         <RelativeLayout
             android:id="@+id/LinearLayoutApartmentInformation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutApartmentProfilePurpose"
+            android:layout_below="@id/LinearLayoutApartmentProfileEmailAddress"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"

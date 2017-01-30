@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.VideoView;
 
 import com.flatshare.domain.MainThread;
@@ -30,6 +31,7 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
         SecondaryProfileInteractor.Callback, MediaInteractor.UploadCallback, NicknameRetrieverInteractor.Callback {
 
 
+    private static final String TAG = "ApartmentProfilePresenterImpl";
     private ApartmentProfilePresenter.View mView;
 
     public ApartmentProfilePresenterImpl(MainThread mainThread,
@@ -69,6 +71,9 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
 
     @Override
     public void onProfileCreated(UserProfile profile) {
+
+        Log.d(TAG, "onProfileCreated: POFRILE DAVID");
+
         ApartmentProfile apartmentProfile = (ApartmentProfile) profile;
         apartmentProfile.setDone(true);
         userState.setApartmentProfile(apartmentProfile);

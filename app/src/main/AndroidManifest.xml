@@ -69,9 +69,6 @@
             android:name=".presentation.ui.activities.profile.ApartmentSettingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.activities.matchingoverview.chat.ChatActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".presentation.ui.activities.matchingoverview.calendar.CalendarActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -117,6 +114,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.ui.activities.profile.RoommateProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.ui.activities.settings.RoommateProfileSettingsFilterActivity"
             android:screenOrientation="portrait" />
     </application>
 

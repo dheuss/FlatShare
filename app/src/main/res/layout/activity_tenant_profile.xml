@@ -53,10 +53,29 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/LinearLayoutProfileAge"
+            android:id="@+id/LinearLayoutProfileEmail"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/LinearLayoutProfileName"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <EditText
+                android:id="@+id/emailProfileEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/LinearLayoutProfileAge"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LinearLayoutProfileEmail"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop">

@@ -60,6 +60,7 @@ public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity i
     private EditText stateEditText;
     private EditText countryEditText;
     private EditText infoEditText;
+    private EditText emailEditText;
 
     private RadioGroup internetRadioGroup;
     private RadioButton internetYESRadioButton, internetNORadioButton;
@@ -318,6 +319,9 @@ public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity i
 
         roommatesTextView = (MultiAutoCompleteTextView)view.findViewById(R.id.apartment_roommates_edit_text);
         roommatesTextView.setText(userState.getApartmentProfile().getRoommateIds().size()+"");
+
+        emailEditText = (EditText)view.findViewById(R.id.apartment_email_editText);
+        emailEditText.setText(userState.getApartmentProfile().getEmail()+"");
 
         priceEditText = (EditText)view.findViewById(R.id.apartment_price_edit_text);
         priceEditText.setText(userState.getApartmentProfile().getPrice() + "");

@@ -104,8 +104,6 @@ public class MatchTest {
         result += "internet? " + apartmentProfile.hasInternet() + "\n";
         result += "zweck-WG? " + apartmentProfile.isPurposeApartment() + "\n";
         result += "washingM? " + apartmentProfile.hasWashingMachine() + "\n";
-        result += "roomSize: " + apartmentProfile.getRoomSize() + "\n";
-        result += "apartmentSize: " + apartmentProfile.getApartmentSize() + "\n";
 
         result += "\n\n\n";
 

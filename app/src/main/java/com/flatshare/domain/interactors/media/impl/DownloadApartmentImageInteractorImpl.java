@@ -56,7 +56,6 @@ public class DownloadApartmentImageInteractorImpl extends AbstractInteractor imp
 
     @Override
     public void execute() {
-        Log.d(TAG, "execute: DOWNLOADAPARTMENTIMAGE");
         downloadProfilePicture(apartmentProfile);
     }
 

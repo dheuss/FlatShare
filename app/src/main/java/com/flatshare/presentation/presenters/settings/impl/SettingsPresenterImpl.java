@@ -191,7 +191,7 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
     @Override
     public void onDownloadTenantImageSuccess(Bitmap tenantImage) {
         mView.hideProgress();
-        mView.showApartmentImage(tenantImage);
+        mView.showTenantImage(tenantImage);
     }
 
     @Override

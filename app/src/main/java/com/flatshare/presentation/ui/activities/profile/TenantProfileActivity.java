@@ -41,6 +41,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
     private EditText firstNameEditText;
     private EditText ageEditText;
     private EditText shortBioText;
+    private EditText emailEditText;
 
     private RadioGroup genderRadioGroup;
     private RadioButton maleRadioButton, femaleRadioButton;
@@ -244,6 +245,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
             boolean isPets = petsRadioGroup.getCheckedRadioButtonId() == petsYesRadioButton.getId();
             String occupation = occupationSpinner.getSelectedItem().toString();
             String shortBio = shortBioText.getText().toString();
+            String email = emailEditText.getText().toString();
 
             TenantProfile tenantProfile = new TenantProfile();
             tenantProfile.setFirstName(firstname);
@@ -253,6 +255,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
             tenantProfile.setOccupation(occupation);
             tenantProfile.setPets(isPets);
             tenantProfile.setShortBio(shortBio);
+            tenantProfile.setEmail(email);
             tenantProfile.setDone(true);
 
             mPresenter.sendProfile(tenantProfile);
@@ -264,6 +267,11 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
 
         if (firstNameEditText.getText().toString().trim().equals("")) {
             firstNameEditText.setError(getString(R.string.field_cannot_be_empty));
+            result = false;
+        }
+
+        if (emailEditText.getText().toString().trim().equals("")) {
+            emailEditText.setText(getString(R.string.field_cannot_be_empty));
             result = false;
         }
 
@@ -292,11 +300,6 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
             result = false;
         }
 
-//        if (profilePicUploaded) {
-//            uploadPictureButton.setError(getString(R.string.picture_required_error));
-//            result = false;
-//        }
-
         return result;
     }
 
@@ -305,6 +308,7 @@ public class TenantProfileActivity extends AbstractActivity implements TenantPro
         firstNameEditText = (EditText) findViewById(R.id.nameProfileEditText);
         ageEditText = (EditText) findViewById(R.id.ageProfileEditText);
         shortBioText = (EditText) findViewById(R.id.infoProfileEditText);
+        emailEditText = (EditText) findViewById(R.id.emailProfileEditText);
 
         genderRadioGroup = (RadioGroup) findViewById(R.id.genderProfileEditTextRadioGroup);
         maleRadioButton = (RadioButton) findViewById(R.id.genderMaleProfileRadioButton);

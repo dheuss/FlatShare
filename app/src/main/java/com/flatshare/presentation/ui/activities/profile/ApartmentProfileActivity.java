@@ -42,6 +42,7 @@ import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.QRCodeReaderActivity;
 import com.flatshare.threading.MainThreadImpl;
 import com.flatshare.utils.location.AppLocationService;
+import com.google.firebase.database.Exclude;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -69,6 +70,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     private EditText apartmentStateEditText;
     private EditText apartmentCountryEditText;
     private EditText apartmentInfoEditText;
+    private EditText apartmentEmailEditText;
 
     private RadioGroup internetRadioGroup;
     private RadioButton internetYesRB, internetNoRB;
@@ -405,6 +407,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             String state = apartmentStateEditText.getText().toString();
             String country = apartmentCountryEditText.getText().toString();
             String info = apartmentInfoEditText.getText().toString();
+            String email = apartmentEmailEditText.getText().toString();
 
             boolean hasInternet = internetRadioGroup.getCheckedRadioButtonId() == internetYesRB.getId();
             boolean isSmoker = smokerRadioGroup.getCheckedRadioButtonId() == smokerYesRB.getId();
@@ -422,6 +425,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
             ApartmentProfile apartmentProfile = new ApartmentProfile();
             apartmentProfile.setPrice(price);
             apartmentProfile.setArea(area);
+            apartmentProfile.setEmail(email);
             apartmentProfile.setInternet(hasInternet);
             apartmentProfile.setSmokerApartment(isSmoker);
             apartmentProfile.setPets(hasPets);
@@ -448,6 +452,11 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
         if (apartmentAreaEditText.getText().toString().trim().equals("")) {
             apartmentAreaEditText.setError(getString(R.string.field_cannot_be_empty));
+            result = false;
+        }
+
+        if (apartmentEmailEditText.getText().toString().trim().equals("")) {
+            apartmentEmailEditText.setError(getString(R.string.field_cannot_be_empty));
             result = false;
         }
 
@@ -513,6 +522,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         apartmentStateEditText = (EditText) findViewById(R.id.apartment_state_edit_text);
         apartmentCountryEditText = (EditText) findViewById(R.id.apartment_country_edit_text);
         apartmentInfoEditText = (EditText) findViewById(R.id.infoApartmentEditText);
+        apartmentEmailEditText = (EditText) findViewById(R.id.apartment_email_editText);
 
         internetRadioGroup = (RadioGroup) findViewById(R.id.internet_apartment_rg);
         internetYesRB = (RadioButton) findViewById(R.id.internet_yes_rb);

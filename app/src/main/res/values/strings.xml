@@ -131,4 +131,7 @@
     <string name="insert_your_info">Insert your short info</string>
     <string name="matching_overview">Discover your matches!</string>
     <string name="overview_profil_string">Here you can see all your matches! Get in touch with your new roommates!</string>
+    <string name="apartment_email">Apartment Contact:</string>
+    <string name="notallowed">You are not allowed to see this information at this point!</string>
+    <string name="tenant_contact">Tenant Contact:</string>
 </resources>

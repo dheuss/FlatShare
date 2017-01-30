@@ -103,11 +103,30 @@
                 android:textColorHint="@color/colorText" />
         </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/LinearLayoutApartmentProfileEmail"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LinearLayoutApartmentProfileArea"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <EditText
+                android:id="@+id/apartment_email_editText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText" />
+        </android.support.design.widget.TextInputLayout>
+
         <Button
             android:id="@+id/getLocation_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutApartmentProfileArea"
+            android:layout_below="@id/LinearLayoutApartmentProfileEmail"
             android:layout_marginBottom="@dimen/marginTop"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"

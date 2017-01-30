@@ -32,6 +32,7 @@ public class ProfileTenantSettingsActivity extends AbstractFragmentActivity impl
 
     private EditText changeNameEditText;
     private EditText changeAgeEditText;
+    private EditText changeEmailText;
 
     private RadioGroup changeGenderRadioGroup;
     private RadioButton changeGenderMaleRadioButton;
@@ -140,6 +141,7 @@ public class ProfileTenantSettingsActivity extends AbstractFragmentActivity impl
                         boolean changePets = changePetsRadioGroup.getCheckedRadioButtonId() == changePetsYESRadioButton.getId();
                         String changeOccupation = changeOccupationSpinner.getSelectedItem().toString();
                         String changeInfo = changeInfoEditText.getText().toString();
+                        String email = changeEmailText.getText().toString();
 
                         TenantProfile tenantProfile = new TenantProfile();
 
@@ -150,6 +152,7 @@ public class ProfileTenantSettingsActivity extends AbstractFragmentActivity impl
                         tenantProfile.setPets(changePets);
                         tenantProfile.setOccupation(changeOccupation);
                         tenantProfile.setShortBio(changeInfo);
+                        tenantProfile.setEmail(email);
 
                         mPresenter.sendProfile(tenantProfile);
                     }
@@ -159,6 +162,7 @@ public class ProfileTenantSettingsActivity extends AbstractFragmentActivity impl
                     public void onClick(DialogInterface dialog, int which) {
                         changeNameEditText.setText(userState.getTenantProfile().getFirstName());
                         changeAgeEditText.setText(userState.getTenantProfile().getAge()+"");
+                        changeEmailText.setText(userState.getTenantProfile().getEmail()+"");
 
                         if (userState.getTenantProfile().getGender() == 0) {
                             changeGenderMaleRadioButton.setChecked(true);
@@ -204,6 +208,9 @@ public class ProfileTenantSettingsActivity extends AbstractFragmentActivity impl
         changeNameEditText.setText(userState.getTenantProfile().getFirstName());
         changeAgeEditText = (EditText)view.findViewById(R.id.ageProfileEditText);
         changeAgeEditText.setText(userState.getTenantProfile().getAge()+"");
+
+        changeEmailText = (EditText)view.findViewById(R.id.emailProfileEditText);
+        changeEmailText.setText(userState.getTenantProfile().getEmail()+"");
 
         changeGenderRadioGroup = (RadioGroup)view.findViewById(R.id.genderProfileEditTextRadioGroup);
         changeGenderMaleRadioButton = (RadioButton)view.findViewById(R.id.genderMaleProfileRadioButton);

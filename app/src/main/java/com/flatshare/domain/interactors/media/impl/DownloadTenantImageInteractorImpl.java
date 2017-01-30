@@ -37,7 +37,6 @@ public class DownloadTenantImageInteractorImpl extends AbstractInteractor implem
 
     @Override
     public void execute() {
-        Log.d(TAG, "execute: DOWNLOADTENANTIMAGE");
         downloadProfilePicture(tenantProfile);
     }
 
@@ -88,27 +87,18 @@ public class DownloadTenantImageInteractorImpl extends AbstractInteractor implem
     }
 
     private void queryFailed(TenantProfile tenantProfile) {
-        //apartmentImageList.add(new Pair<ApartmentProfile, Bitmap>(apartmentProfile, null));
-        //nrProfiles++;
-        //if (nrProfiles == profilesList.size()) {
-            notifySuccess();
-        //}
+        notifySuccess();
+
     }
 
     private void querySucceeded(TenantProfile tenantProfile, byte[] bytes) {
-        //apartmentImageList.add(new Pair<>(apartmentProfile, getBitmap(bytes)));
-        //nrProfiles++;
-        //if (nrProfiles == profilesList.size()) {
-        tenantImage  = getBitmap(bytes);
+
+        tenantImage = getBitmap(bytes);
         Log.d(TAG, "querySucceeded: " + tenantImage);
         notifySuccess();
-        //}
     }
 
     private Bitmap getBitmap(byte[] bytes) {
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-
-//        image.setImageBitmap(Bitmap.createScaledBitmap(bmp, image.getWidth(),
-//                image.getHeight(), false)));
     }
 }

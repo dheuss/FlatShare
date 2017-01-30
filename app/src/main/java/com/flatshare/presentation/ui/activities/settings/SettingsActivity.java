@@ -56,10 +56,6 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
 
     private SettingsPresenter mPresenter;
 
-    private UserState userState;
-    private ApartmentProfile apartmentProfile;
-    private TenantProfile tenantProfile;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -229,18 +225,26 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
 
     @Override
     public void changeToLoginActivity() {
-        Log.v(TAG, ": logout Scucess");
+        Log.v(TAG, ": logout Success");
         startActivity(new Intent(getActivity(), LoginActivity.class));
     }
 
     @Override
     public void showApartmentImage(Bitmap apartmentImage) {
-        settingsCircleImageView.setImageBitmap(apartmentImage);
+        if (apartmentImage == null){
+            settingsCircleImageView.setImageResource(R.drawable.apartment_default);
+        } else {
+            settingsCircleImageView.setImageBitmap(apartmentImage);
+        }
     }
 
     @Override
     public void showTenantImage(Bitmap tenantImage) {
-        settingsCircleImageView.setImageBitmap(tenantImage);
+        if (tenantImage == null){
+            settingsCircleImageView.setImageResource(R.drawable.tenant_default);
+        } else {
+            settingsCircleImageView.setImageBitmap(tenantImage);
+        }
     }
 
     private void popUpView(final int task){
@@ -253,13 +257,13 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
         final TextView popUpTextView = (TextView) mView.findViewById(R.id.popup_TextView);
 
         if (task == 0){
-            popUpTextView.setText("Do you really want to change your emailaddress?");
+            popUpTextView.setText("Do you really want to change your email address?");
         } else if (task == 1){
             popUpTextView.setText("Do you really want to change your password?");
         } else if (task == 2){
             popUpTextView.setText("Do you really want to reset your account?");
         } else if (task == 3){
-            popUpTextView.setText("Do you really want to delte your account?");
+            popUpTextView.setText("Do you really want to delete your account?");
         } else if (task == 4){
             popUpTextView.setText("Do you really want to sign out?");
         } else {

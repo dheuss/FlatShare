@@ -203,11 +203,35 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/LinearLayoutTenantEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LinearLayoutTenantOccupation"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/tenant_contact" />
+
+            <TextView
+                android:id="@+id/tenantEmailTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/notallowed" />
+
+        </LinearLayout>
+
         <RelativeLayout
             android:id="@+id/LinearLayoutTenantInformation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutTenantOccupation"
+            android:layout_below="@id/LinearLayoutTenantEmail"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginRight="@dimen/marginRight"
             android:layout_marginTop="@dimen/marginTop"

@@ -69,6 +69,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     private TextView apartmentStateTextView;
     private TextView apartmentCountryTextView;
     private TextView apartmentInfoTextView;
+    private TextView apartmentContactTextView;
     private ImageView apartmentImageView;
     private ImageView internetImageView;
     private ImageView smokerImageView;
@@ -82,6 +83,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     private String apartmentState;
     private String apartmentCountry;
     private String apartmentInfo;
+    private String apartmentContact;
     private Bitmap apartmentImage;
     private Boolean internet;
     private Boolean smoker;
@@ -94,6 +96,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     private TextView tenantAgeTextView;
     private TextView tenantOccupationTextView;
     private TextView tenantInfoTextView;
+    private TextView tenantContactTextView;
     private ImageView tenantGenderImageView;
     private ImageView tenantSmokerImgeeView;
     private ImageView tenantPetsImageView;
@@ -102,6 +105,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     private int tenantAge;
     private String tenantOccupation;
     private String tenantInfo;
+    private String tenantContact;
     private Bitmap tenantImage;
     private int tenantGender;
     private Boolean tenantSmoker;
@@ -191,6 +195,8 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
         apartmentCountryTextView.setText(getApartmentCountry());
         apartmentInfoTextView = (TextView)customView.findViewById(R.id.apartmentInfoTextView);
         apartmentInfoTextView.setText(getApartmentInfo());
+        apartmentContactTextView = (TextView)customView.findViewById(R.id.apartmentEMAILTextView);
+
         apartmentImageView = (ImageView) customView.findViewById(R.id.apartmentInfoImageView);
         if (getApartmentImage() == null){
             apartmentImageView.setImageResource(apartment_default);
@@ -258,6 +264,8 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
         tenantNameTextView.setText(getTenantName());
         tenantAgeTextView = (TextView)customView.findViewById(R.id.tenantAgeTextView2);
         tenantAgeTextView.setText(getTenantAge()+"");
+        tenantContactTextView = (TextView)customView.findViewById(R.id.tenantEmailTextView);
+
         tenantGenderImageView = (ImageView)customView.findViewById(R.id.genderThumb);
         if (getTenantGender() == 0){
             tenantGenderImageView.setImageResource(male_icon);

@@ -9,6 +9,10 @@ import com.google.firebase.database.PropertyName;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Arber on 12/12/2016.
+ */
+
 public class ApartmentProfile extends UserProfile {
 
     @PropertyName("apartment_filter_settings")
@@ -50,6 +54,9 @@ public class ApartmentProfile extends UserProfile {
     @PropertyName("washing_machine")
     public boolean washingMachine;
 
+    @PropertyName("email")
+    public String email;
+
 //    @PropertyName("image_ids")
 //    public List<String> imageIds;
 //
@@ -65,12 +72,6 @@ public class ApartmentProfile extends UserProfile {
 
     @PropertyName("profile_done")
     public boolean done;
-
-    @PropertyName("roomSize")
-    public int roomSize;
-
-    @PropertyName("apartmentSize")
-    public int apartmentSize;
 
     @PropertyName("timestamp")
     public long timestamp;
@@ -243,26 +244,6 @@ public class ApartmentProfile extends UserProfile {
     }
 
     @Exclude
-    public int getRoomSize() {
-        return roomSize;
-    }
-
-    @Exclude
-    public void setRoomSize(int roomSize) {
-        this.roomSize = roomSize;
-    }
-
-    @Exclude
-    public int getApartmentSize() {
-        return apartmentSize;
-    }
-
-    @Exclude
-    public void setApartmentSize(int apartmentSize) {
-        this.apartmentSize = apartmentSize;
-    }
-
-    @Exclude
     public long getTimestamp() {
         return timestamp;
     }
@@ -288,5 +269,15 @@ public class ApartmentProfile extends UserProfile {
     @Override
     public void setId(String id) {
         setApartmentId(id);
+    }
+
+    @Exclude
+    public String getEmail() {
+        return email;
+    }
+
+    @Exclude
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
