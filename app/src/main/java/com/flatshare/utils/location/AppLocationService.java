@@ -1,13 +1,16 @@
 package com.flatshare.utils.location;
 
+import android.Manifest;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.app.ActivityCompat;
 
 public class AppLocationService extends Service implements LocationListener {
 
@@ -24,12 +27,7 @@ public class AppLocationService extends Service implements LocationListener {
 
     public Location getLocation(String provider) {
 
-//        if (ActivityCompat.checkSelfPermission(AppLocationService.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//
-//        }
         if (locationManager.isProviderEnabled(provider)) {
-            //!!is ok, permission is queried in ApartmentProfileActivtiy!!!
-            //--> everthing works find
             locationManager.requestLocationUpdates(provider,
                     MIN_TIME_FOR_UPDATE, MIN_DISTANCE_FOR_UPDATE, this);
             if (locationManager != null) {

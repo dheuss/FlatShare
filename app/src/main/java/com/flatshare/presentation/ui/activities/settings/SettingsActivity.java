@@ -14,13 +14,21 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.flatshare.R;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
+import com.flatshare.domain.datatypes.enums.ProfileType;
+import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.settings.SettingsPresenter;
 import com.flatshare.presentation.presenters.settings.impl.SettingsPresenterImpl;
 import com.flatshare.presentation.ui.AbstractFragmentActivity;
 import com.flatshare.presentation.ui.activities.auth.login.LoginActivity;
 import com.flatshare.threading.MainThreadImpl;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class SettingsActivity extends AbstractFragmentActivity implements SettingsPresenter.View {
+
+    private CircleImageView settingsCircleImageView;
 
     private Button btnChangeEmail;
     private Button btnChangePassword;
@@ -43,6 +51,10 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
 
     private SettingsPresenter mPresenter;
 
+    private UserState userState;
+    private ApartmentProfile apartmentProfile;
+    private TenantProfile tenantProfile;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +66,13 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
         bindView(view);
 
         Log.d(TAG, "inside onCreate(), creating presenter fr this view");
+
+        userState = UserState.getInstance();
+        if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()){
+
+        } else {
+
+        }
 
         mPresenter = new SettingsPresenterImpl(
                 MainThreadImpl.getInstance(),
@@ -145,6 +164,8 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
     }
 
     private void bindView(View view){
+        settingsCircleImageView = (CircleImageView)view.findViewById(R.id.settings_round_image);
+
         btnChangeEmail = (Button) view.findViewById(R.id.change_email_button);
         btnChangePassword = (Button) view.findViewById(R.id.change_password_button);
         btnSendResetEmail = (Button) view.findViewById(R.id.sending_pass_reset_button);
@@ -152,7 +173,6 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
         changeEmail = (Button) view.findViewById(R.id.changeEmail);
         changePassword = (Button) view.findViewById(R.id.changePass);
         sendEmail = (Button) view.findViewById(R.id.send);
-        remove = (Button) view.findViewById(R.id.remove);
         signOut = (Button) view.findViewById(R.id.sign_out);
 
         oldEmail = (EditText) view.findViewById(R.id.old_email);

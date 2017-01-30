@@ -69,5 +69,6 @@ dependencies {
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.4'
     testCompile 'junit:junit:4.12'
     compile project(':android-viewbadger')
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 }
 apply plugin: 'com.google.gms.google-services'

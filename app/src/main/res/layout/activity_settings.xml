@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,6 +23,18 @@
             android:text="@string/settings"
             android:textColor="@color/colorPrimary"
             android:textSize="30dp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/settings_round_image"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:src="@drawable/tenant_default"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/colorPrimary"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginBottom="@dimen/marginTop"
+            android:layout_gravity="center"/>
 
         <EditText
             android:id="@+id/old_email"
@@ -105,17 +118,6 @@
             android:visibility="gone" />
 
         <Button
-            android:id="@+id/remove"
-            style="?android:textAppearanceSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@color/colorPrimary"
-            android:text="@string/btn_remove"
-            android:textColor="@color/colorButtonText"
-            android:textStyle="bold" />
-
-        <Button
             android:id="@+id/change_email_button"
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
@@ -168,8 +170,9 @@
             android:background="@android:color/holo_red_light"
             android:text="@string/btn_sign_out"
             android:textColor="@android:color/white"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/marginTop"/>
 
     </LinearLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</ScrollView>
