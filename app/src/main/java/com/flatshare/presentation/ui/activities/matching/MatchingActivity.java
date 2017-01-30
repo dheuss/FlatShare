@@ -68,6 +68,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     private TextView apartmentCityTextView;
     private TextView apartmentStateTextView;
     private TextView apartmentCountryTextView;
+    private TextView apartmentInfoTextView;
     private ImageView apartmentImageView;
     private ImageView internetImageView;
     private ImageView smokerImageView;
@@ -80,6 +81,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     private String apartmentCity;
     private String apartmentState;
     private String apartmentCountry;
+    private String apartmentInfo;
     private Bitmap apartmentImage;
     private Boolean internet;
     private Boolean smoker;
@@ -187,6 +189,8 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
         apartmentStateTextView.setText(getApartmentState());
         apartmentCountryTextView = (TextView)customView.findViewById(R.id.apartmentCOUNTRYTextView);
         apartmentCountryTextView.setText(getApartmentCountry());
+        apartmentInfoTextView = (TextView)customView.findViewById(R.id.apartmentInfoTextView);
+        apartmentInfoTextView.setText(getApartmentInfo());
         apartmentImageView = (ImageView) customView.findViewById(R.id.apartmentInfoImageView);
         if (getApartmentImage() == null){
             apartmentImageView.setImageResource(apartment_default);
@@ -228,6 +232,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
                 LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT
         );
+
         closeButton = (ImageButton) customView.findViewById(R.id.ib_close);
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -494,5 +499,13 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
 
     public void setTenantPets(Boolean tenantPets) {
         this.tenantPets = tenantPets;
+    }
+
+    public String getApartmentInfo() {
+        return apartmentInfo;
+    }
+
+    public void setApartmentInfo(String apartmentInfo) {
+        this.apartmentInfo = apartmentInfo;
     }
 }

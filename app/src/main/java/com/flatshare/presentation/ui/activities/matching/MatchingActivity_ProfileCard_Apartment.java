@@ -83,6 +83,7 @@ public class MatchingActivity_ProfileCard_Apartment {
         matchingActivity.setApartmentCity(mProfile.getApartmentLocation().getCity());
         matchingActivity.setApartmentState(mProfile.getApartmentLocation().getState());
         matchingActivity.setApartmentCountry(mProfile.getApartmentLocation().getCountry());
+        matchingActivity.setApartmentInfo(mProfile.getApartmentInfo());
         matchingActivity.setApartmentImage(mBitmap);
         matchingActivity.setInternet(mProfile.hasInternet());
         matchingActivity.setSmoker(mProfile.isSmokerApartment());
