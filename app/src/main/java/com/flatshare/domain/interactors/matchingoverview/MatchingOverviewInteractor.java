@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface MatchingOverviewInteractor extends Interactor {
     interface Callback {
-        void onSentSuccess(); //int classificationId
+        void onSentSuccess();
         void onSentFailure(String error);
     }
 }

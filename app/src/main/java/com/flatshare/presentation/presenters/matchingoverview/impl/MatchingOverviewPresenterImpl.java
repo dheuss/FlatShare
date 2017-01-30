@@ -9,7 +9,9 @@ import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.datatypes.pair.Pair;
 import com.flatshare.domain.interactors.matching.PotentialMatchingInteractor;
 import com.flatshare.domain.interactors.matching.impl.PotentialMatchingInteractorImpl;
+import com.flatshare.domain.interactors.matchingoverview.MatchesInteractor;
 import com.flatshare.domain.interactors.matchingoverview.MatchingOverviewInteractor;
+import com.flatshare.domain.interactors.matchingoverview.impl.MatchesInteractorImpl;
 import com.flatshare.domain.interactors.matchingoverview.impl.MatchingOverviewInteractorImpl;
 import com.flatshare.domain.interactors.media.MediaInteractor;
 import com.flatshare.domain.interactors.media.impl.ApartmentDownloadInteractorImpl;
@@ -21,7 +23,7 @@ import java.util.List;
 
 
 public class MatchingOverviewPresenterImpl extends AbstractPresenter implements MatchingOverviewPresenter,
-        MatchingOverviewInteractor.Callback, MediaInteractor.DownloadCallback, PotentialMatchingInteractor.Callback {
+        MatchingOverviewInteractor.Callback, MatchesInteractor.Callback {
 
     private static final String TAG = "MatchingOverviewPresenterImpl";
     private MatchingOverviewPresenter.View mView;
@@ -68,13 +70,13 @@ public class MatchingOverviewPresenterImpl extends AbstractPresenter implements 
 
 
     @Override
-    public void getPotentialMatches() {
+    public void getMatches() {
+        Log.d(TAG, "getMatches: SANDRO");
         mView.showProgress();
-        int classificationId = userState.getPrimaryUserProfile().getClassificationId();
         TenantProfile tenantProfile = userState.getTenantProfile();
         ApartmentProfile apartmentProfile = userState.getApartmentProfile();
-        PotentialMatchingInteractor potentialMatchingInteractor = new PotentialMatchingInteractorImpl(mMainThread, this, classificationId, tenantProfile, apartmentProfile);
-        potentialMatchingInteractor.execute();
+        MatchesInteractor matchesInteractor = new MatchesInteractorImpl(mMainThread, this, tenantProfile, apartmentProfile);
+        matchesInteractor.execute();
     }
 
     @Override
@@ -83,61 +85,22 @@ public class MatchingOverviewPresenterImpl extends AbstractPresenter implements 
         machingOverviewInteractor.execute();
     }
 
-    @Override
-    public void getProfilePictures(List<TenantProfile> tenantProfiles, List<ApartmentProfile> apartmentProfiles) {
-        MediaInteractor downloadInteractor;
-        if (tenantProfiles == null) {
-            downloadInteractor = new ApartmentDownloadInteractorImpl(mMainThread, this, apartmentProfiles);
-        } else {
-            downloadInteractor = new TenantDownloadInteractorImpl(mMainThread, this, tenantProfiles);
-        }
-        downloadInteractor.execute();
-    }
 
     @Override
-    public void onTenantDownloadSuccess(List<Pair<TenantProfile, Bitmap>> tenantsImageList) {
+    public void onApartmentMatchesFound(List<Pair<ApartmentProfile, Bitmap>> apMatches) {
         mView.hideProgress();
-        mView.showTenants(tenantsImageList);
+        mView.showApartments(apMatches);
     }
 
     @Override
-    public void onApartmentDownloadSuccess(List<Pair<ApartmentProfile, Bitmap>> apartmentImageList) {
+    public void onTenantMatchesFound(List<Pair<TenantProfile, Bitmap>> tenMatches) {
         mView.hideProgress();
-        mView.showApartments(apartmentImageList);
+        mView.showTenants(tenMatches);
     }
 
     @Override
-    public void onDownloadTenantImageSuccess(Bitmap tenantImage) {
-
-    }
-
-    @Override
-    public void onDownloadApartmentImageSucess(Bitmap apartmentImage) {
-
-    }
-
-    @Override
-    public void onDownloadError(String error) {
-        onError("Error on matchingOverviewPresenter Download: " + error);
-    }
-
-    @Override
-    public void onNoPotentialMatchFound() {
-        Log.d("No Match Fount", "");
-    }
-
-    @Override
-    public void notifyError(String errorMessage) {
-        Log.e("Error MatchingOverview ", errorMessage);
-    }
-
-    @Override
-    public void onTenantsFound(List<TenantProfile> tenants) {
-        getProfilePictures(tenants, null);
-    }
-
-    @Override
-    public void onApartmentsFound(List<ApartmentProfile> apartments) {
-        getProfilePictures(null, apartments);
+    public void onFailure(String error) {
+        mView.hideProgress();
+        Log.d("Matches Error", error);
     }
 }

@@ -1,13 +1,15 @@
 package com.flatshare.domain.datatypes.pair;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by Arber on 21/01/2017.
  */
 
 public class Pair<L,R> {
 
-    private final L left;
-    private final R right;
+    private L left;
+    private R right;
 
     public Pair(L left, R right) {
         this.left = left;
@@ -28,4 +30,11 @@ public class Pair<L,R> {
                 this.right.equals(pairo.getRight());
     }
 
+    public void setRight(R right) {
+        this.right = right;
+    }
+
+    public void setLeft(L left) {
+        this.left = left;
+    }
 }

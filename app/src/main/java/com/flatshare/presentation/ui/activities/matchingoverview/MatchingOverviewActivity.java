@@ -71,6 +71,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     private FrameLayout mFrameLayout;
     private ImageButton closeButton;
 
+
     private static final String TAG = "MatchingOverviewActivity";
 
     private MatchingOverviewPresenter mPresenter;
@@ -86,6 +87,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     @Override
     public void onCreate(Bundle savedInstanceState) {
         userState = UserState.getInstance();
+        Log.d(TAG, "onCreate: MATCHING OVERVIEW ACTIVITY");
         super.onCreate(savedInstanceState);
     }
 
@@ -104,7 +106,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                 this
         );
 
-        //mPresenter.getPotentialMatches(); //TODO
+        mPresenter.getMatches();
 
         return view;
     }
@@ -284,7 +286,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                                 View imageView = row.getChildAt(0);
                                 ImageView currentImageView = (ImageView) imageView;
 
-                                if (currentButton == v) {
+                                if (currentButton == v) { //TODO delete Match
                                     if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.APARTMENT.getValue() || userState.getPrimaryUserProfile().getClassificationId() == ProfileType.ROOMMATE.getValue()) {
                                         mPresenter.userDeleteApartment(matchingApartmentProfile.get(i).getMatchedTenants().get(i));
                                     }
@@ -327,7 +329,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
                                 if (currentButton == v) {
                                     if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.APARTMENT.getValue() || userState.getPrimaryUserProfile().getClassificationId() == ProfileType.ROOMMATE.getValue()) {
-                                        mPresenter.userDeleteApartment(matchingApartmentProfile.get(i).getMatchedTenants().get(i));
+                                        mPresenter.userDeleteApartment(matchingApartmentProfile.get(i).getMatchedTenants().get(i)); // appartmentID : tenantid löschen
                                     }
                                     if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
                                         mPresenter.userDeleteApartment(matchingTenantProfile.get(i).getMatchedApartments().get(i));
