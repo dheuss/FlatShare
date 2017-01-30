@@ -33,7 +33,7 @@ public class CalendarSendFinalInteractorImpl extends AbstractInteractor implemen
         this.mCallback = callback;
         this.finalDate = finalDate;
         this.tenantID = tenantID;
-        this.apartmentID= apartmentID;
+        this.apartmentID = apartmentID;
 
     }
 
@@ -77,9 +77,9 @@ public class CalendarSendFinalInteractorImpl extends AbstractInteractor implemen
         mDatabase.child(path).setValue(matchEntry, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                if(databaseError == null){
+                if (databaseError == null) {
                     notifySuccess();
-                }else{
+                } else {
                     notifyError(databaseError.getMessage());
                 }
             }

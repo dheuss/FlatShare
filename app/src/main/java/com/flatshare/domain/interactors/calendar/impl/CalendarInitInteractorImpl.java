@@ -36,7 +36,7 @@ public class CalendarInitInteractorImpl extends AbstractInteractor implements Ca
         this.dateList = dateList;
         this.timeList = timeList;
         this.tenantID = tenantID;
-        this.apartmentID= apartmentID;
+        this.apartmentID = apartmentID;
 
     }
 
@@ -64,7 +64,7 @@ public class CalendarInitInteractorImpl extends AbstractInteractor implements Ca
     public void execute() {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         List<Long> appointmentList = new ArrayList<>();
-        for( int i = 0; i < dateList.size(); i++){
+        for (int i = 0; i < dateList.size(); i++) {
             try {
                 Date date = df.parse(dateList.get(i) + timeList.get(i));
                 appointmentList.add(date.getTime());
@@ -82,10 +82,9 @@ public class CalendarInitInteractorImpl extends AbstractInteractor implements Ca
         mDatabase.child(path).setValue(matchEntry, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                if(databaseError == null){
-
+                if (databaseError == null) {
                     notifySuccess();
-                }else{
+                } else {
                     notifyError(databaseError.getMessage());
                 }
             }

@@ -20,11 +20,14 @@ public interface CalendarPresenter extends BasePresenter {
     void checkForAppointment(String tenantId, String apartmentId);
 
 
+
     interface View extends BaseView {
         void datesSuccessfulToTenants();
 
         void showFinalDate(String finalDate);
 
         void setDatesFromWG(List<String> dateList, List<String> timeList);
+
+        void prepareToShow(List<String> apointmentList);
     }
 }

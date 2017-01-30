@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -84,18 +85,22 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         tenantID = getIntent().getStringExtra(MatchingOverviewActivity.TenantSessionId);
         apartmentID = getIntent().getStringExtra(MatchingOverviewActivity.ApartmentSessionId);
 
-        MatchEntry matchEntry = new MatchEntry();
-        //TODO appointments holen
-        //mPresenter.checkForAppointment(tenantID, apartmentID);
-        if(matchEntry.appointmentSet) {
-            currentAppointmentList = matchEntry.getAppointmentsList();
-            for(int i =0; i<currentAppointmentList.size();i++) {
-                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                String dateText = df.format(currentAppointmentList.get(i));
-                dateList.add(i, dateText);
-            }
-            showOnScreen();
-        }
+        mPresenter.checkForAppointment(tenantID,apartmentID);
+
+//        MatchEntry matchEntry = new MatchEntry();
+//        //TODO appointments holen
+//        //mPresenter.checkForAppointment(tenantID, apartmentID);
+//        Log.d(TAG, "onCreate: AppointmentList: " + matchEntry.getAppointmentsList());
+//        if (matchEntry.appointmentSet) {
+//            currentAppointmentList = matchEntry.getAppointmentsList();
+//            for (int i = 0; i < currentAppointmentList.size(); i++) {
+//                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+//                String dateText = df.format(currentAppointmentList.get(i));
+//                dateList.add(i, dateText);
+//            }
+//            Log.d(TAG, "onCreate: Appointments: " + dateList);
+//            showOnScreen();
+//        }
 
         //Send Button
         send.setOnClickListener(new View.OnClickListener() {
@@ -193,6 +198,11 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             showOnScreen();
         }
     };
+
+    public void prepareToShow(List<String> appointmentList) {
+        dateList = appointmentList;
+        showOnScreen();
+    }
 
     public void showOnScreen() {
 

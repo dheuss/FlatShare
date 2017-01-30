@@ -88,15 +88,12 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     List<ApartmentProfile> matchingApartmentProfile = new ArrayList<>();
     List<Bitmap> matchingApartmentBitmap = new ArrayList<>();
     private Context mContext;
-    HashMap<Integer, String> currentApVisibleMatches = new HashMap<Integer, String>();
-    HashMap<Integer, String> currentTenVisibleMatches = new HashMap<Integer, String>();
-    private boolean firstTime = true;
+
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         userState = UserState.getInstance();
-        Log.d(TAG, "onCreate: MATCHING OVERVIEW ACTIVITY");
         super.onCreate(savedInstanceState);
     }
 
@@ -158,7 +155,6 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                     Glide.with(mContext).load(R.drawable.tenant_default).into(matchingImage);
                 }
             } else {
-                Log.d(TAG, "generateMatchingOverview: with picture");
                 matchingImage.setImageBitmap(matchingBitmapList.get(i));
             }
 

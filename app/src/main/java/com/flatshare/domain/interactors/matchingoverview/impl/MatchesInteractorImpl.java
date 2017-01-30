@@ -38,7 +38,7 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
 
     private MatchesInteractor.Callback mCallback;
 
-    public MatchesInteractorImpl(MainThread mainThread,Callback callback, TenantProfile tenantProfile, ApartmentProfile apartmentProfile) {
+    public MatchesInteractorImpl(MainThread mainThread, Callback callback, TenantProfile tenantProfile, ApartmentProfile apartmentProfile) {
         super(mainThread);
 
         mCallback = callback;
@@ -62,20 +62,20 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
                 }
                 Map<String, MatchEntry> matchEntryMap = new HashMap<String, MatchEntry>(dataSnapshot.getValue(t));
 
-                if (matchEntryMap.size() <= 0){
+                if (matchEntryMap.size() <= 0) {
                     notifyError("No Matches found in MatchesInteractor");
                     return;
                 }
 
-                if (tenantProfile == null){
+                if (tenantProfile == null) {
                     String apId = apartmentProfile.getId();
                     List<String> tenantIds = new ArrayList<>();
 
-                    for (Map.Entry<String, MatchEntry> entry : matchEntryMap.entrySet()){
+                    for (Map.Entry<String, MatchEntry> entry : matchEntryMap.entrySet()) {
 
                         String currentApId = entry.getKey().split(DELIMITER)[1];
 
-                        if (apId.equals(currentApId)){
+                        if (apId.equals(currentApId)) {
                             tenantIds.add(entry.getKey().split(DELIMITER)[0]);
                         }
                     }
@@ -84,11 +84,11 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
                     String tenId = tenantProfile.getId();
                     List<String> apartmentIds = new ArrayList<>();
 
-                    for (Map.Entry<String, MatchEntry> entry : matchEntryMap.entrySet()){
+                    for (Map.Entry<String, MatchEntry> entry : matchEntryMap.entrySet()) {
 
                         String currentTenantId = entry.getKey().split(DELIMITER)[0];
 
-                        if (tenId.equals(currentTenantId)){
+                        if (tenId.equals(currentTenantId)) {
                             apartmentIds.add(entry.getKey().split(DELIMITER)[1]);
                         }
                     }
@@ -120,21 +120,21 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    if(dataSnapshot.getValue() != null){
+                    if (dataSnapshot.getValue() != null) {
                         final Pair<ApartmentProfile, Bitmap> apartmentImagePair = new Pair<ApartmentProfile, Bitmap>(dataSnapshot.getValue(ApartmentProfile.class), null);
                         mStorage.child(imagePath + UploadInteractorImpl.DEFAULT_NAME).getBytes(size).addOnCompleteListener(new OnCompleteListener<byte[]>() {
                             @Override
                             public void onComplete(@NonNull Task<byte[]> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
                                     apartmentImagePair.setRight(bitmap);
                                     apartmentsList.add(apartmentImagePair);
-                                }else{
+                                } else {
                                     apartmentImagePair.setRight(null);
                                     apartmentsList.add(apartmentImagePair);
                                 }
 
-                                if(counter.incrementAndGet() == apartmentIds.size()){
+                                if (counter.incrementAndGet() == apartmentIds.size()) {
                                     notifyApMatchesFound(apartmentsList);
                                 }
                             }
@@ -145,7 +145,7 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                     Log.d(TAG, "onCancelled: No apartment found with id: " + id);
-                    if(counter.incrementAndGet() == apartmentIds.size()){
+                    if (counter.incrementAndGet() == apartmentIds.size()) {
                         notifyApMatchesFound(apartmentsList);
                     }
                 }
@@ -170,21 +170,21 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    if(dataSnapshot.getValue() != null){
+                    if (dataSnapshot.getValue() != null) {
                         final Pair<TenantProfile, Bitmap> tenantImagePair = new Pair<TenantProfile, Bitmap>(dataSnapshot.getValue(TenantProfile.class), null);
                         mStorage.child(imagePath + UploadInteractorImpl.DEFAULT_NAME).getBytes(size).addOnCompleteListener(new OnCompleteListener<byte[]>() {
                             @Override
                             public void onComplete(@NonNull Task<byte[]> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
                                     tenantImagePair.setRight(bitmap);
                                     tenantList.add(tenantImagePair);
-                                }else{
+                                } else {
                                     tenantImagePair.setRight(null);
                                     tenantList.add(tenantImagePair);
                                 }
 
-                                if(counter.incrementAndGet() == tenantIds.size()){
+                                if (counter.incrementAndGet() == tenantIds.size()) {
                                     notifyTenMatchesFound(tenantList);
                                 }
                             }
@@ -195,7 +195,7 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                     Log.d(TAG, "onCancelled: No apartment found with id: " + id);
-                    if(counter.incrementAndGet() == tenantIds.size()){
+                    if (counter.incrementAndGet() == tenantIds.size()) {
                         notifyTenMatchesFound(tenantList);
                     }
                 }

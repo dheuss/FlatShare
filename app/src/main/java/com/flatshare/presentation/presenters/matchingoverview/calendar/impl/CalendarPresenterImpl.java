@@ -25,7 +25,7 @@ import java.util.List;
  * Created by Sandro on 07.01.17.
  */
 
-public class CalendarPresenterImpl extends AbstractPresenter implements CalendarPresenter, CalendarInitInteractor.Callback, CalendarSendFinalInteractor.Callback {
+public class CalendarPresenterImpl extends AbstractPresenter implements CalendarPresenter, CalendarInitInteractor.Callback, CalendarSendFinalInteractor.Callback, CalendarCheckAppointmentInteractor.Callback {
 
     private static final String TAG = "CalendarPresenter";
 
@@ -77,9 +77,9 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
 
     @Override
     public void checkForAppointment(String tenantId, String apartmentId) {
-//        mView.showProgress();
-//        CalendarCheckAppointmentInteractor appointmentInteractor = new CalndarCheckAppointmentInteractorImpl(mMainThread, this, tenantId, apartmentId);
-//        appointmentInteractor.execute();
+        mView.showProgress();
+        CalendarCheckAppointmentInteractor appointmentInteractor = new CalndarCheckAppointmentInteractorImpl(mMainThread, this, tenantId, apartmentId);
+        appointmentInteractor.execute();
 
     }
 
@@ -131,5 +131,28 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         String dateText = df.format(date);
         mView.showFinalDate(dateText);
+    }
+
+    @Override
+    public void onAppointmentFailure(String errorMessage) {
+        mView.hideProgress();
+        onError(errorMessage);
+    }
+
+    @Override
+    public void onAppointmentSuccess() {
+        mView.hideProgress();
+        MatchEntry matchEntry = new MatchEntry();
+        List<Long> appointmentList = matchEntry.getAppointmentsList();
+        List<String> dateList = new ArrayList<>();
+        Log.d(TAG, "onAppointmentSuccess: AppointmentList: " + appointmentList);
+        if (appointmentList != null) {
+            for (int i = 0; i < appointmentList.size(); i++) {
+                Date date = new Date(appointmentList.get(i));
+                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                dateList.add(df.format(date));
+            }
+            mView.prepareToShow(dateList);
+        }
     }
 }
