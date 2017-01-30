@@ -50,13 +50,11 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
     public void execute() {
 
         String matchesPath = databaseRoot.getMatches();
-        System.out.print("Sandro execute");
         mDatabase.child(matchesPath).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 GenericTypeIndicator<Map<String, MatchEntry>> t = new GenericTypeIndicator<Map<String, MatchEntry>>() {
                 };
-                System.out.print("Sandro onDataChange");
 
                 if (dataSnapshot.getValue(t) == null) {
                     notifyError("No Matches found");
