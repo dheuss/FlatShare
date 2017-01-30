@@ -13,7 +13,6 @@ public class ApartmentsStorage {
     public ApartmentsStorage(String apartmentId) {
         this.apartmentId = apartmentId + "/";
     }
-//    private final String videos = "videos/";
 
     public String getRootPath() {
         return rootPath;

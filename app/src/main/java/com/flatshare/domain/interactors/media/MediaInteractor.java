@@ -25,6 +25,8 @@ public interface MediaInteractor extends Interactor {
     interface DownloadCallback {
         void onTenantDownloadSuccess(List<Pair<TenantProfile, Bitmap>> tenantsImageList);
         void onApartmentDownloadSuccess(List<Pair<ApartmentProfile, Bitmap>> apartmentImageList);
+        void onDownloadTenantImageSuccess(Bitmap tenantImage);
+        void onDownloadApartmentImageSucess(Bitmap apartmentImage);
 
         void onDownloadError(String error);
     }

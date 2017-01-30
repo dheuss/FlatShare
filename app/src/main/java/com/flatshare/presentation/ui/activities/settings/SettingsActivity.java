@@ -3,6 +3,7 @@ package com.flatshare.presentation.ui.activities.settings;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,11 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.datatypes.enums.ProfileType;
+import com.flatshare.domain.repository.StorageRepository;
 import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.settings.SettingsPresenter;
 import com.flatshare.presentation.presenters.settings.impl.SettingsPresenterImpl;
@@ -65,19 +68,14 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
         View view = inflater.inflate(R.layout.activity_settings, container, false);
         bindView(view);
 
-        Log.d(TAG, "inside onCreate(), creating presenter fr this view");
-
-        userState = UserState.getInstance();
-        if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()){
-
-        } else {
-
-        }
+        Log.d(TAG, "inside onCreate(), creating presenter for this view");
 
         mPresenter = new SettingsPresenterImpl(
                 MainThreadImpl.getInstance(),
                 this
         );
+
+        mPresenter.getProfilePicture();
 
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
@@ -231,6 +229,16 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
     public void changeToLoginActivity() {
         Log.v(TAG, ": logout Scucess");
         startActivity(new Intent(getActivity(), LoginActivity.class));
+    }
+
+    @Override
+    public void showApartmentImage(Bitmap apartmentImage) {
+        settingsCircleImageView.setImageBitmap(apartmentImage);
+    }
+
+    @Override
+    public void showTenantImage(Bitmap tenantImage) {
+        settingsCircleImageView.setImageBitmap(tenantImage);
     }
 
     private void popUpView(final int task){

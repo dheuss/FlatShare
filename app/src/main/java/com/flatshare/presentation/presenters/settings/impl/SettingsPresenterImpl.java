@@ -1,8 +1,12 @@
 package com.flatshare.presentation.presenters.settings.impl;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
+import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
+import com.flatshare.domain.datatypes.pair.Pair;
 import com.flatshare.domain.interactors.auth.ChangeMailInteractor;
 import com.flatshare.domain.interactors.auth.ChangePasswordInteractor;
 import com.flatshare.domain.interactors.auth.DeleteAccountInteractor;
@@ -13,8 +17,14 @@ import com.flatshare.domain.interactors.auth.impl.ChangePasswordInteractorImpl;
 import com.flatshare.domain.interactors.auth.impl.DeleteAccountInteractorImpl;
 import com.flatshare.domain.interactors.auth.impl.LogoutInteractorImpl;
 import com.flatshare.domain.interactors.auth.impl.ResetPasswordInteractorImpl;
+import com.flatshare.domain.interactors.media.MediaInteractor;
+import com.flatshare.domain.interactors.media.impl.DownloadApartmentImageInteractorImpl;
+import com.flatshare.domain.interactors.media.impl.DownloadTenantImageInteractorImpl;
+import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.settings.SettingsPresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
+
+import java.util.List;
 
 /**
  * Created by david on 29.12.2016.
@@ -25,7 +35,8 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
         ChangeMailInteractor.Callback,
         DeleteAccountInteractor.Callback,
         ChangePasswordInteractor.Callback,
-        ResetPasswordInteractor.Callback{
+        ResetPasswordInteractor.Callback,
+        MediaInteractor.DownloadCallback{
 
     private static final String TAG = "SettingsPresenterImpl";
     private SettingsPresenter.View mView;
@@ -91,8 +102,18 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
     }
 
     @Override
+    public void getProfilePicture() {
+        MediaInteractor downloadInteractor;
+        if (userState.getTenantProfile() == null) {
+            downloadInteractor = new DownloadApartmentImageInteractorImpl(mMainThread, this, userState.getApartmentProfile());
+        } else {
+            downloadInteractor = new DownloadTenantImageInteractorImpl(mMainThread, this, userState.getTenantProfile());
+        }
+        downloadInteractor.execute();
+    }
+
+    @Override
     public void onLogoutSuccess() {
-        System.out.println("983754897435698235270982356324");
         userState.setLoggedIn(false);
         mView.hideProgress();
         mView.changeToLoginActivity();
@@ -155,5 +176,32 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
     public void onResetPasswordFailure(String errorMessage) {
         mView.hideProgress();
         onError(errorMessage);
+    }
+
+    @Override
+    public void onTenantDownloadSuccess(List<Pair<TenantProfile, Bitmap>> tenantsImageList) {
+
+    }
+
+    @Override
+    public void onApartmentDownloadSuccess(List<Pair<ApartmentProfile, Bitmap>> apartmentImageList) {
+
+    }
+
+    @Override
+    public void onDownloadTenantImageSuccess(Bitmap tenantImage) {
+        mView.hideProgress();
+        mView.showApartmentImage(tenantImage);
+    }
+
+    @Override
+    public void onDownloadApartmentImageSucess(Bitmap apartmentImage) {
+        mView.hideProgress();
+        mView.showApartmentImage(apartmentImage);
+    }
+
+    @Override
+    public void onDownloadError(String error) {
+
     }
 }

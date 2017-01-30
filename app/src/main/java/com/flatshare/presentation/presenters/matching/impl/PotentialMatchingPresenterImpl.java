@@ -153,6 +153,16 @@ public class PotentialMatchingPresenterImpl extends AbstractPresenter
     }
 
     @Override
+    public void onDownloadTenantImageSuccess(Bitmap tenantImage) {
+
+    }
+
+    @Override
+    public void onDownloadApartmentImageSucess(Bitmap apartmentImage) {
+
+    }
+
+    @Override
     public void onDownloadError(String error) {
         //TODO!!!
     }
