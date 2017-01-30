@@ -134,4 +134,6 @@
     <string name="apartment_email">Apartment Contact:</string>
     <string name="notallowed">You are not allowed to see this information at this point!</string>
     <string name="tenant_contact">Tenant Contact:</string>
+    <string name="date">Your Appointments</string>
+    <string name="appointment_string">Here you can create your appointment to get in touch with your future living community!</string>
 </resources>

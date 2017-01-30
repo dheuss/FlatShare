@@ -1,5 +1,7 @@
 package com.flatshare.presentation.presenters.matchingoverview.calendar.impl;
 
+import android.util.Log;
+
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.common.MatchEntry;
 import com.flatshare.domain.datatypes.enums.ProfileType;
@@ -72,6 +74,11 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
     }
 
     @Override
+    public void checkForAppointment() {
+        //TODO
+    }
+
+    @Override
     public boolean checkForTenant() {
         return userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue();
     }
@@ -85,13 +92,14 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
 
     @Override
     public void onSentSuccess() {
-        if (!checkForTenant()) {
+        if (checkForTenant()) {
             MatchEntry matchEntry = new MatchEntry();
             List<Long> appointmentList = matchEntry.getAppointmentsList();
+            Log.d(TAG, "onSentSuccess: appointment " + appointmentList);
             List<String> dateList = new ArrayList<>();
             List<String> timeList = new ArrayList<>();
-            for (int i = 0; i<appointmentList.size(); i++){
-                Date date = new Date (appointmentList.get(i));
+            for (int i = 0; i < appointmentList.size(); i++) {
+                Date date = new Date(appointmentList.get(i));
                 SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                 String dateText = df.format(date);
                 String[] partsDateTime = dateText.split(" ");
@@ -99,7 +107,7 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
                 timeList.add(partsDateTime[1]);
             }
             mView.setDatesFromWG(dateList, timeList);
-        }else{
+        } else {
             mView.datesSuccessfulToTenants();
         }
     }
@@ -114,7 +122,7 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
     public void onSentFinalSuccess() {
         MatchEntry matchEntry = new MatchEntry();
         long appointment = matchEntry.getAppointment();
-        Date date = new Date (appointment);
+        Date date = new Date(appointment);
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         String dateText = df.format(date);
         mView.showFinalDate(dateText);

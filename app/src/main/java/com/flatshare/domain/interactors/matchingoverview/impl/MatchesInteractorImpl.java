@@ -57,13 +57,13 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
                 };
 
                 if (dataSnapshot.getValue(t) == null) {
-                    notifyError("No Matches found");
+                    notifyError("No Matches found in MatchesInteractor");
                     return;
                 }
                 Map<String, MatchEntry> matchEntryMap = new HashMap<String, MatchEntry>(dataSnapshot.getValue(t));
 
                 if (matchEntryMap.size() <= 0){
-                    notifyError("No Matches found");
+                    notifyError("No Matches found in MatchesInteractor");
                     return;
                 }
 
@@ -140,8 +140,6 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
                             }
                         });
                     }
-
-
                 }
 
                 @Override
@@ -181,6 +179,9 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
                                     tenantImagePair.setRight(bitmap);
                                     tenantList.add(tenantImagePair);
+                                }else{
+                                    tenantImagePair.setRight(null);
+                                    tenantList.add(tenantImagePair);
                                 }
 
                                 if(counter.incrementAndGet() == tenantIds.size()){
@@ -189,8 +190,6 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
                             }
                         });
                     }
-
-
                 }
 
                 @Override

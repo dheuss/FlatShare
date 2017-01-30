@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
@@ -25,6 +26,7 @@ import com.flatshare.R;
 import com.flatshare.presentation.presenters.matchingoverview.calendar.CalendarPresenter;
 import com.flatshare.presentation.presenters.matchingoverview.calendar.impl.CalendarPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
+import com.flatshare.presentation.ui.activities.MainActivity;
 import com.flatshare.presentation.ui.activities.matchingoverview.MatchingOverviewActivity;
 import com.flatshare.threading.MainThreadImpl;
 
@@ -79,6 +81,8 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         tenantID = getIntent().getStringExtra(MatchingOverviewActivity.TenantSessionId);
         apartmentID = getIntent().getStringExtra(MatchingOverviewActivity.ApartmentSessionId);
 
+        //TODO appoints laden wenn vorhanden
+        mPresenter.checkForAppointment();
         //Send Button
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -336,6 +340,9 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     public void datesSuccessfulToTenants() {
         send.setEnabled(false);
         setDate.setEnabled(false);
+        setDate.setAlpha(0.5f);
+        send.setAlpha(0.5f);
+        startActivity(new Intent(CalendarActivity.this, MainActivity.class));
     }
 
     private void bindView() {

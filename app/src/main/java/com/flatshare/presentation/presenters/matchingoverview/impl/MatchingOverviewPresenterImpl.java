@@ -71,7 +71,6 @@ public class MatchingOverviewPresenterImpl extends AbstractPresenter implements 
 
     @Override
     public void getMatches() {
-        Log.d(TAG, "getMatches: SANDRO");
         mView.showProgress();
         TenantProfile tenantProfile = userState.getTenantProfile();
         ApartmentProfile apartmentProfile = userState.getApartmentProfile();

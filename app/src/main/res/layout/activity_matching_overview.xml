@@ -49,12 +49,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
             android:layout_below="@+id/overview_linear_1">
 
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_below="@+id/overview_linear_1"
                 android:orientation="vertical">
 
@@ -62,6 +66,7 @@
                     android:id="@+id/matchingOverview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="@color/colorText"></TableLayout>

@@ -52,7 +52,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     private UserState userState;
 
     //ApartmentPopUp
-    private TextView apartmentPriceTextView, apartmentSizeTextView, apartmentZipCodeTextView, apartmentCityTextView, apartmentStateTextView, apartmentCountryTextView;
+    private TextView apartmentPriceTextView, apartmentSizeTextView, apartmentZipCodeTextView, apartmentCityTextView, apartmentStateTextView, apartmentCountryTextView, apartmentEmailTextView;
     private ImageView apartmentImageView, internetImageView, smokerImageView, petsImageView, washingMashineImageView, purposeImageView;
     private int apartmentPrice, apartmentSize, apartmentZipCode;
     private String apartmentCity, apartmentState, apartmentCountry;
@@ -60,7 +60,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     private Boolean internet, smoker, pets, washingMashine, purpose;
 
     //TenantPopUp
-    private TextView tenantNameTextView, tenantAgeTextView, tenantOccupationTextView, tenantInfoTextView;
+    private TextView tenantNameTextView, tenantAgeTextView, tenantOccupationTextView, tenantInfoTextView, tenantEmailTextView;
     private ImageView tenantGenderImageView, tenantSmokerImageView, tenantPetsImageView, tenantImageView;
     private String tenantName, tenantOccupation, tenantInfo;
     private int tenantAge;
@@ -115,22 +115,18 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
         return view;
     }
 
+
     public void generateMatchingOverview(List<TenantProfile> matchingTenantList, List<ApartmentProfile> matchingApartmentList, List<Bitmap> matchingBitmapList) {
 
-        int count = matchingOverview.getChildCount();
-        for (int i = 0; i < count; i++) {
-            View child = matchingOverview.getChildAt(i);
-            if (child instanceof TableRow) ((ViewGroup) child).removeAllViews();
-        }
 
         List<String> matchingProfileList = new ArrayList<>();
         if (matchingApartmentList != null) {
             for (int i = 0; i < matchingApartmentList.size(); i++) {
-                matchingProfileList.add(matchingApartmentList.get(i).getApartmentInfo() + " " + matchingApartmentList.get(i).getPrice() + " €");
+                matchingProfileList.add(matchingApartmentList.get(i).getApartmentLocation().getStreet() + " " + matchingApartmentList.get(i).getPrice() + " €");
             }
         } else {
             for (int i = 0; i < matchingTenantList.size(); i++) {
-                matchingProfileList.add(matchingTenantList.get(i).getFirstName() + " " + matchingTenantList.get(i).getShortBio());
+                matchingProfileList.add(matchingTenantList.get(i).getFirstName() + " ");
             }
         }
 
@@ -148,8 +144,11 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
 
             if (matchingBitmapList.get(i) == null) {
-                Log.d(TAG, "generateMatchingOverview: default");
-                Glide.with(mContext).load(R.drawable.apartment_default).into(matchingImage);
+                if(userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
+                    Glide.with(mContext).load(R.drawable.apartment_default).into(matchingImage);
+                }else{
+                    Glide.with(mContext).load(R.drawable.tenant_default).into(matchingImage);
+                }
             } else {
                 Log.d(TAG, "generateMatchingOverview: with picture");
                 matchingImage.setImageBitmap(matchingBitmapList.get(i));
@@ -376,17 +375,19 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
         View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_apartment, null);
 
         apartmentPriceTextView = (TextView) customView.findViewById(R.id.apartmentPriceTextView);
-        apartmentPriceTextView.setText(" €");
+        apartmentPriceTextView.setText(matchingApartmentProfile.get(i).getPrice() + " €");
         apartmentSizeTextView = (TextView) customView.findViewById(R.id.apartmentSizeTextView);
-        apartmentSizeTextView.setText(" m2");
+        apartmentSizeTextView.setText(matchingApartmentProfile.get(i).getArea() + " m2");
+        apartmentEmailTextView = (TextView) customView.findViewById(R.id.apartmentEMAILTextView);
+        apartmentEmailTextView.setText(matchingApartmentProfile.get(i).getEmail());
         apartmentZipCodeTextView = (TextView) customView.findViewById(R.id.apartmentZIPCODETextView);
-        apartmentZipCodeTextView.setText("");
+        apartmentZipCodeTextView.setText(matchingApartmentProfile.get(i).getApartmentLocation().getZipCode() +"");
         apartmentCityTextView = (TextView) customView.findViewById(R.id.apartmentCITYTextView);
-        apartmentCityTextView.setText("");
+        apartmentCityTextView.setText(matchingApartmentProfile.get(i).getApartmentLocation().getCity());
         apartmentStateTextView = (TextView) customView.findViewById(R.id.apartmentSTATETextView);
-        apartmentStateTextView.setText("");
+        apartmentStateTextView.setText(matchingApartmentProfile.get(i).getApartmentLocation().getState() +"");
         apartmentCountryTextView = (TextView) customView.findViewById(R.id.apartmentCOUNTRYTextView);
-        apartmentCountryTextView.setText("");
+        apartmentCountryTextView.setText(matchingApartmentProfile.get(i).getApartmentLocation().getCountry()+"");
         apartmentImageView = (ImageView) customView.findViewById(R.id.apartmentInfoImageView);
         if (matchingApartmentBitmap.get(i) == null) {
             apartmentImageView.setImageResource(apartment_default);
@@ -394,31 +395,31 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
             apartmentImageView.setImageBitmap(matchingApartmentBitmap.get(i));
         }
         internetImageView = (ImageView) customView.findViewById(R.id.internetThumb);
-        if (true) {
+        if (matchingApartmentProfile.get(i).hasInternet()) {
             internetImageView.setImageResource(thumb_up_icon);
         } else {
             internetImageView.setImageResource(thumb_down_icon);
         }
         smokerImageView = (ImageView) customView.findViewById(R.id.smokerThumb);
-        if (true) {
+        if (matchingApartmentProfile.get(i).isSmokerApartment()) {
             smokerImageView.setImageResource(thumb_up_icon);
         } else {
             smokerImageView.setImageResource(thumb_down_icon);
         }
         petsImageView = (ImageView) customView.findViewById(R.id.petsThumb);
-        if (true) {
+        if (matchingApartmentProfile.get(i).hasPets()) {
             petsImageView.setImageResource(thumb_up_icon);
         } else {
             petsImageView.setImageResource(thumb_down_icon);
         }
         washingMashineImageView = (ImageView) customView.findViewById(R.id.washingMashineThumb);
-        if (true) {
+        if (matchingApartmentProfile.get(i).hasWashingMachine()) {
             washingMashineImageView.setImageResource(thumb_up_icon);
         } else {
             washingMashineImageView.setImageResource(thumb_down_icon);
         }
         purposeImageView = (ImageView) customView.findViewById(R.id.purpseThumb);
-        if (true) {
+        if (matchingApartmentProfile.get(i).isPurposeApartment()) {
             purposeImageView.setImageResource(thumb_up_icon);
         } else {
             purposeImageView.setImageResource(thumb_down_icon);
@@ -443,7 +444,8 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
     public void tenantPopUp(View v, int i) {
         View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_tenant, null);
-
+        tenantEmailTextView = (TextView) customView.findViewById(R.id.tenantEmailTextView);
+        tenantEmailTextView.setText(matchingTenantProfile.get(i).getEmail());
         tenantImageView = (ImageView) customView.findViewById(R.id.tenantInfoImageView);
         if (matchingTenantBitmap.get(i) == null) {
             tenantImageView.setImageResource(tenant_default);
@@ -451,31 +453,31 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
             tenantImageView.setImageBitmap(matchingTenantBitmap.get(i));
         }
         tenantNameTextView = (TextView) customView.findViewById(R.id.tenantNameTextView);
-        tenantNameTextView.setText("");
+        tenantNameTextView.setText(matchingTenantProfile.get(i).getFirstName() + "");
         tenantAgeTextView = (TextView) customView.findViewById(R.id.tenantAgeTextView2);
-        tenantAgeTextView.setText("");
+        tenantAgeTextView.setText(matchingTenantProfile.get(i).getAge() + "");
         tenantGenderImageView = (ImageView) customView.findViewById(R.id.genderThumb);
-        if (true) {
+        if (matchingTenantProfile.get(i).getGender() == 0) {
             tenantGenderImageView.setImageResource(male_icon);
         } else {
             tenantGenderImageView.setImageResource(female_icon);
         }
         tenantSmokerImageView = (ImageView) customView.findViewById(R.id.smokerThumb);
-        if (true) {
+        if (matchingTenantProfile.get(i).isSmoker()) {
             tenantSmokerImageView.setImageResource(thumb_up_icon);
         } else {
             tenantSmokerImageView.setImageResource(thumb_down_icon);
         }
         tenantPetsImageView = (ImageView) customView.findViewById(R.id.petsThumb);
-        if (true) {
+        if (matchingTenantProfile.get(i).hasPets()) {
             tenantPetsImageView.setImageResource(thumb_up_icon);
         } else {
             tenantPetsImageView.setImageResource(thumb_down_icon);
         }
         tenantOccupationTextView = (TextView) customView.findViewById(R.id.tenantOccupationTextView);
-        tenantOccupationTextView.setText("");
+        tenantOccupationTextView.setText(matchingTenantProfile.get(i).getOccupation() + "");
         tenantInfoTextView = (TextView) customView.findViewById(R.id.tenantInfoTextView);
-        tenantInfoTextView.setText("");
+        tenantInfoTextView.setText(matchingTenantProfile.get(i).getShortBio() +"");
 
         mPopupWindow = new PopupWindow(
                 customView,
@@ -499,7 +501,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
     @Override
     public void showTenants(List<Pair<TenantProfile, Bitmap>> tenants) {
-        Log.d(TAG, "size of potential apartments: " + tenants.size());
+        Log.d(TAG, "size of matches tenants: " + tenants.size());
         for (Pair<TenantProfile, Bitmap> pair : tenants) {
             matchingTenantProfile.add(pair.getLeft());
             matchingTenantBitmap.add(pair.getRight());
@@ -510,7 +512,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
     @Override
     public void showApartments(List<Pair<ApartmentProfile, Bitmap>> apartments) {
-        Log.d(TAG, "size of potential apartments: " + apartments.size());
+        Log.d(TAG, "size of matches apartments: " + apartments.size());
         for (Pair<ApartmentProfile, Bitmap> pair : apartments) {
             matchingApartmentProfile.add(pair.getLeft());
             matchingApartmentBitmap.add(pair.getRight());

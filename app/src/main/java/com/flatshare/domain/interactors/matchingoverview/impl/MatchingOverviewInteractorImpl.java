@@ -61,7 +61,6 @@ public class MatchingOverviewInteractorImpl extends AbstractInteractor implement
                 if(databaseError == null){
                     Log.d(TAG, "onComplete: Sandro" + path);
                     notifySuccess();
-
                 }else{
                     notifyError(databaseError.getMessage());
                 }
