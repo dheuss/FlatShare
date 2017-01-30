@@ -51,18 +51,22 @@ public class MatchingOverviewInteractorImpl extends AbstractInteractor implement
     @Override
     public void execute() {
         Log.v(TAG, "execute methode called in MatchingOverviewInteractorImpl");
-        String path = databaseRoot.getMatchesNode(tenantId, apartmentId).getRootPath();
+        Log.d(TAG, "execute: TenantID: " + tenantId);
+        Log.d(TAG, "execute: ApartmentID: " + apartmentId);
+
+        final String path = databaseRoot.getMatchesNode(tenantId, apartmentId).getRootPath();
         mDatabase.child(path).removeValue(new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if(databaseError == null){
+                    Log.d(TAG, "onComplete: Sandro" + path);
                     notifySuccess();
+
                 }else{
                     notifyError(databaseError.getMessage());
                 }
 
             }
         });
-        notifySuccess();
     }
 }

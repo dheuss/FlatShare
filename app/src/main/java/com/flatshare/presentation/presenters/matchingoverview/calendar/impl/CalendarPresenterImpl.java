@@ -85,7 +85,7 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
 
     @Override
     public void onSentSuccess() {
-        if (checkForTenant()) {
+        if (!checkForTenant()) {
             MatchEntry matchEntry = new MatchEntry();
             List<Long> appointmentList = matchEntry.getAppointmentsList();
             List<String> dateList = new ArrayList<>();

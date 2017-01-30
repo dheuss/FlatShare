@@ -83,6 +83,7 @@ public class CalendarInitInteractorImpl extends AbstractInteractor implements Ca
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if(databaseError == null){
+
                     notifySuccess();
                 }else{
                     notifyError(databaseError.getMessage());

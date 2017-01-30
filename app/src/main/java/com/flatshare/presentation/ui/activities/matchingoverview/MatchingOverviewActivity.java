@@ -45,6 +45,7 @@ import static com.flatshare.R.drawable.male_icon;
 import static com.flatshare.R.drawable.tenant_default;
 import static com.flatshare.R.drawable.thumb_down_icon;
 import static com.flatshare.R.drawable.thumb_up_icon;
+import static com.flatshare.R.id.overview_linear_1;
 
 public class MatchingOverviewActivity extends AbstractFragmentActivity implements MatchingOverviewPresenter.View {
 
@@ -116,6 +117,12 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
     public void generateMatchingOverview(List<TenantProfile> matchingTenantList, List<ApartmentProfile> matchingApartmentList, List<Bitmap> matchingBitmapList) {
 
+        int count = matchingOverview.getChildCount();
+        for (int i = 0; i < count; i++) {
+            View child = matchingOverview.getChildAt(i);
+            if (child instanceof TableRow) ((ViewGroup) child).removeAllViews();
+        }
+
         List<String> matchingProfileList = new ArrayList<>();
         if (matchingApartmentList != null) {
             for (int i = 0; i < matchingApartmentList.size(); i++) {
@@ -145,7 +152,6 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                 Glide.with(mContext).load(R.drawable.apartment_default).into(matchingImage);
             } else {
                 Log.d(TAG, "generateMatchingOverview: with picture");
-                //Glide.with(mContext).load(matchingBitmapList.get(i)).into(matchingImage);
                 matchingImage.setImageBitmap(matchingBitmapList.get(i));
             }
 

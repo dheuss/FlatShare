@@ -43,7 +43,7 @@ public class DatabaseRoot implements Node {
     }
 
     public MatchesNode getMatchesNode(String tenantId, String apartmentId){
-        return new MatchesNode(potentialMatches, tenantId, apartmentId);
+        return new MatchesNode(matches, tenantId, apartmentId);
     }
 
     public String getUsers() {
