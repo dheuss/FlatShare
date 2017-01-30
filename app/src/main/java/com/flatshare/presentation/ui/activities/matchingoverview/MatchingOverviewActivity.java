@@ -114,13 +114,11 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     public void generateMatchingOverview(List<TenantProfile> matchingTenantList, List<ApartmentProfile> matchingApartmentList, List<Bitmap> matchingBitmapList) {
 
         List<String> matchingProfileList = new ArrayList<>();
-        if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
+        if (matchingApartmentList != null) {
             for (int i = 0; i < matchingApartmentList.size(); i++) {
                 matchingProfileList.add(matchingApartmentList.get(i).getApartmentInfo() + " " + matchingApartmentList.get(i).getPrice() + " €");
             }
-        }
-
-        if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.APARTMENT.getValue() || userState.getPrimaryUserProfile().getClassificationId() == ProfileType.ROOMMATE.getValue()) {
+        }else{
             for (int i = 0; i < matchingTenantList.size(); i++) {
                 matchingProfileList.add(matchingTenantList.get(i).getFirstName() + " " + matchingTenantList.get(i).getShortBio());
             }
@@ -480,6 +478,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
             matchingTenantProfile.add(pair.getLeft());
             matchingTenantBitmap.add(pair.getRight());
         }
+        Log.d(TAG, "showTenants: success " + tenants.size());
         generateMatchingOverview(matchingTenantProfile, null, matchingTenantBitmap);
     }
 
@@ -490,6 +489,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
             matchingApartmentProfile.add(pair.getLeft());
             matchingApartmentBitmap.add(pair.getRight());
         }
+        Log.d(TAG, "showApartments: success " + apartments.size());
         generateMatchingOverview(null, matchingApartmentProfile, matchingApartmentBitmap);
     }
 
