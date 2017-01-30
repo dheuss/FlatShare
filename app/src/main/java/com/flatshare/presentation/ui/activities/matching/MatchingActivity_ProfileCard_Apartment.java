@@ -2,11 +2,17 @@ package com.flatshare.presentation.ui.activities.matching;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.Resource;
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+import com.bumptech.glide.load.resource.bitmap.BitmapResource;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
@@ -18,6 +24,8 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeIn;
 import com.mindorks.placeholderview.annotations.swipe.SwipeInState;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOut;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOutState;
+
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
@@ -58,9 +66,13 @@ public class MatchingActivity_ProfileCard_Apartment {
     private void onResolved(){
         Log.d(TAG, "onResolved: " + mBitmap);
         if (mBitmap == null){
-            Glide.with(mContext).load(R.drawable.apartment_default).into(profileImageView);
+            profileImageView.setImageResource(R.drawable.apartment_default);
+            //Glide.with(mContext).load(R.drawable.apartment_default).into(profileImageView);
         } else{
-            Glide.with(mContext).load(mBitmap).asBitmap().into(profileImageView);
+            profileImageView.setImageBitmap(mBitmap);
+            matchingActivity.setApartmentImage(mBitmap);
+            //Glide.with(mContext).load(mBitmap).asBitmap().into(profileImageView);
+
         }
         nameAgeTxt.setText("Location: " + mProfile.getApartmentLocation().city + ", " + mProfile.getApartmentLocation().district);
         locationNameTxt.setText("Price: " + mProfile.getPrice() + "€");

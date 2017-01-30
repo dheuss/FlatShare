@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.flatshare.R;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
@@ -54,9 +56,12 @@ public class MatchingActivity_ProfileCard_Tenant {
     private void onResolved(){
         //ToDo
         if (mBitmap == null) {
-            Glide.with(mContext).load(R.drawable.tenant_default).into(profileImageView);
+            profileImageView.setImageResource(R.drawable.tenant_default);
+            //Glide.with(mContext).load(R.drawable.tenant_default).into(profileImageView);
         } else {
-            Glide.with(mContext).load(mBitmap).into(profileImageView);
+            profileImageView.setImageBitmap(mBitmap);
+            matchingActivity.setTenantImage(mBitmap);
+            //Glide.with(mContext).load(mBitmap).into(profileImageView);
         }
         nameAgeTxt.setText("Name: " + mProfile.getFirstName() + ", " + mProfile.getAge());
         locationNameTxt.setText("Job: " + mProfile.getOccupation());
