@@ -13,5 +13,6 @@ public interface CalendarSendFinalInteractor extends Interactor {
         void onSentFinalFailure(String errorMessage);
 
         void onSentFinalSuccess();
+
     }
 }

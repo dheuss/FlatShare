@@ -17,7 +17,7 @@ public interface CalendarPresenter extends BasePresenter {
 
     void sendBackFromTenant(String finalDate, String tenantID, String apartmentID);
 
-    void checkForAppointment();
+    void checkForAppointment(String tenantId, String apartmentId);
 
 
     interface View extends BaseView {

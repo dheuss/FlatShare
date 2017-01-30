@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.flatshare.R;
 
+import com.flatshare.domain.datatypes.db.common.MatchEntry;
 import com.flatshare.presentation.presenters.matchingoverview.calendar.CalendarPresenter;
 import com.flatshare.presentation.presenters.matchingoverview.calendar.impl.CalendarPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
@@ -30,6 +31,7 @@ import com.flatshare.presentation.ui.activities.MainActivity;
 import com.flatshare.presentation.ui.activities.matchingoverview.MatchingOverviewActivity;
 import com.flatshare.threading.MainThreadImpl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -53,6 +55,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
     private boolean isTenant;
     private String finalDate, tenantID, apartmentID;
+    private List<Long> currentAppointmentList;
 
 
     @Override
@@ -81,8 +84,19 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         tenantID = getIntent().getStringExtra(MatchingOverviewActivity.TenantSessionId);
         apartmentID = getIntent().getStringExtra(MatchingOverviewActivity.ApartmentSessionId);
 
-        //TODO appoints laden wenn vorhanden
-        mPresenter.checkForAppointment();
+        MatchEntry matchEntry = new MatchEntry();
+        //TODO appointments holen
+        //mPresenter.checkForAppointment(tenantID, apartmentID);
+        if(matchEntry.appointmentSet) {
+            currentAppointmentList = matchEntry.getAppointmentsList();
+            for(int i =0; i<currentAppointmentList.size();i++) {
+                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                String dateText = df.format(currentAppointmentList.get(i));
+                dateList.add(i, dateText);
+            }
+            showOnScreen();
+        }
+
         //Send Button
         send.setOnClickListener(new View.OnClickListener() {
             @Override

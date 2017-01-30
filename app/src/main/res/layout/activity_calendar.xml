@@ -91,7 +91,7 @@
                         android:background="@color/colorPrimary"
                         android:text="Send"
                         android:textColor="@color/colorButtonText"
-                        android:visibility="visible" />
+                        android:visibility="gone" />
 
                 </LinearLayout>
             </ScrollView>
