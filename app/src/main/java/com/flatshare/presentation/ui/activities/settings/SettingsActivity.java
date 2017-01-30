@@ -189,7 +189,6 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
         changeEmail.setVisibility(View.GONE);
         changePassword.setVisibility(View.GONE);
         sendEmail.setVisibility(View.GONE);
-        remove.setVisibility(View.GONE);
     }
 
     public void changeMail(){

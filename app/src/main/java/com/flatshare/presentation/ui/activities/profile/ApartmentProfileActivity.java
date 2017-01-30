@@ -157,7 +157,6 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         }
 
         if (allowed){
-            Toast.makeText(this, "you have access", Toast.LENGTH_SHORT).show();
                 Location location = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
 
                 if (location != null) {
