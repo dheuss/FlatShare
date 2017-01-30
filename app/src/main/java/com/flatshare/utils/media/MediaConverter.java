@@ -36,9 +36,6 @@ public class MediaConverter {
     }
 
     public byte[] videoViewToByte(VideoView videoView) {
-
-        //TODO: implement conversion
-
         return null;
     }
 }

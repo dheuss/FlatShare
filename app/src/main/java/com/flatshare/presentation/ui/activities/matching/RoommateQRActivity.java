@@ -128,7 +128,6 @@ public class RoommateQRActivity extends AbstractActivity implements RoommateQRPr
 
     @Override
     public void showError(String message) {
-        //TODO: show something
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 

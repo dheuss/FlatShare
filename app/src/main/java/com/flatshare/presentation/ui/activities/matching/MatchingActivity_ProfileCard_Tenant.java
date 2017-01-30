@@ -54,14 +54,11 @@ public class MatchingActivity_ProfileCard_Tenant {
 
     @Resolve
     private void onResolved(){
-        //ToDo
         if (mBitmap == null) {
             profileImageView.setImageResource(R.drawable.tenant_default);
-            //Glide.with(mContext).load(R.drawable.tenant_default).into(profileImageView);
         } else {
             profileImageView.setImageBitmap(mBitmap);
             matchingActivity.setTenantImage(mBitmap);
-            //Glide.with(mContext).load(mBitmap).into(profileImageView);
         }
         nameAgeTxt.setText("Name: " + mProfile.getFirstName() + ", " + mProfile.getAge());
         locationNameTxt.setText("Job: " + mProfile.getOccupation());

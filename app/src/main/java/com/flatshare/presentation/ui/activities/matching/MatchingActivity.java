@@ -247,8 +247,6 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
             }
         });
 
-        //Todo Google Maps
-
         mPopupWindow.showAtLocation(mFrameLayout, Gravity.CENTER, 0, 0);
     }
 

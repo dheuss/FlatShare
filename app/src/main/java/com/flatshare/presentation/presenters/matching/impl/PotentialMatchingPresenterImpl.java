@@ -128,15 +128,13 @@ public class PotentialMatchingPresenterImpl extends AbstractPresenter
 
     @Override
     public void onTenantsFound(List<TenantProfile> tenants) {
-//        mView.hideProgress();
-//        mView.showTenants(tenants);
+
         getProfilePictures(tenants, null);
     }
 
     @Override
     public void onApartmentsFound(List<ApartmentProfile> apartments) {
-//        mView.hideProgress();
-//        mView.showApartments(apartments);
+
         getProfilePictures(null, apartments);
     }
 

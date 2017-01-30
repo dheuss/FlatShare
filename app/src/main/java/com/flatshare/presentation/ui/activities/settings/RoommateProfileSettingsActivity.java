@@ -140,7 +140,6 @@ public class RoommateProfileSettingsActivity extends AbstractFragmentActivity im
     }
 
     private void bindValues() {
-        //ToDo
         if (userState.getApartmentProfile() == null) {
             userState.getRoommateProfile().getApartmentId();
         } else {
