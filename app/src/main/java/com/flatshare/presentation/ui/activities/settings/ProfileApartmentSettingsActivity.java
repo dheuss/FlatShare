@@ -38,7 +38,9 @@ import java.util.Locale;
 import java.util.Map;
 
 import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
-
+/**
+ * Created by david on 06/12/2016.
+ */
 public class ProfileApartmentSettingsActivity extends AbstractFragmentActivity implements ApartmentProfilePresenter.View {
 
     private ApartmentProfilePresenter mPresenter;

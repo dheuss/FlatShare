@@ -4,7 +4,9 @@ import android.app.Application;
 import android.util.Log;
 
 import timber.log.Timber;
-
+/**
+ * Created by Arber on 06/12/2016.
+ */
 public class AndroidApplication extends Application {
 
     private static final String TAG = "AndroidApplication";

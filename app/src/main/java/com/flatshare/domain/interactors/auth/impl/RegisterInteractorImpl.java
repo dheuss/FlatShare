@@ -11,7 +11,9 @@ import com.flatshare.domain.interactors.auth.RegisterInteractor;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-
+/**
+ * Created by david on 06/12/2016.
+ */
 public class RegisterInteractorImpl extends AbstractAuthenticator implements RegisterInteractor {
 
     private static final String TAG = "RegisterInt";

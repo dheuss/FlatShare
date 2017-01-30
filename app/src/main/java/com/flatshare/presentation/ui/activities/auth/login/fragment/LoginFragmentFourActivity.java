@@ -39,7 +39,9 @@ import dmax.dialog.SpotsDialog;
 
 import static com.flatshare.presentation.ui.activities.profile.ApartmentProfileActivity.APARTMENT_ID;
 import static com.flatshare.presentation.ui.activities.profile.ApartmentProfileActivity.ROOMMATE_ID;
-
+/**
+ * Created by david on 06/12/2016.
+ */
 public class LoginFragmentFourActivity extends Fragment implements LoginPresenter.View {
 
     private EditText emailEditText;

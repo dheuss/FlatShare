@@ -60,7 +60,7 @@ public class MatchingActivity_ProfileCard_Apartment {
         if (mBitmap == null){
             Glide.with(mContext).load(R.drawable.apartment_default).into(profileImageView);
         } else{
-            Glide.with(mContext).load(mBitmap).into(profileImageView);
+            Glide.with(mContext).load(mBitmap).asBitmap().into(profileImageView);
         }
         nameAgeTxt.setText("Location: " + mProfile.getApartmentLocation().city + ", " + mProfile.getApartmentLocation().district);
         locationNameTxt.setText("Price: " + mProfile.getPrice() + "€");

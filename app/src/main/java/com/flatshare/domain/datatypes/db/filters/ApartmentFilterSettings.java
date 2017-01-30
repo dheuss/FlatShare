@@ -2,7 +2,9 @@ package com.flatshare.domain.datatypes.db.filters;
 
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.PropertyName;
-
+/**
+ * Created by Arber on 06/12/2016.
+ */
 public class ApartmentFilterSettings extends FilterSettings {
 
     @PropertyName("age_from")

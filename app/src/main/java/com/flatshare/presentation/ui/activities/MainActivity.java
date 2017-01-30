@@ -31,7 +31,9 @@ import com.readystatesoftware.viewbadger.BadgeView;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Created by david on 06/12/2016.
+ */
 public class MainActivity extends AbstractActivity implements MatchesPresenter.View {
 
     private static final String TAG = "MainActivity";

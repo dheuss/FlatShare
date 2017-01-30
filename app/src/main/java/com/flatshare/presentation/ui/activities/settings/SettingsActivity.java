@@ -28,7 +28,9 @@ import com.flatshare.presentation.ui.activities.auth.login.LoginActivity;
 import com.flatshare.threading.MainThreadImpl;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
+/**
+ * Created by david on 06/12/2016.
+ */
 public class SettingsActivity extends AbstractFragmentActivity implements SettingsPresenter.View {
 
     private CircleImageView settingsCircleImageView;

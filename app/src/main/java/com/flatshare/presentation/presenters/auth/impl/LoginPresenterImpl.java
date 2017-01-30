@@ -18,7 +18,7 @@ import com.flatshare.presentation.presenters.auth.LoginPresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 
 /**
- * Created by Arber on 05/12/2016.
+ * Created by david on 05/12/2016.
  */
 
 public class LoginPresenterImpl extends AbstractPresenter implements LoginPresenter,

@@ -23,7 +23,9 @@ import com.flatshare.presentation.ui.activities.matching.RoommateQRActivity;
 import com.flatshare.threading.MainThreadImpl;
 
 import static com.flatshare.presentation.ui.activities.profile.ApartmentProfileActivity.ROOMMATE_ID;
-
+/**
+ * Created by david on 06/12/2016.
+ */
 public class RoommateProfileActivity extends AbstractActivity implements RoommateProfilePresenter.View {
 
     private static final String TAG = "RoommateProfileActivity";

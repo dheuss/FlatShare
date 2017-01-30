@@ -13,7 +13,9 @@ import com.flatshare.presentation.presenters.auth.impl.ResetPasswordPresenterImp
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.auth.login.LoginActivity;
 import com.flatshare.threading.MainThreadImpl;
-
+/**
+ * Created by david on 06/12/2016.
+ */
 public class ResetPasswordActivity extends AbstractActivity implements ResetPasswordPresenter.View {
 
     private EditText emailResetPasswordEditText;

@@ -6,7 +6,9 @@ import android.util.Log;
 
 import com.flatshare.domain.MainThread;
 
-
+/**
+ * Created by Arber on 06/12/2016.
+ */
 /**
  * This class makes sure that the runnable we provide will be run on the main UI thread.
  */

@@ -18,7 +18,9 @@ import com.flatshare.presentation.presenters.profile.impl.TenantSettingsPresente
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.MainActivity;
 import com.flatshare.threading.MainThreadImpl;
-
+/**
+ * Created by david on 06/12/2016.
+ */
 public class TenantSettingsActivity extends AbstractActivity implements TenantSettingsPresenter.View {
 
     private TextView minPrice;

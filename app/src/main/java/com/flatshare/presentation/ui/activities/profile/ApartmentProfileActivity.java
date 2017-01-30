@@ -49,7 +49,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
+/**
+ * Created by david on 06/12/2016.
+ */
 public class ApartmentProfileActivity extends AbstractActivity implements ApartmentProfilePresenter.View {
 
     private static final int STATIC_VALUE = 2;

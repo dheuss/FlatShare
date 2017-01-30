@@ -17,7 +17,9 @@ import com.flatshare.presentation.presenters.profile.impl.ApartmentSettingsPrese
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.MainActivity;
 import com.flatshare.threading.MainThreadImpl;
-
+/**
+ * Created by david on 06/12/2016.
+ */
 public class RoommateProfileSettingsFilterActivity extends AbstractActivity implements ApartmentSettingsPresenter.View{
 
     private TextView headlineTextView;

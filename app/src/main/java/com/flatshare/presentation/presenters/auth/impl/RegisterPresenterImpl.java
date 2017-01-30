@@ -8,7 +8,7 @@ import com.flatshare.presentation.presenters.auth.RegisterPresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 
 /**
- * Created by Arber on 11/12/2016.
+ * Created by david on 11/12/2016.
  */
 
 public class RegisterPresenterImpl extends AbstractPresenter implements RegisterPresenter,

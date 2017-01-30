@@ -5,6 +5,9 @@ import com.flatshare.domain.datatypes.auth.ChangePasswordDataType;
 import com.flatshare.domain.datatypes.auth.LoginDataType;
 import com.flatshare.domain.datatypes.auth.RegisterDataType;
 import com.flatshare.domain.datatypes.auth.ResetDataType;
+/**
+ * Created by david on 06/12/2016.
+ */
 
 public interface AuthenticationManager {
 

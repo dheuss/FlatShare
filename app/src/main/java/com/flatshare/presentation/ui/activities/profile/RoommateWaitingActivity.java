@@ -13,7 +13,9 @@ import com.flatshare.presentation.ui.activities.MainActivity;
 import com.flatshare.threading.MainThreadImpl;
 
 import static com.flatshare.presentation.ui.activities.profile.ApartmentProfileActivity.APARTMENT_ID;
-
+/**
+ * Created by david on 06/12/2016.
+ */
 public class RoommateWaitingActivity extends AbstractActivity implements RoommateWaitingPresenter.View {
 
     private static final String TAG = "RoommateWaitingActivity";

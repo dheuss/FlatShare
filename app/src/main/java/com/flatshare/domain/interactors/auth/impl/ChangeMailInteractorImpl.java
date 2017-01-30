@@ -9,7 +9,9 @@ import com.flatshare.domain.interactors.auth.AbstractAuthenticator;
 import com.flatshare.domain.interactors.auth.ChangeMailInteractor;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
+/**
+ * Created by David on 06/12/2016.
+ */
 public class ChangeMailInteractorImpl extends AbstractAuthenticator implements ChangeMailInteractor {
 
     private static final String TAG = "ChangeMailInt";

@@ -5,7 +5,9 @@ import android.util.Log;
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.domain.interactors.matchingoverview.MatchingOverviewInteractor;
-
+/**
+ * Created by david on 06/12/2016.
+ */
 
 public class MatchingOverviewInteractorImpl extends AbstractInteractor implements MatchingOverviewInteractor {
 

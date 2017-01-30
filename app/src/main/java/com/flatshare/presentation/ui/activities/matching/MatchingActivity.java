@@ -39,7 +39,9 @@ import static com.flatshare.R.drawable.male_icon;
 import static com.flatshare.R.drawable.tenant_default;
 import static com.flatshare.R.drawable.thumb_down_icon;
 import static com.flatshare.R.drawable.thumb_up_icon;
-
+/**
+ * Created by Arber on 06/12/2016.
+ */
 public class MatchingActivity extends AbstractFragmentActivity implements PotentialMatchingPresenter.View {
 
     private static final String TAG = "MatchingActivity";

@@ -4,7 +4,9 @@ import com.google.firebase.database.Exclude;
 import com.google.firebase.database.PropertyName;
 
 import java.util.List;
-
+/**
+ * Created by Arber on 06/12/2016.
+ */
 public class MatchEntry {
 
     @PropertyName("appointments_list")

@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.flatshare.R;
-
+/**
+ * Created by david on 06/12/2016.
+ */
 public class LoginFragmentTwoActivity extends Fragment {
 
     public LoginFragmentTwoActivity() {

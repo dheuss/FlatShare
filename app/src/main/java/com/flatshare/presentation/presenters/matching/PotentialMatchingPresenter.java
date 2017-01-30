@@ -11,7 +11,9 @@ import com.flatshare.presentation.presenters.base.BasePresenter;
 import com.flatshare.presentation.ui.BaseView;
 
 import java.util.List;
-
+/**
+ * Created by Arber on 06/12/2016.
+ */
 public interface PotentialMatchingPresenter extends BasePresenter {
 
     void getPotentialMatches();

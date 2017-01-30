@@ -1,5 +1,7 @@
 package com.flatshare.presentation.ui;
-
+/**
+ * Created by Arber on 06/12/2016.
+ */
 /**
  * <p>
  * This interface represents a basic view. All views should implement these common methods.

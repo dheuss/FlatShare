@@ -14,7 +14,9 @@ import com.flatshare.presentation.presenters.profile.PrimaryProfilePresenter;
 import com.flatshare.presentation.presenters.profile.impl.PrimaryProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.threading.MainThreadImpl;
-
+/**
+ * Created by david on 06/12/2016.
+ */
 
 public class PrimaryProfileActivity extends AbstractActivity implements PrimaryProfilePresenter.View {
 

@@ -22,7 +22,9 @@ import com.flatshare.presentation.presenters.profile.TenantProfilePresenter;
 import com.flatshare.presentation.presenters.profile.impl.TenantProfilePresenterImpl;
 import com.flatshare.presentation.ui.AbstractFragmentActivity;
 import com.flatshare.threading.MainThreadImpl;
-
+/**
+ * Created by david on 06/12/2016.
+ */
 public class ProfileTenantSettingsActivity extends AbstractFragmentActivity implements TenantProfilePresenter.View {
 
     private TextView tenantProfileHeadline;

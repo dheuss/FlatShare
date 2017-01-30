@@ -12,7 +12,9 @@ import android.widget.Button;
 
 import com.flatshare.R;
 import com.flatshare.presentation.presenters.auth.LoginPresenter;
-
+/**
+ * Created by david on 06/12/2016.
+ */
 public class LoginFragmentOneActivity extends Fragment { //implements LoginPresenter.View{
 
 //    private Button login_1_Button;

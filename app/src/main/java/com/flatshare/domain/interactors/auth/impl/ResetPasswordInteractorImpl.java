@@ -9,7 +9,9 @@ import com.flatshare.domain.interactors.auth.AbstractAuthenticator;
 import com.flatshare.domain.interactors.auth.ResetPasswordInteractor;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
+/**
+ * Created by david on 06/12/2016.
+ */
 
 public class ResetPasswordInteractorImpl extends AbstractAuthenticator implements ResetPasswordInteractor {
 
