@@ -14,7 +14,6 @@ import com.flatshare.domain.predicates.ApartmentMatchFinder;
 import com.flatshare.domain.predicates.TenantMatchFinder;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
@@ -77,7 +76,7 @@ public class PotentialMatchingInteractorImpl extends AbstractInteractor implemen
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onNoMatchFound();
+                mCallback.onNoPotentialMatchFound();
             }
         });
     }

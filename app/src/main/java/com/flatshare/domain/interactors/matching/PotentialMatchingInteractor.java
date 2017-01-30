@@ -13,7 +13,7 @@ import java.util.List;
 public interface PotentialMatchingInteractor extends Interactor{
 
     interface Callback {
-        void onNoMatchFound();
+        void onNoPotentialMatchFound();
         void notifyError(String errorMessage);
 
         void onTenantsFound(List<TenantProfile> tenants);

@@ -112,7 +112,7 @@ public class MatchingOverviewPresenterImpl extends AbstractPresenter implements 
     }
 
     @Override
-    public void onNoMatchFound() {
+    public void onNoPotentialMatchFound() {
         Log.d("No Match Fount", "");
     }
 

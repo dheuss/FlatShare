@@ -117,7 +117,7 @@ public class PotentialMatchingPresenterImpl extends AbstractPresenter
     }
 
     @Override
-    public void onNoMatchFound() {
+    public void onNoPotentialMatchFound() {
         onError("No Matches were found!");
     }
 
