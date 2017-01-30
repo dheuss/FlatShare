@@ -33,7 +33,9 @@ import com.flatshare.presentation.ui.AbstractFragmentActivity;
 import com.flatshare.presentation.ui.activities.matchingoverview.calendar.CalendarActivity;
 import com.flatshare.threading.MainThreadImpl;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import android.view.ViewGroup.LayoutParams;
@@ -86,6 +88,9 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     List<ApartmentProfile> matchingApartmentProfile = new ArrayList<>();
     List<Bitmap> matchingApartmentBitmap = new ArrayList<>();
     private Context mContext;
+    HashMap<Integer, String> currentApVisibleMatches = new HashMap<Integer, String>();
+    HashMap<Integer, String> currentTenVisibleMatches = new HashMap<Integer, String>();
+    private boolean firstTime = true;
 
 
     @Override
@@ -120,13 +125,16 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
 
         List<String> matchingProfileList = new ArrayList<>();
+        List<String> matchingIdList = new ArrayList<>();
         if (matchingApartmentList != null) {
             for (int i = 0; i < matchingApartmentList.size(); i++) {
                 matchingProfileList.add(matchingApartmentList.get(i).getApartmentLocation().getStreet() + " " + matchingApartmentList.get(i).getPrice() + " €");
+                matchingIdList.add(matchingApartmentList.get(i).getId());
             }
         } else {
             for (int i = 0; i < matchingTenantList.size(); i++) {
                 matchingProfileList.add(matchingTenantList.get(i).getFirstName() + " ");
+                matchingIdList.add(matchingTenantList.get(i).getId());
             }
         }
 
@@ -144,9 +152,9 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
 
             if (matchingBitmapList.get(i) == null) {
-                if(userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
+                if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
                     Glide.with(mContext).load(R.drawable.apartment_default).into(matchingImage);
-                }else{
+                } else {
                     Glide.with(mContext).load(R.drawable.tenant_default).into(matchingImage);
                 }
             } else {
@@ -199,6 +207,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
             infoButton.setLayoutParams(paramsInfo);
 
             matchingOverview.addView(row, i);
+
         }
     }
 
@@ -381,13 +390,13 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
         apartmentEmailTextView = (TextView) customView.findViewById(R.id.apartmentEMAILTextView);
         apartmentEmailTextView.setText(matchingApartmentProfile.get(i).getEmail());
         apartmentZipCodeTextView = (TextView) customView.findViewById(R.id.apartmentZIPCODETextView);
-        apartmentZipCodeTextView.setText(matchingApartmentProfile.get(i).getApartmentLocation().getZipCode() +"");
+        apartmentZipCodeTextView.setText(matchingApartmentProfile.get(i).getApartmentLocation().getZipCode() + "");
         apartmentCityTextView = (TextView) customView.findViewById(R.id.apartmentCITYTextView);
         apartmentCityTextView.setText(matchingApartmentProfile.get(i).getApartmentLocation().getCity());
         apartmentStateTextView = (TextView) customView.findViewById(R.id.apartmentSTATETextView);
-        apartmentStateTextView.setText(matchingApartmentProfile.get(i).getApartmentLocation().getState() +"");
+        apartmentStateTextView.setText(matchingApartmentProfile.get(i).getApartmentLocation().getState() + "");
         apartmentCountryTextView = (TextView) customView.findViewById(R.id.apartmentCOUNTRYTextView);
-        apartmentCountryTextView.setText(matchingApartmentProfile.get(i).getApartmentLocation().getCountry()+"");
+        apartmentCountryTextView.setText(matchingApartmentProfile.get(i).getApartmentLocation().getCountry() + "");
         apartmentImageView = (ImageView) customView.findViewById(R.id.apartmentInfoImageView);
         if (matchingApartmentBitmap.get(i) == null) {
             apartmentImageView.setImageResource(apartment_default);
@@ -477,7 +486,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
         tenantOccupationTextView = (TextView) customView.findViewById(R.id.tenantOccupationTextView);
         tenantOccupationTextView.setText(matchingTenantProfile.get(i).getOccupation() + "");
         tenantInfoTextView = (TextView) customView.findViewById(R.id.tenantInfoTextView);
-        tenantInfoTextView.setText(matchingTenantProfile.get(i).getShortBio() +"");
+        tenantInfoTextView.setText(matchingTenantProfile.get(i).getShortBio() + "");
 
         mPopupWindow = new PopupWindow(
                 customView,
@@ -501,7 +510,8 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
     @Override
     public void showTenants(List<Pair<TenantProfile, Bitmap>> tenants) {
-        Log.d(TAG, "size of matches tenants: " + tenants.size());
+        matchingTenantProfile.clear();
+        matchingTenantBitmap.clear();
         for (Pair<TenantProfile, Bitmap> pair : tenants) {
             matchingTenantProfile.add(pair.getLeft());
             matchingTenantBitmap.add(pair.getRight());
@@ -512,7 +522,8 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
     @Override
     public void showApartments(List<Pair<ApartmentProfile, Bitmap>> apartments) {
-        Log.d(TAG, "size of matches apartments: " + apartments.size());
+        matchingApartmentProfile.clear();
+        matchingApartmentBitmap.clear();
         for (Pair<ApartmentProfile, Bitmap> pair : apartments) {
             matchingApartmentProfile.add(pair.getLeft());
             matchingApartmentBitmap.add(pair.getRight());
