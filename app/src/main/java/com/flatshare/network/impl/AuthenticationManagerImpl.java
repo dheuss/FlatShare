@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
  * Created by Arber on 06/12/2016.
  */
 
+@Deprecated
 public class AuthenticationManagerImpl implements AuthenticationManager {
 
     private AuthenticationManager.LoginCallback loginCallback;

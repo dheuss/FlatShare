@@ -17,6 +17,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Created by Arber on 11/12/2016.
  */
 
+@Deprecated
 public class StorageManagerImpl implements StorageManager {
 
     private static final String TAG = "StorageManager";

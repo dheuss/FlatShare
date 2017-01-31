@@ -9,11 +9,10 @@ import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
-import com.flatshare.domain.interactors.InitInteractor;
+import com.flatshare.domain.interactors.init.InitInteractor;
 import com.flatshare.domain.interactors.auth.LoginInteractor;
-import com.flatshare.domain.interactors.impl.InitInteractorImpl;
+import com.flatshare.domain.interactors.init.impl.InitInteractorImpl;
 import com.flatshare.domain.interactors.auth.impl.LoginInteractorImpl;
-import com.flatshare.domain.interactors.impl.TestInteractor;
 import com.flatshare.presentation.presenters.auth.LoginPresenter;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 

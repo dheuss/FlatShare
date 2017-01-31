@@ -23,6 +23,7 @@ import java.util.Map;
  * Created by Arber on 06/12/2016.
  */
 
+@Deprecated
 public class DatabaseManagerImpl implements DatabaseManager {
 
     private static final String TAG = "DatabaseManager";

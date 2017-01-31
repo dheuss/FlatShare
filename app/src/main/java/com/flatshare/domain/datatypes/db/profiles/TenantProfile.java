@@ -8,6 +8,9 @@ import com.google.firebase.database.PropertyName;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Arber on 12/12/2016.
+ */
 public class TenantProfile extends UserProfile {
 
     @PropertyName("tenant_filter_settings")

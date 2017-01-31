@@ -9,7 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 /**
- * TODO: use method in a asyncTask ande DELETE CLASS!
+ * TODO: use method in a asyncTask and DELETE CLASS!
  * Created by Arber on 18/01/2017.
  */
 public class MediaInteractorCompresser {

@@ -1,4 +1,4 @@
-package com.flatshare.domain.interactors.impl;
+package com.flatshare.domain.interactors.init;
 
 import android.util.Log;
 

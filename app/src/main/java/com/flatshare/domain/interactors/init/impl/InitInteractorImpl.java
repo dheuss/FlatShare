@@ -1,4 +1,4 @@
-package com.flatshare.domain.interactors.impl;
+package com.flatshare.domain.interactors.init.impl;
 
 import android.util.Log;
 
@@ -8,15 +8,14 @@ import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
-import com.flatshare.domain.interactors.InitInteractor;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
+import com.flatshare.domain.interactors.init.InitInteractor;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

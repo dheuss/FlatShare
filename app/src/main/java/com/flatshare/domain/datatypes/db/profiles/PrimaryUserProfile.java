@@ -3,6 +3,9 @@ package com.flatshare.domain.datatypes.db.profiles;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.PropertyName;
 
+/**
+ * Created by Arber on 12/12/2016.
+ */
 public class PrimaryUserProfile extends UserProfile{
 
     @PropertyName("classification_id")

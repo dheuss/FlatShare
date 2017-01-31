@@ -1,4 +1,4 @@
-package com.flatshare.domain.interactors;
+package com.flatshare.domain.interactors.init;
 
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;

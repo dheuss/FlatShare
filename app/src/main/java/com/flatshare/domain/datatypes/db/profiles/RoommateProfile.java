@@ -7,6 +7,9 @@ import com.google.firebase.database.PropertyName;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Arber on 27/12/2016.
+ */
 public class RoommateProfile extends UserProfile {
 
     @PropertyName("roommate_id")
