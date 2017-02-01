@@ -88,15 +88,19 @@ public class MatchingOverviewPresenterImpl extends AbstractPresenter implements 
     @Override
     public void onApartmentMatchesFound(List<Pair<ApartmentProfile, Bitmap>> apMatches) {
         mView.hideProgress();
-        Log.d(TAG, "onApartmentMatchesFound: show apMatches List: " + apMatches);
-        mView.showApartments(apMatches);
+        if(apMatches != null) {
+            Log.d(TAG, "onApartmentMatchesFound: show apMatches List: " + apMatches);
+            mView.showApartments(apMatches);
+        }
     }
 
     @Override
     public void onTenantMatchesFound(List<Pair<TenantProfile, Bitmap>> tenMatches) {
         mView.hideProgress();
-        Log.d(TAG, "onTenantMatchesFound: show tenMatches List: " + tenMatches);
-        mView.showTenants(tenMatches);
+        if(tenMatches != null) {
+            Log.d(TAG, "onTenantMatchesFound: show tenMatches List: " + tenMatches);
+            mView.showTenants(tenMatches);
+        }
     }
 
     @Override
