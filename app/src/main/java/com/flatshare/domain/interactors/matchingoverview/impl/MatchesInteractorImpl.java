@@ -112,6 +112,11 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
 
         final AtomicInteger counter = new AtomicInteger(0);
 
+        if (apartmentIds.size() <= 0) {
+            notifyError("ApartmentsIdList is empty!");
+            return;
+        }
+
         for (final String id : apartmentIds) {
             String apartmentPath = databaseRoot.getApartmentProfileNode(id).getRootPath();
             final String imagePath = storageRoot.getApartments(id).getImagesPath();
@@ -133,12 +138,12 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
                                     apartmentImagePair.setRight(null);
                                     apartmentsList.add(apartmentImagePair);
                                 }
-
-                                if (counter.incrementAndGet() == apartmentIds.size()) {
-                                    notifyApMatchesFound(apartmentsList);
-                                }
                             }
                         });
+                    }
+
+                    if (counter.incrementAndGet() == apartmentIds.size()) {
+                        notifyApMatchesFound(apartmentsList);
                     }
                 }
 
@@ -162,6 +167,11 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
 
         final AtomicInteger counter = new AtomicInteger(0);
 
+        if (tenantIds.size() <= 0) {
+            notifyError("TenantsIdList is empty!");
+            return;
+        }
+
         for (final String id : tenantIds) {
             String tenantPath = databaseRoot.getTenantProfileNode(id).getRootPath();
             final String imagePath = storageRoot.getTenants(id).getImagesPath();
@@ -183,12 +193,12 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
                                     tenantImagePair.setRight(null);
                                     tenantList.add(tenantImagePair);
                                 }
-
-                                if (counter.incrementAndGet() == tenantIds.size()) {
-                                    notifyTenMatchesFound(tenantList);
-                                }
                             }
                         });
+
+                        if (counter.incrementAndGet() == tenantIds.size()) {
+                            notifyTenMatchesFound(tenantList);
+                        }
                     }
                 }
 
