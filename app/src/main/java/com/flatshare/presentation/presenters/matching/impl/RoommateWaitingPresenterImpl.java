@@ -59,7 +59,7 @@ public class RoommateWaitingPresenterImpl extends AbstractPresenter implements R
 
     @Override
     public void onApartmentReady() {
-//        mView.hideProgress();
+        mView.hideProgress();
         mView.changeToMatchingActivity();
     }
 

@@ -74,6 +74,8 @@ public class UserState {
     }
 
     public String getApartmentId() {
+        System.out.println("LOGGER LOGGER LOGGER LOGGER LOGGER ------------------------------------------- 111111111111 " + getApartmentProfile());
+        System.out.println("LOGGER LOGGER LOGGER LOGGER LOGGER ------------------------------------------- 222222222222 " + getApartmentProfile().getApartmentId());
         return getApartmentProfile().getApartmentId();
     }
 
