@@ -3,6 +3,7 @@ package com.flatshare.presentation.ui.activities.matchingoverview;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -52,6 +53,8 @@ import static com.flatshare.R.id.overview_linear_1;
 public class MatchingOverviewActivity extends AbstractFragmentActivity implements MatchingOverviewPresenter.View {
 
     private UserState userState;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     //ApartmentPopUp
     private TextView apartmentPriceTextView, apartmentSizeTextView, apartmentZipCodeTextView, apartmentCityTextView, apartmentStateTextView, apartmentCountryTextView, apartmentEmailTextView;
@@ -112,7 +115,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                 this
         );
 
-        mPresenter.getMatches();
+//        mPresenter.getMatches();
 
         return view;
     }
@@ -502,6 +505,13 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     public void bindView(View view) {
         matchingOverview = (TableLayout) view.findViewById(R.id.matchingOverview);
         mFrameLayout = (FrameLayout) view.findViewById(R.id.matchingOverviewActivity);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.getMatches();
+            }
+        });
     }
 
     @Override
@@ -526,6 +536,12 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
         }
         Log.d(TAG, "showApartments: success " + apartments.size());
         generateMatchingOverview(null, matchingApartmentProfile, matchingApartmentBitmap);
+    }
+
+    @Override
+    public void hideProgress() {
+        super.hideProgress();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override

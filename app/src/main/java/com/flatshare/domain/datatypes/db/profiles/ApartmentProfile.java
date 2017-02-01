@@ -280,4 +280,6 @@ public class ApartmentProfile extends UserProfile {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
 }
