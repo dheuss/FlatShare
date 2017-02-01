@@ -30,6 +30,7 @@ import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -39,6 +40,7 @@ import static com.flatshare.R.drawable.male_icon;
 import static com.flatshare.R.drawable.tenant_default;
 import static com.flatshare.R.drawable.thumb_down_icon;
 import static com.flatshare.R.drawable.thumb_up_icon;
+
 /**
  * Created by Arber on 06/12/2016.
  */
@@ -173,62 +175,70 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
 
     public void cardClick(View view) {
         if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
-            apartmentPopUp(view);
+            if (getInternet() == null) {
+                Toast.makeText(getActivity(), "Sorry, no potential matches!", Toast.LENGTH_SHORT).show();
+            } else {
+                apartmentPopUp(view);
+            }
         } else {
-            tenantPopUp(view);
+            if (getTenantSmoker() == null){
+                Toast.makeText(getActivity(), "Sorry, no potential matches!", Toast.LENGTH_SHORT).show();
+            } else {
+                tenantPopUp(view);
+            }
         }
     }
 
     public void apartmentPopUp(View view) {
         View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_apartment, null);
         apartmentPriceTextView = (TextView) customView.findViewById(R.id.apartmentPriceTextView);
-        apartmentPriceTextView.setText(getApartmentPrice()+" €");
+        apartmentPriceTextView.setText(getApartmentPrice() + " €");
         apartmentSizeTextView = (TextView) customView.findViewById(R.id.apartmentSizeTextView);
-        apartmentSizeTextView.setText(getApartmentSize()+" m2");
-        apartmentZipCodeTextView = (TextView)customView.findViewById(R.id.apartmentZIPCODETextView);
-        apartmentZipCodeTextView.setText(getApartmentZipCode()+"");
-        apartmentCityTextView = (TextView)customView.findViewById(R.id.apartmentCITYTextView);
+        apartmentSizeTextView.setText(getApartmentSize() + " m2");
+        apartmentZipCodeTextView = (TextView) customView.findViewById(R.id.apartmentZIPCODETextView);
+        apartmentZipCodeTextView.setText(getApartmentZipCode() + "");
+        apartmentCityTextView = (TextView) customView.findViewById(R.id.apartmentCITYTextView);
         apartmentCityTextView.setText(getApartmentCity());
-        apartmentStateTextView = (TextView)customView.findViewById(R.id.apartmentSTATETextView);
+        apartmentStateTextView = (TextView) customView.findViewById(R.id.apartmentSTATETextView);
         apartmentStateTextView.setText(getApartmentState());
-        apartmentCountryTextView = (TextView)customView.findViewById(R.id.apartmentCOUNTRYTextView);
+        apartmentCountryTextView = (TextView) customView.findViewById(R.id.apartmentCOUNTRYTextView);
         apartmentCountryTextView.setText(getApartmentCountry());
-        apartmentInfoTextView = (TextView)customView.findViewById(R.id.apartmentInfoTextView);
+        apartmentInfoTextView = (TextView) customView.findViewById(R.id.apartmentInfoTextView);
         apartmentInfoTextView.setText(getApartmentInfo());
-        apartmentContactTextView = (TextView)customView.findViewById(R.id.apartmentEMAILTextView);
+        apartmentContactTextView = (TextView) customView.findViewById(R.id.apartmentEMAILTextView);
 
         apartmentImageView = (ImageView) customView.findViewById(R.id.apartmentInfoImageView);
-        if (getApartmentImage() == null){
+        if (getApartmentImage() == null) {
             apartmentImageView.setImageResource(apartment_default);
         } else {
             apartmentImageView.setImageBitmap(getApartmentImage());
         }
-        internetImageView  = (ImageView) customView.findViewById(R.id.internetThumb);
-        if (getInternet()){
+        internetImageView = (ImageView) customView.findViewById(R.id.internetThumb);
+        if (getInternet()) {
             internetImageView.setImageResource(thumb_up_icon);
-        }else{
+        } else {
             internetImageView.setImageResource(thumb_down_icon);
         }
         smokerImageView = (ImageView) customView.findViewById(R.id.smokerThumb);
-        if (getSmoker()){
+        if (getSmoker()) {
             smokerImageView.setImageResource(thumb_up_icon);
         } else {
             smokerImageView.setImageResource(thumb_down_icon);
         }
         petsImageView = (ImageView) customView.findViewById(R.id.petsThumb);
-        if (getPets()){
+        if (getPets()) {
             petsImageView.setImageResource(thumb_up_icon);
         } else {
             petsImageView.setImageResource(thumb_down_icon);
         }
         washingMashineImageView = (ImageView) customView.findViewById(R.id.washingMashineThumb);
-        if (getWashingMashine()){
+        if (getWashingMashine()) {
             washingMashineImageView.setImageResource(thumb_up_icon);
         } else {
             washingMashineImageView.setImageResource(thumb_down_icon);
         }
         purposeImageView = (ImageView) customView.findViewById(R.id.purpseThumb);
-        if (getPurpose()){
+        if (getPurpose()) {
             purposeImageView.setImageResource(thumb_up_icon);
         } else {
             purposeImageView.setImageResource(thumb_down_icon);
@@ -252,39 +262,39 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
 
     public void tenantPopUp(View view) {
         View customView = getActivity().getLayoutInflater().inflate(R.layout.activity_show_detail_profil_tenant, null);
-        tenantImageView = (ImageView)customView.findViewById(R.id.tenantInfoImageView);
-        if (getTenantImage() == null){
+        tenantImageView = (ImageView) customView.findViewById(R.id.tenantInfoImageView);
+        if (getTenantImage() == null) {
             tenantImageView.setImageResource(tenant_default);
         } else {
             tenantImageView.setImageBitmap(getTenantImage());
         }
-        tenantNameTextView = (TextView)customView.findViewById(R.id.tenantNameTextView);
+        tenantNameTextView = (TextView) customView.findViewById(R.id.tenantNameTextView);
         tenantNameTextView.setText(getTenantName());
-        tenantAgeTextView = (TextView)customView.findViewById(R.id.tenantAgeTextView2);
-        tenantAgeTextView.setText(getTenantAge()+"");
-        tenantContactTextView = (TextView)customView.findViewById(R.id.tenantEmailTextView);
+        tenantAgeTextView = (TextView) customView.findViewById(R.id.tenantAgeTextView2);
+        tenantAgeTextView.setText(getTenantAge() + "");
+        tenantContactTextView = (TextView) customView.findViewById(R.id.tenantEmailTextView);
 
-        tenantGenderImageView = (ImageView)customView.findViewById(R.id.genderThumb);
-        if (getTenantGender() == 0){
+        tenantGenderImageView = (ImageView) customView.findViewById(R.id.genderThumb);
+        if (getTenantGender() == 0) {
             tenantGenderImageView.setImageResource(male_icon);
         } else {
             tenantGenderImageView.setImageResource(female_icon);
         }
-        tenantSmokerImgeeView = (ImageView)customView.findViewById(R.id.smokerThumb);
-        if (getTenantSmoker()){
+        tenantSmokerImgeeView = (ImageView) customView.findViewById(R.id.smokerThumb);
+        if (getTenantSmoker()) {
             tenantSmokerImgeeView.setImageResource(thumb_up_icon);
         } else {
             tenantSmokerImgeeView.setImageResource(thumb_down_icon);
         }
-        tenantPetsImageView = (ImageView)customView.findViewById(R.id.petsThumb);
-        if (getTenantPets()){
+        tenantPetsImageView = (ImageView) customView.findViewById(R.id.petsThumb);
+        if (getTenantPets()) {
             tenantPetsImageView.setImageResource(thumb_up_icon);
         } else {
             tenantPetsImageView.setImageResource(thumb_down_icon);
         }
-        tenantOccupationTextView = (TextView)customView.findViewById(R.id.tenantOccupationTextView);
+        tenantOccupationTextView = (TextView) customView.findViewById(R.id.tenantOccupationTextView);
         tenantOccupationTextView.setText(getTenantOccupation());
-        tenantInfoTextView = (TextView)customView.findViewById(R.id.tenantInfoTextView);
+        tenantInfoTextView = (TextView) customView.findViewById(R.id.tenantInfoTextView);
         tenantInfoTextView.setText(getTenantInfo());
         mPopupWindow = new PopupWindow(
                 customView,

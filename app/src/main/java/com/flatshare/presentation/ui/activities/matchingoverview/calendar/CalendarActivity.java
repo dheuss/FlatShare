@@ -1,6 +1,5 @@
 package com.flatshare.presentation.ui.activities.matchingoverview.calendar;
 
-
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -11,7 +10,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -24,8 +22,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.flatshare.R;
-
-import com.flatshare.domain.datatypes.db.common.MatchEntry;
 import com.flatshare.presentation.presenters.matchingoverview.calendar.CalendarPresenter;
 import com.flatshare.presentation.presenters.matchingoverview.calendar.impl.CalendarPresenterImpl;
 import com.flatshare.presentation.ui.AbstractActivity;
@@ -33,7 +29,6 @@ import com.flatshare.presentation.ui.activities.MainActivity;
 import com.flatshare.presentation.ui.activities.matchingoverview.MatchingOverviewActivity;
 import com.flatshare.threading.MainThreadImpl;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
