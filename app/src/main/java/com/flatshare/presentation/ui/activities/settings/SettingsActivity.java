@@ -13,14 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.flatshare.R;
-import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
-import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
-import com.flatshare.domain.datatypes.enums.ProfileType;
-import com.flatshare.domain.repository.StorageRepository;
-import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.settings.SettingsPresenter;
 import com.flatshare.presentation.presenters.settings.impl.SettingsPresenterImpl;
 import com.flatshare.presentation.ui.AbstractFragmentActivity;
