@@ -82,6 +82,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         apartmentID = getIntent().getStringExtra(MatchingOverviewActivity.ApartmentSessionId);
 
         mPresenter.checkForAppointment(tenantID, apartmentID);
+        mPresenter.checkFinalAppointment(tenantID,apartmentID);
 
         //Send Button
         send.setOnClickListener(new View.OnClickListener() {
@@ -394,6 +395,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             @Override
             public void onRefresh() {
                 dateOverview.removeAllViews();
+                mPresenter.checkFinalAppointment(tenantID,apartmentID);
                 mPresenter.checkForAppointment(tenantID, apartmentID);
             }
         });

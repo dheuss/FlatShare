@@ -77,7 +77,7 @@ public class CalendarCheckFinalDateInteractorImpl extends AbstractInteractor imp
         mDatabase.child(path).removeEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //TODO: read about it...
+                //read about it...
                 Log.d(TAG, "onDataChange: removed listener");
             }
 
