@@ -6,34 +6,24 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.common.MatchEntry;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.domain.interactors.calendar.CalendarCheckAppointmentInteractor;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.ValueEventListener;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Sandro on 30.01.17.
  */
 
-public class CalndarCheckAppointmentInteractorImpl extends AbstractInteractor implements CalendarCheckAppointmentInteractor {
+public class CalendarCheckAppointmentInteractorImpl extends AbstractInteractor implements CalendarCheckAppointmentInteractor {
 
-    private static final String TAG = "CalndarCheckAppointmentInteractorImpl";
+    private static final String TAG = "CalendarCheckAppointmentInteractorImpl";
 
     private final String tenantID;
     private final String apartmentID;
 
-    private Callback mCallback;
+    private CalendarCheckAppointmentInteractor.Callback mCallback;
 
-    public CalndarCheckAppointmentInteractorImpl(MainThread mMainThread, CalendarCheckAppointmentInteractor.Callback callback, String tenantId, String apartmentId) {
+    public CalendarCheckAppointmentInteractorImpl(MainThread mMainThread, CalendarCheckAppointmentInteractor.Callback callback, String tenantId, String apartmentId) {
         super(mMainThread);
         this.tenantID = tenantId;
         this.apartmentID = apartmentId;
@@ -50,6 +40,8 @@ public class CalndarCheckAppointmentInteractorImpl extends AbstractInteractor im
         long appointment = matchEntry.getAppointment();
 
         Log.d(TAG, "execute: Appointment: " + appointment);
+        Log.d(TAG, "execute: Appointment Path: " + path);
+
 
         mDatabase.child(path).setValue(matchEntry, new DatabaseReference.CompletionListener() {
             @Override

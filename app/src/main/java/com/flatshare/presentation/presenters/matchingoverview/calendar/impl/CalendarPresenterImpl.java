@@ -8,13 +8,12 @@ import com.flatshare.domain.datatypes.enums.ProfileType;
 import com.flatshare.domain.interactors.calendar.CalendarCheckAppointmentInteractor;
 import com.flatshare.domain.interactors.calendar.CalendarInitInteractor;
 import com.flatshare.domain.interactors.calendar.CalendarSendFinalInteractor;
+import com.flatshare.domain.interactors.calendar.impl.CalendarCheckAppointmentInteractorImpl;
 import com.flatshare.domain.interactors.calendar.impl.CalendarInitInteractorImpl;
 import com.flatshare.domain.interactors.calendar.impl.CalendarSendFinalInteractorImpl;
-import com.flatshare.domain.interactors.calendar.impl.CalndarCheckAppointmentInteractorImpl;
 import com.flatshare.domain.state.UserState;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 import com.flatshare.presentation.presenters.matchingoverview.calendar.CalendarPresenter;
-import com.flatshare.presentation.ui.activities.matchingoverview.calendar.CalendarActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -78,7 +77,7 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
     @Override
     public void checkForAppointment(String tenantId, String apartmentId) {
         mView.showProgress();
-        CalendarCheckAppointmentInteractor appointmentInteractor = new CalndarCheckAppointmentInteractorImpl(mMainThread, this, tenantId, apartmentId);
+        CalendarCheckAppointmentInteractor appointmentInteractor = new CalendarCheckAppointmentInteractorImpl(mMainThread, this, tenantId, apartmentId);
         appointmentInteractor.execute();
 
     }

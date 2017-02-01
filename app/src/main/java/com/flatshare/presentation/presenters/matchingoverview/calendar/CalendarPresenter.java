@@ -28,6 +28,5 @@ public interface CalendarPresenter extends BasePresenter {
 
         void setDatesFromWG(List<String> dateList, List<String> timeList);
 
-        void prepareToShow(List<String> apointmentList);
     }
 }
