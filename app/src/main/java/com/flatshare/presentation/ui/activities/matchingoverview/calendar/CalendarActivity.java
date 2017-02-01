@@ -298,8 +298,8 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
             dateText.setText(dateList.get(i) + " " + timeList.get(i));
 
-            if(!isTenant) checkButton.setVisibility(View.GONE);
-            if(isTenant){
+            if (!isTenant) checkButton.setVisibility(View.GONE);
+            if (isTenant) {
                 checkButton.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.done_icon));
                 checkButton.setOnClickListener(myCheckHandler);
             }
@@ -310,12 +310,12 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             dateOverview.addView(row, i);
         }
         send.setVisibility(View.VISIBLE);
-        if(!isTenant) {
+        if (!isTenant) {
             send.setEnabled(false);
             setDate.setEnabled(false);
             setDate.setAlpha(0.5f);
             send.setAlpha(0.5f);
-        }else{
+        } else {
             setDate.setVisibility(View.GONE);
         }
     }
@@ -323,14 +323,26 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     View.OnClickListener myCheckHandler = new View.OnClickListener() {
         public void onClick(View v) {
 
-            TableRow row = (TableRow) v;
+            for (int i = 0; i < dateOverview.getChildCount(); i++) {
+                View view = dateOverview.getChildAt(i);
 
-            for (int x = 0; x < row.getChildCount(); x++) {
-                View view = row.getChildAt(x);
-                view.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.windowBackground));
-                if (view instanceof TextView) {
-                    view.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.colorAccent));
-                    finalDate = ((TextView) view).getText().toString();
+                if (view instanceof TableRow) {
+                    TableRow row = (TableRow) view;
+
+                    for (int j = 0; j < row.getChildCount(); j++) {
+                        View elementView = row.getChildAt(j);
+
+                        if (elementView instanceof ImageButton) {
+                            ImageButton currentButton = (ImageButton) elementView;
+                            currentButton.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.windowBackground));
+                            if (currentButton == v) {
+                                if (currentButton == v) {
+                                    currentButton.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.colorAccent));
+                                    finalDate = ((TextView) view).getText().toString();
+                                }
+                            }
+                        }
+                    }
                 }
             }
             send.setVisibility(View.VISIBLE);
@@ -339,14 +351,14 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
     //WG and Tenant, show the final date
     public void showFinalDate(String finalDate) {
-        if(isTenant){
+        if (isTenant) {
             send.setVisibility(View.VISIBLE);
             setDate.setVisibility(View.GONE);
             send.setEnabled(false);
             setDate.setEnabled(false);
             setDate.setAlpha(0.5f);
             send.setAlpha(0.5f);
-        }else{
+        } else {
             send.setVisibility(View.VISIBLE);
             send.setEnabled(false);
             setDate.setEnabled(false);
