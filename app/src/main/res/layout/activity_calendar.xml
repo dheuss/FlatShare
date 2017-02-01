@@ -51,7 +51,8 @@
             android:scrollbars="vertical"
             android:weightSum="1">
 
-            <ScrollView
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh_layout_cal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -68,6 +69,7 @@
                         android:id="@+id/dateOverview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_margin="5dp"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/colorText" />
@@ -97,7 +99,7 @@
                         android:visibility="gone" />
 
                 </LinearLayout>
-            </ScrollView>
+            </android.support.v4.widget.SwipeRefreshLayout>
         </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

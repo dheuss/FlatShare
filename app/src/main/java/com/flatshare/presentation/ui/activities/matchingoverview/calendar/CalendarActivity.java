@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
     private boolean isTenant;
     private String finalDate, tenantID, apartmentID;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -325,7 +327,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
             for (int x = 0; x < row.getChildCount(); x++) {
                 View view = row.getChildAt(x);
-                view.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.cardview_light_background));
+                view.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.windowBackground));
                 if (view instanceof TextView) {
                     view.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.colorAccent));
                     finalDate = ((TextView) view).getText().toString();
@@ -337,6 +339,20 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
     //WG and Tenant, show the final date
     public void showFinalDate(String finalDate) {
+        if(isTenant){
+            send.setVisibility(View.VISIBLE);
+            setDate.setVisibility(View.GONE);
+            send.setEnabled(false);
+            setDate.setEnabled(false);
+            setDate.setAlpha(0.5f);
+            send.setAlpha(0.5f);
+        }else{
+            send.setVisibility(View.VISIBLE);
+            send.setEnabled(false);
+            setDate.setEnabled(false);
+            setDate.setAlpha(0.5f);
+            send.setAlpha(0.5f);
+        }
         TableRow row = new TableRow(this);
         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
         row.setLayoutParams(lp);
@@ -362,6 +378,19 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         send = (Button) findViewById(R.id.send);
         setDate = (FloatingActionButton) findViewById(R.id.setDate);
         dateOverview = (TableLayout) findViewById(R.id.dateOverview);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_cal);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.checkForAppointment(tenantID, apartmentID);
+            }
+        });
+    }
+
+    @Override
+    public void hideProgress() {
+        super.hideProgress();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
 
