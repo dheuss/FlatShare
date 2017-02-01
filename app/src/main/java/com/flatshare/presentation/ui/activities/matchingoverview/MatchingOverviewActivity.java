@@ -115,7 +115,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
                 this
         );
 
-//        mPresenter.getMatches();
+        mPresenter.getMatches();
 
         return view;
     }

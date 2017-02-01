@@ -15,6 +15,7 @@ import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.domain.interactors.matchingoverview.MatchesInteractor;
 import com.flatshare.domain.interactors.media.impl.UploadInteractorImpl;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -127,23 +128,38 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
 
                     if (dataSnapshot.getValue() != null) {
                         final Pair<ApartmentProfile, Bitmap> apartmentImagePair = new Pair<ApartmentProfile, Bitmap>(dataSnapshot.getValue(ApartmentProfile.class), null);
-                        mStorage.child(imagePath + UploadInteractorImpl.DEFAULT_NAME).getBytes(size).addOnCompleteListener(new OnCompleteListener<byte[]>() {
-                            @Override
-                            public void onComplete(@NonNull Task<byte[]> task) {
-                                if (task.isSuccessful()) {
-                                    Bitmap bitmap = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
+
+                        try {
+                            mStorage.child(imagePath + UploadInteractorImpl.DEFAULT_NAME).getBytes(size).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                                @Override
+                                public void onSuccess(byte[] bytes) {
+                                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                                     apartmentImagePair.setRight(bitmap);
                                     apartmentsList.add(apartmentImagePair);
-                                } else {
+                                    Log.d(TAG, "onSuccess: YEAH " + apartmentsList.size());
+                                    if (counter.incrementAndGet() == apartmentIds.size()) {
+                                        Log.d(TAG, "onDataChange: apartmentList: " + apartmentsList.size());
+                                        notifyApMatchesFound(apartmentsList);
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
                                     apartmentImagePair.setRight(null);
                                     apartmentsList.add(apartmentImagePair);
+                                    Log.d(TAG, "onFailure: Xeah " + apartmentsList.size());
+                                    if (counter.incrementAndGet() == apartmentIds.size()) {
+                                        Log.d(TAG, "onDataChange: apartmentList: " + apartmentsList.size());
+                                        notifyApMatchesFound(apartmentsList);
+                                    }
                                 }
-                            }
-                        });
-                    }
+                            });
 
-                    if (counter.incrementAndGet() == apartmentIds.size()) {
-                        notifyApMatchesFound(apartmentsList);
+                        } catch (Exception e) {
+                            // Error
+                            Log.d(TAG, "onDataChange: aaaaaaaaaaaaa");
+                        }
+
                     }
                 }
 
@@ -182,23 +198,38 @@ public class MatchesInteractorImpl extends AbstractInteractor implements Matches
 
                     if (dataSnapshot.getValue() != null) {
                         final Pair<TenantProfile, Bitmap> tenantImagePair = new Pair<TenantProfile, Bitmap>(dataSnapshot.getValue(TenantProfile.class), null);
-                        mStorage.child(imagePath + UploadInteractorImpl.DEFAULT_NAME).getBytes(size).addOnCompleteListener(new OnCompleteListener<byte[]>() {
-                            @Override
-                            public void onComplete(@NonNull Task<byte[]> task) {
-                                if (task.isSuccessful()) {
-                                    Bitmap bitmap = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
+
+                        try {
+                            mStorage.child(imagePath + UploadInteractorImpl.DEFAULT_NAME).getBytes(size).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                                @Override
+                                public void onSuccess(byte[] bytes) {
+                                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                                     tenantImagePair.setRight(bitmap);
                                     tenantList.add(tenantImagePair);
-                                } else {
+                                    Log.d(TAG, "onSuccess: YEAH " + tenantList.size());
+                                    if (counter.incrementAndGet() == tenantIds.size()) {
+                                        Log.d(TAG, "onDataChange: tenantList: " + tenantList.size());
+                                        notifyTenMatchesFound(tenantList);
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
                                     tenantImagePair.setRight(null);
                                     tenantList.add(tenantImagePair);
+                                    Log.d(TAG, "onFailure: Xeah " + tenantList.size());
+                                    if (counter.incrementAndGet() == tenantIds.size()) {
+                                        Log.d(TAG, "onDataChange: tenantList: " + tenantList.size());
+                                        notifyTenMatchesFound(tenantList);
+                                    }
                                 }
-                            }
-                        });
+                            });
 
-                        if (counter.incrementAndGet() == tenantIds.size()) {
-                            notifyTenMatchesFound(tenantList);
+                        } catch (Exception e) {
+                            // Error
+                            Log.d(TAG, "onDataChange: aaaaaaaaaaaaa");
                         }
+
                     }
                 }
 

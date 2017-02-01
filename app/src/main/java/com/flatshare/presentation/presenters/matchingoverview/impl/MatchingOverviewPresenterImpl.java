@@ -80,20 +80,22 @@ public class MatchingOverviewPresenterImpl extends AbstractPresenter implements 
 
     @Override
     public void userDeleteApartment(String tenantId, String apartmentId) {
-        MatchingOverviewInteractor machingOverviewInteractor = new MatchingOverviewInteractorImpl(mMainThread, this, tenantId, apartmentId);
-        machingOverviewInteractor.execute();
+        MatchingOverviewInteractor matchingOverviewInteractor = new MatchingOverviewInteractorImpl(mMainThread, this, tenantId, apartmentId);
+        matchingOverviewInteractor.execute();
     }
 
 
     @Override
     public void onApartmentMatchesFound(List<Pair<ApartmentProfile, Bitmap>> apMatches) {
         mView.hideProgress();
+        Log.d(TAG, "onApartmentMatchesFound: show apMatches List: " + apMatches);
         mView.showApartments(apMatches);
     }
 
     @Override
     public void onTenantMatchesFound(List<Pair<TenantProfile, Bitmap>> tenMatches) {
         mView.hideProgress();
+        Log.d(TAG, "onTenantMatchesFound: show tenMatches List: " + tenMatches);
         mView.showTenants(tenMatches);
     }
 
