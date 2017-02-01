@@ -32,6 +32,8 @@ import com.mindorks.placeholderview.SwipePlaceHolderView;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static com.flatshare.R.drawable.apartment_default;
@@ -60,8 +62,8 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
 
     private PotentialMatchingPresenter mPresenter;
 
-    private List<ApartmentProfile> apartmentProfiles;
-    private List<TenantProfile> tenantProfiles;
+    private List<Pair<ApartmentProfile, Bitmap>> apartmentProfiles;
+    private List<Pair<TenantProfile, Bitmap>> tenantProfiles;
 
     //ApartmentPopUp
     private TextView apartmentPriceTextView;
@@ -123,19 +125,30 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
     public void onCreate(Bundle savedInstanceState) {
         userState = UserState.getInstance();
         super.onCreate(savedInstanceState);
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_matching, container, false);
         sharedPref = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
-        bindView(view);
-        Log.d(TAG, "inside onCreate(), creating presenter for this view");
         mPresenter = new PotentialMatchingPresenterImpl(
                 MainThreadImpl.getInstance(),
                 this
         );
         mPresenter.getPotentialMatches();
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_matching, container, false);
+        bindView(view);
+
+        if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
+            if (apartmentProfiles != null) {
+                showA(apartmentProfiles);
+            }
+        } else {
+            if (tenantProfiles != null) {
+                showT(tenantProfiles);
+            }
+        }
         mSwipeView.getBuilder()
                 .setDisplayViewCount(1)
                 .setSwipeDecor(new SwipeDecor()
@@ -161,6 +174,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
                 cardClick(view);
             }
         });
+
         return view;
     }
 
@@ -181,7 +195,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
                 apartmentPopUp(view);
             }
         } else {
-            if (getTenantSmoker() == null){
+            if (getTenantSmoker() == null) {
                 Toast.makeText(getActivity(), "Sorry, no potential matches!", Toast.LENGTH_SHORT).show();
             } else {
                 tenantPopUp(view);
@@ -325,7 +339,12 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
 
     @Override
     public void showTenants(List<Pair<TenantProfile, Bitmap>> tenants) {
+        tenantProfiles = new ArrayList<>(tenants);
         Log.d(TAG, "size of potential apartments: " + tenants.size());
+        showT(tenants);
+    }
+
+    private void showT(List<Pair<TenantProfile, Bitmap>> tenants) {
         for (Pair<TenantProfile, Bitmap> pair : tenants) {
             TenantProfile tenantProfile = pair.getLeft();
             Bitmap bitmap = pair.getRight();
@@ -333,9 +352,15 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
         }
     }
 
+
     @Override
     public void showApartments(List<Pair<ApartmentProfile, Bitmap>> apartments) {
+        apartmentProfiles = new ArrayList<>(apartments);
         Log.d(TAG, "size of potential apartments: " + apartments.size());
+        showA(apartments);
+    }
+
+    private void showA(List<Pair<ApartmentProfile, Bitmap>> apartments) {
         for (Pair<ApartmentProfile, Bitmap> pair : apartments) {
             ApartmentProfile apartmentProfile = pair.getLeft();
             Bitmap bitmap = pair.getRight();
@@ -343,11 +368,32 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
         }
     }
 
+
     public void tenantSwipedApartment(ApartmentProfile apartmentProfile, boolean accepted) {
+        if (apartmentProfiles == null) {
+            return;
+        }
+        Iterator<Pair<ApartmentProfile, Bitmap>> it = apartmentProfiles.iterator();
+        while (it.hasNext()) {
+            if (it.next().getLeft().getId().equals(apartmentProfile.getId())) {
+                it.remove();
+                break;
+            }
+        }
         mPresenter.tenantSwipedApartment(apartmentProfile.getId(), accepted);
     }
 
     public void roommateSwipedTenant(TenantProfile tenantProfile, boolean accepted) {
+        if (tenantProfiles == null) {
+            return;
+        }
+        Iterator<Pair<TenantProfile, Bitmap>> it = tenantProfiles.iterator();
+        while (it.hasNext()) {
+            if (it.next().getLeft().getId().equals(tenantProfile.getId())) {
+                it.remove();
+                break;
+            }
+        }
         mPresenter.roommateSwipedTenant(tenantProfile.getId(), accepted);
     }
 

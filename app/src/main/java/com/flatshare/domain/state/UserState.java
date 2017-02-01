@@ -1,5 +1,7 @@
 package com.flatshare.domain.state;
 
+import android.graphics.Bitmap;
+
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
 import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
@@ -27,6 +29,8 @@ public class UserState {
     // Singleton Done
 
     private boolean loggedIn;
+
+    private Bitmap profileImage;
 
     private PrimaryUserProfile primaryUserProfile;
     private TenantProfile tenantProfile;
@@ -74,8 +78,6 @@ public class UserState {
     }
 
     public String getApartmentId() {
-        System.out.println("LOGGER LOGGER LOGGER LOGGER LOGGER ------------------------------------------- 111111111111 " + getApartmentProfile());
-        System.out.println("LOGGER LOGGER LOGGER LOGGER LOGGER ------------------------------------------- 222222222222 " + getApartmentProfile().getApartmentId());
         return getApartmentProfile().getApartmentId();
     }
 
@@ -85,5 +87,13 @@ public class UserState {
 
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
+    }
+
+    public Bitmap getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(Bitmap profileImage) {
+        this.profileImage = profileImage;
     }
 }

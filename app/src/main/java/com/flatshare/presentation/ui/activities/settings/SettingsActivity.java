@@ -22,6 +22,7 @@ import com.flatshare.presentation.ui.activities.auth.login.LoginActivity;
 import com.flatshare.threading.MainThreadImpl;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by david on 06/12/2016.
  */
@@ -53,21 +54,23 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.activity_settings, container, false);
-        bindView(view);
-
-        Log.d(TAG, "inside onCreate(), creating presenter for this view");
 
         mPresenter = new SettingsPresenterImpl(
                 MainThreadImpl.getInstance(),
                 this
         );
 
+//        mPresenter.getProfilePicture();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_settings, container, false);
+        bindView(view);
+
         mPresenter.getProfilePicture();
+
+        Log.d(TAG, "inside onCreate(), creating presenter for this view");
 
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
@@ -153,8 +156,8 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
         return view;
     }
 
-    private void bindView(View view){
-        settingsCircleImageView = (CircleImageView)view.findViewById(R.id.settings_round_image);
+    private void bindView(View view) {
+        settingsCircleImageView = (CircleImageView) view.findViewById(R.id.settings_round_image);
 
         btnChangeEmail = (Button) view.findViewById(R.id.change_email_button);
         btnChangePassword = (Button) view.findViewById(R.id.change_password_button);
@@ -181,7 +184,7 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
         sendEmail.setVisibility(View.GONE);
     }
 
-    public void changeMail(){
+    public void changeMail() {
         popUpView(0);
     }
 
@@ -189,7 +192,7 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
         popUpView(1);
     }
 
-    public void resetEmail(){
+    public void resetEmail() {
         popUpView(2);
     }
 
@@ -225,7 +228,7 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
 
     @Override
     public void showApartmentImage(Bitmap apartmentImage) {
-        if (apartmentImage == null){
+        if (apartmentImage == null) {
             settingsCircleImageView.setImageResource(R.drawable.apartment_default);
         } else {
             settingsCircleImageView.setImageBitmap(apartmentImage);
@@ -234,14 +237,14 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
 
     @Override
     public void showTenantImage(Bitmap tenantImage) {
-        if (tenantImage == null){
+        if (tenantImage == null) {
             settingsCircleImageView.setImageResource(R.drawable.tenant_default);
         } else {
             settingsCircleImageView.setImageBitmap(tenantImage);
         }
     }
 
-    private void popUpView(final int task){
+    private void popUpView(final int task) {
         LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
         View mView = layoutInflater.inflate(R.layout.activity_popup, null);
 
@@ -250,15 +253,15 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
 
         final TextView popUpTextView = (TextView) mView.findViewById(R.id.popup_TextView);
 
-        if (task == 0){
+        if (task == 0) {
             popUpTextView.setText("Do you really want to change your email address?");
-        } else if (task == 1){
+        } else if (task == 1) {
             popUpTextView.setText("Do you really want to change your password?");
-        } else if (task == 2){
+        } else if (task == 2) {
             popUpTextView.setText("Do you really want to reset your account?");
-        } else if (task == 3){
+        } else if (task == 3) {
             popUpTextView.setText("Do you really want to delete your account?");
-        } else if (task == 4){
+        } else if (task == 4) {
             popUpTextView.setText("Do you really want to sign out?");
         } else {
             popUpTextView.setText("Do you really want to sign out?");
@@ -269,15 +272,15 @@ public class SettingsActivity extends AbstractFragmentActivity implements Settin
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (task == 0){
+                        if (task == 0) {
                             mPresenter.changeMailAddress(newEmail.getText().toString());
-                        } else if (task == 1){
+                        } else if (task == 1) {
                             mPresenter.changePassword(newPassword.getText().toString());
-                        } else if (task == 2){
+                        } else if (task == 2) {
                             mPresenter.resetPasswordMail(oldEmail.getText().toString());
-                        } else if (task == 3){
+                        } else if (task == 3) {
                             mPresenter.deleteAccount();
-                        } else if (task == 4){
+                        } else if (task == 4) {
                             mPresenter.logOut();
                         } else {
                             mPresenter.logOut();

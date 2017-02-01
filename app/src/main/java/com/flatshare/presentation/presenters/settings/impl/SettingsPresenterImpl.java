@@ -6,6 +6,7 @@ import android.util.Log;
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
+import com.flatshare.domain.datatypes.enums.ProfileType;
 import com.flatshare.domain.datatypes.pair.Pair;
 import com.flatshare.domain.interactors.auth.ChangeMailInteractor;
 import com.flatshare.domain.interactors.auth.ChangePasswordInteractor;
@@ -104,10 +105,18 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
     @Override
     public void getProfilePicture() {
         MediaInteractor downloadInteractor;
-        if (userState.getTenantProfile() == null) {
-            downloadInteractor = new DownloadApartmentImageInteractorImpl(mMainThread, this, userState.getApartmentProfile());
-        } else {
+        if (userState.getPrimaryUserProfile().getClassificationId() == ProfileType.TENANT.getValue()) {
+            if(userState.getProfileImage() != null){
+                onDownloadTenantImageSuccess(userState.getProfileImage());
+                return;
+            }
             downloadInteractor = new DownloadTenantImageInteractorImpl(mMainThread, this, userState.getTenantProfile());
+        } else {
+            if(userState.getProfileImage() != null){
+                onDownloadApartmentImageSucess(userState.getProfileImage());
+                return;
+            }
+            downloadInteractor = new DownloadApartmentImageInteractorImpl(mMainThread, this, userState.getApartmentProfile());
         }
         downloadInteractor.execute();
     }
@@ -190,12 +199,14 @@ public class SettingsPresenterImpl extends AbstractPresenter implements Settings
 
     @Override
     public void onDownloadTenantImageSuccess(Bitmap tenantImage) {
+        userState.setProfileImage(tenantImage);
         mView.hideProgress();
         mView.showTenantImage(tenantImage);
     }
 
     @Override
     public void onDownloadApartmentImageSucess(Bitmap apartmentImage) {
+        userState.setProfileImage(apartmentImage);
         mView.hideProgress();
         mView.showApartmentImage(apartmentImage);
     }

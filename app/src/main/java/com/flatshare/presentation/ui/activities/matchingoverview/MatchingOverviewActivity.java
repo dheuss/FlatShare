@@ -98,6 +98,12 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     public void onCreate(Bundle savedInstanceState) {
         userState = UserState.getInstance();
         super.onCreate(savedInstanceState);
+        mPresenter = new MatchingOverviewPresenterImpl(
+                MainThreadImpl.getInstance(),
+                this
+        );
+
+        mPresenter.getMatches();
     }
 
     @Override
@@ -109,13 +115,6 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
         bindView(view);
 
         Log.d(TAG, "inside onCreate(), creating presenter for this view");
-
-        mPresenter = new MatchingOverviewPresenterImpl(
-                MainThreadImpl.getInstance(),
-                this
-        );
-
-        mPresenter.getMatches();
 
         return view;
     }
