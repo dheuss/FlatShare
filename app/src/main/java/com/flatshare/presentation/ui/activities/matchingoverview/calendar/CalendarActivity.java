@@ -199,11 +199,6 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         }
     };
 
-    public void prepareToShow(List<String> appointmentList) {
-        dateList = appointmentList;
-        showOnScreen();
-    }
-
     public void showOnScreen() {
 
         TableRow row = new TableRow(this);

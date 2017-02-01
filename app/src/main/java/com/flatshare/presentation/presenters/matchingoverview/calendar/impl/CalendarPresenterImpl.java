@@ -97,6 +97,7 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
 
     @Override
     public void onSentSuccess() {
+        mView.hideProgress();
         if (checkForTenant()) {
             MatchEntry matchEntry = new MatchEntry();
             List<Long> appointmentList = matchEntry.getAppointmentsList();
@@ -144,15 +145,17 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
         mView.hideProgress();
         MatchEntry matchEntry = new MatchEntry();
         List<Long> appointmentList = matchEntry.getAppointmentsList();
+        Log.d(TAG, "onSentSuccess: appointment " + appointmentList);
         List<String> dateList = new ArrayList<>();
-        Log.d(TAG, "onAppointmentSuccess: AppointmentList: " + appointmentList);
-        if (appointmentList != null) {
-            for (int i = 0; i < appointmentList.size(); i++) {
-                Date date = new Date(appointmentList.get(i));
-                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                dateList.add(df.format(date));
-            }
-            mView.prepareToShow(dateList);
+        List<String> timeList = new ArrayList<>();
+        for (int i = 0; i < appointmentList.size(); i++) {
+            Date date = new Date(appointmentList.get(i));
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            String dateText = df.format(date);
+            String[] partsDateTime = dateText.split(" ");
+            dateList.add(partsDateTime[0]);
+            timeList.add(partsDateTime[1]);
         }
+        mView.setDatesFromWG(dateList, timeList);
     }
 }

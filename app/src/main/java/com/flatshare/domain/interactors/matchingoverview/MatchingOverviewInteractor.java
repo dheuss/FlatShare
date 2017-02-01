@@ -8,7 +8,7 @@ import com.flatshare.presentation.ui.BaseView;
 import java.util.List;
 
 /**
- * Created by david on 15.01.2017.
+ * Created by sandro on 15.01.2017.
  */
 
 public interface MatchingOverviewInteractor extends Interactor {

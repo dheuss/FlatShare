@@ -9,7 +9,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
 /**
- * Created by david on 06/12/2016.
+ * Created by sandro on 06/12/2016.
  */
 
 public class MatchingOverviewInteractorImpl extends AbstractInteractor implements MatchingOverviewInteractor {
