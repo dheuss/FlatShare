@@ -89,7 +89,7 @@ public class MatchingOverviewPresenterImpl extends AbstractPresenter implements 
     public void onApartmentMatchesFound(List<Pair<ApartmentProfile, Bitmap>> apMatches) {
         mView.hideProgress();
         if(apMatches != null) {
-            Log.d(TAG, "onApartmentMatchesFound: show apMatches List: " + apMatches);
+            Log.d(TAG, "onApartmentMatchesFound: show apMatches List: " + apMatches.size());
             mView.showApartments(apMatches);
         }
     }
@@ -98,7 +98,7 @@ public class MatchingOverviewPresenterImpl extends AbstractPresenter implements 
     public void onTenantMatchesFound(List<Pair<TenantProfile, Bitmap>> tenMatches) {
         mView.hideProgress();
         if(tenMatches != null) {
-            Log.d(TAG, "onTenantMatchesFound: show tenMatches List: " + tenMatches);
+            Log.d(TAG, "onTenantMatchesFound: show tenMatches List: " + tenMatches.size());
             mView.showTenants(tenMatches);
         }
     }
