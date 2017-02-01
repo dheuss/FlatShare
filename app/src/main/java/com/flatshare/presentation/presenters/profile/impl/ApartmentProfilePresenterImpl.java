@@ -9,6 +9,7 @@ import android.widget.VideoView;
 
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
+import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
 import com.flatshare.domain.datatypes.db.profiles.UserProfile;
 import com.flatshare.domain.datatypes.enums.MediaType;
 import com.flatshare.domain.interactors.matching.NicknameRetrieverInteractor;
@@ -104,7 +105,9 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
     @Override
     public void uploadImage(byte[] data) {
 //        mView.showProgress();
-        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, false, MediaType.IMAGE, data, userState.getApartmentId());
+        RoommateProfile roommateProfile = userState.getRoommateProfile();
+        String apId = roommateProfile.getApartmentId();
+        MediaInteractor mediaInteractor = new UploadInteractorImpl(mMainThread, this, false, MediaType.IMAGE, data, apId);
         mediaInteractor.execute();
     }
 
