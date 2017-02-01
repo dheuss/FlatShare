@@ -509,6 +509,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                matchingOverview.removeAllViews();
                 mPresenter.getMatches();
             }
         });

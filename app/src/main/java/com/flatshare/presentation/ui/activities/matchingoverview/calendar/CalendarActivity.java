@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -166,7 +167,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-            dateList.add(day + "/" + month + 1 + "/" + year);
+            dateList.add(day + "/" + (month < 10 ? '0' : "") + month + "/" + year);
             showDialog(888);
         }
     };
@@ -289,7 +290,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
             row.setLayoutParams(lp);
             TextView dateText = new TextView(this);
-            Button checkButton = new Button(this);
+            ImageButton checkButton = new ImageButton(this);
 
             dateText.setText(dateList.get(i) + " " + timeList.get(i));
 
@@ -298,10 +299,9 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
                 checkButton.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.done_icon));
                 checkButton.setOnClickListener(myCheckHandler);
             }
-
             row.addView(dateText);
             row.addView(checkButton);
-
+            //TODO Design TableRow Views
             dateOverview.addView(row, i);
         }
         send.setVisibility(View.VISIBLE);
@@ -317,7 +317,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
     View.OnClickListener myCheckHandler = new View.OnClickListener() {
         public void onClick(View v) {
-
+            Log.d(TAG, "onClick: You pressed me");
             for (int i = 0; i < dateOverview.getChildCount(); i++) {
                 View view = dateOverview.getChildAt(i);
 
@@ -329,25 +329,29 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
                         if (elementView instanceof ImageButton) {
                             ImageButton currentButton = (ImageButton) elementView;
-                            currentButton.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.windowBackground));
+
+                            View textView = row.getChildAt(0);
+                            TextView currentText = (TextView) textView;
+
+                            row.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.windowBackground));
+
                             if (currentButton == v) {
                                 if (currentButton == v) {
-                                    currentButton.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.colorAccent));
-                                    finalDate = ((TextView) view).getText().toString();
+                                    row.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.colorAccent));
+                                    finalDate = currentText.getText().toString();
+                                    send.setVisibility(View.VISIBLE);
                                 }
                             }
                         }
                     }
                 }
             }
-            send.setVisibility(View.VISIBLE);
         }
     };
 
     //WG and Tenant, show the final date
     public void showFinalDate(String finalDate) {
         if (isTenant) {
-            send.setVisibility(View.VISIBLE);
             setDate.setVisibility(View.GONE);
             send.setEnabled(false);
             setDate.setEnabled(false);
@@ -389,6 +393,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                dateOverview.removeAllViews();
                 mPresenter.checkForAppointment(tenantID, apartmentID);
             }
         });
