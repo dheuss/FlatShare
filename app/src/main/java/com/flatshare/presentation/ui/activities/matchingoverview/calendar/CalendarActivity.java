@@ -85,7 +85,9 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         tenantID = getIntent().getStringExtra(MatchingOverviewActivity.TenantSessionId);
         apartmentID = getIntent().getStringExtra(MatchingOverviewActivity.ApartmentSessionId);
 
-        mPresenter.checkForAppointment(tenantID,apartmentID);
+        if(!isTenant) {
+            mPresenter.checkForAppointment(tenantID, apartmentID);
+        }
 
 //        MatchEntry matchEntry = new MatchEntry();
 //        //TODO appointments holen

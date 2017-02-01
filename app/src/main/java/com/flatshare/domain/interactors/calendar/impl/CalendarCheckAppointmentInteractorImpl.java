@@ -9,6 +9,8 @@ import com.flatshare.domain.interactors.calendar.CalendarCheckAppointmentInterac
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
+import java.util.List;
+
 
 /**
  * Created by Sandro on 30.01.17.
@@ -37,17 +39,17 @@ public class CalendarCheckAppointmentInteractorImpl extends AbstractInteractor i
 
         final MatchEntry matchEntry = new MatchEntry();
 
-        long appointment = matchEntry.getAppointment();
 
-        Log.d(TAG, "execute: Appointment: " + appointment);
-        Log.d(TAG, "execute: Appointment Path: " + path);
+
 
 
         mDatabase.child(path).setValue(matchEntry, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                Log.d(TAG, "execute: Appointment: " + matchEntry.getAppointmentsList());
+                final List<Long> appointmentsList = matchEntry.getAppointmentsList();
                 if (databaseError == null) {
-                    notifySuccess();
+                    notifySuccess(appointmentsList);
                 } else {
                     notifyError(databaseError.getMessage());
                 }
@@ -66,12 +68,12 @@ public class CalendarCheckAppointmentInteractorImpl extends AbstractInteractor i
         });
     }
 
-    private void notifySuccess() {
+    private void notifySuccess(final List<Long> appointmentsList) {
         Log.d(TAG, "inside postMessage(String msg)");
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onAppointmentSuccess();
+                mCallback.onAppointmentSuccess(appointmentsList);
             }
         });
     }

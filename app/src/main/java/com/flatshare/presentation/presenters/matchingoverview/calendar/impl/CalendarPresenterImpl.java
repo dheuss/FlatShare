@@ -140,21 +140,26 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
     }
 
     @Override
-    public void onAppointmentSuccess() {
+    public void onAppointmentSuccess(List<Long> appointmentsList) {
         mView.hideProgress();
-        MatchEntry matchEntry = new MatchEntry();
-        List<Long> appointmentList = matchEntry.getAppointmentsList();
-        Log.d(TAG, "onSentSuccess: appointment " + appointmentList);
         List<String> dateList = new ArrayList<>();
         List<String> timeList = new ArrayList<>();
-        for (int i = 0; i < appointmentList.size(); i++) {
-            Date date = new Date(appointmentList.get(i));
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            String dateText = df.format(date);
-            String[] partsDateTime = dateText.split(" ");
-            dateList.add(partsDateTime[0]);
-            timeList.add(partsDateTime[1]);
+        if (appointmentsList != null) {
+            if (appointmentsList.size() > 0) {
+                for (int i = 0; i < appointmentsList.size(); i++) {
+                    Date date = new Date(appointmentsList.get(i));
+                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    String dateText = df.format(date);
+                    String[] partsDateTime = dateText.split(" ");
+                    dateList.add(partsDateTime[0]);
+                    timeList.add(partsDateTime[1]);
+                }
+                mView.setDatesFromWG(dateList, timeList);
+            } else {
+                Log.d(TAG, "onAppointmentSuccess: NO Appointment found");
+            }
+        } else{
+            Log.d(TAG, "onAppointmentSuccess: AppontmentList is null");
         }
-        mView.setDatesFromWG(dateList, timeList);
     }
 }
