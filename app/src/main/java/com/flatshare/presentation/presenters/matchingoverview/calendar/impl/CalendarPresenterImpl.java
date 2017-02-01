@@ -6,9 +6,11 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.common.MatchEntry;
 import com.flatshare.domain.datatypes.enums.ProfileType;
 import com.flatshare.domain.interactors.calendar.CalendarCheckAppointmentInteractor;
+import com.flatshare.domain.interactors.calendar.CalendarCheckFinalDateInteractor;
 import com.flatshare.domain.interactors.calendar.CalendarInitInteractor;
 import com.flatshare.domain.interactors.calendar.CalendarSendFinalInteractor;
 import com.flatshare.domain.interactors.calendar.impl.CalendarCheckAppointmentInteractorImpl;
+import com.flatshare.domain.interactors.calendar.impl.CalendarCheckFinalDateInteractorImpl;
 import com.flatshare.domain.interactors.calendar.impl.CalendarInitInteractorImpl;
 import com.flatshare.domain.interactors.calendar.impl.CalendarSendFinalInteractorImpl;
 import com.flatshare.domain.state.UserState;
@@ -24,7 +26,11 @@ import java.util.List;
  * Created by Sandro on 07.01.17.
  */
 
-public class CalendarPresenterImpl extends AbstractPresenter implements CalendarPresenter, CalendarInitInteractor.Callback, CalendarSendFinalInteractor.Callback, CalendarCheckAppointmentInteractor.Callback {
+public class CalendarPresenterImpl extends AbstractPresenter implements CalendarPresenter,
+        CalendarInitInteractor.Callback,
+        CalendarSendFinalInteractor.Callback,
+        CalendarCheckAppointmentInteractor.Callback,
+        CalendarCheckFinalDateInteractor.Callback {
 
     private static final String TAG = "CalendarPresenter";
 
@@ -80,6 +86,12 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
         CalendarCheckAppointmentInteractor appointmentInteractor = new CalendarCheckAppointmentInteractorImpl(mMainThread, this, tenantId, apartmentId);
         appointmentInteractor.execute();
 
+    }
+
+    @Override
+    public void checkFinalAppointment(String tenantId, String apartmentId) {
+        CalendarCheckFinalDateInteractor finalDateInteractor = new CalendarCheckFinalDateInteractorImpl(mMainThread, this, tenantId, apartmentId);
+        finalDateInteractor.execute();
     }
 
     @Override
@@ -158,5 +170,13 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
                 Log.d(TAG, "onAppointmentSuccess: NO Appointment found");
             }
 
+    }
+
+    @Override
+    public void onAppointmentSet(long appointment) {
+        Date date = new Date(appointment);
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String dateText = df.format(date);
+        mView.showFinalDate(dateText);
     }
 }

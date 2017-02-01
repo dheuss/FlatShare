@@ -1,6 +1,5 @@
 package com.flatshare.domain.interactors.calendar.impl;
 
-import android.icu.text.DateFormat;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
@@ -73,6 +72,7 @@ public class CalendarSendFinalInteractorImpl extends AbstractInteractor implemen
         final MatchEntry matchEntry = new MatchEntry();
 
         matchEntry.setAppointment(appointment);
+        matchEntry.setAppointmentSet(true);
 
         mDatabase.child(path).setValue(matchEntry, new DatabaseReference.CompletionListener() {
             @Override
