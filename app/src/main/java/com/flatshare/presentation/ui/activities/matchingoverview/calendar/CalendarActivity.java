@@ -32,6 +32,7 @@ import com.flatshare.presentation.ui.activities.MainActivity;
 import com.flatshare.presentation.ui.activities.matchingoverview.MatchingOverviewActivity;
 import com.flatshare.threading.MainThreadImpl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -84,7 +85,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         apartmentID = getIntent().getStringExtra(MatchingOverviewActivity.ApartmentSessionId);
 
         mPresenter.checkForAppointment(tenantID, apartmentID);
-        mPresenter.checkFinalAppointment(tenantID,apartmentID);
+        mPresenter.checkFinalAppointment(tenantID, apartmentID);
 
         //Send Button
         send.setOnClickListener(new View.OnClickListener() {
@@ -170,7 +171,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-            dateList.add(day + "/" + (month < 10 ? '0' : "") + month + "/" + year);
+            dateList.add("" + (day < 10 ? '0' : "") + day + "/" + (month < 10 ? '0' : "") + month + "/" + year);
             showDialog(888);
         }
     };
@@ -178,7 +179,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
     private TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hour, int min) {
-            timeList.add(" " + hour + ":" + (min < 10 ? '0' : "") + min);
+            timeList.add(" " + (hour < 10 ? '0' : "") + hour + ":" + (min < 10 ? '0' : "") + min);
             showOnScreen();
         }
     };
@@ -381,7 +382,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             setDate.setAlpha(0.5f);
             send.setAlpha(0.5f);
         }
-        dateOverview.setColumnStretchable(0,true);
+        dateOverview.setColumnStretchable(0, true);
         TableRow row = new TableRow(this);
         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
         row.setLayoutParams(lp);
@@ -420,7 +421,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             @Override
             public void onRefresh() {
                 dateOverview.removeAllViews();
-                mPresenter.checkFinalAppointment(tenantID,apartmentID);
+                mPresenter.checkFinalAppointment(tenantID, apartmentID);
                 mPresenter.checkForAppointment(tenantID, apartmentID);
             }
         });
