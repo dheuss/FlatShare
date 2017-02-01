@@ -137,12 +137,7 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
 
     @Override
     public void onSentFinalSuccess() {
-        MatchEntry matchEntry = new MatchEntry();
-        long appointment = matchEntry.getAppointment();
-        Date date = new Date(appointment);
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        String dateText = df.format(date);
-        mView.showFinalDate(dateText);
+        mView.datesSuccessfulToTenants();
     }
 
     @Override
