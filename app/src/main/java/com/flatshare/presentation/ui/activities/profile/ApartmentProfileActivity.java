@@ -336,7 +336,6 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.CAMERA},
                 PERMISSIONS_REQUEST_CAMERA);
-
     }
 
     @Override
