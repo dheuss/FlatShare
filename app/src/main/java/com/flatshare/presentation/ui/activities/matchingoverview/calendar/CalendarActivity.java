@@ -56,8 +56,6 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
     private boolean isTenant;
     private String finalDate, tenantID, apartmentID;
-    private List<Long> currentAppointmentList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,24 +83,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         tenantID = getIntent().getStringExtra(MatchingOverviewActivity.TenantSessionId);
         apartmentID = getIntent().getStringExtra(MatchingOverviewActivity.ApartmentSessionId);
 
-        if(!isTenant) {
-            mPresenter.checkForAppointment(tenantID, apartmentID);
-        }
-
-//        MatchEntry matchEntry = new MatchEntry();
-//        //TODO appointments holen
-//        //mPresenter.checkForAppointment(tenantID, apartmentID);
-//        Log.d(TAG, "onCreate: AppointmentList: " + matchEntry.getAppointmentsList());
-//        if (matchEntry.appointmentSet) {
-//            currentAppointmentList = matchEntry.getAppointmentsList();
-//            for (int i = 0; i < currentAppointmentList.size(); i++) {
-//                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-//                String dateText = df.format(currentAppointmentList.get(i));
-//                dateList.add(i, dateText);
-//            }
-//            Log.d(TAG, "onCreate: Appointments: " + dateList);
-//            showOnScreen();
-//        }
+        mPresenter.checkForAppointment(tenantID, apartmentID);
 
         //Send Button
         send.setOnClickListener(new View.OnClickListener() {
@@ -315,25 +296,36 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
 
             dateText.setText(dateList.get(i) + " " + timeList.get(i));
 
-            checkButton.setVisibility(View.VISIBLE);
-            checkButton.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.done_icon));
-            checkButton.setOnClickListener(myCheckHandler);
+            if(!isTenant) checkButton.setVisibility(View.GONE);
+            if(isTenant){
+                checkButton.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.done_icon));
+                checkButton.setOnClickListener(myCheckHandler);
+            }
 
             row.addView(dateText);
             row.addView(checkButton);
 
             dateOverview.addView(row, i);
         }
+        send.setVisibility(View.VISIBLE);
+        if(!isTenant) {
+            send.setEnabled(false);
+            setDate.setEnabled(false);
+            setDate.setAlpha(0.5f);
+            send.setAlpha(0.5f);
+        }else{
+            setDate.setVisibility(View.GONE);
+        }
     }
 
     View.OnClickListener myCheckHandler = new View.OnClickListener() {
         public void onClick(View v) {
 
-            v.setVisibility(View.GONE);
             TableRow row = (TableRow) v;
 
             for (int x = 0; x < row.getChildCount(); x++) {
                 View view = row.getChildAt(x);
+                view.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.cardview_light_background));
                 if (view instanceof TextView) {
                     view.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.colorAccent));
                     finalDate = ((TextView) view).getText().toString();
