@@ -11,7 +11,7 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="Find your perfect match! Either your dream apartment or dram flatmate!"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorPrimary"
         android:textSize="20dp"
         android:textStyle="bold" />
 
