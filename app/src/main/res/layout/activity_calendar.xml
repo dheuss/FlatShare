@@ -1,109 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_refresh_layout_cal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/LinearLayoutCalender_1"
-            android:gravity="center"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/appointments_inital"
+            <LinearLayout
+                android:id="@+id/LinearLayoutCalender_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="@dimen/marginLeft"
-                android:text="@string/date"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
-                android:textSize="30dp" />
-
-            <TextView
-                android:id="@+id/appointments_info"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/appointments_inital"
-                android:layout_marginLeft="@dimen/marginLeft"
-                android:layout_marginRight="@dimen/marginRight"
-                android:layout_marginTop="@dimen/marginTop"
-                android:layout_marginBottom="@dimen/marginTop"
+                android:layout_marginTop="40dp"
                 android:gravity="center"
-                android:text="@string/appointment_string" />
+                android:orientation="vertical">
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/LinearLayoutCalender_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/LinearLayoutCalender_1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight"
-            android:scrollbars="vertical"
-            android:weightSum="1">
-
-            <android.support.v4.widget.SwipeRefreshLayout
-                android:id="@+id/swipe_refresh_layout_cal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:id="@+id/LinearLayoutCalender_4"
+                <TextView
+                    android:id="@+id/appointments_inital"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="@dimen/marginLeft"
+                    android:text="@string/date"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/appointments_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/appointments_inital"
+                    android:layout_marginBottom="@dimen/marginTop"
                     android:layout_marginLeft="@dimen/marginLeft"
                     android:layout_marginRight="@dimen/marginRight"
-                    android:orientation="vertical">
+                    android:layout_marginTop="@dimen/marginTop"
+                    android:gravity="center"
+                    android:text="@string/appointment_string" />
 
-                    <TableLayout
-                        android:id="@+id/dateOverview"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:stretchColumns="2"
-                        android:layout_marginLeft="@dimen/marginLeft"
-                        android:layout_marginRight="@dimen/marginRight"
-                        android:layout_gravity="center"
-                        android:layout_margin="5dp"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textColor="@color/colorText" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/LinearLayoutCalender_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/LinearLayoutCalender_1"
+                android:layout_marginLeft="@dimen/marginLeft"
+                android:layout_marginRight="@dimen/marginRight"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:scrollbars="vertical"
+                android:weightSum="1">
 
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/setDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:layout_margin="16dp"
-                        android:clickable="true"
-                        android:onClick="setDate"
-                        android:src="@drawable/add_plus_icon"
-                        app:layout_anchor="@id/LinearLayoutCalender_4"
-                        app:layout_anchorGravity="bottom|right|end" />
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                    <Button
-                        android:id="@+id/send"
+                    <LinearLayout
+                        android:id="@+id/LinearLayoutCalender_4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorPrimary"
-                        android:text="Send"
-                        android:textColor="@color/colorButtonText"
-                        android:visibility="gone" />
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/marginLeft"
+                        android:layout_marginRight="@dimen/marginRight"
+                        android:orientation="vertical">
 
-                </LinearLayout>
-            </android.support.v4.widget.SwipeRefreshLayout>
-        </LinearLayout>
-    </RelativeLayout>
-</FrameLayout>
+                        <TableLayout
+                            android:id="@+id/dateOverview"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="5dp"
+                            android:layout_marginLeft="@dimen/marginLeft"
+                            android:layout_marginRight="@dimen/marginRight"
+                            android:stretchColumns="2"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:textColor="@color/colorText" />
+
+
+                        <android.support.design.widget.FloatingActionButton
+                            android:id="@+id/setDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_margin="16dp"
+                            android:clickable="true"
+                            android:onClick="setDate"
+                            android:src="@drawable/add_plus_icon"
+                            app:layout_anchor="@id/LinearLayoutCalender_4"
+                            app:layout_anchorGravity="bottom|right|end" />
+
+                        <Button
+                            android:id="@+id/send"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimary"
+                            android:text="Send"
+                            android:textColor="@color/colorButtonText"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

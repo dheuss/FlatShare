@@ -1,81 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/matchingOverviewActivity"
+
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_refresh_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/windowBackground"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/matchingOverviewActivity"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/windowBackground"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/overview_linear_1"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/overview_profile_inital"
+            <LinearLayout
+                android:id="@+id/overview_linear_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="@dimen/marginLeft"
                 android:layout_marginTop="@dimen/marginTop"
-                android:text="@string/matching_overview"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
-                android:textSize="30dp" />
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
 
-            <TextView
-                android:id="@+id/overview_profile_info"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/overview_profile_inital"
-                android:layout_marginLeft="@dimen/marginLeft"
-                android:layout_marginRight="@dimen/marginRight"
-                android:layout_marginTop="@dimen/marginTop"
-                android:gravity="center"
-                android:text="@string/overview_profil_string" />
+                <TextView
+                    android:id="@+id/overview_profile_inital"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="@dimen/marginLeft"
+                    android:layout_marginTop="@dimen/marginTop"
+                    android:text="@string/matching_overview"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/overview_profile_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/overview_profile_inital"
+                    android:layout_marginLeft="@dimen/marginLeft"
+                    android:layout_marginRight="@dimen/marginRight"
+                    android:layout_marginTop="@dimen/marginTop"
+                    android:gravity="center"
+                    android:text="@string/overview_profil_string" />
 
 
-        </LinearLayout>
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/marginTop"
-            android:layout_marginLeft="@dimen/marginLeft"
-            android:layout_marginRight="@dimen/marginRight"
-            android:layout_below="@+id/overview_linear_1">
-
-            <android.support.v4.widget.SwipeRefreshLayout
-                android:id="@+id/swipe_refresh_layout"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/overview_linear_1"
-                android:orientation="vertical">
+                android:layout_marginLeft="@dimen/marginLeft"
+                android:layout_marginRight="@dimen/marginRight"
+                android:layout_marginTop="@dimen/marginTop"
+                android:gravity="center">
 
-                <TableLayout
-                    android:id="@+id/matchingOverview"
-                    android:layout_width="fill_parent"
+                <ScrollView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:stretchColumns="2"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/colorText"></TableLayout>
+                    android:layout_below="@+id/overview_linear_1"
+                    android:orientation="vertical">
 
-            </android.support.v4.widget.SwipeRefreshLayout>
+                    <TableLayout
+                        android:id="@+id/matchingOverview"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:stretchColumns="2"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/colorText"></TableLayout>
 
-        </LinearLayout>
+                </ScrollView>
 
-    </RelativeLayout>
+            </LinearLayout>
 
-</FrameLayout>
+        </RelativeLayout>
+
+    </FrameLayout>
+</android.support.v4.widget.SwipeRefreshLayout>
