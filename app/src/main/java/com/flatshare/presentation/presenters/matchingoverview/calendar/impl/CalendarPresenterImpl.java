@@ -144,7 +144,6 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
         mView.hideProgress();
         List<String> dateList = new ArrayList<>();
         List<String> timeList = new ArrayList<>();
-        if (appointmentsList != null) {
             if (appointmentsList.size() > 0) {
                 for (int i = 0; i < appointmentsList.size(); i++) {
                     Date date = new Date(appointmentsList.get(i));
@@ -158,8 +157,6 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
             } else {
                 Log.d(TAG, "onAppointmentSuccess: NO Appointment found");
             }
-        } else{
-            Log.d(TAG, "onAppointmentSuccess: AppontmentList is null");
-        }
+
     }
 }

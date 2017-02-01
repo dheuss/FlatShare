@@ -59,6 +59,9 @@
                     android:id="@+id/LinearLayoutCalender_4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/marginLeft"
+                    android:layout_marginRight="@dimen/marginRight"
                     android:orientation="vertical">
 
                     <TableLayout

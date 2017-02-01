@@ -6,8 +6,10 @@ import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.common.MatchEntry;
 import com.flatshare.domain.interactors.base.AbstractInteractor;
 import com.flatshare.domain.interactors.calendar.CalendarCheckAppointmentInteractor;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -37,25 +39,34 @@ public class CalendarCheckAppointmentInteractorImpl extends AbstractInteractor i
 
         String path = databaseRoot.getMatchesNode(tenantID, apartmentID).getRootPath();
 
-        final MatchEntry matchEntry = new MatchEntry();
-
-
-
-
-
-        mDatabase.child(path).setValue(matchEntry, new DatabaseReference.CompletionListener() {
+        mDatabase.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                Log.d(TAG, "execute: Appointment: " + matchEntry.getAppointmentsList());
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                MatchEntry matchEntry = dataSnapshot.getValue(MatchEntry.class);
+
+                if (matchEntry == null) {
+                    Log.d(TAG, "onDataChange: Match Entry Appointment is null");
+                    notifyError("Match Entry Appointment is null");
+                    return;
+                }
+
                 final List<Long> appointmentsList = matchEntry.getAppointmentsList();
-                if (databaseError == null) {
-                    notifySuccess(appointmentsList);
+
+                if (appointmentsList == null) {
+                    Log.d(TAG, "onDataChange: AppointmentList is null");
+                    notifyError("AppointmentList is null");
+                    return;
                 } else {
-                    notifyError(databaseError.getMessage());
+                    notifySuccess(appointmentsList);
                 }
             }
-        });
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                notifyError(databaseError.getMessage());
+            }
+        });
     }
 
     private void notifyError(final String errorMessage) {
