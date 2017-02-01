@@ -383,7 +383,8 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         setDate.setEnabled(false);
         setDate.setAlpha(0.5f);
         send.setAlpha(0.5f);
-        startActivity(new Intent(CalendarActivity.this, MainActivity.class));
+        finish();
+//        startActivity(new Intent(CalendarActivity.this, MainActivity.class));
     }
 
     private void bindView() {
