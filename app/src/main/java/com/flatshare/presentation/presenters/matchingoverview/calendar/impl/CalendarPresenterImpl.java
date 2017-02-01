@@ -143,7 +143,7 @@ public class CalendarPresenterImpl extends AbstractPresenter implements Calendar
     @Override
     public void onAppointmentFailure(String errorMessage) {
         mView.hideProgress();
-        onError(errorMessage);
+        //onError(errorMessage);
     }
 
     @Override

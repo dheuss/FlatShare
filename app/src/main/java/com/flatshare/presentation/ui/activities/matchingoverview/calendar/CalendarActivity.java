@@ -6,11 +6,13 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -201,11 +203,13 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
         TableRow.LayoutParams paramsText = (TableRow.LayoutParams) dateText.getLayoutParams();
         paramsText.setMargins(10, 0, 10, 0);
         paramsText.weight = 1;
-        paramsText.width = TableRow.LayoutParams.FILL_PARENT;
+        paramsText.width = TableRow.LayoutParams.WRAP_CONTENT;
+        paramsText.gravity = Gravity.CENTER;
         dateText.setLayoutParams(paramsText);
 
         TableRow.LayoutParams paramsDelete = (TableRow.LayoutParams) deleteButton.getLayoutParams();
         paramsDelete.setMargins(0, 0, 0, 0);
+        paramsDelete.gravity = Gravity.RIGHT;
         deleteButton.setLayoutParams(paramsDelete);
 
         dateOverview.addView(row, dateList.size() - 1);
@@ -302,7 +306,19 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             }
             row.addView(dateText);
             row.addView(checkButton);
-            //TODO Design TableRow Views
+
+            TableRow.LayoutParams paramsText = (TableRow.LayoutParams) dateText.getLayoutParams();
+            paramsText.setMargins(10, 0, 10, 0);
+            paramsText.weight = 1;
+            paramsText.width = TableRow.LayoutParams.WRAP_CONTENT;
+            paramsText.gravity = Gravity.CENTER;
+            dateText.setLayoutParams(paramsText);
+
+            TableRow.LayoutParams paramsCheck = (TableRow.LayoutParams) checkButton.getLayoutParams();
+            paramsCheck.setMargins(0, 0, 0, 0);
+            paramsCheck.gravity = Gravity.RIGHT;
+            checkButton.setLayoutParams(paramsCheck);
+
             dateOverview.addView(row, i);
         }
         send.setVisibility(View.VISIBLE);
@@ -334,7 +350,7 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
                             View textView = row.getChildAt(0);
                             TextView currentText = (TextView) textView;
 
-                            row.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.windowBackground));
+                            row.setBackground(ContextCompat.getDrawable(getApplicationContext(), android.R.color.transparent));
 
                             if (currentButton == v) {
                                 if (currentButton == v) {
@@ -365,15 +381,23 @@ public class CalendarActivity extends AbstractActivity implements CalendarPresen
             setDate.setAlpha(0.5f);
             send.setAlpha(0.5f);
         }
+        dateOverview.setColumnStretchable(0,true);
         TableRow row = new TableRow(this);
         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
         row.setLayoutParams(lp);
         TextView dateText = new TextView(this);
 
         dateText.setText("Your appointment is: " + finalDate);
+        dateText.setTypeface(null, Typeface.BOLD_ITALIC);
         dateText.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.colorAccent));
 
         row.addView(dateText);
+
+        TableRow.LayoutParams paramsText = (TableRow.LayoutParams) dateText.getLayoutParams();
+        paramsText.setMargins(10, 0, 10, 0);
+        paramsText.gravity = Gravity.CENTER;
+        paramsText.width = TableRow.LayoutParams.MATCH_PARENT;
+        dateText.setLayoutParams(paramsText);
 
         dateOverview.addView(row);
     }

@@ -93,7 +93,6 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
     private Context mContext;
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         userState = UserState.getInstance();
@@ -140,7 +139,7 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
         for (int i = 0; i < matchingProfileList.size(); i++) {
 
             TableRow row = new TableRow(this.getActivity());
-            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT);
+            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.FILL_PARENT);
             row.setLayoutParams(lp);
 
             TextView matchingText = new TextView(this.getActivity());
@@ -182,8 +181,8 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
             TableRow.LayoutParams paramsImage = (TableRow.LayoutParams) matchingImage.getLayoutParams();
             paramsImage.setMargins(10, 1, 10, 1);
-            paramsImage.width = 90;
-            paramsImage.height = 90;
+            paramsImage.width = 100;
+            paramsImage.height = 100;
             matchingImage.setLayoutParams(paramsImage);
 
             TableRow.LayoutParams paramsText = (TableRow.LayoutParams) matchingText.getLayoutParams();
@@ -194,14 +193,20 @@ public class MatchingOverviewActivity extends AbstractFragmentActivity implement
 
             TableRow.LayoutParams paramsCalendar = (TableRow.LayoutParams) matchingCalendar.getLayoutParams();
             paramsCalendar.setMargins(0, 0, 0, 0);
+            paramsCalendar.gravity = Gravity.RIGHT;
+            paramsCalendar.gravity = Gravity.RIGHT;
             matchingCalendar.setLayoutParams(paramsCalendar);
 
             TableRow.LayoutParams paramsDelete = (TableRow.LayoutParams) deleteButton.getLayoutParams();
             paramsDelete.setMargins(0, 0, 0, 0);
+            paramsDelete.gravity = Gravity.RIGHT;
+            paramsDelete.gravity = Gravity.RIGHT;
             deleteButton.setLayoutParams(paramsDelete);
 
             TableRow.LayoutParams paramsInfo = (TableRow.LayoutParams) infoButton.getLayoutParams();
             paramsInfo.setMargins(0, 0, 0, 0);
+            paramsInfo.gravity = Gravity.RIGHT;
+            paramsInfo.gravity = Gravity.RIGHT;
             infoButton.setLayoutParams(paramsInfo);
 
             matchingOverview.addView(row, i);

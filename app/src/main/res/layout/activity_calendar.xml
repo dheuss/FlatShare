@@ -49,6 +49,8 @@
             android:layout_below="@id/LinearLayoutCalender_1"
             android:orientation="vertical"
             android:gravity="center"
+            android:layout_marginLeft="@dimen/marginLeft"
+            android:layout_marginRight="@dimen/marginRight"
             android:scrollbars="vertical"
             android:weightSum="1">
 
@@ -68,8 +70,11 @@
 
                     <TableLayout
                         android:id="@+id/dateOverview"
-                        android:layout_width="match_parent"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:stretchColumns="2"
+                        android:layout_marginLeft="@dimen/marginLeft"
+                        android:layout_marginRight="@dimen/marginRight"
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
                         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -90,8 +95,6 @@
 
                     <Button
                         android:id="@+id/send"
-                        android:layout_marginLeft="@dimen/marginLeft"
-                        android:layout_marginRight="@dimen/marginRight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/colorPrimary"

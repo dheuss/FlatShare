@@ -47,7 +47,7 @@ public class CalendarCheckAppointmentInteractorImpl extends AbstractInteractor i
 
                 if (matchEntry == null) {
                     Log.d(TAG, "onDataChange: Match Entry Appointment is null");
-                    notifyError("You have no Appointment right now.");
+                    notifyError("");
                     return;
                 }
 
