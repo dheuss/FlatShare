@@ -1,7 +1,5 @@
 package com.flatshare.domain.datatypes.pair;
 
-import android.graphics.Bitmap;
-
 /**
  * Created by Arber on 21/01/2017.
  */
