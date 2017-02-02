@@ -1,5 +1,6 @@
 package com.flatshare.domain.interactors.matching;
 
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.interactors.base.Interactor;
 
 /**
@@ -11,7 +12,7 @@ public interface RoommateWaitingInteractor extends Interactor {
     interface Callback {
 
         void notifyError(String errorMessage);
-        void onApartmentReady();
+        void onApartmentReady(ApartmentProfile apartmentProfile);
     }
 
 }

@@ -19,25 +19,24 @@ import com.google.firebase.database.ValueEventListener;
 public class RoommateWaitingInteractorImpl extends AbstractInteractor implements RoommateWaitingInteractor {
 
 
-    private static final String TAG = "RoommateQRInt";
+    private static final String TAG = "RoommateWaitingInt";
 
     private RoommateWaitingInteractor.Callback mCallback;
-    private String roommateId;
+    private RoommateProfile roommateProfile;
 
     public RoommateWaitingInteractorImpl(MainThread mainThread,
-                                         Callback callback, String roommateId) {
+                                         Callback callback, RoommateProfile roommateProfile) {
 
         super(mainThread);
         this.mCallback = callback;
-        this.roommateId = roommateId;
+        this.roommateProfile = roommateProfile;
 
-        Log.d(TAG, "RoommateWaitingInteractorImpl: CONSTRUCTOR!");
     }
 
 
     @Override
     public void execute() {
-        final String path = databaseRoot.getRoommateProfileNode(this.roommateId).getDone();
+        final String path = databaseRoot.getRoommateProfileNode(this.roommateProfile.getRoommateId()).getDone();
 
         Log.d(TAG, "execute: trying to add value event listener");
 
@@ -56,7 +55,8 @@ public class RoommateWaitingInteractorImpl extends AbstractInteractor implements
                 } else { // Profile was created
                     if (dataSnapshot.getValue(Boolean.class)) {
                         removeValueListener(path);
-                        notifySuccess();
+//                        notifySuccess();
+                        getApartment();
                     }
                 }
             }
@@ -69,12 +69,35 @@ public class RoommateWaitingInteractorImpl extends AbstractInteractor implements
 
     }
 
-    private void notifySuccess() {
-        Log.d(TAG, "notifySuccess: APARTMENT READY!!!");
+    private void getApartment() {
+
+        Log.d(TAG, "getApartment: APID: " + roommateProfile.getApartmentId());
+        String apartmentsPath = databaseRoot.getApartmentProfileNode(roommateProfile.getApartmentId()).getRootPath();
+
+        mDatabase.child(apartmentsPath).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() == null){
+                    notifySuccess(null);
+                } else {
+                    ApartmentProfile apartmentProfile = dataSnapshot.getValue(ApartmentProfile.class);
+                    notifySuccess(apartmentProfile);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                notifyError(databaseError.getMessage());
+            }
+        });
+    }
+
+    private void notifySuccess(final ApartmentProfile apartmentProfile) {
+//        Log.d(TAG, "notifySuccess: APARTMENT READY!!!");
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onApartmentReady();
+                mCallback.onApartmentReady(apartmentProfile);
             }
         });
     }
@@ -83,7 +106,7 @@ public class RoommateWaitingInteractorImpl extends AbstractInteractor implements
         mDatabase.child(path).removeEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //TODO: read about it...
+
                 Log.d(TAG, "onDataChange: removed listener");
             }
 

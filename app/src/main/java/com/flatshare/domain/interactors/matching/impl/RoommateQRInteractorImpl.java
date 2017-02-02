@@ -64,7 +64,7 @@ public class RoommateQRInteractorImpl extends AbstractInteractor implements Room
 //                    notifyError("Roommate profile with profileID: " + roommateId + " does not exist!");
                 } else { // ID was scanned
                     if(!dataSnapshot.getValue(Boolean.class)) {
-                        notifyCodeRead();
+                        getNewRoommateProfile();
                     }
                 }
             }
@@ -72,6 +72,27 @@ public class RoommateQRInteractorImpl extends AbstractInteractor implements Room
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 notifyError(databaseError.getMessage());
+            }
+        });
+    }
+
+    private void getNewRoommateProfile() {
+        String path = databaseRoot.getRoommateProfileNode(this.roommateId).getRootPath();
+
+        mDatabase.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot != null){
+                    RoommateProfile roommateProfile = dataSnapshot.getValue(RoommateProfile.class);
+                    notifyCodeRead(roommateProfile);
+                } else {
+                    notifyCodeRead(null);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
     }
@@ -103,11 +124,11 @@ public class RoommateQRInteractorImpl extends AbstractInteractor implements Room
         });
     }
 
-    private void notifyCodeRead() {
+    private void notifyCodeRead(final RoommateProfile roommateProfile) {
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onCodeRead();
+                mCallback.onCodeRead(roommateProfile);
             }
         });
     }

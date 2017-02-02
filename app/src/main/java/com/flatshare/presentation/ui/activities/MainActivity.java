@@ -129,11 +129,11 @@ public class MainActivity extends AbstractActivity implements MatchesPresenter.V
             adapter.addFragment(new ProfileTenantSettingsActivity(), "ProfileTenantSettingsActivity");
 
         } else if (classificationId == ProfileType.APARTMENT.getValue()){
-            Log.d(TAG, "setupViewPager: APPPPART");
+//            Log.d(TAG, "setupViewPager: APPPPART");
             adapter.addFragment(new ProfileApartmentSettingsActivity(), "ProfileApartmentSettingsActivity");
 
         } else if (classificationId == ProfileType.ROOMMATE.getValue()) {
-            Log.d(TAG, "setupViewPager: ROMMMM");
+//            Log.d(TAG, "setupViewPager: ROMMMM");
             adapter.addFragment(new RoommateProfileSettingsActivity(), "RoommateProfileSettingsActivity");
 
         } else {

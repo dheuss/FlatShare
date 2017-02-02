@@ -71,9 +71,13 @@ public class RoommateQRPresenterImpl extends AbstractPresenter implements Roomma
     }
 
     @Override
-    public void onCodeRead() {
+    public void onCodeRead(RoommateProfile roommateProfile) {
+        if (roommateProfile != null) {
+            userState.setRoommateProfile(roommateProfile);
+        } else {
+            userState.getRoommateProfile().setAvailable(false);
+        }
         mView.onQRCodeRead();
-        userState.getRoommateProfile().setAvailable(false);
     }
 
     @Override

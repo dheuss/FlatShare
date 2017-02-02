@@ -1,41 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/matchingActivityFrameLayout"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_refresh_layout_p_matching"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/windowBackground"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/matchingActivityFrameLayout"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_gravity="bottom"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:background="@color/windowBackground"
+        android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/rejectBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/clear_icon" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/infoBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/info_icon" />
+            <ImageButton
+                android:id="@+id/rejectBtn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/clear_icon" />
 
-        <ImageButton
-            android:id="@+id/acceptBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/favorite_icon" />
-    </LinearLayout>
+            <ImageButton
+                android:id="@+id/infoBtn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/info_icon" />
 
-    <com.mindorks.placeholderview.SwipePlaceHolderView
-        android:id="@+id/swipeView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</FrameLayout>
+            <ImageButton
+                android:id="@+id/acceptBtn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/favorite_icon" />
+        </LinearLayout>
+
+        <com.mindorks.placeholderview.SwipePlaceHolderView
+            android:id="@+id/swipeView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

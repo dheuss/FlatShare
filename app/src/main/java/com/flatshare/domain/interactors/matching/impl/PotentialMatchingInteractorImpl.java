@@ -5,6 +5,7 @@ import android.util.Log;
 import com.flatshare.domain.MainThread;
 import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
 import com.flatshare.domain.datatypes.db.profiles.PrimaryUserProfile;
+import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
 import com.flatshare.domain.datatypes.db.profiles.TenantProfile;
 import com.flatshare.domain.datatypes.db.profiles.UserProfile;
 import com.flatshare.domain.datatypes.enums.ProfileType;
@@ -29,7 +30,7 @@ import java.util.Map;
 public class PotentialMatchingInteractorImpl extends AbstractInteractor implements PotentialMatchingInteractor {
 
     private static final String TAG = "PotentialMatchingInt";
-    private static final long HOURS_24_IN_MIN = 24*60;
+    private static final long HOURS_24_IN_MIN = 24 * 60;
 
     /**
      * The Callback is responsible for talking to the UI on the main thread
@@ -96,7 +97,7 @@ public class PotentialMatchingInteractorImpl extends AbstractInteractor implemen
 
         if (tenantProfile != null || apartmentProfile != null) {
 
-            if (classificationId == 0) { // tenant is looking for matches
+            if (classificationId == ProfileType.TENANT.getValue()) { // tenant is looking for matches
                 matchTenant(tenantProfile);
             } else { // apartment is looking for matches
                 matchApartment(apartmentProfile);
@@ -114,7 +115,7 @@ public class PotentialMatchingInteractorImpl extends AbstractInteractor implemen
                         if (cId == ProfileType.TENANT.getValue()) {
                             getTenant(pUP.getTenantProfileId());
                         } else {
-                            getApartment(pUP.getRoommateProfileId());
+                            getRoommate(pUP.getRoommateProfileId());
                         }
                     }
                 }
@@ -233,10 +234,37 @@ public class PotentialMatchingInteractorImpl extends AbstractInteractor implemen
 
     }
 
-    private void getApartment(String apartmentProfileId) {
-        String apPath = databaseRoot.getApartmentProfiles();
+    private void getRoommate(String roommateProfileId) {
 
-        mDatabase.child(apPath + apartmentProfileId).addListenerForSingleValueEvent(new ValueEventListener() {
+        String roommatePath = databaseRoot.getRoommateProfileNode(roommateProfileId).getRootPath();
+
+        Log.d(TAG, "getRoommate: RID: " + roommateProfileId);
+
+        mDatabase.child(roommatePath).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() == null) {
+                    notifyError("No RoommateProfile found!");
+                } else {
+                    RoommateProfile roommateProfile = dataSnapshot.getValue(RoommateProfile.class);
+                    getApartment(roommateProfile.getApartmentId());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                notifyError(databaseError.getMessage());
+            }
+        });
+
+    }
+
+    private void getApartment(String apartmentProfileId) {
+        String apPath = databaseRoot.getApartmentProfileNode(apartmentProfileId).getRootPath();
+
+        Log.d(TAG, "getApartment: APID: " + apartmentProfileId);
+
+        mDatabase.child(apPath).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() == null) {
@@ -256,11 +284,13 @@ public class PotentialMatchingInteractorImpl extends AbstractInteractor implemen
 
     private void getTenant(String tenantProfileId) {
 
+        Log.d(TAG, "getTenant: TPID: " + tenantProfileId);
+
         mDatabase.child(databaseRoot.getTenantProfileNode(tenantProfileId).getRootPath()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() == null) {
-                    notifyError("No ApartmentProfile found!");
+                    notifyError("No TenantProfile found!");
                 } else {
                     TenantProfile tUP = dataSnapshot.getValue(TenantProfile.class);
                     matchTenant(tUP);

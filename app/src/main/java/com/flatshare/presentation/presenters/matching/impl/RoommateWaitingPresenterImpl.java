@@ -3,11 +3,12 @@ package com.flatshare.presentation.presenters.matching.impl;
 import android.util.Log;
 
 import com.flatshare.domain.MainThread;
+import com.flatshare.domain.datatypes.db.profiles.ApartmentProfile;
+import com.flatshare.domain.datatypes.db.profiles.RoommateProfile;
 import com.flatshare.domain.interactors.matching.RoommateWaitingInteractor;
 import com.flatshare.domain.interactors.matching.impl.RoommateWaitingInteractorImpl;
 import com.flatshare.presentation.presenters.base.AbstractPresenter;
 import com.flatshare.presentation.presenters.matching.RoommateWaitingPresenter;
-import com.flatshare.presentation.ui.activities.profile.RoommateWaitingActivity;
 
 /**
  * Created by Arber on 11/01/2017.
@@ -58,16 +59,19 @@ public class RoommateWaitingPresenterImpl extends AbstractPresenter implements R
     }
 
     @Override
-    public void onApartmentReady() {
+    public void onApartmentReady(ApartmentProfile apartmentProfile) {
+        Log.d(TAG, "onApartmentReady: " + apartmentProfile.toString());
+        userState.setApartmentProfile(apartmentProfile);
         mView.hideProgress();
         mView.changeToMatchingActivity();
     }
 
     @Override
     public void listenToDB() {
-        String roommateId = userState.getRoommateId();
-        Log.d(TAG, "listenToDB: " + roommateId);
-        RoommateWaitingInteractor roommateWaitingInteractor = new RoommateWaitingInteractorImpl(mMainThread, this, roommateId);
+//        String roommateId = userState.getRoommateId();
+        RoommateProfile roommateProfile = userState.getRoommateProfile();
+        Log.d(TAG, "listenToDB: " + roommateProfile.getRoommateId());
+        RoommateWaitingInteractor roommateWaitingInteractor = new RoommateWaitingInteractorImpl(mMainThread, this, roommateProfile);
         roommateWaitingInteractor.execute();
     }
 }
