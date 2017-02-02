@@ -24,7 +24,7 @@ public interface ApartmentProfilePresenter extends BasePresenter {
 
     void uploadVideo(VideoView videoView);
 
-    void getUserEmails();
+    void getNicknames();
 
     interface View extends BaseView {
         void changeToApartmentSettings();

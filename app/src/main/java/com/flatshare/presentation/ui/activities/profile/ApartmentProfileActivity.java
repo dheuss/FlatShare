@@ -18,6 +18,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.CursorLoader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -42,7 +43,6 @@ import com.flatshare.presentation.ui.AbstractActivity;
 import com.flatshare.presentation.ui.activities.matching.QRCodeReaderActivity;
 import com.flatshare.threading.MainThreadImpl;
 import com.flatshare.utils.location.AppLocationService;
-import com.google.firebase.database.Exclude;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -102,6 +102,9 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     private ApartmentProfilePresenter mPresenter;
     private static final String TAG = "ApartmentProfileAct";
     private Map<String, String> nicknameIdMap;
+
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -228,16 +231,21 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+//        Log.d(TAG, "onActivityResult: on top");
         if (requestCode == STATIC_VALUE) {
+//            Log.d(TAG, "onActivityResult: reqCode == StaticV");
             if (resultCode == RESULT_OK) {
-
+//                Log.d(TAG, "onActivityResult: Result -> OK");
                 ParcelablePair idNicknamePair = data.getParcelableExtra(ROOMMATE_ID_NICKNAME_PAIR);
 
                 if (nicknameIdMap == null) {
+//                    Log.d(TAG, "onActivityResult: NULL?");
                     nicknameIdMap = new HashMap<>();
                 }
+//                Log.d(TAG, "onActivityResult: putting new value: " + idNicknamePair.getValue() + " ID: " + idNicknamePair.getId());
                 nicknameIdMap.put(idNicknamePair.getValue(), idNicknamePair.getId());
-                adapter.add(idNicknamePair.getValue());
+//                adapter.add(idNicknamePair.getValue());
+                updateAdapter(nicknameIdMap);
                 roommatesEmailsMultiAC.getText().append(idNicknamePair.getValue() + "; ");
             }
         }
@@ -545,6 +553,20 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         createApartmentButton = (Button) findViewById(R.id.create_apartment_profile_button);
 
         roommatesEmailsMultiAC = (MultiAutoCompleteTextView) findViewById(R.id.apartment_roommates_edit_text);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_apartment_p_activity);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.getNicknames();
+            }
+        });
+    }
+
+    @Override
+    public void hideProgress() {
+        super.hideProgress();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -567,6 +589,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
 
     @Override
     public void updateAdapter(Map<String, String> nicknameIdMap) {
+        swipeRefreshLayout.setRefreshing(false);
         this.nicknameIdMap = nicknameIdMap;
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>(nicknameIdMap.keySet()));
 
@@ -578,7 +601,7 @@ public class ApartmentProfileActivity extends AbstractActivity implements Apartm
         roommatesEmailsMultiAC.setTokenizer(new SemicolonTokenizer());
         roommatesEmailsMultiAC.setThreshold(1);
 
-        mPresenter.getUserEmails();
+        mPresenter.getNicknames();
     }
 
 //    private void deleteLastWord(String oldText, String newText) {

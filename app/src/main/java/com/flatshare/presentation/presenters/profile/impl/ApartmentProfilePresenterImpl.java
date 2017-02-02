@@ -133,7 +133,7 @@ public class ApartmentProfilePresenterImpl extends AbstractPresenter implements 
     }
 
     @Override
-    public void getUserEmails() {
+    public void getNicknames() {
         String roommateId = userState.getRoommateProfile().getId();
         NicknameRetrieverInteractor nicknameRetrieverInteractor = new NicknameRetrieverInteractorImpl(mMainThread, this, roommateId);
         nicknameRetrieverInteractor.execute();
