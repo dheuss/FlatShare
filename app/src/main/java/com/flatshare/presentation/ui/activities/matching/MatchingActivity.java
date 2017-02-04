@@ -118,7 +118,7 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
 
     private ImageButton closeButton;
 
-    private SwipeRefreshLayout swipeRefreshLayout;
+//    private SwipeRefreshLayout swipeRefreshLayout;
 
     private SharedPreferences sharedPref;
 
@@ -188,19 +188,19 @@ public class MatchingActivity extends AbstractFragmentActivity implements Potent
         infoBtn = (ImageButton) view.findViewById(R.id.infoBtn);
         acceptBtn = (ImageButton) view.findViewById(R.id.acceptBtn);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout_p_matching);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPresenter.getPotentialMatches();
-            }
-        });
+//        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout_p_matching);
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                mPresenter.getPotentialMatches();
+//            }
+//        });
     }
 
     @Override
     public void hideProgress() {
         super.hideProgress();
-        swipeRefreshLayout.setRefreshing(false);
+//        swipeRefreshLayout.setRefreshing(false);
     }
 
     public void cardClick(View view) {
